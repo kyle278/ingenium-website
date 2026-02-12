@@ -1,158 +1,144 @@
-import Link from "next/link";
-import { Layout, PenTool, Rocket, Search, ShieldCheck, Sparkles, Waypoints, CheckCircle2 } from "lucide-react";
-import { parseDelimited } from "../lib/contentParsers";
-import { getWebsiteContent } from "../lib/websiteContent";
+﻿import Link from "next/link";
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  LayoutPanelTop,
+  LineChart,
+  PenTool,
+  Rocket,
+  ShieldCheck,
+  Target,
+} from "lucide-react";
 
-const proofPlaceholdersFallback = [
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
-];
-
-const outcomesFallback = [
+const outcomes = [
   { label: "Qualified demo requests", value: "+38%" },
-  { label: "Lead response time", value: "-61%" },
+  { label: "Time to launch", value: "6 weeks" },
   { label: "Pipeline attribution", value: "100% tracked" },
 ];
 
-const deliverablesFallback = [
+const process = [
   {
-    title: "Narrative-first strategy",
-    description: "We map your story, offer, and ICP before a single pixel is placed.",
+    title: "Discovery & strategy",
+    detail: "Audit funnel performance, define the conversion model, align stakeholders.",
+  },
+  {
+    title: "UX + design system",
+    detail: "Create a high-clarity narrative, visual system, and conversion architecture.",
+  },
+  {
+    title: "Build + integrate",
+    detail: "Develop the site, wire forms to CRM, and instrument analytics.",
+  },
+  {
+    title: "Launch + optimize",
+    detail: "Ship in phases, run experiments, and iterate with AI support.",
+  },
+];
+
+const deliverables = [
+  {
+    title: "Narrative-first messaging",
+    description: "Positioning, proof, and CTA flow mapped to buyer intent.",
     icon: PenTool,
   },
   {
     title: "Conversion-grade design",
-    description: "Every section moves the buyer toward clarity, proof, and action.",
-    icon: Layout,
+    description: "Enterprise UI that guides decision makers to action.",
+    icon: LayoutPanelTop,
   },
   {
-    title: "Launch + growth",
-    description: "SEO, analytics, and automation hooks built in from day one.",
+    title: "Launch + growth system",
+    description: "SEO, analytics, CRM integration, and AI-ready workflows.",
     icon: Rocket,
   },
 ];
 
-const websiteBenefitsFallback = [
-  "Live lead capture into CRM",
-  "Automated routing and notifications",
-  "AI-ready follow-ups",
-  "Full-funnel analytics",
+const proof = [
+  {
+    title: "FinTech platform",
+    outcome: "Pipeline growth +32% in 90 days",
+    detail: "Rebuilt enterprise site and launched conversion testing cadence.",
+  },
+  {
+    title: "Healthcare SaaS",
+    outcome: "Demo conversions doubled",
+    detail: "Role-based pages, automated follow-up, and CRM routing.",
+  },
+  {
+    title: "Enterprise services",
+    outcome: "Launch in 6 weeks, 4 new markets",
+    detail: "Localized pages with governance and approvals.",
+  },
 ];
 
-const faqsFallback = [
+const faqs = [
   {
     question: "Can you rebuild our current site?",
-    answer: "Yes. We can migrate your content, keep what works, and re-architect the funnel.",
+    answer: "Yes. We migrate what works, redesign the conversion flow, and ship in phases.",
   },
   {
     question: "Will the site connect to our CRM?",
-    answer: "Absolutely. Forms and CTAs can write directly into your CRM with automation triggers.",
+    answer: "Every form and CTA can write directly into your CRM with routing and automation triggers.",
   },
   {
-    question: "What is the typical timeline?",
-    answer: "Most websites ship in weeks, with a staged rollout for content and funnel upgrades.",
+    question: "What do you need from our team?",
+    answer: "Brand inputs, stakeholder alignment, and access to CRM/analytics for discovery.",
+  },
+  {
+    question: "How fast can we go live?",
+    answer: "Most enterprise sites launch in 4-6 weeks with staged rollouts.",
   },
 ];
 
-export default async function WebsiteSitesPage() {
-  const content = await getWebsiteContent();
+const benefits = [
+  "Live lead capture into CRM",
+  "AI-ready follow-ups and routing",
+  "Governed approvals and security",
+  "Full-funnel analytics + attribution",
+  "Ongoing experimentation cadence",
+];
 
-  const proofPlaceholders = content.lines("websites_proof_logos", proofPlaceholdersFallback);
-
-  const outcomes = parseDelimited(
-    content.lines(
-      "websites_outcomes",
-      outcomesFallback.map((item) => `${item.label} | ${item.value}`)
-    ),
-    outcomesFallback,
-    (parts) => ({ label: parts[0], value: parts[1] }),
-    2
-  );
-
-  const deliverableOverrides = parseDelimited(
-    content.lines(
-      "websites_deliverables",
-      deliverablesFallback.map((item) => `${item.title} | ${item.description}`)
-    ),
-    deliverablesFallback.map((item) => ({ title: item.title, description: item.description })),
-    (parts) => ({ title: parts[0], description: parts[1] }),
-    2
-  );
-
-  const deliverables = deliverablesFallback.map((item, index) => ({
-    ...item,
-    title: deliverableOverrides[index]?.title ?? item.title,
-    description: deliverableOverrides[index]?.description ?? item.description,
-  }));
-
-  const websiteBenefits = content.lines("websites_benefits", websiteBenefitsFallback);
-
-  const faqs = parseDelimited(
-    content.lines(
-      "websites_faqs",
-      faqsFallback.map((item) => `${item.question} | ${item.answer}`)
-    ),
-    faqsFallback,
-    (parts) => ({ question: parts[0], answer: parts[1] }),
-    2
-  );
-
-  const heroFlowSteps = content.lines("websites_hero_flow_steps", [
-    "Capture intent in real time",
-    "Route to the right owner instantly",
-    "Trigger AI follow-ups",
-  ]);
-
-  const implementationSteps = content.lines("websites_implementation_steps", [
-    "Audit current funnel and messaging",
-    "Design conversion-first structure",
-    "Build + connect CRM workflows",
-    "Launch and optimize",
-  ]);
+export default function WebsitesPage() {
   return (
     <div className="space-y-24">
       <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr] items-center">
         <div className="space-y-6">
-          <div className="site-chip">{content.text("websites_hero_chip", "Websites")}</div>
-          <h1 className="font-display text-4xl md:text-5xl">
-            {content.text("websites_hero_title", "Websites that turn interest into revenue.")}
+          <div className="chip">Websites</div>
+          <h1 className="section-title text-4xl md:text-5xl leading-tight">
+            Custom enterprise websites that convert and compound.
           </h1>
           <p className="text-lg text-muted">
-            {content.text(
-              "websites_hero_subtext",
-              "Your website is the first AI agent your prospects meet. We build conversion-first sites that connect seamlessly to your CRM, automations, and AI departments."
-            )}
+            Your website is the first sales conversation. We build conversion-first sites that connect
+            directly to your CRM, AI agents, and automation stack.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/contact" className="btn-primary h-11 px-6 text-sm">
-              {content.text("websites_hero_primary_cta", "Start a website build")}
+            <Link href="/contact" className="btn-primary text-sm">
+              Get a Website Strategy Call
+              <ArrowUpRight className="h-4 w-4" />
             </Link>
-            <Link href="/crm" className="btn-secondary h-11 px-6 text-sm">
-              {content.text("websites_hero_secondary_cta", "Explore CRM")}
+            <Link href="/case-studies" className="btn-secondary text-sm">
+              View case studies
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             {outcomes.map((stat) => (
-              <div key={stat.label} className="site-kpi">
-                <div className="text-2xl font-display">{stat.value}</div>
+              <div key={stat.label} className="card p-4">
+                <div className="text-2xl section-title">{stat.value}</div>
                 <div className="text-xs text-muted mt-1">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
-        <div className="site-card-bright p-6 space-y-4">
-          <div className="text-xs text-muted">
-            {content.text("websites_hero_flow_title", "Full-funnel flow")}
-          </div>
-          <div className="text-xl font-display">
-            {content.text("websites_hero_flow_headline", "Website > CRM > AI Agents > Automations")}
-          </div>
-          <div className="mt-4 grid gap-3 text-sm text-muted">
-            {heroFlowSteps.map((item) => (
+        <div className="card-soft p-6 space-y-4">
+          <div className="text-xs text-muted">Conversion engine snapshot</div>
+          <div className="text-xl section-title">Website → CRM → AI → Revenue</div>
+          <div className="space-y-3 text-sm text-muted">
+            {[
+              "Capture intent in real time",
+              "Route to the right owner instantly",
+              "Trigger AI follow-ups",
+              "Measure every decision point",
+            ].map((item) => (
               <div key={item} className="flex items-center gap-3">
                 <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
                 {item}
@@ -162,125 +148,132 @@ export default async function WebsiteSitesPage() {
         </div>
       </section>
 
-      <section className="site-card p-8">
-        <div className="flex flex-wrap items-center justify-between gap-4">
+      <section className="card p-8">
+        <div className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
           <div>
-            <h2 className="font-display text-2xl">
-              {content.text("websites_proof_title", "Proof placeholders ready to swap")}
-            </h2>
-            <p className="text-muted text-sm mt-2">
-              {content.text(
-                "websites_proof_subtext",
-                "Add customer logos, testimonials, or results once available."
-              )}
+            <h2 className="section-title text-3xl">What makes our websites different</h2>
+            <p className="text-muted mt-2">
+              We do not stop at design. We build the system around the site so every visitor becomes a
+              measurable opportunity.
             </p>
-          </div>
-          <span className="site-badge">
-            {content.text("websites_proof_badge", "Placeholder zone")}
-          </span>
-        </div>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {proofPlaceholders.map((logo, index) => (
-            <div key={`${logo}-${index}`} className="site-card p-6 text-center text-sm text-muted">
-              {logo}
+            <div className="mt-6 grid gap-3">
+              {benefits.map((item) => (
+                <div key={item} className="flex items-center gap-3 text-sm text-muted">
+                  <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
+                  {item}
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          <div className="card-soft p-6 space-y-3">
+            <div className="text-xs text-muted">Pricing approach</div>
+            <div className="text-lg section-title">Enterprise scope, fixed outcomes</div>
+            <p className="text-sm text-muted">
+              We scope by conversion outcomes and timeline, not by hours. You get clear milestones and a
+              single accountable team.
+            </p>
+            <Link href="/contact" className="btn-secondary text-xs">
+              Request a scope call
+            </Link>
+          </div>
         </div>
       </section>
 
       <section className="grid gap-6 lg:grid-cols-3">
         {deliverables.map((item) => (
-          <div key={item.title} className="site-card p-6">
+          <div key={item.title} className="card p-6">
             <item.icon className="h-6 w-6 text-[var(--accent)]" />
-            <div className="mt-4 text-xl font-display">{item.title}</div>
+            <div className="mt-4 text-xl section-title">{item.title}</div>
             <p className="mt-2 text-sm text-muted">{item.description}</p>
           </div>
         ))}
       </section>
 
-      <section className="grid gap-10 lg:grid-cols-[1.1fr,0.9fr] items-start">
-        <div className="space-y-4">
-          <h2 className="font-display text-3xl">
-            {content.text("websites_system_title", "Your website becomes the front door of the CRM.")}
-          </h2>
-          <p className="text-muted">
-            {content.text(
-              "websites_system_subtext",
-              "Every form submission becomes a structured workflow. Automations route, score, and notify while AI departments follow up with the right context."
-            )}
-          </p>
-          <div className="flex items-center gap-2 text-xs text-muted">
-            <Waypoints className="h-4 w-4 text-[var(--accent)]" />
-            {content.text("websites_system_badge", "Website > CRM > AI Agents > Automations")}
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {websiteBenefits.map((item) => (
-              <div key={item} className="site-card p-4 text-sm">
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="site-card p-6 space-y-4">
-          <div className="text-xs text-muted">
-            {content.text("websites_example_label", "Example conversion path")}
-          </div>
-          <div className="text-xl font-display">
-            {content.text("websites_example_title", "Inbound lead > AI qualification > SDR booked")}
-          </div>
-          <p className="text-sm text-muted">
-            {content.text(
-              "websites_example_subtext",
-              "Your website becomes the first step of an accountable, trackable revenue system."
-            )}
-          </p>
-        </div>
-      </section>
-
-      <section className="site-card p-8">
+      <section className="card p-8">
         <div className="grid gap-6 lg:grid-cols-[1.2fr,0.8fr]">
-          <div className="space-y-4">
-            <h2 className="font-display text-3xl">
-              {content.text("websites_implementation_title", "Implementation path")}
-            </h2>
-            <p className="text-muted">
-              {content.text(
-                "websites_implementation_subtext",
-                "We map your message, build the conversion system, and connect it to CRM + AI."
-              )}
+          <div>
+            <h2 className="section-title text-3xl">Implementation path</h2>
+            <p className="text-muted mt-2">
+              We map your story, build the conversion system, and connect it to CRM and AI operations.
             </p>
           </div>
           <div className="space-y-3">
-            {implementationSteps.map((item, index) => (
-              <div key={item} className="flex items-start gap-3 text-sm">
-                <span className="h-7 w-7 rounded-full border border-[var(--border)] bg-[var(--surface-2)] flex items-center justify-center text-xs font-display">
+            {process.map((item, index) => (
+              <div key={item.title} className="flex items-start gap-3 text-sm">
+                <span className="h-7 w-7 rounded-full border border-[var(--border)] bg-[var(--surface-2)] flex items-center justify-center text-xs section-title">
                   {index + 1}
                 </span>
-                <span className="text-muted">{item}</span>
+                <div>
+                  <div className="font-semibold">{item.title}</div>
+                  <div className="text-xs text-muted mt-1">{item.detail}</div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
-        <div className="site-card p-6">
-          <h2 className="font-display text-2xl">
-            {content.text("websites_what_you_get_title", "What you get")}
-          </h2>
-          <div className="mt-4 grid gap-3">
-            {websiteBenefits.map((item) => (
-              <div key={item} className="flex items-center gap-3 text-sm text-muted">
-                <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
+      <section className="grid gap-8 lg:grid-cols-[1.05fr,0.95fr]">
+        <div className="card p-6">
+          <h2 className="section-title text-2xl">What you get in 30 days</h2>
+          <div className="mt-4 grid gap-3 text-sm text-muted">
+            {[
+              "Conversion blueprint and page hierarchy",
+              "Design direction + key templates",
+              "CRM integration plan",
+              "Experiment roadmap",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <LineChart className="h-4 w-4 text-[var(--accent)]" />
                 {item}
               </div>
             ))}
           </div>
         </div>
-        <div className="site-card p-6">
-          <h2 className="font-display text-2xl">
-            {content.text("websites_faq_title", "FAQ")}
-          </h2>
+        <div className="card p-6">
+          <h2 className="section-title text-2xl">What we need from you</h2>
+          <div className="mt-4 grid gap-3 text-sm text-muted">
+            {[
+              "Access to current analytics",
+              "CRM and marketing tooling overview",
+              "Stakeholder workshop attendance",
+              "Brand and legal constraints",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <Target className="h-4 w-4 text-[var(--accent)]" />
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="space-y-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h2 className="section-title text-3xl">Proof from enterprise teams</h2>
+            <p className="text-muted mt-2 max-w-2xl">
+              Outcomes that show how conversion-first websites create measurable revenue impact.
+            </p>
+          </div>
+          <Link href="/case-studies" className="btn-secondary text-xs">
+            See all case studies
+          </Link>
+        </div>
+        <div className="grid gap-6 lg:grid-cols-3">
+          {proof.map((item) => (
+            <div key={item.title} className="card p-6 space-y-3">
+              <div className="text-xs uppercase tracking-[0.2em] text-subtle">{item.title}</div>
+              <div className="text-lg section-title">{item.outcome}</div>
+              <p className="text-sm text-muted">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="grid gap-8 lg:grid-cols-[1fr,1fr]">
+        <div className="card p-6">
+          <h2 className="section-title text-2xl">FAQ</h2>
           <div className="mt-4 space-y-4">
             {faqs.map((faq) => (
               <div key={faq.question}>
@@ -290,34 +283,48 @@ export default async function WebsiteSitesPage() {
             ))}
           </div>
         </div>
+        <div className="card-soft p-6 space-y-4">
+          <div className="chip">Enterprise-ready</div>
+          <h2 className="section-title text-2xl">Security and governance baked in</h2>
+          <p className="text-sm text-muted">
+            We align with your security requirements, approval workflows, and compliance needs from day one.
+          </p>
+          <div className="grid gap-3 text-sm text-muted">
+            {[
+              "SOC 2 readiness and security documentation",
+              "Role-based access and approvals",
+              "Audit logs and data retention policies",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <ShieldCheck className="h-4 w-4 text-[var(--accent)]" />
+                {item}
+              </div>
+            ))}
+          </div>
+          <Link href="/security" className="btn-secondary text-xs">
+            View security details
+          </Link>
+        </div>
       </section>
 
-      <section className="site-card-bright p-10 text-center space-y-4">
-        <div className="site-chip">
-          {content.text("websites_final_chip", "Ready to upgrade your front door?")}
-        </div>
-        <h2 className="font-display text-3xl md:text-4xl">
-          {content.text("websites_final_title", "Let us build the website your CRM and AI deserve.")}
+      <section className="card-soft p-10 text-center space-y-4">
+        <div className="chip">Website-first growth</div>
+        <h2 className="section-title text-3xl md:text-4xl">
+          Ready to build a website that drives pipeline?
         </h2>
         <p className="text-muted max-w-2xl mx-auto">
-          {content.text(
-            "websites_final_subtext",
-            "We will map the story, design the experience, and wire everything into the CRM and AI stack."
-          )}
+          Book a strategy call to map your conversion plan, timeline, and rollout options.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
-          <Link href="/contact" className="btn-primary h-12 px-6 text-sm">
-            {content.text("websites_final_primary_cta", "Book a website consult")}
+          <Link href="/contact" className="btn-primary text-sm">
+            Get a Website Strategy Call
+            <ArrowUpRight className="h-4 w-4" />
           </Link>
-          <Link href="/crm" className="btn-secondary h-12 px-6 text-sm">
-            {content.text("websites_final_secondary_cta", "Explore CRM")}
+          <Link href="/platform" className="btn-secondary text-sm">
+            Explore the platform
           </Link>
         </div>
       </section>
     </div>
   );
 }
-
-
-
-

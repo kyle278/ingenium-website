@@ -1,21 +1,29 @@
-import { Space_Grotesk } from "next/font/google";
+﻿import { Manrope, Sora } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const sora = Sora({
   subsets: ["latin"],
-  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
   display: "swap",
 });
 
 export const metadata = {
-  title: "Ingenium Consulting",
-  description: "Ingenium Consulting Website",
+  title: "Ingenium Digital Consulting",
+  description: "Enterprise websites, AI agents, CRM, and automation built to convert.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={spaceGrotesk.variable}>{children}</body>
+      <body className={`${sora.variable} ${manrope.variable}`}>{children}</body>
     </html>
   );
 }

@@ -1,58 +1,95 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
-const footerLinks = [
+const productLinks = [
   { href: "/websites", label: "Websites" },
   { href: "/platform", label: "Platform" },
   { href: "/agents", label: "AI Agents" },
+  { href: "/crm", label: "CRM" },
+  { href: "/automations", label: "Automations" },
+];
+
+const companyLinks = [
+  { href: "/about", label: "About" },
   { href: "/case-studies", label: "Case Studies" },
   { href: "/security", label: "Security" },
-  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 
 export default function SiteFooter() {
   return (
-    <footer className="mt-16 space-y-8">
-      <div className="rounded-3xl border border-slate-200/70 bg-white/90 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
-        <div className="grid gap-8 lg:grid-cols-[1.5fr,1fr,1fr]">
-          <div className="space-y-4">
-            <div className="text-xs uppercase tracking-[0.24em] text-slate-500">Ingenium</div>
-            <p className="text-2xl font-[var(--font-display)] tracking-tight text-slate-900">
-              Enterprise websites built to convert and scale.
+    <footer className="border-t border-slate-200/60">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-sm font-bold text-white">
+                I
+              </span>
+              <span className="font-[var(--font-display)] text-lg font-semibold tracking-tight">
+                Ingenium
+              </span>
+            </div>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-500">
+              Enterprise websites, AI operations, and CRM systems built to convert and scale.
             </p>
-            <p className="text-sm text-slate-600 max-w-md">
-              We design the site, orchestrate the AI operations behind it, and keep performance compounding
-              with a unified CRM and automation layer.
-            </p>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+              Product
+            </h4>
+            <div className="mt-4 space-y-3">
+              {productLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block text-sm text-slate-500 transition-colors hover:text-slate-900"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+              Company
+            </h4>
+            <div className="mt-4 space-y-3">
+              {companyLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block text-sm text-slate-500 transition-colors hover:text-slate-900"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+              Get in Touch
+            </h4>
+            <div className="mt-4 space-y-3 text-sm text-slate-500">
+              <p>hello@ingeniumconsulting.net</p>
+              <p>Mon&ndash;Fri, 9 am&ndash;6 pm</p>
+              <p>US + EU delivery teams</p>
+            </div>
             <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-slate-200/70 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-white"
+              href="/security"
+              className="mt-4 inline-block text-sm font-medium text-emerald-600 transition-colors hover:text-emerald-700"
             >
-              Get a Website Strategy Call
-            </Link>
-          </div>
-          <div className="space-y-2 text-sm">
-            <div className="text-xs uppercase tracking-[0.2em] text-slate-500">Explore</div>
-            {footerLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="block text-slate-600 hover:text-slate-900">
-                {link.label}
-              </Link>
-            ))}
-          </div>
-          <div className="space-y-2 text-sm">
-            <div className="text-xs uppercase tracking-[0.2em] text-slate-500">Contact</div>
-            <p className="text-slate-600">Global team (US + EU)</p>
-            <p className="text-slate-600">hello@ingeniumconsulting.net</p>
-            <p className="text-slate-600">Mon-Fri · 9am-6pm</p>
-            <Link href="/security" className="inline-flex items-center gap-2 text-emerald-700">
               Security overview
             </Link>
           </div>
         </div>
-      </div>
-      <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
-        <span>© 2026 Ingenium Digital Consulting. All rights reserved.</span>
-        <span>Websites · AI Agents · CRM · Automations</span>
+
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200/60 pt-8 text-xs text-slate-400">
+          <span>&copy; 2026 Ingenium Digital Consulting. All rights reserved.</span>
+          <span>Websites &middot; AI Agents &middot; CRM &middot; Automations</span>
+        </div>
       </div>
     </footer>
   );

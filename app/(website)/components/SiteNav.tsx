@@ -1,22 +1,16 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navItems = [
   { href: "/websites", label: "Websites" },
   { href: "/platform", label: "Platform" },
-  { href: "/agents", label: "AI Agents" },
   { href: "/case-studies", label: "Case Studies" },
   { href: "/security", label: "Security" },
 ];
-
-const primaryCta =
-  "inline-flex items-center gap-2 rounded-full bg-emerald-700 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(5,150,105,0.35)] transition hover:bg-emerald-800";
-const secondaryCta =
-  "inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/80 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-white";
 
 export default function SiteNav() {
   const pathname = usePathname();
@@ -24,8 +18,8 @@ export default function SiteNav() {
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
@@ -40,109 +34,88 @@ export default function SiteNav() {
   }, [open]);
 
   return (
-    <div className="flex items-center justify-between rounded-3xl border border-slate-200/70 bg-white/80 px-6 py-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur">
-      <Link href="/" className="flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-700 text-white font-semibold">
-          I
-        </span>
-        <div className="leading-tight">
-          <div className="font-[var(--font-display)] text-base font-semibold tracking-tight">Ingenium</div>
-          <div className="text-xs text-slate-500">Enterprise Website Systems</div>
-        </div>
-      </Link>
+    <header className="sticky top-0 z-50 border-b border-slate-200/60 bg-[#f7f2ea]/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-6">
+        <Link href="/" className="flex items-center gap-2.5">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-sm font-bold text-white">
+            I
+          </span>
+          <span className="font-[var(--font-display)] text-lg font-semibold tracking-tight">
+            Ingenium
+          </span>
+        </Link>
 
-      <div className="hidden lg:flex items-center gap-1 text-sm">
-        {navItems.map((item) => {
-          const active = pathname === item.href;
-          return (
+        <nav className="hidden items-center gap-8 lg:flex">
+          {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                active
-                  ? "bg-emerald-50 text-emerald-800"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-white"
+              className={`text-sm transition-colors ${
+                pathname === item.href
+                  ? "font-medium text-slate-900"
+                  : "text-slate-500 hover:text-slate-900"
               }`}
             >
               {item.label}
             </Link>
-          );
-        })}
-      </div>
+          ))}
+        </nav>
 
-      <div className="hidden lg:flex items-center gap-2">
-        <Link href="/case-studies" className={secondaryCta}>
-          View case studies
-        </Link>
-        <Link href="/contact" className={primaryCta}>
-          Get a Website Strategy Call
-        </Link>
-      </div>
+        <div className="hidden items-center gap-5 lg:flex">
+          <Link
+            href="/contact"
+            className="text-sm text-slate-500 transition-colors hover:text-slate-900"
+          >
+            Contact
+          </Link>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-slate-800"
+          >
+            Book a Strategy Call
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
 
-      <button
-        type="button"
-        onClick={() => setOpen((prev) => !prev)}
-        className="lg:hidden h-10 w-10 rounded-2xl border border-slate-200/70 bg-white inline-flex items-center justify-center"
-        aria-label="Toggle navigation"
-      >
-        {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-      </button>
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg lg:hidden"
+          aria-label="Toggle menu"
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
 
       {open && (
-        <div className="fixed inset-0 z-50 bg-[#f7f2ea] lg:hidden">
-          <div className="flex items-center justify-between px-6 py-5 border-b border-slate-200/70 bg-white/90">
-            <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-700 text-white font-semibold">
-                I
-              </span>
-              <div className="leading-tight">
-                <div className="font-[var(--font-display)] text-base font-semibold tracking-tight">Ingenium</div>
-                <div className="text-xs text-slate-500">Enterprise Website Systems</div>
-              </div>
-            </Link>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="h-10 w-10 rounded-2xl border border-slate-200/70 bg-white inline-flex items-center justify-center"
-              aria-label="Close navigation"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
-          <div className="px-6 py-8 space-y-6">
-            <div className="grid gap-2 text-base">
-              {navItems.map((item) => {
-                const active = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className={`rounded-2xl px-4 py-3 font-medium transition ${
-                      active
-                        ? "bg-emerald-50 text-emerald-800"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-white"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </div>
-            <div className="space-y-3">
-              <Link href="/case-studies" className={`${secondaryCta} w-full`} onClick={() => setOpen(false)}>
-                View case studies
+        <div className="fixed inset-0 top-[73px] z-50 bg-[#f7f2ea] lg:hidden">
+          <nav className="mx-auto max-w-7xl space-y-1 px-6 py-8">
+            {[...navItems, { href: "/contact", label: "Contact" }].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={`block rounded-xl px-4 py-3 text-base font-medium transition ${
+                  pathname === item.href
+                    ? "bg-white text-slate-900"
+                    : "text-slate-600 hover:bg-white/60 hover:text-slate-900"
+                }`}
+              >
+                {item.label}
               </Link>
-              <Link href="/contact" className={`${primaryCta} w-full`} onClick={() => setOpen(false)}>
-                Get a Website Strategy Call
+            ))}
+            <div className="pt-6">
+              <Link
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="block rounded-full bg-slate-900 px-6 py-3.5 text-center text-sm font-medium text-white"
+              >
+                Book a Strategy Call
               </Link>
             </div>
-            <div className="rounded-3xl border border-slate-200/70 bg-white/80 p-4 text-sm text-slate-600">
-              Strategy, build, and optimization in one enterprise-ready system.
-            </div>
-          </div>
+          </nav>
         </div>
       )}
-    </div>
+    </header>
   );
 }

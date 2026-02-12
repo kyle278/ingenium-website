@@ -1,110 +1,111 @@
-import Link from "next/link";
-import { Mail, MapPin, PhoneCall, Sparkles, CheckCircle2, AlertTriangle } from "lucide-react";
-import { getWebsiteContent } from "../lib/websiteContent";
+﻿import Link from "next/link";
+import { ArrowUpRight, CheckCircle2, Mail, MapPin, PhoneCall } from "lucide-react";
 
-const deliverablesFallback = [
-  "Leak audit + revenue recovery plan",
-  "Website conversion rebuild",
-  "CRM configuration + custom fields",
-  "AI Agent departments",
-  "Marketing automations",
-  "Forecasting + reporting",
+const expectations = [
+  "We respond within 1 business day",
+  "Strategy call includes conversion roadmap",
+  "Security review available on request",
 ];
 
-export default async function WebsiteContactPage() {
-  const content = await getWebsiteContent();
-  const deliverables = content.lines("contact_deliverables", deliverablesFallback);
+export default function ContactPage() {
   return (
     <div className="space-y-24">
-      <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr] items-center">
+      <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr] items-start">
         <div className="space-y-6">
-          <div className="site-chip">{content.text("contact_hero_chip", "Leak Audit")}</div>
-          <h1 className="font-display text-4xl md:text-5xl">{content.text("contact_hero_title", "Find the revenue leaks in your funnel.")}</h1>
+          <div className="chip">Contact</div>
+          <h1 className="section-title text-4xl md:text-5xl leading-tight">
+            Book a Website Strategy Call.
+          </h1>
           <p className="text-lg text-muted">
-            {content.text("contact_hero_subtext", "In 15 minutes we identify where leads are disappearing and map the system to fix it.")}
+            Tell us about your website goals and we will map the conversion plan, timeline, and rollout.
           </p>
-          <div className="flex items-center gap-3 text-sm text-muted">
-            <AlertTriangle className="h-4 w-4 text-[var(--accent)]" />
-            {content.text("contact_hero_alert", "Limited to 10 audits per week.")}
-          </div>
-          <div className="space-y-3 text-sm">
-            <div className="flex items-center gap-3">
-              <Mail className="h-4 w-4 text-[var(--accent)]" />
-              <span>{content.text("contact_email", "hello@ingeniumconsulting.net")}</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <MapPin className="h-4 w-4 text-[var(--accent)]" />
-              <span>{content.text("contact_location", "Graiguecullen, Carlow, Ireland")}</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <PhoneCall className="h-4 w-4 text-[var(--accent)]" />
-              <span>{content.text("contact_phone", "Consultations by appointment")}</span>
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/" className="btn-secondary h-11 px-6 text-sm">{content.text("contact_back_cta", "Back to Home")}</Link>
-            <Link
-              href="/app"
-              target="_blank"
-              rel="noreferrer"
-              className="btn-primary h-11 px-6 text-sm"
-            >
-              Enter Portal
-            </Link>
+          <div className="grid gap-3 text-sm text-muted">
+            {expectations.map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
+                {item}
+              </div>
+            ))}
           </div>
         </div>
-        <div className="site-card-bright p-6">
-          <div className="flex items-center gap-2 text-xs text-muted">
-            <Sparkles className="h-4 w-4" />
-            Revenue leak audit
-          </div>
-          <form className="mt-4 space-y-4">
-            <input
-              className="w-full h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 text-sm"
-              placeholder={content.text("contact_form_name", "Full name")}
-              type="text"
-            />
-            <input
-              className="w-full h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 text-sm"
-              placeholder={content.text("contact_form_email", "Work email")}
-              type="email"
-            />
-            <input
-              className="w-full h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 text-sm"
-              placeholder={content.text("contact_form_company", "Company")}
-              type="text"
-            />
-            <textarea
-              className="w-full min-h-[140px] rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm"
-              placeholder={content.text("contact_form_message", "Where do you think leads are leaking today?")}
-            />
-            <button type="button" className="btn-primary h-11 px-6 text-sm w-full">
-              Find my leaks
+        <div className="card-soft p-6 space-y-4">
+          <div className="text-xs text-muted">Contact form</div>
+          <form className="space-y-4">
+            <div className="grid gap-3">
+              <input
+                className="w-full rounded-xl border border-[var(--border)] bg-white px-4 py-3 text-sm"
+                placeholder="Full name"
+                type="text"
+              />
+              <input
+                className="w-full rounded-xl border border-[var(--border)] bg-white px-4 py-3 text-sm"
+                placeholder="Work email"
+                type="email"
+              />
+              <input
+                className="w-full rounded-xl border border-[var(--border)] bg-white px-4 py-3 text-sm"
+                placeholder="Company"
+                type="text"
+              />
+              <input
+                className="w-full rounded-xl border border-[var(--border)] bg-white px-4 py-3 text-sm"
+                placeholder="Role"
+                type="text"
+              />
+              <textarea
+                className="w-full rounded-xl border border-[var(--border)] bg-white px-4 py-3 text-sm min-h-[120px]"
+                placeholder="Tell us about your goals"
+              />
+            </div>
+            <button type="button" className="btn-primary w-full text-sm">
+              Submit request
+              <ArrowUpRight className="h-4 w-4" />
             </button>
             <p className="text-xs text-muted">
-              {content.text("contact_form_note", "This form is for review only. We will wire submissions after the design review.")}
+              Prefer email? Reach us at <span className="text-[var(--accent)]">hello@ingeniumconsulting.net</span>.
             </p>
           </form>
         </div>
       </section>
 
-      <section className="site-card p-8">
-        <h2 className="font-display text-3xl">{content.text("contact_deliverables_title", "What you get after the audit")}</h2>
-        <p className="text-muted mt-2 max-w-2xl">
-          {content.text("contact_deliverables_subtext", "A clear map of revenue leaks plus the build plan to fix them.")}
+      <section className="card p-8">
+        <div className="grid gap-6 lg:grid-cols-3">
+          <div className="space-y-3">
+            <Mail className="h-5 w-5 text-[var(--accent)]" />
+            <div className="text-lg section-title">Email</div>
+            <p className="text-sm text-muted">hello@ingeniumconsulting.net</p>
+          </div>
+          <div className="space-y-3">
+            <PhoneCall className="h-5 w-5 text-[var(--accent)]" />
+            <div className="text-lg section-title">Availability</div>
+            <p className="text-sm text-muted">Mon-Fri · 9am-6pm</p>
+          </div>
+          <div className="space-y-3">
+            <MapPin className="h-5 w-5 text-[var(--accent)]" />
+            <div className="text-lg section-title">Global presence</div>
+            <p className="text-sm text-muted">US + EU delivery teams</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="card-soft p-10 text-center space-y-4">
+        <div className="chip">Next steps</div>
+        <h2 className="section-title text-3xl md:text-4xl">
+          Want a deeper walkthrough?
+        </h2>
+        <p className="text-muted max-w-2xl mx-auto">
+          We can share a full website roadmap, platform overview, and security packet.
         </p>
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {deliverables.map((item) => (
-            <div key={item} className="flex items-center gap-3 text-sm text-muted">
-              <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
-              {item}
-            </div>
-          ))}
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link href="/case-studies" className="btn-secondary text-sm">
+            View case studies
+          </Link>
+          <Link href="/security" className="btn-primary text-sm">
+            Request security packet
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
     </div>
   );
 }
-
-
-

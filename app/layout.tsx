@@ -23,7 +23,11 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${sora.variable} ${manrope.variable}`}>{children}</body>
+      <body
+        className={`${sora.variable} ${manrope.variable} min-h-screen bg-[#f7f2ea] text-slate-900 antialiased font-[var(--font-body)]`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

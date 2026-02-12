@@ -1,0 +1,499 @@
+WEBSITE ANALYSIS — https://ingenium-website-sigma.vercel.app/
+Reviewed: February 12, 2026
+
+Persona: UI Engineer
+Page: Home (/)
+Section: Global nav -> Clean structure and consistent CTAs. Consider tightening nav spacing and ensuring a single primary CTA style across pages for uniformity.
+Section: Hero -> Strong headline hierarchy. Consider a sharper visual separation between headline and supporting paragraph; ensure consistent max-widths for readability.
+Section: Trust metrics strip -> Metrics are clear. Consider using a grid with equal spacing and aligning numbers/labels to reinforce visual rhythm.
+Section: Logo wall -> Placeholders read as repeated “Client Logo.” Replace with real logo lockups or a single-row marquee to avoid visual noise.
+Section: Problem -> Clear sectioning. Consider adding a small icon system or numbered subheads to increase scannability.
+Section: Platform modules -> Solid card concept. Make sure cards are equal height and align CTAs; ensure hover states are consistent.
+Section: How it works -> Step layout is clear. Consider adding subtle separators or a timeline line to show progression.
+Section: First 30 days -> List is readable. Could be improved with icon bullets and consistent line height.
+Section: Results -> Cards are compact but could use a consistent visual token (color or icon) for metrics.
+Section: Security -> Good content but could benefit from a compact “compliance badges” row to reduce text density.
+Section: Final CTA -> Strong. Ensure CTA button styles match the primary in the nav.
+Section: Footer -> Comprehensive. Consider visual grouping and spacing between columns to reduce block density.
+Site overview -> UI is structured and consistent, but needs refined spacing rhythm, consistent card heights, and fewer placeholder elements to feel enterprise-grade.
+
+Page: Websites (/websites)
+Section: Hero -> Good alignment with main value prop. Consider a dedicated visual (diagram or UI mock) to anchor the page.
+Section: Outcomes strip -> Clear but could be visually balanced with a 3-column metric grid.
+Section: Conversion engine -> Solid list. Add small iconography for each bullet and ensure vertical spacing is consistent.
+Section: Differentiators -> Repeats copy. Consider removing repeated lines and tighten to avoid visual redundancy.
+Section: Pricing approach -> Good structure. Could use cards with equal padding and a “scope” CTA alignment.
+Section: Process -> Step pattern repeats well. Consider a progress indicator or a stepper visual.
+Section: First 30 days -> Bullet list clear. Add sub-labels or icons for visual cadence.
+Section: Your side -> Good expectations. Ensure spacing between list items is consistent.
+Section: Results -> Consistent with home. Add a “view case study” link per card.
+Section: FAQ -> Needs more spacing between questions; consider accordion UI for density.
+Section: Security -> Good. Consider a lighter background for separation.
+Section: Final CTA -> Strong. Ensure button styles match site-wide.
+Section: Footer -> Standard.
+Site overview -> Good information architecture, but visual hierarchy needs stronger spacing, consistent component sizing, and more UI tokens (icons, badges, dividers).
+
+Page: Platform (/platform)
+Section: Hero -> Clear. Consider a system diagram to visually communicate the portal.
+Section: Portal modules -> Good list. Add iconography and consistent card structure for each module.
+Section: Role-based views -> Good. Consider distinct cards for Marketing, RevOps, IT with consistent spacing.
+Section: Integrations -> Needs a visual pattern (logo strip) to avoid a dense text block.
+Section: Governance -> Good. Add badge row or highlight to break text.
+Section: Final CTA -> Consistent.
+Section: Footer -> Standard.
+Site overview -> Solid content but needs UI patterns that visually separate feature clusters and reduce text density.
+
+Page: AI Agents (/agents)
+Section: Hero -> Strong. Consider a visual “agent cards” layout.
+Section: Capabilities -> Good list. Icons and consistent spacing would help.
+Section: Example workflows -> Clear. Could be a simple flow diagram to improve comprehension.
+Section: Governance -> Strong. Add a structured list with check icons to reduce text block feel.
+Section: Example agent pack -> Good. Could be a 2-column list with roles on the left and outputs on the right.
+Section: Impact -> Clear. Could be a metric strip for outcomes.
+Section: Aligned to website -> Good CTA.
+Section: Final CTA -> Standard.
+Section: Footer -> Standard.
+Site overview -> Clear information but missing strong visual structure and interactive elements that clarify how agents work in practice.
+
+Page: AI Agent Departments (/departments)
+Section: Hero -> Strong. Consider a department diagram with role hierarchy.
+Section: Departments -> Good function list. Could use cards for each department.
+Section: Department blueprint -> Needs a structured layout (bullets with icons or a 2-column list).
+Section: Governance -> Strong. Add visual emphasis on “human control.”
+Section: Oversight model -> Could be a compact checklist.
+Section: Example department structure -> Great candidate for a simple org chart.
+Section: Aligned to website -> Good CTA.
+Section: Final CTA -> Standard.
+Section: Footer -> Standard.
+Site overview -> Solid conceptual framing but requires stronger visual scaffolding to communicate hierarchy and governance.
+
+Page: CRM (/crm)
+Section: Hero -> Clear. Consider a CRM UI mock to ground the claim.
+Section: CRM foundation -> Good. Could be a 2x2 grid for key capabilities.
+Section: Key workflows -> Clear list; add icons or a step visual.
+Section: AI-ready -> Good CTA to automations.
+Section: Migration -> Good. Consider a timeline for phased rollout.
+Section: Data governance -> Strong. Add badges for SSO/SAML.
+Section: Final CTA -> Standard.
+Section: Footer -> Standard.
+Site overview -> Strong structure, but visual elements (mockups, diagrams) would help credibility and enterprise feel.
+
+Page: Automations (/automations)
+Section: Hero -> Clear.
+Section: Workflows -> Good. Use cards or icons to break long list.
+Section: Example workflow -> Great for a numbered flow diagram.
+Section: Governance -> Solid. Add a checklist UI.
+Section: What we automate first -> Good; use columns for scanning.
+Section: Connected -> Good; consider a simple pipeline graphic.
+Section: Final CTA -> Standard.
+Section: Footer -> Standard.
+Site overview -> Content is strong but needs more visual patterns to guide the reader.
+
+Page: Case Studies (/case-studies)
+Section: Hero -> Clear.
+Section: Metrics strip -> Good but could be a four-column grid.
+Section: Filter row -> Present but not interactive; consider a visual style that makes filters feel clickable.
+Section: Case cards -> Content is good. Use consistent card layout and add industry badges.
+Section: Final CTA -> Standard.
+Section: Footer -> Standard.
+Site overview -> Credibility is good, but interaction design for filters and case cards needs stronger UI treatment.
+
+Page: Security (/security)
+Section: Hero -> Strong.
+Section: Security controls -> Good list; could be a grid with icons.
+Section: AI governance -> Good. Consider a short “how it works” flow.
+Section: Compliance posture -> Clear. Add badges for SOC 2, GDPR to reduce text-only feel.
+Section: Final CTA -> Standard.
+Section: Footer -> Standard.
+Site overview -> Solid content; would benefit from visual trust signals and structured layouts.
+
+Page: About (/about)
+Section: Hero -> Clear.
+Section: Operating model -> Good; consider a 4-card layout.
+Section: What we deliver -> Good but could be a grid.
+Section: Leadership partnership -> Clear; add a simple process diagram.
+Section: Global reach -> Good; could use a map or region callouts.
+Section: Enterprise-ready -> Strong CTA to security.
+Section: Final CTA -> Standard.
+Section: Footer -> Standard.
+Site overview -> Good story but needs richer visuals to feel premium and enterprise.
+
+Page: Contact (/contact)
+Section: Hero -> Clear; consider a form UI with progress or validation cues.
+Section: Call expectations -> Good list.
+Section: Submit request -> Ensure form affordances are clearly visible and consistently styled.
+Section: Contact details -> Fine.
+Section: Secondary CTA -> Good.
+Section: Footer -> Standard.
+Site overview -> Functional but needs improved form UI cues and supporting trust elements (response time, security assurance).
+
+Persona: UX Engineer
+Page: Home (/)
+Section: Global nav -> Pathways are clear (Websites, Platform, Case Studies, Security). Consider a “Solutions” grouping to reduce choice overload.
+Section: Hero -> Strong value prop. Consider adding a sub-CTA for “See the website system” earlier to reduce scroll depth.
+Section: Trust metrics -> Good for credibility. Add context labels and ensure the metrics link to proof.
+Section: Logo wall -> Helpful but generic; real logos or industries will improve trust.
+Section: Problem -> Good pain framing. Add a quick “symptoms” checklist to speed comprehension.
+Section: Platform modules -> Good segmentation. Consider a short intro explaining the portal relationship.
+Section: How it works -> Strong. Consider a summary sentence after step 3 to reinforce outcome.
+Section: First 30 days -> Great for expectation setting; consider a visual timeline.
+Section: Results -> Good proof. Consider linking each to a case study or result detail.
+Section: Security -> Good enterprise reassurance. Consider a quick “security packet available” micro-CTA.
+Section: Final CTA -> Good. Add calendar or a form to reduce friction.
+Section: Footer -> Good paths.
+Site overview -> The journey is logical but could reduce scroll length with stronger visual anchors and tighter cross-links to proof and next steps.
+
+Page: Websites (/websites)
+Section: Hero -> Clear. Consider adding audience qualifiers (enterprise, RevOps, IT) to reduce ambiguity.
+Section: Outcomes strip -> Strong. Tie outcomes to a “see proof” link.
+Section: Conversion engine -> Good mental model. Consider a diagram showing flow Website ? CRM ? AI ? Revenue.
+Section: Differentiators -> Strong but repetitive. Reduce duplication.
+Section: Pricing approach -> Good; add a “what’s included” summary to reduce uncertainty.
+Section: Process -> Clear path. Consider a sample timeline to manage expectations.
+Section: First 30 days -> Great for commitment. Add deliverable examples (template names).
+Section: Your side -> Good; consider turning this into a checklist with estimated time.
+Section: Results -> Good. Add proof links.
+Section: FAQ -> Helpful; consider accordion to reduce wall of text.
+Section: Security -> Good; link to security page for details.
+Section: Final CTA -> Good.
+Site overview -> Strong flow, but needs more visuals and proof links to reduce cognitive load and increase trust.
+
+Page: Platform (/platform)
+Section: Hero -> Clear but abstract. Add a diagram or portal screenshot to anchor.
+Section: Modules -> Good list; better as cards with outcomes per module.
+Section: Role-based views -> Useful. Consider user-specific navigation (tabs).
+Section: Integrations -> Good but could be more concrete (logo list or categories).
+Section: Governance -> Strong. Link to security page.
+Section: Final CTA -> Good.
+Site overview -> Good explanation, but needs concrete visuals and stronger cross-links to product pages.
+
+Page: AI Agents (/agents)
+Section: Hero -> Clear. Consider a short example story to ground the concept.
+Section: Capabilities -> Good; add expected outputs to reduce ambiguity.
+Section: Example workflows -> Great; use a flow visualization.
+Section: Governance -> Good; highlight human-in-the-loop for trust.
+Section: Agent pack -> Good; add example outcomes and SLAs.
+Section: Impact -> Good; add quantified outcomes.
+Section: Aligned to website -> Clear tie-back.
+Section: Final CTA -> Good.
+Site overview -> Strong explanation but lacks concrete examples, which are critical for AI trust.
+
+Page: AI Agent Departments (/departments)
+Section: Hero -> Clear. Consider a short use-case by department.
+Section: Departments -> Good; add outputs and KPIs.
+Section: Department blueprint -> Good but needs a visual structure.
+Section: Governance -> Strong; add a “what’s automated vs. approved” breakdown.
+Section: Oversight model -> Good; consider a matrix.
+Section: Example structure -> Great for an org chart.
+Section: Aligned to website -> Good.
+Section: Final CTA -> Good.
+Site overview -> Good framing but should add examples to reduce “AI department” ambiguity.
+
+Page: CRM (/crm)
+Section: Hero -> Clear. Add “who it’s for” to reduce confusion versus existing CRM.
+Section: Foundation -> Good. Add a short “why switch” bullet list.
+Section: Workflows -> Good. Consider a persona-based view.
+Section: AI-ready -> Good tie-in to automations.
+Section: Migration -> Good; add timeframes and approach.
+Section: Data governance -> Strong.
+Section: Final CTA -> Good.
+Site overview -> Clear, but risk of buyer confusion: is this replacement or layer? Clarify.
+
+Page: Automations (/automations)
+Section: Hero -> Clear.
+Section: Workflows -> Good. Add outcome examples.
+Section: Example workflow -> Strong; add a visual diagram.
+Section: Governance -> Good.
+Section: What we automate first -> Helpful; add prioritization logic.
+Section: Connected -> Good; add a “where signals come from” note.
+Section: Final CTA -> Good.
+Site overview -> Good, but should increase specificity to reduce perceived risk.
+
+Page: Case Studies (/case-studies)
+Section: Hero -> Good.
+Section: Metrics strip -> Great.
+Section: Filters -> Should be interactive; otherwise remove or style as “tags.”
+Section: Case cards -> Good; add industry badges and a clear CTA per card.
+Section: Final CTA -> Good.
+Site overview -> Good proof but needs stronger interaction and access to full case studies.
+
+Page: Security (/security)
+Section: Hero -> Good.
+Section: Security controls -> Good; add a downloadable summary.
+Section: AI governance -> Good; add a concrete example of approval flow.
+Section: Compliance posture -> Good; add named frameworks if applicable.
+Section: Final CTA -> Good.
+Site overview -> Strong reassurance but needs more concrete artifacts (docs, checklist).
+
+Page: About (/about)
+Section: Hero -> Good.
+Section: Operating model -> Good; add a “how we engage” summary.
+Section: What we deliver -> Good; add a visual structure.
+Section: Leadership partnership -> Good.
+Section: Global reach -> Good.
+Section: Enterprise-ready -> Good.
+Section: Final CTA -> Good.
+Site overview -> Clear story but could use more proof or team credibility cues.
+
+Page: Contact (/contact)
+Section: Hero -> Clear.
+Section: Call expectations -> Good; add a short checklist of what to prepare.
+Section: Submit request -> Ensure low friction form (not visible here).
+Section: Contact details -> Good.
+Section: Secondary CTA -> Good.
+Site overview -> Good but could add trust signals (response time, calendar link, security).
+
+Persona: Marketing Manager (Enterprise SaaS)
+Page: Home (/)
+Section: Hero -> Strong positioning and outcome-oriented language. Consider adding a short list of buyer outcomes (pipeline, speed, attribution).
+Section: Proof metrics -> Good. Tie metrics to recognizable references or case studies.
+Section: Problem -> Clear pain points. Add a quick “why now” to create urgency.
+Section: Platform modules -> Good. Ensure “website” stays as the primary offer, with platform as the system behind it.
+Section: How it works -> Solid. Add a short proof statement after step 3.
+Section: Results -> Good. Add recognizable industries or logos.
+Section: Security -> Great for enterprise. Add a “security packet” CTA.
+Section: Final CTA -> Strong.
+Site overview -> Good narrative but needs stronger proof and differentiation vs. agencies or platforms.
+
+Page: Websites (/websites)
+Section: Hero -> Clear. Add “enterprise outcomes” language.
+Section: Outcomes strip -> Good. Add confidence statements (e.g., typical timelines).
+Section: Differentiators -> Good but repetitive; tighten copy and make it sharper.
+Section: Pricing approach -> Good; add “what’s included” and “what’s not.”
+Section: Process -> Great; add a sample timeline.
+Section: Results -> Good; add industry names.
+Section: FAQ -> Great; add “procurement/security” question.
+Section: Security -> Good.
+Section: Final CTA -> Good.
+Site overview -> Strong focus on websites but needs clearer differentiation and stronger proof.
+
+Page: Platform (/platform)
+Section: Hero -> Good. Add a short “why it matters for conversion.”
+Section: Modules -> Good. Consider showing how modules roll out with the website build.
+Section: Role-based views -> Strong. Add a “benefit per role” bullet.
+Section: Integrations -> Good; add logos to increase trust.
+Section: Governance -> Good; link to security.
+Site overview -> Solid but could emphasize that platform is an enabler for website conversion.
+
+Page: AI Agents (/agents)
+Section: Hero -> Good.
+Section: Capabilities -> Good; add “outputs” (reports, drafts, alerts).
+Section: Example workflows -> Great; use as proof points.
+Section: Governance -> Strong.
+Section: Impact -> Add quantified outcomes or example KPIs.
+Site overview -> Needs more outcome proof; strong for positioning.
+
+Page: AI Agent Departments (/departments)
+Section: Hero -> Clear.
+Section: Departments -> Good; add outcomes per department.
+Section: Blueprint -> Good; add “ownership” language to remove risk.
+Section: Governance -> Good.
+Site overview -> Strong differentiation but needs clearer proof and implementation examples.
+
+Page: CRM (/crm)
+Section: Hero -> Good; clarify whether it replaces or augments.
+Section: Foundation -> Good; add “why not just HubSpot/Salesforce?”
+Section: Migration -> Good; add risk mitigation.
+Section: Governance -> Good.
+Site overview -> Needs clarity on product vs. service vs. integration.
+
+Page: Automations (/automations)
+Section: Hero -> Clear.
+Section: Workflows -> Good; add results or benchmark improvements.
+Section: Governance -> Good; add compliance note.
+Site overview -> Needs more proof and outcome framing.
+
+Page: Case Studies (/case-studies)
+Section: Hero -> Good.
+Section: Case cards -> Add brand names or at least size category and industry.
+Site overview -> Good but proof needs specificity for enterprise buyers.
+
+Page: Security (/security)
+Section: Controls -> Good; add SOC 2 status details if applicable.
+Section: AI governance -> Good.
+Site overview -> Solid; needs downloadable assets for procurement.
+
+Page: About (/about)
+Section: Operating model -> Good; add team credibility (years, leadership background).
+Site overview -> Needs proof of expertise.
+
+Page: Contact (/contact)
+Section: Expectations -> Good.
+Section: CTA -> Consider calendar booking and optional form.
+Site overview -> Good, but can add faster conversion paths.
+
+Persona: Web Designer
+Page: Home (/)
+Section: Hero -> Copy is strong, but layout needs more visual storytelling elements (illustrations, product UI).
+Section: Trust metrics -> Good; consider typographic scale and weight contrast.
+Section: Logo wall -> Placeholder copy damages perceived quality.
+Section: Problem -> Needs more visual hierarchy; use color blocks or subtle background shifts.
+Section: Platform modules -> Consider card layouts and iconography to create a design system pattern.
+Section: How it works -> Add a horizontal stepper on desktop.
+Section: First 30 days -> Add highlight styling for key deliverables.
+Section: Results -> Consider stronger typography for metrics.
+Section: Security -> Use badge visuals to signal trust.
+Section: Footer -> Needs more breathing room and visual separators.
+Site overview -> Requires stronger art direction: clearer visual system, supporting imagery, and more expressive typography.
+
+Page: Websites (/websites)
+Section: Hero -> Consider a hero visual or product mock to avoid text-only feel.
+Section: Differentiators -> Needs card layout with icons.
+Section: Process -> A timeline graphic would elevate.
+Section: FAQ -> Use accordion styling and spacing.
+Site overview -> Good structure; needs richer visual language and consistent component styling.
+
+Page: Platform (/platform)
+Section: Modules -> Needs icon system.
+Section: Role-based views -> Could be a tabbed layout.
+Section: Integrations -> Add logos to add texture.
+Site overview -> Requires more visual depth and illustrative elements.
+
+Page: AI Agents (/agents)
+Section: Capabilities -> Use card grid or split layout.
+Section: Example workflows -> Visual flow diagram.
+Site overview -> Strong copy but too text-heavy; needs visual framing.
+
+Page: AI Agent Departments (/departments)
+Section: Department blueprint -> Could be a visual org chart.
+Site overview -> Needs visual explanation of hierarchy.
+
+Page: CRM (/crm)
+Section: Foundation -> A 2x2 grid would improve.
+Section: Migration -> Timeline or steps.
+Site overview -> Needs CRM-specific visuals.
+
+Page: Automations (/automations)
+Section: Example workflow -> Diagram.
+Site overview -> Needs diagrammatic treatment for clarity.
+
+Page: Case Studies (/case-studies)
+Section: Case cards -> Should feel like polished cards with tags, metrics, and a CTA.
+Site overview -> Lacks visual richness for proof.
+
+Page: Security (/security)
+Section: Controls -> Badge layout.
+Site overview -> Needs more trust signals visually.
+
+Page: About (/about)
+Section: Operating model -> Use a four-card grid.
+Site overview -> Needs visual storytelling (team, process).
+
+Page: Contact (/contact)
+Section: Form -> Needs polished, enterprise-grade form styling.
+Site overview -> Needs trust and expectation-setting visuals.
+
+Persona: Sales Director
+Page: Home (/)
+Section: Hero -> Good. Add “who we sell to” (ICP) to qualify leads.
+Section: Proof metrics -> Good; add “based on X engagements” for credibility.
+Section: Problem -> Great. Add a short “what happens if you do nothing.”
+Section: Results -> Good; link to full proof and ROI.
+Section: Security -> Excellent for enterprise deals.
+Section: Final CTA -> Good.
+Site overview -> Strong initial pitch but needs more qualification and proof to help sales cycles.
+
+Page: Websites (/websites)
+Section: Pricing approach -> Good; add ballpark ranges to pre-qualify.
+Section: Process -> Good; add expected stakeholder involvement and timelines.
+Section: FAQ -> Add procurement/security and pricing questions.
+Site overview -> Needs clearer expectations and qualification language.
+
+Page: Platform (/platform)
+Section: Integrations -> Add specific CRM/MA platforms.
+Site overview -> Clarify whether it integrates or replaces to avoid objections.
+
+Page: AI Agents (/agents)
+Section: Governance -> Good. Add “what humans control.”
+Section: Impact -> Add metrics or pilot outcomes.
+Site overview -> Need proof and clearer scope to avoid skepticism.
+
+Page: AI Agent Departments (/departments)
+Section: Departments -> Add outcomes per department.
+Site overview -> Needs clearer ROI story for each department.
+
+Page: CRM (/crm)
+Section: Migration -> Good; add risk mitigation.
+Site overview -> Potential objection: replacing CRM. Clarify.
+
+Page: Automations (/automations)
+Section: Governance -> Good.
+Site overview -> Needs pilot scope and ROI framing.
+
+Page: Case Studies (/case-studies)
+Section: Case cards -> Add customer size and segment; include “why it worked.”
+Site overview -> Good but need stronger proof specifics for enterprise buyers.
+
+Page: Security (/security)
+Section: Controls -> Good. Add standard security doc references.
+Site overview -> Helps procurement; add packet download.
+
+Page: About (/about)
+Section: Leadership partnership -> Good. Add leadership names/experience.
+Site overview -> Needs credibility signals.
+
+Page: Contact (/contact)
+Section: Call expectations -> Good. Add a “who should attend” line.
+Site overview -> Could add a calendar to reduce friction.
+
+Persona: Client (Enterprise Buyer)
+Page: Home (/)
+Section: Hero -> Clear and persuasive. I understand you build websites and the system behind them.
+Section: Proof -> Helpful but I want to see real clients.
+Section: Problem -> Resonates. Makes me think you understand my pain.
+Section: Platform modules -> Feels like a lot; I need a clearer explanation of what I’m buying first.
+Section: How it works -> Helpful. Gives me confidence.
+Section: Results -> Promising but I need more detail.
+Section: Security -> Important and reassuring.
+Section: Final CTA -> Clear.
+Site overview -> I’m interested, but I need more proof, real logos, and clarity on how quickly we can start.
+
+Page: Websites (/websites)
+Section: Hero -> Clear. I know this is the main offer.
+Section: Outcomes -> Good. I want to see exact examples.
+Section: Process -> Clear. Helps me understand the engagement.
+Section: FAQ -> Helpful.
+Section: Security -> Good.
+Site overview -> I feel this is the right starting point but want more concrete case studies.
+
+Page: Platform (/platform)
+Section: Modules -> I want to see the portal or product visuals.
+Section: Role views -> Helpful for my team.
+Section: Integrations -> I need to know if it works with our CRM.
+Site overview -> I’m interested but want to see screenshots or a demo.
+
+Page: AI Agents (/agents)
+Section: Capabilities -> Interesting but I need examples.
+Section: Governance -> Reassuring.
+Site overview -> I need more specific proof and a pilot offer.
+
+Page: AI Agent Departments (/departments)
+Section: Departments -> Makes sense for functions.
+Section: Governance -> Reassuring.
+Site overview -> I need to see how this works in practice.
+
+Page: CRM (/crm)
+Section: Hero -> I’m not sure if this replaces our CRM or integrates.
+Section: Migration -> Helpful but I need more detail.
+Site overview -> Needs clarity on integration vs replacement.
+
+Page: Automations (/automations)
+Section: Workflows -> Useful; I want to know setup time.
+Section: Governance -> Good.
+Site overview -> Good but I need examples and a pilot plan.
+
+Page: Case Studies (/case-studies)
+Section: Case cards -> Good start. I need real customer names or references.
+Site overview -> Proof is good but needs more depth to convince procurement.
+
+Page: Security (/security)
+Section: Controls -> Good. I’ll need the full packet.
+Site overview -> Reassuring.
+
+Page: About (/about)
+Section: Operating model -> Good. I need to know who is leading and their experience.
+Site overview -> Good but needs leadership credibility.
+
+Page: Contact (/contact)
+Section: Expectations -> Helpful. I want to book quickly.
+Site overview -> Add an easy way to schedule a call.

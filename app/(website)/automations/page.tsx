@@ -1,18 +1,28 @@
-﻿import Link from "next/link";
-import { ArrowUpRight, CheckCircle2, GitBranch, ShieldCheck, Workflow } from "lucide-react";
+import Link from "next/link";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  GitBranch,
+  ShieldCheck,
+  Workflow,
+} from "lucide-react";
 
-const workflows = [
+const coreWorkflows = [
   {
     title: "Lead routing",
-    detail: "Route inbound leads based on intent, territory, and account priority.",
+    detail:
+      "Route inbound leads based on intent, territory, and account priority.",
   },
   {
     title: "Follow-up automation",
-    detail: "Trigger sequences when buyers engage with key pages or assets.",
+    detail:
+      "Trigger sequences when buyers engage with key pages or assets.",
   },
   {
     title: "Pipeline alerts",
-    detail: "Surface stalled deals and send playbooks to owners automatically.",
+    detail:
+      "Surface stalled deals and send playbooks to owners automatically.",
   },
 ];
 
@@ -23,106 +33,91 @@ const governance = [
   "Rollback options and monitoring",
 ];
 
-const primaryButton =
-  "inline-flex items-center gap-2 rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_35px_rgba(5,150,105,0.35)] transition hover:bg-emerald-800";
-const secondaryButton =
-  "inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/80 px-5 py-3 text-sm font-semibold text-slate-900 transition hover:bg-white";
-const card = "rounded-3xl border border-slate-200/70 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]";
-const cardSoft =
-  "rounded-3xl border border-emerald-200/60 bg-white/90 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]";
-const chip =
-  "inline-flex items-center gap-2 rounded-full border border-emerald-200/60 bg-emerald-50 px-4 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-emerald-900";
+const priorities = [
+  "Lead capture to CRM routing",
+  "Pipeline health alerts",
+  "Executive reporting summaries",
+  "Customer lifecycle updates",
+];
 
 export default function AutomationsPage() {
   return (
-    <div className="space-y-20 md:space-y-28">
-      <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr] items-center">
-        <div className="space-y-6">
-          <div className={chip}>Automations</div>
-          <h1 className="font-[var(--font-display)] text-4xl md:text-5xl leading-tight tracking-tight">
-            Automations that keep revenue moving.
-          </h1>
-          <p className="text-lg text-slate-600">
-            Build workflows that connect your website signals, CRM data, and AI agents—so teams act on
-            intent instantly.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/contact" className={primaryButton}>
-              Get a Website Strategy Call
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-            <Link href="/platform" className={secondaryButton}>
-              Explore the platform
-            </Link>
-          </div>
-        </div>
-        <div className={cardSoft + " space-y-4"}>
-          <div className="text-xs text-slate-500">Workflow snapshot</div>
-          <div className="text-xl font-semibold">Website signal → Automation → CRM action</div>
-          <div className="space-y-3 text-sm text-slate-600">
-            {[
-              "Detect high-intent visits",
-              "Trigger AI qualification",
-              "Assign owner + notify",
-              "Log outcome in CRM",
-            ].map((item) => (
-              <div key={item} className="flex items-center gap-3">
-                <Workflow className="h-4 w-4 text-emerald-700" />
-                {item}
-              </div>
-            ))}
-          </div>
+    <div className="space-y-24 md:space-y-32">
+      {/* ── Hero ── */}
+      <section className="text-center">
+        <p className="inline-flex items-center rounded-full border border-emerald-200/60 bg-emerald-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-emerald-700">
+          Automations
+        </p>
+        <h1 className="mx-auto mt-8 max-w-4xl font-[var(--font-display)] text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl">
+          Automations that keep revenue moving
+        </h1>
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-500">
+          Build workflows that connect your website signals, CRM data, and AI
+          agents&mdash;so teams act on intent instantly.
+        </p>
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(5,150,105,0.3)] transition hover:bg-emerald-700"
+          >
+            Get a Website Strategy Call
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            href="/platform"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+          >
+            Explore the Platform
+          </Link>
         </div>
       </section>
 
-      <section className="space-y-6">
-        <div>
-          <h2 className="font-[var(--font-display)] text-3xl tracking-tight">Automations built for enterprise teams</h2>
-          <p className="text-slate-600 mt-2 max-w-2xl">
-            We connect your workflows to measurable outcomes, not just task completion.
+      {/* ── Core workflows (sticky) ── */}
+      <section className="grid items-start gap-16 lg:grid-cols-2">
+        <div className="lg:sticky lg:top-28">
+          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
+            Workflows
+          </p>
+          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-bold tracking-tight md:text-4xl">
+            Automations built for enterprise teams
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-500">
+            We connect your workflows to measurable outcomes, not just task
+            completion.
           </p>
         </div>
-        <div className="grid gap-6 lg:grid-cols-3">
-          {workflows.map((item) => (
-            <div key={item.title} className={card + " space-y-3"}>
-              <div className="h-10 w-10 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
-                <GitBranch className="h-5 w-5" />
+        <div className="space-y-4">
+          {coreWorkflows.map((item) => (
+            <div
+              key={item.title}
+              className="rounded-2xl border border-slate-200/60 bg-white p-6"
+            >
+              <div className="flex items-center gap-3">
+                <GitBranch className="h-5 w-5 text-emerald-600" />
+                <h3 className="font-semibold">{item.title}</h3>
               </div>
-              <div className="text-lg font-semibold">{item.title}</div>
-              <p className="text-sm text-slate-600">{item.detail}</p>
+              <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                {item.detail}
+              </p>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className={card + " p-8"}>
-        <div className="grid gap-8 lg:grid-cols-[1.05fr,0.95fr]">
-          <div>
-            <h2 className="font-[var(--font-display)] text-3xl tracking-tight">Governance and auditability</h2>
-            <p className="text-slate-600 mt-2">
-              Automation without control creates risk. We build governance into every workflow.
+          <div className="rounded-2xl border border-slate-200/60 bg-white p-6">
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+              Example workflow
             </p>
-            <div className="mt-6 grid gap-3">
-              {governance.map((item) => (
-                <div key={item} className="flex items-center gap-3 text-sm text-slate-600">
-                  <ShieldCheck className="h-4 w-4 text-emerald-700" />
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className={cardSoft + " space-y-3"}>
-            <div className="text-xs text-slate-500">Example workflow</div>
-            <div className="text-lg font-semibold">High-intent lead response</div>
-            <div className="space-y-3 text-sm text-slate-600">
+            <h3 className="mt-3 font-semibold">High-intent lead response</h3>
+            <div className="mt-4 space-y-3">
               {[
                 "Detect key page visits",
                 "Trigger AI summary",
                 "Assign SDR + notify",
                 "Log activity in CRM",
               ].map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-700" />
+                <div
+                  key={item}
+                  className="flex items-center gap-3 text-sm text-slate-600"
+                >
+                  <Workflow className="h-4 w-4 shrink-0 text-emerald-600" />
                   {item}
                 </div>
               ))}
@@ -131,50 +126,116 @@ export default function AutomationsPage() {
         </div>
       </section>
 
-      <section className="grid gap-8 lg:grid-cols-[1fr,1fr]">
-        <div className={card}>
-          <h2 className="font-[var(--font-display)] text-2xl tracking-tight">What we automate first</h2>
-          <div className="mt-4 grid gap-3 text-sm text-slate-600">
+      {/* ── Governance (dark) ── */}
+      <section className="overflow-hidden rounded-[2rem] bg-slate-950 px-8 py-16 md:px-16 md:py-20">
+        <div className="grid items-start gap-12 lg:grid-cols-2">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
+              Governance
+            </p>
+            <h2 className="mt-4 font-[var(--font-display)] text-3xl font-bold tracking-tight text-white md:text-4xl">
+              Governance and auditability
+            </h2>
+            <p className="mt-4 text-slate-400">
+              Automation without control creates risk. We build governance into
+              every workflow.
+            </p>
+            <div className="mt-8 space-y-3">
+              {governance.map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-3 text-sm text-slate-300"
+                >
+                  <ShieldCheck className="h-4 w-4 shrink-0 text-emerald-400" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+              What we automate first
+            </p>
+            <div className="mt-4 space-y-3">
+              {priorities.map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-3 text-sm text-slate-300"
+                >
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Website tie-in ── */}
+      <section className="grid items-start gap-16 lg:grid-cols-2">
+        <div className="lg:sticky lg:top-28">
+          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
+            Connected
+          </p>
+          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-bold tracking-tight md:text-4xl">
+            Every automation ties back to conversion
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-500">
+            Automations run from website signals and CRM context to keep your
+            funnel moving.
+          </p>
+        </div>
+        <div className="rounded-2xl border border-emerald-200/40 bg-emerald-50/50 p-8">
+          <div className="space-y-3">
             {[
-              "Lead capture to CRM routing",
-              "Pipeline health alerts",
-              "Executive reporting summaries",
-              "Customer lifecycle updates",
-            ].map((item) => (
-              <div key={item} className="flex items-center gap-3">
-                <CheckCircle2 className="h-4 w-4 text-emerald-700" />
+              "Detect high-intent visits",
+              "Trigger AI qualification",
+              "Assign owner + notify",
+              "Log outcome in CRM",
+            ].map((item, idx) => (
+              <div
+                key={item}
+                className="flex items-center gap-4 rounded-xl border border-emerald-200/60 bg-white px-5 py-3.5 text-sm text-slate-700"
+              >
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-xs font-bold text-emerald-700">
+                  {String(idx + 1).padStart(2, "0")}
+                </span>
                 {item}
               </div>
             ))}
           </div>
-        </div>
-        <div className={cardSoft + " space-y-4"}>
-          <div className={chip}>Connected to your website</div>
-          <h2 className="font-[var(--font-display)] text-2xl tracking-tight">Every automation ties back to conversion</h2>
-          <p className="text-sm text-slate-600">
-            Automations run from website signals and CRM context to keep your funnel moving.
-          </p>
-          <Link href="/websites" className={secondaryButton + " text-xs"}>
+          <Link
+            href="/websites"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 transition hover:text-emerald-700"
+          >
             Explore the website offer
+            <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </section>
 
-      <section className={cardSoft + " p-10 text-center space-y-4"}>
-        <div className={chip}>Automation engine</div>
-        <h2 className="font-[var(--font-display)] text-3xl md:text-4xl tracking-tight">
+      {/* ── Final CTA ── */}
+      <section className="overflow-hidden rounded-[2rem] bg-emerald-600 px-8 py-16 text-center md:px-16 md:py-20">
+        <h2 className="mx-auto max-w-3xl font-[var(--font-display)] text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
           Ready to automate your revenue workflows?
         </h2>
-        <p className="text-slate-600 max-w-2xl mx-auto">
-          Book a strategy call to map your automation priorities and rollout plan.
+        <p className="mx-auto mt-4 max-w-xl text-emerald-100">
+          Book a strategy call to map your automation priorities and rollout
+          plan.
         </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link href="/contact" className={primaryButton}>
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
+          >
             Get a Website Strategy Call
             <ArrowUpRight className="h-4 w-4" />
           </Link>
-          <Link href="/platform" className={secondaryButton}>
-            Explore the platform
+          <Link
+            href="/platform"
+            className="inline-flex items-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
+          >
+            Explore the Platform
           </Link>
         </div>
       </section>

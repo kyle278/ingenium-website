@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git push:*)",
+      "Bash(npm run build:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nUI overhaul: websites page\n\n- Centered hero with bold metric cards below\n- Dark conversion engine section with step-by-step flow\n- Split layout for differentiators + pricing approach\n- Timeline implementation path with numbered steps\n- Metric-forward proof cards, FAQ + security side-by-side\n- Bold emerald CTA band\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nFix: use correct Tailwind v4 import syntax\n\nThe old v3-style imports \\(@import \"tailwindcss/preflight\" and\n\"tailwindcss/utilities\"\\) were missing the theme layer, causing\nmost utility classes to not generate. Tailwind v4 uses a single\n@import \"tailwindcss\" that includes all layers.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}

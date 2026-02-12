@@ -1,251 +1,173 @@
-import Link from "next/link";
-import { GitBranch, Bell, Workflow, Zap, Layers, ShieldCheck, CheckCircle2 } from "lucide-react";
-import { parseDelimited } from "../lib/contentParsers";
-import { getWebsiteContent } from "../lib/websiteContent";
+﻿import Link from "next/link";
+import { ArrowUpRight, CheckCircle2, GitBranch, ShieldCheck, Workflow } from "lucide-react";
 
-const proofPlaceholdersFallback = [
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
-];
-
-const playsFallback = [
+const workflows = [
   {
-    title: "Lead created -> Notify SDR",
-    description: "Instant alert plus automatic task creation in the CRM.",
+    title: "Lead routing",
+    detail: "Route inbound leads based on intent, territory, and account priority.",
   },
   {
-    title: "Opportunity won -> Create invoice",
-    description: "Generate the invoice record, notify finance, and update forecast totals.",
+    title: "Follow-up automation",
+    detail: "Trigger sequences when buyers engage with key pages or assets.",
   },
   {
-    title: "Stalled pipeline -> Escalate",
-    description: "Detect inactivity and trigger a re-engagement playbook.",
-  },
-  {
-    title: "Renewal risk -> Launch retention",
-    description: "Kick off success workflows before churn hits.",
+    title: "Pipeline alerts",
+    detail: "Surface stalled deals and send playbooks to owners automatically.",
   },
 ];
 
-const deliverablesFallback = [
-  "Trigger + filter design",
-  "Decision paths and splits",
-  "Record actions",
-  "Notification workflows",
+const governance = [
+  "Approval gates for sensitive actions",
+  "Audit logs for every workflow",
+  "Role-based access controls",
+  "Rollback options and monitoring",
 ];
 
-export default async function WebsiteAutomationsPage() {
-  const content = await getWebsiteContent();
-
-  const proofPlaceholders = content.lines("automations_proof_logos", proofPlaceholdersFallback);
-  const deliverables = content.lines("automations_deliverables", deliverablesFallback);
-
-  const plays = parseDelimited(
-    content.lines(
-      "automations_plays",
-      playsFallback.map((item) => `${item.title} | ${item.description}`)
-    ),
-    playsFallback,
-    (parts) => ({ title: parts[0], description: parts[1] }),
-    2
-  );
-
-  const heroBadges = content.lines("automations_hero_badges", [
-    "Triggers",
-    "Decisions",
-    "Record actions",
-    "Notifications",
-  ]);
-
-
+export default function AutomationsPage() {
   return (
     <div className="space-y-24">
       <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr] items-center">
         <div className="space-y-6">
-          <div className="site-chip">{content.text("automations_hero_chip", "Automations")}</div>
-          <h1 className="font-display text-4xl md:text-5xl">{content.text("automations_hero_title", "Automations that run while you sleep.")}</h1>
+          <div className="chip">Automations</div>
+          <h1 className="section-title text-4xl md:text-5xl leading-tight">
+            Automations that keep revenue moving.
+          </h1>
           <p className="text-lg text-muted">
-            {content.text(
-              "automations_hero_subtext",
-              "Trigger on record changes, branch on conditions, and orchestrate CRM work without code. Your workflows keep moving even when no one is online."
-            )}
+            Build workflows that connect your website signals, CRM data, and AI agents—so teams act on
+            intent instantly.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link
-              href="/app/crm/automations"
-              target="_blank"
-              rel="noreferrer"
-              className="btn-primary h-11 px-6 text-sm"
-            >
-              {content.text("automations_hero_primary_cta", "Open Builder")}
+            <Link href="/contact" className="btn-primary text-sm">
+              Get a Website Strategy Call
+              <ArrowUpRight className="h-4 w-4" />
             </Link>
-            <Link href="/contact" className="btn-secondary h-11 px-6 text-sm">{content.text("automations_hero_secondary_cta", "Talk to us")}</Link>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {heroBadges.map((badge) => (
-              <span key={badge} className="site-badge">
-                {badge}
-              </span>
-            ))}
+            <Link href="/platform" className="btn-secondary text-sm">
+              Explore the platform
+            </Link>
           </div>
         </div>
-        <div className="site-card-bright p-6 space-y-4">
-          <div className="text-xs text-muted">{content.text("automations_hero_card_label", "Live workflow")}</div>
-          <div className="text-xl font-display">{content.text("automations_hero_card_title", "Lead updated > Notify owner")}</div>
-          <div className="mt-4 space-y-3 text-sm text-muted">
+        <div className="card-soft p-6 space-y-4">
+          <div className="text-xs text-muted">Workflow snapshot</div>
+          <div className="text-xl section-title">Website signal → Automation → CRM action</div>
+          <div className="space-y-3 text-sm text-muted">
             {[
-              "Trigger: Lead updated",
-              "Decision: Status = Qualified",
-              "Action: Send notification",
-            ].map((step) => (
-              <div key={step} className="flex items-center gap-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)]" />
-                {step}
+              "Detect high-intent visits",
+              "Trigger AI qualification",
+              "Assign owner + notify",
+              "Log outcome in CRM",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <Workflow className="h-4 w-4 text-[var(--accent)]" />
+                {item}
               </div>
             ))}
-          </div>
-          <div className="site-card p-4 text-xs text-muted">
-            {content.text("automations_hero_card_note", "Automations are processed continuously, even when no user is logged in.")}
           </div>
         </div>
       </section>
 
-      <section className="site-card p-8">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h2 className="font-display text-2xl">{content.text("automations_proof_title", "Proof placeholders ready to swap")}</h2>
-            <p className="text-muted text-sm mt-2">
-              {content.text("automations_proof_subtext", "Add automation results, case studies, or customer proof when ready.")}
-            </p>
-          </div>
-          <span className="site-badge">{content.text("automations_proof_badge", "Placeholder zone")}</span>
+      <section className="space-y-6">
+        <div>
+          <h2 className="section-title text-3xl">Automations built for enterprise teams</h2>
+          <p className="text-muted mt-2 max-w-2xl">
+            We connect your workflows to measurable outcomes, not just task completion.
+          </p>
         </div>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {proofPlaceholders.map((logo, index) => (
-            <div key={`${logo}-${index}`} className="site-card p-6 text-center text-sm text-muted">
-              {logo}
+        <div className="grid gap-6 lg:grid-cols-3">
+          {workflows.map((item) => (
+            <div key={item.title} className="card p-6 space-y-3">
+              <div className="h-10 w-10 rounded-xl bg-[var(--accent-soft)] text-[var(--accent)] flex items-center justify-center">
+                <GitBranch className="h-5 w-5" />
+              </div>
+              <div className="text-lg section-title">{item.title}</div>
+              <p className="text-sm text-muted">{item.detail}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="grid gap-6 md:grid-cols-3">
-        {[
-          {
-            title: "Smart triggers",
-            description: "Run when any CRM object is created, updated, or meets a filter.",
-            icon: Workflow,
-          },
-          {
-            title: "Decision paths",
-            description: "Branch based on field values, custom data, or random splits.",
-            icon: GitBranch,
-          },
-          {
-            title: "Instant notifications",
-            description: "Notify teams in-app the moment a workflow completes a step.",
-            icon: Bell,
-          },
-        ].map((card) => (
-          <div key={card.title} className="site-card p-6">
-            <card.icon className="h-6 w-6 text-[var(--accent)]" />
-            <div className="mt-4 text-xl font-display">{card.title}</div>
-            <p className="mt-2 text-sm text-muted">{card.description}</p>
-          </div>
-        ))}
-      </section>
-
-      <section className="site-card p-8">
-        <div className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
+      <section className="card p-8">
+        <div className="grid gap-8 lg:grid-cols-[1.05fr,0.95fr]">
           <div>
-            <h2 className="font-display text-3xl">{content.text("automations_plays_title", "Popular automation plays")}</h2>
+            <h2 className="section-title text-3xl">Governance and auditability</h2>
             <p className="text-muted mt-2">
-              {content.text("automations_plays_subtext", "Start with proven workflows and customize them with your own fields and CRM objects.")}
+              Automation without control creates risk. We build governance into every workflow.
             </p>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              {plays.map((card) => (
-                <div key={card.title} className="site-card p-5">
-                  <div className="text-lg font-display">{card.title}</div>
-                  <p className="mt-2 text-sm text-muted">{card.description}</p>
+            <div className="mt-6 grid gap-3">
+              {governance.map((item) => (
+                <div key={item} className="flex items-center gap-3 text-sm text-muted">
+                  <ShieldCheck className="h-4 w-4 text-[var(--accent)]" />
+                  {item}
                 </div>
               ))}
             </div>
           </div>
-          <div className="space-y-4">
-            <div className="site-chip">{content.text("automations_why_chip", "Why it matters")}</div>
-            {[
-              "Every automation is scoped to the correct account data.",
-              "Run actions like create record, update record, notify, or branch.",
-              "Field selectors include both default and custom fields.",
-            ].map((item) => (
-              <div key={item} className="flex items-start gap-3 text-sm">
-                <span className="h-2.5 w-2.5 rounded-full bg-[var(--accent)] mt-1" />
-                <span className="text-muted">{item}</span>
-              </div>
-            ))}
+          <div className="card-soft p-6 space-y-3">
+            <div className="text-xs text-muted">Example workflow</div>
+            <div className="text-lg section-title">High-intent lead response</div>
+            <div className="space-y-3 text-sm text-muted">
+              {[
+                "Detect key page visits",
+                "Trigger AI summary",
+                "Assign SDR + notify",
+                "Log activity in CRM",
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-3">
+                  <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
-        <div className="site-card p-6">
-          <h2 className="font-display text-2xl">{content.text("automations_what_you_get_title", "What you get")}</h2>
-          <div className="mt-4 grid gap-3">
-            {deliverables.map((item) => (
-              <div key={item} className="flex items-center gap-3 text-sm text-muted">
+      <section className="grid gap-8 lg:grid-cols-[1fr,1fr]">
+        <div className="card p-6">
+          <h2 className="section-title text-2xl">What we automate first</h2>
+          <div className="mt-4 grid gap-3 text-sm text-muted">
+            {[
+              "Lead capture to CRM routing",
+              "Pipeline health alerts",
+              "Executive reporting summaries",
+              "Customer lifecycle updates",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-3">
                 <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
                 {item}
               </div>
             ))}
           </div>
         </div>
-        <div className="site-card p-6">
-          <h2 className="font-display text-2xl">{content.text("automations_ready_title", "Automation-ready in weeks")}</h2>
-          <p className="text-muted mt-2 text-sm">
-            {content.text("automations_ready_subtext", "We build the workflows, connect the data, and hand off a system your team can run.")}
+        <div className="card-soft p-6 space-y-4">
+          <div className="chip">Connected to your website</div>
+          <h2 className="section-title text-2xl">Every automation ties back to conversion</h2>
+          <p className="text-sm text-muted">
+            Automations run from website signals and CRM context to keep your funnel moving.
           </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link href="/contact" className="btn-primary h-11 px-6 text-sm">{content.text("automations_ready_primary_cta", "Book a workflow consult")}</Link>
-            <Link href="/crm" className="btn-secondary h-11 px-6 text-sm">{content.text("automations_ready_secondary_cta", "Explore CRM")}</Link>
-          </div>
+          <Link href="/websites" className="btn-secondary text-xs">
+            Explore the website offer
+          </Link>
         </div>
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-3">
-        <div className="site-card p-6">
-          <Zap className="h-6 w-6 text-[var(--accent)]" />
-          <div className="mt-4 text-lg font-display">{content.text("automations_card_title_1", "Fast execution")}</div>
-          <p className="mt-2 text-sm text-muted">
-            {content.text("automations_card_desc_1", "Workflows trigger within seconds and keep your teams ahead.")}
-          </p>
-        </div>
-        <div className="site-card p-6">
-          <Layers className="h-6 w-6 text-[var(--accent)]" />
-          <div className="mt-4 text-lg font-display">{content.text("automations_card_title_2", "Flexible nodes")}</div>
-          <p className="mt-2 text-sm text-muted">
-            {content.text("automations_card_desc_2", "Add decision logic, random splits, and record actions anytime.")}
-          </p>
-        </div>
-        <div className="site-card p-6">
-          <ShieldCheck className="h-6 w-6 text-[var(--accent)]" />
-          <div className="mt-4 text-lg font-display">{content.text("automations_card_title_3", "Audit-ready")}</div>
-          <p className="mt-2 text-sm text-muted">
-            {content.text("automations_card_desc_3", "Every action is logged with clear ownership and timestamps.")}
-          </p>
+      <section className="card-soft p-10 text-center space-y-4">
+        <div className="chip">Automation engine</div>
+        <h2 className="section-title text-3xl md:text-4xl">
+          Ready to automate your revenue workflows?
+        </h2>
+        <p className="text-muted max-w-2xl mx-auto">
+          Book a strategy call to map your automation priorities and rollout plan.
+        </p>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link href="/contact" className="btn-primary text-sm">
+            Get a Website Strategy Call
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
+          <Link href="/platform" className="btn-secondary text-sm">
+            Explore the platform
+          </Link>
         </div>
       </section>
     </div>
   );
 }
-
-
-
-
-
-
-
-

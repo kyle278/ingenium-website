@@ -1,0 +1,228 @@
+﻿WEBSITE PLAN (v1) - Enterprise AI + CRM + Web Builds
+
+Purpose
+- Build a best-in-class enterprise SaaS marketing site that prioritizes qualified demo and consultation requests.
+- Emphasize custom websites as the primary offer, with the broader platform (AI agents, AI agent departments, CRM, automations, analytics and editor) as the system that powers long term growth.
+Comment: The positioning calls out many products at once; the hero must still say one clear promise and show one primary visual (site build + portal) to avoid cognitive overload. //by web designer
+Comment: Decide the single conversion goal for each page now. If websites are the flagship, the hero should be “website-first” and the platform should support that narrative instead of competing with it. //by conversion optimization specialist
+Comment: I would want to know within 5 seconds if you build the site and run it, or if I need internal devs; call this out early. //by client
+Comment: Add one sentence that defines qualification (who you work with) so sales does not waste calls. //by sales
+Comment (agree): We should state the scope clearly: strategy, build, and ongoing optimization are included, with optional handoff to internal teams. This directly supports conversion and reduces friction. //by marketing director
+Comment (agree): Keep the hero promise singular and “website-first,” then use the platform to reinforce credibility and longevity. //by marketing director
+
+Primary Conversion
+- Primary CTA: Request a Website Strategy Call or Book a Demo (single primary action per page).
+- Secondary CTA: View Case Study or See Examples or Watch 90-sec Overview.
+- Tertiary CTA: Talk to Sales or Contact.
+Comment: “Request a Website Strategy Call” vs “Book a Demo” are two different intents; pick one default and make the other page-specific. //by conversion optimization specialist
+Comment: Consider CTA wording that matches the page goal and the user’s stage (e.g., “Get Website Roadmap” on /websites). //by sales
+Comment (agree): Default CTA for top-of-funnel should be “Get a Website Strategy Call,” and we can reserve “Book a Demo” for platform-heavy pages. //by marketing director
+Comment (disagree): We should keep only one secondary CTA globally; multiple secondary CTAs can dilute focus. I recommend “View Case Study.” //by marketing director
+
+Audience (ICP)
+- Enterprise and mid-market operators: Marketing leaders, RevOps, and IT and security stakeholders.
+- High-intent buyers searching for: enterprise web builds, AI automation for marketing and operations, CRM consolidation.
+Comment: Add one or two industries or common buyer pain points to tighten the visual examples and language. //by web designer
+Comment: Create role-based entry points from the hero or nav (Marketing, RevOps, IT) so each persona sees themselves quickly. //by client
+Comment (agree): We should set a clear “not for” boundary (e.g., very small teams or DIY) to increase perceived focus and quality. //by marketing director
+
+Research-Informed UX Principles (summarized)
+- Users scan, not read: structure content for fast scanning with strong headings, short blocks, and clear hierarchy.
+- Reduce form friction: shorter, clearer forms convert better than long forms; only ask for what you need at first.
+- Place proof near decision points: trust signals should sit adjacent to CTAs.
+Comment: Add a “what happens next” statement next to each CTA to reduce anxiety and increase form starts. //by conversion optimization specialist
+Comment (agree): Also include “time-to-value” language near CTAs to make the next step feel worthwhile. //by marketing director
+
+Site Map (Phase 1)
+- / (Home)
+- /websites (Primary conversion page)
+- /agents (AI Agents)
+- /departments (AI Agent Departments)
+- /crm
+- /automations
+- /platform (Portal overview: CRM + Agents + Departments + Website analytics/editor)
+- /case-studies
+- /contact (Book demo or contact)
+- /security (Enterprise trust)
+- /about (Company and leadership credibility)
+Comment: The nav mentions “Solutions” and “Resources” but these are not in the map; decide if these are real pages or remove from nav. //by web designer
+Comment: Too many top-level pages can dilute focus; consider consolidating /agents and /departments into a single “AI Workforce” page until content is mature. //by conversion optimization specialist
+Comment: I would want a “Pricing or Packages” cue even if it is “Contact for enterprise pricing.” //by client
+Comment: Ensure /security is linked from CTA modals and footer; it is a common blocker in enterprise sales cycles. //by sales
+Comment (agree): Add a lightweight “Pricing Approach” section on /websites (not a full pricing page) to address cost expectations without committing to fixed tiers. //by marketing director
+
+Global Structure
+- Persistent top nav with primary CTA button and minimal links: Platform, Websites, Solutions, Case Studies, Resources, Contact.
+- Sticky CTA on mobile.
+- Footer with trust badges, security, legal, and contact.
+Comment: Keep the nav to 4 to 5 links max; too many items lowers click-through to the primary CTA. //by conversion optimization specialist
+Comment: The footer should include an address or HQ region for legitimacy and procurement confidence. //by sales
+Comment (agree): Reduce nav to “Websites, Platform, Case Studies, Security, Contact” and move the rest into the footer. //by marketing director
+
+Narrative Arc (Home Page)
+1) Hero: outcome-focused headline, clear who it is for, primary CTA, secondary CTA.
+2) Trust strip: logos plus 1 to 2 quantified outcomes.
+3) The core problem: enterprise teams are patching tools and agencies; results are inconsistent.
+4) The solution: one platform plus elite web builds that compound growth.
+5) Product pillars: Websites, AI Agents, AI Departments, CRM, Automations, Analytics and Editor.
+6) How it works in 3 steps: Discover -> Build -> Run.
+7) Results proof: short case study cards with metrics.
+8) Security and governance: approvals, audit trails, data controls.
+9) CTA band: repeat primary CTA with short benefit statement.
+Comment: The hero should include one concrete outcome number (speed, pipeline, or conversion lift) to anchor credibility immediately. //by conversion optimization specialist
+Comment: Consider a short “What you get in 30 days” block to make the process feel tangible. //by client
+Comment (agree): Add a “30-day deliverables” callout immediately after the hero or the process section to reduce perceived risk. //by marketing director
+Comment (agree): The trust strip should include a mix of logos and one short quantitative claim, not two long claims. //by marketing director
+
+Page-by-Page Plans
+
+1) Home (/)
+- Goal: create clarity and push to website strategy call.
+- Sections:
+  - Hero (headline + subhead + CTA + UI visual)
+  - Logo and credibility strip
+  - Why now problem framing
+  - Platform overview (5 pillars)
+  - Website builds as flagship offer (expanded block + CTA to /websites)
+  - How it works (3-step)
+  - Case study highlights
+  - Security and compliance block
+  - Final CTA
+Comment: The UI visual should be consistent with the product you can actually demo; avoid abstract art that does not match the real UI. //by web designer
+Comment: Insert a short comparison block (“current stack vs unified system”) to clarify value and reduce skepticism. //by conversion optimization specialist
+Comment (agree): The comparison block should lead into the “website-first” offer to maintain the funnel logic. //by marketing director
+
+2) Websites (/websites) - Primary
+- Goal: convert highest intent visitors.
+- Sections:
+  - Hero with custom enterprise websites that convert positioning
+  - Outcomes and metrics (speed, conversion lift, pipeline impact)
+  - Process (Discovery -> UX Strategy -> Build -> Launch -> Optimize)
+  - Example deliverables (design system, SEO, analytics, CMS/editor)
+  - Proof (case study + testimonial)
+  - FAQ (timeline, ownership, integrations)
+  - CTA + short form (3 to 5 fields)
+Comment: Add a gallery or “before/after” set to validate design quality quickly. //by web designer
+Comment: Include a “what you need from us” checklist to set expectations and reduce sales friction. //by sales
+Comment: Place a CTA right after the process section; visitors deciding there should not scroll further. //by conversion optimization specialist
+Comment (agree): Keep this page the “money page” with the strongest proof, most concrete outcomes, and the most explicit next steps. //by marketing director
+
+3) Platform (/platform)
+- Goal: show unified portal and why it replaces fragmented stacks.
+- Sections:
+  - Hero (single system for marketing and revenue ops)
+  - Portal map (CRM + Agents + Departments + Website editor + Analytics)
+  - Role-based views (Marketing, RevOps, IT)
+  - Integration highlights
+  - CTA
+Comment: A simple static “portal map” might not be enough; include 1 or 2 real UI screenshots for trust. //by web designer
+Comment (agree): This page should support the website story, not replace it; keep the CTA aligned with the website strategy call. //by marketing director
+
+4) AI Agents (/agents)
+- Goal: clarify what agents do and why governance matters.
+- Sections:
+  - Hero (agent workforce outcomes)
+  - Agent capabilities (research, content, ops, QA)
+  - Safety and approvals
+  - Example agent workflows
+  - CTA
+Comment: Add one concrete workflow with inputs and outputs so buyers can imagine the result, not the concept. //by client
+Comment (agree): Keep a short “limits and safeguards” section to address risk proactively and reduce security objections. //by marketing director
+
+5) AI Agent Departments (/departments)
+- Goal: show multi-agent orchestration for business functions.
+- Sections:
+  - Hero (department-level outcomes)
+  - Department structure (roles, approvals, escalation)
+  - Use cases (Marketing Ops, Sales Ops, Support)
+  - CTA
+Comment: Tie this page to specific buying roles (e.g., marketing leaders) so it does not feel abstract. //by sales
+Comment (agree): Use a single “department story” narrative (e.g., Marketing Ops) instead of multiple thin examples. //by marketing director
+
+6) CRM (/crm)
+- Goal: position CRM as the system of record with AI-first workflows.
+- Sections:
+  - Hero (clean pipeline visibility)
+  - Key workflows (lead routing, lifecycle stages, pipeline health)
+  - Automations tie-in
+  - CTA
+Comment: CRM pages need a migration story and data ownership assurances to reduce risk. //by conversion optimization specialist
+Comment (agree): Add a short “migration in weeks, not months” statement with a safe, phased rollout. //by marketing director
+
+7) Automations (/automations)
+- Goal: show how workflow automation reduces manual steps.
+- Sections:
+  - Hero
+  - Workflow examples
+  - Governance and auditability
+  - CTA
+Comment: Show a small workflow diagram or timeline for visual clarity. //by web designer
+Comment (agree): This page should be concise and link back to /platform or /websites for the core conversion path. //by marketing director
+
+8) Case Studies (/case-studies)
+- Goal: provide proof and de-risk purchase.
+- Structure:
+  - Filters by industry and function
+  - 3 to 5 detailed stories
+  - Each story: challenge -> solution -> results -> quote
+  - CTA at end
+Comment: Add a “quick wins” strip with one-line metrics above the filters to hook skimmers. //by conversion optimization specialist
+Comment (agree): The CTA on this page should be “Get a Website Strategy Call” to keep conversion consistent. //by marketing director
+
+9) Contact (/contact)
+- Goal: convert warm visitors.
+- Sections:
+  - Short form (name, work email, company, role, goal)
+  - Calendar embed
+  - Response expectations (timeline)
+  - CTA
+Comment: Include phone number, office location, and a “sales availability” note for enterprise confidence. //by sales
+Comment (agree): Add a “what to expect on the call” bullet list to reduce anxiety and increase submit rate. //by marketing director
+
+10) Security (/security)
+- Goal: satisfy enterprise IT and security.
+- Sections:
+  - Data handling
+  - Access control and approvals
+  - Audit trail
+  - Compliance posture (placeholders)
+  - CTA
+Comment: List specific controls in plain language; avoid empty compliance headings without proof. //by client
+Comment: Add a link to request a security packet or DPA to accelerate procurement. //by sales
+Comment (agree): Keep this page short and scanable; sales can provide the deep packet. //by marketing director
+
+Design Direction (for implementation later)
+- Typography: strong editorial headline face plus clean body type (enterprise-grade).
+- Color: confident neutrals with one bold accent; avoid overly playful palettes.
+- Layout: wide grids, large whitespace, strong section separators, consistent CTA placement.
+- Motion: subtle reveal and scroll cues; avoid distracting animations.
+Comment: Use a consistent visual motif across pages (gridlines, data panels, or blueprint aesthetic) to reinforce enterprise feel. //by web designer
+Comment (agree): The motif should support the “precision and control” narrative, not look like generic AI gradients. //by marketing director
+
+Copy Guidance
+- No jargon. Use outcomes and specifics.
+- Each section should answer: What is it? Who is it for? Why should I trust you?
+- Use fewer, stronger claims backed by metrics or proof.
+Comment: Add a “proof policy” line in content planning so claims always have a source (case study, benchmark, or internal data). //by conversion optimization specialist
+Comment (agree): Avoid buzzwords like “full funnel engine” in copy; show the outcomes instead. //by marketing director
+
+Conversion System
+- Primary CTA repeated 3 to 4 times per long page (hero, mid, near proof, footer).
+- Forms: 3 to 5 fields for first step; optional enrichment later.
+- Add trust adjacent to CTAs: logos, case study, or security badge.
+Comment: Add a low-friction exit path (e.g., “Email me a one-pager”) for visitors not ready to book. //by conversion optimization specialist
+Comment (disagree): Keep the exit path subtle; it should not compete with the primary CTA on high-intent pages. //by marketing director
+
+Implementation Notes for Codex
+- Build pages one at a time, validate with npm run build after each.
+- Start with Home -> Websites -> Platform -> Contact.
+- Maintain consistent section components for speed.
+Comment: Prioritize visual consistency and spacing tokens early so later pages feel cohesive. //by web designer
+Comment (agree): Start with Home and /websites in the same sprint so messaging stays consistent. //by marketing director
+
+Sources (for reference)
+- https://my.wlu.edu/communications-and-public-affairs/digital-communications/help-tutorials-and-training/online-tutorials/creating-web-content/writing-for-the-web
+- https://guides.libraries.wm.edu/writing-for-web/style-guidelines
+- https://baymard.com/blog/checkout-flow-average-form-fields
+- https://baymard.com/learn/form-design
+- https://www.hubspot.com/products/crm/form

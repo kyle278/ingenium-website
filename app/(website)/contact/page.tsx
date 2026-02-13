@@ -6,6 +6,8 @@ import { getActiveFormBySlug, getPublishedContentBlockMap } from "@/lib/portal/q
 import type { WebsiteContentBlock } from "@/lib/portal/types";
 import { hasPortalConnectionConfig } from "@/portalconnect";
 
+export const dynamic = "force-dynamic";
+
 const sectionLabel = "text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700";
 const card =
   "rounded-3xl border border-slate-200/70 bg-white/90 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)]";

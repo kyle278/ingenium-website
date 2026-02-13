@@ -5,78 +5,91 @@ import {
   CheckCircle2,
   ChevronRight,
   LayoutPanelTop,
-  Layers,
+  LineChart,
   Lock,
   Sparkles,
-  Target,
   Users,
   Workflow,
+  Layers,
 } from "lucide-react";
 
-const trustLogos = [
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
-  "Client Logo",
+const primaryButton =
+  "inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(5,150,105,0.3)] transition hover:bg-emerald-700";
+const secondaryButton =
+  "inline-flex items-center gap-2 rounded-full border border-slate-300/80 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50";
+const sectionLabel =
+  "text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700";
+const card =
+  "rounded-3xl border border-slate-200/70 bg-white/90 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)]";
+const softCard =
+  "rounded-3xl border border-white/60 bg-white/60 p-6 shadow-[0_12px_30px_rgba(15,23,42,0.04)]";
+
+const outcomes = [
+  { metric: "Up to 28%", label: "Conversion lift" },
+  { metric: "4-6 weeks", label: "Launch timeline" },
+  { metric: "100%", label: "Attribution coverage" },
+  { metric: "24/7", label: "AI operations" },
+];
+
+const industries = [
+  "Fintech",
+  "Healthcare",
+  "B2B SaaS",
+  "Enterprise Services",
+  "Logistics",
+  "Professional Services",
 ];
 
 const problems = [
   {
     title: "Fragmented stack",
     description:
-      "Your website, CRM, and automation tools live in silos\u2014wins never compound.",
+      "Your website, CRM, and automations live in silos, so wins never compound.",
   },
   {
     title: "Slow iteration",
     description:
-      "Every conversion test waits on dev queues. Revenue experiments die in backlog.",
+      "Conversion tests wait on dev queues, and revenue experiments die in backlog.",
   },
   {
-    title: "No single owner",
+    title: "No ownership",
     description:
-      "Multiple vendors, no unified accountability, inconsistent results.",
+      "Multiple vendors means inconsistent results and no accountable operator.",
   },
 ];
 
-const pillars = [
+const systemSteps = [
   {
-    title: "Custom websites",
-    description: "High-conversion sites built for speed, clarity, and scale.",
+    title: "Website",
+    detail: "Conversion-first experience built for enterprise teams.",
     icon: LayoutPanelTop,
-    href: "/websites",
-  },
-  {
-    title: "AI agents",
-    description: "Specialized agents for research, content, QA, and execution.",
-    icon: Sparkles,
-    href: "/agents",
-  },
-  {
-    title: "Agent departments",
-    description: "Orchestrated teams with roles, approvals, and governance.",
-    icon: Users,
-    href: "/departments",
   },
   {
     title: "CRM",
-    description: "Unified customer data and full pipeline visibility.",
+    detail: "Unified pipeline data, routing, and attribution.",
     icon: Layers,
-    href: "/crm",
+  },
+  {
+    title: "AI Agents",
+    detail: "Specialized agents execute research, content, and QA.",
+    icon: Sparkles,
   },
   {
     title: "Automations",
-    description: "Workflow automation tied to measurable outcomes.",
+    detail: "Workflows that keep momentum compounding.",
     icon: Workflow,
-    href: "/automations",
+  },
+  {
+    title: "Analytics",
+    detail: "Performance dashboards across the funnel.",
+    icon: LineChart,
   },
 ];
 
 const steps = [
   {
     num: "01",
-    title: "Discover",
+    title: "Diagnose",
     detail:
       "Audit your funnel, align stakeholders, and map conversion priorities.",
   },
@@ -84,11 +97,11 @@ const steps = [
     num: "02",
     title: "Build",
     detail:
-      "Design and launch a custom site with integrated CRM and analytics.",
+      "Launch a custom website with integrated CRM and analytics foundations.",
   },
   {
     num: "03",
-    title: "Run",
+    title: "Operate",
     detail:
       "Deploy AI agents and automations that keep improving performance.",
   },
@@ -103,25 +116,25 @@ const deliverables = [
 
 const proof = [
   {
-    label: "FinTech",
+    label: "Fintech",
     metric: "+32%",
     title: "Pipeline growth in 90 days",
     detail:
-      "Rebuilt enterprise site, unified CRM data, launched conversion testing.",
+      "Rebuilt enterprise site, unified CRM data, launched weekly conversion tests.",
   },
   {
     label: "Healthcare SaaS",
     metric: "2x",
     title: "Demo conversions",
     detail:
-      "Role-based pages and automated follow-up for high-intent buyers.",
+      "Role-based pages with automated follow-up and AI-assisted SDR briefs.",
   },
   {
     label: "Enterprise Services",
     metric: "6 wks",
-    title: "From strategy to launch",
+    title: "Strategy to launch",
     detail:
-      "Localized pages with AI-assisted content governance across 4 markets.",
+      "Localized pages with governance workflows across four regions.",
   },
 ];
 
@@ -137,103 +150,137 @@ const securityItems = [
 export default function HomePage() {
   return (
     <div className="space-y-24 md:space-y-32">
-      {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="text-center">
-        <p className="inline-flex items-center rounded-full border border-emerald-200/60 bg-emerald-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-emerald-700">
-          Enterprise Website Systems
-        </p>
-
-        <h1 className="mx-auto mt-8 max-w-4xl font-[var(--font-display)] text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-          Enterprise websites built to convert, backed by
-          AI{"\u00a0"}operations
-        </h1>
-
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-500">
-          We design conversion-first websites and run the system behind
-          them&mdash;AI agents, CRM, automation, and analytics that keep
-          performance compounding.
-        </p>
-
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(5,150,105,0.3)] transition hover:bg-emerald-700"
-          >
-            Get a Website Strategy Call
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="/case-studies"
-            className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-          >
-            View Case Studies
-          </Link>
+      <section className="grid items-center gap-12 lg:grid-cols-[1.1fr,0.9fr]">
+        <div>
+          <p className={sectionLabel}>Enterprise Website Systems</p>
+          <h1 className="mt-6 max-w-2xl font-[var(--font-display)] text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+            Enterprise websites built to convert, backed by AI operations.
+          </h1>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
+            Ingenium builds conversion-first websites and operates the system
+            behind them, including AI agents, CRM, automations, and analytics
+            that keep performance compounding.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link href="/contact" className={primaryButton}>
+              Book a Website Strategy Call
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href="/case-studies" className={secondaryButton}>
+              View Case Studies
+            </Link>
+          </div>
+          <div className="mt-10 flex flex-wrap gap-4 text-sm text-slate-500">
+            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              4-6 week launch
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              Up to 28% conversion lift
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              100% pipeline attribution
+            </span>
+          </div>
         </div>
 
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-sm text-slate-400">
-          {[
-            "4\u20136 week launch",
-            "Up to 28% conversion lift",
-            "100% pipeline attribution",
-          ].map((stat) => (
-            <span key={stat} className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              {stat}
+        <div className="rounded-[2.25rem] border border-slate-200/70 bg-white/80 p-6 shadow-[0_30px_80px_rgba(15,23,42,0.15)]">
+          <div className="rounded-3xl border border-slate-200/60 bg-white p-5">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold uppercase tracking-[0.28em] text-slate-400">
+                Live Conversion View
+              </span>
+              <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
+                +28% lift
+              </span>
+            </div>
+            <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6">
+              <p className="text-sm font-medium text-slate-500">
+                Website experience preview
+              </p>
+              <div className="mt-4 space-y-3">
+                <div className="h-3 w-3/4 rounded-full bg-slate-200" />
+                <div className="h-3 w-2/3 rounded-full bg-slate-200" />
+                <div className="h-3 w-1/2 rounded-full bg-slate-200" />
+              </div>
+            </div>
+          </div>
+          <div className="mt-6 grid gap-3">
+            <div className="rounded-2xl border border-slate-200/60 bg-white px-4 py-3 text-sm text-slate-600">
+              Pipeline: <span className="font-semibold">$4.6M</span>
+            </div>
+            <div className="rounded-2xl border border-slate-200/60 bg-white px-4 py-3 text-sm text-slate-600">
+              Demo conversion: <span className="font-semibold">+31%</span>
+            </div>
+            <div className="rounded-2xl border border-slate-200/60 bg-white px-4 py-3 text-sm text-slate-600">
+              Response SLA: <span className="font-semibold">2 hours</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-[2rem] border border-white/70 bg-white/70 p-8 shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
+        <div className="grid gap-6 md:grid-cols-4">
+          {outcomes.map((item) => (
+            <div key={item.label} className="rounded-2xl bg-white/80 p-5">
+              <p className="text-2xl font-[var(--font-display)] font-semibold text-slate-900">
+                {item.metric}
+              </p>
+              <p className="mt-2 text-sm text-slate-500">{item.label}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-6 text-xs uppercase tracking-[0.3em] text-slate-400">
+          Typical outcomes from recent enterprise launches
+        </p>
+      </section>
+
+      <section className="space-y-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
+          Trusted by enterprise teams across
+        </p>
+        <div className="flex flex-wrap gap-3">
+          {industries.map((industry) => (
+            <span
+              key={industry}
+              className="rounded-full border border-slate-200/60 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500"
+            >
+              {industry}
             </span>
           ))}
         </div>
       </section>
 
-      {/* ── Trust strip ──────────────────────────────────────── */}
-      <section className="rounded-2xl border border-slate-200/60 bg-white/40 px-8 py-10">
-        <p className="mb-8 text-center text-xs font-medium uppercase tracking-widest text-slate-400">
-          Trusted by enterprise teams building growth
-        </p>
-        <div className="grid grid-cols-3 gap-8 md:grid-cols-6">
-          {trustLogos.map((logo, i) => (
-            <div
-              key={i}
-              className="flex items-center justify-center py-2 text-sm text-slate-300"
-            >
-              {logo}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Problem ──────────────────────────────────────────── */}
-      <section className="grid items-start gap-16 lg:grid-cols-2">
-        <div className="lg:sticky lg:top-28">
-          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
-            The problem
-          </p>
-          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-bold tracking-tight md:text-4xl">
-            Most enterprise websites stall after launch
+      <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr]">
+        <div>
+          <p className={sectionLabel}>The problem</p>
+          <h2 className="mt-4 max-w-xl font-[var(--font-display)] text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
+            Most enterprise websites stall after launch.
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-500">
-            The build is only half the work. Without a system to capture,
-            qualify, and act on intent, conversion gains fade fast.
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
+            Without a system to capture, qualify, and act on intent, conversion
+            gains fade fast.
           </p>
           <Link
             href="/websites"
-            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 transition hover:text-emerald-700"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700"
           >
-            See the website system
-            <ArrowRight className="h-3.5 w-3.5" />
+            Explore the website system
+            <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
-
         <div className="space-y-4">
           {problems.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-2xl border border-slate-200/60 bg-white p-6"
-            >
+            <div key={item.title} className={softCard}>
               <div className="flex items-center gap-3">
-                <Target className="h-5 w-5 text-slate-400" />
-                <h3 className="font-semibold">{item.title}</h3>
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                <h3 className="text-base font-semibold text-slate-900">
+                  {item.title}
+                </h3>
               </div>
-              <p className="mt-2 text-sm leading-relaxed text-slate-500">
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">
                 {item.description}
               </p>
             </div>
@@ -241,200 +288,167 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Platform pillars (dark) ──────────────────────────── */}
-      <section className="overflow-hidden rounded-[2rem] bg-slate-950 px-8 py-16 md:px-16 md:py-20">
+      <section className="rounded-[2.5rem] border border-slate-200/70 bg-white/80 px-8 py-16 shadow-[0_30px_80px_rgba(15,23,42,0.12)]">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
-            The Ingenium System
-          </p>
-          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-bold tracking-tight text-white md:text-4xl">
-            One platform. One team. Compounding results.
+          <p className={sectionLabel}>The system</p>
+          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
+            The conversion engine behind every launch.
           </h2>
-          <p className="mt-4 text-slate-400">
-            Your site is the front door. The platform keeps it converting week
-            after week.
+          <p className="mt-4 text-lg text-slate-600">
+            Your website is the front door. The Ingenium platform keeps it
+            converting week after week.
           </p>
         </div>
-
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {pillars.map((pillar) => {
-            const Icon = pillar.icon;
+        <div className="mt-12 grid gap-4 md:grid-cols-5">
+          {systemSteps.map((item) => {
+            const Icon = item.icon;
             return (
-              <Link
-                key={pillar.title}
-                href={pillar.href}
-                className="group rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition hover:bg-white/[0.08]"
-              >
-                <Icon className="h-5 w-5 text-emerald-400" />
-                <h3 className="mt-4 font-semibold text-white">
-                  {pillar.title}
+              <div key={item.title} className="rounded-2xl bg-white p-4">
+                <Icon className="h-5 w-5 text-emerald-600" />
+                <h3 className="mt-3 text-sm font-semibold text-slate-900">
+                  {item.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-400">
-                  {pillar.description}
+                <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                  {item.detail}
                 </p>
-                <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-emerald-400">
-                  Explore <ChevronRight className="h-3 w-3" />
-                </span>
-              </Link>
+              </div>
             );
           })}
         </div>
       </section>
 
-      {/* ── How it works ─────────────────────────────────────── */}
-      <section className="grid gap-16 lg:grid-cols-[1fr,1.2fr]">
+      <section className="grid gap-12 lg:grid-cols-[1fr,1fr]">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
-            How it works
-          </p>
-          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-bold tracking-tight md:text-4xl">
-            A proven path from strategy to scale
+          <p className={sectionLabel}>How it works</p>
+          <h2 className="mt-4 max-w-xl font-[var(--font-display)] text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
+            A proven path from strategy to scale.
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-500">
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
             We align strategy, design, and execution so you see measurable wins
-            fast.
+            quickly.
           </p>
-
-          <div className="mt-10 space-y-0">
-            {steps.map((step, idx) => (
-              <div key={step.num} className="flex gap-6">
-                <div className="flex flex-col items-center">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-50 font-[var(--font-display)] text-sm font-bold text-emerald-700">
-                    {step.num}
-                  </span>
-                  {idx < steps.length - 1 && (
-                    <div className="my-1 h-full w-px bg-slate-200" />
-                  )}
+          <div className="mt-8 space-y-4">
+            {steps.map((step) => (
+              <div
+                key={step.num}
+                className="flex gap-4 rounded-2xl bg-white/70 p-5"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-sm font-semibold text-emerald-700">
+                  {step.num}
                 </div>
-                <div className="pb-10">
-                  <h3 className="font-[var(--font-display)] text-lg font-semibold">
+                <div>
+                  <p className="text-base font-semibold text-slate-900">
                     {step.title}
-                  </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-500">
-                    {step.detail}
                   </p>
+                  <p className="mt-1 text-sm text-slate-600">{step.detail}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-2xl border border-slate-200/60 bg-white p-8 lg:mt-12">
-          <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+        <div className={card}>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
             First 30 days
           </p>
-          <h3 className="mt-3 font-[var(--font-display)] text-xl font-semibold">
-            What you get early
+          <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold text-slate-900">
+            What you receive early
           </h3>
           <div className="mt-6 space-y-4">
             {deliverables.map((item) => (
               <div key={item} className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                <span className="text-sm leading-relaxed text-slate-600">
-                  {item}
-                </span>
+                <CheckCircle2 className="mt-0.5 h-4 w-4 text-emerald-600" />
+                <span className="text-sm text-slate-600">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Proof ────────────────────────────────────────────── */}
       <section>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
-              Results
-            </p>
-            <h2 className="mt-4 font-[var(--font-display)] text-3xl font-bold tracking-tight md:text-4xl">
-              Proof from enterprise teams
+            <p className={sectionLabel}>Proof</p>
+            <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
+              Outcomes from enterprise teams.
             </h2>
           </div>
           <Link
             href="/case-studies"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-slate-900"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900"
           >
-            All case studies
-            <ArrowRight className="h-3.5 w-3.5" />
+            View all case studies
+            <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
-
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 lg:grid-cols-3">
           {proof.map((item) => (
-            <div
-              key={item.label}
-              className="rounded-2xl border border-slate-200/60 bg-white p-8"
-            >
-              <p className="text-xs font-medium uppercase tracking-widest text-slate-400">
+            <div key={item.label} className={card}>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
                 {item.label}
               </p>
-              <p className="mt-4 font-[var(--font-display)] text-4xl font-bold tracking-tight text-emerald-600">
+              <p className="mt-4 text-4xl font-[var(--font-display)] font-semibold text-emerald-600">
                 {item.metric}
               </p>
-              <p className="mt-1 font-semibold">{item.title}</p>
-              <p className="mt-3 text-sm leading-relaxed text-slate-500">
-                {item.detail}
+              <p className="mt-2 text-base font-semibold text-slate-900">
+                {item.title}
               </p>
+              <p className="mt-3 text-sm text-slate-600">{item.detail}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── Security ─────────────────────────────────────────── */}
-      <section className="grid gap-12 lg:grid-cols-2">
+      <section className="grid gap-12 lg:grid-cols-[1fr,1fr]">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
-            Enterprise ready
-          </p>
-          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-bold tracking-tight md:text-4xl">
-            Security and governance built in
+          <p className={sectionLabel}>Security</p>
+          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">
+            Enterprise governance built in.
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-500">
+          <p className="mt-4 text-lg text-slate-600">
             Approvals, audit trails, and role-based controls keep every update
             accountable.
           </p>
           <Link
             href="/security"
-            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 transition hover:text-emerald-700"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700"
           >
-            View security details
-            <ArrowRight className="h-3.5 w-3.5" />
+            Review security posture
+            <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
-
         <div className="grid gap-3 sm:grid-cols-2">
           {securityItems.map((item) => (
             <div
               key={item}
-              className="flex items-center gap-3 rounded-xl border border-slate-200/60 bg-white px-4 py-3.5 text-sm text-slate-600"
+              className="flex items-center gap-3 rounded-2xl border border-slate-200/70 bg-white px-4 py-3 text-sm text-slate-600"
             >
-              <Lock className="h-4 w-4 shrink-0 text-slate-400" />
+              <Lock className="h-4 w-4 text-emerald-600" />
               {item}
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── Final CTA ────────────────────────────────────────── */}
-      <section className="overflow-hidden rounded-[2rem] bg-emerald-600 px-8 py-16 text-center md:px-16 md:py-20">
-        <h2 className="mx-auto max-w-3xl font-[var(--font-display)] text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
-          Ready for a website that drives pipeline?
+      <section className="rounded-[2.5rem] bg-emerald-600 px-8 py-16 text-center text-white shadow-[0_25px_60px_rgba(5,150,105,0.35)]">
+        <h2 className="mx-auto max-w-3xl font-[var(--font-display)] text-3xl font-semibold tracking-tight md:text-4xl">
+          Ready for a website system that drives pipeline?
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-emerald-100">
+        <p className="mx-auto mt-4 max-w-xl text-emerald-50">
           Book a strategy call to map your conversion plan, timeline, and
           rollout options.
         </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
+            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
           >
-            Get a Website Strategy Call
+            Book a Strategy Call
             <ArrowUpRight className="h-4 w-4" />
           </Link>
           <Link
             href="/websites"
-            className="inline-flex items-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
+            className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
           >
             Explore the Website Offer
           </Link>

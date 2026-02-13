@@ -17,25 +17,32 @@ const companyLinks = [
 
 export default function SiteFooter() {
   return (
-    <footer className="border-t border-slate-200/60">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="border-t border-white/70 bg-white/60">
+      <div className="mx-auto max-w-6xl px-6 py-16">
+        <div className="grid gap-12 md:grid-cols-[1.2fr,1fr,1fr,1fr]">
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-600 text-sm font-bold text-white">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600 text-sm font-bold text-white">
                 I
               </span>
-              <span className="font-[var(--font-display)] text-lg font-semibold tracking-tight">
+              <span className="font-[var(--font-display)] text-lg font-semibold tracking-tight text-slate-900">
                 Ingenium
               </span>
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-500">
-              Enterprise websites, AI operations, and CRM systems built to convert and scale.
+              Enterprise websites and AI operations that drive pipeline, backed
+              by CRM, automation, and governance.
             </p>
+            <div className="mt-6 flex flex-wrap gap-2 text-xs uppercase tracking-[0.3em] text-slate-400">
+              <span>Websites</span>
+              <span>AI Agents</span>
+              <span>CRM</span>
+              <span>Automations</span>
+            </div>
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+            <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
               Product
             </h4>
             <div className="mt-4 space-y-3">
@@ -52,7 +59,7 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+            <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
               Company
             </h4>
             <div className="mt-4 space-y-3">
@@ -69,26 +76,26 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-              Get in Touch
+            <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
+              Get in touch
             </h4>
             <div className="mt-4 space-y-3 text-sm text-slate-500">
               <p>hello@ingeniumconsulting.net</p>
-              <p>Mon&ndash;Fri, 9 am&ndash;6 pm</p>
+              <p>Mon-Fri, 9 am-6 pm</p>
               <p>US + EU delivery teams</p>
             </div>
             <Link
               href="/security"
-              className="mt-4 inline-block text-sm font-medium text-emerald-600 transition-colors hover:text-emerald-700"
+              className="mt-4 inline-block text-sm font-semibold text-emerald-700 transition-colors hover:text-emerald-800"
             >
               Security overview
             </Link>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200/60 pt-8 text-xs text-slate-400">
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/70 pt-8 text-xs text-slate-400">
           <span>&copy; 2026 Ingenium Digital Consulting. All rights reserved.</span>
-          <span>Websites &middot; AI Agents &middot; CRM &middot; Automations</span>
+          <span>Enterprise website systems</span>
         </div>
       </div>
     </footer>

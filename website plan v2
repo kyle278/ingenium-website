@@ -1,0 +1,209 @@
+WEBSITE PLAN V2 — Ingenium Digital Consulting
+Created: February 13, 2026
+Purpose: Enterprise-grade SaaS website that prioritizes website builds as the core offer, backed by AI agents, CRM, automations, and governance. Primary KPI: qualified form conversions.
+
+Global Direction
+- Positioning: “Enterprise website systems that drive pipeline, with the AI operations behind them.”
+- Primary conversion: Book a Strategy Call (form + calendar).
+- Secondary conversion: View Case Studies, Download Security Packet (gated).
+- Proof-first: Every major page includes at least one proof block (metric, industry badge, or result).
+- Visual language: calm enterprise palette, high contrast typography, clean spacing, soft depth (shadows), subtle gradients, iconography for all feature lists.
+
+Design System
+- Layout: Max width 1200px, consistent section padding (desktop 96px top/bot, mobile 64px).
+- Grid: 12-column on desktop, 4-column on mobile.
+- Buttons: Primary (solid), Secondary (outline), Tertiary (text). Single primary color across site.
+- Cards: 2 types
+  - Card Solid: white background, soft shadow, rounded corners.
+  - Card Soft: light tint background, no shadow, rounded corners.
+- Badges: small uppercase labels for context.
+- Icon set: use a consistent icon style (line or solid) for all lists.
+- Trust: logo strip or industry list on high-intent pages.
+
+Narrative Flow
+1) Establish enterprise website systems as the product.
+2) Prove it with outcomes and case studies.
+3) Explain the platform behind the site (agents, CRM, automations).
+4) Show governance and security.
+5) Convert with clear CTA.
+
+Site IA (Pages)
+- Home (/)
+- Websites (/websites) — primary offer page
+- Platform (/platform)
+- AI Agents (/agents)
+- AI Agent Departments (/departments)
+- CRM (/crm)
+- Automations (/automations)
+- Case Studies (/case-studies)
+- Security (/security)
+- About (/about)
+- Contact (/contact)
+
+Page Plans
+
+Home (/)
+1) Hero
+  - Headline: Enterprise Website Systems
+  - Subhead: We build conversion-first websites, then operate the AI systems behind them.
+  - Primary CTA: Book a Website Strategy Call
+  - Secondary CTA: View Case Studies
+  - Visual: split layout with website preview + pipeline diagram (static)
+2) Outcomes Strip
+  - 3–4 metrics with labels and footnote “Typical outcomes from recent launches.”
+3) Trust
+  - Logo strip or industry badges (Fintech, Healthcare, SaaS, Services)
+4) The Problem
+  - 3 pain points with icons: fragmented stack, slow iteration, no ownership
+5) The Solution
+  - “Website System” diagram: Website ? CRM ? AI Agents ? Automations ? Analytics
+6) How It Works
+  - 3 steps: Diagnose, Build, Operate
+7) First 30 Days
+  - Timeline card with deliverables
+8) Proof
+  - 2 case study previews with outcomes
+9) Security
+  - Badge row + short governance statement
+10) Final CTA
+  - Book a Strategy Call + brief reassurance text
+
+Websites (/websites)
+1) Hero + Visual
+  - Headline: Enterprise websites that convert
+  - Visual: website mock + conversion lift badge
+2) Outcomes Grid
+  - 3–4 metrics (pipeline lift, demo conversion, time to launch)
+3) Conversion Engine
+  - 4 cards: Strategy, Messaging, Architecture, Optimization
+4) Differentiators
+  - 3-column comparison vs. agencies and in-house
+5) Process Timeline
+  - 4-step timeline with dates (Week 1–6)
+6) First 30 Days Deliverables
+  - Card list with icons
+7) Your Side (Client Inputs)
+  - Checklist: stakeholders, approvals, assets
+8) Proof
+  - 3 case study cards + CTA
+9) FAQ (Accordion)
+10) Security Summary + CTA
+11) Final CTA
+
+Platform (/platform)
+1) Hero
+  - “Your revenue operations portal” + screenshot placeholder
+2) Modules Grid
+  - Websites, CRM, Agents, Automations, Analytics
+3) Role-Based Views
+  - Tabs for Marketing, RevOps, IT
+4) Integrations
+  - Logo strip
+5) Governance
+  - Approval flows + audit trails
+6) CTA
+
+AI Agents (/agents)
+1) Hero
+  - “AI agents that run the work”
+2) Agent Capabilities
+  - 6 cards with icons and outputs
+3) Example Workflow
+  - Flow diagram: Brief ? Draft ? Review ? Publish
+4) Governance
+  - Human-in-the-loop checklist
+5) Starter Agent Pack
+  - Role list + outputs
+6) Impact
+  - Metric strip
+7) CTA
+
+AI Agent Departments (/departments)
+1) Hero
+  - “Departments of agents with oversight”
+2) Department Cards
+  - Marketing, Sales, Customer Success, Ops
+3) Department Blueprint
+  - Role hierarchy list
+4) Oversight Model
+  - RACI-style matrix
+5) Example Department
+  - Simple org chart visual
+6) CTA
+
+CRM (/crm)
+1) Hero
+  - “CRM built for conversion systems” + UI mock
+2) CRM Foundation
+  - 2x2 grid: pipeline, attribution, routing, lifecycle
+3) Key Workflows
+  - Cards with icons
+4) AI-Ready Layer
+  - Tie to Agents + Automations
+5) Migration
+  - 3-step timeline with risk mitigation
+6) Governance
+  - SSO, roles, audit
+7) CTA
+
+Automations (/automations)
+1) Hero
+2) Workflow Library
+  - Cards by department
+3) Example Workflow Diagram
+4) Governance
+5) First Automations
+  - Prioritized list
+6) Connected Signals
+  - Pipeline graphic
+7) CTA
+
+Case Studies (/case-studies)
+1) Hero
+2) Metrics Strip
+3) Filter Tags (visual only or interactive later)
+4) Case Cards
+  - Title, industry, challenge, solution, results, CTA
+5) CTA
+
+Security (/security)
+1) Hero
+2) Security Controls Grid
+3) AI Governance Flow
+4) Compliance Posture (badges)
+5) Security Packet CTA
+
+About (/about)
+1) Hero
+2) Operating Model
+  - 4-card grid
+3) What We Deliver
+  - 3-column list
+4) Leadership Partnership
+  - Engagement model
+5) Global Reach
+  - Regions list
+6) CTA
+
+Contact (/contact)
+1) Hero
+2) Form (name, email, company, role, website, budget range, needs)
+3) Call Expectations
+4) Response Time + Security reassurance
+5) Secondary CTA
+
+Global Components to Build
+- SiteNav with primary CTA
+- SiteFooter with grouped links
+- Section title + eyebrow pattern
+- Card components (solid and soft)
+- Metric strip component
+- Case study card
+- FAQ accordion (simple, no JS required for v1)
+- Badge row
+
+Implementation Notes
+- Replace placeholder “Client Logo” with industry tags until real logos provided.
+- Maintain consistent button styles across pages.
+- Ensure all lists use icons for visual rhythm.
+- Each page must include a proof block and a CTA above the fold.

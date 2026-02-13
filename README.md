@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ingenium Website
 
-## Getting Started
-
-First, run the development server:
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Portal Connection
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This website reads and writes data through Supabase tables managed by the Ingenium portal:
 
-## Learn More
+- `website_content_blocks`
+- `website_media`
+- `website_forms`
+- `website_form_submissions`
 
-To learn more about Next.js, take a look at the following resources:
+### Required Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Set these in local and deployment environments:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+SUPABASE_URL=...
+SUPABASE_ANON_KEY=...
+SITE_ID=...
+ACCOUNT_ID=...
+CONTACT_FORM_SLUG=contact
+```
 
-## Deploy on Vercel
+`CONTACT_FORM_SLUG` is optional and defaults to `contact`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Canonical IDs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`portalconnect.ts` is the only source of truth for site/account IDs used by website queries:
+
+- `SITE_ID`
+- `ACCOUNT_ID`
+
+Do not hardcode site/account IDs anywhere else in the app.
+
+### Contact Form Flow
+
+- The page at `app/(website)/contact/page.tsx` reads the active form from `website_forms`.
+- The client component `app/(website)/contact/PortalContactForm.tsx` renders fields from `fields` JSON.
+- Submissions post to `app/api/portal/forms/[slug]/submit/route.ts`.
+- The route inserts into `website_form_submissions` with `account_id`, `site_id`, and `form_id`.
+
+### Content Block Overrides (Contact Page)
+
+If published, these `block_key` values override contact-page copy:
+
+- `contact.hero.label`
+- `contact.hero.title`
+- `contact.hero.body`
+- `contact.expectations` (`content_json` array or newline-delimited `content`)
+- `contact.call_expectations` (`content_json` array or newline-delimited `content`)
+- `contact.cta.title`
+- `contact.cta.body`

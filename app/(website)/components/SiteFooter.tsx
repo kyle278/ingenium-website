@@ -45,7 +45,7 @@ export default function SiteFooter() {
             <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
               Product
             </h4>
-            <div className="mt-4 space-y-3">
+            <div className="mt-4 flex flex-wrap gap-4">
               {productLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -62,7 +62,7 @@ export default function SiteFooter() {
             <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
               Company
             </h4>
-            <div className="mt-4 space-y-3">
+            <div className="mt-4 flex flex-wrap gap-4">
               {companyLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -79,10 +79,10 @@ export default function SiteFooter() {
             <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
               Get in touch
             </h4>
-            <div className="mt-4 space-y-3 text-sm text-slate-500">
-              <p>hello@ingeniumconsulting.net</p>
-              <p>Mon-Fri, 9 am-6 pm</p>
-              <p>US + EU delivery teams</p>
+            <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-500">
+              <span>hello@ingeniumconsulting.net</span>
+              <span>Mon-Fri, 9 am-6 pm</span>
+              <span>US + EU delivery teams</span>
             </div>
             <Link
               href="/security"

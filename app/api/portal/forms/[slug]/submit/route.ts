@@ -100,11 +100,7 @@ function buildSubmissionMetadata(
 }
 
 export async function POST(request: NextRequest, context: RouteContext) {
-  if (
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-    !hasPortalConnectConfig()
-  ) {
+  if (!hasPortalConnectConfig()) {
     return NextResponse.json(
       { error: "Portal connection is not configured on this deployment." },
       { status: 503 },

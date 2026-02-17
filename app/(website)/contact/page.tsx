@@ -89,11 +89,9 @@ function FallbackContactForm() {
 }
 
 export default async function ContactPage() {
-  const contactFormIdentifier = process.env.NEXT_PUBLIC_CONTACT_FORM_SLUG ?? process.env.CONTACT_FORM_SLUG ?? "contact";
-  const hasSupabaseConfig = Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  );
-  const shouldUsePortal = hasSupabaseConfig && hasPortalConnectConfig();
+  const contactFormIdentifier =
+    process.env.NEXT_PUBLIC_CONTACT_FORM_SLUG ?? process.env.CONTACT_FORM_SLUG ?? "contact";
+  const shouldUsePortal = hasPortalConnectConfig();
 
   let blocks: NormalizedWebsiteContentBlock[] = [];
   let portalForm = null;

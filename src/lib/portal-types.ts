@@ -13,36 +13,20 @@ export interface WebsiteContentBlock {
   account_id: string;
   site_id: string;
   block_key: string;
-  label: string;
-  block_type: WebsiteContentBlockType;
+  label: string | null;
+  block_type: WebsiteContentBlockType | string | null;
   content: string | null;
   content_json: unknown;
   section: string | null;
-  sort_order: number;
+  page_key: string | null;
+  section_key: string | null;
+  page_label: string | null;
+  section_label: string | null;
+  max_length: number | null;
+  helper_text: string | null;
+  is_editable: boolean | null;
+  sort_order: number | null;
   is_published: boolean;
-  metadata: Record<string, unknown> | null;
-  created_at: string;
-  updated_at: string;
-}
-
-export type WebsiteMediaType = "image" | "video" | "document";
-
-export interface WebsiteMedia {
-  id: string;
-  account_id: string;
-  site_id: string;
-  file_name: string;
-  file_path: string;
-  file_size: number | null;
-  mime_type: string | null;
-  media_type: WebsiteMediaType;
-  alt_text: string | null;
-  caption: string | null;
-  gallery: string;
-  sort_order: number;
-  width: number | null;
-  height: number | null;
-  metadata: Record<string, unknown> | null;
   created_at: string;
   updated_at: string;
 }

@@ -8,7 +8,6 @@ import {
   LineChart,
   Lock,
   Sparkles,
-  Users,
   Workflow,
   Layers,
 } from "lucide-react";

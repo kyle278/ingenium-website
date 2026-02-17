@@ -1,0 +1,50 @@
+﻿You are working inside the Ingenium website project. Generate a single idempotent SQL seed script for Supabase that inserts/updates ALL website content blocks and active website forms needed by the current site.
+
+Requirements:
+1) Target tables:
+- public.website_content_blocks
+- public.website_forms
+
+2) Source of truth:
+- Read the current website pages/components and extract all visible copy that should be editable in Portal.
+- Include navigation/footer copy and page-level sections (home, about, websites, platform, agents, departments, automations, crm, case-studies, security, contact).
+
+3) Content block model:
+- Populate these columns for every block:
+  account_id, site_id, block_key, label, block_type, content, content_json,
+  section (legacy), page_key, section_key, page_label, section_label,
+  max_length, helper_text, is_editable, sort_order, is_published
+- Use explicit page_key + section_key for all new rows.
+- Keep section legacy column populated for compatibility.
+- block_key must be stable and deterministic.
+- Use block_type = 'text' for scalar strings, and 'custom' for arrays/objects stored in content_json.
+- Mark all editable rows is_editable = true and is_published = true.
+
+4) Upsert behavior:
+- Use ON CONFLICT to make reruns safe.
+- Conflict key for content blocks: (site_id, block_key)
+- Conflict key for forms: (site_id, slug)
+- Update mutable fields + updated_at on conflict.
+
+5) Forms:
+- Insert/update at least the contact form in website_forms.
+- Ensure fields JSON contains standard keys where possible:
+  email, first_name, last_name, phone, company, title, plus extra fields as needed.
+- is_active must be true.
+
+6) IDs and parameters:
+- Put account_id and site_id in a WITH params CTE at top of script.
+- Do not hardcode those IDs in multiple places.
+- Keep the script wrapped in begin/commit.
+
+7) Output format:
+- Return ONLY SQL in one code block.
+- Include short SQL comments for each section (content blocks, forms, verification queries).
+- Include verification SELECT statements at the end to confirm rows exist.
+
+Before generating SQL, first print a compact mapping table (as SQL comments) of:
+- page_key
+- section_key
+- block_key
+- block_type
+Then generate the executable SQL.

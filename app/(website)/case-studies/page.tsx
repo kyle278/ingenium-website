@@ -141,7 +141,7 @@ export default function CaseStudiesPage() {
             <div className="rounded-2xl border border-emerald-200/60 bg-emerald-50/60 p-6">
               <Quote className="h-5 w-5 text-emerald-600" />
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                "{item.quote}"
+                &ldquo;{item.quote}&rdquo;
               </p>
               <Link
                 href="/contact"

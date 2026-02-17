@@ -1,0 +1,168 @@
+﻿You are implementing a production integration between this website project and the Ingenium Portal Supabase backend.
+
+Goal:
+1) Website text must be dynamically driven by `website_content_blocks`.
+2) Website forms must submit into `website_form_submissions` so Ingenium Portal can process CRM + UTM linkage.
+3) The new content model must use explicit `page_key` and `section_key` (not only legacy `section`).
+
+Implement everything below.
+
+================================================================
+1) REQUIRED CONFIG + CLIENT SETUP
+================================================================
+
+Create `src/portalconnect.ts` (or closest equivalent path) with this shape:
+
+export const portalConnect = {
+  supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  account_id: "REPLACE_WITH_ACCOUNT_ID",
+  site_id: "REPLACE_WITH_SITE_ID",
+};
+
+Rule:
+- Every content/form read/write must use `portalConnect.account_id` and `portalConnect.site_id`.
+- Do not hardcode IDs anywhere else.
+
+Create `src/lib/supabase.ts` browser client using anon key.
+Never expose service role key in frontend code.
+
+================================================================
+2) CONTENT BLOCKS (TEXT SYNC TO PORTAL)
+================================================================
+
+Table: `public.website_content_blocks`
+
+Use these fields:
+- id
+- account_id
+- site_id
+- block_key
+- label
+- block_type
+- content
+- content_json
+- section (legacy)
+- page_key (new)
+- section_key (new)
+- page_label (new)
+- section_label (new)
+- max_length (new)
+- helper_text (new)
+- is_editable (new)
+- sort_order
+- is_published
+- created_at
+- updated_at
+
+Build `src/lib/portal-content.ts` with:
+- `getPublishedBlocks()`
+- `getBlockContent(pageKey, sectionKey, blockKey, fallback?)`
+- `getSectionBlocks(pageKey, sectionKey)`
+
+Query rules:
+- always filter: `site_id = portalConnect.site_id`
+- always filter: `is_published = true`
+- order by: `page_key`, `section_key`, `sort_order`, `created_at`
+
+Normalization rules:
+- Use `page_key` + `section_key` as primary location.
+- Fallback for older rows:
+  - parse legacy `section` using delimiters `::`, `>`, `/`, `|`
+  - default to `home/general` when missing.
+- Build stable key normalizer: lowercase snake_case.
+
+Add `src/lib/content-map.ts`:
+- define page constants (`home`, `about`, `services`, `contact`, etc.)
+- define section constants per page
+- define known `block_key` constants
+Use these constants across components (no string drift).
+
+Rendering rule:
+- Replace hardcoded website copy with Supabase block lookups.
+- If a block is missing, render fallback text and log a dev warning.
+
+Sync rule:
+- Content must be dynamically read (no permanent static snapshot).
+- If using Next.js, use dynamic/no-store for content fetch path.
+
+================================================================
+3) PORTAL VISUAL EDITOR BRIDGE COMPATIBILITY
+================================================================
+
+For each editable text node, add attributes:
+- `data-content-block-key`
+- `data-page-key`
+- `data-section-key`
+
+In editor mode (e.g. `?portal_editor=1`):
+- on page load send:
+  window.parent.postMessage({ type: "portal-content-editor-ready" }, "*")
+- on editable text click send:
+  window.parent.postMessage({
+    type: "portal-content-block-selected",
+    blockKey,
+    pageKey,
+    sectionKey
+  }, "*")
+
+Do not enable layout editing — text/content only.
+
+================================================================
+4) FORMS -> INGENIUM PORTAL
+================================================================
+
+Read form definitions from `public.website_forms`:
+- filter `site_id = portalConnect.site_id`
+- filter `is_active = true`
+- identify form by slug/name in your UI
+
+On submit, insert into `public.website_form_submissions` with:
+- account_id: portalConnect.account_id
+- site_id: portalConnect.site_id
+- form_id: selected form id
+- data: JSON including field values (use standard keys where possible):
+  - email
+  - first_name
+  - last_name
+  - phone
+  - company
+  - title
+  - plus all other submitted fields
+- source_url: current page URL
+- metadata JSON including:
+  - utm_source
+  - utm_medium
+  - utm_campaign
+  - utm_term
+  - utm_content
+  - referrer
+  - landing_url
+  - form_slug
+  - submitted_at (ISO timestamp)
+
+Important:
+- Do NOT create CRM leads/contacts directly in website project.
+- Ingenium Portal DB trigger handles lead/contact matching/creation and UTM touch linking after row insert in `website_form_submissions`.
+
+If framework supports server routes:
+- create server submit endpoint that enriches metadata with user-agent and IP where possible.
+If not, client insert is acceptable as long as required fields above are sent.
+
+================================================================
+5) ACCEPTANCE CRITERIA (MUST PASS)
+================================================================
+
+1. Editing a text block in Portal updates website text on next load without redeploy.
+2. Content location is clearly defined by `page_key` + `section_key`.
+3. Missing block fallbacks do not crash pages.
+4. Form submit creates row in `website_form_submissions` with correct account/site/form ids.
+5. UTM/referrer values are included in submission payload.
+6. No service-role key exposed client-side.
+7. Lint + typecheck + build pass.
+
+Deliverables:
+- list of files changed
+- summary of content mapping (page/section/block_key)
+- one example page showing before/after hardcoded-to-dynamic conversion
+- one sample inserted submission payload

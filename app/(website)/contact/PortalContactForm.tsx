@@ -7,7 +7,7 @@ import type {
   WebsiteForm,
   WebsiteFormField,
   WebsiteFormFieldOption,
-} from "@/lib/portal/types";
+} from "@/src/lib/portal-types";
 
 type FormValue = string | boolean;
 type FormValues = Record<string, FormValue>;
@@ -50,9 +50,49 @@ function isSelectField(field: WebsiteFormField) {
 
 interface PortalContactFormProps {
   form: WebsiteForm;
+  description?: string;
 }
 
-export default function PortalContactForm({ form }: PortalContactFormProps) {
+const LANDING_URL_STORAGE_KEY = "ingenium.portal.landing_url";
+
+function readLandingUrl() {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  try {
+    const existing = window.sessionStorage.getItem(LANDING_URL_STORAGE_KEY);
+
+    if (existing) {
+      return existing;
+    }
+
+    const current = window.location.href;
+    window.sessionStorage.setItem(LANDING_URL_STORAGE_KEY, current);
+    return current;
+  } catch {
+    return window.location.href;
+  }
+}
+
+function buildTrackingMetadata(formSlug: string) {
+  const searchParams = new URLSearchParams(window.location.search);
+  const submittedAt = new Date().toISOString();
+
+  return {
+    utm_source: searchParams.get("utm_source"),
+    utm_medium: searchParams.get("utm_medium"),
+    utm_campaign: searchParams.get("utm_campaign"),
+    utm_term: searchParams.get("utm_term"),
+    utm_content: searchParams.get("utm_content"),
+    referrer: document.referrer || null,
+    landing_url: readLandingUrl(),
+    form_slug: formSlug,
+    submitted_at: submittedAt,
+  };
+}
+
+export default function PortalContactForm({ form, description }: PortalContactFormProps) {
   const initialValues = useMemo<FormValues>(() => {
     return form.fields.reduce<FormValues>((accumulator, field) => {
       accumulator[field.key] = field.type === "checkbox" ? false : "";
@@ -92,6 +132,7 @@ export default function PortalContactForm({ form }: PortalContactFormProps) {
         body: JSON.stringify({
           data: values,
           source_url: window.location.href,
+          metadata: buildTrackingMetadata(form.slug),
         }),
       });
 
@@ -113,7 +154,9 @@ export default function PortalContactForm({ form }: PortalContactFormProps) {
 
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
-      {form.description ? <p className="text-sm text-slate-500">{form.description}</p> : null}
+      {description || form.description ? (
+        <p className="text-sm text-slate-500">{description ?? form.description}</p>
+      ) : null}
       {hasFields ? (
         form.fields.map((field) => {
           const value = values[field.key];

@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { createWebsiteFormSubmission, getActiveFormBySlug } from "@/lib/portal/queries";
-import type { WebsiteFormField } from "@/lib/portal/types";
-import { hasPortalConnectionConfig } from "@/portalconnect";
+import {
+  createWebsiteFormSubmission,
+  getActiveFormBySlug,
+  type WebsiteSubmissionMetadata,
+} from "@/src/lib/portal-forms";
+import type { WebsiteFormField } from "@/src/lib/portal-types";
+import { hasPortalConnectConfig } from "@/src/portalconnect";
 
 type RouteContext = {
   params: Promise<{ slug: string }>;
@@ -38,8 +42,69 @@ function getClientIpAddress(request: NextRequest) {
   return request.headers.get("x-real-ip");
 }
 
+function readBodyMetadata(payload: Record<string, unknown>) {
+  const metadata = payload.metadata;
+
+  if (!metadata || typeof metadata !== "object" || Array.isArray(metadata)) {
+    return {};
+  }
+
+  return metadata as Record<string, unknown>;
+}
+
+function readQueryParam(url: string | null, key: string) {
+  if (!url) {
+    return null;
+  }
+
+  try {
+    return new URL(url).searchParams.get(key);
+  } catch {
+    return null;
+  }
+}
+
+function readOptionalString(value: unknown) {
+  return typeof value === "string" && value.trim().length > 0 ? value : null;
+}
+
+function buildSubmissionMetadata(
+  body: Record<string, unknown>,
+  sourceUrl: string | null,
+  userAgent: string | null,
+  ipAddress: string | null,
+  formSlug: string,
+) {
+  const bodyMetadata = readBodyMetadata(body);
+  const submittedAt = new Date().toISOString();
+  const metadata: WebsiteSubmissionMetadata = {
+    utm_source: readOptionalString(bodyMetadata.utm_source) ?? readQueryParam(sourceUrl, "utm_source"),
+    utm_medium: readOptionalString(bodyMetadata.utm_medium) ?? readQueryParam(sourceUrl, "utm_medium"),
+    utm_campaign:
+      readOptionalString(bodyMetadata.utm_campaign) ?? readQueryParam(sourceUrl, "utm_campaign"),
+    utm_term: readOptionalString(bodyMetadata.utm_term) ?? readQueryParam(sourceUrl, "utm_term"),
+    utm_content:
+      readOptionalString(bodyMetadata.utm_content) ?? readQueryParam(sourceUrl, "utm_content"),
+    referrer: readOptionalString(bodyMetadata.referrer) ?? readOptionalString(body.referrer),
+    landing_url:
+      readOptionalString(bodyMetadata.landing_url) ??
+      readOptionalString(body.landing_url) ??
+      sourceUrl,
+    form_slug: readOptionalString(bodyMetadata.form_slug) ?? formSlug,
+    submitted_at: readOptionalString(bodyMetadata.submitted_at) ?? submittedAt,
+    user_agent: readOptionalString(bodyMetadata.user_agent) ?? userAgent,
+    ip_address: readOptionalString(bodyMetadata.ip_address) ?? ipAddress,
+  };
+
+  return metadata;
+}
+
 export async function POST(request: NextRequest, context: RouteContext) {
-  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY || !hasPortalConnectionConfig()) {
+  if (
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    !hasPortalConnectConfig()
+  ) {
     return NextResponse.json(
       { error: "Portal connection is not configured on this deployment." },
       { status: 503 },
@@ -118,11 +183,14 @@ export async function POST(request: NextRequest, context: RouteContext) {
         ? body.ipAddress
         : getClientIpAddress(request);
 
+  const metadata = buildSubmissionMetadata(body, sourceUrl, userAgent, ipAddress, slug);
+
   try {
     await createWebsiteFormSubmission({
       formId: form.id,
       data: submissionRecord,
       sourceUrl,
+      metadata,
       userAgent,
       ipAddress,
     });

@@ -1,21 +1,42 @@
 import Link from "next/link";
 
-const productLinks = [
-  { href: "/websites", label: "Websites" },
-  { href: "/platform", label: "Platform" },
-  { href: "/agents", label: "AI Agents" },
-  { href: "/crm", label: "CRM" },
-  { href: "/automations", label: "Automations" },
-];
+interface FooterLink {
+  href: string;
+  label: string;
+}
 
-const companyLinks = [
-  { href: "/about", label: "About" },
-  { href: "/case-studies", label: "Case Studies" },
-  { href: "/security", label: "Security" },
-  { href: "/contact", label: "Contact" },
-];
+interface SiteFooterContent {
+  brand: string;
+  summary: string;
+  product_title: string;
+  product_links: FooterLink[];
+  company_title: string;
+  company_links: FooterLink[];
+  contact_title: string;
+  contact_items: string[];
+  security_link_label: string;
+  legal_line: string;
+  legal_tagline: string;
+  tags: string[];
+}
 
-export default function SiteFooter() {
+interface EditorAttrs {
+  "data-content-block-key": string;
+  "data-page-key": string;
+  "data-section-key": string;
+}
+
+interface SiteFooterProps {
+  content: SiteFooterContent;
+  editorAttrs: EditorAttrs;
+}
+
+export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
+  const productLinks = Array.isArray(content.product_links) ? content.product_links : [];
+  const companyLinks = Array.isArray(content.company_links) ? content.company_links : [];
+  const contactItems = Array.isArray(content.contact_items) ? content.contact_items : [];
+  const tags = Array.isArray(content.tags) ? content.tags : [];
+
   return (
     <footer className="border-t border-white/70 bg-white/60">
       <div className="mx-auto max-w-6xl px-6 py-16">
@@ -25,25 +46,28 @@ export default function SiteFooter() {
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600 text-sm font-bold text-white">
                 I
               </span>
-              <span className="font-[var(--font-display)] text-lg font-semibold tracking-tight text-slate-900">
-                Ingenium
+              <span
+                className="font-[var(--font-display)] text-lg font-semibold tracking-tight text-slate-900"
+                {...editorAttrs}
+              >
+                {content.brand}
               </span>
             </div>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-500">
-              Enterprise websites and AI operations that drive pipeline, backed
-              by CRM, automation, and governance.
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-500" {...editorAttrs}>
+              {content.summary}
             </p>
             <div className="mt-6 flex flex-wrap gap-2 text-xs uppercase tracking-[0.3em] text-slate-400">
-              <span>Websites</span>
-              <span>AI Agents</span>
-              <span>CRM</span>
-              <span>Automations</span>
+              {tags.map((tag) => (
+                <span key={tag} {...editorAttrs}>
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
-              Product
+            <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400" {...editorAttrs}>
+              {content.product_title}
             </h4>
             <div className="mt-4 flex flex-wrap gap-4">
               {productLinks.map((link) => (
@@ -51,6 +75,7 @@ export default function SiteFooter() {
                   key={link.href}
                   href={link.href}
                   className="block text-sm text-slate-500 transition-colors hover:text-slate-900"
+                  {...editorAttrs}
                 >
                   {link.label}
                 </Link>
@@ -59,8 +84,8 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
-              Company
+            <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400" {...editorAttrs}>
+              {content.company_title}
             </h4>
             <div className="mt-4 flex flex-wrap gap-4">
               {companyLinks.map((link) => (
@@ -68,6 +93,7 @@ export default function SiteFooter() {
                   key={link.href}
                   href={link.href}
                   className="block text-sm text-slate-500 transition-colors hover:text-slate-900"
+                  {...editorAttrs}
                 >
                   {link.label}
                 </Link>
@@ -76,26 +102,29 @@ export default function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
-              Get in touch
+            <h4 className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400" {...editorAttrs}>
+              {content.contact_title}
             </h4>
             <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-500">
-              <span>hello@ingeniumconsulting.net</span>
-              <span>Mon-Fri, 9 am-6 pm</span>
-              <span>US + EU delivery teams</span>
+              {contactItems.map((item) => (
+                <span key={item} {...editorAttrs}>
+                  {item}
+                </span>
+              ))}
             </div>
             <Link
               href="/security"
               className="mt-4 inline-block text-sm font-semibold text-emerald-700 transition-colors hover:text-emerald-800"
+              {...editorAttrs}
             >
-              Security overview
+              {content.security_link_label}
             </Link>
           </div>
         </div>
 
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/70 pt-8 text-xs text-slate-400">
-          <span>&copy; 2026 Ingenium Digital Consulting. All rights reserved.</span>
-          <span>Enterprise website systems</span>
+          <span {...editorAttrs}>{content.legal_line}</span>
+          <span {...editorAttrs}>{content.legal_tagline}</span>
         </div>
       </div>
     </footer>

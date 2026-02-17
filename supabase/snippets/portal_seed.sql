@@ -6,8 +6,8 @@ begin;
 -- 0) Canonical IDs from portalconnect/env
 with params as (
   select
-    'TODO_ACCOUNT_UUID'::uuid as account_id,
-    'TODO_SITE_UUID'::uuid as site_id
+    'd253b486-faa4-47b9-b10f-67a7c6da3374'::uuid as account_id,
+    '13f9d31e-022c-4fd6-83bb-39cd1a51a85e'::uuid as site_id
 )
 insert into website_sites (
   id,
@@ -46,8 +46,8 @@ set
 -- 1) Content blocks (website_content_blocks)
 with params as (
   select
-    'TODO_ACCOUNT_UUID'::uuid as account_id,
-    'TODO_SITE_UUID'::uuid as site_id
+    'd253b486-faa4-47b9-b10f-67a7c6da3374'::uuid as account_id,
+    '13f9d31e-022c-4fd6-83bb-39cd1a51a85e'::uuid as site_id
 ),
 rows as (
   select *
@@ -59,6 +59,13 @@ rows as (
         "block_type": "text",
         "content": "Contact",
         "content_json": null,
+        "page_key": "contact",
+        "section_key": "hero",
+        "page_label": "Contact",
+        "section_label": "Hero",
+        "max_length": 80,
+        "helper_text": "Small section label above contact hero.",
+        "is_editable": true,
         "section": "contact",
         "sort_order": 10,
         "is_published": true
@@ -69,6 +76,13 @@ rows as (
         "block_type": "text",
         "content": "Book a Website Strategy Call",
         "content_json": null,
+        "page_key": "contact",
+        "section_key": "hero",
+        "page_label": "Contact",
+        "section_label": "Hero",
+        "max_length": 120,
+        "helper_text": "Primary headline for contact page hero.",
+        "is_editable": true,
         "section": "contact",
         "sort_order": 20,
         "is_published": true
@@ -79,6 +93,13 @@ rows as (
         "block_type": "text",
         "content": "Tell us about your website goals and we will map the conversion plan, timeline, and rollout.",
         "content_json": null,
+        "page_key": "contact",
+        "section_key": "hero",
+        "page_label": "Contact",
+        "section_label": "Hero",
+        "max_length": 360,
+        "helper_text": "Supporting text under the hero title.",
+        "is_editable": true,
         "section": "contact",
         "sort_order": 30,
         "is_published": true
@@ -93,6 +114,13 @@ rows as (
           "Strategy call includes a conversion roadmap",
           "Security review available on request"
         ],
+        "page_key": "contact",
+        "section_key": "expectations",
+        "page_label": "Contact",
+        "section_label": "Expectations",
+        "max_length": null,
+        "helper_text": "Array of expectation bullet points.",
+        "is_editable": true,
         "section": "contact",
         "sort_order": 40,
         "is_published": true
@@ -108,6 +136,13 @@ rows as (
           "Map a phased rollout plan",
           "Answer security and procurement questions"
         ],
+        "page_key": "contact",
+        "section_key": "call_expectations",
+        "page_label": "Contact",
+        "section_label": "Call Expectations",
+        "max_length": null,
+        "helper_text": "Array of call expectation bullet points.",
+        "is_editable": true,
         "section": "contact",
         "sort_order": 50,
         "is_published": true
@@ -118,6 +153,13 @@ rows as (
         "block_type": "text",
         "content": "Want a deeper walkthrough?",
         "content_json": null,
+        "page_key": "contact",
+        "section_key": "cta",
+        "page_label": "Contact",
+        "section_label": "CTA",
+        "max_length": 120,
+        "helper_text": "Contact page CTA headline.",
+        "is_editable": true,
         "section": "contact",
         "sort_order": 60,
         "is_published": true
@@ -128,8 +170,53 @@ rows as (
         "block_type": "text",
         "content": "We can share a full website roadmap, platform overview, and security packet.",
         "content_json": null,
+        "page_key": "contact",
+        "section_key": "cta",
+        "page_label": "Contact",
+        "section_label": "CTA",
+        "max_length": 260,
+        "helper_text": "Contact page CTA supporting text.",
+        "is_editable": true,
         "section": "contact",
         "sort_order": 70,
+        "is_published": true
+      },
+      {
+        "block_key": "contact.info.content",
+        "label": "Contact Info Cards",
+        "block_type": "custom",
+        "content": null,
+        "content_json": [
+          { "title": "Email", "body": "hello@ingeniumconsulting.net" },
+          { "title": "Availability", "body": "Mon-Fri, 9 am-6 pm" },
+          { "title": "Global presence", "body": "US and EU delivery teams" }
+        ],
+        "page_key": "contact",
+        "section_key": "info",
+        "page_label": "Contact",
+        "section_label": "Info",
+        "max_length": null,
+        "helper_text": "Contact info cards displayed under the form.",
+        "is_editable": true,
+        "section": "contact",
+        "sort_order": 80,
+        "is_published": true
+      },
+      {
+        "block_key": "contact.form.form_description",
+        "label": "Contact Form Description",
+        "block_type": "text",
+        "content": "Share a few details and we will follow up with a tailored rollout plan.",
+        "content_json": null,
+        "page_key": "contact",
+        "section_key": "form",
+        "page_label": "Contact",
+        "section_label": "Form",
+        "max_length": 240,
+        "helper_text": "Optional description shown above the form fields.",
+        "is_editable": true,
+        "section": "contact",
+        "sort_order": 90,
         "is_published": true
       }
     ]'::jsonb
@@ -139,6 +226,13 @@ rows as (
     block_type text,
     content text,
     content_json jsonb,
+    page_key text,
+    section_key text,
+    page_label text,
+    section_label text,
+    max_length integer,
+    helper_text text,
+    is_editable boolean,
     section text,
     sort_order integer,
     is_published boolean
@@ -154,6 +248,13 @@ insert into website_content_blocks (
   content,
   content_json,
   section,
+  page_key,
+  section_key,
+  page_label,
+  section_label,
+  max_length,
+  helper_text,
+  is_editable,
   sort_order,
   is_published,
   metadata
@@ -168,6 +269,13 @@ select
   r.content,
   r.content_json,
   r.section,
+  r.page_key,
+  r.section_key,
+  r.page_label,
+  r.section_label,
+  r.max_length,
+  r.helper_text,
+  r.is_editable,
   r.sort_order,
   r.is_published,
   '{}'::jsonb
@@ -180,6 +288,13 @@ set
   content = excluded.content,
   content_json = excluded.content_json,
   section = excluded.section,
+  page_key = excluded.page_key,
+  section_key = excluded.section_key,
+  page_label = excluded.page_label,
+  section_label = excluded.section_label,
+  max_length = excluded.max_length,
+  helper_text = excluded.helper_text,
+  is_editable = excluded.is_editable,
   sort_order = excluded.sort_order,
   is_published = excluded.is_published,
   metadata = excluded.metadata,
@@ -189,8 +304,8 @@ set
 -- file_path is the object key in the public "website-media" bucket.
 with params as (
   select
-    'TODO_ACCOUNT_UUID'::uuid as account_id,
-    'TODO_SITE_UUID'::uuid as site_id
+    'd253b486-faa4-47b9-b10f-67a7c6da3374'::uuid as account_id,
+    '13f9d31e-022c-4fd6-83bb-39cd1a51a85e'::uuid as site_id
 ),
 rows as (
   select *
@@ -258,20 +373,13 @@ select
   r.height,
   '{}'::jsonb
 from params p
-cross join rows r
-where not exists (
-  select 1
-  from website_media wm
-  where wm.site_id = p.site_id
-    and wm.account_id = p.account_id
-    and wm.file_path = r.file_path
-);
+cross join rows r;
 
 -- 3) Form definitions (website_forms)
 with params as (
   select
-    'TODO_ACCOUNT_UUID'::uuid as account_id,
-    'TODO_SITE_UUID'::uuid as site_id
+    'd253b486-faa4-47b9-b10f-67a7c6da3374'::uuid as account_id,
+    '13f9d31e-022c-4fd6-83bb-39cd1a51a85e'::uuid as site_id
 ),
 rows as (
   select *
@@ -282,10 +390,12 @@ rows as (
         "slug": "contact",
         "description": "Website strategy call request form",
         "fields": [
-          { "key": "name", "label": "Full name", "type": "text", "required": true },
+          { "key": "first_name", "label": "First name", "type": "text", "required": true },
+          { "key": "last_name", "label": "Last name", "type": "text", "required": true },
           { "key": "email", "label": "Work email", "type": "email", "required": true },
+          { "key": "phone", "label": "Phone", "type": "tel", "required": false },
           { "key": "company", "label": "Company", "type": "text", "required": false },
-          { "key": "role", "label": "Role", "type": "text", "required": false },
+          { "key": "title", "label": "Title", "type": "text", "required": false },
           { "key": "website", "label": "Company website", "type": "url", "required": false },
           {
             "key": "budget",
@@ -348,8 +458,8 @@ set
 -- Run this only if you want a test record in portal inbox.
 with params as (
   select
-    'TODO_ACCOUNT_UUID'::uuid as account_id,
-    'TODO_SITE_UUID'::uuid as site_id
+    'd253b486-faa4-47b9-b10f-67a7c6da3374'::uuid as account_id,
+    '13f9d31e-022c-4fd6-83bb-39cd1a51a85e'::uuid as site_id
 ),
 seed_submission as (
   select false as enabled

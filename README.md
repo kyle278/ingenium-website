@@ -9,53 +9,51 @@ npm run dev
 
 Open `http://localhost:3000`.
 
-## Portal Connection
+## Ingenium Portal Integration
 
-This website reads and writes data through Supabase tables managed by the Ingenium portal:
+This website reads and writes Supabase data managed by the Ingenium Portal:
 
-- `website_content_blocks`
-- `website_media`
-- `website_forms`
-- `website_form_submissions`
+- `public.website_content_blocks`
+- `public.website_forms`
+- `public.website_form_submissions`
 
-### Required Environment Variables
+### Environment Variables
 
 Set these in local and deployment environments:
 
 ```bash
-SUPABASE_URL=...
-SUPABASE_ANON_KEY=...
-SITE_ID=...
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+NEXT_PUBLIC_ACCOUNT_ID=... # optional if ACCOUNT_ID is set
+NEXT_PUBLIC_SITE_ID=...    # optional if SITE_ID is set
 ACCOUNT_ID=...
-CONTACT_FORM_SLUG=contact
+SITE_ID=...
+NEXT_PUBLIC_CONTACT_FORM_SLUG=contact # optional
+CONTACT_FORM_SLUG=contact             # optional fallback
 ```
 
-`CONTACT_FORM_SLUG` is optional and defaults to `contact`.
+`src/portalconnect.ts` is the canonical source of `account_id` and `site_id` used by all portal reads/writes.
 
-### Canonical IDs
+### Content Flow
 
-`portalconnect.ts` is the only source of truth for site/account IDs used by website queries:
+- Content is loaded from `website_content_blocks` through `src/lib/portal-content.ts`.
+- Content location is normalized by `page_key` + `section_key` with legacy `section` fallback parsing.
+- Missing blocks render fallback text and log a dev warning.
+- Editable text nodes include:
+  - `data-content-block-key`
+  - `data-page-key`
+  - `data-section-key`
+- Editor bridge events are sent by `app/(website)/components/PortalEditorBridge.tsx` when `?portal_editor=1`.
 
-- `SITE_ID`
-- `ACCOUNT_ID`
+### Form Flow
 
-Do not hardcode site/account IDs anywhere else in the app.
-
-### Contact Form Flow
-
-- The page at `app/(website)/contact/page.tsx` reads the active form from `website_forms`.
-- The client component `app/(website)/contact/PortalContactForm.tsx` renders fields from `fields` JSON.
+- `app/(website)/contact/page.tsx` loads the active form from `website_forms`.
+- `app/(website)/contact/PortalContactForm.tsx` renders the form from `fields` JSON.
 - Submissions post to `app/api/portal/forms/[slug]/submit/route.ts`.
-- The route inserts into `website_form_submissions` with `account_id`, `site_id`, and `form_id`.
+- The route inserts into `website_form_submissions` with:
+  - `account_id`, `site_id`, `form_id`
+  - normalized `data`
+  - `source_url`
+  - `metadata` including UTM/referrer/landing/form slug/submitted timestamp plus server `user_agent` and `ip_address` when available.
 
-### Content Block Overrides (Contact Page)
-
-If published, these `block_key` values override contact-page copy:
-
-- `contact.hero.label`
-- `contact.hero.title`
-- `contact.hero.body`
-- `contact.expectations` (`content_json` array or newline-delimited `content`)
-- `contact.call_expectations` (`content_json` array or newline-delimited `content`)
-- `contact.cta.title`
-- `contact.cta.body`
+Portal DB triggers handle CRM and UTM linkage after insertion; the website does not create CRM leads directly.

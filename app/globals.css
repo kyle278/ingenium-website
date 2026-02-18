@@ -68,3 +68,29 @@ html {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
 }
+
+/* Desktop custom scrollbar */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-brand) #0b1222;
+  }
+
+  html::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: #0b1222;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: var(--color-brand);
+    border-radius: 999px;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background: var(--color-brand-light);
+  }
+}

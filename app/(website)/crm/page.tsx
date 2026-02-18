@@ -14,6 +14,7 @@ import {
 
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
+import AnimatedMetric from "../components/AnimatedMetric";
 
 export const dynamic = "force-dynamic";
 
@@ -256,9 +257,11 @@ export default async function CrmPage() {
 
           {/* Proof element */}
           <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2">
-            <span className="font-(--font-mono) text-2xl font-bold text-emerald-400">
-              {hero.proof?.metric ?? fallbackHero.proof.metric}
-            </span>
+            <AnimatedMetric
+              as="span"
+              className="font-(--font-mono) text-2xl font-bold text-emerald-400"
+              value={hero.proof?.metric ?? fallbackHero.proof.metric}
+            />
             <span className="text-sm text-slate-400">
               {hero.proof?.label ?? fallbackHero.proof.label}
             </span>
@@ -308,9 +311,11 @@ export default async function CrmPage() {
                   key={`metric-${idx}`}
                   className="rounded-xl border border-slate-800 bg-slate-950/60 p-3 text-center"
                 >
-                  <p className="font-(--font-mono) text-lg font-bold text-cyan-400">
-                    {m.value}
-                  </p>
+                  <AnimatedMetric
+                    as="p"
+                    className="font-(--font-mono) text-lg font-bold text-cyan-400"
+                    value={m.value}
+                  />
                   <p className="mt-1 text-[11px] text-slate-500">{m.label}</p>
                   <p className="mt-1 text-xs font-medium text-emerald-400">
                     {m.trend}

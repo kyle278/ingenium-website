@@ -14,6 +14,7 @@ import {
 
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
+import AnimatedMetric from "../components/AnimatedMetric";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const dynamic = "force-dynamic";
@@ -293,9 +294,11 @@ export default async function WebsitesPage() {
 
           {/* Proof indicator */}
           <div className="mt-10 inline-flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-5 py-3">
-            <span className="metric-display text-3xl font-bold text-emerald-400">
-              {hero.proof_metric ?? fallbackHero.proof_metric}
-            </span>
+            <AnimatedMetric
+              as="span"
+              className="metric-display text-3xl font-bold text-emerald-400"
+              value={hero.proof_metric ?? fallbackHero.proof_metric}
+            />
             <span className="text-left text-sm text-slate-400">
               {hero.proof_label ?? fallbackHero.proof_label}
             </span>
@@ -515,7 +518,11 @@ export default async function WebsitesPage() {
             <div className="grid grid-cols-2 gap-4">
               {(proof.case ?? fallbackProof.case).results.map((r: { metric: string; label: string }) => (
                 <div key={r.label} className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-                  <p className="metric-display text-2xl font-bold text-emerald-400">{r.metric}</p>
+                  <AnimatedMetric
+                    as="p"
+                    className="metric-display text-2xl font-bold text-emerald-400"
+                    value={r.metric}
+                  />
                   <p className="mt-1 text-xs text-slate-400">{r.label}</p>
                 </div>
               ))}

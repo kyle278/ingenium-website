@@ -18,6 +18,7 @@ import {
 
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
+import AnimatedMetric from "../components/AnimatedMetric";
 
 export const dynamic = "force-dynamic";
 
@@ -279,9 +280,11 @@ export default async function AgentsPage() {
 
           {/* Proof element */}
           <div className="mt-10 flex items-center gap-4 rounded-lg border border-slate-800/60 bg-slate-900/30 px-5 py-4">
-            <span className="font-(--font-display) text-3xl font-bold text-emerald-400">
-              {proof.metric}
-            </span>
+            <AnimatedMetric
+              as="span"
+              className="font-(--font-display) text-3xl font-bold text-emerald-400"
+              value={proof.metric}
+            />
             <div className="text-sm leading-snug">
               <p className="text-slate-300" {...sectionAttrs(SECTION_KEYS.AGENTS.HERO)}>
                 {proof.context}
@@ -539,9 +542,11 @@ export default async function AgentsPage() {
                 {/* Metric */}
                 <div className="flex flex-col items-center justify-center">
                   <ArrowRight className="mb-1 hidden h-5 w-5 text-emerald-500/50 md:block" />
-                  <span className="font-(--font-display) text-3xl font-bold text-emerald-400">
-                    {c.metric}
-                  </span>
+                  <AnimatedMetric
+                    as="span"
+                    className="font-(--font-display) text-3xl font-bold text-emerald-400"
+                    value={c.metric}
+                  />
                   <span className="mt-1 font-(--font-mono) text-xs text-emerald-400/70">
                     {c.metric_label}
                   </span>
@@ -586,9 +591,11 @@ export default async function AgentsPage() {
                     key={m.label}
                     className="rounded-lg border border-slate-800/60 bg-slate-950/50 p-4"
                   >
-                    <p className="font-(--font-display) text-2xl font-bold text-cyan-400">
-                      {m.value}
-                    </p>
+                    <AnimatedMetric
+                      as="p"
+                      className="font-(--font-display) text-2xl font-bold text-cyan-400"
+                      value={m.value}
+                    />
                     <p className="mt-1 text-sm text-slate-500">{m.label}</p>
                     {m.trend && (
                       <p className="mt-2 flex items-center gap-1 text-xs font-medium text-emerald-400">

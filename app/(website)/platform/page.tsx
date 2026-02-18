@@ -19,6 +19,8 @@ import {
 
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
+import AnimatedMetric from "../components/AnimatedMetric";
+import ScrollReveal from "../components/ScrollReveal";
 
 export const dynamic = "force-dynamic";
 
@@ -271,6 +273,32 @@ function getCategoryColor(category: string) {
   }
 }
 
+function getArchitectureLayerIcon(layerName: string, index: number) {
+  const normalized = layerName.toLowerCase();
+
+  if (normalized.includes("website")) {
+    return Globe;
+  }
+
+  if (normalized.includes("crm")) {
+    return Database;
+  }
+
+  if (normalized.includes("ai")) {
+    return Sparkles;
+  }
+
+  if (normalized.includes("automation")) {
+    return Workflow;
+  }
+
+  if (normalized.includes("analytic")) {
+    return BarChart3;
+  }
+
+  return index % 2 === 0 ? Layers : MonitorDot;
+}
+
 /* ── Page Component ─────────────────────────────────────────────────── */
 
 export default async function PlatformPage() {
@@ -335,9 +363,11 @@ export default async function PlatformPage() {
 
             {/* Proof element */}
             <div className="mt-10 inline-flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-5 py-3">
-              <span className="metric-display font-(--font-mono) text-3xl font-bold text-emerald-400">
-                {hero.proof_metric ?? fallbackHero.proof_metric}
-              </span>
+              <AnimatedMetric
+                as="span"
+                className="metric-display font-(--font-mono) text-3xl font-bold text-emerald-400"
+                value={hero.proof_metric ?? fallbackHero.proof_metric}
+              />
               <span className="text-left text-sm text-slate-400">
                 {hero.proof_label ?? fallbackHero.proof_label}
               </span>
@@ -349,53 +379,95 @@ export default async function PlatformPage() {
             className="relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 p-6 dot-grid"
             {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
           >
-            <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-600">
-              {hero.architecture?.label ?? fallbackHero.architecture.label}
-            </p>
-            <div className="relative mt-6 space-y-3">
-              {(hero.architecture?.layers ?? fallbackHero.architecture.layers).map(
-                (layer: { name: string; description: string; accent: string }, i: number) => (
-                  <div key={layer.name} className="relative">
-                    <div
-                      className={`rounded-lg border p-4 ${
-                        layer.accent === "cyan"
-                          ? "border-cyan-500/20 bg-cyan-950/20"
-                          : "border-emerald-500/20 bg-emerald-950/20"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <span
-                            className={`flex h-6 w-6 items-center justify-center rounded font-(--font-mono) text-[10px] font-bold ${
-                              layer.accent === "cyan"
-                                ? "bg-cyan-500/10 text-cyan-400"
-                                : "bg-emerald-500/10 text-emerald-400"
-                            }`}
-                          >
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
-                          <span className="text-sm font-semibold text-white">{layer.name}</span>
+            <div className="flex items-center justify-between gap-3">
+              <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-600">
+                {hero.architecture?.label ?? fallbackHero.architecture.label}
+              </p>
+              <span className="rounded-full border border-slate-700 bg-slate-950/70 px-2.5 py-1 font-(--font-mono) text-[10px] text-slate-500">
+                Real-time data sync
+              </span>
+            </div>
+
+            <div className="mt-5 grid gap-4 lg:grid-cols-[0.95fr,1.25fr,0.95fr]">
+              <div className="rounded-lg border border-slate-800 bg-slate-950/60 p-3">
+                <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-cyan-400">
+                  Input Signals
+                </p>
+                <div className="mt-3 space-y-2">
+                  {["Website sessions", "Form intent", "Campaign touchpoints", "Product usage events"].map(
+                    (signal, i) => (
+                      <ScrollReveal key={signal} delayMs={i * 45}>
+                        <div className="rounded-md border border-slate-800 bg-slate-900/80 px-2.5 py-1.5 text-xs text-slate-300">
+                          {signal}
                         </div>
-                        <span className="font-(--font-mono) text-[10px] text-slate-600">
-                          {layer.description}
-                        </span>
-                      </div>
-                    </div>
-                    {i < (hero.architecture?.layers ?? fallbackHero.architecture.layers).length - 1 && (
-                      <div className="mx-auto h-3 w-px bg-slate-700" />
-                    )}
-                  </div>
-                ),
-              )}
+                      </ScrollReveal>
+                    ),
+                  )}
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="pointer-events-none absolute left-4 top-4 bottom-4 w-px bg-gradient-to-b from-emerald-500/40 via-cyan-500/30 to-emerald-500/40" />
+                <div className="space-y-3">
+                  {(hero.architecture?.layers ?? fallbackHero.architecture.layers).map(
+                    (layer: { name: string; description: string; accent: string }, i: number) => {
+                      const LayerIcon = getArchitectureLayerIcon(layer.name, i);
+                      const accentClasses =
+                        layer.accent === "cyan"
+                          ? "border-cyan-500/20 bg-cyan-950/20 text-cyan-400"
+                          : "border-emerald-500/20 bg-emerald-950/20 text-emerald-400";
+
+                      return (
+                        <ScrollReveal key={layer.name} delayMs={i * 70}>
+                          <div className="relative pl-9">
+                            <span className={`absolute left-0 top-4 flex h-8 w-8 items-center justify-center rounded-lg border ${accentClasses}`}>
+                              <LayerIcon className="h-4 w-4" />
+                            </span>
+                            <div className={`rounded-lg border p-3 ${accentClasses.replace("text-cyan-400", "").replace("text-emerald-400", "")}`}>
+                              <div className="flex items-center justify-between gap-3">
+                                <span className="text-sm font-semibold text-white">{layer.name}</span>
+                                <span className="font-(--font-mono) text-[10px] text-slate-500">
+                                  {String(i + 1).padStart(2, "0")}
+                                </span>
+                              </div>
+                              <p className="mt-1.5 text-xs leading-relaxed text-slate-400">{layer.description}</p>
+                            </div>
+                          </div>
+                        </ScrollReveal>
+                      );
+                    },
+                  )}
+                </div>
+              </div>
+
+              <div className="rounded-lg border border-slate-800 bg-slate-950/60 p-3">
+                <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-emerald-400">
+                  Activation Outputs
+                </p>
+                <div className="mt-3 space-y-2">
+                  {["Routed leads", "SDR briefs", "SLA alerts", "Revenue dashboards"].map(
+                    (output, i) => (
+                      <ScrollReveal key={output} delayMs={i * 45 + 70}>
+                        <div className="rounded-md border border-slate-800 bg-slate-900/80 px-2.5 py-1.5 text-xs text-slate-300">
+                          {output}
+                        </div>
+                      </ScrollReveal>
+                    ),
+                  )}
+                </div>
+              </div>
             </div>
-            <div className="mt-6 rounded-lg border border-slate-800 bg-slate-950/60 p-3 text-center">
-              <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-emerald-400">
-                Unified data layer
-              </p>
-              <p className="mt-1 text-xs text-slate-500">
-                All modules share a single data model with real-time sync
-              </p>
-            </div>
+
+            <ScrollReveal delayMs={220}>
+              <div className="mt-4 rounded-lg border border-slate-800 bg-slate-950/60 p-3 text-center">
+                <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-emerald-400">
+                  Unified Data Layer
+                </p>
+                <p className="mt-1 text-xs text-slate-500">
+                  Shared schema, event bus, and attribution model across all modules
+                </p>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -462,9 +534,11 @@ export default async function PlatformPage() {
                         </p>
                         <div className="mt-4 flex items-end justify-between">
                           <div className="rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2">
-                            <span className="metric-display font-(--font-mono) text-xl font-bold text-emerald-400">
-                              {item.metric}
-                            </span>
+                            <AnimatedMetric
+                              as="span"
+                              className="metric-display font-(--font-mono) text-xl font-bold text-emerald-400"
+                              value={item.metric ?? "0"}
+                            />
                             <p className="mt-0.5 text-[10px] text-slate-500">{item.metric_label}</p>
                           </div>
                           {item.link && (
@@ -519,9 +593,11 @@ export default async function PlatformPage() {
                           {item.description}
                         </p>
                         <div className="mt-4 rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2">
-                          <span className="metric-display font-(--font-mono) text-xl font-bold text-cyan-400">
-                            {item.metric}
-                          </span>
+                          <AnimatedMetric
+                            as="span"
+                            className="metric-display font-(--font-mono) text-xl font-bold text-cyan-400"
+                            value={item.metric ?? "0"}
+                          />
                           <p className="mt-0.5 text-[10px] text-slate-500">{item.metric_label}</p>
                         </div>
                         {item.link && (
@@ -614,9 +690,11 @@ export default async function PlatformPage() {
 
                   {/* Role-specific proof */}
                   <div className="mt-6 rounded-lg border border-slate-800 bg-slate-950/60 p-3">
-                    <span className="metric-display font-(--font-mono) text-2xl font-bold text-emerald-400">
-                      {tab.proof.metric}
-                    </span>
+                    <AnimatedMetric
+                      as="span"
+                      className="metric-display font-(--font-mono) text-2xl font-bold text-emerald-400"
+                      value={tab.proof.metric}
+                    />
                     <p className="mt-1 text-xs text-slate-400">{tab.proof.label}</p>
                     <p className="mt-0.5 font-(--font-mono) text-[10px] text-slate-600">
                       {tab.proof.context}

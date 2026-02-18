@@ -16,6 +16,7 @@ import {
 
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
+import AnimatedMetric from "../components/AnimatedMetric";
 
 export const dynamic = "force-dynamic";
 
@@ -313,9 +314,11 @@ export default async function DepartmentsPage() {
                   >
                     <p className="text-xs font-semibold text-white">{branch.name}</p>
                     <div className="mt-2 flex items-center justify-between">
-                      <span className="font-(--font-mono) text-[10px] text-cyan-400">
-                        {branch.agents} agents
-                      </span>
+                      <AnimatedMetric
+                        as="span"
+                        className="font-(--font-mono) text-[10px] text-cyan-400"
+                        value={`${branch.agents} agents`}
+                      />
                       <span className="font-(--font-mono) text-[10px] text-slate-500">
                         {branch.oversight}
                       </span>
@@ -377,7 +380,11 @@ export default async function DepartmentsPage() {
                 <div className="mt-4 grid grid-cols-3 gap-3 border-t border-slate-800 pt-4">
                   {(dept.kpis ?? []).map((kpi: { metric: string; label: string }) => (
                     <div key={kpi.label}>
-                      <p className="font-(--font-mono) text-lg font-bold text-cyan-400">{kpi.metric}</p>
+                      <AnimatedMetric
+                        as="p"
+                        className="font-(--font-mono) text-lg font-bold text-cyan-400"
+                        value={kpi.metric}
+                      />
                       <p className="mt-0.5 text-[11px] text-slate-500">{kpi.label}</p>
                     </div>
                   ))}
@@ -614,22 +621,22 @@ export default async function DepartmentsPage() {
       <section className="relative rounded-2xl border border-slate-800 bg-slate-900/50 p-8 dot-grid">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="font-(--font-mono) text-3xl font-bold text-white">12</p>
+            <AnimatedMetric as="p" className="font-(--font-mono) text-3xl font-bold text-white" value="12" />
             <p className="mt-1 text-sm font-medium text-slate-300">AI agents per avg. deployment</p>
             <p className="mt-1 font-(--font-mono) text-[11px] text-slate-600">across 4 departments</p>
           </div>
           <div>
-            <p className="font-(--font-mono) text-3xl font-bold text-white">100%</p>
+            <AnimatedMetric as="p" className="font-(--font-mono) text-3xl font-bold text-white" value="100%" />
             <p className="mt-1 text-sm font-medium text-slate-300">Human oversight coverage</p>
             <p className="mt-1 font-(--font-mono) text-[11px] text-slate-600">every action auditable</p>
           </div>
           <div>
-            <p className="font-(--font-mono) text-3xl font-bold text-white">&lt;90s</p>
+            <AnimatedMetric as="p" className="font-(--font-mono) text-3xl font-bold text-white" value="<90s" />
             <p className="mt-1 text-sm font-medium text-slate-300">Escalation response time</p>
             <p className="mt-1 font-(--font-mono) text-[11px] text-slate-600">avg. to human review</p>
           </div>
           <div>
-            <p className="font-(--font-mono) text-3xl font-bold text-white">4-6 wks</p>
+            <AnimatedMetric as="p" className="font-(--font-mono) text-3xl font-bold text-white" value="4-6 wks" />
             <p className="mt-1 text-sm font-medium text-slate-300">Strategy to full deployment</p>
             <p className="mt-1 font-(--font-mono) text-[11px] text-slate-600">including governance setup</p>
           </div>

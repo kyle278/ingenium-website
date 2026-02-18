@@ -17,6 +17,7 @@ import {
 
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
+import AnimatedMetric from "../components/AnimatedMetric";
 
 export const dynamic = "force-dynamic";
 
@@ -287,9 +288,11 @@ export default async function CaseStudiesPage() {
                     className="rounded-xl border border-slate-800 bg-slate-900/60 p-4 text-center"
                     {...sectionAttrs(SECTION_KEYS.CASE_STUDIES.HERO)}
                   >
-                    <p className="metric-display font-(--font-display) text-2xl font-bold text-emerald-400 sm:text-3xl">
-                      {m}
-                    </p>
+                    <AnimatedMetric
+                      as="p"
+                      className="metric-display font-(--font-display) text-2xl font-bold text-emerald-400 sm:text-3xl"
+                      value={m}
+                    />
                     <p className="mt-1 text-sm font-medium text-slate-300">{l}</p>
                     <p className="mt-0.5 font-(--font-mono) text-[10px] text-slate-600">
                       {d}
@@ -501,9 +504,11 @@ export default async function CaseStudiesPage() {
                                   {metric.before}
                                 </span>
                                 <ArrowRight className="h-3 w-3 text-slate-700" />
-                                <span className="metric-display font-(--font-mono) text-lg font-bold text-cyan-400">
-                                  {metric.after}
-                                </span>
+                                <AnimatedMetric
+                                  as="span"
+                                  className="metric-display font-(--font-mono) text-lg font-bold text-cyan-400"
+                                  value={metric.after}
+                                />
                               </div>
                             </div>
                           ),

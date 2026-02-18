@@ -17,6 +17,7 @@ import {
 
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
+import AnimatedMetric from "../components/AnimatedMetric";
 
 export const dynamic = "force-dynamic";
 
@@ -391,9 +392,11 @@ export default async function AutomationsPage() {
         >
           <TrendingUp className="h-6 w-6 shrink-0 text-emerald-400" />
           <p className="text-sm text-slate-300">
-            <span className="font-(--font-mono) text-2xl font-bold text-emerald-400">
-              {workflows.proof?.metric ?? fallbackWorkflows.proof.metric}
-            </span>{" "}
+            <AnimatedMetric
+              as="span"
+              className="font-(--font-mono) text-2xl font-bold text-emerald-400"
+              value={workflows.proof?.metric ?? fallbackWorkflows.proof.metric}
+            />{" "}
             {workflows.proof?.label ?? fallbackWorkflows.proof.label}
           </p>
         </div>
@@ -531,9 +534,11 @@ export default async function AutomationsPage() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                     {row.metric}
                   </p>
-                  <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-(--font-mono) text-[11px] font-bold text-emerald-400">
-                    {row.impact}
-                  </span>
+                  <AnimatedMetric
+                    as="span"
+                    className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-(--font-mono) text-[11px] font-bold text-emerald-400"
+                    value={row.impact}
+                  />
                 </div>
                 <p className="mt-3 text-sm font-medium text-white">{row.workflow}</p>
                 <div className="mt-4 grid grid-cols-2 gap-3">
@@ -547,9 +552,11 @@ export default async function AutomationsPage() {
                     <p className="text-[10px] font-semibold uppercase tracking-wider text-cyan-600">
                       After
                     </p>
-                    <p className="mt-1 font-(--font-mono) text-sm font-semibold text-cyan-400">
-                      {row.after}
-                    </p>
+                    <AnimatedMetric
+                      as="p"
+                      className="mt-1 font-(--font-mono) text-sm font-semibold text-cyan-400"
+                      value={row.after}
+                    />
                   </div>
                 </div>
               </div>

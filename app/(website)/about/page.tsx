@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, Clock3, Globe, ShieldCheck, Users } from "luc
 
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
+import AnimatedMetric from "../components/AnimatedMetric";
 
 export const dynamic = "force-dynamic";
 
@@ -126,9 +127,11 @@ export default async function AboutPage() {
           <p className="font-(--font-mono) text-xs uppercase tracking-widest text-slate-500">
             Proof Snapshot
           </p>
-          <p className="metric-display mt-4 text-3xl font-semibold text-emerald-400">
-            {hero.proof?.metric ?? "4-6 weeks"}
-          </p>
+          <AnimatedMetric
+            as="p"
+            className="metric-display mt-4 text-3xl font-semibold text-emerald-400"
+            value={hero.proof?.metric ?? "4-6 weeks"}
+          />
           <p className="mt-2 text-sm text-slate-300">{hero.proof?.label}</p>
           <div className="mt-5 space-y-2 text-xs text-slate-500">
             <p>Client: {hero.proof?.client ?? "Mid-market B2B technology company"}</p>

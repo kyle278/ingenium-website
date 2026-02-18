@@ -20,6 +20,7 @@ import {
 
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
+import AnimatedMetric from "./components/AnimatedMetric";
 import ScrollReveal from "./components/ScrollReveal";
 
 export const dynamic = "force-dynamic";
@@ -334,9 +335,11 @@ export default async function HomePage() {
 
           {/* Proof indicator */}
           <div className="mt-10 inline-flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-5 py-3">
-            <span className="metric-display text-3xl font-bold text-emerald-400">
-              {hero.proof_metric ?? fallbackHero.proof_metric}
-            </span>
+            <AnimatedMetric
+              as="span"
+              className="metric-display text-3xl font-bold text-emerald-400"
+              value={hero.proof_metric ?? fallbackHero.proof_metric}
+            />
             <span className="text-left text-sm text-slate-400">
               {hero.proof_label ?? fallbackHero.proof_label}
             </span>
@@ -363,7 +366,12 @@ export default async function HomePage() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {(metrics.items ?? fallbackMetrics.items).map((item: { metric: string; label: string; context?: string }) => (
             <div key={item.label} {...sectionAttrs(SECTION_KEYS.HOME.OUTCOMES)}>
-              <p className="metric-display text-3xl font-bold text-white">{item.metric}</p>
+              <AnimatedMetric
+                as="p"
+                className="metric-display text-3xl font-bold text-white"
+                value={item.metric}
+                delayMs={40}
+              />
               <p className="mt-1 text-sm font-medium text-slate-300">{item.label}</p>
               {item.context && (
                 <p className="mt-1 font-(--font-mono) text-[11px] text-slate-600">{item.context}</p>
@@ -632,7 +640,11 @@ export default async function HomePage() {
                 </span>
                 <span className="font-(--font-mono) text-[11px] text-slate-600">{item.timeframe}</span>
               </div>
-              <p className="metric-display mt-5 text-4xl font-bold text-emerald-400">{item.metric}</p>
+              <AnimatedMetric
+                as="p"
+                className="metric-display mt-5 text-4xl font-bold text-emerald-400"
+                value={item.metric}
+              />
               <p className="mt-1 text-sm font-medium text-white">{item.metric_label}</p>
               <div className="mt-4 border-t border-slate-800 pt-4">
                 <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Client</p>

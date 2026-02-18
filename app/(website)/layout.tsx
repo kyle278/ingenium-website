@@ -1,6 +1,7 @@
 import SiteNav from "./components/SiteNav";
 import SiteFooter from "./components/SiteFooter";
 import PortalEditorBridge from "./components/PortalEditorBridge";
+import RouteStructuredData from "./components/RouteStructuredData";
 import { PAGE_KEYS, SECTION_KEYS, getSectionContentBlockKey } from "@/src/lib/content-map";
 import { buildEditableAttributes, createPageContentResolver, getPublishedBlocks } from "@/src/lib/portal-content";
 
@@ -11,6 +12,8 @@ const fallbackNavContent = {
   items: [
     { href: "/websites", label: "Websites" },
     { href: "/platform", label: "Platform" },
+    { href: "/agents", label: "AI Agents" },
+    { href: "/crm", label: "CRM" },
     { href: "/case-studies", label: "Case Studies" },
     { href: "/security", label: "Security" },
   ],
@@ -21,14 +24,15 @@ const fallbackNavContent = {
 const fallbackFooterContent = {
   brand: "Ingenium",
   summary:
-    "Enterprise websites and AI operations that drive pipeline, backed by CRM, automation, and governance.",
-  product_title: "Product",
+    "Enterprise web design agency building conversion systems — website, CRM, AI agents, and automation — to grow your pipeline.",
+  product_title: "Services",
   product_links: [
-    { href: "/websites", label: "Websites" },
+    { href: "/websites", label: "Website Redesign" },
     { href: "/platform", label: "Platform" },
     { href: "/agents", label: "AI Agents" },
-    { href: "/crm", label: "CRM" },
+    { href: "/crm", label: "CRM Implementation" },
     { href: "/automations", label: "Automations" },
+    { href: "/departments", label: "AI Departments" },
   ],
   company_title: "Company",
   company_links: [
@@ -40,12 +44,12 @@ const fallbackFooterContent = {
   contact_title: "Get in touch",
   contact_items: [
     "hello@ingeniumconsulting.net",
-    "Mon-Fri, 9 am-6 pm",
+    "Mon–Fri, 9 am–6 pm EST",
     "US + EU delivery teams",
   ],
   security_link_label: "Security overview",
   legal_line: "\u00a9 2026 Ingenium Digital Consulting. All rights reserved.",
-  legal_tagline: "Enterprise website systems",
+  legal_tagline: "Enterprise conversion systems",
   tags: ["Websites", "AI Agents", "CRM", "Automations"],
 };
 
@@ -84,16 +88,20 @@ export default async function WebsiteLayout({ children }: { children: React.Reac
   );
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#f6f2eb]">
+    <div className="relative min-h-screen bg-slate-950">
       <PortalEditorBridge />
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-32 right-[-4rem] h-72 w-72 rounded-full bg-emerald-200/40 blur-3xl" />
-        <div className="absolute top-1/3 left-[-6rem] h-96 w-96 rounded-full bg-amber-200/40 blur-3xl" />
-        <div className="absolute bottom-[-10rem] right-1/3 h-80 w-80 rounded-full bg-sky-200/30 blur-3xl" />
+      <RouteStructuredData />
+
+      {/* Ambient glow effects */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 right-[-8rem] h-96 w-96 rounded-full bg-emerald-500/8 blur-[100px]" />
+        <div className="absolute top-1/3 left-[-10rem] h-[500px] w-[500px] rounded-full bg-cyan-500/5 blur-[120px]" />
+        <div className="absolute bottom-[-12rem] right-1/4 h-80 w-80 rounded-full bg-emerald-500/5 blur-[100px]" />
       </div>
+
       <div className="relative">
         <SiteNav content={navContent} editorAttrs={navAttrs} />
-        <main className="mx-auto max-w-6xl px-6 pb-24 pt-16 md:pt-24">
+        <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6 md:pt-20">
           {children}
         </main>
         <SiteFooter content={footerContent} editorAttrs={footerAttrs} />

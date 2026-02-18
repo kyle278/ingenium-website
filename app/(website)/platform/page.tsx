@@ -1,15 +1,20 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   ArrowRight,
   ArrowUpRight,
+  BarChart3,
+  CheckCircle2,
+  Clock,
+  Database,
+  Globe,
+  Layers,
+  MonitorDot,
   ShieldCheck,
   Sparkles,
   Target,
   Users,
-  Waypoints,
   Workflow,
-  Layers,
-  Box,
 } from "lucide-react";
 
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
@@ -17,100 +22,256 @@ import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 
 export const dynamic = "force-dynamic";
 
-const primaryButton =
-  "inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(5,150,105,0.3)] transition hover:bg-emerald-700";
-const secondaryButton =
-  "inline-flex items-center gap-2 rounded-full border border-slate-300/80 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50";
-const sectionLabel = "text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700";
-const card =
-  "rounded-3xl border border-slate-200/70 bg-white/90 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)]";
-const softCard =
-  "rounded-3xl border border-white/60 bg-white/60 p-6 shadow-[0_12px_30px_rgba(15,23,42,0.04)]";
+export const metadata: Metadata = {
+  title: "Website + CRM + AI Platform for Revenue Teams | Ingenium",
+  description:
+    "One platform connecting your website, CRM, AI agents, and automations. Built for revenue teams who need pipeline visibility and control.",
+  openGraph: {
+    title: "Website + CRM + AI Platform for Revenue Teams | Ingenium",
+    description:
+      "One platform connecting your website, CRM, AI agents, and automations. Built for revenue teams who need pipeline visibility and control.",
+  },
+  alternates: { canonical: "/platform" },
+};
+
+/* ── Fallback Content ──────────────────────────────────────────────── */
 
 const fallbackHero = {
-  label: "Platform",
-  title: "One portal for websites, AI operations, and revenue systems.",
-  body:
-    "Replace fragmented tools with a single system that connects your website, CRM, AI agents, and automations so every decision is measurable.",
-  primary_cta: { label: "Book a Website Strategy Call", href: "/contact" },
-  secondary_cta: { label: "Explore the Website Offer", href: "/websites" },
-  preview: {
-    label: "Portal preview",
-    badge: "Role-based views",
-    subtitle: "Website, CRM, AI, and automation controls in one workspace.",
+  label: "Website CRM AI Platform",
+  title: "One platform connecting your website, CRM, AI agents, and automations.",
+  body: "Revenue teams lose pipeline when their tools are disconnected. Ingenium unifies website performance, CRM intelligence, AI execution, and workflow automation into a single system — so every interaction is tracked, every lead is routed, and every decision is backed by data.",
+  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  secondary_cta: { label: "Explore Platform Modules", href: "#modules" },
+  tertiary_cta: { label: "See case study results", href: "/case-studies" },
+  proof_metric: "3.2x",
+  proof_label: "pipeline velocity increase for a mid-market SaaS company after platform deployment",
+  architecture: {
+    label: "System architecture",
+    layers: [
+      { name: "Website Layer", description: "Conversion pages, forms, analytics", accent: "emerald" },
+      { name: "CRM Layer", description: "Contacts, deals, pipeline, attribution", accent: "cyan" },
+      { name: "AI Layer", description: "Agents, departments, governance", accent: "emerald" },
+      { name: "Automation Layer", description: "Routing, enrichment, workflows", accent: "cyan" },
+    ],
   },
 };
 
 const fallbackModules = {
-  label: "Inside the portal",
-  title: "Every module designed to keep your website converting.",
-  body: "Your site is the front door. The platform keeps it converting week after week.",
-  link: { label: "Explore the website system", href: "/websites" },
+  label: "Platform Modules",
+  title: "Five systems engineered to operate as one.",
+  body: "Each module handles a distinct function. Together, they create a closed-loop revenue system where data flows without manual intervention.",
   items: [
-    { title: "Website analytics + editor", description: "Ship changes faster with governed approvals and live insights.", icon: "box" },
-    { title: "CRM foundation", description: "Unified customer data, pipeline visibility, and lifecycle tracking.", icon: "layers" },
-    { title: "AI agents", description: "Specialized agents for research, content, QA, and execution.", icon: "sparkles" },
-    { title: "Agent departments", description: "Orchestrated teams with roles, escalation, and oversight.", icon: "users" },
-    { title: "Automations", description: "Routing, enrichment, and workflows connected to outcomes.", icon: "workflow" },
+    {
+      title: "Website Engine",
+      description:
+        "Conversion-optimised pages with built-in analytics, A/B testing, and progressive lead capture. Every visitor interaction feeds directly into your CRM.",
+      icon: "globe",
+      metric: "38%",
+      metric_label: "avg. increase in qualified demo requests",
+      link: { label: "Explore website redesign services", href: "/websites" },
+    },
+    {
+      title: "CRM Foundation",
+      description:
+        "Unified contact records, pipeline tracking, lifecycle stages, and end-to-end attribution. The single source of truth for every revenue conversation.",
+      icon: "database",
+      metric: "<45s",
+      metric_label: "lead-to-rep routing time",
+      link: { label: "See CRM integration capabilities", href: "/crm" },
+    },
+    {
+      title: "AI Agents",
+      description:
+        "Specialised agents for research, content, qualification, and follow-up. Each agent operates within governance controls with human-in-the-loop checkpoints.",
+      icon: "sparkles",
+      metric: "4x",
+      metric_label: "content output without added headcount",
+      link: { label: "Explore AI agent capabilities", href: "/agents" },
+    },
+    {
+      title: "Automations",
+      description:
+        "Lead routing, data enrichment, follow-up sequences, and alert workflows. Triggered by behaviour signals, not arbitrary timers.",
+      icon: "workflow",
+      metric: "62%",
+      metric_label: "reduction in manual data entry",
+      link: { label: "View automation workflows", href: "/automations" },
+    },
+    {
+      title: "Analytics & Attribution",
+      description:
+        "First-touch to closed-won attribution, funnel analysis, and performance dashboards. Know exactly which channels, pages, and campaigns drive revenue.",
+      icon: "chart",
+      metric: "100%",
+      metric_label: "pipeline attribution coverage",
+      link: { label: "See platform analytics in action", href: "/case-studies" },
+    },
   ],
 };
 
 const fallbackRoles = {
-  label: "Role-based views",
-  title: "One platform, tailored views for each team.",
-  body: "Marketing, RevOps, and IT see what matters most without the noise.",
-  items: [
-    { title: "Marketing leaders", detail: "Launch faster, prove ROI, keep messaging consistent across channels.", icon: "target" },
-    { title: "RevOps teams", detail: "Single source of truth for pipeline health, routing, and attribution.", icon: "waypoints" },
-    { title: "IT + Security", detail: "Governance, audit logs, and role-based access for every change.", icon: "shield" },
+  label: "Role-Based Views",
+  title: "One platform, tailored for every team.",
+  body: "Marketing, sales, and technical teams each see what matters most — without the noise of irrelevant data or controls.",
+  tabs: [
+    {
+      role: "Marketing",
+      icon: "target",
+      headline: "Launch faster. Prove ROI. Scale content.",
+      outcomes: [
+        "Website analytics with conversion attribution by campaign and channel",
+        "AI-assisted content creation with brand governance and approval workflows",
+        "A/B testing framework with automated winner deployment",
+        "Pipeline contribution dashboards showing marketing-sourced revenue",
+      ],
+      proof: {
+        metric: "2.1x",
+        label: "marketing-attributed pipeline",
+        context: "Series B SaaS, 90 days post-launch",
+      },
+    },
+    {
+      role: "Sales",
+      icon: "users",
+      headline: "Full context on every lead. Faster follow-up.",
+      outcomes: [
+        "Lead routing with firmographic enrichment delivered in under 60 seconds",
+        "Account intelligence briefs generated by AI agents before every call",
+        "Pipeline visibility with deal velocity tracking and risk alerts",
+        "Automated follow-up sequences triggered by engagement signals",
+      ],
+      proof: {
+        metric: "67%",
+        label: "faster lead response time",
+        context: "Mid-market technology company",
+      },
+    },
+    {
+      role: "Technical",
+      icon: "shield",
+      headline: "Governance, audit trails, and enterprise controls.",
+      outcomes: [
+        "Role-based access controls with SSO and SCIM provisioning",
+        "Complete audit logs for every AI action, content change, and workflow execution",
+        "SOC 2-ready infrastructure with compliance documentation",
+        "API-first architecture for custom integrations and data warehouse connections",
+      ],
+      proof: {
+        metric: "100%",
+        label: "audit trail coverage",
+        context: "Enterprise compliance requirement met",
+      },
+    },
   ],
 };
 
 const fallbackIntegrations = {
-  label: "Integration-ready",
-  title: "Connects to your existing systems.",
-  body: "The platform plugs into your stack without a rip-and-replace project.",
-  items: [
-    "Salesforce and HubSpot",
-    "Marketing automation platforms",
-    "Data warehouses and BI tools",
-    "SSO, SCIM, and identity providers",
+  label: "Integration Architecture",
+  title: "Connects to your stack without a rip-and-replace.",
+  body: "The platform integrates natively with major CRM, marketing automation, and data systems. Data flows bidirectionally so your existing tools stay in sync.",
+  patterns: [
+    {
+      name: "HubSpot",
+      flow: "Bidirectional sync of contacts, deals, and engagement data. Website form submissions create CRM records with full attribution context.",
+      category: "CRM",
+    },
+    {
+      name: "Salesforce",
+      flow: "Native integration with leads, opportunities, and custom objects. Pipeline attribution mapped from first website touch to closed-won.",
+      category: "CRM",
+    },
+    {
+      name: "Marketing Automation",
+      flow: "Marketo, Pardot, and HubSpot Marketing Hub. Behavioural triggers from website interactions feed nurture campaigns and lead scoring models.",
+      category: "Automation",
+    },
+    {
+      name: "Data Warehouse",
+      flow: "Snowflake, BigQuery, and Redshift connectors. Unified data model for cross-platform reporting and custom analytics.",
+      category: "Analytics",
+    },
+    {
+      name: "Identity & Security",
+      flow: "Okta, Azure AD, and Google Workspace SSO. SCIM provisioning for automated user lifecycle management.",
+      category: "Security",
+    },
+    {
+      name: "Communication",
+      flow: "Slack and Teams notifications for lead alerts, workflow completions, and AI agent outputs. Real-time visibility without context-switching.",
+      category: "Productivity",
+    },
   ],
   governance_card: {
-    label: "Governance",
-    title: "Enterprise controls built in.",
-    body: "Approval workflows, audit trails, and security documentation ship alongside every module.",
-    link: { label: "View security details", href: "/security" },
+    label: "Enterprise Governance",
+    title: "Security and compliance built into every integration.",
+    body: "Approval workflows, audit trails, and data handling policies govern every connection. Your security team maintains full visibility.",
+    items: [
+      "Data encryption in transit and at rest",
+      "Role-based access with granular permissions",
+      "Complete audit logs for every data sync",
+    ],
+    link: { label: "Review security and AI governance controls", href: "/security" },
   },
 };
 
 const fallbackCta = {
-  title: "Ready to consolidate your website and revenue stack?",
-  body: "Book a strategy call to map the portal rollout and conversion plan.",
+  title: "Ready to unify your website, CRM, and AI operations?",
+  body: "Book a strategy call to map your platform architecture, integration requirements, and rollout plan. Or request an architecture review to see how your current stack compares.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
-  secondary_cta: { label: "View Case Studies", href: "/case-studies" },
+  secondary_cta: { label: "Request an Architecture Review", href: "/contact" },
+  reassurance: "30-minute call · Custom architecture diagram · No obligation",
 };
 
-function getIcon(iconName: string | undefined) {
+/* ── Helpers ────────────────────────────────────────────────────────── */
+
+function getModuleIcon(iconName: string | undefined) {
   switch (iconName) {
-    case "layers":
-      return Layers;
+    case "globe":
+      return Globe;
+    case "database":
+      return Database;
     case "sparkles":
       return Sparkles;
-    case "users":
-      return Users;
     case "workflow":
       return Workflow;
+    case "chart":
+      return BarChart3;
+    default:
+      return Layers;
+  }
+}
+
+function getRoleIcon(iconName: string | undefined) {
+  switch (iconName) {
     case "target":
       return Target;
-    case "waypoints":
-      return Waypoints;
+    case "users":
+      return Users;
     case "shield":
       return ShieldCheck;
     default:
-      return Box;
+      return MonitorDot;
   }
 }
+
+function getCategoryColor(category: string) {
+  switch (category) {
+    case "CRM":
+      return "text-emerald-400 border-emerald-500/20 bg-emerald-950/40";
+    case "Automation":
+      return "text-cyan-400 border-cyan-500/20 bg-cyan-950/40";
+    case "Analytics":
+      return "text-emerald-400 border-emerald-500/20 bg-emerald-950/40";
+    case "Security":
+      return "text-cyan-400 border-cyan-500/20 bg-cyan-950/40";
+    case "Productivity":
+      return "text-emerald-400 border-emerald-500/20 bg-emerald-950/40";
+    default:
+      return "text-slate-400 border-slate-700 bg-slate-800/40";
+  }
+}
+
+/* ── Page Component ─────────────────────────────────────────────────── */
 
 export default async function PlatformPage() {
   const { sectionJson, sectionAttrs } = await loadPortalPageContent(PAGE_KEYS.PLATFORM);
@@ -121,140 +282,496 @@ export default async function PlatformPage() {
   const cta = sectionJson(SECTION_KEYS.PLATFORM.CTA, fallbackCta);
 
   return (
-    <div className="space-y-24 md:space-y-32">
-      <section className="grid items-center gap-12 lg:grid-cols-[1.05fr,0.95fr]">
-        <div>
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}>{hero.label}</p>
-          <h1 className="mt-6 max-w-2xl font-[var(--font-display)] text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl" {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}>
-            {hero.title}
-          </h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600" {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}>{hero.body}</p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link href={hero.primary_cta?.href ?? "/contact"} className={primaryButton} {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}>
-              {hero.primary_cta?.label ?? "Book a Website Strategy Call"}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link href={hero.secondary_cta?.href ?? "/websites"} className={secondaryButton} {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}>
-              {hero.secondary_cta?.label ?? "Explore the Website Offer"}
-            </Link>
-          </div>
-        </div>
-        <div className={card}>
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400" {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}>
-              {hero.preview?.label ?? fallbackHero.preview.label}
-            </span>
-            <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700" {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}>
-              {hero.preview?.badge ?? fallbackHero.preview.badge}
-            </span>
-          </div>
-          <div className="mt-6 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6">
-            <p className="text-sm font-medium text-slate-500" {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}>
-              {hero.preview?.subtitle ?? fallbackHero.preview.subtitle}
+    <div className="space-y-28 md:space-y-40">
+      {/* ═══════ HERO ═══════ */}
+      <section className="pt-8">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr,0.9fr]">
+          <div>
+            <p
+              className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
+              {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
+            >
+              {hero.label}
             </p>
-            <div className="mt-4 grid gap-3">
-              <div className="h-3 w-3/4 rounded-full bg-slate-200" />
-              <div className="h-3 w-2/3 rounded-full bg-slate-200" />
-              <div className="h-3 w-1/2 rounded-full bg-slate-200" />
+            <h1
+              className="mt-6 font-(--font-display) text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl"
+              {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
+            >
+              {hero.title}
+            </h1>
+            <p
+              className="mt-6 max-w-xl text-lg leading-relaxed text-slate-400"
+              {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
+            >
+              {hero.body}
+            </p>
+
+            {/* Three-tier CTA ladder */}
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <Link
+                href={hero.primary_cta?.href ?? "/contact"}
+                className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
+                {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
+              >
+                {hero.primary_cta?.label ?? "Book a Strategy Call"}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href={hero.secondary_cta?.href ?? "#modules"}
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
+                {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
+              >
+                {hero.secondary_cta?.label ?? "Explore Platform Modules"}
+              </Link>
+              <Link
+                href={hero.tertiary_cta?.href ?? "/case-studies"}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-slate-300"
+                {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
+              >
+                {hero.tertiary_cta?.label ?? "See case study results"}
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+
+            {/* Proof element */}
+            <div className="mt-10 inline-flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-5 py-3">
+              <span className="metric-display font-(--font-mono) text-3xl font-bold text-emerald-400">
+                {hero.proof_metric ?? fallbackHero.proof_metric}
+              </span>
+              <span className="text-left text-sm text-slate-400">
+                {hero.proof_label ?? fallbackHero.proof_label}
+              </span>
+            </div>
+          </div>
+
+          {/* System architecture visual */}
+          <div
+            className="relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 p-6 dot-grid"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
+          >
+            <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-600">
+              {hero.architecture?.label ?? fallbackHero.architecture.label}
+            </p>
+            <div className="relative mt-6 space-y-3">
+              {(hero.architecture?.layers ?? fallbackHero.architecture.layers).map(
+                (layer: { name: string; description: string; accent: string }, i: number) => (
+                  <div key={layer.name} className="relative">
+                    <div
+                      className={`rounded-lg border p-4 ${
+                        layer.accent === "cyan"
+                          ? "border-cyan-500/20 bg-cyan-950/20"
+                          : "border-emerald-500/20 bg-emerald-950/20"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <span
+                            className={`flex h-6 w-6 items-center justify-center rounded font-(--font-mono) text-[10px] font-bold ${
+                              layer.accent === "cyan"
+                                ? "bg-cyan-500/10 text-cyan-400"
+                                : "bg-emerald-500/10 text-emerald-400"
+                            }`}
+                          >
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <span className="text-sm font-semibold text-white">{layer.name}</span>
+                        </div>
+                        <span className="font-(--font-mono) text-[10px] text-slate-600">
+                          {layer.description}
+                        </span>
+                      </div>
+                    </div>
+                    {i < (hero.architecture?.layers ?? fallbackHero.architecture.layers).length - 1 && (
+                      <div className="mx-auto h-3 w-px bg-slate-700" />
+                    )}
+                  </div>
+                ),
+              )}
+            </div>
+            <div className="mt-6 rounded-lg border border-slate-800 bg-slate-950/60 p-3 text-center">
+              <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-emerald-400">
+                Unified data layer
+              </p>
+              <p className="mt-1 text-xs text-slate-500">
+                All modules share a single data model with real-time sync
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="grid gap-10 lg:grid-cols-[1fr,1.1fr]">
-        <div>
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}>{modules.label}</p>
-          <h2 className="mt-4 max-w-xl font-[var(--font-display)] text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl" {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}>
+      {/* ═══════ MODULES ═══════ */}
+      <section id="modules">
+        <div className="text-center">
+          <p
+            className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
+          >
+            {modules.label}
+          </p>
+          <h2
+            className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
+          >
             {modules.title}
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600" {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}>{modules.body}</p>
-          <Link href={modules.link?.href ?? "/websites"} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700" {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}>
-            {modules.link?.label ?? "Explore the website system"}
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+          <p
+            className="mx-auto mt-4 max-w-2xl text-slate-400"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
+          >
+            {modules.body}
+          </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {(modules.items ?? fallbackModules.items).map((item) => {
-            const Icon = getIcon(item.icon);
-            return (
-              <div key={item.title} className={softCard} {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}>
-                <Icon className="h-5 w-5 text-emerald-600" />
-                <h3 className="mt-4 text-base font-semibold text-slate-900">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.description}</p>
-              </div>
-            );
-          })}
+
+        <div className="mt-12 space-y-4">
+          {/* First row: 2 large cards */}
+          <div className="grid gap-4 lg:grid-cols-2">
+            {(modules.items ?? fallbackModules.items)
+              .slice(0, 2)
+              .map(
+                (
+                  item: {
+                    title: string;
+                    description: string;
+                    icon?: string;
+                    metric?: string;
+                    metric_label?: string;
+                    link?: { label: string; href: string };
+                  },
+                  i: number,
+                ) => {
+                  const Icon = getModuleIcon(item.icon);
+                  const bgClass = i === 0 ? "dot-grid" : "grid-lines";
+                  return (
+                    <div
+                      key={item.title}
+                      className={`relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 p-6 ${bgClass}`}
+                      {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
+                    >
+                      <div className="relative">
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10">
+                            <Icon className="h-5 w-5 text-emerald-400" />
+                          </div>
+                          <h3 className="font-(--font-display) text-lg font-bold text-white">
+                            {item.title}
+                          </h3>
+                        </div>
+                        <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                          {item.description}
+                        </p>
+                        <div className="mt-4 flex items-end justify-between">
+                          <div className="rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2">
+                            <span className="metric-display font-(--font-mono) text-xl font-bold text-emerald-400">
+                              {item.metric}
+                            </span>
+                            <p className="mt-0.5 text-[10px] text-slate-500">{item.metric_label}</p>
+                          </div>
+                          {item.link && (
+                            <Link
+                              href={item.link.href}
+                              className="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
+                            >
+                              {item.link.label}
+                              <ArrowRight className="h-3.5 w-3.5" />
+                            </Link>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                },
+              )}
+          </div>
+
+          {/* Second row: 3 compact cards */}
+          <div className="grid gap-4 md:grid-cols-3">
+            {(modules.items ?? fallbackModules.items)
+              .slice(2)
+              .map(
+                (
+                  item: {
+                    title: string;
+                    description: string;
+                    icon?: string;
+                    metric?: string;
+                    metric_label?: string;
+                    link?: { label: string; href: string };
+                  },
+                  i: number,
+                ) => {
+                  const Icon = getModuleIcon(item.icon);
+                  const bgVariants = ["", "glass-card", "dot-grid"];
+                  return (
+                    <div
+                      key={item.title}
+                      className={`relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 p-6 ${bgVariants[i] ?? ""}`}
+                      {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
+                    >
+                      <div className="relative">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10">
+                          <Icon className="h-5 w-5 text-emerald-400" />
+                        </div>
+                        <h3 className="mt-4 font-(--font-display) text-base font-bold text-white">
+                          {item.title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                          {item.description}
+                        </p>
+                        <div className="mt-4 rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2">
+                          <span className="metric-display font-(--font-mono) text-xl font-bold text-cyan-400">
+                            {item.metric}
+                          </span>
+                          <p className="mt-0.5 text-[10px] text-slate-500">{item.metric_label}</p>
+                        </div>
+                        {item.link && (
+                          <Link
+                            href={item.link.href}
+                            className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
+                          >
+                            {item.link.label}
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  );
+                },
+              )}
+          </div>
         </div>
       </section>
 
-      <section className="rounded-[2.5rem] border border-slate-200/70 bg-white/80 px-8 py-16 shadow-[0_30px_80px_rgba(15,23,42,0.12)]">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}>{roles.label}</p>
-          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl" {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}>
+      {/* ═══════ ROLE-BASED VIEWS ═══════ */}
+      <section className="rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
+        <div className="text-center">
+          <p
+            className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}
+          >
+            {roles.label}
+          </p>
+          <h2
+            className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}
+          >
             {roles.title}
           </h2>
-          <p className="mt-4 text-lg text-slate-600" {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}>{roles.body}</p>
+          <p
+            className="mx-auto mt-4 max-w-2xl text-slate-400"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}
+          >
+            {roles.body}
+          </p>
         </div>
+
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {(roles.items ?? fallbackRoles.items).map((role) => {
-            const Icon = getIcon(role.icon);
-            return (
-              <div key={role.title} className="rounded-2xl bg-white p-6" {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}>
-                <Icon className="h-5 w-5 text-emerald-600" />
-                <h3 className="mt-4 font-semibold text-slate-900">{role.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{role.detail}</p>
-              </div>
-            );
-          })}
+          {(roles.tabs ?? fallbackRoles.tabs).map(
+            (
+              tab: {
+                role: string;
+                icon?: string;
+                headline: string;
+                outcomes: string[];
+                proof: { metric: string; label: string; context: string };
+              },
+              i: number,
+            ) => {
+              const Icon = getRoleIcon(tab.icon);
+              const borderAccent =
+                i === 1 ? "border-cyan-500/20" : "border-emerald-500/20";
+              return (
+                <div
+                  key={tab.role}
+                  className={`rounded-xl border ${borderAccent} bg-slate-900/60 p-6`}
+                  {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`flex h-9 w-9 items-center justify-center rounded-lg ${
+                        i === 1 ? "bg-cyan-500/10" : "bg-emerald-500/10"
+                      }`}
+                    >
+                      <Icon className={`h-4.5 w-4.5 ${i === 1 ? "text-cyan-400" : "text-emerald-400"}`} />
+                    </div>
+                    <span className="font-(--font-mono) text-xs uppercase tracking-wider text-slate-500">
+                      {tab.role}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 font-(--font-display) text-base font-bold text-white">
+                    {tab.headline}
+                  </h3>
+
+                  <div className="mt-4 space-y-3">
+                    {tab.outcomes.map((outcome: string) => (
+                      <div key={outcome} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                        <span className="text-sm leading-relaxed text-slate-400">{outcome}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Role-specific proof */}
+                  <div className="mt-6 rounded-lg border border-slate-800 bg-slate-950/60 p-3">
+                    <span className="metric-display font-(--font-mono) text-2xl font-bold text-emerald-400">
+                      {tab.proof.metric}
+                    </span>
+                    <p className="mt-1 text-xs text-slate-400">{tab.proof.label}</p>
+                    <p className="mt-0.5 font-(--font-mono) text-[10px] text-slate-600">
+                      {tab.proof.context}
+                    </p>
+                  </div>
+                </div>
+              );
+            },
+          )}
         </div>
       </section>
 
-      <section className="grid gap-10 lg:grid-cols-[1fr,1fr]">
+      {/* ═══════ INTEGRATIONS ═══════ */}
+      <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr]">
         <div>
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}>{integrations.label}</p>
-          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl" {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}>
+          <p
+            className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}
+          >
+            {integrations.label}
+          </p>
+          <h2
+            className="mt-4 max-w-lg font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}
+          >
             {integrations.title}
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600" {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}>{integrations.body}</p>
+          <p
+            className="mt-4 max-w-lg text-slate-400"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}
+          >
+            {integrations.body}
+          </p>
+
+          <div className="mt-8 space-y-4">
+            {(integrations.patterns ?? fallbackIntegrations.patterns).map(
+              (pattern: { name: string; flow: string; category: string }) => (
+                <div
+                  key={pattern.name}
+                  className="rounded-xl border border-slate-800 bg-slate-900/40 p-4"
+                  {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}
+                >
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-semibold text-white">{pattern.name}</h3>
+                    <span
+                      className={`rounded-md border px-2 py-0.5 font-(--font-mono) text-[10px] uppercase tracking-wider ${getCategoryColor(pattern.category)}`}
+                    >
+                      {pattern.category}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-500">{pattern.flow}</p>
+                </div>
+              ),
+            )}
+          </div>
+        </div>
+
+        {/* Governance sidebar */}
+        <div
+          className="rounded-2xl border border-emerald-500/20 bg-emerald-950/20 p-8"
+          {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}
+        >
+          <span className="inline-flex items-center rounded-md border border-emerald-500/20 bg-emerald-950/40 px-2.5 py-1 font-(--font-mono) text-[10px] uppercase tracking-wider text-emerald-400">
+            {integrations.governance_card?.label ?? fallbackIntegrations.governance_card.label}
+          </span>
+          <h3 className="mt-4 font-(--font-display) text-xl font-bold text-white">
+            {integrations.governance_card?.title ?? fallbackIntegrations.governance_card.title}
+          </h3>
+          <p className="mt-3 text-sm leading-relaxed text-slate-400">
+            {integrations.governance_card?.body ?? fallbackIntegrations.governance_card.body}
+          </p>
           <div className="mt-6 space-y-3">
-            {(integrations.items ?? fallbackIntegrations.items).map((item) => (
-              <div key={item} className="flex items-center gap-3 text-sm text-slate-600" {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}>
-                <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                {item}
+            {(
+              integrations.governance_card?.items ?? fallbackIntegrations.governance_card.items
+            ).map((item: string) => (
+              <div key={item} className="flex items-center gap-3">
+                <ShieldCheck className="h-4 w-4 shrink-0 text-emerald-400" />
+                <span className="text-sm text-slate-300">{item}</span>
               </div>
             ))}
           </div>
-        </div>
-        <div className="rounded-3xl border border-emerald-200/60 bg-emerald-50/60 p-8" {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}>
-          <p className="inline-flex items-center rounded-full border border-emerald-200/60 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
-            {integrations.governance_card?.label ?? fallbackIntegrations.governance_card.label}
-          </p>
-          <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold">
-            {integrations.governance_card?.title ?? fallbackIntegrations.governance_card.title}
-          </h3>
-          <p className="mt-3 text-sm leading-relaxed text-slate-600">
-            {integrations.governance_card?.body ?? fallbackIntegrations.governance_card.body}
-          </p>
-          <Link href={integrations.governance_card?.link?.href ?? "/security"} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-emerald-700">
-            {integrations.governance_card?.link?.label ?? "View security details"}
+          <Link
+            href={
+              integrations.governance_card?.link?.href ??
+              fallbackIntegrations.governance_card.link.href
+            }
+            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
+          >
+            {integrations.governance_card?.link?.label ??
+              fallbackIntegrations.governance_card.link.label}
             <ArrowRight className="h-4 w-4" />
           </Link>
+
+          {/* Data flow visual */}
+          <div className="mt-8 rounded-lg border border-slate-800 bg-slate-950/60 p-4">
+            <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-cyan-400">
+              Data flow
+            </p>
+            <div className="mt-3 space-y-2">
+              {[
+                "Website event captured",
+                "Lead enriched + scored",
+                "CRM record created",
+                "Workflow triggered",
+                "Rep notified with context",
+              ].map((step, i) => (
+                <div key={step} className="flex items-center gap-2">
+                  <span className="flex h-5 w-5 items-center justify-center rounded font-(--font-mono) text-[9px] font-bold text-cyan-400 bg-cyan-500/10">
+                    {i + 1}
+                  </span>
+                  <span className="text-xs text-slate-500">{step}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="rounded-[2.5rem] bg-emerald-600 px-8 py-16 text-center text-white shadow-[0_25px_60px_rgba(5,150,105,0.35)]">
-        <h2 className="mx-auto max-w-3xl font-[var(--font-display)] text-3xl font-semibold tracking-tight md:text-4xl" {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}>
-          {cta.title}
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-emerald-50" {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}>{cta.body}</p>
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Link href={cta.primary_cta?.href ?? "/contact"} className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50" {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}>
-            {cta.primary_cta?.label ?? "Book a Strategy Call"}
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-          <Link href={cta.secondary_cta?.href ?? "/case-studies"} className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10" {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}>
-            {cta.secondary_cta?.label ?? "View Case Studies"}
-          </Link>
+      {/* ═══════ FINAL CTA ═══════ */}
+      <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
+        <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
+        <div className="relative">
+          <h2
+            className="mx-auto max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}
+          >
+            {cta.title}
+          </h2>
+          <p
+            className="mx-auto mt-4 max-w-xl text-slate-400"
+            {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}
+          >
+            {cta.body}
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href={cta.primary_cta?.href ?? "/contact"}
+              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
+              {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}
+            >
+              {cta.primary_cta?.label ?? "Book a Strategy Call"}
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href={cta.secondary_cta?.href ?? "/contact"}
+              className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
+              {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}
+            >
+              {cta.secondary_cta?.label ?? "Request an Architecture Review"}
+            </Link>
+          </div>
+          <p className="mt-6 flex items-center justify-center gap-2 font-(--font-mono) text-xs text-slate-600">
+            <Clock className="h-3.5 w-3.5" />
+            {cta.reassurance ?? fallbackCta.reassurance}
+          </p>
         </div>
       </section>
     </div>

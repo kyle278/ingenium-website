@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
@@ -31,27 +32,25 @@ interface SiteNavProps {
 export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    if (!open) {
-      return;
-    }
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
+  useEffect(() => {
+    if (!open) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-      }
+      if (event.key === "Escape") setOpen(false);
     };
-
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
   useEffect(() => {
-    if (!open) {
-      return;
-    }
-
+    if (!open) return;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
@@ -62,29 +61,35 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="mx-auto max-w-6xl px-6 pt-5">
-        <div className="flex h-[70px] items-center justify-between rounded-full border border-white/70 bg-white/80 px-6 shadow-[0_12px_40px_rgba(15,23,42,0.08)] backdrop-blur">
+      <div className="mx-auto max-w-7xl px-4 pt-4 sm:px-6">
+        <div
+          className={`flex h-16 items-center justify-between rounded-2xl border px-5 transition-all duration-300 ${
+            scrolled
+              ? "border-slate-800/80 bg-slate-900/90 shadow-lg shadow-black/20 backdrop-blur-xl"
+              : "border-slate-800/40 bg-slate-900/60 backdrop-blur-md"
+          }`}
+        >
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600 text-sm font-bold text-white">
-              I
-            </span>
+            <Image src="/logo.svg" alt="Ingenium logo" width={32} height={32} className="h-8 w-8" priority />
             <span
-              className="font-[var(--font-display)] text-lg font-semibold tracking-tight text-slate-900"
+              className="font-(--font-display) text-lg font-bold tracking-tight text-white"
               {...editorAttrs}
             >
               {content.brand}
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex">
+          {/* Desktop Nav */}
+          <nav className="hidden items-center gap-1 lg:flex">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm transition-colors ${
+                className={`rounded-lg px-3 py-2 text-sm transition-colors ${
                   pathname === item.href
-                    ? "font-semibold text-slate-900"
-                    : "text-slate-500 hover:text-slate-900"
+                    ? "bg-slate-800/60 font-semibold text-white"
+                    : "text-slate-400 hover:bg-slate-800/40 hover:text-white"
                 }`}
                 {...editorAttrs}
               >
@@ -93,17 +98,18 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-5 lg:flex">
+          {/* Desktop CTA */}
+          <div className="hidden items-center gap-4 lg:flex">
             <Link
               href="/contact"
-              className="text-sm text-slate-500 transition-colors hover:text-slate-900"
+              className="text-sm text-slate-400 transition-colors hover:text-white"
               {...editorAttrs}
             >
               {content.contact_label}
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700"
+              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
               {...editorAttrs}
             >
               {content.cta_label}
@@ -111,10 +117,11 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
             </Link>
           </div>
 
+          {/* Mobile Toggle */}
           <button
             type="button"
             onClick={() => setOpen(!open)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/60 bg-white/70 lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700/60 bg-slate-800/50 text-slate-300 lg:hidden"
             aria-label="Toggle menu"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -122,29 +129,30 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {open && (
-        <div className="fixed inset-0 top-[86px] z-50 bg-[#f6f2eb] lg:hidden">
-          <nav className="mx-auto max-w-6xl space-y-2 px-6 py-8">
+        <div className="fixed inset-0 top-[84px] z-50 bg-slate-950/98 backdrop-blur-xl lg:hidden">
+          <nav className="mx-auto max-w-7xl space-y-1 px-6 py-6">
             {[...navItems, { href: "/contact", label: content.contact_label }].map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`block rounded-2xl px-5 py-3 text-base font-medium transition ${
+                className={`block rounded-xl px-4 py-3 text-base font-medium transition ${
                   pathname === item.href
-                    ? "bg-white text-slate-900"
-                    : "text-slate-600 hover:bg-white/70 hover:text-slate-900"
+                    ? "bg-slate-800 text-white"
+                    : "text-slate-400 hover:bg-slate-800/60 hover:text-white"
                 }`}
                 {...editorAttrs}
               >
                 {item.label}
               </Link>
             ))}
-            <div className="pt-6">
+            <div className="pt-4">
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className="block rounded-full bg-emerald-600 px-6 py-3.5 text-center text-sm font-semibold text-white"
+                className="block rounded-xl bg-emerald-600 px-6 py-3.5 text-center text-sm font-semibold text-white shadow-lg shadow-emerald-600/20"
                 {...editorAttrs}
               >
                 {content.cta_label}

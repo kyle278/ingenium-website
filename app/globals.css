@@ -1,5 +1,70 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: light;
+  color-scheme: dark light;
+
+  /* Brand Colors */
+  --color-brand: #10B981;
+  --color-brand-light: #34D399;
+  --color-brand-dark: #059669;
+  --color-accent: #06B6D4;
+  --color-accent-light: #22D3EE;
+
+  /* Surfaces */
+  --color-surface-dark: #0F172A;
+  --color-surface-darker: #020617;
+  --color-surface-card: rgba(15, 23, 42, 0.6);
+  --color-surface-light: #F8FAFC;
+  --color-surface-white: #FFFFFF;
+
+  /* Text */
+  --color-text-primary: #F8FAFC;
+  --color-text-secondary: #94A3B8;
+  --color-text-muted: #64748B;
+  --color-text-dark: #0F172A;
+  --color-text-dark-secondary: #475569;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: #F8FAFC;
+}
+
+/* Dot grid pattern for dark sections */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Subtle grid lines for tech sections */
+.grid-lines {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Glassmorphism card on dark bg */
+.glass-card {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+/* Glow effect for brand elements */
+.brand-glow {
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.15), 0 0 80px rgba(16, 185, 129, 0.05);
+}
+
+/* Monospace metric display */
+.metric-display {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }

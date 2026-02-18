@@ -299,6 +299,33 @@ function getArchitectureLayerIcon(layerName: string, index: number) {
   return index % 2 === 0 ? Layers : MonitorDot;
 }
 
+function pickText(value: unknown, fallback: string) {
+  return typeof value === "string" && value.trim().length > 0 ? value : fallback;
+}
+
+function normalizeModuleItem(
+  item: unknown,
+  fallback: (typeof fallbackModules.items)[number],
+) {
+  const record = item && typeof item === "object" ? (item as Record<string, unknown>) : {};
+  const linkRecord =
+    record.link && typeof record.link === "object"
+      ? (record.link as Record<string, unknown>)
+      : {};
+
+  return {
+    title: pickText(record.title, fallback.title),
+    description: pickText(record.description, fallback.description),
+    icon: pickText(record.icon, fallback.icon),
+    metric: pickText(record.metric, fallback.metric),
+    metric_label: pickText(record.metric_label, fallback.metric_label),
+    link: {
+      label: pickText(linkRecord.label, fallback.link.label),
+      href: pickText(linkRecord.href, fallback.link.href),
+    },
+  };
+}
+
 /* ── Page Component ─────────────────────────────────────────────────── */
 
 export default async function PlatformPage() {
@@ -308,6 +335,11 @@ export default async function PlatformPage() {
   const roles = sectionJson(SECTION_KEYS.PLATFORM.ROLES, fallbackRoles);
   const integrations = sectionJson(SECTION_KEYS.PLATFORM.INTEGRATIONS, fallbackIntegrations);
   const cta = sectionJson(SECTION_KEYS.PLATFORM.CTA, fallbackCta);
+  const rawModuleItems =
+    modules.items && Array.isArray(modules.items) ? modules.items : [];
+  const moduleItems = fallbackModules.items.map((fallbackItem, index) =>
+    normalizeModuleItem(rawModuleItems[index], fallbackItem),
+  );
 
   return (
     <div className="space-y-28 md:space-y-40">
@@ -498,7 +530,7 @@ export default async function PlatformPage() {
         <div className="mt-12 space-y-4">
           {/* First row: 2 large cards */}
           <div className="grid gap-4 lg:grid-cols-2">
-            {(modules.items ?? fallbackModules.items)
+            {moduleItems
               .slice(0, 2)
               .map(
                 (
@@ -560,7 +592,7 @@ export default async function PlatformPage() {
 
           {/* Second row: 3 compact cards */}
           <div className="grid gap-4 md:grid-cols-3">
-            {(modules.items ?? fallbackModules.items)
+            {moduleItems
               .slice(2)
               .map(
                 (

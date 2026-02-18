@@ -15,6 +15,7 @@ import {
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 import AnimatedMetric from "../components/AnimatedMetric";
+import ScrollReveal from "../components/ScrollReveal";
 
 export const dynamic = "force-dynamic";
 
@@ -36,9 +37,9 @@ export const metadata: Metadata = {
 /* ------------------------------------------------------------------ */
 
 const primaryButton =
-  "inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_12px_30px_rgba(16,185,129,0.25)] transition hover:bg-emerald-400";
+  "cta-lift inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_12px_30px_rgba(16,185,129,0.25)] transition hover:bg-emerald-400";
 const secondaryButton =
-  "inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:bg-slate-800";
+  "cta-lift inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:bg-slate-800";
 const sectionLabel =
   "text-xs font-semibold uppercase tracking-[0.3em] text-emerald-400";
 const darkCard =
@@ -309,7 +310,7 @@ export default async function CrmPage() {
               ) => (
                 <div
                   key={`metric-${idx}`}
-                  className="rounded-xl border border-slate-800 bg-slate-950/60 p-3 text-center"
+                  className="metric-card rounded-xl border border-slate-800 bg-slate-950/60 p-3 text-center"
                 >
                   <AnimatedMetric
                     as="p"
@@ -438,27 +439,28 @@ export default async function CrmPage() {
                 step: { phase: string; detail: string },
                 idx: number,
               ) => (
-                <div
-                  key={`flow-${idx}`}
-                  className="relative rounded-xl border border-slate-800 bg-slate-950/50 p-4"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/15 font-(--font-mono) text-xs font-bold text-emerald-400">
-                      {idx + 1}
-                    </span>
-                    <span className="text-sm font-semibold text-white">
-                      {step.phase}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-xs leading-relaxed text-slate-500">
-                    {step.detail}
-                  </p>
-                  {idx < flowSteps.length - 1 && (
-                    <div className="absolute -right-2 top-1/2 z-10 hidden -translate-y-1/2 md:block">
-                      <ArrowRight className="h-3.5 w-3.5 text-emerald-500/40" />
+                <ScrollReveal key={`flow-${idx}`} delayMs={idx * 55}>
+                  <div
+                    className="metric-card relative rounded-xl border border-slate-800 bg-slate-950/50 p-4"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="data-flow-dot flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/15 font-(--font-mono) text-xs font-bold text-emerald-400">
+                        {idx + 1}
+                      </span>
+                      <span className="text-sm font-semibold text-white">
+                        {step.phase}
+                      </span>
                     </div>
-                  )}
-                </div>
+                    <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                      {step.detail}
+                    </p>
+                    {idx < flowSteps.length - 1 && (
+                      <div className="absolute -right-2 top-1/2 z-10 hidden -translate-y-1/2 md:block">
+                        <ArrowRight className="h-3.5 w-3.5 text-emerald-500/40" />
+                      </div>
+                    )}
+                  </div>
+                </ScrollReveal>
               ),
             )}
           </div>
@@ -555,34 +557,33 @@ export default async function CrmPage() {
                   },
                   idx: number,
                 ) => (
-                  <div
-                    key={`gate-${idx}`}
-                    className="relative flex gap-5 pb-8 last:pb-0"
-                  >
-                    {/* Node */}
-                    <div className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-emerald-500/40 bg-slate-950">
-                      <GitMerge className="h-4 w-4 text-emerald-400" />
-                    </div>
+                  <ScrollReveal key={`gate-${idx}`} className="timeline-step" delayMs={idx * 70}>
+                    <div className="relative flex gap-5 pb-8 last:pb-0">
+                      {/* Node */}
+                      <div className="timeline-dot relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-emerald-500/40 bg-slate-950">
+                        <GitMerge className="h-4 w-4 text-emerald-400" />
+                      </div>
 
-                    {/* Content */}
-                    <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4 flex-1">
-                      <div className="flex items-center justify-between gap-2">
-                        <h4 className="text-sm font-semibold text-white">
-                          {gate.phase}
-                        </h4>
-                        <span className="font-(--font-mono) text-xs text-slate-500">
-                          {gate.week}
-                        </span>
-                      </div>
-                      <p className="mt-1.5 text-xs leading-relaxed text-slate-500">
-                        {gate.detail}
-                      </p>
-                      <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-[11px] font-medium text-cyan-400">
-                        <CheckCircle2 className="h-3 w-3" />
-                        Gate: {gate.checkpoint}
+                      {/* Content */}
+                      <div className="metric-card rounded-xl border border-slate-800 bg-slate-950/60 p-4 flex-1">
+                        <div className="flex items-center justify-between gap-2">
+                          <h4 className="text-sm font-semibold text-white">
+                            {gate.phase}
+                          </h4>
+                          <span className="font-(--font-mono) text-xs text-slate-500">
+                            {gate.week}
+                          </span>
+                        </div>
+                        <p className="mt-1.5 text-xs leading-relaxed text-slate-500">
+                          {gate.detail}
+                        </p>
+                        <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-[11px] font-medium text-cyan-400">
+                          <CheckCircle2 className="h-3 w-3" />
+                          Gate: {gate.checkpoint}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </ScrollReveal>
                 ),
               )}
             </div>

@@ -318,7 +318,7 @@ export default async function HomePage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
               href={hero.primary_cta?.href ?? "/contact"}
-              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500 hover:shadow-emerald-500/30"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500 hover:shadow-emerald-500/30"
               {...sectionAttrs(SECTION_KEYS.HOME.HERO)}
             >
               {hero.primary_cta?.label ?? "Book a Strategy Call"}
@@ -326,7 +326,7 @@ export default async function HomePage() {
             </Link>
             <Link
               href={hero.secondary_cta?.href ?? "#process"}
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
               {...sectionAttrs(SECTION_KEYS.HOME.HERO)}
             >
               {hero.secondary_cta?.label ?? "See How It Works"}
@@ -365,7 +365,11 @@ export default async function HomePage() {
       <section className="relative rounded-2xl border border-slate-800 bg-slate-900/50 p-8 dot-grid">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {(metrics.items ?? fallbackMetrics.items).map((item: { metric: string; label: string; context?: string }) => (
-            <div key={item.label} {...sectionAttrs(SECTION_KEYS.HOME.OUTCOMES)}>
+            <div
+              key={item.label}
+              className="metric-card rounded-lg border border-slate-800/80 bg-slate-900/55 p-4"
+              {...sectionAttrs(SECTION_KEYS.HOME.OUTCOMES)}
+            >
               <AnimatedMetric
                 as="p"
                 className="metric-display text-3xl font-bold text-white"
@@ -493,7 +497,7 @@ export default async function HomePage() {
                 <div {...sectionAttrs(SECTION_KEYS.HOME.SYSTEM)}>
                   <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-5 transition hover:border-emerald-800/60 hover:bg-slate-900/80">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10">
+                      <div className="data-flow-dot flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10">
                         <Icon className="h-4 w-4 text-emerald-400" />
                       </div>
                       <span className="font-(--font-mono) text-[10px] text-slate-600">
@@ -545,14 +549,14 @@ export default async function HomePage() {
             {/* Timeline steps */}
             <div className="mt-10 space-y-0">
               {(process.phases ?? fallbackProcess.phases).map((phase: { num: string; title: string; timeline: string; deliverables: string; owner: string }, i: number) => (
-                <ScrollReveal key={phase.num} delayMs={i * 70}>
+                <ScrollReveal key={phase.num} className="timeline-step" delayMs={i * 70}>
                   <div className="relative pl-8" {...sectionAttrs(SECTION_KEYS.HOME.PROCESS)}>
                     {/* Timeline line */}
                     {i < (process.phases ?? fallbackProcess.phases).length - 1 && (
-                      <div className="absolute left-[11px] top-8 h-full w-px bg-slate-800" />
+                      <div className="timeline-line absolute left-[11px] top-8 h-full w-px bg-slate-800" />
                     )}
                     {/* Timeline dot */}
-                    <div className="absolute left-0 top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-emerald-500/30 bg-slate-900">
+                    <div className="timeline-dot absolute left-0 top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-emerald-500/30 bg-slate-900">
                       <div className="h-2 w-2 rounded-full bg-emerald-500" />
                     </div>
                     <div className="pb-8">
@@ -591,7 +595,7 @@ export default async function HomePage() {
             <div className="mt-8">
               <Link
                 href="/websites"
-                className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300"
+                className="cta-lift inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300"
               >
                 See full enterprise website redesign services
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -631,7 +635,7 @@ export default async function HomePage() {
           {(proof.items ?? fallbackProof.items).map((item: { client_type: string; industry: string; challenge: string; intervention: string; metric: string; metric_label: string; timeframe: string }) => (
             <div
               key={item.client_type}
-              className="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-slate-700"
+              className="metric-card group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-slate-700"
               {...sectionAttrs(SECTION_KEYS.HOME.PROOF)}
             >
               <div className="flex items-center justify-between">
@@ -733,7 +737,7 @@ export default async function HomePage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href={cta.primary_cta?.href ?? "/contact"}
-              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
               {...sectionAttrs(SECTION_KEYS.HOME.CTA)}
             >
               {cta.primary_cta?.label ?? "Book a Strategy Call"}
@@ -741,7 +745,7 @@ export default async function HomePage() {
             </Link>
             <Link
               href={cta.secondary_cta?.href ?? "/contact"}
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
               {...sectionAttrs(SECTION_KEYS.HOME.CTA)}
             >
               {cta.secondary_cta?.label ?? "Download Enterprise Website Checklist"}

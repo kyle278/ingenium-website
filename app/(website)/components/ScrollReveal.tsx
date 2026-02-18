@@ -7,7 +7,9 @@ interface ScrollRevealProps {
   className?: string;
   delayMs?: number;
   durationMs?: number;
-  translateY?: number;
+  offsetPx?: number;
+  direction?: "up" | "left" | "right";
+  blur?: boolean;
 }
 
 export default function ScrollReveal({
@@ -15,7 +17,9 @@ export default function ScrollReveal({
   className,
   delayMs = 0,
   durationMs = 500,
-  translateY = 16,
+  offsetPx = 16,
+  direction = "up",
+  blur = false,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(() => {
@@ -60,15 +64,23 @@ export default function ScrollReveal({
   return (
     <div
       ref={ref}
+      data-revealed={visible ? "true" : "false"}
       className={className}
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? "translate3d(0, 0, 0)" : `translate3d(0, ${translateY}px, 0)`,
-        transitionProperty: "opacity, transform",
+        transform: visible
+          ? "translate3d(0, 0, 0)"
+          : direction === "left"
+            ? `translate3d(-${offsetPx}px, 0, 0)`
+            : direction === "right"
+              ? `translate3d(${offsetPx}px, 0, 0)`
+              : `translate3d(0, ${offsetPx}px, 0)`,
+        filter: blur && !visible ? "blur(4px)" : "blur(0px)",
+        transitionProperty: "opacity, transform, filter",
         transitionDuration: `${durationMs}ms`,
         transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
         transitionDelay: `${delayMs}ms`,
-        willChange: "opacity, transform",
+        willChange: "opacity, transform, filter",
       }}
     >
       {children}

@@ -23,6 +23,7 @@
   --color-text-muted: #64748B;
   --color-text-dark: #0F172A;
   --color-text-dark-secondary: #475569;
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Smooth scrolling */
@@ -69,6 +70,110 @@ html {
   letter-spacing: -0.02em;
 }
 
+/* Interactive CTA motion */
+.cta-lift {
+  transition:
+    transform 220ms var(--motion-ease-out),
+    box-shadow 220ms var(--motion-ease-out),
+    filter 220ms var(--motion-ease-out);
+}
+
+.cta-lift:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.02);
+}
+
+.cta-lift:active {
+  transform: translateY(0);
+}
+
+/* Metric card hover */
+.metric-card {
+  transition:
+    transform 260ms var(--motion-ease-out),
+    border-color 260ms var(--motion-ease-out),
+    box-shadow 260ms var(--motion-ease-out);
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(52, 211, 153, 0.35);
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.45);
+}
+
+/* Timeline / deployment plan */
+.timeline-step .timeline-dot {
+  transform: scale(0.8);
+  opacity: 0.72;
+  transition:
+    transform 280ms var(--motion-ease-out),
+    opacity 280ms var(--motion-ease-out),
+    box-shadow 280ms var(--motion-ease-out);
+}
+
+.timeline-step .timeline-line {
+  transform-origin: top;
+  transform: scaleY(0.4);
+  opacity: 0.45;
+  transition:
+    transform 340ms var(--motion-ease-out),
+    opacity 340ms var(--motion-ease-out);
+}
+
+.timeline-step[data-revealed="true"] .timeline-dot {
+  transform: scale(1);
+  opacity: 1;
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.15);
+}
+
+.timeline-step[data-revealed="true"] .timeline-line {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+/* Data flow pulse */
+.data-flow-dot {
+  position: relative;
+}
+
+.data-flow-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 211, 238, 0.45);
+  opacity: 0;
+  animation: flow-pulse 1.8s var(--motion-ease-out) infinite;
+  animation-delay: calc(var(--flow-index, 0) * 120ms);
+}
+
+/* FAQ open / close */
+.faq-chevron {
+  transition: transform 220ms var(--motion-ease-out);
+}
+
+.faq-chevron[data-open="true"] {
+  transform: rotate(180deg);
+}
+
+/* Ambient background drift */
+.ambient-drift-a {
+  animation: ambient-drift-a 16s ease-in-out infinite;
+}
+
+.ambient-drift-b {
+  animation: ambient-drift-b 20s ease-in-out infinite;
+}
+
+.ambient-drift-c {
+  animation: ambient-drift-c 18s ease-in-out infinite;
+}
+
+/* Contact form step transition */
+.form-step-enter {
+  animation: form-step-enter 320ms var(--motion-ease-out) both;
+}
+
 /* Desktop custom scrollbar */
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
   html {
@@ -77,8 +182,8 @@ html {
   }
 
   html::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 8px;
+    height: 8px;
   }
 
   html::-webkit-scrollbar-track {
@@ -92,5 +197,78 @@ html {
 
   html::-webkit-scrollbar-thumb:hover {
     background: var(--color-brand-light);
+  }
+}
+
+@keyframes flow-pulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  45% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+@keyframes ambient-drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-18px, 12px, 0);
+  }
+}
+
+@keyframes ambient-drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(16px, -14px, 0);
+  }
+}
+
+@keyframes ambient-drift-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(10px, 16px, 0);
+  }
+}
+
+@keyframes form-step-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-lift,
+  .metric-card,
+  .faq-chevron,
+  .timeline-step .timeline-dot,
+  .timeline-step .timeline-line {
+    transition: none !important;
+  }
+
+  .ambient-drift-a,
+  .ambient-drift-b,
+  .ambient-drift-c,
+  .form-step-enter,
+  .data-flow-dot::after {
+    animation: none !important;
   }
 }

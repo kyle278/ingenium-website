@@ -291,20 +291,20 @@ export default async function ContactPage() {
         <div className="mt-8 flex flex-wrap gap-4">
           <Link
             href="/contact?intent=strategy-call"
-            className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-500"
+            className="cta-lift inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-500"
           >
             Book a Strategy Call
             <ArrowUpRight className="h-4 w-4" />
           </Link>
           <Link
             href="/contact?intent=security-review"
-            className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:text-white"
+            className="cta-lift inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:text-white"
           >
             Request Security Review
           </Link>
           <Link
             href="/case-studies"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-300 transition hover:text-emerald-200"
+            className="cta-lift inline-flex items-center gap-2 text-sm font-semibold text-emerald-300 transition hover:text-emerald-200"
           >
             Review enterprise website case studies
             <ArrowRight className="h-4 w-4" />

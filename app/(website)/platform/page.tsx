@@ -370,7 +370,7 @@ export default async function PlatformPage() {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Link
                 href={hero.primary_cta?.href ?? "/contact"}
-                className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
+                className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
                 {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
               >
                 {hero.primary_cta?.label ?? "Book a Strategy Call"}
@@ -378,14 +378,14 @@ export default async function PlatformPage() {
               </Link>
               <Link
                 href={hero.secondary_cta?.href ?? "#modules"}
-                className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
+                className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
                 {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
               >
                 {hero.secondary_cta?.label ?? "Explore Platform Modules"}
               </Link>
               <Link
                 href={hero.tertiary_cta?.href ?? "/case-studies"}
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-slate-300"
+                className="cta-lift inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-slate-300"
                 {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
               >
                 {hero.tertiary_cta?.label ?? "See case study results"}
@@ -428,7 +428,7 @@ export default async function PlatformPage() {
                 <div className="mt-3 space-y-2">
                   {["Website sessions", "Form intent", "Campaign touchpoints", "Product usage events"].map(
                     (signal, i) => (
-                      <ScrollReveal key={signal} delayMs={i * 45}>
+                      <ScrollReveal key={signal} delayMs={i * 45} direction="left">
                         <div className="rounded-md border border-slate-800 bg-slate-900/80 px-2.5 py-1.5 text-xs text-slate-300">
                           {signal}
                         </div>
@@ -450,9 +450,9 @@ export default async function PlatformPage() {
                           : "border-emerald-500/20 bg-emerald-950/20 text-emerald-400";
 
                       return (
-                        <ScrollReveal key={layer.name} delayMs={i * 70}>
+                        <ScrollReveal key={layer.name} delayMs={i * 70} className="timeline-step">
                           <div className="relative pl-9">
-                            <span className={`absolute left-0 top-4 flex h-8 w-8 items-center justify-center rounded-lg border ${accentClasses}`}>
+                            <span className={`timeline-dot data-flow-dot absolute left-0 top-4 flex h-8 w-8 items-center justify-center rounded-lg border ${accentClasses}`}>
                               <LayerIcon className="h-4 w-4" />
                             </span>
                             <div className={`rounded-lg border p-3 ${accentClasses.replace("text-cyan-400", "").replace("text-emerald-400", "")}`}>
@@ -479,7 +479,7 @@ export default async function PlatformPage() {
                 <div className="mt-3 space-y-2">
                   {["Routed leads", "SDR briefs", "SLA alerts", "Revenue dashboards"].map(
                     (output, i) => (
-                      <ScrollReveal key={output} delayMs={i * 45 + 70}>
+                      <ScrollReveal key={output} delayMs={i * 45 + 70} direction="right">
                         <div className="rounded-md border border-slate-800 bg-slate-900/80 px-2.5 py-1.5 text-xs text-slate-300">
                           {output}
                         </div>
@@ -549,7 +549,7 @@ export default async function PlatformPage() {
                   return (
                     <div
                       key={item.title}
-                      className={`relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 p-6 ${bgClass}`}
+                      className={`metric-card relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 p-6 ${bgClass}`}
                       {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
                     >
                       <div className="relative">
@@ -611,7 +611,7 @@ export default async function PlatformPage() {
                   return (
                     <div
                       key={item.title}
-                      className={`relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 p-6 ${bgVariants[i] ?? ""}`}
+                      className={`metric-card relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 p-6 ${bgVariants[i] ?? ""}`}
                       {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
                     >
                       <div className="relative">
@@ -691,7 +691,7 @@ export default async function PlatformPage() {
               return (
                 <div
                   key={tab.role}
-                  className={`rounded-xl border ${borderAccent} bg-slate-900/60 p-6`}
+                  className={`metric-card rounded-xl border ${borderAccent} bg-slate-900/60 p-6`}
                   {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}
                 >
                   <div className="flex items-center gap-3">
@@ -813,7 +813,7 @@ export default async function PlatformPage() {
               integrations.governance_card?.link?.href ??
               fallbackIntegrations.governance_card.link.href
             }
-            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
+            className="cta-lift mt-6 inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
           >
             {integrations.governance_card?.link?.label ??
               fallbackIntegrations.governance_card.link.label}
@@ -834,7 +834,7 @@ export default async function PlatformPage() {
                 "Rep notified with context",
               ].map((step, i) => (
                 <div key={step} className="flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded font-(--font-mono) text-[9px] font-bold text-cyan-400 bg-cyan-500/10">
+                  <span className="data-flow-dot flex h-5 w-5 items-center justify-center rounded font-(--font-mono) text-[9px] font-bold text-cyan-400 bg-cyan-500/10">
                     {i + 1}
                   </span>
                   <span className="text-xs text-slate-500">{step}</span>
@@ -864,7 +864,7 @@ export default async function PlatformPage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href={cta.primary_cta?.href ?? "/contact"}
-              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
               {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}
             >
               {cta.primary_cta?.label ?? "Book a Strategy Call"}
@@ -872,7 +872,7 @@ export default async function PlatformPage() {
             </Link>
             <Link
               href={cta.secondary_cta?.href ?? "/contact"}
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
               {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}
             >
               {cta.secondary_cta?.label ?? "Request an Architecture Review"}

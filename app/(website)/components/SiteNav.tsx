@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface NavItem {
   href: string;
@@ -33,6 +33,14 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navRef = useRef<HTMLElement | null>(null);
+  const [activeIndicator, setActiveIndicator] = useState({ x: 0, width: 0, visible: false });
+  const navItems = Array.isArray(content.items) ? content.items : [];
+
+  const isActivePath = useCallback(
+    (href: string) => pathname === href || pathname.startsWith(`${href}/`),
+    [pathname],
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -57,7 +65,36 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
     };
   }, [open]);
 
-  const navItems = Array.isArray(content.items) ? content.items : [];
+  const updateActiveIndicator = useCallback(() => {
+    const navElement = navRef.current;
+    if (!navElement) {
+      return;
+    }
+
+    const activeLink = navElement.querySelector<HTMLAnchorElement>("a[data-active='true']");
+    if (!activeLink) {
+      setActiveIndicator((current) => ({ ...current, visible: false, width: 0 }));
+      return;
+    }
+
+    const navRect = navElement.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+
+    setActiveIndicator({
+      x: linkRect.left - navRect.left,
+      width: linkRect.width,
+      visible: true,
+    });
+  }, []);
+
+  useEffect(() => {
+    const rafId = window.requestAnimationFrame(updateActiveIndicator);
+    window.addEventListener("resize", updateActiveIndicator);
+    return () => {
+      window.cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", updateActiveIndicator);
+    };
+  }, [pathname, navItems.length, updateActiveIndicator]);
 
   return (
     <header className="sticky top-0 z-50">
@@ -81,21 +118,34 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden items-center gap-1 lg:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`rounded-lg px-3 py-2 text-sm transition-colors ${
-                  pathname === item.href
-                    ? "bg-slate-800/60 font-semibold text-white"
-                    : "text-slate-400 hover:bg-slate-800/40 hover:text-white"
-                }`}
-                {...editorAttrs}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav ref={navRef} className="relative hidden items-center gap-1 lg:flex">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-y-1 rounded-lg bg-slate-800/60 transition-[transform,width,opacity] duration-300 motion-reduce:transition-none"
+              style={{
+                width: `${activeIndicator.width}px`,
+                transform: `translateX(${activeIndicator.x}px)`,
+                opacity: activeIndicator.visible ? 1 : 0,
+              }}
+            />
+            {navItems.map((item) => {
+              const isActive = isActivePath(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  data-active={isActive ? "true" : "false"}
+                  className={`relative z-10 rounded-lg px-3 py-2 text-sm transition-colors ${
+                    isActive
+                      ? "font-semibold text-white"
+                      : "text-slate-400 hover:bg-slate-800/40 hover:text-white"
+                  }`}
+                  {...editorAttrs}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop CTA */}
@@ -109,7 +159,7 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
               {...editorAttrs}
             >
               {content.cta_label}
@@ -139,7 +189,7 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={`block rounded-xl px-4 py-3 text-base font-medium transition ${
-                  pathname === item.href
+                  isActivePath(item.href)
                     ? "bg-slate-800 text-white"
                     : "text-slate-400 hover:bg-slate-800/60 hover:text-white"
                 }`}

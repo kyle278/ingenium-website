@@ -53,14 +53,14 @@ export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
             >
               Book a Strategy Call
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
               href="/case-studies"
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
             >
               View Case Studies
             </Link>
@@ -150,7 +150,7 @@ export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
             </ul>
             <Link
               href="/security"
-              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 transition-colors hover:text-emerald-300"
+              className="cta-lift mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 transition-colors hover:text-emerald-300"
               {...editorAttrs}
             >
               {content.security_link_label}

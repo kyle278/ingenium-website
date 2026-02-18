@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 
 import type {
@@ -184,6 +184,7 @@ export default function PortalContactForm({ form, description }: PortalContactFo
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [step, setStep] = useState<FormStep>(1);
+  const [stepAnimationKey, setStepAnimationKey] = useState(0);
 
   const hasFields = form.fields.length > 0;
   const { firstStep, secondStep, hiddenFields } = useMemo(
@@ -191,6 +192,10 @@ export default function PortalContactForm({ form, description }: PortalContactFo
     [form.fields],
   );
   const hasSecondStep = secondStep.length > 0;
+
+  useEffect(() => {
+    setStepAnimationKey((previous) => previous + 1);
+  }, [step]);
 
   function updateValue(fieldKey: string, nextValue: FormValue) {
     setValues((previousValues) => ({
@@ -394,13 +399,21 @@ export default function PortalContactForm({ form, description }: PortalContactFo
               </p>
             ) : null}
           </div>
+          <div className="h-1.5 rounded-full bg-slate-800">
+            <div
+              className="h-full rounded-full bg-emerald-500 transition-[width] duration-300 ease-out"
+              style={{ width: hasSecondStep ? `${step * 50}%` : "100%" }}
+            />
+          </div>
 
           {hiddenFields.map((field) => renderField(field, false))}
 
-          {visibleFields.map((field) => {
-            const isStepTwoOptional = hasSecondStep && step === 2 && !field.required;
-            return renderField(field, isStepTwoOptional ? false : undefined);
-          })}
+          <div key={stepAnimationKey} className="form-step-enter space-y-5">
+            {visibleFields.map((field) => {
+              const isStepTwoOptional = hasSecondStep && step === 2 && !field.required;
+              return renderField(field, isStepTwoOptional ? false : undefined);
+            })}
+          </div>
         </>
       ) : (
         <p className="text-sm text-slate-500">
@@ -412,14 +425,14 @@ export default function PortalContactForm({ form, description }: PortalContactFo
         <div className="grid gap-3 sm:grid-cols-2">
           <button
             type="button"
-            className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900 px-7 py-3.5 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:text-white"
+            className="cta-lift inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900 px-7 py-3.5 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:text-white"
             onClick={() => setStep(1)}
           >
             <ArrowLeft className="h-4 w-4" />
             Back
           </button>
           <button
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-60"
+            className="cta-lift inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-60"
             disabled={submitState === "submitting" || !hasFields}
             type="submit"
           >
@@ -429,7 +442,7 @@ export default function PortalContactForm({ form, description }: PortalContactFo
         </div>
       ) : (
         <button
-          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-60"
+          className="cta-lift inline-flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-60"
           disabled={submitState === "submitting" || !hasFields}
           type="submit"
         >

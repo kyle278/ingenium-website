@@ -15,6 +15,7 @@ import {
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 import AnimatedMetric from "../components/AnimatedMetric";
+import FaqAccordion from "../components/FaqAccordion";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const dynamic = "force-dynamic";
@@ -277,7 +278,7 @@ export default async function WebsitesPage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
               href={hero.primary_cta?.href ?? "/contact"}
-              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
               {...sectionAttrs(SECTION_KEYS.WEBSITES.HERO)}
             >
               {hero.primary_cta?.label ?? "Book a Strategy Call"}
@@ -285,7 +286,7 @@ export default async function WebsitesPage() {
             </Link>
             <Link
               href={hero.secondary_cta?.href ?? "#implementation"}
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
               {...sectionAttrs(SECTION_KEYS.WEBSITES.HERO)}
             >
               {hero.secondary_cta?.label ?? "See Our Process"}
@@ -327,12 +328,12 @@ export default async function WebsitesPage() {
         {/* Flow visualization */}
         <div className="mt-10 space-y-0">
           {(engine.flow ?? fallbackEngine.flow).map((step: string, i: number) => (
-            <ScrollReveal key={step} delayMs={i * 55}>
+            <ScrollReveal key={step} className="timeline-step" delayMs={i * 55}>
               <div className="relative pl-10" {...sectionAttrs(SECTION_KEYS.WEBSITES.ENGINE)}>
                 {i < (engine.flow ?? fallbackEngine.flow).length - 1 && (
-                  <div className="absolute left-[15px] top-8 h-full w-px bg-emerald-800/40" />
+                  <div className="timeline-line absolute left-[15px] top-8 h-full w-px bg-emerald-800/40" />
                 )}
-                <div className="absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-lg border border-emerald-500/20 bg-slate-900">
+                <div className="timeline-dot absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-lg border border-emerald-500/20 bg-slate-900">
                   <span className="font-(--font-mono) text-xs text-emerald-400">{String(i + 1).padStart(2, "0")}</span>
                 </div>
                 <div className="pb-6">
@@ -423,12 +424,12 @@ export default async function WebsitesPage() {
 
           <div className="mt-10 space-y-0">
             {(implementation.phases ?? fallbackImplementation.phases).map((phase: { week: string; title: string; deliverables: string; owner: string }, i: number) => (
-              <ScrollReveal key={phase.week} delayMs={i * 70}>
+              <ScrollReveal key={phase.week} className="timeline-step" delayMs={i * 70}>
                 <div className="relative pl-8" {...sectionAttrs(SECTION_KEYS.WEBSITES.PROCESS)}>
                   {i < (implementation.phases ?? fallbackImplementation.phases).length - 1 && (
-                    <div className="absolute left-[11px] top-8 h-full w-px bg-slate-800" />
+                    <div className="timeline-line absolute left-[11px] top-8 h-full w-px bg-slate-800" />
                   )}
-                  <div className="absolute left-0 top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-emerald-500/30 bg-slate-900">
+                  <div className="timeline-dot absolute left-0 top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-emerald-500/30 bg-slate-900">
                     <div className="h-2 w-2 rounded-full bg-emerald-500" />
                   </div>
                   <div className="pb-8">
@@ -517,7 +518,7 @@ export default async function WebsitesPage() {
 
             <div className="grid grid-cols-2 gap-4">
               {(proof.case ?? fallbackProof.case).results.map((r: { metric: string; label: string }) => (
-                <div key={r.label} className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+                <div key={r.label} className="metric-card rounded-xl border border-slate-800 bg-slate-900/60 p-4">
                   <AnimatedMetric
                     as="p"
                     className="metric-display text-2xl font-bold text-emerald-400"
@@ -537,13 +538,11 @@ export default async function WebsitesPage() {
           <h2 className="font-(--font-display) text-2xl font-bold text-white" {...sectionAttrs(SECTION_KEYS.WEBSITES.FAQ)}>
             {faq.title}
           </h2>
-          <div className="mt-8 space-y-6">
-            {(faq.items ?? fallbackFaq.items).map((item: { question: string; answer: string }) => (
-              <div key={item.question} className="border-b border-slate-800/60 pb-6">
-                <h3 className="text-sm font-semibold text-white">{item.question}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-400">{item.answer}</p>
-              </div>
-            ))}
+          <div className="mt-8">
+            <FaqAccordion
+              items={faq.items ?? fallbackFaq.items}
+              editorAttrs={sectionAttrs(SECTION_KEYS.WEBSITES.FAQ)}
+            />
           </div>
         </div>
 
@@ -588,7 +587,7 @@ export default async function WebsitesPage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href={cta.primary_cta?.href ?? "/contact"}
-              className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
               {...sectionAttrs(SECTION_KEYS.WEBSITES.CTA)}
             >
               {cta.primary_cta?.label ?? "Book a Strategy Call"}
@@ -596,7 +595,7 @@ export default async function WebsitesPage() {
             </Link>
             <Link
               href={cta.secondary_cta?.href ?? "/contact"}
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
+              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
               {...sectionAttrs(SECTION_KEYS.WEBSITES.CTA)}
             >
               {cta.secondary_cta?.label ?? "Download Website Redesign Scope Template"}

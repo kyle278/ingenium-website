@@ -18,6 +18,7 @@ import {
 import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
 import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 import AnimatedMetric from "../components/AnimatedMetric";
+import ScrollReveal from "../components/ScrollReveal";
 
 export const dynamic = "force-dynamic";
 
@@ -37,9 +38,9 @@ export const metadata: Metadata = {
 /* ---------- shared dark-theme utility classes ---------- */
 
 const primaryButton =
-  "inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(16,185,129,0.25)] transition hover:bg-emerald-500";
+  "cta-lift inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(16,185,129,0.25)] transition hover:bg-emerald-500";
 const secondaryButton =
-  "inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:bg-slate-800";
+  "cta-lift inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:bg-slate-800";
 const sectionLabel =
   "text-xs font-semibold uppercase tracking-[0.3em] text-emerald-400";
 const card =
@@ -277,32 +278,34 @@ export default async function AutomationsPage() {
                   (hero.workflow_diagram?.steps ?? fallbackHero.workflow_diagram.steps).length - 1;
 
                 return (
-                  <div key={step.action} className="relative flex items-stretch gap-4">
-                    {/* Vertical connector line */}
-                    <div className="flex w-10 flex-col items-center">
-                      <div
-                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-xs font-bold ${styles}`}
-                      >
-                        {String(idx + 1).padStart(2, "0")}
+                  <ScrollReveal key={step.action} className="timeline-step" delayMs={idx * 65}>
+                    <div className="relative flex items-stretch gap-4">
+                      {/* Vertical connector line */}
+                      <div className="flex w-10 flex-col items-center">
+                        <div
+                          className={`timeline-dot data-flow-dot flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-xs font-bold ${styles}`}
+                        >
+                          {String(idx + 1).padStart(2, "0")}
+                        </div>
+                        {!isLast && (
+                          <div className="timeline-line w-px grow bg-gradient-to-b from-slate-700 to-slate-800" />
+                        )}
                       </div>
-                      {!isLast && (
-                        <div className="w-px grow bg-gradient-to-b from-slate-700 to-slate-800" />
-                      )}
-                    </div>
 
-                    {/* Step content */}
-                    <div className="pb-5">
-                      <p
-                        className="text-sm font-medium text-slate-200"
-                        {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.HERO)}
-                      >
-                        {step.action}
-                      </p>
-                      <p className="mt-0.5 font-(--font-mono) text-xs text-slate-500">
-                        {step.type === "escalation" ? `Escalation @ ${step.timing}` : `T+ ${step.timing}`}
-                      </p>
+                      {/* Step content */}
+                      <div className="pb-5">
+                        <p
+                          className="text-sm font-medium text-slate-200"
+                          {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.HERO)}
+                        >
+                          {step.action}
+                        </p>
+                        <p className="mt-0.5 font-(--font-mono) text-xs text-slate-500">
+                          {step.type === "escalation" ? `Escalation @ ${step.timing}` : `T+ ${step.timing}`}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  </ScrollReveal>
                 );
               },
             )}
@@ -344,7 +347,7 @@ export default async function AutomationsPage() {
             }) => (
               <div
                 key={wf.title}
-                className={`${softCard} group transition hover:border-slate-700`}
+                className={`metric-card ${softCard} group transition hover:border-slate-700`}
                 {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.WORKFLOWS)}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -435,29 +438,31 @@ export default async function AutomationsPage() {
                     (governance.lifecycle ?? fallbackGovernance.lifecycle).length - 1;
 
                   return (
-                    <div key={item.stage} className="relative flex items-stretch gap-4">
-                      <div className="flex w-8 flex-col items-center">
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-emerald-500/40 bg-emerald-500/10">
-                          {idx === 0 && <GitBranch className="h-3.5 w-3.5 text-emerald-400" />}
-                          {idx === 1 && <Gauge className="h-3.5 w-3.5 text-emerald-400" />}
-                          {idx === 2 && <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />}
-                          {idx === 3 && <Timer className="h-3.5 w-3.5 text-emerald-400" />}
-                          {idx === 4 && <RotateCcw className="h-3.5 w-3.5 text-emerald-400" />}
+                    <ScrollReveal key={item.stage} className="timeline-step" delayMs={idx * 65}>
+                      <div className="relative flex items-stretch gap-4">
+                        <div className="flex w-8 flex-col items-center">
+                          <div className="timeline-dot data-flow-dot flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-emerald-500/40 bg-emerald-500/10">
+                            {idx === 0 && <GitBranch className="h-3.5 w-3.5 text-emerald-400" />}
+                            {idx === 1 && <Gauge className="h-3.5 w-3.5 text-emerald-400" />}
+                            {idx === 2 && <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />}
+                            {idx === 3 && <Timer className="h-3.5 w-3.5 text-emerald-400" />}
+                            {idx === 4 && <RotateCcw className="h-3.5 w-3.5 text-emerald-400" />}
+                          </div>
+                          {!isLast && (
+                            <div className="timeline-line w-px grow bg-gradient-to-b from-slate-700 to-slate-800" />
+                          )}
                         </div>
-                        {!isLast && (
-                          <div className="w-px grow bg-gradient-to-b from-slate-700 to-slate-800" />
-                        )}
+                        <div className="pb-5">
+                          <p
+                            className="text-sm font-semibold text-white"
+                            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.GOVERNANCE)}
+                          >
+                            {item.stage}
+                          </p>
+                          <p className="mt-0.5 text-sm text-slate-400">{item.detail}</p>
+                        </div>
                       </div>
-                      <div className="pb-5">
-                        <p
-                          className="text-sm font-semibold text-white"
-                          {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.GOVERNANCE)}
-                        >
-                          {item.stage}
-                        </p>
-                        <p className="mt-0.5 text-sm text-slate-400">{item.detail}</p>
-                      </div>
-                    </div>
+                    </ScrollReveal>
                   );
                 },
               )}
@@ -527,7 +532,7 @@ export default async function AutomationsPage() {
             }) => (
               <div
                 key={row.workflow}
-                className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 backdrop-blur-sm transition hover:border-slate-700"
+                className="metric-card rounded-2xl border border-slate-800 bg-slate-900/60 p-5 backdrop-blur-sm transition hover:border-slate-700"
                 {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CONNECTED)}
               >
                 <div className="flex items-center justify-between">
@@ -590,7 +595,7 @@ export default async function AutomationsPage() {
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Link
             href={cta.primary_cta?.href ?? "/contact"}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
+            className="cta-lift inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
             {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CTA)}
           >
             {cta.primary_cta?.label ?? "Book a Strategy Call"}
@@ -598,7 +603,7 @@ export default async function AutomationsPage() {
           </Link>
           <Link
             href={cta.secondary_cta?.href ?? "/contact?intent=workflow-audit"}
-            className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+            className="cta-lift inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
             {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CTA)}
           >
             {cta.secondary_cta?.label ?? "Request a Workflow Audit"}

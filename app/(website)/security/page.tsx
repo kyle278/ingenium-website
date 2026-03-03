@@ -249,10 +249,10 @@ export default async function SecurityPage() {
   return (
     <div className="space-y-28 md:space-y-36">
       {/* ============================================================ */}
-      {/*  SECTION 1 â€” Hero / Compliance                               */}
+      {/*  SECTION 1 - Hero / Compliance                               */}
       {/* ============================================================ */}
       <section className="grid items-start gap-14 lg:grid-cols-[1.1fr,0.9fr]">
-        {/* Left column â€” headline + CTAs */}
+        {/* Left column - headline + CTAs */}
         <div>
           <p className={sectionLabel}>
             {hero.label}
@@ -307,7 +307,7 @@ export default async function SecurityPage() {
           </div>
         </div>
 
-        {/* Right column â€” compliance posture card */}
+        {/* Right column - compliance posture card */}
         <div className={darkCardLg}>
           <div className="flex items-center gap-3">
             <Shield className="h-5 w-5 text-emerald-400" />
@@ -339,7 +339,7 @@ export default async function SecurityPage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  SECTION 2 â€” Security Controls                               */}
+      {/*  SECTION 2 - Security Controls                               */}
       {/* ============================================================ */}
       <section>
         <div className="max-w-3xl">
@@ -480,7 +480,7 @@ export default async function SecurityPage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  SECTION 3 â€” AI Governance                                   */}
+      {/*  SECTION 3 - AI Governance                                   */}
       {/* ============================================================ */}
       <section className="rounded-[2.5rem] border border-slate-800 bg-slate-900/50 px-6 py-16 backdrop-blur-sm sm:px-10">
         <div className="max-w-3xl">
@@ -510,7 +510,7 @@ export default async function SecurityPage() {
             </h3>
           </div>
 
-          {/* Lifecycle stages â€” vertical timeline */}
+          {/* Lifecycle stages - vertical timeline */}
           <div className="relative mt-8 ml-3 border-l border-slate-700 pl-8">
             {lifecycleStages.map((stage, i) => (
               <div
@@ -591,7 +591,7 @@ export default async function SecurityPage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  SECTION 4 â€” Final CTA                                       */}
+      {/*  SECTION 4 - Final CTA                                       */}
       {/* ============================================================ */}
       <section className="rounded-[2.5rem] border border-emerald-500/20 bg-gradient-to-b from-emerald-950/40 to-slate-950 px-8 py-20 text-center shadow-[0_0_80px_rgba(16,185,129,0.08)]">
         <Shield className="mx-auto h-10 w-10 text-emerald-500/60" />

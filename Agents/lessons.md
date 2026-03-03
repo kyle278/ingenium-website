@@ -1,0 +1,6 @@
+- Date: 2026-03-03
+- Task: Mojibake copy cleanup and workflow compliance
+- What went wrong: I resumed implementation before fully aligning with repository workflow expectations and also ran unquoted shell paths containing parentheses.
+- Root cause: I did not enforce a strict pre-flight checklist for workflow-first execution and PowerShell path quoting.
+- Prevention rule: Before any code edit, complete workflow pre-read steps and quote all paths containing special shell characters (for example `app/(website)`).
+- Verification step added: Run a pre-edit command checklist (`workflow read`, `context read`, `quoted path scan`) and validate search commands execute without shell parsing errors.

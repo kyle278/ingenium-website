@@ -34,24 +34,24 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-/* â”€â”€ Fallback Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Fallback Content ------------------------------------------------ */
 
 const fallbackHero = {
   label: "Enterprise Web Design Agency",
   title: "We build enterprise websites that generate pipeline.",
-  body: "Ingenium is the enterprise web design agency that builds conversion systems â€” website, CRM, AI agents, and automation â€” so your pipeline compounds week after week.",
+  body: "Ingenium is the enterprise web design agency that builds conversion systems - website, CRM, AI agents, and automation - so your pipeline compounds week after week.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "See How It Works", href: "#process" },
   proof_metric: "47%",
   proof_label: "conversion lift for a Series B SaaS company in 90 days",
-  badges: ["4â€“6 week launch", "Full pipeline attribution", "AI-powered operations"],
+  badges: ["4-6 week launch", "Full pipeline attribution", "AI-powered operations"],
 };
 
 const fallbackMetrics = {
-  label: "Average across 12 enterprise engagements, 2024â€“2025",
+  label: "Average across 12 enterprise engagements, 2024-2025",
   items: [
     { metric: "47%", label: "Conversion lift", context: "avg. across enterprise clients" },
-    { metric: "4â€“6 wks", label: "Strategy to launch", context: "full system deployment" },
+    { metric: "4-6 wks", label: "Strategy to launch", context: "full system deployment" },
     { metric: "100%", label: "Pipeline attribution", context: "end-to-end tracking" },
     { metric: "<60s", label: "Lead response time", context: "automated routing + context" },
   ],
@@ -60,7 +60,7 @@ const fallbackMetrics = {
 const fallbackIndustries = {
   label: "Trusted by growth and enterprise teams across industries",
   items: [
-    { name: "Series Bâ€“D SaaS", icon: "zap" },
+    { name: "Series B-D SaaS", icon: "zap" },
     { name: "Enterprise Financial Services", icon: "bar_chart" },
     { name: "Healthcare Platforms", icon: "shield" },
     { name: "B2B Technology", icon: "globe" },
@@ -94,7 +94,7 @@ const fallbackProblem = {
 const fallbackEngine = {
   label: "The Conversion Engine",
   title: "A unified system, not a collection of tools.",
-  body: "Your website is the front door. The Ingenium platform keeps it converting â€” CRM, AI agents, and automations working as one system.",
+  body: "Your website is the front door. The Ingenium platform keeps it converting - CRM, AI agents, and automations working as one system.",
   nodes: [
     { title: "Website", outcome: "Conversion-first design that captures intent", href: "/websites", icon: "layout" },
     { title: "CRM", outcome: "Unified pipeline data with smart routing", href: "/crm", icon: "layers" },
@@ -112,21 +112,21 @@ const fallbackProcess = {
     {
       num: "01",
       title: "Discovery & Strategy",
-      timeline: "Week 1â€“2",
+      timeline: "Week 1-2",
       deliverables: "Conversion audit, messaging architecture, KPI framework, technical requirements",
       owner: "Ingenium leads, your team validates",
     },
     {
       num: "02",
       title: "Design & Build",
-      timeline: "Week 3â€“4",
+      timeline: "Week 3-4",
       deliverables: "Design system, page builds, CRM integration, analytics instrumentation",
       owner: "Ingenium builds, your team reviews at gates",
     },
     {
       num: "03",
       title: "Launch & Optimise",
-      timeline: "Week 5â€“6",
+      timeline: "Week 5-6",
       deliverables: "Go-live, AI agent deployment, automation workflows, first optimisation cycle",
       owner: "Joint ownership with weekly reporting",
     },
@@ -181,7 +181,7 @@ const fallbackProof = {
 const fallbackGovernance = {
   label: "Enterprise Governance",
   title: "Security and governance built into every layer.",
-  body: "Approval workflows, audit trails, and role-based controls keep every update accountable â€” from content changes to AI agent outputs.",
+  body: "Approval workflows, audit trails, and role-based controls keep every update accountable - from content changes to AI agent outputs.",
   link: { label: "Review enterprise security and AI governance", href: "/security" },
   secondary_link: { label: "Request security review pack", href: "/contact" },
   items: [
@@ -199,10 +199,10 @@ const fallbackCta = {
   body: "Book a strategy call and get a tailored conversion roadmap within 48 hours. No commitment required.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "Download Enterprise Website Checklist", href: "/contact" },
-  reassurance: "30-minute call Â· Tailored roadmap Â· No obligation",
+  reassurance: "30-minute call - Tailored roadmap - No obligation",
 };
 
-/* â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Helpers ---------------------------------------------------------- */
 
 function getIcon(iconName: string | undefined) {
   switch (iconName) {
@@ -271,7 +271,7 @@ function normalizeIndustryItems(items: unknown): IndustryTrustItem[] {
   return normalized.length > 0 ? normalized : fallbackIndustries.items;
 }
 
-/* â”€â”€ Page Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Page Component --------------------------------------------------- */
 
 export default async function HomePage() {
   const hero = fallbackHero;
@@ -287,7 +287,7 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-28 md:space-y-40">
-      {/* â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â• */}
+      {/* ======= HERO ======= */}
       <section className="relative pt-8">
         <div className="mx-auto max-w-4xl text-center">
           <p
@@ -350,7 +350,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• METRICS STRIP â•â•â•â•â•â•â• */}
+      {/* ======= METRICS STRIP ======= */}
       <section className="relative rounded-2xl border border-slate-800 bg-slate-900/50 p-8 dot-grid">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {(metrics.items ?? fallbackMetrics.items).map((item: { metric: string; label: string; context?: string }) => (
@@ -378,7 +378,7 @@ export default async function HomePage() {
         </p>
       </section>
 
-      {/* â•â•â•â•â•â•â• INDUSTRY TRUST â•â•â•â•â•â•â• */}
+      {/* ======= INDUSTRY TRUST ======= */}
       <section>
         <p
           className="text-center text-sm text-slate-500"
@@ -402,7 +402,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• PROBLEM STATEMENT â•â•â•â•â•â•â• */}
+      {/* ======= PROBLEM STATEMENT ======= */}
       <section className="rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
         <p
           className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
@@ -446,7 +446,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• CONVERSION ENGINE â•â•â•â•â•â•â• */}
+      {/* ======= CONVERSION ENGINE ======= */}
       <section>
         <div className="text-center">
           <p
@@ -466,7 +466,7 @@ export default async function HomePage() {
           </p>
         </div>
 
-        {/* System flow â€” horizontal pipeline */}
+        {/* System flow - horizontal pipeline */}
         <div className="mt-12 grid gap-3 md:grid-cols-5">
           {(engine.nodes ?? fallbackEngine.nodes).map((node: { title: string; outcome: string; href?: string; icon?: string }, i: number) => {
             const Icon = getIcon(node.icon);
@@ -500,7 +500,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• PROCESS â•â•â•â•â•â•â• */}
+      {/* ======= PROCESS ======= */}
       <section id="process">
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Left: Timeline */}
@@ -579,7 +579,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• PROOF / CASE SNAPSHOTS â•â•â•â•â•â•â• */}
+      {/* ======= PROOF / CASE SNAPSHOTS ======= */}
       <section>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -633,7 +633,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• GOVERNANCE â•â•â•â•â•â•â• */}
+      {/* ======= GOVERNANCE ======= */}
       <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr]">
         <div>
           <p
@@ -683,7 +683,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• FINAL CTA â•â•â•â•â•â•â• */}
+      {/* ======= FINAL CTA ======= */}
       <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
         <div className="relative">

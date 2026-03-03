@@ -32,12 +32,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/platform" },
 };
 
-/* â”€â”€ Fallback Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Fallback Content ------------------------------------------------ */
 
 const fallbackHero = {
   label: "Website CRM AI Platform",
   title: "One platform connecting your website, CRM, AI agents, and automations.",
-  body: "Revenue teams lose pipeline when their tools are disconnected. Ingenium unifies website performance, CRM intelligence, AI execution, and workflow automation into a single system â€” so every interaction is tracked, every lead is routed, and every decision is backed by data.",
+  body: "Revenue teams lose pipeline when their tools are disconnected. Ingenium unifies website performance, CRM intelligence, AI execution, and workflow automation into a single system - so every interaction is tracked, every lead is routed, and every decision is backed by data.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "Explore Platform Modules", href: "#modules" },
   tertiary_cta: { label: "See case study results", href: "/case-studies" },
@@ -110,7 +110,7 @@ const fallbackModules = {
 const fallbackRoles = {
   label: "Role-Based Views",
   title: "One platform, tailored for every team.",
-  body: "Marketing, sales, and technical teams each see what matters most â€” without the noise of irrelevant data or controls.",
+  body: "Marketing, sales, and technical teams each see what matters most - without the noise of irrelevant data or controls.",
   tabs: [
     {
       role: "Marketing",
@@ -217,10 +217,10 @@ const fallbackCta = {
   body: "Book a strategy call to map your platform architecture, integration requirements, and rollout plan. Or request an architecture review to see how your current stack compares.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "Request an Architecture Review", href: "/contact" },
-  reassurance: "30-minute call Â· Custom architecture diagram Â· No obligation",
+  reassurance: "30-minute call - Custom architecture diagram - No obligation",
 };
 
-/* â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Helpers ---------------------------------------------------------- */
 
 function getModuleIcon(iconName: string | undefined) {
   switch (iconName) {
@@ -322,7 +322,7 @@ function normalizeModuleItem(
   };
 }
 
-/* â”€â”€ Page Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Page Component --------------------------------------------------- */
 
 export default async function PlatformPage() {
   const hero = fallbackHero;
@@ -338,7 +338,7 @@ export default async function PlatformPage() {
 
   return (
     <div className="space-y-28 md:space-y-40">
-      {/* â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â• */}
+      {/* ======= HERO ======= */}
       <section className="pt-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr,0.9fr]">
           <div>
@@ -492,7 +492,7 @@ export default async function PlatformPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• MODULES â•â•â•â•â•â•â• */}
+      {/* ======= MODULES ======= */}
       <section id="modules">
         <div className="text-center">
           <p
@@ -633,7 +633,7 @@ export default async function PlatformPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• ROLE-BASED VIEWS â•â•â•â•â•â•â• */}
+      {/* ======= ROLE-BASED VIEWS ======= */}
       <section className="rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
         <div className="text-center">
           <p
@@ -718,7 +718,7 @@ export default async function PlatformPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• INTEGRATIONS â•â•â•â•â•â•â• */}
+      {/* ======= INTEGRATIONS ======= */}
       <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr]">
         <div>
           <p
@@ -819,7 +819,7 @@ export default async function PlatformPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• FINAL CTA â•â•â•â•â•â•â• */}
+      {/* ======= FINAL CTA ======= */}
       <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
         <div className="relative">

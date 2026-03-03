@@ -7,9 +7,10 @@
 
 ## Data Flow
 - Browser gathers form values and URL/referrer tracking values.
-- Browser posts JSON payload to `/api/portal/forms/contact/submit`.
+- Browser posts JSON payload to `/api/portal-form-submit`.
 - UI shows loading, success, or error states based on API response.
 
 ## Risks
 - Missing tracking normalization can break downstream attribution.
 - Unhandled submit failures can silently drop leads.
+- Corrupted copy encoding can surface mojibake glyphs in visible marketing pages.

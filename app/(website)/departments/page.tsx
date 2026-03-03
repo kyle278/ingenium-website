@@ -29,12 +29,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/departments" },
 };
 
-/* â”€â”€ Fallback Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Fallback Content ------------------------------------------------ */
 
 const fallbackHero = {
   label: "AI Departments",
   title: "The operating model for scaling AI safely.",
-  body: "Move beyond single agents. Deploy governed AI departments that run entire business functions â€” with human leaders, escalation paths, and measurable KPIs at every level.",
+  body: "Move beyond single agents. Deploy governed AI departments that run entire business functions - with human leaders, escalation paths, and measurable KPIs at every level.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "See the Implementation Blueprint", href: "/platform" },
   org_chart: {
@@ -109,10 +109,10 @@ const fallbackGovernance = {
     ],
   },
   override_examples: [
-    "Sales agent pauses outreach to a prospect flagged by legal â€” escalated to VP Sales in under 90 seconds",
-    "Content agent draft rejected by brand governance rules â€” routed to Marketing Director for tone review",
-    "Customer Success agent detects churn signal on enterprise account â€” escalated to CS Director with full context",
-    "Growth agent experiment exceeds budget threshold â€” paused automatically, awaiting Growth Lead approval",
+    "Sales agent pauses outreach to a prospect flagged by legal - escalated to VP Sales in under 90 seconds",
+    "Content agent draft rejected by brand governance rules - routed to Marketing Director for tone review",
+    "Customer Success agent detects churn signal on enterprise account - escalated to CS Director with full context",
+    "Growth agent experiment exceeds budget threshold - paused automatically, awaiting Growth Lead approval",
   ],
   safeguards: [
     "Role-based permissions at agent and department level",
@@ -127,7 +127,7 @@ const fallbackGovernance = {
 const fallbackStructure = {
   label: "Department Structure",
   title: "How AI departments are organized and connected.",
-  body: "Each department follows a consistent org-chart model: a human leader, specialist AI agents, quality controls, and operational connectors â€” all mapped to your existing reporting structure.",
+  body: "Each department follows a consistent org-chart model: a human leader, specialist AI agents, quality controls, and operational connectors - all mapped to your existing reporting structure.",
   departments: [
     {
       name: "Marketing Operations",
@@ -178,10 +178,10 @@ const fallbackCta = {
   body: "Book a strategy call to define department roles, governance thresholds, and rollout priorities. Get a tailored blueprint within 48 hours.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "See the Implementation Blueprint", href: "/platform" },
-  reassurance: "30-minute call Â· Department blueprint Â· No obligation",
+  reassurance: "30-minute call - Department blueprint - No obligation",
 };
 
-/* â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Helpers ---------------------------------------------------------- */
 
 function getDeptIcon(iconName: string | undefined) {
   switch (iconName) {
@@ -213,7 +213,7 @@ function getRiskColor(risk: string) {
   }
 }
 
-/* â”€â”€ Page Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Page Component --------------------------------------------------- */
 
 export default async function DepartmentsPage() {
   const hero = fallbackHero;
@@ -232,7 +232,7 @@ export default async function DepartmentsPage() {
 
   return (
     <div className="space-y-28 md:space-y-40">
-      {/* â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â• */}
+      {/* ======= HERO ======= */}
       <section className="relative pt-8">
         <div className="grid items-start gap-12 lg:grid-cols-[1.1fr,0.9fr]">
           {/* Left: Copy */}
@@ -324,7 +324,7 @@ export default async function DepartmentsPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• OUTCOMES FRAMING â€” Departmental KPIs â•â•â•â•â•â•â• */}
+      {/* ======= OUTCOMES FRAMING - Departmental KPIs ======= */}
       <section>
         <div className="text-center">
           <p
@@ -380,7 +380,7 @@ export default async function DepartmentsPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• HUMAN CONTROL â€” Escalation & Override â•â•â•â•â•â•â• */}
+      {/* ======= HUMAN CONTROL - Escalation & Override ======= */}
       <section className="rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
         <p
           className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
@@ -486,7 +486,7 @@ export default async function DepartmentsPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• DEPARTMENT STRUCTURE â€” Org-Chart Detail â•â•â•â•â•â•â• */}
+      {/* ======= DEPARTMENT STRUCTURE - Org-Chart Detail ======= */}
       <section>
         <div className="grid gap-12 lg:grid-cols-[0.85fr,1.15fr]">
           {/* Left: Introduction */}
@@ -592,7 +592,7 @@ export default async function DepartmentsPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• PROOF ELEMENT â•â•â•â•â•â•â• */}
+      {/* ======= PROOF ELEMENT ======= */}
       <section className="relative rounded-2xl border border-slate-800 bg-slate-900/50 p-8 dot-grid">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -621,7 +621,7 @@ export default async function DepartmentsPage() {
         </p>
       </section>
 
-      {/* â•â•â•â•â•â•â• FINAL CTA â•â•â•â•â•â•â• */}
+      {/* ======= FINAL CTA ======= */}
       <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
         <div className="relative">

@@ -130,7 +130,7 @@ export default function ContactForm() {
       setIsSubmitting(true);
       setErrorMessage("");
 
-      const response = await fetch("/api/portal/forms/contact/submit", {
+      const response = await fetch("/api/portal-form-submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

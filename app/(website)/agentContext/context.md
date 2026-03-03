@@ -11,3 +11,4 @@ Website route group `app/(website)` handles public page rendering and client-sid
 - Preserve current two-step form progression and validation gates.
 - Keep browser code free of privileged credentials.
 - Submit all entered fields, not a reduced subset.
+- Keep static route copy free of encoding artifacts; normalize punctuation if corrupted characters appear.

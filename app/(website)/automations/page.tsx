@@ -205,7 +205,7 @@ export default async function AutomationsPage() {
 
   return (
     <div className="space-y-28 md:space-y-36">
-      {/* ========== 1 Â· HERO / WORKFLOW DIAGRAM ========== */}
+      {/* ========== 1 - HERO / WORKFLOW DIAGRAM ========== */}
       <section className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
           <p
@@ -298,7 +298,7 @@ export default async function AutomationsPage() {
         </div>
       </section>
 
-      {/* ========== 2 Â· WORKFLOW CAPABILITIES ========== */}
+      {/* ========== 2 - WORKFLOW CAPABILITIES ========== */}
       <section>
         <div className="mb-12 max-w-2xl">
           <p
@@ -385,7 +385,7 @@ export default async function AutomationsPage() {
         </div>
       </section>
 
-      {/* ========== 3 Â· GOVERNANCE ========== */}
+      {/* ========== 3 - GOVERNANCE ========== */}
       <section className="rounded-[2.5rem] border border-slate-800 bg-slate-900/60 px-8 py-16 shadow-[0_30px_80px_rgba(0,0,0,0.4)] backdrop-blur-sm">
         <div className="grid gap-14 lg:grid-cols-[1fr_1fr]">
           {/* Left: lifecycle pipeline */}
@@ -472,7 +472,7 @@ export default async function AutomationsPage() {
         </div>
       </section>
 
-      {/* ========== 4 Â· CONVERSION TIE-BACK / KPI DASHBOARD ========== */}
+      {/* ========== 4 - CONVERSION TIE-BACK / KPI DASHBOARD ========== */}
       <section>
         <div className="mb-12 max-w-2xl">
           <p
@@ -548,7 +548,7 @@ export default async function AutomationsPage() {
         </p>
       </section>
 
-      {/* ========== 5 Â· FINAL CTA ========== */}
+      {/* ========== 5 - FINAL CTA ========== */}
       <section className="rounded-[2.5rem] border border-emerald-500/20 bg-gradient-to-br from-emerald-600 to-emerald-700 px-8 py-16 text-center shadow-[0_25px_60px_rgba(16,185,129,0.2)]">
         <h2
           className="mx-auto max-w-3xl font-(--font-display) text-3xl font-semibold tracking-tight text-white md:text-4xl"

@@ -5,8 +5,8 @@ This file is the mandatory operating workflow for every task in this repository.
 ## 1. Mandatory Task Start
 Before doing implementation work:
 1. Read this file.
-2. Read `Agents/Tasks/lessons.md`.
-3. For ANY AND ALL UI or UX updates, read `Agents/design-language.md` before implementation and keep it as an active reference while designing and coding.
+2. Read `Agents/lessons.md`.
+3. For ANY AND ALL UI or UX updates, read `Agents/DesignLanguage.md` before implementation and keep it as an active reference while designing and coding.
 4. Read global system context files:
    - `agentContext/context.md`
    - `agentContext/architecture.md`
@@ -115,8 +115,8 @@ Keep main context clean and focused.
 - Preserve existing behavior unless change is explicitly required.
 
 UI/UX enforcement:
-- For ANY AND ALL UI or UX updates, `Agents/design-language.md` is mandatory pre-read before implementation.
-- UI decisions (layout, typography, spacing, color, component behavior) must be referenced against `Agents/design-language.md` unless the user explicitly requests an exception.
+- For ANY AND ALL UI or UX updates, `Agents/DesignLanguage.md` is mandatory pre-read before implementation.
+- UI decisions (layout, typography, spacing, color, component behavior) must be referenced against `Agents/DesignLanguage.md` unless the user explicitly requests an exception.
 - If an exception is requested, document the intentional deviation in plan/handoff notes.
 
 For non-trivial work, always ask:
@@ -140,11 +140,11 @@ Required checks (as applicable):
 4. Manual validation of changed behavior/UI flow.
 5. Regression check for neighboring behavior.
 6. Diff review confirms only intended changes.
-7. `Agents/Changelog.md` includes a categorized entry for every implemented change in the task.
+7. `Agents/changeLog.md` includes a categorized entry for every implemented change in the task.
 8. Communication file review confirms all directed requests were answered and required approvals were recorded.
 9. For each touched system area, nested `agentContext/context.md` and `agentContext/architecture.md` were reviewed and updated to current state (not append-only).
 10. Global `agentContext/context.md` and `agentContext/architecture.md` were reviewed and updated to current state (not append-only).
-11. For UI/UX tasks, `Agents/design-language.md` was read before implementation and the delivered UI/UX changes were validated against it (or explicit user-requested exceptions were documented).
+11. For UI/UX tasks, `Agents/DesignLanguage.md` was read before implementation and the delivered UI/UX changes were validated against it (or explicit user-requested exceptions were documented).
 
 If any check cannot be run, explicitly state:
 - what was skipped,
@@ -152,7 +152,7 @@ If any check cannot be run, explicitly state:
 - residual risk.
 
 ## 8. Change Logging (Mandatory)
-All changes must be logged in `Agents/Changelog.md`.
+All changes must be logged in `Agents/changeLog.md`.
 
 Scope rule:
 - Log every change, including functional, UI, UX, API, data, docs, and process updates.
@@ -196,7 +196,7 @@ Before closing a task:
 
 ## 10. Self-Improvement Loop (Mandatory)
 After any user correction, mistake, rollback, or missed requirement:
-1. Add an entry to `Agents/Tasks/lessons.md`.
+1. Add an entry to `Agents/lessons.md`.
 2. Convert the lesson into a concrete prevention rule.
 3. Apply that rule on the next similar task.
 
@@ -219,10 +219,10 @@ Track and improve:
 Goal: correction and regression rates trend down over time.
 
 ## 12. Changelog Review Mode (User-Triggered, One Task Only)
-This mode is used only when the user explicitly requests review of a specific task from `Agents/Changelog.md`.
+This mode is used only when the user explicitly requests review of a specific task from `Agents/changeLog.md`.
 
 Trigger rule:
-- User must provide the exact task name from `Agents/Changelog.md`.
+- User must provide the exact task name from `Agents/changeLog.md`.
 - Process exactly one task per run.
 - If multiple entries match the same task name, require disambiguation by date or commit hash before implementation.
 
@@ -282,7 +282,7 @@ To prevent repeated review of the same task:
 ## 16. Global and Area Agent Context Contract (Mandatory)
 The repository must maintain:
 - Global system folder: `agentContext/`
-- Nested area folders: `app/app/<area>/agentContext/`
+- Nested area folders: `app/<area>/agentContext/`
 
 Global folder files:
 - `context.md`: full-system operational context and cross-domain map.

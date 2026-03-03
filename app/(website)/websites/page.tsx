@@ -28,12 +28,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/websites" },
 };
 
-/* â”€â”€ Fallback Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Fallback Content ------------------------------------------------ */
 
 const fallbackHero = {
   label: "Enterprise Website Redesign",
   title: "Enterprise website redesign that turns traffic into qualified pipeline.",
-  body: "Your website is your first sales conversation. Ingenium builds enterprise website redesign systems â€” not design projects â€” that connect directly to your CRM, AI agents, and automation stack so every visitor becomes a measurable opportunity.",
+  body: "Your website is your first sales conversation. Ingenium builds enterprise website redesign systems - not design projects - that connect directly to your CRM, AI agents, and automation stack so every visitor becomes a measurable opportunity.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "See Our Process", href: "#implementation" },
   proof_metric: "+38%",
@@ -43,11 +43,11 @@ const fallbackHero = {
 const fallbackEngine = {
   label: "The Conversion Architecture",
   title: "How an Ingenium enterprise website redesign converts.",
-  body: "Every page is engineered to a conversion blueprint â€” from messaging architecture to CTA psychology to real-time lead routing.",
+  body: "Every page is engineered to a conversion blueprint - from messaging architecture to CTA psychology to real-time lead routing.",
   flow: [
     "Visitor lands on a service page built around a specific conversion hypothesis",
     "Problem framing and proof elements build confidence and urgency",
-    "Contextual CTA triggers a progressive form â€” low friction, high intent",
+    "Contextual CTA triggers a progressive form - low friction, high intent",
     "Lead enriched with firmographic data, scored, and routed to the right rep in under 60 seconds",
     "Automated follow-up sequence triggered, with full engagement context attached in CRM",
   ],
@@ -119,19 +119,19 @@ const fallbackImplementation = {
   title: "Enterprise website redesign in weeks, not months.",
   phases: [
     {
-      week: "Week 1â€“2",
+      week: "Week 1-2",
       title: "Discovery & Strategy",
       deliverables: "Conversion audit, messaging architecture, KPI framework, technical requirements",
       owner: "Ingenium leads discovery; your team validates direction and priorities",
     },
     {
-      week: "Week 3â€“4",
+      week: "Week 3-4",
       title: "Design & Build",
       deliverables: "Design system, page builds, CRM integration, analytics instrumentation",
       owner: "Ingenium builds; your team reviews at design and content gates",
     },
     {
-      week: "Week 5â€“6",
+      week: "Week 5-6",
       title: "Launch & Optimise",
       deliverables: "Staged go-live, AI agent deployment, automation workflows, first optimisation cycle",
       owner: "Joint ownership with weekly performance reporting",
@@ -180,11 +180,11 @@ const fallbackFaq = {
   items: [
     {
       question: "How long does an enterprise website redesign take?",
-      answer: "Most enterprise website redesigns launch in 4â€“6 weeks with staged rollouts. Discovery and strategy take 1â€“2 weeks, design and build take 2â€“3 weeks, and launch with initial optimisation completes the cycle.",
+      answer: "Most enterprise website redesigns launch in 4-6 weeks with staged rollouts. Discovery and strategy take 1-2 weeks, design and build take 2-3 weeks, and launch with initial optimisation completes the cycle.",
     },
     {
       question: "What does an enterprise website redesign cost?",
-      answer: "Enterprise website redesign pricing depends on scope â€” number of pages, CRM integration complexity, and ongoing optimisation requirements. We provide a scoped estimate after a strategy call. Typical engagements range from growth-stage to enterprise-scale packages.",
+      answer: "Enterprise website redesign pricing depends on scope - number of pages, CRM integration complexity, and ongoing optimisation requirements. We provide a scoped estimate after a strategy call. Typical engagements range from growth-stage to enterprise-scale packages.",
     },
     {
       question: "How do you handle migration from our existing site?",
@@ -196,7 +196,7 @@ const fallbackFaq = {
     },
     {
       question: "How do you integrate with our existing CRM and marketing stack?",
-      answer: "We build native integrations with HubSpot, Salesforce, and major CRM platforms. Forms, lead routing, attribution tracking, and automation triggers are wired during the build phase â€” not bolted on after launch.",
+      answer: "We build native integrations with HubSpot, Salesforce, and major CRM platforms. Forms, lead routing, attribution tracking, and automation triggers are wired during the build phase - not bolted on after launch.",
     },
     {
       question: "What happens if we need changes after launch?",
@@ -221,10 +221,10 @@ const fallbackCta = {
   body: "Book a strategy call to map your conversion plan, timeline, and rollout options. Get a tailored roadmap within 48 hours.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "Download Website Redesign Scope Template", href: "/contact" },
-  reassurance: "30-minute call Â· Tailored roadmap Â· No obligation Â· Typical launch in 4â€“6 weeks",
+  reassurance: "30-minute call - Tailored roadmap - No obligation - Typical launch in 4-6 weeks",
 };
 
-/* â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Helpers ---------------------------------------------------------- */
 
 function getPillarIcon(iconName: string | undefined) {
   switch (iconName) {
@@ -255,7 +255,7 @@ function normalizePillarItem(
   };
 }
 
-/* â”€â”€ Page Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Page Component --------------------------------------------------- */
 
 export default async function WebsitesPage() {
   const hero = fallbackHero;
@@ -274,7 +274,7 @@ export default async function WebsitesPage() {
 
   return (
     <div className="space-y-28 md:space-y-40">
-      {/* â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â• */}
+      {/* ======= HERO ======= */}
       <section className="pt-8">
         <div className="mx-auto max-w-4xl text-center">
           <p
@@ -322,7 +322,7 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• CONVERSION ENGINE DETAIL â•â•â•â•â•â•â• */}
+      {/* ======= CONVERSION ENGINE DETAIL ======= */}
       <section className="rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
         <p
           className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
@@ -358,7 +358,7 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• COMPARISON â•â•â•â•â•â•â• */}
+      {/* ======= COMPARISON ======= */}
       <section>
         <p className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400">
           {comparison.label ?? fallbackComparison.label}
@@ -392,7 +392,7 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• CAPABILITY PILLARS â•â•â•â•â•â•â• */}
+      {/* ======= CAPABILITY PILLARS ======= */}
       <section className="grid gap-6 lg:grid-cols-3">
         {pillarItems.map((item, i: number) => {
           const Icon = getPillarIcon(item.icon);
@@ -418,7 +418,7 @@ export default async function WebsitesPage() {
         })}
       </section>
 
-      {/* â•â•â•â•â•â•â• IMPLEMENTATION PATH â•â•â•â•â•â•â• */}
+      {/* ======= IMPLEMENTATION PATH ======= */}
       <section id="implementation" className="grid gap-12 lg:grid-cols-2">
         <div>
           <p
@@ -478,7 +478,7 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• PROOF â€” FULL MINI CASE â•â•â•â•â•â•â• */}
+      {/* ======= PROOF - FULL MINI CASE ======= */}
       <section>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -541,7 +541,7 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• FAQ â•â•â•â•â•â•â• */}
+      {/* ======= FAQ ======= */}
       <section className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
         <div>
           <h2 className="font-(--font-display) text-2xl font-bold text-white">
@@ -582,7 +582,7 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• FINAL CTA â•â•â•â•â•â•â• */}
+      {/* ======= FINAL CTA ======= */}
       <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
         <div className="relative">

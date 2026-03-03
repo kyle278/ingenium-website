@@ -68,3 +68,64 @@ This file is mandatory for all tasks.
   - `app/api/portal/agentContext/architecture.md`
   - `Agents/Plans/portal-form-integration.md`
   - `Agents/agentCommunications/portal-form-integration-comms.md`
+
+---
+
+- Date: 2026-03-03
+- Task: Correct invalid file path references in workflow orchestration
+- Categories: `DOCUMENTATION`, `PROCESS`
+- Summary:
+  - Updated `Agents/workflowOrchestration.md` to use existing repository paths.
+  - Corrected lessons, design language, changelog, and nested area `agentContext` path references.
+- Impact:
+  - Mandatory workflow setup and sign-off steps now reference valid files and folders.
+  - Reduced risk of agent setup failures caused by broken path instructions.
+- Key files:
+  - `Agents/workflowOrchestration.md`
+
+---
+
+- Date: 2026-03-03
+- Task: Fix mojibake characters across website copy
+- Categories: `BUG FIX`, `UI CHANGE`, `UX CHANGE`, `IMPROVEMENT`, `PROCESS`
+- Summary:
+  - Scanned website route files for mojibake corruption patterns shown in screenshots.
+  - Replaced corrupted character sequences across marketing copy (for example broken dash, separator, and arrow text).
+  - Normalized impacted comment separators and reassurances to clean ASCII-safe punctuation.
+- Impact:
+  - Website text now renders cleanly without random replacement glyphs in hero metrics, timelines, CTA reassurance rows, and FAQ copy.
+  - Content is now consistent and robust against the specific encoding artifacts that previously leaked into the UI.
+- Key files:
+  - `app/(website)/page.tsx`
+  - `app/(website)/websites/page.tsx`
+  - `app/(website)/case-studies/page.tsx`
+  - `app/(website)/departments/page.tsx`
+  - `app/(website)/platform/page.tsx`
+  - `app/(website)/crm/page.tsx`
+  - `app/(website)/security/page.tsx`
+  - `app/(website)/automations/page.tsx`
+  - `Agents/Plans/fix-mojibake-website-copy.md`
+
+---
+
+- Date: 2026-03-03
+- Task: Harden portal form submit routing and service-key validation for production incident
+- Categories: `BUG FIX`, `SECURITY`, `FUNCTIONAL CHANGE`, `IMPROVEMENT`, `PROCESS`
+- Summary:
+  - Added dedicated Node API route `/api/portal-form-submit` for website form submissions.
+  - Refactored portal submit logic into shared server-only handler with strict env validation.
+  - Added guard that rejects publishable/anon credentials in `PORTAL_SUPABASE_SERVICE_ROLE_KEY`.
+  - Updated contact form client submit target to only call local API route.
+  - Updated production/preview/development Vercel env var `PORTAL_SUPABASE_SERVICE_ROLE_KEY` away from publishable key.
+- Impact:
+  - Browser submit flow is now server-route-only and no longer depends on route-specific slug path.
+  - Misconfigured service keys now fail fast with clear config error instead of portal trigger RLS failures.
+  - Production incident moved past original RLS failure; current blocker is an upstream portal trigger SQL ambiguity (`submission_url`) outside this repo.
+- Key files:
+  - `app/api/portal-form-submit/route.ts`
+  - `app/api/portal/_lib/formSubmit.ts`
+  - `app/api/portal/forms/[slug]/submit/route.ts`
+  - `app/(website)/contact/ContactForm.tsx`
+  - `app/api/portal/agentContext/context.md`
+  - `app/api/portal/agentContext/architecture.md`
+  - `Agents/Plans/production-form-submit-rls-fix.md`

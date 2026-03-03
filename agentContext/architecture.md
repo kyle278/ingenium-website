@@ -7,7 +7,7 @@
 
 ## Integration Boundary
 - Contact form submits to internal API route.
-- Internal API route validates payload, resolves form id, and inserts into `website_form_submissions`.
+- Internal API route (`/api/portal-form-submit`) validates payload, resolves form id, and inserts into `website_form_submissions`.
 - Attribution and CRM linkage occur in Portal DB triggers, not in website runtime.
 
 ## Change Impact Map

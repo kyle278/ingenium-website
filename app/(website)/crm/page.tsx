@@ -71,12 +71,12 @@ const fallbackHero = {
 
 const fallbackFoundation = {
   label: "CRM Foundation",
-  title: "Lifecycle stages, routing rules, and attribution â€” built right.",
+  title: "Lifecycle stages, routing rules, and attribution - built right.",
   body: "Every CRM implementation starts with the operational foundation: lifecycle stages that match your funnel, lead routing that eliminates manual handoffs, attribution that connects revenue to source, and data hygiene that keeps everything trustworthy.",
   flow: {
     label: "Lead lifecycle in action",
     description:
-      "Lead arrives via form â†’ enriched with firmographic data â†’ scored against ICP â†’ routed to the right rep in <60s â†’ full context attached.",
+      "Lead arrives via form -> enriched with firmographic data -> scored against ICP -> routed to the right rep in <60s -> full context attached.",
     steps: [
       { phase: "Capture", detail: "Form submission triggers instant record creation" },
       { phase: "Enrich", detail: "Firmographic and intent data appended automatically" },
@@ -88,7 +88,7 @@ const fallbackFoundation = {
   pillars: [
     {
       title: "Lifecycle stages",
-      detail: "Custom stages mapped to your actual sales motion â€” not a generic template.",
+      detail: "Custom stages mapped to your actual sales motion - not a generic template.",
       icon: "database",
     },
     {
@@ -219,7 +219,7 @@ export default async function CrmPage() {
       {/*  HERO                                                    */}
       {/* ======================================================== */}
       <section className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
-        {/* Left â€” copy */}
+        {/* Left - copy */}
         <div>
           <p
             className={sectionLabel}
@@ -268,7 +268,7 @@ export default async function CrmPage() {
           </div>
         </div>
 
-        {/* Right â€” CRM dashboard wireframe */}
+        {/* Right - CRM dashboard wireframe */}
         <div className={darkCard}>
           <div className="flex items-center justify-between">
             <span
@@ -386,7 +386,7 @@ export default async function CrmPage() {
           )}
         </div>
 
-        {/* Lead lifecycle flow â€” concrete example */}
+        {/* Lead lifecycle flow - concrete example */}
         <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-900/80 p-8">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p
@@ -446,7 +446,7 @@ export default async function CrmPage() {
       {/* ======================================================== */}
       <section className="rounded-[2.5rem] border border-slate-800 bg-slate-900/60 px-8 py-16 shadow-[0_30px_80px_rgba(0,0,0,0.5)]">
         <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr]">
-          {/* Left â€” copy + safeguards */}
+          {/* Left - copy + safeguards */}
           <div>
             <p
               className={sectionLabel}
@@ -506,7 +506,7 @@ export default async function CrmPage() {
             </div>
           </div>
 
-          {/* Right â€” timeline visual with gates */}
+          {/* Right - timeline visual with gates */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
               {migration.timeline?.label ??

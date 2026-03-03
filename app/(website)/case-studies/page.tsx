@@ -20,21 +20,21 @@ import AnimatedMetric from "../components/AnimatedMetric";
 export const metadata: Metadata = {
   title: "Enterprise Website Case Studies | Ingenium",
   description:
-    "Real results from enterprise website rebuilds â€” conversion lift, pipeline growth, and system integration outcomes with measurable timelines.",
+    "Real results from enterprise website rebuilds - conversion lift, pipeline growth, and system integration outcomes with measurable timelines.",
   openGraph: {
     title: "Enterprise Website Case Studies | Ingenium",
     description:
-      "Real results from enterprise website rebuilds â€” conversion lift, pipeline growth, and system integration outcomes with measurable timelines.",
+      "Real results from enterprise website rebuilds - conversion lift, pipeline growth, and system integration outcomes with measurable timelines.",
   },
   alternates: { canonical: "/case-studies" },
 };
 
-/* â”€â”€ Fallback Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Fallback Content ------------------------------------------------ */
 
 const fallbackHero = {
   label: "Evidence Library",
   title: "Enterprise website case studies with measurable outcomes.",
-  body: "Every engagement produces data. These are the results from enterprise website rebuilds â€” conversion architecture, pipeline integration, and system-level transformation with verified timelines.",
+  body: "Every engagement produces data. These are the results from enterprise website rebuilds - conversion architecture, pipeline integration, and system-level transformation with verified timelines.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "Download the Full Case Pack", href: "/contact" },
   aggregate_metrics: [
@@ -43,14 +43,14 @@ const fallbackHero = {
     { metric: "41 days", label: "Avg. time to launch", detail: "from kickoff to live" },
     { metric: "67%", label: "CAC reduction", detail: "median across B2B clients" },
   ],
-  aggregate_note: "Aggregate metrics from 12 enterprise engagements, 2023â€“2025",
+  aggregate_note: "Aggregate metrics from 12 enterprise engagements, 2023-2025",
 };
 
 const fallbackFilters = {
   label: "Filter by",
   industries: ["Fintech", "Healthcare", "Enterprise Services", "B2B Technology", "SaaS"],
   services: ["Website Rebuild", "Conversion Architecture", "CRM Integration", "AI Automation"],
-  sizes: ["Series Aâ€“B", "Series C+", "Mid-Market", "Enterprise"],
+  sizes: ["Series A-B", "Series C+", "Mid-Market", "Enterprise"],
 };
 
 const fallbackCaseList = {
@@ -59,10 +59,10 @@ const fallbackCaseList = {
       id: "fintech-saas",
       client_type: "Series B Fintech SaaS",
       industry: "Fintech",
-      size: "Series B Â· 120 employees",
+      size: "Series B - 120 employees",
       stage: "Post-PMF, scaling outbound and inbound pipeline",
       challenge:
-        "Website generated 62K monthly visits but converted at 0.7% to demo requests. Marketing attribution was broken â€” the team could not tie any campaign to closed revenue. Sales received form fills with zero context, leading to 4-day average response times and low qualification rates.",
+        "Website generated 62K monthly visits but converted at 0.7% to demo requests. Marketing attribution was broken - the team could not tie any campaign to closed revenue. Sales received form fills with zero context, leading to 4-day average response times and low qualification rates.",
       intervention:
         "Full website rebuild with conversion architecture: buyer-persona messaging across 16 pages, progressive lead capture forms, CRM integration with automated lead routing, AI-assisted enrichment for SDR context, and end-to-end attribution from first touch to closed-won.",
       metrics: {
@@ -89,7 +89,7 @@ const fallbackCaseList = {
       id: "healthcare-platform",
       client_type: "Series C Healthcare Platform",
       industry: "Healthcare",
-      size: "Series C Â· 340 employees",
+      size: "Series C - 340 employees",
       stage: "Expanding from single product to platform positioning",
       challenge:
         "The buyer journey was fragmented across three legacy microsites with inconsistent messaging. Enterprise prospects could not self-educate on compliance capabilities. Demo requests required manual triage, and the sales team had no visibility into which content influenced deals.",
@@ -119,7 +119,7 @@ const fallbackCaseList = {
       id: "enterprise-services",
       client_type: "Global Enterprise Consulting Firm",
       industry: "Enterprise Services",
-      size: "1,200+ employees Â· 6 regions",
+      size: "1,200+ employees - 6 regions",
       stage: "Digital transformation of client-facing web presence",
       challenge:
         "Eight regional websites with no shared design system, inconsistent brand, and zero cross-region analytics. Each office maintained its own CMS and contact forms. Global leadership had no visibility into web-sourced pipeline, and compliance reviews took 3+ weeks per content update.",
@@ -149,7 +149,7 @@ const fallbackCaseList = {
       id: "b2b-technology",
       client_type: "Mid-Market B2B Infrastructure Provider",
       industry: "B2B Technology",
-      size: "Mid-Market Â· 85 employees",
+      size: "Mid-Market - 85 employees",
       stage: "Transitioning from founder-led sales to scalable inbound",
       challenge:
         "The company had grown to $8M ARR on founder-led sales with minimal web presence. The existing site was a static brochure with a generic contact form. There was no CRM integration, no lead scoring, and the founder personally triaged every inbound inquiry. The team needed to scale pipeline without scaling headcount.",
@@ -183,10 +183,10 @@ const fallbackCta = {
   body: "Book a strategy call to scope your website rebuild and define the metrics that matter. We will map your conversion architecture, timeline, and expected outcomes within 48 hours.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "Download the Full Case Pack", href: "/contact" },
-  reassurance: "30-minute call Â· Scoped roadmap Â· No obligation",
+  reassurance: "30-minute call - Scoped roadmap - No obligation",
 };
 
-/* â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Helpers ---------------------------------------------------------- */
 
 function MetricArrow({ direction }: { direction: string }) {
   if (direction === "up") {
@@ -221,7 +221,7 @@ function getCategoryLabel(category: string) {
   }
 }
 
-/* â”€â”€ Page Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Page Component --------------------------------------------------- */
 
 export default async function CaseStudiesPage() {
   const hero = fallbackHero;
@@ -245,7 +245,7 @@ export default async function CaseStudiesPage() {
 
   return (
     <div className="space-y-28 md:space-y-40">
-      {/* â•â•â•â•â•â•â• HERO WITH OUTCOMES â•â•â•â•â•â•â• */}
+      {/* ======= HERO WITH OUTCOMES ======= */}
       <section className="pt-8">
         <div className="mx-auto max-w-4xl text-center">
           <p
@@ -318,7 +318,7 @@ export default async function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• FILTERS â•â•â•â•â•â•â• */}
+      {/* ======= FILTERS ======= */}
       <section>
         <div className="flex flex-wrap items-start gap-8">
           {/* Industry */}
@@ -383,7 +383,7 @@ export default async function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* â•â•â•â•â•â•â• CASE CARDS (EXPANDED DASHBOARD FORMAT) â•â•â•â•â•â•â• */}
+      {/* ======= CASE CARDS (EXPANDED DASHBOARD FORMAT) ======= */}
       <section className="space-y-16">
         {caseStudies.map((item: typeof fallbackCaseList.items[number], index: number) => {
           const fallback = fallbackCaseList.items[index] ?? fallbackCaseList.items[0];
@@ -535,7 +535,7 @@ export default async function CaseStudiesPage() {
         })}
       </section>
 
-      {/* â•â•â•â•â•â•â• FINAL CTA â•â•â•â•â•â•â• */}
+      {/* ======= FINAL CTA ======= */}
       <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
         <div className="relative">

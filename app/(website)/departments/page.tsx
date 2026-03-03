@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -14,11 +14,7 @@ import {
   Users,
 } from "lucide-react";
 
-import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
-import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 import AnimatedMetric from "../components/AnimatedMetric";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "AI Departments for Revenue Teams | Ingenium",
@@ -33,12 +29,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/departments" },
 };
 
-/* ── Fallback Content ──────────────────────────────────────────────── */
+/* â”€â”€ Fallback Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 const fallbackHero = {
   label: "AI Departments",
   title: "The operating model for scaling AI safely.",
-  body: "Move beyond single agents. Deploy governed AI departments that run entire business functions — with human leaders, escalation paths, and measurable KPIs at every level.",
+  body: "Move beyond single agents. Deploy governed AI departments that run entire business functions â€” with human leaders, escalation paths, and measurable KPIs at every level.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "See the Implementation Blueprint", href: "/platform" },
   org_chart: {
@@ -113,10 +109,10 @@ const fallbackGovernance = {
     ],
   },
   override_examples: [
-    "Sales agent pauses outreach to a prospect flagged by legal — escalated to VP Sales in under 90 seconds",
-    "Content agent draft rejected by brand governance rules — routed to Marketing Director for tone review",
-    "Customer Success agent detects churn signal on enterprise account — escalated to CS Director with full context",
-    "Growth agent experiment exceeds budget threshold — paused automatically, awaiting Growth Lead approval",
+    "Sales agent pauses outreach to a prospect flagged by legal â€” escalated to VP Sales in under 90 seconds",
+    "Content agent draft rejected by brand governance rules â€” routed to Marketing Director for tone review",
+    "Customer Success agent detects churn signal on enterprise account â€” escalated to CS Director with full context",
+    "Growth agent experiment exceeds budget threshold â€” paused automatically, awaiting Growth Lead approval",
   ],
   safeguards: [
     "Role-based permissions at agent and department level",
@@ -131,7 +127,7 @@ const fallbackGovernance = {
 const fallbackStructure = {
   label: "Department Structure",
   title: "How AI departments are organized and connected.",
-  body: "Each department follows a consistent org-chart model: a human leader, specialist AI agents, quality controls, and operational connectors — all mapped to your existing reporting structure.",
+  body: "Each department follows a consistent org-chart model: a human leader, specialist AI agents, quality controls, and operational connectors â€” all mapped to your existing reporting structure.",
   departments: [
     {
       name: "Marketing Operations",
@@ -182,10 +178,10 @@ const fallbackCta = {
   body: "Book a strategy call to define department roles, governance thresholds, and rollout priorities. Get a tailored blueprint within 48 hours.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "See the Implementation Blueprint", href: "/platform" },
-  reassurance: "30-minute call · Department blueprint · No obligation",
+  reassurance: "30-minute call Â· Department blueprint Â· No obligation",
 };
 
-/* ── Helpers ────────────────────────────────────────────────────────── */
+/* â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function getDeptIcon(iconName: string | undefined) {
   switch (iconName) {
@@ -217,15 +213,14 @@ function getRiskColor(risk: string) {
   }
 }
 
-/* ── Page Component ─────────────────────────────────────────────────── */
+/* â”€â”€ Page Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 export default async function DepartmentsPage() {
-  const { sectionJson, sectionAttrs } = await loadPortalPageContent(PAGE_KEYS.DEPARTMENTS);
-  const hero = sectionJson(SECTION_KEYS.DEPARTMENTS.HERO, fallbackHero);
-  const outcomes = sectionJson(SECTION_KEYS.DEPARTMENTS.DEPARTMENTS, fallbackOutcomes);
-  const governance = sectionJson(SECTION_KEYS.DEPARTMENTS.GOVERNANCE, fallbackGovernance);
-  const structure = sectionJson(SECTION_KEYS.DEPARTMENTS.STRUCTURE, fallbackStructure);
-  const cta = sectionJson(SECTION_KEYS.DEPARTMENTS.CTA, fallbackCta);
+  const hero = fallbackHero;
+  const outcomes = fallbackOutcomes;
+  const governance = fallbackGovernance;
+  const structure = fallbackStructure;
+  const cta = fallbackCta;
 
   const orgChart = hero.org_chart ?? fallbackHero.org_chart;
   const escalationFlow = governance.escalation_flow ?? fallbackGovernance.escalation_flow;
@@ -237,26 +232,23 @@ export default async function DepartmentsPage() {
 
   return (
     <div className="space-y-28 md:space-y-40">
-      {/* ═══════ HERO ═══════ */}
+      {/* â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â• */}
       <section className="relative pt-8">
         <div className="grid items-start gap-12 lg:grid-cols-[1.1fr,0.9fr]">
           {/* Left: Copy */}
           <div>
             <p
               className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-              {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.HERO)}
             >
               {hero.label}
             </p>
             <h1
               className="mt-6 max-w-2xl font-(--font-display) text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
-              {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.HERO)}
             >
               {hero.title}
             </h1>
             <p
               className="mt-6 max-w-xl text-lg leading-relaxed text-slate-400"
-              {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.HERO)}
             >
               {hero.body}
             </p>
@@ -265,7 +257,6 @@ export default async function DepartmentsPage() {
               <Link
                 href={hero.primary_cta?.href ?? "/contact"}
                 className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500 hover:shadow-emerald-500/30"
-                {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.HERO)}
               >
                 {hero.primary_cta?.label ?? "Book a Strategy Call"}
                 <ArrowRight className="h-4 w-4" />
@@ -273,7 +264,6 @@ export default async function DepartmentsPage() {
               <Link
                 href={hero.secondary_cta?.href ?? "/platform"}
                 className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
-                {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.HERO)}
               >
                 {hero.secondary_cta?.label ?? "See the Implementation Blueprint"}
               </Link>
@@ -283,7 +273,6 @@ export default async function DepartmentsPage() {
           {/* Right: Org-chart visual concept */}
           <div
             className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6"
-            {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.HERO)}
           >
             <div className="flex items-center justify-between">
               <span className="font-(--font-mono) text-xs uppercase tracking-widest text-slate-500">
@@ -335,24 +324,21 @@ export default async function DepartmentsPage() {
         </div>
       </section>
 
-      {/* ═══════ OUTCOMES FRAMING — Departmental KPIs ═══════ */}
+      {/* â•â•â•â•â•â•â• OUTCOMES FRAMING â€” Departmental KPIs â•â•â•â•â•â•â• */}
       <section>
         <div className="text-center">
           <p
             className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-            {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.DEPARTMENTS)}
           >
             {outcomes.label}
           </p>
           <h2
             className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.DEPARTMENTS)}
           >
             {outcomes.title}
           </h2>
           <p
             className="mx-auto mt-4 max-w-2xl text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.DEPARTMENTS)}
           >
             {outcomes.body}
           </p>
@@ -368,7 +354,6 @@ export default async function DepartmentsPage() {
               <div
                 key={dept.name}
                 className="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-slate-700"
-                {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.DEPARTMENTS)}
               >
                 <div className="flex items-center gap-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500/10">
@@ -395,23 +380,20 @@ export default async function DepartmentsPage() {
         </div>
       </section>
 
-      {/* ═══════ HUMAN CONTROL — Escalation & Override ═══════ */}
+      {/* â•â•â•â•â•â•â• HUMAN CONTROL â€” Escalation & Override â•â•â•â•â•â•â• */}
       <section className="rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
         <p
           className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-          {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.GOVERNANCE)}
         >
           {governance.label}
         </p>
         <h2
           className="mt-4 max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-          {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.GOVERNANCE)}
         >
           {governance.title}
         </h2>
         <p
           className="mt-4 max-w-2xl text-slate-400"
-          {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.GOVERNANCE)}
         >
           {governance.body}
         </p>
@@ -427,7 +409,7 @@ export default async function DepartmentsPage() {
                 step: { stage: string; description: string; risk: string },
                 i: number,
               ) => (
-                <div key={step.stage} className="group relative" {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.GOVERNANCE)}>
+                <div key={step.stage} className="group relative">
                   <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
                     <div className="flex items-center justify-between">
                       <span className="font-(--font-mono) text-[10px] text-slate-600">
@@ -465,7 +447,6 @@ export default async function DepartmentsPage() {
                 <div
                   key={`override-${i}`}
                   className="flex items-start gap-3 rounded-lg border border-slate-800 bg-slate-900/40 p-4"
-                  {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.GOVERNANCE)}
                 >
                   <GitBranch className="mt-0.5 h-4 w-4 shrink-0 text-orange-400" />
                   <p className="text-sm text-slate-300">{example}</p>
@@ -484,7 +465,6 @@ export default async function DepartmentsPage() {
                 <div
                   key={item}
                   className="flex items-center gap-3"
-                  {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.GOVERNANCE)}
                 >
                   <ShieldCheck className="h-4 w-4 shrink-0 text-emerald-400" />
                   <span className="text-sm text-slate-300">{item}</span>
@@ -506,26 +486,23 @@ export default async function DepartmentsPage() {
         </div>
       </section>
 
-      {/* ═══════ DEPARTMENT STRUCTURE — Org-Chart Detail ═══════ */}
+      {/* â•â•â•â•â•â•â• DEPARTMENT STRUCTURE â€” Org-Chart Detail â•â•â•â•â•â•â• */}
       <section>
         <div className="grid gap-12 lg:grid-cols-[0.85fr,1.15fr]">
           {/* Left: Introduction */}
           <div>
             <p
               className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-              {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.STRUCTURE)}
             >
               {structure.label}
             </p>
             <h2
               className="mt-4 max-w-lg font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-              {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.STRUCTURE)}
             >
               {structure.title}
             </h2>
             <p
               className="mt-4 text-slate-400"
-              {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.STRUCTURE)}
             >
               {structure.body}
             </p>
@@ -541,7 +518,6 @@ export default async function DepartmentsPage() {
                     <div
                       key={`connection-${i}`}
                       className="flex items-start gap-3"
-                      {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.STRUCTURE)}
                     >
                       <Network className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
                       <span className="text-sm text-slate-400">{connection}</span>
@@ -579,7 +555,6 @@ export default async function DepartmentsPage() {
                   <div
                     key={dept.name}
                     className="rounded-2xl border border-slate-800 bg-slate-900/40 p-5 transition hover:border-slate-700"
-                    {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.STRUCTURE)}
                   >
                     <div className="flex items-center gap-3">
                       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10">
@@ -617,7 +592,7 @@ export default async function DepartmentsPage() {
         </div>
       </section>
 
-      {/* ═══════ PROOF ELEMENT ═══════ */}
+      {/* â•â•â•â•â•â•â• PROOF ELEMENT â•â•â•â•â•â•â• */}
       <section className="relative rounded-2xl border border-slate-800 bg-slate-900/50 p-8 dot-grid">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -646,19 +621,17 @@ export default async function DepartmentsPage() {
         </p>
       </section>
 
-      {/* ═══════ FINAL CTA ═══════ */}
+      {/* â•â•â•â•â•â•â• FINAL CTA â•â•â•â•â•â•â• */}
       <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
         <div className="relative">
           <h2
             className="mx-auto max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.CTA)}
           >
             {cta.title}
           </h2>
           <p
             className="mx-auto mt-4 max-w-xl text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.CTA)}
           >
             {cta.body}
           </p>
@@ -666,7 +639,6 @@ export default async function DepartmentsPage() {
             <Link
               href={cta.primary_cta?.href ?? "/contact"}
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
-              {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.CTA)}
             >
               {cta.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowUpRight className="h-4 w-4" />
@@ -674,7 +646,6 @@ export default async function DepartmentsPage() {
             <Link
               href={cta.secondary_cta?.href ?? "/platform"}
               className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
-              {...sectionAttrs(SECTION_KEYS.DEPARTMENTS.CTA)}
             >
               {cta.secondary_cta?.label ?? "See the Implementation Blueprint"}
             </Link>

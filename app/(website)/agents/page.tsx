@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -16,11 +16,7 @@ import {
   Zap,
 } from "lucide-react";
 
-import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
-import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 import AnimatedMetric from "../components/AnimatedMetric";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "AI Agents for Marketing and Sales Teams | Ingenium",
@@ -55,7 +51,7 @@ const ghostButton =
   "inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 transition hover:text-emerald-300";
 
 /* ------------------------------------------------------------------ */
-/*  Fallback content (portal-overridable)                             */
+/*  Fallback content (static default copy)                             */
 /* ------------------------------------------------------------------ */
 
 const fallbackHero = {
@@ -221,13 +217,12 @@ function getLifecycleIcon(name: string | undefined) {
 /* ================================================================== */
 
 export default async function AgentsPage() {
-  const { sectionJson, sectionAttrs } = await loadPortalPageContent(PAGE_KEYS.AGENTS);
 
-  const hero = sectionJson(SECTION_KEYS.AGENTS.HERO, fallbackHero);
-  const capabilities = sectionJson(SECTION_KEYS.AGENTS.CAPABILITIES, fallbackCapabilities);
-  const governance = sectionJson(SECTION_KEYS.AGENTS.GOVERNANCE, fallbackGovernance);
-  const impact = sectionJson(SECTION_KEYS.AGENTS.IMPACT, fallbackImpact);
-  const cta = sectionJson(SECTION_KEYS.AGENTS.CTA, fallbackCta);
+  const hero = fallbackHero;
+  const capabilities = fallbackCapabilities;
+  const governance = fallbackGovernance;
+  const impact = fallbackImpact;
+  const cta = fallbackCta;
 
   const workflowSteps = hero.workflow?.steps ?? fallbackHero.workflow.steps;
   const proof = hero.proof ?? fallbackHero.proof;
@@ -245,18 +240,16 @@ export default async function AgentsPage() {
       <section className="grid items-start gap-12 lg:grid-cols-[1.1fr_0.9fr]">
         {/* Left: copy */}
         <div>
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.AGENTS.HERO)}>
+          <p className={sectionLabel}>
             {hero.label}
           </p>
           <h1
             className="mt-5 max-w-2xl font-(--font-display) text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]"
-            {...sectionAttrs(SECTION_KEYS.AGENTS.HERO)}
           >
             {hero.title}
           </h1>
           <p
             className="mt-5 max-w-xl font-(--font-body) text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.AGENTS.HERO)}
           >
             {hero.body}
           </p>
@@ -264,7 +257,6 @@ export default async function AgentsPage() {
             <Link
               href={hero.primary_cta?.href ?? "/contact"}
               className={primaryButton}
-              {...sectionAttrs(SECTION_KEYS.AGENTS.HERO)}
             >
               {hero.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowRight className="h-4 w-4" />
@@ -272,7 +264,6 @@ export default async function AgentsPage() {
             <Link
               href={hero.secondary_cta?.href ?? "/departments"}
               className={secondaryButton}
-              {...sectionAttrs(SECTION_KEYS.AGENTS.HERO)}
             >
               {hero.secondary_cta?.label ?? "Explore Agent Departments"}
             </Link>
@@ -286,10 +277,10 @@ export default async function AgentsPage() {
               value={proof.metric}
             />
             <div className="text-sm leading-snug">
-              <p className="text-slate-300" {...sectionAttrs(SECTION_KEYS.AGENTS.HERO)}>
+              <p className="text-slate-300">
                 {proof.context}
               </p>
-              <p className="mt-0.5 text-slate-500" {...sectionAttrs(SECTION_KEYS.AGENTS.HERO)}>
+              <p className="mt-0.5 text-slate-500">
                 {proof.client_type} &middot; {proof.timeframe}
               </p>
             </div>
@@ -301,7 +292,6 @@ export default async function AgentsPage() {
           <div className="flex items-center justify-between">
             <span
               className="font-(--font-mono) text-xs uppercase tracking-widest text-slate-500"
-              {...sectionAttrs(SECTION_KEYS.AGENTS.HERO)}
             >
               {hero.workflow?.label ?? fallbackHero.workflow.label}
             </span>
@@ -341,18 +331,16 @@ export default async function AgentsPage() {
       {/* ============================================================ */}
       <section>
         <div className="max-w-2xl">
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.AGENTS.CAPABILITIES)}>
+          <p className={sectionLabel}>
             {capabilities.label}
           </p>
           <h2
             className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.AGENTS.CAPABILITIES)}
           >
             {capabilities.title}
           </h2>
           <p
             className="mt-4 text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.AGENTS.CAPABILITIES)}
           >
             {capabilities.body}
           </p>
@@ -372,7 +360,6 @@ export default async function AgentsPage() {
                 <div
                   key={role.role}
                   className={`${darkCard} grid items-start gap-6 lg:grid-cols-[1fr_1.5fr] ${reversed ? "lg:direction-rtl" : ""}`}
-                  {...sectionAttrs(SECTION_KEYS.AGENTS.CAPABILITIES)}
                 >
                   <div className={reversed ? "lg:direction-ltr" : ""}>
                     <div className="flex items-center gap-3">
@@ -406,7 +393,6 @@ export default async function AgentsPage() {
           <Link
             href={capabilities.mid_cta?.href ?? "/departments"}
             className={ghostButton}
-            {...sectionAttrs(SECTION_KEYS.AGENTS.CAPABILITIES)}
           >
             {capabilities.mid_cta?.label ?? "See how agents are organized"}
             <ArrowRight className="h-4 w-4" />
@@ -431,18 +417,16 @@ export default async function AgentsPage() {
         <div className="relative grid gap-12 lg:grid-cols-[1fr_1.2fr]">
           {/* Left: copy + controls */}
           <div>
-            <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.AGENTS.GOVERNANCE)}>
+            <p className={sectionLabel}>
               {governance.label}
             </p>
             <h2
               className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-              {...sectionAttrs(SECTION_KEYS.AGENTS.GOVERNANCE)}
             >
               {governance.title}
             </h2>
             <p
               className="mt-4 text-base leading-relaxed text-slate-400"
-              {...sectionAttrs(SECTION_KEYS.AGENTS.GOVERNANCE)}
             >
               {governance.body}
             </p>
@@ -451,7 +435,6 @@ export default async function AgentsPage() {
                 <div
                   key={item}
                   className="flex items-center gap-3 text-sm text-slate-300"
-                  {...sectionAttrs(SECTION_KEYS.AGENTS.GOVERNANCE)}
                 >
                   <ShieldCheck className="h-4 w-4 text-emerald-500/70" />
                   {item}
@@ -498,18 +481,16 @@ export default async function AgentsPage() {
       {/* ============================================================ */}
       <section>
         <div className="max-w-2xl">
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.AGENTS.IMPACT)}>
+          <p className={sectionLabel}>
             {impact.label}
           </p>
           <h2
             className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.AGENTS.IMPACT)}
           >
             {impact.title}
           </h2>
           <p
             className="mt-4 text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.AGENTS.IMPACT)}
           >
             {impact.body}
           </p>
@@ -527,7 +508,6 @@ export default async function AgentsPage() {
               <div
                 key={c.metric_label}
                 className="grid items-center gap-6 rounded-xl border border-slate-800 bg-slate-900/40 p-6 md:grid-cols-[1fr_auto_1fr]"
-                {...sectionAttrs(SECTION_KEYS.AGENTS.IMPACT)}
               >
                 {/* Before */}
                 <div>
@@ -580,7 +560,6 @@ export default async function AgentsPage() {
           <div className="relative">
             <p
               className="font-(--font-mono) text-xs uppercase tracking-widest text-slate-500"
-              {...sectionAttrs(SECTION_KEYS.AGENTS.IMPACT)}
             >
               {dashboard.label}
             </p>
@@ -627,13 +606,11 @@ export default async function AgentsPage() {
         <div className="relative">
           <h2
             className="mx-auto max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl"
-            {...sectionAttrs(SECTION_KEYS.AGENTS.CTA)}
           >
             {cta.title}
           </h2>
           <p
             className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.AGENTS.CTA)}
           >
             {cta.body}
           </p>
@@ -641,7 +618,6 @@ export default async function AgentsPage() {
             <Link
               href={cta.primary_cta?.href ?? "/contact"}
               className={primaryButton}
-              {...sectionAttrs(SECTION_KEYS.AGENTS.CTA)}
             >
               {cta.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowUpRight className="h-4 w-4" />
@@ -649,7 +625,6 @@ export default async function AgentsPage() {
             <Link
               href={cta.secondary_cta?.href ?? "/contact?intent=playbook"}
               className={secondaryButton}
-              {...sectionAttrs(SECTION_KEYS.AGENTS.CTA)}
             >
               {cta.secondary_cta?.label ?? "View a Sample Agent Playbook"}
               <FileText className="h-4 w-4" />

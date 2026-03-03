@@ -1,12 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Clock3, Globe, ShieldCheck, Users } from "lucide-react";
 
-import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
-import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 import AnimatedMetric from "../components/AnimatedMetric";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Enterprise Website Consulting Team | Ingenium",
@@ -89,41 +85,39 @@ const fallbackCta = {
 };
 
 export default async function AboutPage() {
-  const { sectionJson, sectionAttrs } = await loadPortalPageContent(PAGE_KEYS.ABOUT);
 
-  const hero = sectionJson(SECTION_KEYS.ABOUT.HERO, fallbackHero);
-  const work = sectionJson(SECTION_KEYS.ABOUT.WORK, fallbackWork);
-  const globalSection = sectionJson(SECTION_KEYS.ABOUT.GLOBAL, fallbackGlobal);
-  const cta = sectionJson(SECTION_KEYS.ABOUT.CTA, fallbackCta);
+  const hero = fallbackHero;
+  const work = fallbackWork;
+  const globalSection = fallbackGlobal;
+  const cta = fallbackCta;
 
   return (
     <div className="space-y-24 pb-4 md:space-y-28">
       <section className="grid items-start gap-10 lg:grid-cols-[1.15fr,0.85fr]">
         <div>
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.ABOUT.HERO)}>
+          <p className={sectionLabel}>
             {hero.label}
           </p>
           <h1
             className="mt-5 max-w-3xl font-(--font-display) text-4xl font-bold tracking-tight text-white sm:text-5xl"
-            {...sectionAttrs(SECTION_KEYS.ABOUT.HERO)}
           >
             {hero.title}
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-400" {...sectionAttrs(SECTION_KEYS.ABOUT.HERO)}>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-400">
             {hero.body}
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link href={hero.primary_cta?.href ?? "/contact"} className={primaryButton} {...sectionAttrs(SECTION_KEYS.ABOUT.HERO)}>
+            <Link href={hero.primary_cta?.href ?? "/contact"} className={primaryButton}>
               {hero.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href={hero.secondary_cta?.href ?? "/case-studies"} className={secondaryButton} {...sectionAttrs(SECTION_KEYS.ABOUT.HERO)}>
+            <Link href={hero.secondary_cta?.href ?? "/case-studies"} className={secondaryButton}>
               {hero.secondary_cta?.label ?? "View Enterprise Case Studies"}
             </Link>
           </div>
         </div>
 
-        <div className={`${darkCard} dot-grid`} {...sectionAttrs(SECTION_KEYS.ABOUT.HERO)}>
+        <div className={`${darkCard} dot-grid`}>
           <p className="font-(--font-mono) text-xs uppercase tracking-widest text-slate-500">
             Proof Snapshot
           </p>
@@ -142,18 +136,18 @@ export default async function AboutPage() {
 
       <section className="grid gap-6 lg:grid-cols-2">
         <div className={darkCard}>
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.ABOUT.WORK)}>
+          <p className={sectionLabel}>
             {work.label}
           </p>
-          <h2 className="mt-4 font-(--font-display) text-3xl font-bold tracking-tight text-white" {...sectionAttrs(SECTION_KEYS.ABOUT.WORK)}>
+          <h2 className="mt-4 font-(--font-display) text-3xl font-bold tracking-tight text-white">
             {work.title}
           </h2>
-          <p className="mt-4 text-slate-400" {...sectionAttrs(SECTION_KEYS.ABOUT.WORK)}>
+          <p className="mt-4 text-slate-400">
             {work.body}
           </p>
           <div className="mt-8 space-y-4">
             {(work.cadence ?? fallbackWork.cadence).map((item: { title: string; detail: string }) => (
-              <div key={item.title} className="rounded-xl border border-slate-800 bg-slate-950/60 p-4" {...sectionAttrs(SECTION_KEYS.ABOUT.WORK)}>
+              <div key={item.title} className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
                 <p className="font-medium text-white">{item.title}</p>
                 <p className="mt-1 text-sm text-slate-400">{item.detail}</p>
               </div>
@@ -163,12 +157,12 @@ export default async function AboutPage() {
 
         <div className="space-y-6">
           <div className={darkCard}>
-            <p className="font-(--font-mono) text-xs uppercase tracking-widest text-slate-500" {...sectionAttrs(SECTION_KEYS.ABOUT.WORK)}>
+            <p className="font-(--font-mono) text-xs uppercase tracking-widest text-slate-500">
               Accountability Model
             </p>
             <div className="mt-4 space-y-4">
               {(work.accountability ?? fallbackWork.accountability).map((item: { label: string; detail: string }) => (
-                <div key={item.label} className="flex gap-3" {...sectionAttrs(SECTION_KEYS.ABOUT.WORK)}>
+                <div key={item.label} className="flex gap-3">
                   <Users className="mt-0.5 h-4 w-4 text-emerald-400" />
                   <div>
                     <p className="text-sm font-medium text-white">{item.label}</p>
@@ -179,12 +173,12 @@ export default async function AboutPage() {
             </div>
           </div>
           <div className={darkCard}>
-            <p className="font-(--font-mono) text-xs uppercase tracking-widest text-slate-500" {...sectionAttrs(SECTION_KEYS.ABOUT.WORK)}>
+            <p className="font-(--font-mono) text-xs uppercase tracking-widest text-slate-500">
               Escalation Path
             </p>
             <div className="mt-4 space-y-3">
               {(work.escalation ?? fallbackWork.escalation).map((item: string) => (
-                <div key={item} className="flex items-start gap-3 text-sm text-slate-300" {...sectionAttrs(SECTION_KEYS.ABOUT.WORK)}>
+                <div key={item} className="flex items-start gap-3 text-sm text-slate-300">
                   <Clock3 className="mt-0.5 h-4 w-4 text-cyan-400" />
                   <span>{item}</span>
                 </div>
@@ -195,20 +189,20 @@ export default async function AboutPage() {
       </section>
 
       <section className={`${darkCard} grid-lines`}>
-        <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.ABOUT.GLOBAL)}>
+        <p className={sectionLabel}>
           {globalSection.label}
         </p>
-        <h2 className="mt-4 font-(--font-display) text-3xl font-bold tracking-tight text-white" {...sectionAttrs(SECTION_KEYS.ABOUT.GLOBAL)}>
+        <h2 className="mt-4 font-(--font-display) text-3xl font-bold tracking-tight text-white">
           {globalSection.title}
         </h2>
-        <p className="mt-4 max-w-3xl text-slate-400" {...sectionAttrs(SECTION_KEYS.ABOUT.GLOBAL)}>
+        <p className="mt-4 max-w-3xl text-slate-400">
           {globalSection.body}
         </p>
 
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
           {(globalSection.regions ?? fallbackGlobal.regions).map(
             (region: { name: string; coverage: string; focus: string }) => (
-              <div key={region.name} className="rounded-xl border border-slate-800 bg-slate-950/60 p-4" {...sectionAttrs(SECTION_KEYS.ABOUT.GLOBAL)}>
+              <div key={region.name} className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
                 <div className="flex items-center gap-2 text-sm font-medium text-white">
                   <Globe className="h-4 w-4 text-cyan-400" />
                   {region.name}
@@ -222,7 +216,7 @@ export default async function AboutPage() {
 
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           {(globalSection.capabilities ?? fallbackGlobal.capabilities).map((item: string) => (
-            <div key={item} className="flex items-center gap-2 text-sm text-slate-300" {...sectionAttrs(SECTION_KEYS.ABOUT.GLOBAL)}>
+            <div key={item} className="flex items-center gap-2 text-sm text-slate-300">
               <ShieldCheck className="h-4 w-4 text-emerald-400" />
               {item}
             </div>
@@ -231,24 +225,23 @@ export default async function AboutPage() {
       </section>
 
       <section className="rounded-3xl border border-emerald-500/30 bg-emerald-500/10 px-8 py-12">
-        <h2 className="font-(--font-display) text-3xl font-bold tracking-tight text-white" {...sectionAttrs(SECTION_KEYS.ABOUT.CTA)}>
+        <h2 className="font-(--font-display) text-3xl font-bold tracking-tight text-white">
           {cta.title}
         </h2>
-        <p className="mt-4 max-w-3xl text-slate-300" {...sectionAttrs(SECTION_KEYS.ABOUT.CTA)}>
+        <p className="mt-4 max-w-3xl text-slate-300">
           {cta.body}
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
-          <Link href={cta.primary_cta?.href ?? "/contact"} className={primaryButton} {...sectionAttrs(SECTION_KEYS.ABOUT.CTA)}>
+          <Link href={cta.primary_cta?.href ?? "/contact"} className={primaryButton}>
             {cta.primary_cta?.label ?? "Book a Strategy Call"}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
-          <Link href={cta.secondary_cta?.href ?? "/contact?intent=technical-review"} className={secondaryButton} {...sectionAttrs(SECTION_KEYS.ABOUT.CTA)}>
+          <Link href={cta.secondary_cta?.href ?? "/contact?intent=technical-review"} className={secondaryButton}>
             {cta.secondary_cta?.label ?? "Request a Technical Review"}
           </Link>
           <Link
             href={cta.tertiary_cta?.href ?? "/contact?intent=security-pack"}
             className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-300 transition hover:text-emerald-200"
-            {...sectionAttrs(SECTION_KEYS.ABOUT.CTA)}
           >
             {cta.tertiary_cta?.label ?? "Request a Security Pack"}
             <ArrowRight className="h-4 w-4" />

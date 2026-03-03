@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 import {
   ArrowRight,
@@ -17,12 +17,8 @@ import {
   Workflow,
 } from "lucide-react";
 
-import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
-import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 import AnimatedMetric from "../components/AnimatedMetric";
 import ScrollReveal from "../components/ScrollReveal";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Website + CRM + AI Platform for Revenue Teams | Ingenium",
@@ -36,12 +32,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/platform" },
 };
 
-/* ── Fallback Content ──────────────────────────────────────────────── */
+/* â”€â”€ Fallback Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 const fallbackHero = {
   label: "Website CRM AI Platform",
   title: "One platform connecting your website, CRM, AI agents, and automations.",
-  body: "Revenue teams lose pipeline when their tools are disconnected. Ingenium unifies website performance, CRM intelligence, AI execution, and workflow automation into a single system — so every interaction is tracked, every lead is routed, and every decision is backed by data.",
+  body: "Revenue teams lose pipeline when their tools are disconnected. Ingenium unifies website performance, CRM intelligence, AI execution, and workflow automation into a single system â€” so every interaction is tracked, every lead is routed, and every decision is backed by data.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "Explore Platform Modules", href: "#modules" },
   tertiary_cta: { label: "See case study results", href: "/case-studies" },
@@ -114,7 +110,7 @@ const fallbackModules = {
 const fallbackRoles = {
   label: "Role-Based Views",
   title: "One platform, tailored for every team.",
-  body: "Marketing, sales, and technical teams each see what matters most — without the noise of irrelevant data or controls.",
+  body: "Marketing, sales, and technical teams each see what matters most â€” without the noise of irrelevant data or controls.",
   tabs: [
     {
       role: "Marketing",
@@ -221,10 +217,10 @@ const fallbackCta = {
   body: "Book a strategy call to map your platform architecture, integration requirements, and rollout plan. Or request an architecture review to see how your current stack compares.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "Request an Architecture Review", href: "/contact" },
-  reassurance: "30-minute call · Custom architecture diagram · No obligation",
+  reassurance: "30-minute call Â· Custom architecture diagram Â· No obligation",
 };
 
-/* ── Helpers ────────────────────────────────────────────────────────── */
+/* â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function getModuleIcon(iconName: string | undefined) {
   switch (iconName) {
@@ -326,15 +322,14 @@ function normalizeModuleItem(
   };
 }
 
-/* ── Page Component ─────────────────────────────────────────────────── */
+/* â”€â”€ Page Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 export default async function PlatformPage() {
-  const { sectionJson, sectionAttrs } = await loadPortalPageContent(PAGE_KEYS.PLATFORM);
-  const hero = sectionJson(SECTION_KEYS.PLATFORM.HERO, fallbackHero);
-  const modules = sectionJson(SECTION_KEYS.PLATFORM.MODULES, fallbackModules);
-  const roles = sectionJson(SECTION_KEYS.PLATFORM.ROLES, fallbackRoles);
-  const integrations = sectionJson(SECTION_KEYS.PLATFORM.INTEGRATIONS, fallbackIntegrations);
-  const cta = sectionJson(SECTION_KEYS.PLATFORM.CTA, fallbackCta);
+  const hero = fallbackHero;
+  const modules = fallbackModules;
+  const roles = fallbackRoles;
+  const integrations = fallbackIntegrations;
+  const cta = fallbackCta;
   const rawModuleItems =
     modules.items && Array.isArray(modules.items) ? modules.items : [];
   const moduleItems = fallbackModules.items.map((fallbackItem, index) =>
@@ -343,25 +338,22 @@ export default async function PlatformPage() {
 
   return (
     <div className="space-y-28 md:space-y-40">
-      {/* ═══════ HERO ═══════ */}
+      {/* â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â• */}
       <section className="pt-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr,0.9fr]">
           <div>
             <p
               className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-              {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
             >
               {hero.label}
             </p>
             <h1
               className="mt-6 font-(--font-display) text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl"
-              {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
             >
               {hero.title}
             </h1>
             <p
               className="mt-6 max-w-xl text-lg leading-relaxed text-slate-400"
-              {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
             >
               {hero.body}
             </p>
@@ -371,7 +363,6 @@ export default async function PlatformPage() {
               <Link
                 href={hero.primary_cta?.href ?? "/contact"}
                 className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
-                {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
               >
                 {hero.primary_cta?.label ?? "Book a Strategy Call"}
                 <ArrowRight className="h-4 w-4" />
@@ -379,14 +370,12 @@ export default async function PlatformPage() {
               <Link
                 href={hero.secondary_cta?.href ?? "#modules"}
                 className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
-                {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
               >
                 {hero.secondary_cta?.label ?? "Explore Platform Modules"}
               </Link>
               <Link
                 href={hero.tertiary_cta?.href ?? "/case-studies"}
                 className="cta-lift inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-slate-300"
-                {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
               >
                 {hero.tertiary_cta?.label ?? "See case study results"}
                 <ArrowUpRight className="h-3.5 w-3.5" />
@@ -409,7 +398,6 @@ export default async function PlatformPage() {
           {/* System architecture visual */}
           <div
             className="relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 p-6 dot-grid"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.HERO)}
           >
             <div className="flex items-center justify-between gap-3">
               <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-600">
@@ -504,24 +492,21 @@ export default async function PlatformPage() {
         </div>
       </section>
 
-      {/* ═══════ MODULES ═══════ */}
+      {/* â•â•â•â•â•â•â• MODULES â•â•â•â•â•â•â• */}
       <section id="modules">
         <div className="text-center">
           <p
             className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
           >
             {modules.label}
           </p>
           <h2
             className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
           >
             {modules.title}
           </h2>
           <p
             className="mx-auto mt-4 max-w-2xl text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
           >
             {modules.body}
           </p>
@@ -550,7 +535,6 @@ export default async function PlatformPage() {
                     <div
                       key={item.title}
                       className={`metric-card relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 p-6 ${bgClass}`}
-                      {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
                     >
                       <div className="relative">
                         <div className="flex items-center gap-3">
@@ -612,7 +596,6 @@ export default async function PlatformPage() {
                     <div
                       key={item.title}
                       className={`metric-card relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 p-6 ${bgVariants[i] ?? ""}`}
-                      {...sectionAttrs(SECTION_KEYS.PLATFORM.MODULES)}
                     >
                       <div className="relative">
                         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10">
@@ -650,24 +633,21 @@ export default async function PlatformPage() {
         </div>
       </section>
 
-      {/* ═══════ ROLE-BASED VIEWS ═══════ */}
+      {/* â•â•â•â•â•â•â• ROLE-BASED VIEWS â•â•â•â•â•â•â• */}
       <section className="rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
         <div className="text-center">
           <p
             className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}
           >
             {roles.label}
           </p>
           <h2
             className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}
           >
             {roles.title}
           </h2>
           <p
             className="mx-auto mt-4 max-w-2xl text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}
           >
             {roles.body}
           </p>
@@ -692,7 +672,6 @@ export default async function PlatformPage() {
                 <div
                   key={tab.role}
                   className={`metric-card rounded-xl border ${borderAccent} bg-slate-900/60 p-6`}
-                  {...sectionAttrs(SECTION_KEYS.PLATFORM.ROLES)}
                 >
                   <div className="flex items-center gap-3">
                     <div
@@ -739,24 +718,21 @@ export default async function PlatformPage() {
         </div>
       </section>
 
-      {/* ═══════ INTEGRATIONS ═══════ */}
+      {/* â•â•â•â•â•â•â• INTEGRATIONS â•â•â•â•â•â•â• */}
       <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr]">
         <div>
           <p
             className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}
           >
             {integrations.label}
           </p>
           <h2
             className="mt-4 max-w-lg font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}
           >
             {integrations.title}
           </h2>
           <p
             className="mt-4 max-w-lg text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}
           >
             {integrations.body}
           </p>
@@ -767,7 +743,6 @@ export default async function PlatformPage() {
                 <div
                   key={pattern.name}
                   className="rounded-xl border border-slate-800 bg-slate-900/40 p-4"
-                  {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}
                 >
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-semibold text-white">{pattern.name}</h3>
@@ -787,7 +762,6 @@ export default async function PlatformPage() {
         {/* Governance sidebar */}
         <div
           className="rounded-2xl border border-emerald-500/20 bg-emerald-950/20 p-8"
-          {...sectionAttrs(SECTION_KEYS.PLATFORM.INTEGRATIONS)}
         >
           <span className="inline-flex items-center rounded-md border border-emerald-500/20 bg-emerald-950/40 px-2.5 py-1 font-(--font-mono) text-[10px] uppercase tracking-wider text-emerald-400">
             {integrations.governance_card?.label ?? fallbackIntegrations.governance_card.label}
@@ -845,19 +819,17 @@ export default async function PlatformPage() {
         </div>
       </section>
 
-      {/* ═══════ FINAL CTA ═══════ */}
+      {/* â•â•â•â•â•â•â• FINAL CTA â•â•â•â•â•â•â• */}
       <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
         <div className="relative">
           <h2
             className="mx-auto max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}
           >
             {cta.title}
           </h2>
           <p
             className="mx-auto mt-4 max-w-xl text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}
           >
             {cta.body}
           </p>
@@ -865,7 +837,6 @@ export default async function PlatformPage() {
             <Link
               href={cta.primary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
-              {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}
             >
               {cta.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowUpRight className="h-4 w-4" />
@@ -873,7 +844,6 @@ export default async function PlatformPage() {
             <Link
               href={cta.secondary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
-              {...sectionAttrs(SECTION_KEYS.PLATFORM.CTA)}
             >
               {cta.secondary_cta?.label ?? "Request an Architecture Review"}
             </Link>

@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 import {
   ArrowRight,
@@ -18,10 +18,6 @@ import {
   UserCheck,
 } from "lucide-react";
 
-import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
-import { loadPortalPageContent } from "@/src/lib/portal-page-content";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Enterprise Security and AI Governance | Ingenium",
@@ -54,7 +50,7 @@ const darkCardLg =
   "rounded-3xl border border-slate-800 bg-slate-900/80 p-8 backdrop-blur-sm";
 
 /* ------------------------------------------------------------------ */
-/*  Fallback content (portal-overridable)                              */
+/*  Fallback content (static default copy)                              */
 /* ------------------------------------------------------------------ */
 
 const fallbackHero = {
@@ -214,11 +210,10 @@ const fallbackCta = {
 /* ------------------------------------------------------------------ */
 
 export default async function SecurityPage() {
-  const { sectionJson, sectionAttrs } = await loadPortalPageContent(PAGE_KEYS.SECURITY);
-  const hero = sectionJson(SECTION_KEYS.SECURITY.HERO, fallbackHero);
-  const controls = sectionJson(SECTION_KEYS.SECURITY.CONTROLS, fallbackControls);
-  const governance = sectionJson(SECTION_KEYS.SECURITY.GOVERNANCE, fallbackGovernance);
-  const cta = sectionJson(SECTION_KEYS.SECURITY.CTA, fallbackCta);
+  const hero = fallbackHero;
+  const controls = fallbackControls;
+  const governance = fallbackGovernance;
+  const cta = fallbackCta;
 
   const badges = Array.isArray(hero.badges) ? hero.badges : fallbackHero.badges;
   const postureItems = Array.isArray(hero.posture_items)
@@ -254,25 +249,23 @@ export default async function SecurityPage() {
   return (
     <div className="space-y-28 md:space-y-36">
       {/* ============================================================ */}
-      {/*  SECTION 1 — Hero / Compliance                               */}
+      {/*  SECTION 1 â€” Hero / Compliance                               */}
       {/* ============================================================ */}
       <section className="grid items-start gap-14 lg:grid-cols-[1.1fr,0.9fr]">
-        {/* Left column — headline + CTAs */}
+        {/* Left column â€” headline + CTAs */}
         <div>
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.SECURITY.HERO)}>
+          <p className={sectionLabel}>
             {hero.label}
           </p>
 
           <h1
             className="mt-6 max-w-2xl font-(--font-display) text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]"
-            {...sectionAttrs(SECTION_KEYS.SECURITY.HERO)}
           >
             {hero.title}
           </h1>
 
           <p
             className="mt-6 max-w-xl text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.SECURITY.HERO)}
           >
             {hero.body}
           </p>
@@ -281,7 +274,6 @@ export default async function SecurityPage() {
             <Link
               href={hero.primary_cta?.href ?? "/contact"}
               className={primaryButton}
-              {...sectionAttrs(SECTION_KEYS.SECURITY.HERO)}
             >
               {hero.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowRight className="h-4 w-4" />
@@ -289,7 +281,6 @@ export default async function SecurityPage() {
             <Link
               href={hero.secondary_cta?.href ?? "/contact?intent=security-review"}
               className={secondaryButton}
-              {...sectionAttrs(SECTION_KEYS.SECURITY.HERO)}
             >
               {hero.secondary_cta?.label ?? "Request a Security Review Pack"}
             </Link>
@@ -301,7 +292,6 @@ export default async function SecurityPage() {
               <div
                 key={`badge-${i}`}
                 className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-5 py-3.5 backdrop-blur-sm"
-                {...sectionAttrs(SECTION_KEYS.SECURITY.HERO)}
               >
                 <ShieldCheck className="h-5 w-5 shrink-0 text-emerald-400" />
                 <div>
@@ -317,13 +307,12 @@ export default async function SecurityPage() {
           </div>
         </div>
 
-        {/* Right column — compliance posture card */}
+        {/* Right column â€” compliance posture card */}
         <div className={darkCardLg}>
           <div className="flex items-center gap-3">
             <Shield className="h-5 w-5 text-emerald-400" />
             <p
               className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500"
-              {...sectionAttrs(SECTION_KEYS.SECURITY.HERO)}
             >
               Compliance Posture
             </p>
@@ -334,7 +323,6 @@ export default async function SecurityPage() {
               <div
                 key={`posture-${i}`}
                 className="flex items-start gap-3 text-sm leading-relaxed text-slate-300"
-                {...sectionAttrs(SECTION_KEYS.SECURITY.HERO)}
               >
                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
                 {typeof item === "string" ? item : fallbackHero.posture_items[i]}
@@ -344,7 +332,6 @@ export default async function SecurityPage() {
 
           <div
             className="mt-6 rounded-xl border border-dashed border-slate-700 bg-slate-950/60 p-4 text-sm leading-relaxed text-slate-500"
-            {...sectionAttrs(SECTION_KEYS.SECURITY.HERO)}
           >
             Documentation packages are available under NDA for procurement and vendor review processes.
           </div>
@@ -352,22 +339,20 @@ export default async function SecurityPage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  SECTION 2 — Security Controls                               */}
+      {/*  SECTION 2 â€” Security Controls                               */}
       {/* ============================================================ */}
       <section>
         <div className="max-w-3xl">
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.SECURITY.CONTROLS)}>
+          <p className={sectionLabel}>
             {controls.label}
           </p>
           <h2
             className="mt-4 font-(--font-display) text-3xl font-semibold tracking-tight text-white md:text-4xl"
-            {...sectionAttrs(SECTION_KEYS.SECURITY.CONTROLS)}
           >
             {controls.title}
           </h2>
           <p
             className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.SECURITY.CONTROLS)}
           >
             {controls.body}
           </p>
@@ -379,14 +364,13 @@ export default async function SecurityPage() {
             <Lock className="h-5 w-5 text-emerald-400" />
             <h3
               className="font-(--font-display) text-xl font-semibold text-white"
-              {...sectionAttrs(SECTION_KEYS.SECURITY.CONTROLS)}
             >
               {controls.encryption?.title ?? fallbackControls.encryption.title}
             </h3>
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {encryptionItems.map((item, i) => (
-              <div key={`enc-${i}`} className={darkCard} {...sectionAttrs(SECTION_KEYS.SECURITY.CONTROLS)}>
+              <div key={`enc-${i}`} className={darkCard}>
                 <p className="text-sm font-semibold text-emerald-400">
                   {typeof item === "string" ? item : item.label}
                 </p>
@@ -404,14 +388,13 @@ export default async function SecurityPage() {
             <KeyRound className="h-5 w-5 text-emerald-400" />
             <h3
               className="font-(--font-display) text-xl font-semibold text-white"
-              {...sectionAttrs(SECTION_KEYS.SECURITY.CONTROLS)}
             >
               {controls.access?.title ?? fallbackControls.access.title}
             </h3>
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {accessItems.map((item, i) => (
-              <div key={`acc-${i}`} className={darkCard} {...sectionAttrs(SECTION_KEYS.SECURITY.CONTROLS)}>
+              <div key={`acc-${i}`} className={darkCard}>
                 <div className="flex items-center gap-2">
                   <UserCheck className="h-4 w-4 text-cyan-400" />
                   <p className="text-sm font-semibold text-white">
@@ -432,14 +415,13 @@ export default async function SecurityPage() {
             <Network className="h-5 w-5 text-emerald-400" />
             <h3
               className="font-(--font-display) text-xl font-semibold text-white"
-              {...sectionAttrs(SECTION_KEYS.SECURITY.CONTROLS)}
             >
               {controls.infrastructure?.title ?? fallbackControls.infrastructure.title}
             </h3>
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {infraItems.map((item, i) => (
-              <div key={`infra-${i}`} className={darkCard} {...sectionAttrs(SECTION_KEYS.SECURITY.CONTROLS)}>
+              <div key={`infra-${i}`} className={darkCard}>
                 <p className="text-sm font-semibold text-white">
                   {typeof item === "string" ? item : item.label}
                 </p>
@@ -454,7 +436,7 @@ export default async function SecurityPage() {
         {/* --- 2d. Incident Response + 2e. Data Residency --- */}
         <div className="mt-14 grid gap-8 lg:grid-cols-2">
           {/* Incident Response */}
-          <div className={darkCardLg} {...sectionAttrs(SECTION_KEYS.SECURITY.CONTROLS)}>
+          <div className={darkCardLg}>
             <div className="flex items-center gap-3">
               <Siren className="h-5 w-5 text-emerald-400" />
               <h3 className="font-(--font-display) text-lg font-semibold text-white">
@@ -475,7 +457,7 @@ export default async function SecurityPage() {
           </div>
 
           {/* Data Residency */}
-          <div className={darkCardLg} {...sectionAttrs(SECTION_KEYS.SECURITY.CONTROLS)}>
+          <div className={darkCardLg}>
             <div className="flex items-center gap-3">
               <Globe className="h-5 w-5 text-cyan-400" />
               <h3 className="font-(--font-display) text-lg font-semibold text-white">
@@ -498,22 +480,20 @@ export default async function SecurityPage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  SECTION 3 — AI Governance                                   */}
+      {/*  SECTION 3 â€” AI Governance                                   */}
       {/* ============================================================ */}
       <section className="rounded-[2.5rem] border border-slate-800 bg-slate-900/50 px-6 py-16 backdrop-blur-sm sm:px-10">
         <div className="max-w-3xl">
-          <p className={sectionLabel} {...sectionAttrs(SECTION_KEYS.SECURITY.GOVERNANCE)}>
+          <p className={sectionLabel}>
             {governance.label}
           </p>
           <h2
             className="mt-4 font-(--font-display) text-3xl font-semibold tracking-tight text-white md:text-4xl"
-            {...sectionAttrs(SECTION_KEYS.SECURITY.GOVERNANCE)}
           >
             {governance.title}
           </h2>
           <p
             className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.SECURITY.GOVERNANCE)}
           >
             {governance.body}
           </p>
@@ -525,19 +505,17 @@ export default async function SecurityPage() {
             <FileCheck2 className="h-5 w-5 text-emerald-400" />
             <h3
               className="font-(--font-display) text-xl font-semibold text-white"
-              {...sectionAttrs(SECTION_KEYS.SECURITY.GOVERNANCE)}
             >
               {governance.lifecycle?.title ?? fallbackGovernance.lifecycle.title}
             </h3>
           </div>
 
-          {/* Lifecycle stages — vertical timeline */}
+          {/* Lifecycle stages â€” vertical timeline */}
           <div className="relative mt-8 ml-3 border-l border-slate-700 pl-8">
             {lifecycleStages.map((stage, i) => (
               <div
                 key={`stage-${i}`}
                 className="relative pb-10 last:pb-0"
-                {...sectionAttrs(SECTION_KEYS.SECURITY.GOVERNANCE)}
               >
                 {/* Timeline dot */}
                 <div className="absolute -left-[calc(2rem+0.4375rem)] flex h-7 w-7 items-center justify-center rounded-full border border-emerald-500/40 bg-slate-950">
@@ -560,7 +538,7 @@ export default async function SecurityPage() {
 
         {/* --- 3b. AI Data Handling Controls --- */}
         <div className="mt-16 grid gap-8 lg:grid-cols-2">
-          <div className={darkCardLg} {...sectionAttrs(SECTION_KEYS.SECURITY.GOVERNANCE)}>
+          <div className={darkCardLg}>
             <div className="flex items-center gap-3">
               <Eye className="h-5 w-5 text-cyan-400" />
               <h3 className="font-(--font-display) text-lg font-semibold text-white">
@@ -581,7 +559,7 @@ export default async function SecurityPage() {
           </div>
 
           {/* --- 3c. Regulated Industry Support --- */}
-          <div {...sectionAttrs(SECTION_KEYS.SECURITY.GOVERNANCE)}>
+          <div>
             <h3 className="font-(--font-display) text-lg font-semibold text-white">
               {governance.regulated?.title ?? fallbackGovernance.regulated.title}
             </h3>
@@ -613,21 +591,19 @@ export default async function SecurityPage() {
       </section>
 
       {/* ============================================================ */}
-      {/*  SECTION 4 — Final CTA                                       */}
+      {/*  SECTION 4 â€” Final CTA                                       */}
       {/* ============================================================ */}
       <section className="rounded-[2.5rem] border border-emerald-500/20 bg-gradient-to-b from-emerald-950/40 to-slate-950 px-8 py-20 text-center shadow-[0_0_80px_rgba(16,185,129,0.08)]">
         <Shield className="mx-auto h-10 w-10 text-emerald-500/60" />
 
         <h2
           className="mx-auto mt-6 max-w-3xl font-(--font-display) text-3xl font-semibold tracking-tight text-white md:text-4xl"
-          {...sectionAttrs(SECTION_KEYS.SECURITY.CTA)}
         >
           {cta.title}
         </h2>
 
         <p
           className="mx-auto mt-4 max-w-xl text-slate-400"
-          {...sectionAttrs(SECTION_KEYS.SECURITY.CTA)}
         >
           {cta.body}
         </p>
@@ -636,7 +612,6 @@ export default async function SecurityPage() {
           <Link
             href={cta.primary_cta?.href ?? "/contact"}
             className={primaryButton}
-            {...sectionAttrs(SECTION_KEYS.SECURITY.CTA)}
           >
             {cta.primary_cta?.label ?? "Book a Strategy Call"}
             <ArrowUpRight className="h-4 w-4" />
@@ -644,7 +619,6 @@ export default async function SecurityPage() {
           <Link
             href={cta.secondary_cta?.href ?? "/contact?intent=security-review"}
             className={secondaryButton}
-            {...sectionAttrs(SECTION_KEYS.SECURITY.CTA)}
           >
             {cta.secondary_cta?.label ?? "Request a Security Review Pack"}
           </Link>
@@ -654,7 +628,6 @@ export default async function SecurityPage() {
           <Link
             href={cta.tertiary_cta?.href ?? "/contact?intent=architecture-call"}
             className={tertiaryButton}
-            {...sectionAttrs(SECTION_KEYS.SECURITY.CTA)}
           >
             {cta.tertiary_cta?.label ?? "Book a Technical Architecture Call"}
             <ArrowRight className="h-4 w-4" />

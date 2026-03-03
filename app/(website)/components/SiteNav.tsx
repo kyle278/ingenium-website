@@ -1,10 +1,10 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 interface NavItem {
   href: string;
@@ -18,29 +18,50 @@ interface SiteNavContent {
   cta_label: string;
 }
 
-interface EditorAttrs {
-  "data-content-block-key": string;
-  "data-page-key": string;
-  "data-section-key": string;
-}
-
 interface SiteNavProps {
   content: SiteNavContent;
-  editorAttrs: EditorAttrs;
 }
 
-export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
+const SOLUTION_HREFS = ["/websites", "/platform", "/agents", "/crm"];
+
+export default function SiteNav({ content }: SiteNavProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const [activeIndicator, setActiveIndicator] = useState({ x: 0, width: 0, visible: false });
-  const navItems = Array.isArray(content.items) ? content.items : [];
+  const navItems = useMemo(() => {
+    const baseItems = Array.isArray(content.items) ? content.items : [];
+    if (baseItems.some((item) => item.href === "/projects")) {
+      return baseItems;
+    }
+
+    const withProjects = [...baseItems];
+    const caseStudiesIndex = withProjects.findIndex((item) => item.href === "/case-studies");
+    const projectsItem: NavItem = { href: "/projects", label: "Projects" };
+
+    if (caseStudiesIndex >= 0) {
+      withProjects.splice(caseStudiesIndex + 1, 0, projectsItem);
+      return withProjects;
+    }
+
+    withProjects.push(projectsItem);
+    return withProjects;
+  }, [content.items]);
+  const solutionItems = useMemo(
+    () => navItems.filter((item) => SOLUTION_HREFS.includes(item.href)),
+    [navItems],
+  );
+  const topLevelItems = useMemo(
+    () => navItems.filter((item) => !SOLUTION_HREFS.includes(item.href)),
+    [navItems],
+  );
 
   const isActivePath = useCallback(
     (href: string) => pathname === href || pathname.startsWith(`${href}/`),
     [pathname],
   );
+  const isSolutionsActive = solutionItems.some((item) => isActivePath(item.href));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -94,7 +115,7 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
       window.cancelAnimationFrame(rafId);
       window.removeEventListener("resize", updateActiveIndicator);
     };
-  }, [pathname, navItems.length, updateActiveIndicator]);
+  }, [pathname, topLevelItems.length, solutionItems.length, updateActiveIndicator]);
 
   return (
     <header className="sticky top-0 z-50">
@@ -111,7 +132,6 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
             <Image src="/logo.svg" alt="Ingenium logo" width={32} height={32} className="h-8 w-8" priority />
             <span
               className="font-(--font-display) text-lg font-bold tracking-tight text-white"
-              {...editorAttrs}
             >
               {content.brand}
             </span>
@@ -128,7 +148,40 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
                 opacity: activeIndicator.visible ? 1 : 0,
               }}
             />
-            {navItems.map((item) => {
+            <div className="group relative z-10">
+              <Link
+                href="/websites"
+                data-active={isSolutionsActive ? "true" : "false"}
+                className={`inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm transition-colors ${
+                  isSolutionsActive
+                    ? "font-semibold text-white"
+                    : "text-slate-400 hover:bg-slate-800/40 hover:text-white"
+                }`}
+              >
+                Solutions
+                <ChevronDown className="h-3.5 w-3.5" />
+              </Link>
+              <div className="invisible absolute left-0 top-full mt-2 w-52 rounded-xl border border-slate-800 bg-slate-900/95 p-2 opacity-0 shadow-xl shadow-black/30 backdrop-blur-xl transition duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                {solutionItems.map((item) => {
+                  const isActive = isActivePath(item.href);
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      data-active={isActive ? "true" : "false"}
+                      className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
+                        isActive
+                          ? "bg-slate-800 text-white"
+                          : "text-slate-300 hover:bg-slate-800/80 hover:text-white"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+            {topLevelItems.map((item) => {
               const isActive = isActivePath(item.href);
               return (
                 <Link
@@ -140,7 +193,6 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
                       ? "font-semibold text-white"
                       : "text-slate-400 hover:bg-slate-800/40 hover:text-white"
                   }`}
-                  {...editorAttrs}
                 >
                   {item.label}
                 </Link>
@@ -153,14 +205,12 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
             <Link
               href="/contact"
               className="text-sm text-slate-400 transition-colors hover:text-white"
-              {...editorAttrs}
             >
               {content.contact_label}
             </Link>
             <Link
               href="/contact"
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
-              {...editorAttrs}
             >
               {content.cta_label}
               <ArrowRight className="h-3.5 w-3.5" />
@@ -183,7 +233,26 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
       {open && (
         <div className="fixed inset-0 top-[84px] z-50 bg-slate-950/98 backdrop-blur-xl lg:hidden">
           <nav className="mx-auto max-w-7xl space-y-1 px-6 py-6">
-            {[...navItems, { href: "/contact", label: content.contact_label }].map((item) => (
+            <div className="rounded-xl border border-slate-800/80 bg-slate-900/60 p-3">
+              <p className="px-2 pb-2 font-(--font-mono) text-[10px] uppercase tracking-widest text-slate-500">
+                Solutions
+              </p>
+              {solutionItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={`block rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+                    isActivePath(item.href)
+                      ? "bg-slate-800 text-white"
+                      : "text-slate-400 hover:bg-slate-800/60 hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+            {[...topLevelItems, { href: "/contact", label: content.contact_label }].map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -193,7 +262,6 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
                     ? "bg-slate-800 text-white"
                     : "text-slate-400 hover:bg-slate-800/60 hover:text-white"
                 }`}
-                {...editorAttrs}
               >
                 {item.label}
               </Link>
@@ -203,7 +271,6 @@ export default function SiteNav({ content, editorAttrs }: SiteNavProps) {
                 href="/contact"
                 onClick={() => setOpen(false)}
                 className="block rounded-xl bg-emerald-600 px-6 py-3.5 text-center text-sm font-semibold text-white shadow-lg shadow-emerald-600/20"
-                {...editorAttrs}
               >
                 {content.cta_label}
               </Link>

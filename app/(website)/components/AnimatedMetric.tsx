@@ -120,8 +120,11 @@ export default function AnimatedMetric({
       return;
     }
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
+    const skipMetricAnimation =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      window.matchMedia("(max-width: 767px)").matches;
+
+    if (skipMetricAnimation) {
       const rafId = window.requestAnimationFrame(() => {
         setProgress(1);
       });

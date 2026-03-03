@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 import {
   ArrowRight,
@@ -15,12 +15,8 @@ import {
   Zap,
 } from "lucide-react";
 
-import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
-import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 import AnimatedMetric from "../components/AnimatedMetric";
 import ScrollReveal from "../components/ScrollReveal";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Marketing and Lead Routing Automation Services | Ingenium",
@@ -192,15 +188,12 @@ const fallbackCta = {
 /* ---------- page component ---------- */
 
 export default async function AutomationsPage() {
-  const { sectionJson, sectionAttrs } = await loadPortalPageContent(
-    PAGE_KEYS.AUTOMATIONS,
-  );
 
-  const hero = sectionJson(SECTION_KEYS.AUTOMATIONS.HERO, fallbackHero);
-  const workflows = sectionJson(SECTION_KEYS.AUTOMATIONS.WORKFLOWS, fallbackWorkflows);
-  const governance = sectionJson(SECTION_KEYS.AUTOMATIONS.GOVERNANCE, fallbackGovernance);
-  const connected = sectionJson(SECTION_KEYS.AUTOMATIONS.CONNECTED, fallbackConnected);
-  const cta = sectionJson(SECTION_KEYS.AUTOMATIONS.CTA, fallbackCta);
+  const hero = fallbackHero;
+  const workflows = fallbackWorkflows;
+  const governance = fallbackGovernance;
+  const connected = fallbackConnected;
+  const cta = fallbackCta;
 
   const stepTypeStyles: Record<string, string> = {
     trigger: "border-emerald-500/40 bg-emerald-500/10 text-emerald-400",
@@ -212,24 +205,21 @@ export default async function AutomationsPage() {
 
   return (
     <div className="space-y-28 md:space-y-36">
-      {/* ========== 1 · HERO / WORKFLOW DIAGRAM ========== */}
+      {/* ========== 1 Â· HERO / WORKFLOW DIAGRAM ========== */}
       <section className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
           <p
             className={sectionLabel}
-            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.HERO)}
           >
             {hero.label}
           </p>
           <h1
             className="mt-6 max-w-2xl font-(--font-display) text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]"
-            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.HERO)}
           >
             {hero.title}
           </h1>
           <p
             className="mt-5 max-w-xl text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.HERO)}
           >
             {hero.body}
           </p>
@@ -237,7 +227,6 @@ export default async function AutomationsPage() {
             <Link
               href={hero.primary_cta?.href ?? "/contact"}
               className={primaryButton}
-              {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.HERO)}
             >
               {hero.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowRight className="h-4 w-4" />
@@ -245,7 +234,6 @@ export default async function AutomationsPage() {
             <Link
               href={hero.secondary_cta?.href ?? "/contact?intent=workflow-audit"}
               className={secondaryButton}
-              {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.HERO)}
             >
               {hero.secondary_cta?.label ?? "Request a Workflow Audit"}
             </Link>
@@ -257,13 +245,11 @@ export default async function AutomationsPage() {
           <div className="flex items-center justify-between">
             <span
               className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500"
-              {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.HERO)}
             >
               {hero.workflow_diagram?.label ?? fallbackHero.workflow_diagram.label}
             </span>
             <span
               className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-(--font-mono) text-xs font-semibold text-emerald-400"
-              {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.HERO)}
             >
               {hero.workflow_diagram?.badge ?? fallbackHero.workflow_diagram.badge}
             </span>
@@ -296,7 +282,6 @@ export default async function AutomationsPage() {
                       <div className="pb-5">
                         <p
                           className="text-sm font-medium text-slate-200"
-                          {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.HERO)}
                         >
                           {step.action}
                         </p>
@@ -313,24 +298,21 @@ export default async function AutomationsPage() {
         </div>
       </section>
 
-      {/* ========== 2 · WORKFLOW CAPABILITIES ========== */}
+      {/* ========== 2 Â· WORKFLOW CAPABILITIES ========== */}
       <section>
         <div className="mb-12 max-w-2xl">
           <p
             className={sectionLabel}
-            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.WORKFLOWS)}
           >
             {workflows.label}
           </p>
           <h2
             className="mt-4 font-(--font-display) text-3xl font-semibold tracking-tight text-white md:text-4xl"
-            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.WORKFLOWS)}
           >
             {workflows.title}
           </h2>
           <p
             className="mt-4 text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.WORKFLOWS)}
           >
             {workflows.body}
           </p>
@@ -348,7 +330,6 @@ export default async function AutomationsPage() {
               <div
                 key={wf.title}
                 className={`metric-card ${softCard} group transition hover:border-slate-700`}
-                {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.WORKFLOWS)}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10">
@@ -391,7 +372,6 @@ export default async function AutomationsPage() {
         {/* Proof element */}
         <div
           className="mt-8 flex items-center gap-5 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-6 py-5"
-          {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.WORKFLOWS)}
         >
           <TrendingUp className="h-6 w-6 shrink-0 text-emerald-400" />
           <p className="text-sm text-slate-300">
@@ -405,26 +385,23 @@ export default async function AutomationsPage() {
         </div>
       </section>
 
-      {/* ========== 3 · GOVERNANCE ========== */}
+      {/* ========== 3 Â· GOVERNANCE ========== */}
       <section className="rounded-[2.5rem] border border-slate-800 bg-slate-900/60 px-8 py-16 shadow-[0_30px_80px_rgba(0,0,0,0.4)] backdrop-blur-sm">
         <div className="grid gap-14 lg:grid-cols-[1fr_1fr]">
           {/* Left: lifecycle pipeline */}
           <div>
             <p
               className={sectionLabel}
-              {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.GOVERNANCE)}
             >
               {governance.label}
             </p>
             <h2
               className="mt-4 font-(--font-display) text-3xl font-semibold tracking-tight text-white md:text-4xl"
-              {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.GOVERNANCE)}
             >
               {governance.title}
             </h2>
             <p
               className="mt-4 text-lg leading-relaxed text-slate-400"
-              {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.GOVERNANCE)}
             >
               {governance.body}
             </p>
@@ -455,7 +432,6 @@ export default async function AutomationsPage() {
                         <div className="pb-5">
                           <p
                             className="text-sm font-semibold text-white"
-                            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.GOVERNANCE)}
                           >
                             {item.stage}
                           </p>
@@ -480,7 +456,6 @@ export default async function AutomationsPage() {
                   <div
                     key={item}
                     className="flex items-center gap-3 text-sm text-slate-300"
-                    {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.GOVERNANCE)}
                   >
                     <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
                     {item}
@@ -497,24 +472,21 @@ export default async function AutomationsPage() {
         </div>
       </section>
 
-      {/* ========== 4 · CONVERSION TIE-BACK / KPI DASHBOARD ========== */}
+      {/* ========== 4 Â· CONVERSION TIE-BACK / KPI DASHBOARD ========== */}
       <section>
         <div className="mb-12 max-w-2xl">
           <p
             className={sectionLabel}
-            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CONNECTED)}
           >
             {connected.label}
           </p>
           <h2
             className="mt-4 font-(--font-display) text-3xl font-semibold tracking-tight text-white md:text-4xl"
-            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CONNECTED)}
           >
             {connected.title}
           </h2>
           <p
             className="mt-4 text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CONNECTED)}
           >
             {connected.body}
           </p>
@@ -533,7 +505,6 @@ export default async function AutomationsPage() {
               <div
                 key={row.workflow}
                 className="metric-card rounded-2xl border border-slate-800 bg-slate-900/60 p-5 backdrop-blur-sm transition hover:border-slate-700"
-                {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CONNECTED)}
               >
                 <div className="flex items-center justify-between">
                   <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
@@ -572,23 +543,20 @@ export default async function AutomationsPage() {
         {/* Disclaimer note */}
         <p
           className="mt-4 text-center text-xs text-slate-600"
-          {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CONNECTED)}
         >
           {connected.note ?? fallbackConnected.note}
         </p>
       </section>
 
-      {/* ========== 5 · FINAL CTA ========== */}
+      {/* ========== 5 Â· FINAL CTA ========== */}
       <section className="rounded-[2.5rem] border border-emerald-500/20 bg-gradient-to-br from-emerald-600 to-emerald-700 px-8 py-16 text-center shadow-[0_25px_60px_rgba(16,185,129,0.2)]">
         <h2
           className="mx-auto max-w-3xl font-(--font-display) text-3xl font-semibold tracking-tight text-white md:text-4xl"
-          {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CTA)}
         >
           {cta.title}
         </h2>
         <p
           className="mx-auto mt-4 max-w-xl text-emerald-100/80"
-          {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CTA)}
         >
           {cta.body}
         </p>
@@ -596,7 +564,6 @@ export default async function AutomationsPage() {
           <Link
             href={cta.primary_cta?.href ?? "/contact"}
             className="cta-lift inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
-            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CTA)}
           >
             {cta.primary_cta?.label ?? "Book a Strategy Call"}
             <ArrowUpRight className="h-4 w-4" />
@@ -604,7 +571,6 @@ export default async function AutomationsPage() {
           <Link
             href={cta.secondary_cta?.href ?? "/contact?intent=workflow-audit"}
             className="cta-lift inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-            {...sectionAttrs(SECTION_KEYS.AUTOMATIONS.CTA)}
           >
             {cta.secondary_cta?.label ?? "Request a Workflow Audit"}
           </Link>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -18,12 +18,8 @@ import {
   Users,
 } from "lucide-react";
 
-import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
-import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 import AnimatedMetric from "./components/AnimatedMetric";
 import ScrollReveal from "./components/ScrollReveal";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Enterprise Web Design Agency | Ingenium",
@@ -38,24 +34,24 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-/* ── Fallback Content ──────────────────────────────────────────────── */
+/* â”€â”€ Fallback Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 const fallbackHero = {
   label: "Enterprise Web Design Agency",
   title: "We build enterprise websites that generate pipeline.",
-  body: "Ingenium is the enterprise web design agency that builds conversion systems — website, CRM, AI agents, and automation — so your pipeline compounds week after week.",
+  body: "Ingenium is the enterprise web design agency that builds conversion systems â€” website, CRM, AI agents, and automation â€” so your pipeline compounds week after week.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "See How It Works", href: "#process" },
   proof_metric: "47%",
   proof_label: "conversion lift for a Series B SaaS company in 90 days",
-  badges: ["4–6 week launch", "Full pipeline attribution", "AI-powered operations"],
+  badges: ["4â€“6 week launch", "Full pipeline attribution", "AI-powered operations"],
 };
 
 const fallbackMetrics = {
-  label: "Average across 12 enterprise engagements, 2024–2025",
+  label: "Average across 12 enterprise engagements, 2024â€“2025",
   items: [
     { metric: "47%", label: "Conversion lift", context: "avg. across enterprise clients" },
-    { metric: "4–6 wks", label: "Strategy to launch", context: "full system deployment" },
+    { metric: "4â€“6 wks", label: "Strategy to launch", context: "full system deployment" },
     { metric: "100%", label: "Pipeline attribution", context: "end-to-end tracking" },
     { metric: "<60s", label: "Lead response time", context: "automated routing + context" },
   ],
@@ -64,7 +60,7 @@ const fallbackMetrics = {
 const fallbackIndustries = {
   label: "Trusted by growth and enterprise teams across industries",
   items: [
-    { name: "Series B–D SaaS", icon: "zap" },
+    { name: "Series Bâ€“D SaaS", icon: "zap" },
     { name: "Enterprise Financial Services", icon: "bar_chart" },
     { name: "Healthcare Platforms", icon: "shield" },
     { name: "B2B Technology", icon: "globe" },
@@ -98,7 +94,7 @@ const fallbackProblem = {
 const fallbackEngine = {
   label: "The Conversion Engine",
   title: "A unified system, not a collection of tools.",
-  body: "Your website is the front door. The Ingenium platform keeps it converting — CRM, AI agents, and automations working as one system.",
+  body: "Your website is the front door. The Ingenium platform keeps it converting â€” CRM, AI agents, and automations working as one system.",
   nodes: [
     { title: "Website", outcome: "Conversion-first design that captures intent", href: "/websites", icon: "layout" },
     { title: "CRM", outcome: "Unified pipeline data with smart routing", href: "/crm", icon: "layers" },
@@ -116,21 +112,21 @@ const fallbackProcess = {
     {
       num: "01",
       title: "Discovery & Strategy",
-      timeline: "Week 1–2",
+      timeline: "Week 1â€“2",
       deliverables: "Conversion audit, messaging architecture, KPI framework, technical requirements",
       owner: "Ingenium leads, your team validates",
     },
     {
       num: "02",
       title: "Design & Build",
-      timeline: "Week 3–4",
+      timeline: "Week 3â€“4",
       deliverables: "Design system, page builds, CRM integration, analytics instrumentation",
       owner: "Ingenium builds, your team reviews at gates",
     },
     {
       num: "03",
       title: "Launch & Optimise",
-      timeline: "Week 5–6",
+      timeline: "Week 5â€“6",
       deliverables: "Go-live, AI agent deployment, automation workflows, first optimisation cycle",
       owner: "Joint ownership with weekly reporting",
     },
@@ -185,7 +181,7 @@ const fallbackProof = {
 const fallbackGovernance = {
   label: "Enterprise Governance",
   title: "Security and governance built into every layer.",
-  body: "Approval workflows, audit trails, and role-based controls keep every update accountable — from content changes to AI agent outputs.",
+  body: "Approval workflows, audit trails, and role-based controls keep every update accountable â€” from content changes to AI agent outputs.",
   link: { label: "Review enterprise security and AI governance", href: "/security" },
   secondary_link: { label: "Request security review pack", href: "/contact" },
   items: [
@@ -203,10 +199,10 @@ const fallbackCta = {
   body: "Book a strategy call and get a tailored conversion roadmap within 48 hours. No commitment required.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "Download Enterprise Website Checklist", href: "/contact" },
-  reassurance: "30-minute call · Tailored roadmap · No obligation",
+  reassurance: "30-minute call Â· Tailored roadmap Â· No obligation",
 };
 
-/* ── Helpers ────────────────────────────────────────────────────────── */
+/* â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function getIcon(iconName: string | undefined) {
   switch (iconName) {
@@ -275,41 +271,37 @@ function normalizeIndustryItems(items: unknown): IndustryTrustItem[] {
   return normalized.length > 0 ? normalized : fallbackIndustries.items;
 }
 
-/* ── Page Component ─────────────────────────────────────────────────── */
+/* â”€â”€ Page Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 export default async function HomePage() {
-  const { sectionJson, sectionAttrs } = await loadPortalPageContent(PAGE_KEYS.HOME);
-  const hero = sectionJson(SECTION_KEYS.HOME.HERO, fallbackHero);
-  const metrics = sectionJson(SECTION_KEYS.HOME.OUTCOMES, fallbackMetrics);
-  const industries = sectionJson(SECTION_KEYS.HOME.INDUSTRIES, fallbackIndustries);
-  const problem = sectionJson(SECTION_KEYS.HOME.PROBLEM, fallbackProblem);
-  const engine = sectionJson(SECTION_KEYS.HOME.SYSTEM, fallbackEngine);
-  const process = sectionJson(SECTION_KEYS.HOME.PROCESS, fallbackProcess);
-  const proof = sectionJson(SECTION_KEYS.HOME.PROOF, fallbackProof);
-  const governance = sectionJson(SECTION_KEYS.HOME.SECURITY, fallbackGovernance);
-  const cta = sectionJson(SECTION_KEYS.HOME.CTA, fallbackCta);
+  const hero = fallbackHero;
+  const metrics = fallbackMetrics;
+  const industries = fallbackIndustries;
+  const problem = fallbackProblem;
+  const engine = fallbackEngine;
+  const process = fallbackProcess;
+  const proof = fallbackProof;
+  const governance = fallbackGovernance;
+  const cta = fallbackCta;
   const industryItems = normalizeIndustryItems(industries.items);
 
   return (
     <div className="space-y-28 md:space-y-40">
-      {/* ═══════ HERO ═══════ */}
+      {/* â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â• */}
       <section className="relative pt-8">
         <div className="mx-auto max-w-4xl text-center">
           <p
             className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-            {...sectionAttrs(SECTION_KEYS.HOME.HERO)}
           >
             {hero.label}
           </p>
           <h1
             className="mt-6 font-(--font-display) text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
-            {...sectionAttrs(SECTION_KEYS.HOME.HERO)}
           >
             {hero.title}
           </h1>
           <p
             className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.HOME.HERO)}
           >
             {hero.body}
           </p>
@@ -319,7 +311,6 @@ export default async function HomePage() {
             <Link
               href={hero.primary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500 hover:shadow-emerald-500/30"
-              {...sectionAttrs(SECTION_KEYS.HOME.HERO)}
             >
               {hero.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowRight className="h-4 w-4" />
@@ -327,7 +318,6 @@ export default async function HomePage() {
             <Link
               href={hero.secondary_cta?.href ?? "#process"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
-              {...sectionAttrs(SECTION_KEYS.HOME.HERO)}
             >
               {hero.secondary_cta?.label ?? "See How It Works"}
             </Link>
@@ -352,7 +342,6 @@ export default async function HomePage() {
             <span
               key={badge}
               className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/50 px-4 py-2 text-xs text-slate-400"
-              {...sectionAttrs(SECTION_KEYS.HOME.HERO)}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               {badge}
@@ -361,14 +350,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══════ METRICS STRIP ═══════ */}
+      {/* â•â•â•â•â•â•â• METRICS STRIP â•â•â•â•â•â•â• */}
       <section className="relative rounded-2xl border border-slate-800 bg-slate-900/50 p-8 dot-grid">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {(metrics.items ?? fallbackMetrics.items).map((item: { metric: string; label: string; context?: string }) => (
             <div
               key={item.label}
               className="metric-card rounded-lg border border-slate-800/80 bg-slate-900/55 p-4"
-              {...sectionAttrs(SECTION_KEYS.HOME.OUTCOMES)}
             >
               <AnimatedMetric
                 as="p"
@@ -385,17 +373,15 @@ export default async function HomePage() {
         </div>
         <p
           className="mt-8 border-t border-slate-800 pt-4 font-(--font-mono) text-[11px] text-slate-600"
-          {...sectionAttrs(SECTION_KEYS.HOME.OUTCOMES)}
         >
           {metrics.label}
         </p>
       </section>
 
-      {/* ═══════ INDUSTRY TRUST ═══════ */}
+      {/* â•â•â•â•â•â•â• INDUSTRY TRUST â•â•â•â•â•â•â• */}
       <section>
         <p
           className="text-center text-sm text-slate-500"
-          {...sectionAttrs(SECTION_KEYS.HOME.INDUSTRIES)}
         >
           {industries.label}
         </p>
@@ -406,7 +392,6 @@ export default async function HomePage() {
               <ScrollReveal key={`${item.name}-${index}`} delayMs={index * 40}>
                 <div
                   className="flex items-center gap-2.5 rounded-lg border border-slate-800 bg-slate-900/40 px-4 py-2.5"
-                  {...sectionAttrs(SECTION_KEYS.HOME.INDUSTRIES)}
                 >
                   <Icon className="h-4 w-4 text-slate-500" />
                   <span className="text-sm text-slate-400">{item.name}</span>
@@ -417,17 +402,15 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══════ PROBLEM STATEMENT ═══════ */}
+      {/* â•â•â•â•â•â•â• PROBLEM STATEMENT â•â•â•â•â•â•â• */}
       <section className="rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
         <p
           className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-          {...sectionAttrs(SECTION_KEYS.HOME.PROBLEM)}
         >
           {problem.label}
         </p>
         <h2
           className="mt-4 max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-          {...sectionAttrs(SECTION_KEYS.HOME.PROBLEM)}
         >
           {problem.title}
         </h2>
@@ -438,7 +421,6 @@ export default async function HomePage() {
               <div
                 key={item.persona}
                 className="rounded-xl border border-slate-800 bg-slate-900/50 p-6"
-                {...sectionAttrs(SECTION_KEYS.HOME.PROBLEM)}
               >
                 <div className="flex items-center gap-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-800">
@@ -457,7 +439,6 @@ export default async function HomePage() {
           <Link
             href="/websites"
             className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
-            {...sectionAttrs(SECTION_KEYS.HOME.PROBLEM)}
           >
             See how our enterprise website redesign services solve this
             <ChevronRight className="h-4 w-4" />
@@ -465,36 +446,33 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══════ CONVERSION ENGINE ═══════ */}
+      {/* â•â•â•â•â•â•â• CONVERSION ENGINE â•â•â•â•â•â•â• */}
       <section>
         <div className="text-center">
           <p
             className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-            {...sectionAttrs(SECTION_KEYS.HOME.SYSTEM)}
           >
             {engine.label}
           </p>
           <h2
             className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.HOME.SYSTEM)}
           >
             {engine.title}
           </h2>
           <p
             className="mx-auto mt-4 max-w-2xl text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.HOME.SYSTEM)}
           >
             {engine.body}
           </p>
         </div>
 
-        {/* System flow — horizontal pipeline */}
+        {/* System flow â€” horizontal pipeline */}
         <div className="mt-12 grid gap-3 md:grid-cols-5">
           {(engine.nodes ?? fallbackEngine.nodes).map((node: { title: string; outcome: string; href?: string; icon?: string }, i: number) => {
             const Icon = getIcon(node.icon);
             return (
               <ScrollReveal key={node.title} className="group relative" delayMs={i * 55}>
-                <div {...sectionAttrs(SECTION_KEYS.HOME.SYSTEM)}>
+                <div>
                   <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-5 transition hover:border-emerald-800/60 hover:bg-slate-900/80">
                     <div className="flex items-center gap-3">
                       <div className="data-flow-dot flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10">
@@ -522,26 +500,23 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══════ PROCESS ═══════ */}
+      {/* â•â•â•â•â•â•â• PROCESS â•â•â•â•â•â•â• */}
       <section id="process">
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Left: Timeline */}
           <div>
             <p
               className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-              {...sectionAttrs(SECTION_KEYS.HOME.PROCESS)}
             >
               {process.label}
             </p>
             <h2
               className="mt-4 max-w-lg font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-              {...sectionAttrs(SECTION_KEYS.HOME.PROCESS)}
             >
               {process.title}
             </h2>
             <p
               className="mt-4 text-slate-400"
-              {...sectionAttrs(SECTION_KEYS.HOME.PROCESS)}
             >
               {process.body}
             </p>
@@ -550,7 +525,7 @@ export default async function HomePage() {
             <div className="mt-10 space-y-0">
               {(process.phases ?? fallbackProcess.phases).map((phase: { num: string; title: string; timeline: string; deliverables: string; owner: string }, i: number) => (
                 <ScrollReveal key={phase.num} className="timeline-step" delayMs={i * 70}>
-                  <div className="relative pl-8" {...sectionAttrs(SECTION_KEYS.HOME.PROCESS)}>
+                  <div className="relative pl-8">
                     {/* Timeline line */}
                     {i < (process.phases ?? fallbackProcess.phases).length - 1 && (
                       <div className="timeline-line absolute left-[11px] top-8 h-full w-px bg-slate-800" />
@@ -578,14 +553,13 @@ export default async function HomePage() {
             <p className="font-(--font-mono) text-xs uppercase tracking-widest text-cyan-400">First 30 Days</p>
             <h3
               className="mt-4 font-(--font-display) text-xl font-bold text-white"
-              {...sectionAttrs(SECTION_KEYS.HOME.PROCESS)}
             >
               {process.first_30_days?.title ?? fallbackProcess.first_30_days.title}
             </h3>
             <div className="mt-6 space-y-4">
               {(process.first_30_days?.items ?? fallbackProcess.first_30_days.items).map((item: string, i: number) => (
                 <ScrollReveal key={item} delayMs={i * 55}>
-                  <div className="flex items-start gap-3" {...sectionAttrs(SECTION_KEYS.HOME.PROCESS)}>
+                  <div className="flex items-start gap-3">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
                     <span className="text-sm text-slate-300">{item}</span>
                   </div>
@@ -605,19 +579,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══════ PROOF / CASE SNAPSHOTS ═══════ */}
+      {/* â•â•â•â•â•â•â• PROOF / CASE SNAPSHOTS â•â•â•â•â•â•â• */}
       <section>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p
               className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-              {...sectionAttrs(SECTION_KEYS.HOME.PROOF)}
             >
               {proof.label}
             </p>
             <h2
               className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-              {...sectionAttrs(SECTION_KEYS.HOME.PROOF)}
             >
               {proof.title}
             </h2>
@@ -625,7 +597,6 @@ export default async function HomePage() {
           <Link
             href={proof.link?.href ?? "/case-studies"}
             className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white"
-            {...sectionAttrs(SECTION_KEYS.HOME.PROOF)}
           >
             {proof.link?.label ?? "View all enterprise website case studies"}
             <ArrowUpRight className="h-4 w-4" />
@@ -636,7 +607,6 @@ export default async function HomePage() {
             <div
               key={item.client_type}
               className="metric-card group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-slate-700"
-              {...sectionAttrs(SECTION_KEYS.HOME.PROOF)}
             >
               <div className="flex items-center justify-between">
                 <span className="rounded-md bg-slate-800 px-2.5 py-1 font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-400">
@@ -663,24 +633,21 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══════ GOVERNANCE ═══════ */}
+      {/* â•â•â•â•â•â•â• GOVERNANCE â•â•â•â•â•â•â• */}
       <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr]">
         <div>
           <p
             className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-            {...sectionAttrs(SECTION_KEYS.HOME.SECURITY)}
           >
             {governance.label}
           </p>
           <h2
             className="mt-4 max-w-lg font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.HOME.SECURITY)}
           >
             {governance.title}
           </h2>
           <p
             className="mt-4 text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.HOME.SECURITY)}
           >
             {governance.body}
           </p>
@@ -688,7 +655,6 @@ export default async function HomePage() {
             <Link
               href={governance.link?.href ?? "/security"}
               className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300"
-              {...sectionAttrs(SECTION_KEYS.HOME.SECURITY)}
             >
               {governance.link?.label ?? "Review enterprise security and AI governance"}
               <ChevronRight className="h-4 w-4" />
@@ -709,7 +675,6 @@ export default async function HomePage() {
             <div
               key={item}
               className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/40 px-4 py-3"
-              {...sectionAttrs(SECTION_KEYS.HOME.SECURITY)}
             >
               <Lock className="h-4 w-4 shrink-0 text-emerald-400" />
               <span className="text-sm text-slate-300">{item}</span>
@@ -718,19 +683,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══════ FINAL CTA ═══════ */}
+      {/* â•â•â•â•â•â•â• FINAL CTA â•â•â•â•â•â•â• */}
       <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
         <div className="relative">
           <h2
             className="mx-auto max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.HOME.CTA)}
           >
             {cta.title}
           </h2>
           <p
             className="mx-auto mt-4 max-w-xl text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.HOME.CTA)}
           >
             {cta.body}
           </p>
@@ -738,7 +701,6 @@ export default async function HomePage() {
             <Link
               href={cta.primary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
-              {...sectionAttrs(SECTION_KEYS.HOME.CTA)}
             >
               {cta.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowUpRight className="h-4 w-4" />
@@ -746,7 +708,6 @@ export default async function HomePage() {
             <Link
               href={cta.secondary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
-              {...sectionAttrs(SECTION_KEYS.HOME.CTA)}
             >
               {cta.secondary_cta?.label ?? "Download Enterprise Website Checklist"}
             </Link>

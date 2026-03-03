@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import type { Metadata } from "next";
 import {
   ArrowRight,
@@ -12,13 +12,9 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
-import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 import AnimatedMetric from "../components/AnimatedMetric";
 import FaqAccordion from "../components/FaqAccordion";
 import ScrollReveal from "../components/ScrollReveal";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Enterprise Website Redesign Services | Ingenium",
@@ -32,12 +28,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/websites" },
 };
 
-/* ── Fallback Content ──────────────────────────────────────────────── */
+/* â”€â”€ Fallback Content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 const fallbackHero = {
   label: "Enterprise Website Redesign",
   title: "Enterprise website redesign that turns traffic into qualified pipeline.",
-  body: "Your website is your first sales conversation. Ingenium builds enterprise website redesign systems — not design projects — that connect directly to your CRM, AI agents, and automation stack so every visitor becomes a measurable opportunity.",
+  body: "Your website is your first sales conversation. Ingenium builds enterprise website redesign systems â€” not design projects â€” that connect directly to your CRM, AI agents, and automation stack so every visitor becomes a measurable opportunity.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "See Our Process", href: "#implementation" },
   proof_metric: "+38%",
@@ -47,11 +43,11 @@ const fallbackHero = {
 const fallbackEngine = {
   label: "The Conversion Architecture",
   title: "How an Ingenium enterprise website redesign converts.",
-  body: "Every page is engineered to a conversion blueprint — from messaging architecture to CTA psychology to real-time lead routing.",
+  body: "Every page is engineered to a conversion blueprint â€” from messaging architecture to CTA psychology to real-time lead routing.",
   flow: [
     "Visitor lands on a service page built around a specific conversion hypothesis",
     "Problem framing and proof elements build confidence and urgency",
-    "Contextual CTA triggers a progressive form — low friction, high intent",
+    "Contextual CTA triggers a progressive form â€” low friction, high intent",
     "Lead enriched with firmographic data, scored, and routed to the right rep in under 60 seconds",
     "Automated follow-up sequence triggered, with full engagement context attached in CRM",
   ],
@@ -123,19 +119,19 @@ const fallbackImplementation = {
   title: "Enterprise website redesign in weeks, not months.",
   phases: [
     {
-      week: "Week 1–2",
+      week: "Week 1â€“2",
       title: "Discovery & Strategy",
       deliverables: "Conversion audit, messaging architecture, KPI framework, technical requirements",
       owner: "Ingenium leads discovery; your team validates direction and priorities",
     },
     {
-      week: "Week 3–4",
+      week: "Week 3â€“4",
       title: "Design & Build",
       deliverables: "Design system, page builds, CRM integration, analytics instrumentation",
       owner: "Ingenium builds; your team reviews at design and content gates",
     },
     {
-      week: "Week 5–6",
+      week: "Week 5â€“6",
       title: "Launch & Optimise",
       deliverables: "Staged go-live, AI agent deployment, automation workflows, first optimisation cycle",
       owner: "Joint ownership with weekly performance reporting",
@@ -184,11 +180,11 @@ const fallbackFaq = {
   items: [
     {
       question: "How long does an enterprise website redesign take?",
-      answer: "Most enterprise website redesigns launch in 4–6 weeks with staged rollouts. Discovery and strategy take 1–2 weeks, design and build take 2–3 weeks, and launch with initial optimisation completes the cycle.",
+      answer: "Most enterprise website redesigns launch in 4â€“6 weeks with staged rollouts. Discovery and strategy take 1â€“2 weeks, design and build take 2â€“3 weeks, and launch with initial optimisation completes the cycle.",
     },
     {
       question: "What does an enterprise website redesign cost?",
-      answer: "Enterprise website redesign pricing depends on scope — number of pages, CRM integration complexity, and ongoing optimisation requirements. We provide a scoped estimate after a strategy call. Typical engagements range from growth-stage to enterprise-scale packages.",
+      answer: "Enterprise website redesign pricing depends on scope â€” number of pages, CRM integration complexity, and ongoing optimisation requirements. We provide a scoped estimate after a strategy call. Typical engagements range from growth-stage to enterprise-scale packages.",
     },
     {
       question: "How do you handle migration from our existing site?",
@@ -200,7 +196,7 @@ const fallbackFaq = {
     },
     {
       question: "How do you integrate with our existing CRM and marketing stack?",
-      answer: "We build native integrations with HubSpot, Salesforce, and major CRM platforms. Forms, lead routing, attribution tracking, and automation triggers are wired during the build phase — not bolted on after launch.",
+      answer: "We build native integrations with HubSpot, Salesforce, and major CRM platforms. Forms, lead routing, attribution tracking, and automation triggers are wired during the build phase â€” not bolted on after launch.",
     },
     {
       question: "What happens if we need changes after launch?",
@@ -225,10 +221,10 @@ const fallbackCta = {
   body: "Book a strategy call to map your conversion plan, timeline, and rollout options. Get a tailored roadmap within 48 hours.",
   primary_cta: { label: "Book a Strategy Call", href: "/contact" },
   secondary_cta: { label: "Download Website Redesign Scope Template", href: "/contact" },
-  reassurance: "30-minute call · Tailored roadmap · No obligation · Typical launch in 4–6 weeks",
+  reassurance: "30-minute call Â· Tailored roadmap Â· No obligation Â· Typical launch in 4â€“6 weeks",
 };
 
-/* ── Helpers ────────────────────────────────────────────────────────── */
+/* â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function getPillarIcon(iconName: string | undefined) {
   switch (iconName) {
@@ -238,40 +234,61 @@ function getPillarIcon(iconName: string | undefined) {
   }
 }
 
-/* ── Page Component ─────────────────────────────────────────────────── */
+function pickText(value: unknown, fallback: string) {
+  return typeof value === "string" && value.trim().length > 0 ? value : fallback;
+}
+
+function normalizePillarItem(
+  item: unknown,
+  fallback: (typeof fallbackPillars.items)[number],
+) {
+  const record = item && typeof item === "object" ? (item as Record<string, unknown>) : {};
+
+  return {
+    title: pickText(record.title, fallback.title),
+    description: pickText(record.description, fallback.description),
+    output: pickText(
+      record.output ?? record.deliverable ?? record.concrete_output,
+      fallback.output,
+    ),
+    icon: pickText(record.icon, fallback.icon),
+  };
+}
+
+/* â”€â”€ Page Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 export default async function WebsitesPage() {
-  const { sectionJson, sectionAttrs } = await loadPortalPageContent(PAGE_KEYS.WEBSITES);
-  const hero = sectionJson(SECTION_KEYS.WEBSITES.HERO, fallbackHero);
-  const engine = sectionJson(SECTION_KEYS.WEBSITES.ENGINE, fallbackEngine);
-  const comparison = sectionJson(SECTION_KEYS.WEBSITES.DIFFERENTIATORS, fallbackComparison);
-  const pillars = sectionJson(SECTION_KEYS.WEBSITES.DELIVERABLES, fallbackPillars);
-  const implementation = sectionJson(SECTION_KEYS.WEBSITES.PROCESS, fallbackImplementation);
-  const first30 = sectionJson(SECTION_KEYS.WEBSITES.READINESS, fallbackFirst30);
-  const proof = sectionJson(SECTION_KEYS.WEBSITES.PROOF, fallbackProof);
-  const faq = sectionJson(SECTION_KEYS.WEBSITES.FAQ, fallbackFaq);
-  const cta = sectionJson(SECTION_KEYS.WEBSITES.CTA, fallbackCta);
+  const hero = fallbackHero;
+  const engine = fallbackEngine;
+  const comparison = fallbackComparison;
+  const pillars = fallbackPillars;
+  const implementation = fallbackImplementation;
+  const first30 = fallbackFirst30;
+  const proof = fallbackProof;
+  const faq = fallbackFaq;
+  const cta = fallbackCta;
+  const rawPillarItems = Array.isArray(pillars.items) ? pillars.items : [];
+  const pillarItems = fallbackPillars.items.map((fallbackItem, index) =>
+    normalizePillarItem(rawPillarItems[index], fallbackItem),
+  );
 
   return (
     <div className="space-y-28 md:space-y-40">
-      {/* ═══════ HERO ═══════ */}
+      {/* â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â• */}
       <section className="pt-8">
         <div className="mx-auto max-w-4xl text-center">
           <p
             className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-            {...sectionAttrs(SECTION_KEYS.WEBSITES.HERO)}
           >
             {hero.label}
           </p>
           <h1
             className="mt-6 font-(--font-display) text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl"
-            {...sectionAttrs(SECTION_KEYS.WEBSITES.HERO)}
           >
             {hero.title}
           </h1>
           <p
             className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.WEBSITES.HERO)}
           >
             {hero.body}
           </p>
@@ -279,7 +296,6 @@ export default async function WebsitesPage() {
             <Link
               href={hero.primary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
-              {...sectionAttrs(SECTION_KEYS.WEBSITES.HERO)}
             >
               {hero.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowRight className="h-4 w-4" />
@@ -287,7 +303,6 @@ export default async function WebsitesPage() {
             <Link
               href={hero.secondary_cta?.href ?? "#implementation"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
-              {...sectionAttrs(SECTION_KEYS.WEBSITES.HERO)}
             >
               {hero.secondary_cta?.label ?? "See Our Process"}
             </Link>
@@ -307,21 +322,19 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* ═══════ CONVERSION ENGINE DETAIL ═══════ */}
+      {/* â•â•â•â•â•â•â• CONVERSION ENGINE DETAIL â•â•â•â•â•â•â• */}
       <section className="rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
         <p
           className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-          {...sectionAttrs(SECTION_KEYS.WEBSITES.ENGINE)}
         >
           {engine.label}
         </p>
         <h2
           className="mt-4 max-w-2xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-          {...sectionAttrs(SECTION_KEYS.WEBSITES.ENGINE)}
         >
           {engine.title}
         </h2>
-        <p className="mt-4 max-w-2xl text-slate-400" {...sectionAttrs(SECTION_KEYS.WEBSITES.ENGINE)}>
+        <p className="mt-4 max-w-2xl text-slate-400">
           {engine.body}
         </p>
 
@@ -329,7 +342,7 @@ export default async function WebsitesPage() {
         <div className="mt-10 space-y-0">
           {(engine.flow ?? fallbackEngine.flow).map((step: string, i: number) => (
             <ScrollReveal key={step} className="timeline-step" delayMs={i * 55}>
-              <div className="relative pl-10" {...sectionAttrs(SECTION_KEYS.WEBSITES.ENGINE)}>
+              <div className="relative pl-10">
                 {i < (engine.flow ?? fallbackEngine.flow).length - 1 && (
                   <div className="timeline-line absolute left-[15px] top-8 h-full w-px bg-emerald-800/40" />
                 )}
@@ -345,7 +358,7 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* ═══════ COMPARISON ═══════ */}
+      {/* â•â•â•â•â•â•â• COMPARISON â•â•â•â•â•â•â• */}
       <section>
         <p className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400">
           {comparison.label ?? fallbackComparison.label}
@@ -379,16 +392,15 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* ═══════ CAPABILITY PILLARS ═══════ */}
+      {/* â•â•â•â•â•â•â• CAPABILITY PILLARS â•â•â•â•â•â•â• */}
       <section className="grid gap-6 lg:grid-cols-3">
-        {(pillars.items ?? fallbackPillars.items).map((item: { title: string; description: string; output: string; icon?: string }, i: number) => {
+        {pillarItems.map((item, i: number) => {
           const Icon = getPillarIcon(item.icon);
           const bgVariants = ["dot-grid", "grid-lines", ""];
           return (
             <div
               key={item.title}
               className={`relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 p-6 ${bgVariants[i] ?? ""}`}
-              {...sectionAttrs(SECTION_KEYS.WEBSITES.DELIVERABLES)}
             >
               <div className="relative">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10">
@@ -406,18 +418,16 @@ export default async function WebsitesPage() {
         })}
       </section>
 
-      {/* ═══════ IMPLEMENTATION PATH ═══════ */}
+      {/* â•â•â•â•â•â•â• IMPLEMENTATION PATH â•â•â•â•â•â•â• */}
       <section id="implementation" className="grid gap-12 lg:grid-cols-2">
         <div>
           <p
             className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-            {...sectionAttrs(SECTION_KEYS.WEBSITES.PROCESS)}
           >
             {implementation.label}
           </p>
           <h2
             className="mt-4 max-w-lg font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            {...sectionAttrs(SECTION_KEYS.WEBSITES.PROCESS)}
           >
             {implementation.title}
           </h2>
@@ -425,7 +435,7 @@ export default async function WebsitesPage() {
           <div className="mt-10 space-y-0">
             {(implementation.phases ?? fallbackImplementation.phases).map((phase: { week: string; title: string; deliverables: string; owner: string }, i: number) => (
               <ScrollReveal key={phase.week} className="timeline-step" delayMs={i * 70}>
-                <div className="relative pl-8" {...sectionAttrs(SECTION_KEYS.WEBSITES.PROCESS)}>
+                <div className="relative pl-8">
                   {i < (implementation.phases ?? fallbackImplementation.phases).length - 1 && (
                     <div className="timeline-line absolute left-[11px] top-8 h-full w-px bg-slate-800" />
                   )}
@@ -447,7 +457,7 @@ export default async function WebsitesPage() {
         </div>
 
         {/* First 30 days */}
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8" {...sectionAttrs(SECTION_KEYS.WEBSITES.READINESS)}>
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
           <p className="font-(--font-mono) text-xs uppercase tracking-widest text-cyan-400">First 30 Days</p>
           <h3 className="mt-4 font-(--font-display) text-xl font-bold text-white">
             {first30.title ?? fallbackFirst30.title}
@@ -468,21 +478,20 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* ═══════ PROOF — FULL MINI CASE ═══════ */}
+      {/* â•â•â•â•â•â•â• PROOF â€” FULL MINI CASE â•â•â•â•â•â•â• */}
       <section>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400" {...sectionAttrs(SECTION_KEYS.WEBSITES.PROOF)}>
+            <p className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400">
               {proof.label}
             </p>
-            <h2 className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl" {...sectionAttrs(SECTION_KEYS.WEBSITES.PROOF)}>
+            <h2 className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl">
               {proof.title}
             </h2>
           </div>
           <Link
             href={proof.link?.href ?? "/case-studies"}
             className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white"
-            {...sectionAttrs(SECTION_KEYS.WEBSITES.PROOF)}
           >
             {proof.link?.label ?? "View all enterprise website case studies"}
             <ArrowUpRight className="h-4 w-4" />
@@ -532,21 +541,20 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* ═══════ FAQ ═══════ */}
+      {/* â•â•â•â•â•â•â• FAQ â•â•â•â•â•â•â• */}
       <section className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
         <div>
-          <h2 className="font-(--font-display) text-2xl font-bold text-white" {...sectionAttrs(SECTION_KEYS.WEBSITES.FAQ)}>
+          <h2 className="font-(--font-display) text-2xl font-bold text-white">
             {faq.title}
           </h2>
           <div className="mt-8">
             <FaqAccordion
               items={faq.items ?? fallbackFaq.items}
-              editorAttrs={sectionAttrs(SECTION_KEYS.WEBSITES.FAQ)}
             />
           </div>
         </div>
 
-        <div className="rounded-2xl border border-emerald-500/20 bg-emerald-950/20 p-8" {...sectionAttrs(SECTION_KEYS.WEBSITES.FAQ)}>
+        <div className="rounded-2xl border border-emerald-500/20 bg-emerald-950/20 p-8">
           <span className="inline-flex items-center rounded-md border border-emerald-500/20 bg-emerald-950/40 px-2.5 py-1 font-(--font-mono) text-[10px] uppercase tracking-wider text-emerald-400">
             {faq.enterprise_card?.label ?? fallbackFaq.enterprise_card.label}
           </span>
@@ -574,21 +582,20 @@ export default async function WebsitesPage() {
         </div>
       </section>
 
-      {/* ═══════ FINAL CTA ═══════ */}
+      {/* â•â•â•â•â•â•â• FINAL CTA â•â•â•â•â•â•â• */}
       <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
         <div className="relative">
-          <h2 className="mx-auto max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl" {...sectionAttrs(SECTION_KEYS.WEBSITES.CTA)}>
+          <h2 className="mx-auto max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl">
             {cta.title}
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-slate-400" {...sectionAttrs(SECTION_KEYS.WEBSITES.CTA)}>
+          <p className="mx-auto mt-4 max-w-xl text-slate-400">
             {cta.body}
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href={cta.primary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
-              {...sectionAttrs(SECTION_KEYS.WEBSITES.CTA)}
             >
               {cta.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowUpRight className="h-4 w-4" />
@@ -596,7 +603,6 @@ export default async function WebsitesPage() {
             <Link
               href={cta.secondary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
-              {...sectionAttrs(SECTION_KEYS.WEBSITES.CTA)}
             >
               {cta.secondary_cta?.label ?? "Download Website Redesign Scope Template"}
             </Link>

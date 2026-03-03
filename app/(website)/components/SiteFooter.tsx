@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
@@ -22,20 +22,16 @@ interface SiteFooterContent {
   tags: string[];
 }
 
-interface EditorAttrs {
-  "data-content-block-key": string;
-  "data-page-key": string;
-  "data-section-key": string;
-}
-
 interface SiteFooterProps {
   content: SiteFooterContent;
-  editorAttrs: EditorAttrs;
 }
 
-export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
+export default function SiteFooter({ content }: SiteFooterProps) {
   const productLinks = Array.isArray(content.product_links) ? content.product_links : [];
-  const companyLinks = Array.isArray(content.company_links) ? content.company_links : [];
+  const companyLinksBase = Array.isArray(content.company_links) ? content.company_links : [];
+  const companyLinks = companyLinksBase.some((link) => link.href === "/projects")
+    ? companyLinksBase
+    : [...companyLinksBase, { href: "/projects", label: "Projects" }];
   const contactItems = Array.isArray(content.contact_items) ? content.contact_items : [];
   const tags = Array.isArray(content.tags) ? content.tags : [];
 
@@ -75,12 +71,11 @@ export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
               <Image src="/logo.svg" alt="Ingenium logo" width={28} height={28} className="h-7 w-7" />
               <span
                 className="font-(--font-display) text-lg font-bold tracking-tight text-white"
-                {...editorAttrs}
               >
                 {content.brand}
               </span>
             </div>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-500" {...editorAttrs}>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-500">
               {content.summary}
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
@@ -88,7 +83,6 @@ export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
                 <span
                   key={tag}
                   className="rounded-md border border-slate-800 bg-slate-900 px-2 py-1 font-(--font-mono) text-[10px] uppercase tracking-widest text-slate-500"
-                  {...editorAttrs}
                 >
                   {tag}
                 </span>
@@ -98,7 +92,7 @@ export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
 
           {/* Product links */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-500" {...editorAttrs}>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-500">
               {content.product_title}
             </h4>
             <ul className="mt-4 space-y-2.5">
@@ -107,7 +101,6 @@ export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
                   <Link
                     href={link.href}
                     className="text-sm text-slate-400 transition-colors hover:text-emerald-400"
-                    {...editorAttrs}
                   >
                     {link.label}
                   </Link>
@@ -118,7 +111,7 @@ export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
 
           {/* Company links */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-500" {...editorAttrs}>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-500">
               {content.company_title}
             </h4>
             <ul className="mt-4 space-y-2.5">
@@ -127,7 +120,6 @@ export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
                   <Link
                     href={link.href}
                     className="text-sm text-slate-400 transition-colors hover:text-emerald-400"
-                    {...editorAttrs}
                   >
                     {link.label}
                   </Link>
@@ -138,12 +130,12 @@ export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
 
           {/* Contact column */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-500" {...editorAttrs}>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-slate-500">
               {content.contact_title}
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-400">
               {contactItems.map((item) => (
-                <li key={item} {...editorAttrs}>
+                <li key={item}>
                   {item}
                 </li>
               ))}
@@ -151,7 +143,6 @@ export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
             <Link
               href="/security"
               className="cta-lift mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 transition-colors hover:text-emerald-300"
-              {...editorAttrs}
             >
               {content.security_link_label}
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -161,8 +152,8 @@ export default function SiteFooter({ content, editorAttrs }: SiteFooterProps) {
 
         {/* Bottom bar */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-slate-800/60 py-6 text-xs text-slate-600">
-          <span {...editorAttrs}>{content.legal_line}</span>
-          <span {...editorAttrs}>{content.legal_tagline}</span>
+          <span>{content.legal_line}</span>
+          <span>{content.legal_tagline}</span>
         </div>
       </div>
     </footer>

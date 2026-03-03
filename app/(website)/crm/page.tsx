@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -12,12 +12,8 @@ import {
   Zap,
 } from "lucide-react";
 
-import { PAGE_KEYS, SECTION_KEYS } from "@/src/lib/content-map";
-import { loadPortalPageContent } from "@/src/lib/portal-page-content";
 import AnimatedMetric from "../components/AnimatedMetric";
 import ScrollReveal from "../components/ScrollReveal";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "CRM Implementation and RevOps Services | Ingenium",
@@ -48,7 +44,7 @@ const softCard =
   "rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 backdrop-blur-sm";
 
 /* ------------------------------------------------------------------ */
-/*  Fallback content (portal-overridable)                             */
+/*  Fallback content (static default copy)                             */
 /* ------------------------------------------------------------------ */
 
 const fallbackHero = {
@@ -75,12 +71,12 @@ const fallbackHero = {
 
 const fallbackFoundation = {
   label: "CRM Foundation",
-  title: "Lifecycle stages, routing rules, and attribution — built right.",
+  title: "Lifecycle stages, routing rules, and attribution â€” built right.",
   body: "Every CRM implementation starts with the operational foundation: lifecycle stages that match your funnel, lead routing that eliminates manual handoffs, attribution that connects revenue to source, and data hygiene that keeps everything trustworthy.",
   flow: {
     label: "Lead lifecycle in action",
     description:
-      "Lead arrives via form → enriched with firmographic data → scored against ICP → routed to the right rep in <60s → full context attached.",
+      "Lead arrives via form â†’ enriched with firmographic data â†’ scored against ICP â†’ routed to the right rep in <60s â†’ full context attached.",
     steps: [
       { phase: "Capture", detail: "Form submission triggers instant record creation" },
       { phase: "Enrich", detail: "Firmographic and intent data appended automatically" },
@@ -92,7 +88,7 @@ const fallbackFoundation = {
   pillars: [
     {
       title: "Lifecycle stages",
-      detail: "Custom stages mapped to your actual sales motion — not a generic template.",
+      detail: "Custom stages mapped to your actual sales motion â€” not a generic template.",
       icon: "database",
     },
     {
@@ -198,22 +194,12 @@ function PillarIcon({ icon, className }: { icon: string; className?: string }) {
 /* ------------------------------------------------------------------ */
 
 export default async function CrmPage() {
-  const { sectionJson, sectionAttrs } = await loadPortalPageContent(
-    PAGE_KEYS.CRM,
-  );
+  const hero = fallbackHero;
+  const foundation = fallbackFoundation;
+  const migration = fallbackMigration;
+  const cta = fallbackCta;
 
-  const hero = sectionJson(SECTION_KEYS.CRM.HERO, fallbackHero);
-  const foundation = sectionJson(
-    SECTION_KEYS.CRM.FOUNDATION,
-    fallbackFoundation,
-  );
-  const migration = sectionJson(
-    SECTION_KEYS.CRM.MIGRATION,
-    fallbackMigration,
-  );
-  const cta = sectionJson(SECTION_KEYS.CRM.CTA, fallbackCta);
-
-  /* ---- derived arrays (safe portal fallback) ---- */
+  /* ---- derived arrays (safe static fallback) ---- */
   const dashboardMetrics =
     hero.dashboard?.metrics ?? fallbackHero.dashboard.metrics;
   const dashboardStages =
@@ -233,25 +219,22 @@ export default async function CrmPage() {
       {/*  HERO                                                    */}
       {/* ======================================================== */}
       <section className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
-        {/* Left — copy */}
+        {/* Left â€” copy */}
         <div>
           <p
             className={sectionLabel}
-            {...sectionAttrs(SECTION_KEYS.CRM.HERO)}
           >
             {hero.label}
           </p>
 
           <h1
             className="mt-6 max-w-2xl font-(--font-display) text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
-            {...sectionAttrs(SECTION_KEYS.CRM.HERO)}
           >
             {hero.title}
           </h1>
 
           <p
             className="mt-5 max-w-xl text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.CRM.HERO)}
           >
             {hero.body}
           </p>
@@ -272,7 +255,6 @@ export default async function CrmPage() {
             <Link
               href={hero.primary_cta?.href ?? "/contact"}
               className={primaryButton}
-              {...sectionAttrs(SECTION_KEYS.CRM.HERO)}
             >
               {hero.primary_cta?.label ?? "Book a Strategy Call"}
               <ArrowRight className="h-4 w-4" />
@@ -280,19 +262,17 @@ export default async function CrmPage() {
             <Link
               href={hero.secondary_cta?.href ?? "/contact"}
               className={secondaryButton}
-              {...sectionAttrs(SECTION_KEYS.CRM.HERO)}
             >
               {hero.secondary_cta?.label ?? "Request a Migration Assessment"}
             </Link>
           </div>
         </div>
 
-        {/* Right — CRM dashboard wireframe */}
+        {/* Right â€” CRM dashboard wireframe */}
         <div className={darkCard}>
           <div className="flex items-center justify-between">
             <span
               className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500"
-              {...sectionAttrs(SECTION_KEYS.CRM.HERO)}
             >
               {hero.dashboard?.label ?? fallbackHero.dashboard.label}
             </span>
@@ -368,19 +348,16 @@ export default async function CrmPage() {
         <div className="max-w-3xl">
           <p
             className={sectionLabel}
-            {...sectionAttrs(SECTION_KEYS.CRM.FOUNDATION)}
           >
             {foundation.label}
           </p>
           <h2
             className="mt-4 font-(--font-display) text-3xl font-semibold tracking-tight text-white md:text-4xl"
-            {...sectionAttrs(SECTION_KEYS.CRM.FOUNDATION)}
           >
             {foundation.title}
           </h2>
           <p
             className="mt-4 text-lg leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.CRM.FOUNDATION)}
           >
             {foundation.body}
           </p>
@@ -396,7 +373,6 @@ export default async function CrmPage() {
               <div
                 key={`pillar-${idx}`}
                 className={softCard}
-                {...sectionAttrs(SECTION_KEYS.CRM.FOUNDATION)}
               >
                 <PillarIcon icon={p.icon} />
                 <h3 className="mt-4 font-(--font-display) text-base font-semibold text-white">
@@ -410,12 +386,11 @@ export default async function CrmPage() {
           )}
         </div>
 
-        {/* Lead lifecycle flow — concrete example */}
+        {/* Lead lifecycle flow â€” concrete example */}
         <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-900/80 p-8">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p
               className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400"
-              {...sectionAttrs(SECTION_KEYS.CRM.FOUNDATION)}
             >
               {foundation.flow?.label ?? fallbackFoundation.flow.label}
             </p>
@@ -427,7 +402,6 @@ export default async function CrmPage() {
 
           <p
             className="mt-3 max-w-3xl font-(--font-mono) text-sm leading-relaxed text-slate-400"
-            {...sectionAttrs(SECTION_KEYS.CRM.FOUNDATION)}
           >
             {foundation.flow?.description ??
               fallbackFoundation.flow.description}
@@ -472,23 +446,20 @@ export default async function CrmPage() {
       {/* ======================================================== */}
       <section className="rounded-[2.5rem] border border-slate-800 bg-slate-900/60 px-8 py-16 shadow-[0_30px_80px_rgba(0,0,0,0.5)]">
         <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr]">
-          {/* Left — copy + safeguards */}
+          {/* Left â€” copy + safeguards */}
           <div>
             <p
               className={sectionLabel}
-              {...sectionAttrs(SECTION_KEYS.CRM.MIGRATION)}
             >
               {migration.label}
             </p>
             <h2
               className="mt-4 font-(--font-display) text-3xl font-semibold tracking-tight text-white md:text-4xl"
-              {...sectionAttrs(SECTION_KEYS.CRM.MIGRATION)}
             >
               {migration.title}
             </h2>
             <p
               className="mt-4 text-lg leading-relaxed text-slate-400"
-              {...sectionAttrs(SECTION_KEYS.CRM.MIGRATION)}
             >
               {migration.body}
             </p>
@@ -498,7 +469,6 @@ export default async function CrmPage() {
                 <div
                   key={`safeguard-${idx}`}
                   className="flex items-start gap-3 text-sm text-slate-300"
-                  {...sectionAttrs(SECTION_KEYS.CRM.MIGRATION)}
                 >
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
                   {item}
@@ -509,7 +479,6 @@ export default async function CrmPage() {
             {/* Governance sub-card */}
             <div
               className="mt-8 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-6"
-              {...sectionAttrs(SECTION_KEYS.CRM.MIGRATION)}
             >
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-400">
                 {migration.governance_card?.label ??
@@ -537,7 +506,7 @@ export default async function CrmPage() {
             </div>
           </div>
 
-          {/* Right — timeline visual with gates */}
+          {/* Right â€” timeline visual with gates */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
               {migration.timeline?.label ??
@@ -597,13 +566,11 @@ export default async function CrmPage() {
       <section className="rounded-[2.5rem] border border-emerald-500/20 bg-gradient-to-br from-emerald-600 to-emerald-700 px-8 py-16 text-center shadow-[0_25px_60px_rgba(16,185,129,0.2)]">
         <h2
           className="mx-auto max-w-3xl font-(--font-display) text-3xl font-semibold tracking-tight text-white md:text-4xl"
-          {...sectionAttrs(SECTION_KEYS.CRM.CTA)}
         >
           {cta.title}
         </h2>
         <p
           className="mx-auto mt-4 max-w-xl text-emerald-100/80"
-          {...sectionAttrs(SECTION_KEYS.CRM.CTA)}
         >
           {cta.body}
         </p>
@@ -611,7 +578,6 @@ export default async function CrmPage() {
           <Link
             href={cta.primary_cta?.href ?? "/contact"}
             className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
-            {...sectionAttrs(SECTION_KEYS.CRM.CTA)}
           >
             {cta.primary_cta?.label ?? "Book a Strategy Call"}
             <ArrowUpRight className="h-4 w-4" />
@@ -619,7 +585,6 @@ export default async function CrmPage() {
           <Link
             href={cta.secondary_cta?.href ?? "/contact"}
             className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-            {...sectionAttrs(SECTION_KEYS.CRM.CTA)}
           >
             {cta.secondary_cta?.label ?? "Request a Migration Assessment"}
           </Link>

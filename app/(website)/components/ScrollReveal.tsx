@@ -27,12 +27,24 @@ export default function ScrollReveal({
       return false;
     }
 
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      window.matchMedia("(max-width: 767px)").matches
+    );
   });
 
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
+    }
+
+    const skipRevealAnimation =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      window.matchMedia("(max-width: 767px)").matches;
+
+    if (skipRevealAnimation) {
+      const rafId = window.requestAnimationFrame(() => setVisible(true));
+      return () => window.cancelAnimationFrame(rafId);
     }
 
     if (visible) {

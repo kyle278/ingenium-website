@@ -16,8 +16,10 @@ const routeLabelMap: Record<string, string> = {
   "/crm": "CRM",
   "/automations": "Automations",
   "/case-studies": "Case Studies",
+  "/projects": "Projects",
   "/security": "Security",
   "/about": "About",
+  "/team": "Team",
   "/contact": "Contact",
 };
 
@@ -223,6 +225,20 @@ function buildCaseStudiesSchema(): JsonLd {
   };
 }
 
+function buildProjectsSchema(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Client Projects",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Northstar Pay Growth Platform" },
+      { "@type": "ListItem", position: 2, name: "Meridian Health Demand Engine" },
+      { "@type": "ListItem", position: 3, name: "Arclight Security Enterprise Rebuild" },
+      { "@type": "ListItem", position: 4, name: "PilotGrid Logistics Revenue System" },
+    ],
+  };
+}
+
 export default function RouteStructuredData() {
   const pathname = usePathname() || "/";
 
@@ -244,6 +260,10 @@ export default function RouteStructuredData() {
 
     if (pathname === "/case-studies") {
       items.push(buildCaseStudiesSchema());
+    }
+
+    if (pathname === "/projects") {
+      items.push(buildProjectsSchema());
     }
 
     return items;

@@ -40,3 +40,31 @@ This file is mandatory for all tasks.
   - `AGENTS/DesignLanguage.md`
   - `README.md`
   - Removed portal files under `src/lib/` and `src/portalconnect.ts`
+
+---
+
+- Date: 2026-03-03
+- Task: Reconnect contact form submissions to Ingenium Portal via server-side route
+- Categories: `FUNCTIONAL CHANGE`, `SECURITY`, `IMPROVEMENT`, `DOCUMENTATION`, `PROCESS`
+- Summary:
+  - Added a secure portal submission endpoint at `app/api/portal/forms/[slug]/submit/route.ts`.
+  - Updated contact form submission flow to post all fields plus canonical tracking data (`utm_*`, `cid`, `submission_url`) to the new endpoint.
+  - Added required workflow artifacts: plan file, communication log, and global/area `agentContext` files.
+  - Updated project documentation and local env template values for portal form integration.
+- Impact:
+  - Contact form submissions now create portal-ingest rows through the website server, keeping service-role access off the client.
+  - Payload shape now aligns with portal trigger expectations for attribution and downstream CRM processing.
+  - Team has explicit configuration/docs/context files for maintaining this integration path.
+- Key files:
+  - `app/api/portal/forms/[slug]/submit/route.ts`
+  - `app/(website)/contact/ContactForm.tsx`
+  - `.env.local`
+  - `README.md`
+  - `agentContext/context.md`
+  - `agentContext/architecture.md`
+  - `app/(website)/agentContext/context.md`
+  - `app/(website)/agentContext/architecture.md`
+  - `app/api/portal/agentContext/context.md`
+  - `app/api/portal/agentContext/architecture.md`
+  - `Agents/Plans/portal-form-integration.md`
+  - `Agents/agentCommunications/portal-form-integration-comms.md`

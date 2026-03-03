@@ -9,10 +9,63 @@ type SubmitState = "idle" | "success";
 const fieldClassName =
   "w-full rounded-lg border border-slate-700 bg-slate-800/60 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30";
 
+function splitFullName(fullName: string) {
+  const parts = fullName
+    .split(/\s+/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  if (parts.length === 0) {
+    return {
+      firstName: null,
+      lastName: null,
+    };
+  }
+
+  if (parts.length === 1) {
+    return {
+      firstName: parts[0] ?? null,
+      lastName: null,
+    };
+  }
+
+  return {
+    firstName: parts[0] ?? null,
+    lastName: parts.slice(1).join(" "),
+  };
+}
+
+function getQueryParam(query: URLSearchParams, key: string) {
+  const value = query.get(key);
+  if (!value) {
+    return null;
+  }
+
+  const normalized = value.trim();
+  return normalized.length > 0 ? normalized : null;
+}
+
+function getFormTracking() {
+  const url = new URL(window.location.href);
+  const query = url.searchParams;
+
+  return {
+    utm_source: getQueryParam(query, "utm_source"),
+    utm_medium: getQueryParam(query, "utm_medium"),
+    utm_campaign: getQueryParam(query, "utm_campaign"),
+    utm_term: getQueryParam(query, "utm_term"),
+    utm_content: getQueryParam(query, "utm_content"),
+    cid: getQueryParam(query, "cid"),
+    submission_url: window.location.href,
+    referrer: document.referrer || null,
+  };
+}
+
 export default function ContactForm() {
   const [step, setStep] = useState<FormStep>(1);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [stepAnimationKey, setStepAnimationKey] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,7 +88,7 @@ export default function ContactForm() {
     setStepAnimationKey((prev) => prev + 1);
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (step === 1) {
@@ -43,8 +96,70 @@ export default function ContactForm() {
       return;
     }
 
-    setSubmitState("success");
-    setErrorMessage("");
+    if (isSubmitting) {
+      return;
+    }
+
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedStack = stack.trim();
+    const trimmedGoals = goals.trim();
+    const { firstName, lastName } = splitFullName(trimmedName);
+    const intent = getQueryParam(new URLSearchParams(window.location.search), "intent");
+
+    const fields: Record<string, unknown> = {
+      name: trimmedName,
+      email: trimmedEmail,
+      challenge,
+      companySize,
+      stack: trimmedStack,
+      timeline,
+      budgetRange,
+      goals: trimmedGoals,
+      first_name: firstName,
+      last_name: lastName,
+      biggest_growth_challenge: challenge,
+      company_size: companySize || null,
+      current_stack: trimmedStack || null,
+      budget_range: budgetRange || null,
+      additional_goals: trimmedGoals || null,
+      intent,
+    };
+
+    try {
+      setIsSubmitting(true);
+      setErrorMessage("");
+
+      const response = await fetch("/api/portal/forms/contact/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formSlug: "contact",
+          fields,
+          tracking: getFormTracking(),
+        }),
+      });
+
+      if (!response.ok) {
+        let message = "Unable to submit your request. Please try again.";
+        const payload = (await response.json().catch(() => null)) as { error?: unknown } | null;
+        if (payload && typeof payload.error === "string" && payload.error.trim().length > 0) {
+          message = payload.error;
+        }
+        throw new Error(message);
+      }
+
+      setSubmitState("success");
+      setErrorMessage("");
+    } catch (error) {
+      const message =
+        error instanceof Error && error.message.trim().length > 0
+          ? error.message
+          : "Unable to submit your request. Please try again.";
+      setErrorMessage(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   if (submitState === "success") {
@@ -62,7 +177,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
+    <form className="space-y-5" onSubmit={handleSubmit} aria-busy={isSubmitting}>
       <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2">
         <p className="font-(--font-mono) text-[11px] uppercase tracking-widest text-slate-500">
           Step {step} of 2
@@ -203,6 +318,7 @@ export default function ContactForm() {
             type="button"
             className="cta-lift inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900 px-7 py-3.5 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:text-white"
             onClick={() => setStep(1)}
+            disabled={isSubmitting}
           >
             <ArrowLeft className="h-4 w-4" />
             Back
@@ -210,15 +326,17 @@ export default function ContactForm() {
           <button
             className="cta-lift inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
             type="submit"
+            disabled={isSubmitting}
           >
-            Get Started
-            <ArrowRight className="h-4 w-4" />
+            {isSubmitting ? "Submitting..." : "Get Started"}
+            {isSubmitting ? null : <ArrowRight className="h-4 w-4" />}
           </button>
         </div>
       ) : (
         <button
           className="cta-lift inline-flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
           type="submit"
+          disabled={isSubmitting}
         >
           Continue
           <ArrowRight className="h-4 w-4" />

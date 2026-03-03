@@ -14,9 +14,21 @@ Open `http://localhost:3000`.
 - Framework: Next.js App Router
 - Styling: Tailwind CSS + `app/globals.css`
 - Content model: static in-code fallback objects per route page
-- Contact flow: in-site progressive form component in `app/(website)/contact/ContactForm.tsx`
+- Contact flow: progressive form in `app/(website)/contact/ContactForm.tsx` posting to `app/api/portal/forms/[slug]/submit/route.ts`
 
-The website no longer reads page content blocks from the Ingenium portal.
+The website keeps page content static in code, while form submissions are forwarded to Ingenium Portal.
+
+## Portal Form Integration Env
+
+Set these values in `.env.local`:
+
+```bash
+NEXT_PUBLIC_PORTAL_SUPABASE_URL=https://<portal-project>.supabase.co
+PORTAL_SUPABASE_SERVICE_ROLE_KEY=<portal-service-role-key>
+PORTAL_ORGANISATION_ID=<organisation-uuid>
+PORTAL_SITE_ID=<website-site-uuid>
+PORTAL_DEFAULT_FORM_SLUG=contact
+```
 
 ## Key Route Files
 

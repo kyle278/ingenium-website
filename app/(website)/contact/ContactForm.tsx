@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 
+import { getIngeniumTrackingPayload } from "@/lib/ingeniumTrackingPayload";
+
 type FormStep = 1 | 2;
 type SubmitState = "idle" | "success";
 
@@ -43,22 +45,6 @@ function getQueryParam(query: URLSearchParams, key: string) {
 
   const normalized = value.trim();
   return normalized.length > 0 ? normalized : null;
-}
-
-function getFormTracking() {
-  const url = new URL(window.location.href);
-  const query = url.searchParams;
-
-  return {
-    utm_source: getQueryParam(query, "utm_source"),
-    utm_medium: getQueryParam(query, "utm_medium"),
-    utm_campaign: getQueryParam(query, "utm_campaign"),
-    utm_term: getQueryParam(query, "utm_term"),
-    utm_content: getQueryParam(query, "utm_content"),
-    cid: getQueryParam(query, "cid"),
-    submission_url: window.location.href,
-    referrer: document.referrer || null,
-  };
 }
 
 export default function ContactForm() {
@@ -136,7 +122,7 @@ export default function ContactForm() {
         body: JSON.stringify({
           formSlug: "contact",
           fields,
-          tracking: getFormTracking(),
+          tracking: getIngeniumTrackingPayload(),
         }),
       });
 
@@ -177,7 +163,12 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit} aria-busy={isSubmitting}>
+    <form
+      className="space-y-5"
+      onSubmit={handleSubmit}
+      aria-busy={isSubmitting}
+      data-form-id="contact"
+    >
       <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2">
         <p className="font-(--font-mono) text-[11px] uppercase tracking-widest text-slate-500">
           Step {step} of 2
@@ -327,6 +318,8 @@ export default function ContactForm() {
             className="cta-lift inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
             type="submit"
             disabled={isSubmitting}
+            data-track-cta="contact_submit"
+            data-track-label="Get Started"
           >
             {isSubmitting ? "Submitting..." : "Get Started"}
             {isSubmitting ? null : <ArrowRight className="h-4 w-4" />}
@@ -337,6 +330,8 @@ export default function ContactForm() {
           className="cta-lift inline-flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
           type="submit"
           disabled={isSubmitting}
+          data-track-cta="contact_continue"
+          data-track-label="Continue"
         >
           Continue
           <ArrowRight className="h-4 w-4" />

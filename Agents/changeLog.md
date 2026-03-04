@@ -16,6 +16,36 @@ This file is mandatory for all tasks.
 
 ---
 
+- Date: 2026-03-04
+- Task: Implement Ingenium website tracking runtime and canonical form linkage IDs
+- Categories: `FUNCTIONAL CHANGE`, `IMPROVEMENT`, `SECURITY`, `DOCUMENTATION`, `PROCESS`
+- Summary:
+  - Added global Ingenium tracker bootstrap component that loads `${NEXT_PUBLIC_INGENIUM_PORTAL_APP_URL}/ingenium-tracker.js` and initializes tracking endpoint `${NEXT_PUBLIC_INGENIUM_PORTAL_APP_URL}/api/websites/tracking/events`.
+  - Added custom event instrumentation for CTA clicks, outbound/download links, scroll depth, video progress, form lifecycle events, FAQ expands, heartbeat, and session end.
+  - Enforced immediate event delivery for custom events by calling `flush()` immediately after each `track(...)`.
+  - Added reusable browser tracking payload helper and wired contact form submissions to include canonical IDs: `visitor_id`, `session_id`, and `site_id`.
+  - Extended portal form submit handling to preserve canonical linkage IDs in stored submission `data` and `metadata`.
+  - Added required tracking env variables for public portal URL and site ID in `.env.local`.
+- Impact:
+  - Website interactions are now instrumented and sent to Portal tracking ingestion without exposing service-role credentials in browser code.
+  - Contact form submissions can be correlated with tracked sessions/visitors through canonical linkage IDs.
+  - Tracking setup is globally mounted and reusable for current and future event types via data attributes and event listeners.
+- Key files:
+  - `app/components/IngeniumTracking.tsx`
+  - `app/layout.tsx`
+  - `lib/ingeniumTrackingPayload.ts`
+  - `app/(website)/contact/ContactForm.tsx`
+  - `app/api/portal/_lib/formSubmit.ts`
+  - `.env.local`
+  - `agentContext/context.md`
+  - `agentContext/architecture.md`
+  - `app/(website)/agentContext/context.md`
+  - `app/(website)/agentContext/architecture.md`
+  - `app/api/portal/agentContext/context.md`
+  - `app/api/portal/agentContext/architecture.md`
+  - `Agents/Plans/ingenium-website-tracking-integration.md`
+  - `Agents/agentCommunications/ingenium-website-tracking-integration-comms.md`
+
 - Date: 2026-03-03
 - Task: Remove portal-driven content wiring, restore static live copy, and add team page
 - Categories: `IMPROVEMENT`, `UI CHANGE`, `UX CHANGE`, `FUNCTIONAL CHANGE`, `DOCUMENTATION`

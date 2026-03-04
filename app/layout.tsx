@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 
+import IngeniumTracking from "@/app/components/IngeniumTracking";
+
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -48,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-slate-950 font-[var(--font-body)] text-slate-50 antialiased`}
       >
+        <IngeniumTracking />
         {children}
       </body>
     </html>

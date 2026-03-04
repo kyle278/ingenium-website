@@ -220,6 +220,9 @@ export async function handlePortalFormSubmit(
     const utmTerm = readCanonicalValue(tracking, fields, "utm_term", ["UTM_Term"]);
     const utmContent = readCanonicalValue(tracking, fields, "utm_content", ["UTM_Content"]);
     const cid = readCanonicalValue(tracking, fields, "cid", ["CID"]);
+    const visitorId = readCanonicalValue(tracking, fields, "visitor_id", ["visitorId"]);
+    const sessionId = readCanonicalValue(tracking, fields, "session_id", ["sessionId"]);
+    const trackingSiteId = readCanonicalValue(tracking, fields, "site_id", ["siteId"]);
     const submissionUrl = readCanonicalValue(tracking, fields, "submission_url", [
       "Submission url",
       "submissionUrl",
@@ -249,6 +252,10 @@ export async function handlePortalFormSubmit(
       utm_term: utmTerm,
       utm_content: utmContent,
       cid,
+      visitor_id: visitorId,
+      session_id: sessionId,
+      site_id: trackingSiteId,
+      referrer,
       submission_url: submissionUrl,
     };
 
@@ -263,9 +270,13 @@ export async function handlePortalFormSubmit(
       utm_term: utmTerm,
       utm_content: utmContent,
       cid,
+      visitor_id: visitorId,
+      session_id: sessionId,
+      tracking_site_id: trackingSiteId,
       diagnostics: {
         has_form_id_override: Boolean(requestedFormId),
         route_slug: options.routeSlug ?? null,
+        tracking_site_id_matches_env_site_id: trackingSiteId ? trackingSiteId === siteId : null,
       },
     };
 

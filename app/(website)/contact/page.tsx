@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, CheckCircle2, Mail, MapPin, PhoneCall } from "lucide-react";
 
+import { WEBSITE_FORM_NAMES, WEBSITE_FORM_SLUGS } from "@/lib/portalIntegration/forms";
+import { getPortalFormBySlug } from "@/lib/portalIntegration/server";
+
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
@@ -39,7 +42,19 @@ const infoCards = [
   { title: "Delivery footprint", body: "US and EU coverage" },
 ];
 
-export default function ContactPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ContactPage() {
+  let contactForm = null;
+  let formResolutionError: string | null = null;
+
+  try {
+    contactForm = await getPortalFormBySlug(WEBSITE_FORM_SLUGS.contact);
+  } catch (error) {
+    formResolutionError =
+      error instanceof Error ? error.message : "Unknown Portal form resolution error.";
+  }
+
   return (
     <div className="space-y-24 md:space-y-28">
       <section className="grid items-start gap-8 lg:grid-cols-[1.05fr,0.95fr]">
@@ -78,7 +93,30 @@ export default function ContactPage() {
         </div>
 
         <div className={`${darkCard} grid-lines`}>
-          <ContactForm />
+          {contactForm ? (
+            <ContactForm
+              formId={contactForm.id}
+              formSlug={contactForm.slug}
+              formName={contactForm.name}
+            />
+          ) : (
+            <div className="space-y-4 rounded-xl border border-rose-500/40 bg-rose-500/10 p-5">
+              <p className="font-(--font-mono) text-xs uppercase tracking-widest text-rose-300">
+                Form Configuration Required
+              </p>
+              <h2 className="font-(--font-display) text-xl font-semibold text-white">
+                Contact form UUID is not configured in Ingenium Portal.
+              </h2>
+              <p className="text-sm leading-relaxed text-slate-300">
+                The website requires the canonical Portal form UUID for reporting and submission
+                tracking. Upsert the "{WEBSITE_FORM_NAMES.contact}" row with slug "
+                {WEBSITE_FORM_SLUGS.contact}" in Portal, then reload this page.
+              </p>
+              {formResolutionError ? (
+                <p className="text-xs text-rose-200/80">{formResolutionError}</p>
+              ) : null}
+            </div>
+          )}
         </div>
       </section>
 

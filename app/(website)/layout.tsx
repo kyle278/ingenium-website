@@ -4,6 +4,8 @@ import RouteStructuredData from "./components/RouteStructuredData";
 
 export const revalidate = 300;
 
+const portalAppUrl = process.env.PORTAL_APP_URL?.replace(/\/$/, "") ?? "";
+
 const navContent = {
   brand: "Ingenium",
   items: [
@@ -15,8 +17,10 @@ const navContent = {
     { href: "/case-studies", label: "Case Studies" },
     { href: "/security", label: "Security" },
   ],
-  contact_label: "Contact",
-  cta_label: "Book a Strategy Call",
+  login_label: "Login",
+  login_href: portalAppUrl ? `${portalAppUrl}/login` : "#",
+  signup_label: "Sign Up",
+  signup_href: portalAppUrl ? `${portalAppUrl}/signup` : "#",
 };
 
 const footerContent = {

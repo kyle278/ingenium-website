@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 
 import IngeniumTracking from "@/app/components/IngeniumTracking";
+import { getPortalPublicConfigOrNull } from "@/lib/portalIntegration/config";
 
 import "./globals.css";
 
@@ -45,12 +46,19 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const portalPublicConfig = getPortalPublicConfigOrNull();
+
   return (
     <html lang="en">
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-slate-950 font-[var(--font-body)] text-slate-50 antialiased`}
       >
-        <IngeniumTracking />
+        {portalPublicConfig ? (
+          <IngeniumTracking
+            portalAppUrl={portalPublicConfig.portalAppUrl}
+            siteId={portalPublicConfig.siteId}
+          />
+        ) : null}
         {children}
       </body>
     </html>

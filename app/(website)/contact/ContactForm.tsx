@@ -7,6 +7,11 @@ import { getIngeniumTrackingPayload } from "@/lib/ingeniumTrackingPayload";
 
 type FormStep = 1 | 2;
 type SubmitState = "idle" | "success";
+type ContactFormProps = {
+  formId: string;
+  formSlug: string;
+  formName: string;
+};
 
 const fieldClassName =
   "w-full rounded-lg border border-slate-700 bg-slate-800/60 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30";
@@ -47,7 +52,15 @@ function getQueryParam(query: URLSearchParams, key: string) {
   return normalized.length > 0 ? normalized : null;
 }
 
-export default function ContactForm() {
+function createIdempotencyKey() {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+
+  return `contact_submit_${Date.now()}`;
+}
+
+export default function ContactForm({ formId, formSlug, formName }: ContactFormProps) {
   const [step, setStep] = useState<FormStep>(1);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [stepAnimationKey, setStepAnimationKey] = useState(0);
@@ -120,7 +133,10 @@ export default function ContactForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          formSlug: "contact",
+          formId,
+          formSlug,
+          formName,
+          idempotencyKey: createIdempotencyKey(),
           fields,
           tracking: getIngeniumTrackingPayload(),
         }),
@@ -167,7 +183,9 @@ export default function ContactForm() {
       className="space-y-5"
       onSubmit={handleSubmit}
       aria-busy={isSubmitting}
-      data-form-id="contact"
+      data-form-id={formId}
+      data-form-slug={formSlug}
+      data-form-name={formName}
     >
       <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2">
         <p className="font-(--font-mono) text-[11px] uppercase tracking-widest text-slate-500">

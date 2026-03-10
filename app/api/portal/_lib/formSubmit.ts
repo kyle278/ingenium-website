@@ -1,5 +1,8 @@
-import { createClient } from "@supabase/supabase-js";
 import type { NextRequest } from "next/server";
+
+import { readPortalServerConfig } from "@/lib/portalIntegration/config";
+import { createPortalServerClient, getPortalFormBySlug } from "@/lib/portalIntegration/server";
+import type { PortalFormSubmitRequest } from "@/lib/portalIntegration/types";
 
 type SubmitOptions = {
   routeSlug?: string | null;
@@ -9,20 +12,6 @@ type SubmitResult = {
   status: number;
   body: Record<string, unknown>;
 };
-
-function readEnvValue(key: string) {
-  const raw = process.env[key];
-  if (typeof raw !== "string") {
-    return null;
-  }
-
-  const normalized = raw.trim();
-  return normalized.length > 0 ? normalized : null;
-}
-
-function sanitizeSecretValue(value: string) {
-  return value.replace(/\\r\\n|\\n|\\r/g, "").trim();
-}
 
 function asObject(value: unknown): Record<string, unknown> | null {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
@@ -55,90 +44,45 @@ function readCanonicalValue(
   }
 
   for (const key of [canonicalKey, ...aliases]) {
-    const fieldsValue = asNullableString(fields[key]);
-    if (fieldsValue) {
-      return fieldsValue;
+    const fieldValue = asNullableString(fields[key]);
+    if (fieldValue) {
+      return fieldValue;
     }
   }
 
   return null;
 }
 
-function validateServiceRoleKey(serviceRoleKey: string) {
-  const anonCandidates = [
-    readEnvValue("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
-    readEnvValue("SUPABASE_ANON_KEY"),
-  ]
-    .filter((value): value is string => Boolean(value))
-    .map((value) => sanitizeSecretValue(value));
-
-  if (serviceRoleKey.startsWith("sb_publishable_") || serviceRoleKey.startsWith("sb_anon_")) {
-    return "PORTAL_SUPABASE_SERVICE_ROLE_KEY is set to a publishable/anon key. Use a service-role secret key.";
-  }
-
-  if (anonCandidates.includes(serviceRoleKey)) {
-    return "PORTAL_SUPABASE_SERVICE_ROLE_KEY matches the anon key. Use a service-role secret key.";
-  }
-
-  return null;
+function readIpAddress(req: NextRequest) {
+  const ipHeader = req.headers.get("x-forwarded-for") ?? req.headers.get("x-real-ip");
+  return ipHeader?.split(",")[0]?.trim() || null;
 }
 
-async function resolveFormId(params: {
-  supabaseUrl: string;
-  serviceRoleKey: string;
-  organisationId: string;
-  siteId: string;
-  requestedFormId: string | null;
-  requestedSlug: string | null;
-}) {
-  const {
-    supabaseUrl,
-    serviceRoleKey,
-    organisationId,
-    siteId,
-    requestedFormId,
-    requestedSlug,
-  } = params;
-
-  const supabase = createClient(supabaseUrl, serviceRoleKey, {
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
-
-  if (requestedFormId) {
-    const { data, error } = await supabase
-      .from("website_forms")
-      .select("id")
-      .eq("organisation_id", organisationId)
-      .eq("site_id", siteId)
-      .eq("id", requestedFormId)
-      .eq("is_active", true)
-      .maybeSingle();
-
-    if (error) {
-      throw new Error(`Failed to resolve form by id: ${error.message}`);
-    }
-
-    return data?.id ? (data.id as string) : null;
+async function parseSubmitPayload(req: NextRequest) {
+  let payload: unknown;
+  try {
+    payload = await req.json();
+  } catch {
+    return { error: "Invalid JSON payload." } as const;
   }
 
-  if (!requestedSlug) {
-    return null;
+  const body = asObject(payload) as PortalFormSubmitRequest | null;
+  if (!body) {
+    return { error: "Invalid payload: expected object body." } as const;
   }
 
-  const { data, error } = await supabase
-    .from("website_forms")
-    .select("id")
-    .eq("organisation_id", organisationId)
-    .eq("site_id", siteId)
-    .eq("slug", requestedSlug)
-    .eq("is_active", true)
-    .maybeSingle();
+  const fields = asObject(body.fields);
+  const tracking = asObject(body.tracking) ?? {};
 
-  if (error) {
-    throw new Error(`Failed to resolve form by slug: ${error.message}`);
+  if (!fields) {
+    return { error: "Invalid payload: fields must be an object." } as const;
   }
 
-  return data?.id ? (data.id as string) : null;
+  return {
+    body,
+    fields,
+    tracking,
+  } as const;
 }
 
 export async function handlePortalFormSubmit(
@@ -146,71 +90,42 @@ export async function handlePortalFormSubmit(
   options: SubmitOptions = {},
 ): Promise<SubmitResult> {
   try {
-    const supabaseUrl = readEnvValue("NEXT_PUBLIC_PORTAL_SUPABASE_URL");
-    const serviceRoleRaw = readEnvValue("PORTAL_SUPABASE_SERVICE_ROLE_KEY");
-    const serviceRoleKey = serviceRoleRaw ? sanitizeSecretValue(serviceRoleRaw) : null;
-    const organisationId = readEnvValue("PORTAL_ORGANISATION_ID");
-    const siteId = readEnvValue("PORTAL_SITE_ID");
-
-    if (!supabaseUrl || !serviceRoleKey || !organisationId || !siteId) {
-      return {
-        status: 500,
-        body: {
-          error:
-            "Portal form submit is not configured. Required env vars: NEXT_PUBLIC_PORTAL_SUPABASE_URL, PORTAL_SUPABASE_SERVICE_ROLE_KEY, PORTAL_ORGANISATION_ID, PORTAL_SITE_ID.",
-        },
-      };
+    const parsedPayload = await parseSubmitPayload(req);
+    if ("error" in parsedPayload) {
+      return { status: 400, body: { error: parsedPayload.error } };
     }
 
-    const serviceKeyError = validateServiceRoleKey(serviceRoleKey);
-    if (serviceKeyError) {
-      return {
-        status: 500,
-        body: {
-          error: serviceKeyError,
-        },
-      };
-    }
-
-    let payload: unknown;
-    try {
-      payload = await req.json();
-    } catch {
-      return { status: 400, body: { error: "Invalid JSON payload." } };
-    }
-
-    const bodyRaw = asObject(payload);
-    if (!bodyRaw) {
-      return { status: 400, body: { error: "Invalid payload: expected object body." } };
-    }
-
-    const fields = asObject(bodyRaw.fields);
-    const tracking = asObject(bodyRaw.tracking) ?? {};
-
-    if (!fields) {
-      return { status: 400, body: { error: "Invalid payload: fields must be an object." } };
-    }
-
-    const requestedFormId = asNullableString(bodyRaw.formId);
+    const { body, fields, tracking } = parsedPayload;
+    const config = readPortalServerConfig();
+    const requestedFormId = asNullableString(body.formId);
     const requestedSlug =
-      asNullableString(bodyRaw.formSlug) ??
-      asNullableString(options.routeSlug) ??
-      readEnvValue("PORTAL_DEFAULT_FORM_SLUG") ??
-      null;
+      asNullableString(body.formSlug) ?? asNullableString(options.routeSlug) ?? config.defaultFormSlug;
+    const requestedFormName = asNullableString(body.formName);
+    const idempotencyKey = asNullableString(body.idempotencyKey);
 
-    const formId = await resolveFormId({
-      supabaseUrl,
-      serviceRoleKey,
-      organisationId,
-      siteId,
-      requestedFormId,
-      requestedSlug,
-    });
-
-    if (!formId) {
+    if (!requestedSlug) {
       return {
         status: 400,
-        body: { error: "Unable to resolve an active portal form for this submission." },
+        body: { error: "Missing required form identifier: formSlug." },
+      };
+    }
+
+    const { supabase } = createPortalServerClient();
+    const resolvedForm = await getPortalFormBySlug(requestedSlug);
+
+    if (!resolvedForm) {
+      return {
+        status: 400,
+        body: { error: `No active Portal website form found for slug "${requestedSlug}".` },
+      };
+    }
+
+    if (requestedFormId && requestedFormId !== resolvedForm.id) {
+      return {
+        status: 400,
+        body: {
+          error: `Provided formId does not match the active Portal form UUID for slug "${requestedSlug}".`,
+        },
       };
     }
 
@@ -222,12 +137,14 @@ export async function handlePortalFormSubmit(
     const cid = readCanonicalValue(tracking, fields, "cid", ["CID"]);
     const visitorId = readCanonicalValue(tracking, fields, "visitor_id", ["visitorId"]);
     const sessionId = readCanonicalValue(tracking, fields, "session_id", ["sessionId"]);
-    const trackingSiteId = readCanonicalValue(tracking, fields, "site_id", ["siteId"]);
     const submissionUrl = readCanonicalValue(tracking, fields, "submission_url", [
-      "Submission url",
       "submissionUrl",
       "Submission URL",
     ]);
+    const landingUrl = readCanonicalValue(tracking, fields, "landing_url", ["landingUrl"]);
+    const referrer =
+      readCanonicalValue(tracking, fields, "referrer", ["Referrer"]) ??
+      asNullableString(req.headers.get("referer"));
 
     if (!submissionUrl) {
       return {
@@ -236,13 +153,52 @@ export async function handlePortalFormSubmit(
       };
     }
 
-    const referrer =
-      readCanonicalValue(tracking, fields, "referrer", ["Referrer"]) ??
-      asNullableString(req.headers.get("referer"));
+    if (idempotencyKey) {
+      const { data: existingRows, error: existingError } = await supabase
+        .from("website_form_submissions")
+        .select("id")
+        .eq("organisation_id", config.organisationId)
+        .eq("site_id", config.siteId)
+        .eq("form_id", resolvedForm.id)
+        .contains("metadata", { idempotency_key: idempotencyKey })
+        .limit(1);
 
-    const ipHeader = req.headers.get("x-forwarded-for") ?? req.headers.get("x-real-ip");
-    const ipAddress = ipHeader?.split(",")[0]?.trim() || null;
-    const userAgent = req.headers.get("user-agent");
+      if (existingError) {
+        return {
+          status: 500,
+          body: { error: `Failed duplicate submission check: ${existingError.message}` },
+        };
+      }
+
+      const existingId = existingRows?.[0]?.id;
+      if (existingId) {
+        return {
+          status: 200,
+          body: {
+            ok: true,
+            duplicate: true,
+            submissionId: existingId,
+          },
+        };
+      }
+    }
+
+    const metadata = {
+      submitted_at: new Date().toISOString(),
+      referrer,
+      landing_url: landingUrl,
+      utm_source: utmSource,
+      utm_medium: utmMedium,
+      utm_campaign: utmCampaign,
+      utm_term: utmTerm,
+      utm_content: utmContent,
+      cid,
+      visitor_id: visitorId,
+      session_id: sessionId,
+      form_slug: resolvedForm.slug,
+      form_name: requestedFormName ?? resolvedForm.name,
+      idempotency_key: idempotencyKey,
+    };
 
     const dataPayload = {
       ...fields,
@@ -252,44 +208,18 @@ export async function handlePortalFormSubmit(
       utm_term: utmTerm,
       utm_content: utmContent,
       cid,
-      visitor_id: visitorId,
-      session_id: sessionId,
-      site_id: trackingSiteId,
-      referrer,
       submission_url: submissionUrl,
-    };
-
-    const metadata = {
-      submitted_at: new Date().toISOString(),
-      resolved_form_slug: requestedSlug,
-      referrer,
-      landing_url: submissionUrl,
-      utm_source: utmSource,
-      utm_medium: utmMedium,
-      utm_campaign: utmCampaign,
-      utm_term: utmTerm,
-      utm_content: utmContent,
-      cid,
       visitor_id: visitorId,
       session_id: sessionId,
-      tracking_site_id: trackingSiteId,
-      diagnostics: {
-        has_form_id_override: Boolean(requestedFormId),
-        route_slug: options.routeSlug ?? null,
-        tracking_site_id_matches_env_site_id: trackingSiteId ? trackingSiteId === siteId : null,
-      },
+      site_id: config.siteId,
     };
-
-    const supabase = createClient(supabaseUrl, serviceRoleKey, {
-      auth: { persistSession: false, autoRefreshToken: false },
-    });
 
     const { data: insertedRows, error } = await supabase
       .from("website_form_submissions")
       .insert({
-        organisation_id: organisationId,
-        site_id: siteId,
-        form_id: formId,
+        organisation_id: config.organisationId,
+        site_id: config.siteId,
+        form_id: resolvedForm.id,
         data: dataPayload,
         source_url: submissionUrl,
         submission_url: submissionUrl,
@@ -299,15 +229,20 @@ export async function handlePortalFormSubmit(
         utm_term: utmTerm,
         utm_content: utmContent,
         campaign_cid: cid,
+        tracking_visitor_id: visitorId,
+        tracking_session_id: sessionId,
         metadata,
-        ip_address: ipAddress,
-        user_agent: userAgent,
+        ip_address: readIpAddress(req),
+        user_agent: asNullableString(req.headers.get("user-agent")),
       })
       .select("id")
       .limit(1);
 
     if (error) {
-      return { status: 500, body: { error: `Portal insert failed: ${error.message}` } };
+      return {
+        status: 500,
+        body: { error: `Portal insert failed: ${error.message}` },
+      };
     }
 
     return {

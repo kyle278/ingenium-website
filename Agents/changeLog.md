@@ -16,6 +16,60 @@ This file is mandatory for all tasks.
 
 ---
 
+- Date: 2026-03-10
+- Task: Move Login and Sign Up to the top navigation on all devices
+- Categories: `UI CHANGE`, `UX CHANGE`, `IMPROVEMENT`, `DOCUMENTATION`, `PROCESS`
+- Summary:
+  - Replaced the previous right-side contact/strategy CTA block in the shared website header with Portal-backed Login and Sign Up actions.
+  - Added the same Login and Sign Up actions at the top of the mobile menu so auth entrypoints stay visible before the rest of the nav links.
+  - Wired auth destinations to `${PORTAL_APP_URL}/login` and `${PORTAL_APP_URL}/signup` from the shared website layout config.
+- Impact:
+  - Login and Sign Up are now visible at the top of the page across desktop and mobile.
+  - Website visitors can jump directly into Portal auth without opening the contact flow first.
+- Key files:
+  - `app/(website)/components/SiteNav.tsx`
+  - `app/(website)/layout.tsx`
+  - `app/(website)/agentContext/context.md`
+  - `app/(website)/agentContext/architecture.md`
+  - `agentContext/context.md`
+  - `Agents/Plans/nav-auth-actions-top.md`
+  - `Agents/agentCommunications/nav-auth-actions-top-comms.md`
+
+- Date: 2026-03-10
+- Task: Replace legacy website Portal integration with production-grade tracking and submission contract
+- Categories: `FUNCTIONAL CHANGE`, `SECURITY`, `IMPROVEMENT`, `DOCUMENTATION`, `PROCESS`
+- Summary:
+  - Replaced the legacy tracker bootstrap with a centralized Portal integration layer that uses `PORTAL_APP_URL`, durable `visitor_id` cookie plus `localStorage`, rotating `session_id`, and required `session_start`, `page_view`, `form_view`, and `scroll_depth` events.
+  - Added centralized Portal config/types and a server-side form resolver so the contact page now requires the real Portal `website_forms.id` UUID before rendering a tracked form.
+  - Reworked the Portal submission handler to resolve the active form by slug, enforce canonical `form_id` matching, write required tracking columns (`tracking_visitor_id`, `tracking_session_id`, `campaign_cid`), and include the required `data` and `metadata` payload contents.
+  - Added idempotent SQL for the canonical `contact` form setup in Portal and updated repository docs/context to the new contract.
+- Impact:
+  - Anonymous visitor/session identity is now stable enough for Portal analytics stitching and CRM identity backfill.
+  - Website > Reports form performance can aggregate by canonical Portal form UUID instead of unstable DOM identifiers.
+  - Browser code no longer depends on legacy public env names or fake form ids, and the server remains the only place where the service-role key is used.
+- Key files:
+  - `app/components/IngeniumTracking.tsx`
+  - `app/layout.tsx`
+  - `app/(website)/contact/page.tsx`
+  - `app/(website)/contact/ContactForm.tsx`
+  - `app/api/portal/_lib/formSubmit.ts`
+  - `lib/ingeniumTrackingPayload.ts`
+  - `lib/portalIntegration/types.ts`
+  - `lib/portalIntegration/config.ts`
+  - `lib/portalIntegration/forms.ts`
+  - `lib/portalIntegration/server.ts`
+  - `lib/portalIntegration/browserTracker.ts`
+  - `supabase/snippets/website_forms_contact_upsert.sql`
+  - `README.md`
+  - `agentContext/context.md`
+  - `agentContext/architecture.md`
+  - `app/(website)/agentContext/context.md`
+  - `app/(website)/agentContext/architecture.md`
+  - `app/api/portal/agentContext/context.md`
+  - `app/api/portal/agentContext/architecture.md`
+  - `Agents/Plans/portal-production-website-integration.md`
+  - `Agents/agentCommunications/portal-production-website-integration-comms.md`
+
 - Date: 2026-03-04
 - Task: Implement Ingenium website tracking runtime and canonical form linkage IDs
 - Categories: `FUNCTIONAL CHANGE`, `IMPROVEMENT`, `SECURITY`, `DOCUMENTATION`, `PROCESS`

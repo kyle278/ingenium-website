@@ -5,13 +5,13 @@ import { ArrowRight, ArrowUpRight, Clock3, Globe, ShieldCheck, Users } from "luc
 import AnimatedMetric from "../components/AnimatedMetric";
 
 export const metadata: Metadata = {
-  title: "Enterprise Website Consulting Team | Ingenium",
+  title: "Why Ingenium | Revenue Platform Implementation Partner",
   description:
-    "Meet the Ingenium team - enterprise web design, CRM, and AI operations specialists building conversion systems for growth companies.",
+    "See how Ingenium works as the implementation partner behind the platform: strategy, rollout, governance, and execution for revenue teams.",
   openGraph: {
-    title: "Enterprise Website Consulting Team | Ingenium",
+    title: "Why Ingenium | Revenue Platform Implementation Partner",
     description:
-      "See how Ingenium operates across strategy, delivery, governance, and global execution for enterprise buyers.",
+      "See how Ingenium operates across platform strategy, rollout, governance, and global execution for revenue teams.",
     url: "/about",
   },
   alternates: { canonical: "/about" },
@@ -25,11 +25,11 @@ const secondaryButton =
   "inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:text-white";
 
 const fallbackHero = {
-  label: "Enterprise Website Consulting Team",
-  title: "A senior team that builds and operates revenue systems, not one-off projects.",
-  body: "Ingenium combines enterprise web design, CRM operations, automation engineering, and AI governance in one accountable delivery team.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
-  secondary_cta: { label: "View Enterprise Case Studies", href: "/case-studies" },
+  label: "Why Ingenium",
+  title: "The platform matters. The partner who gets it live and keeps it performing matters just as much.",
+  body: "Ingenium is the implementation partner behind the system. We combine architecture, rollout, revenue operations, automation engineering, and AI governance into one accountable team.",
+  primary_cta: { label: "Book a Platform Strategy Call", href: "/contact" },
+  secondary_cta: { label: "View Platform Outcomes", href: "/case-studies" },
   proof: {
     metric: "4-6 weeks",
     label: "average timeline from kickoff to first measurable conversion improvements",
@@ -69,7 +69,7 @@ const fallbackGlobal = {
     { name: "Shared overlap", coverage: "10:00-13:00 ET", focus: "Cross-team reviews and handoffs" },
   ],
   capabilities: [
-    "Enterprise website architecture and delivery",
+    "Acquisition engine architecture and delivery",
     "CRM implementation and data governance",
     "Automation design with rollback controls",
     "Security and procurement support documentation",
@@ -77,9 +77,9 @@ const fallbackGlobal = {
 };
 
 const fallbackCta = {
-  title: "Choose the right next step for your stakeholder group.",
-  body: "Different buyers need different evidence. We run role-specific review calls so decisions move faster.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  title: "Different stakeholders need different evidence. We are set up for that reality.",
+  body: "We run role-specific review calls so marketing, sales, operations, technical, and security buyers can each get the evidence they need to move forward.",
+  primary_cta: { label: "Book a Platform Strategy Call", href: "/contact" },
   secondary_cta: { label: "Request a Technical Review", href: "/contact?intent=technical-review" },
   tertiary_cta: { label: "Request a Security Pack", href: "/contact?intent=security-pack" },
 };
@@ -108,11 +108,11 @@ export default async function AboutPage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link href={hero.primary_cta?.href ?? "/contact"} className={primaryButton}>
-              {hero.primary_cta?.label ?? "Book a Strategy Call"}
+              {hero.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href={hero.secondary_cta?.href ?? "/case-studies"} className={secondaryButton}>
-              {hero.secondary_cta?.label ?? "View Enterprise Case Studies"}
+              {hero.secondary_cta?.label ?? "View Revenue Platform Case Studies"}
             </Link>
           </div>
         </div>
@@ -233,7 +233,7 @@ export default async function AboutPage() {
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
           <Link href={cta.primary_cta?.href ?? "/contact"} className={primaryButton}>
-            {cta.primary_cta?.label ?? "Book a Strategy Call"}
+            {cta.primary_cta?.label ?? "Book a Platform Strategy Call"}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
           <Link href={cta.secondary_cta?.href ?? "/contact?intent=technical-review"} className={secondaryButton}>

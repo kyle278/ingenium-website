@@ -22,13 +22,13 @@ import AnimatedMetric from "./components/AnimatedMetric";
 import ScrollReveal from "./components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Enterprise Web Design Agency | Ingenium",
+  title: "Ingenium Revenue Platform | Website, CRM, AI, and Automation",
   description:
-    "Ingenium is the enterprise web design agency that builds conversion systems - website, CRM, AI agents, and automation - to grow your pipeline.",
+    "Ingenium gives revenue teams one system for acquisition, CRM execution, AI agents, and automation so pipeline moves faster and every signal is accountable.",
   openGraph: {
-    title: "Enterprise Web Design Agency | Ingenium",
+    title: "Ingenium Revenue Platform | Website, CRM, AI, and Automation",
     description:
-      "Ingenium is the enterprise web design agency that builds conversion systems for measurable pipeline growth.",
+      "One revenue platform for acquisition, CRM execution, AI agents, and automation - deployed with the team and governance to make it stick.",
     url: "/",
   },
   alternates: { canonical: "/" },
@@ -37,169 +37,169 @@ export const metadata: Metadata = {
 /* -- Fallback Content ------------------------------------------------ */
 
 const fallbackHero = {
-  label: "Enterprise Web Design Agency",
-  title: "We build enterprise websites that generate pipeline.",
-  body: "Ingenium is the enterprise web design agency that builds conversion systems - website, CRM, AI agents, and automation - so your pipeline compounds week after week.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
-  secondary_cta: { label: "See How It Works", href: "#process" },
-  proof_metric: "47%",
-  proof_label: "conversion lift for a Series B SaaS company in 90 days",
-  badges: ["4-6 week launch", "Full pipeline attribution", "AI-powered operations"],
+  label: "Ingenium Revenue Platform",
+  title: "Replace disconnected tools with one revenue system that moves buyers to pipeline faster.",
+  body: "Ingenium combines your acquisition engine, CRM command layer, AI agents, and automation workflows into one governed platform. We do not just install software. We architect the system, launch it with your team, and keep it compounding.",
+  primary_cta: { label: "Book a Platform Strategy Call", href: "/contact" },
+  secondary_cta: { label: "Explore the Platform", href: "/platform" },
+  proof_metric: "31d",
+  proof_label: "average time from kickoff to live revenue workflows",
+  badges: ["One customer data layer", "Human-approved AI execution", "Revenue visibility from first touch"],
 };
 
 const fallbackMetrics = {
-  label: "Average across 12 enterprise engagements, 2024-2025",
+  label: "Representative outcomes from platform launches across growth-stage and enterprise teams",
   items: [
-    { metric: "47%", label: "Conversion lift", context: "avg. across enterprise clients" },
-    { metric: "4-6 wks", label: "Strategy to launch", context: "full system deployment" },
-    { metric: "100%", label: "Pipeline attribution", context: "end-to-end tracking" },
-    { metric: "<60s", label: "Lead response time", context: "automated routing + context" },
+    { metric: "2.7x", label: "Faster pipeline velocity", context: "after full-system rollout" },
+    { metric: "<45s", label: "Lead-to-owner routing", context: "with enrichment and context" },
+    { metric: "100%", label: "Attribution coverage", context: "from session to CRM record" },
+    { metric: "31d", label: "Time to first impact", context: "for launch-ready revenue teams" },
   ],
 };
 
 const fallbackIndustries = {
-  label: "Trusted by growth and enterprise teams across industries",
+  label: "Built for teams that cannot afford broken handoffs between marketing, sales, and operations",
   items: [
-    { name: "Series B-D SaaS", icon: "zap" },
-    { name: "Enterprise Financial Services", icon: "bar_chart" },
+    { name: "B2B SaaS", icon: "zap" },
+    { name: "Enterprise Services", icon: "users" },
     { name: "Healthcare Platforms", icon: "shield" },
-    { name: "B2B Technology", icon: "globe" },
-    { name: "Professional Services", icon: "users" },
-    { name: "Enterprise IT Teams", icon: "layers" },
+    { name: "Financial Services", icon: "bar_chart" },
+    { name: "Multi-Region GTM Teams", icon: "globe" },
+    { name: "RevOps-Led Organizations", icon: "layers" },
   ],
 };
 
 const fallbackProblem = {
-  label: "The Problem",
-  title: "Your website generates traffic. But can you prove which campaigns drive revenue?",
+  label: "Why Teams Switch",
+  title: "Most revenue teams are still buying pipeline with a stack that cannot agree on what happened.",
   problems: [
     {
       persona: "Marketing",
-      pain: "Your website generates traffic but you can't prove which campaigns drive revenue.",
+      pain: "Traffic rises, but attribution is partial, page journeys are invisible, and campaign proof still depends on spreadsheets.",
       icon: "bar_chart",
     },
     {
       persona: "Sales",
-      pain: "Leads arrive late, unqualified, and without context. Reps waste hours on dead ends.",
+      pain: "Leads arrive late, context is missing, and reps chase records instead of acting on live buyer intent.",
       icon: "users",
     },
     {
       persona: "Technical",
-      pain: "Your stack is duct-taped together and no one owns the data model.",
+      pain: "Your stack is duct-taped together, workflows are brittle, and no one trusts the underlying data model.",
       icon: "layers",
     },
   ],
 };
 
 const fallbackEngine = {
-  label: "The Conversion Engine",
-  title: "A unified system, not a collection of tools.",
-  body: "Your website is the front door. The Ingenium platform keeps it converting - CRM, AI agents, and automations working as one system.",
+  label: "The Platform",
+  title: "A single operating system for revenue execution.",
+  body: "Salesforce and HubSpot sell the power of one system of record. Ingenium goes further by combining that shared data model with the implementation layer, the AI execution layer, and the revenue workflows that actually move deals.",
   nodes: [
-    { title: "Website", outcome: "Conversion-first design that captures intent", href: "/websites", icon: "layout" },
-    { title: "CRM", outcome: "Unified pipeline data with smart routing", href: "/crm", icon: "layers" },
-    { title: "AI Agents", outcome: "Research, qualify, and brief in seconds", href: "/agents", icon: "sparkles" },
-    { title: "Automations", outcome: "Trigger-to-action in under 60 seconds", href: "/automations", icon: "workflow" },
-    { title: "Analytics", outcome: "Full-funnel attribution and dashboards", href: "/platform", icon: "line_chart" },
+    { title: "Acquisition Engine", outcome: "Pages, forms, and proof flows built to create qualified intent", href: "/websites", icon: "layout" },
+    { title: "CRM Command", outcome: "Shared pipeline truth with routing, ownership, and lifecycle accuracy", href: "/crm", icon: "layers" },
+    { title: "AI Agents", outcome: "Research, brief, qualify, and assist with human approval gates", href: "/agents", icon: "sparkles" },
+    { title: "Automation Layer", outcome: "Trigger-to-action workflows with SLA enforcement and rollback control", href: "/automations", icon: "workflow" },
+    { title: "Trust Layer", outcome: "Security, governance, and auditability across every action", href: "/security", icon: "shield" },
   ],
 };
 
 const fallbackProcess = {
-  label: "How We Work",
-  title: "A proven path from strategy to scale.",
-  body: "We align strategy, design, and execution so you see measurable conversion wins within weeks, not quarters.",
+  label: "How We Deploy",
+  title: "Platform strategy, rollout, and operating rhythm in one engagement.",
+  body: "The sale does not stop at the software layer. We define the architecture, launch the system with your team, and establish the measurement model that proves whether it is working.",
   phases: [
     {
       num: "01",
-      title: "Discovery & Strategy",
-      timeline: "Week 1-2",
-      deliverables: "Conversion audit, messaging architecture, KPI framework, technical requirements",
-      owner: "Ingenium leads, your team validates",
+      title: "Revenue Systems Audit",
+      timeline: "Week 1",
+      deliverables: "Signal map, funnel leak analysis, role requirements, and architecture blueprint",
+      owner: "Ingenium leads; your operators pressure-test the model",
     },
     {
       num: "02",
-      title: "Design & Build",
-      timeline: "Week 3-4",
-      deliverables: "Design system, page builds, CRM integration, analytics instrumentation",
-      owner: "Ingenium builds, your team reviews at gates",
+      title: "Build the Core System",
+      timeline: "Week 2-4",
+      deliverables: "Acquisition journeys, CRM configuration, AI workflows, automations, and dashboards",
+      owner: "Ingenium builds; your team approves at structured gates",
     },
     {
       num: "03",
-      title: "Launch & Optimise",
-      timeline: "Week 5-6",
-      deliverables: "Go-live, AI agent deployment, automation workflows, first optimisation cycle",
-      owner: "Joint ownership with weekly reporting",
+      title: "Launch and Optimize",
+      timeline: "Week 5+",
+      deliverables: "Go-live, operator training, KPI reviews, experiment backlog, and governance cadence",
+      owner: "Joint operating rhythm with weekly decision reviews",
     },
   ],
   first_30_days: {
     title: "Your first 30 days",
     items: [
-      "Conversion blueprint with 12+ page-level hypotheses",
-      "Design system and component library deployed",
-      "Analytics instrumentation with attribution dashboards live",
-      "AI operations roadmap for the next 90 days",
-      "First A/B test live and generating data",
+      "One shared signal model connecting website behavior to CRM action",
+      "Role-specific dashboards for marketing, sales, and leadership",
+      "Live lead-routing and follow-up workflows with SLA visibility",
+      "Governed AI agents operating inside approved tasks",
+      "A prioritized growth backlog tied to revenue outcomes",
     ],
   },
 };
 
 const fallbackProof = {
   label: "Proof",
-  title: "Outcomes from enterprise teams like yours.",
-  link: { label: "View all enterprise website case studies", href: "/case-studies" },
+  title: "Outcomes from teams that stopped buying isolated fixes.",
+  link: { label: "View all revenue platform case studies", href: "/case-studies" },
   items: [
     {
       client_type: "Series B SaaS Company",
       industry: "Fintech",
-      challenge: "Website generating traffic but less than 1% converting to demo requests.",
-      intervention: "Full website rebuild with conversion architecture, CRM integration, and automated lead routing.",
-      metric: "+47%",
-      metric_label: "Conversion to qualified pipeline",
+      challenge: "Traffic was healthy, but CRM routing was manual and leadership had no clean attribution to pipeline.",
+      intervention: "Unified acquisition, CRM, and routing system with real-time qualification and accountable reporting.",
+      metric: "2.3x",
+      metric_label: "Marketing-attributed pipeline",
       timeframe: "90 days",
     },
     {
       client_type: "Healthcare SaaS Platform",
       industry: "Healthcare",
-      challenge: "Generic website with no role-based messaging. Sales team manually qualifying every lead.",
-      intervention: "Role-based page system with AI-assisted SDR briefs and automated follow-up sequences.",
-      metric: "2.3x",
-      metric_label: "Demo conversions",
+      challenge: "Three disconnected buyer journeys and no way to scale enterprise follow-up without increasing headcount.",
+      intervention: "Role-based acquisition paths, governed AI briefs, and automated qualification handoff.",
+      metric: "<2m",
+      metric_label: "Intent-to-brief turnaround",
       timeframe: "60 days",
     },
     {
       client_type: "Enterprise Services Firm",
       industry: "Professional Services",
-      challenge: "4 regional websites with inconsistent messaging and no governance model.",
-      intervention: "Unified platform with localised pages, approval workflows, and centralised analytics.",
-      metric: "6 weeks",
-      metric_label: "Strategy to full launch",
+      challenge: "Regional websites, inconsistent governance, and no shared pipeline visibility across markets.",
+      intervention: "Unified platform with localized journeys, approval workflows, and region-level attribution.",
+      metric: "48h",
+      metric_label: "Content approval cycle after rollout",
       timeframe: "Across 4 regions",
     },
   ],
 };
 
 const fallbackGovernance = {
-  label: "Enterprise Governance",
-  title: "Security and governance built into every layer.",
-  body: "Approval workflows, audit trails, and role-based controls keep every update accountable - from content changes to AI agent outputs.",
-  link: { label: "Review enterprise security and AI governance", href: "/security" },
-  secondary_link: { label: "Request security review pack", href: "/contact" },
+  label: "Trust and Governance",
+  title: "Urgency wins the deal only when trust survives procurement.",
+  body: "The platform story is stronger because it is backed by governance. Approval workflows, audit trails, environment separation, and role-based controls sit under every automated or AI-assisted action.",
+  link: { label: "Review trust, security, and AI governance", href: "/security" },
+  secondary_link: { label: "Request an architecture review", href: "/contact" },
   items: [
-    "SSO / SAML access controls",
-    "Role-based approval workflows",
-    "Complete audit trails and activity logs",
-    "Data residency and sovereignty options",
-    "Vendor risk documentation on request",
-    "SOC 2 readiness framework",
+    "Shared governance model across website, CRM, AI, and automation",
+    "Role-based approvals before sensitive actions or launches",
+    "Complete audit trails and execution history",
+    "Security review pack and architecture walkthroughs on request",
+    "Data handling boundaries designed for regulated buyers",
+    "Implementation partner accountability after launch",
   ],
 };
 
 const fallbackCta = {
-  title: "Ready to build a website that drives pipeline?",
-  body: "Book a strategy call and get a tailored conversion roadmap within 48 hours. No commitment required.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
-  secondary_cta: { label: "Download Enterprise Website Checklist", href: "/contact" },
-  reassurance: "30-minute call - Tailored roadmap - No obligation",
+  title: "If your stack is slowing revenue, the fix is not another isolated tool.",
+  body: "Book a platform strategy call and we will map how Ingenium can replace disconnected acquisition, CRM, AI, and automation workflows with one accountable operating system.",
+  primary_cta: { label: "Book a Platform Strategy Call", href: "/contact" },
+  secondary_cta: { label: "Request an Architecture Review", href: "/contact" },
+  reassurance: "30-minute call - revenue systems audit - implementation roadmap",
 };
 
 /* -- Helpers ---------------------------------------------------------- */
@@ -312,7 +312,7 @@ export default async function HomePage() {
               href={hero.primary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500 hover:shadow-emerald-500/30"
             >
-              {hero.primary_cta?.label ?? "Book a Strategy Call"}
+              {hero.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
@@ -440,7 +440,7 @@ export default async function HomePage() {
             href="/websites"
             className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
           >
-            See how our enterprise website redesign services solve this
+            See how the acquisition engine solves this
             <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
@@ -571,7 +571,7 @@ export default async function HomePage() {
                 href="/websites"
                 className="cta-lift inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300"
               >
-                See full enterprise website redesign services
+                See the full acquisition engine
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
@@ -598,7 +598,7 @@ export default async function HomePage() {
             href={proof.link?.href ?? "/case-studies"}
             className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white"
           >
-            {proof.link?.label ?? "View all enterprise website case studies"}
+            {proof.link?.label ?? "View all revenue platform case studies"}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
@@ -702,14 +702,14 @@ export default async function HomePage() {
               href={cta.primary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
             >
-              {cta.primary_cta?.label ?? "Book a Strategy Call"}
+              {cta.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
               href={cta.secondary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
             >
-              {cta.secondary_cta?.label ?? "Download Enterprise Website Checklist"}
+              {cta.secondary_cta?.label ?? "Request an Architecture Review"}
             </Link>
           </div>
           <p className="mt-6 font-(--font-mono) text-xs text-slate-600">

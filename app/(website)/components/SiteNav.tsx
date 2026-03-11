@@ -24,7 +24,7 @@ interface SiteNavProps {
   content: SiteNavContent;
 }
 
-const SOLUTION_HREFS = ["/websites", "/platform", "/agents", "/crm"];
+const SOLUTION_HREFS = ["/websites", "/crm", "/agents", "/automations"];
 
 export default function SiteNav({ content }: SiteNavProps) {
   const pathname = usePathname();
@@ -32,24 +32,10 @@ export default function SiteNav({ content }: SiteNavProps) {
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const [activeIndicator, setActiveIndicator] = useState({ x: 0, width: 0, visible: false });
-  const navItems = useMemo(() => {
-    const baseItems = Array.isArray(content.items) ? content.items : [];
-    if (baseItems.some((item) => item.href === "/projects")) {
-      return baseItems;
-    }
-
-    const withProjects = [...baseItems];
-    const caseStudiesIndex = withProjects.findIndex((item) => item.href === "/case-studies");
-    const projectsItem: NavItem = { href: "/projects", label: "Projects" };
-
-    if (caseStudiesIndex >= 0) {
-      withProjects.splice(caseStudiesIndex + 1, 0, projectsItem);
-      return withProjects;
-    }
-
-    withProjects.push(projectsItem);
-    return withProjects;
-  }, [content.items]);
+  const navItems = useMemo(
+    () => (Array.isArray(content.items) ? content.items : []),
+    [content.items],
+  );
   const solutionItems = useMemo(
     () => navItems.filter((item) => SOLUTION_HREFS.includes(item.href)),
     [navItems],

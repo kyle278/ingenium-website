@@ -31,13 +31,13 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumconsulting.
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Enterprise Web Design Agency | Ingenium",
+  title: "Ingenium Revenue Platform | Acquisition, CRM, AI, and Automation",
   description:
-    "Ingenium is the enterprise web design agency that builds conversion systems - website, CRM, AI agents, and automation - to grow your pipeline.",
+    "Ingenium connects acquisition, CRM execution, AI agents, and automation into one governed revenue platform for ambitious teams.",
   openGraph: {
-    title: "Enterprise Web Design Agency | Ingenium",
+    title: "Ingenium Revenue Platform | Acquisition, CRM, AI, and Automation",
     description:
-      "Ingenium builds conversion systems - website, CRM, AI agents, and automation - to grow your pipeline.",
+      "One governed revenue platform for acquisition, CRM execution, AI agents, automation, and measurable growth.",
     type: "website",
     siteName: "Ingenium",
     url: "/",

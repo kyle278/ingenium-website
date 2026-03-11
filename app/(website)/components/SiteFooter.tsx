@@ -28,10 +28,7 @@ interface SiteFooterProps {
 
 export default function SiteFooter({ content }: SiteFooterProps) {
   const productLinks = Array.isArray(content.product_links) ? content.product_links : [];
-  const companyLinksBase = Array.isArray(content.company_links) ? content.company_links : [];
-  const companyLinks = companyLinksBase.some((link) => link.href === "/projects")
-    ? companyLinksBase
-    : [...companyLinksBase, { href: "/projects", label: "Projects" }];
+  const companyLinks = Array.isArray(content.company_links) ? content.company_links : [];
   const contactItems = Array.isArray(content.contact_items) ? content.contact_items : [];
   const tags = Array.isArray(content.tags) ? content.tags : [];
 
@@ -41,17 +38,18 @@ export default function SiteFooter({ content }: SiteFooterProps) {
         {/* Main CTA band */}
         <div className="border-b border-slate-800/60 py-16 text-center">
           <h2 className="font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            Ready to build a website that drives pipeline?
+            Ready to replace disconnected revenue tooling with one operating system?
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-slate-400">
-            Book a strategy call and get a tailored conversion roadmap within 48 hours.
+            Book a platform strategy call and get a practical rollout direction for acquisition,
+            CRM, AI execution, and automation.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contact"
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
             >
-              Book a Strategy Call
+              Book a Platform Strategy Call
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link

@@ -19,11 +19,11 @@ import AnimatedMetric from "../components/AnimatedMetric";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Marketing and Lead Routing Automation Services | Ingenium",
+  title: "Revenue Automation Layer | Ingenium",
   description:
-    "Marketing automation and lead routing built for speed and governance. Trigger-to-action workflows with SLA tracking and rollback controls.",
+    "Revenue automations for routing, follow-up, enrichment, and escalation with SLA tracking, rollback controls, and governance built in.",
   openGraph: {
-    title: "Marketing and Lead Routing Automation Services | Ingenium",
+    title: "Revenue Automation Layer | Ingenium",
     description:
       "Marketing automation and lead routing built for speed, governance, and measurable pipeline impact.",
     url: "/automations",
@@ -47,10 +47,10 @@ const softCard =
 /* ---------- fallback content ---------- */
 
 const fallbackHero = {
-  label: "Marketing Automation",
-  title: "Marketing automation and lead routing built for speed.",
-  body: "Trigger-to-action workflows with SLA tracking, governance checkpoints, and rollback controls. Every automation connects to your CRM, website signals, and AI agents.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  label: "Revenue Automation",
+  title: "Automations that move revenue now, not workflows that just look good in a diagram.",
+  body: "Ingenium builds trigger-to-action workflows with timing guarantees, rollback controls, and real business ownership. The goal is faster action, fewer missed signals, and less operator drag.",
+  primary_cta: { label: "Book an Automation Review", href: "/contact" },
   secondary_cta: { label: "Request a Workflow Audit", href: "/contact?intent=workflow-audit" },
   workflow_diagram: {
     label: "Workflow example",
@@ -68,7 +68,7 @@ const fallbackHero = {
 const fallbackWorkflows = {
   label: "Workflow Capabilities",
   title: "Trigger-action workflows with timing guarantees.",
-  body: "Each automation maps a trigger to a measurable action with SLA tracking, escalation paths, and failure handling built in.",
+  body: "Every workflow maps a signal to an action, an SLA, and an escalation path so nothing important waits in a queue.",
   workflows: [
     {
       title: "High-intent lead response",
@@ -108,7 +108,7 @@ const fallbackWorkflows = {
 const fallbackGovernance = {
   label: "Governance & Reliability",
   title: "Automations you can trust in production.",
-  body: "Every workflow ships with rollback controls, monitoring, and an approval path. Nothing runs in production without testing and sign-off.",
+  body: "Every workflow ships with rollback controls, monitoring, and an approval path. Nothing important goes live on hope alone.",
   lifecycle: [
     {
       stage: "Build",
@@ -179,9 +179,9 @@ const fallbackConnected = {
 };
 
 const fallbackCta = {
-  title: "Ready to automate with speed and governance?",
-  body: "Book a strategy call to map your automation priorities, or request a workflow audit to identify your highest-impact opportunities.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  title: "If the right action still depends on someone noticing the alert, the workflow is not finished.",
+  body: "Book an automation review to identify the highest-friction handoffs in your revenue engine and map the workflows that should replace them first.",
+  primary_cta: { label: "Book an Automation Review", href: "/contact" },
   secondary_cta: { label: "Request a Workflow Audit", href: "/contact?intent=workflow-audit" },
 };
 
@@ -228,7 +228,7 @@ export default async function AutomationsPage() {
               href={hero.primary_cta?.href ?? "/contact"}
               className={primaryButton}
             >
-              {hero.primary_cta?.label ?? "Book a Strategy Call"}
+              {hero.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
@@ -565,7 +565,7 @@ export default async function AutomationsPage() {
             href={cta.primary_cta?.href ?? "/contact"}
             className="cta-lift inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
           >
-            {cta.primary_cta?.label ?? "Book a Strategy Call"}
+            {cta.primary_cta?.label ?? "Book a Platform Strategy Call"}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
           <Link

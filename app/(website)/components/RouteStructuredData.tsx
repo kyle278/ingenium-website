@@ -9,16 +9,16 @@ const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumconsultin
 
 const routeLabelMap: Record<string, string> = {
   "/": "Home",
-  "/websites": "Websites",
+  "/websites": "Acquisition Engine",
   "/platform": "Platform",
   "/agents": "AI Agents",
   "/departments": "AI Departments",
   "/crm": "CRM",
-  "/automations": "Automations",
-  "/case-studies": "Case Studies",
+  "/automations": "Automation",
+  "/case-studies": "Revenue Platform Case Studies",
   "/projects": "Projects",
-  "/security": "Security",
-  "/about": "About",
+  "/security": "Trust and Security",
+  "/about": "Why Ingenium",
   "/team": "Team",
   "/contact": "Contact",
 };
@@ -32,22 +32,22 @@ const servicePages: Record<
   }
 > = {
   "/websites": {
-    name: "Enterprise Website Redesign Services",
-    serviceType: "Enterprise Web Design",
+    name: "Ingenium Acquisition Engine",
+    serviceType: "Revenue Acquisition Platform",
     description:
-      "Conversion-focused enterprise website redesign services with CRM integration and revenue attribution.",
+      "High-conviction acquisition journeys, proof architecture, and conversion paths wired directly into CRM action.",
   },
   "/platform": {
-    name: "Website CRM AI Platform Services",
+    name: "Ingenium Revenue Platform",
     serviceType: "Revenue Operations Platform",
     description:
-      "Platform implementation connecting website performance, CRM, AI agents, and automation workflows.",
+      "Platform architecture connecting acquisition, CRM command, AI agents, automation, and governance.",
   },
   "/agents": {
-    name: "AI Agents for Marketing and Sales",
+    name: "Governed AI Agents for Revenue Teams",
     serviceType: "AI Workflow Services",
     description:
-      "Governed AI agents for marketing and sales workflows with approval gates and measurable outcomes.",
+      "Governed AI agents for research, drafting, qualification, and operator assistance with approval gates.",
   },
   "/departments": {
     name: "AI Departments for Revenue Teams",
@@ -56,16 +56,16 @@ const servicePages: Record<
       "Department-based AI operations design with human oversight, governance rules, and KPI ownership.",
   },
   "/crm": {
-    name: "CRM Implementation and RevOps Services",
-    serviceType: "CRM Implementation",
+    name: "Ingenium CRM Command Layer",
+    serviceType: "CRM Operations Platform",
     description:
-      "CRM implementation, migration, and revenue operations services for clean data and accurate forecasting.",
+      "CRM lifecycle design, routing, migration, and attribution for accountable revenue execution.",
   },
   "/automations": {
-    name: "Marketing and Lead Routing Automation Services",
-    serviceType: "Marketing Automation",
+    name: "Ingenium Revenue Automation Layer",
+    serviceType: "Revenue Automation",
     description:
-      "Marketing and sales workflow automation with lead routing, SLA tracking, and rollback controls.",
+      "Routing, escalation, follow-up, and enrichment workflows with SLA tracking and rollback controls.",
   },
 };
 
@@ -177,10 +177,10 @@ function buildWebsitesFaqSchema(): JsonLd {
     mainEntity: [
       {
         "@type": "Question",
-        name: "How long does an enterprise website redesign take?",
+        name: "How long does an acquisition engine rollout take?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Most redesign programs launch in 4 to 6 weeks, then continue with ongoing optimization cycles.",
+          text: "Most acquisition-engine rollouts launch in 4 to 6 weeks, then continue with ongoing optimization cycles.",
         },
       },
       {
@@ -215,7 +215,7 @@ function buildCaseStudiesSchema(): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Enterprise Website Case Studies",
+    name: "Revenue Platform Case Studies",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Fintech SaaS Website Rebuild" },
       { "@type": "ListItem", position: 2, name: "Healthcare Platform Conversion Program" },
@@ -229,7 +229,7 @@ function buildProjectsSchema(): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Client Projects",
+    name: "Selected Delivery Projects",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Northstar Pay Growth Platform" },
       { "@type": "ListItem", position: 2, name: "Meridian Health Demand Engine" },

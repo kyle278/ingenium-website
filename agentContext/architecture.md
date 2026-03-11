@@ -15,6 +15,7 @@
 - Attribution and CRM linkage occur in Portal DB triggers, not in website runtime.
 
 ## Change Impact Map
+- Public marketing route copy, metadata, nav, and footer now carry a platform-first narrative modeled on unified-system selling patterns.
 - Form UX changes impact conversion flow and visible success/error states.
 - API route changes impact data integrity and attribution downstream.
 - Tracking runtime changes impact event completeness, unique visitor/session quality, and Website > Reports form metrics.

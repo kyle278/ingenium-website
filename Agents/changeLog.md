@@ -16,6 +16,41 @@ This file is mandatory for all tasks.
 
 ---
 
+- Date: 2026-03-11
+- Task: Rewrite the public website around a platform-first revenue story
+- Categories: `UI CHANGE`, `UX CHANGE`, `IMPROVEMENT`, `DOCUMENTATION`, `PROCESS`
+- Summary:
+  - Repositioned the public website around a unified revenue platform narrative influenced by current Salesforce and HubSpot-style platform selling patterns.
+  - Tightened the visible IA in the shared nav/footer around Platform, Acquisition Engine, CRM, AI Agents, Automation, Security, proof, and contact.
+  - Rewrote the core public route messaging across home, platform, CRM, agents, automations, acquisition engine, security, case studies, about, and contact to emphasize urgency, trust, proof, and implementation credibility while preserving the existing animated dark technical design language.
+  - Updated structured data and root metadata to match the new platform-led positioning.
+- Impact:
+  - The site now sells Ingenium as a platform plus implementation partner instead of leading with generic agency framing.
+  - Buyers encounter a more focused narrative: unified system, role-based value, governance, proof, and clear next-step CTAs.
+  - Lower-priority brochure pages remain in the repo but are no longer emphasized in the primary buyer path.
+- Key files:
+  - `app/layout.tsx`
+  - `app/(website)/layout.tsx`
+  - `app/(website)/components/SiteNav.tsx`
+  - `app/(website)/components/SiteFooter.tsx`
+  - `app/(website)/components/RouteStructuredData.tsx`
+  - `app/(website)/page.tsx`
+  - `app/(website)/platform/page.tsx`
+  - `app/(website)/crm/page.tsx`
+  - `app/(website)/agents/page.tsx`
+  - `app/(website)/automations/page.tsx`
+  - `app/(website)/websites/page.tsx`
+  - `app/(website)/security/page.tsx`
+  - `app/(website)/case-studies/page.tsx`
+  - `app/(website)/about/page.tsx`
+  - `app/(website)/contact/page.tsx`
+  - `agentContext/context.md`
+  - `agentContext/architecture.md`
+  - `app/(website)/agentContext/context.md`
+  - `app/(website)/agentContext/architecture.md`
+  - `Agents/Plans/platform-led-website-rewrite.md`
+  - `Agents/agentCommunications/platform-led-website-rewrite-comms.md`
+
 - Date: 2026-03-10
 - Task: Move Login and Sign Up to the top navigation on all devices
 - Categories: `UI CHANGE`, `UX CHANGE`, `IMPROVEMENT`, `DOCUMENTATION`, `PROCESS`

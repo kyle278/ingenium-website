@@ -1,7 +1,7 @@
 # Global Context
 
 ## System Purpose
-Ingenium website is a Next.js App Router project that serves marketing pages, guarantees durable anonymous analytics identity for Portal reporting, and submits contact intake data into Ingenium Portal through a server-owned integration path.
+Ingenium website is a Next.js App Router project that sells Ingenium as a unified revenue platform and implementation partner, guarantees durable anonymous analytics identity for Portal reporting, and submits contact intake data into Ingenium Portal through a server-owned integration path.
 
 ## Active Domains
 - Marketing website pages under `app/(website)`
@@ -25,6 +25,7 @@ Ingenium website is a Next.js App Router project that serves marketing pages, gu
 - Tracker script initializes from `PORTAL_APP_URL` and `PORTAL_SITE_ID` passed server-side into the root client bootstrap.
 - Website runtime owns `visitor_id` cookie + `localStorage` sync and `session_id` rotation via `sessionStorage`.
 - Browser tracking runtime emits `session_start`, `page_view`, `form_view`, and `scroll_depth` using canonical payload shape and page-scoped resets.
+- Public IA now prioritizes platform, acquisition, CRM, AI agents, automation, security, proof, and contact over secondary brochure-style pages.
 - Portal form definitions are stored in `public.website_forms`.
 - Submissions are written to `public.website_form_submissions`.
 - Portal-side trigger handles downstream CRM attribution logic and event processing.

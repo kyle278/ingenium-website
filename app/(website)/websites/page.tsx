@@ -17,13 +17,13 @@ import FaqAccordion from "../components/FaqAccordion";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Enterprise Website Redesign Services | Ingenium",
+  title: "Acquisition Engine | Ingenium",
   description:
-    "Enterprise website redesign built for conversion. Strategy, design, CRO, and a 30-day launch path. See how Ingenium builds sites that sell.",
+    "Ingenium builds acquisition systems, not brochure websites. High-conviction buyer journeys, proof architecture, and conversion paths wired directly into CRM action.",
   openGraph: {
-    title: "Enterprise Website Redesign Services | Ingenium",
+    title: "Acquisition Engine | Ingenium",
     description:
-      "Enterprise website redesign built for conversion. Strategy, design, CRO, and a 30-day launch path.",
+      "Acquisition journeys, proof architecture, CRM-connected forms, and rollout execution built to move revenue.",
   },
   alternates: { canonical: "/websites" },
 };
@@ -31,19 +31,19 @@ export const metadata: Metadata = {
 /* -- Fallback Content ------------------------------------------------ */
 
 const fallbackHero = {
-  label: "Enterprise Website Redesign",
-  title: "Enterprise website redesign that turns traffic into qualified pipeline.",
-  body: "Your website is your first sales conversation. Ingenium builds enterprise website redesign systems - not design projects - that connect directly to your CRM, AI agents, and automation stack so every visitor becomes a measurable opportunity.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  label: "Acquisition Engine",
+  title: "Your website should act like the front end of the platform, not a disconnected marketing asset.",
+  body: "Ingenium builds acquisition systems that create urgency, collect better signals, and push context directly into CRM and workflow execution. Every page earns its place by moving buyers closer to revenue.",
+  primary_cta: { label: "Book an Acquisition Review", href: "/contact" },
   secondary_cta: { label: "See Our Process", href: "#implementation" },
-  proof_metric: "+38%",
-  proof_label: "qualified demo requests for a Series B SaaS company after full website redesign",
+  proof_metric: "2.2x",
+  proof_label: "increase in qualified intent after acquisition-engine rollout",
 };
 
 const fallbackEngine = {
   label: "The Conversion Architecture",
-  title: "How an Ingenium enterprise website redesign converts.",
-  body: "Every page is engineered to a conversion blueprint - from messaging architecture to CTA psychology to real-time lead routing.",
+  title: "How an Ingenium acquisition engine converts.",
+  body: "Every page is engineered around buyer movement, proof density, form strategy, and direct connection to the rest of the revenue system.",
   flow: [
     "Visitor lands on a service page built around a specific conversion hypothesis",
     "Problem framing and proof elements build confidence and urgency",
@@ -55,7 +55,7 @@ const fallbackEngine = {
 
 const fallbackComparison = {
   label: "Why This Approach",
-  title: "Enterprise website redesign: system vs. project.",
+  title: "Acquisition engine: system vs. project.",
   columns: [
     {
       title: "Ingenium System",
@@ -116,7 +116,7 @@ const fallbackPillars = {
 
 const fallbackImplementation = {
   label: "Implementation Path",
-  title: "Enterprise website redesign in weeks, not months.",
+  title: "Acquisition engine rollout in weeks, not quarters.",
   phases: [
     {
       week: "Week 1-2",
@@ -153,11 +153,11 @@ const fallbackFirst30 = {
 
 const fallbackProof = {
   label: "Results",
-  title: "Enterprise website redesign results with measurable outcomes.",
+  title: "Acquisition engine results with measurable outcomes.",
   case: {
     client_type: "Series B SaaS Company (Fintech)",
     challenge: "Website generating 50K+ monthly visits but less than 0.8% converting to demo requests. Marketing couldn't prove which campaigns drove revenue. Sales received leads without context.",
-    approach: "Full enterprise website redesign: conversion architecture, role-based messaging, progressive forms, CRM integration with automated routing, and AI-assisted follow-up sequences.",
+    approach: "Full acquisition-engine rollout: conversion architecture, role-based messaging, progressive forms, CRM integration with automated routing, and AI-assisted follow-up sequences.",
     changes: [
       "Rebuilt 14 pages with buyer-persona messaging architecture",
       "Implemented progressive lead capture reducing form abandonment by 62%",
@@ -172,19 +172,19 @@ const fallbackProof = {
     ],
     timeframe: "Results measured at 90 days post-launch",
   },
-  link: { label: "View all enterprise website case studies", href: "/case-studies" },
+  link: { label: "View all revenue platform case studies", href: "/case-studies" },
 };
 
 const fallbackFaq = {
-  title: "Enterprise website redesign FAQ",
+  title: "Acquisition engine FAQ",
   items: [
     {
-      question: "How long does an enterprise website redesign take?",
-      answer: "Most enterprise website redesigns launch in 4-6 weeks with staged rollouts. Discovery and strategy take 1-2 weeks, design and build take 2-3 weeks, and launch with initial optimisation completes the cycle.",
+      question: "How long does an acquisition engine rollout take?",
+      answer: "Most acquisition-engine rollouts launch in 4-6 weeks with staged releases. Discovery and strategy take 1-2 weeks, build and integration take 2-3 weeks, and launch plus initial optimisation completes the cycle.",
     },
     {
-      question: "What does an enterprise website redesign cost?",
-      answer: "Enterprise website redesign pricing depends on scope - number of pages, CRM integration complexity, and ongoing optimisation requirements. We provide a scoped estimate after a strategy call. Typical engagements range from growth-stage to enterprise-scale packages.",
+      question: "What does an acquisition engine rollout cost?",
+      answer: "Pricing depends on acquisition scope, CRM complexity, workflow depth, and post-launch optimisation. We provide a scoped estimate after a strategy call based on the system you need, not a generic design package.",
     },
     {
       question: "How do you handle migration from our existing site?",
@@ -205,8 +205,8 @@ const fallbackFaq = {
   ],
   enterprise_card: {
     label: "Enterprise Ready",
-    title: "Security and governance baked into every redesign.",
-    body: "Your enterprise website redesign includes approval workflows, audit trails, and compliance-ready infrastructure from day one.",
+    title: "Security and governance baked into the acquisition engine.",
+    body: "Your acquisition engine includes approval workflows, audit trails, and compliance-ready infrastructure from day one.",
     items: [
       "SOC 2 readiness framework and documentation",
       "Role-based access controls and approval workflows",
@@ -217,11 +217,11 @@ const fallbackFaq = {
 };
 
 const fallbackCta = {
-  title: "Ready to start your enterprise website redesign?",
-  body: "Book a strategy call to map your conversion plan, timeline, and rollout options. Get a tailored roadmap within 48 hours.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
-  secondary_cta: { label: "Download Website Redesign Scope Template", href: "/contact" },
-  reassurance: "30-minute call - Tailored roadmap - No obligation - Typical launch in 4-6 weeks",
+  title: "If your current site cannot prove pipeline impact, it is underperforming no matter how polished it looks.",
+  body: "Book an acquisition review to map your buyer journey, rollout path, and the signal model needed to connect the site to real revenue action.",
+  primary_cta: { label: "Book an Acquisition Review", href: "/contact" },
+  secondary_cta: { label: "Request a Launch Blueprint", href: "/contact" },
+  reassurance: "30-minute call - rollout blueprint - no obligation - typical launch in 4-6 weeks",
 };
 
 /* -- Helpers ---------------------------------------------------------- */
@@ -297,7 +297,7 @@ export default async function WebsitesPage() {
               href={hero.primary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
             >
-              {hero.primary_cta?.label ?? "Book a Strategy Call"}
+              {hero.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
@@ -493,7 +493,7 @@ export default async function WebsitesPage() {
             href={proof.link?.href ?? "/case-studies"}
             className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white"
           >
-            {proof.link?.label ?? "View all enterprise website case studies"}
+            {proof.link?.label ?? "View all revenue platform case studies"}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
@@ -597,14 +597,14 @@ export default async function WebsitesPage() {
               href={cta.primary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
             >
-              {cta.primary_cta?.label ?? "Book a Strategy Call"}
+              {cta.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
               href={cta.secondary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
             >
-              {cta.secondary_cta?.label ?? "Download Website Redesign Scope Template"}
+              {cta.secondary_cta?.label ?? "Request a Launch Blueprint"}
             </Link>
           </div>
           <p className="mt-6 flex items-center justify-center gap-2 font-(--font-mono) text-xs text-slate-600">

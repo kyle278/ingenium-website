@@ -21,13 +21,13 @@ import AnimatedMetric from "../components/AnimatedMetric";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Website + CRM + AI Platform for Revenue Teams | Ingenium",
+  title: "Revenue Platform Architecture | Ingenium",
   description:
-    "One platform connecting your website, CRM, AI agents, and automations. Built for revenue teams who need pipeline visibility and control.",
+    "See how Ingenium connects acquisition, CRM execution, AI agents, automation, and governance into one revenue platform for growing teams.",
   openGraph: {
-    title: "Website + CRM + AI Platform for Revenue Teams | Ingenium",
+    title: "Revenue Platform Architecture | Ingenium",
     description:
-      "One platform connecting your website, CRM, AI agents, and automations. Built for revenue teams who need pipeline visibility and control.",
+      "One governed revenue platform connecting acquisition, CRM execution, AI agents, automation, and reporting.",
   },
   alternates: { canonical: "/platform" },
 };
@@ -35,129 +35,129 @@ export const metadata: Metadata = {
 /* -- Fallback Content ------------------------------------------------ */
 
 const fallbackHero = {
-  label: "Website CRM AI Platform",
-  title: "One platform connecting your website, CRM, AI agents, and automations.",
-  body: "Revenue teams lose pipeline when their tools are disconnected. Ingenium unifies website performance, CRM intelligence, AI execution, and workflow automation into a single system - so every interaction is tracked, every lead is routed, and every decision is backed by data.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  label: "Revenue Platform Architecture",
+  title: "The system your buyers feel, your reps trust, and your operators can finally control.",
+  body: "HubSpot and Salesforce win because they promise one source of truth. Ingenium layers execution on top of that promise: the acquisition experience, the CRM operating model, the AI workforce, the automation fabric, and the governance required to run all of it in production.",
+  primary_cta: { label: "Book a Platform Review", href: "/contact" },
   secondary_cta: { label: "Explore Platform Modules", href: "#modules" },
-  tertiary_cta: { label: "See case study results", href: "/case-studies" },
-  proof_metric: "3.2x",
-  proof_label: "pipeline velocity increase for a mid-market SaaS company after platform deployment",
+  tertiary_cta: { label: "See deployment outcomes", href: "/case-studies" },
+  proof_metric: "4.1x",
+  proof_label: "increase in operator speed after unified rollout across acquisition, CRM, and workflow layers",
   architecture: {
     label: "System architecture",
     layers: [
-      { name: "Website Layer", description: "Conversion pages, forms, analytics", accent: "emerald" },
-      { name: "CRM Layer", description: "Contacts, deals, pipeline, attribution", accent: "cyan" },
-      { name: "AI Layer", description: "Agents, departments, governance", accent: "emerald" },
-      { name: "Automation Layer", description: "Routing, enrichment, workflows", accent: "cyan" },
+      { name: "Acquisition Layer", description: "Buyer journeys, pages, forms, and intent capture", accent: "emerald" },
+      { name: "CRM Command Layer", description: "Contacts, lifecycle, ownership, and revenue truth", accent: "cyan" },
+      { name: "AI Execution Layer", description: "Research, drafting, qualification, and operator assistance", accent: "emerald" },
+      { name: "Automation Layer", description: "Routing, enrichment, escalations, and workflow timing", accent: "cyan" },
     ],
   },
 };
 
 const fallbackModules = {
   label: "Platform Modules",
-  title: "Five systems engineered to operate as one.",
-  body: "Each module handles a distinct function. Together, they create a closed-loop revenue system where data flows without manual intervention.",
+  title: "Five modules designed to remove revenue drag.",
+  body: "Every module is valuable alone. The leverage comes from the shared data model and operating rhythm between them.",
   items: [
     {
-      title: "Website Engine",
+      title: "Acquisition Engine",
       description:
-        "Conversion-optimised pages with built-in analytics, A/B testing, and progressive lead capture. Every visitor interaction feeds directly into your CRM.",
+        "High-conviction buyer journeys, proof-heavy pages, progressive forms, and instrumentation that make demand generation accountable.",
       icon: "globe",
-      metric: "38%",
-      metric_label: "avg. increase in qualified demo requests",
-      link: { label: "Explore website redesign services", href: "/websites" },
+      metric: "2.2x",
+      metric_label: "increase in qualified buyer intent",
+      link: { label: "See the acquisition engine", href: "/websites" },
     },
     {
-      title: "CRM Foundation",
+      title: "CRM Command",
       description:
-        "Unified contact records, pipeline tracking, lifecycle stages, and end-to-end attribution. The single source of truth for every revenue conversation.",
+        "Lifecycle design, routing logic, attribution, and operator visibility built so the CRM becomes actionable, not administrative.",
       icon: "database",
       metric: "<45s",
-      metric_label: "lead-to-rep routing time",
-      link: { label: "See CRM integration capabilities", href: "/crm" },
+      metric_label: "lead-to-owner routing",
+      link: { label: "See CRM command capabilities", href: "/crm" },
     },
     {
       title: "AI Agents",
       description:
-        "Specialised agents for research, content, qualification, and follow-up. Each agent operates within governance controls with human-in-the-loop checkpoints.",
+        "Governed AI operators for research, briefing, drafting, and qualification, all running inside explicit human approval boundaries.",
       icon: "sparkles",
-      metric: "4x",
-      metric_label: "content output without added headcount",
-      link: { label: "Explore AI agent capabilities", href: "/agents" },
+      metric: "90s",
+      metric_label: "signal-to-brief turnaround",
+      link: { label: "Explore AI agent operations", href: "/agents" },
     },
     {
-      title: "Automations",
+      title: "Automation Layer",
       description:
-        "Lead routing, data enrichment, follow-up sequences, and alert workflows. Triggered by behaviour signals, not arbitrary timers.",
+        "Lead routing, escalations, follow-up, and internal notifications triggered by real signal, with rollback and observability built in.",
       icon: "workflow",
-      metric: "62%",
-      metric_label: "reduction in manual data entry",
+      metric: "99%",
+      metric_label: "reduction in manual handoff lag",
       link: { label: "View automation workflows", href: "/automations" },
     },
     {
-      title: "Analytics & Attribution",
+      title: "Trust and Measurement",
       description:
-        "First-touch to closed-won attribution, funnel analysis, and performance dashboards. Know exactly which channels, pages, and campaigns drive revenue.",
+        "Attribution, auditability, governance, and reporting that let operators move fast without losing trust or procurement readiness.",
       icon: "chart",
       metric: "100%",
-      metric_label: "pipeline attribution coverage",
-      link: { label: "See platform analytics in action", href: "/case-studies" },
+      metric_label: "governed reporting coverage",
+      link: { label: "See trust and governance", href: "/security" },
     },
   ],
 };
 
 const fallbackRoles = {
   label: "Role-Based Views",
-  title: "One platform, tailored for every team.",
-  body: "Marketing, sales, and technical teams each see what matters most - without the noise of irrelevant data or controls.",
+  title: "One platform, different value by operator.",
+  body: "The promise is unified. The experience is role-specific. Marketing, sales, RevOps, and leadership each get the control surface they actually need.",
   tabs: [
     {
       role: "Marketing",
       icon: "target",
-      headline: "Launch faster. Prove ROI. Scale content.",
+      headline: "Create demand with proof, speed, and clean attribution.",
       outcomes: [
-        "Website analytics with conversion attribution by campaign and channel",
-        "AI-assisted content creation with brand governance and approval workflows",
-        "A/B testing framework with automated winner deployment",
-        "Pipeline contribution dashboards showing marketing-sourced revenue",
+        "See buyer movement from first visit to qualified pipeline",
+        "Launch AI-assisted content inside real brand and approval controls",
+        "Run experimentation without breaking reporting fidelity",
+        "Show leadership how acquisition is moving revenue, not just traffic",
       ],
       proof: {
         metric: "2.1x",
         label: "marketing-attributed pipeline",
-        context: "Series B SaaS, 90 days post-launch",
+        context: "after unified acquisition + CRM rollout",
       },
     },
     {
       role: "Sales",
       icon: "users",
-      headline: "Full context on every lead. Faster follow-up.",
+      headline: "Act on context immediately, not after another handoff.",
       outcomes: [
-        "Lead routing with firmographic enrichment delivered in under 60 seconds",
-        "Account intelligence briefs generated by AI agents before every call",
-        "Pipeline visibility with deal velocity tracking and risk alerts",
-        "Automated follow-up sequences triggered by engagement signals",
+        "Receive enriched, qualified leads with activity history already attached",
+        "Get AI-prepared briefs before outreach or calls",
+        "See pipeline stall risk while there is still time to intervene",
+        "Trigger follow-up and escalation paths without waiting on ops",
       ],
       proof: {
         metric: "67%",
         label: "faster lead response time",
-        context: "Mid-market technology company",
+        context: "after automation + AI brief deployment",
       },
     },
     {
-      role: "Technical",
+      role: "Revenue Ops",
       icon: "shield",
-      headline: "Governance, audit trails, and enterprise controls.",
+      headline: "Control the system without becoming the bottleneck.",
       outcomes: [
-        "Role-based access controls with SSO and SCIM provisioning",
-        "Complete audit logs for every AI action, content change, and workflow execution",
-        "SOC 2-ready infrastructure with compliance documentation",
-        "API-first architecture for custom integrations and data warehouse connections",
+        "Own the lifecycle model, routing rules, and reporting logic in one place",
+        "Audit every AI action, routing event, and deployment change",
+        "Maintain governance without slowing the go-to-market team down",
+        "Connect the platform to the warehouse and the rest of your stack cleanly",
       ],
       proof: {
         metric: "100%",
         label: "audit trail coverage",
-        context: "Enterprise compliance requirement met",
+        context: "across AI, CRM, and workflow execution",
       },
     },
   ],
@@ -165,17 +165,17 @@ const fallbackRoles = {
 
 const fallbackIntegrations = {
   label: "Integration Architecture",
-  title: "Connects to your stack without a rip-and-replace.",
-  body: "The platform integrates natively with major CRM, marketing automation, and data systems. Data flows bidirectionally so your existing tools stay in sync.",
+  title: "Fits into the stack you already have to justify.",
+  body: "Ingenium is designed to connect to the tools already inside your buying committee, while replacing the fragmented operating logic between them.",
   patterns: [
     {
       name: "HubSpot",
-      flow: "Bidirectional sync of contacts, deals, and engagement data. Website form submissions create CRM records with full attribution context.",
+      flow: "Use HubSpot as the CRM system of record while Ingenium owns acquisition journeys, workflow timing, AI execution, and richer attribution context.",
       category: "CRM",
     },
     {
       name: "Salesforce",
-      flow: "Native integration with leads, opportunities, and custom objects. Pipeline attribution mapped from first website touch to closed-won.",
+      flow: "Keep Salesforce at the center of opportunity management while Ingenium upgrades the signal, routing, briefing, and orchestration layer around it.",
       category: "CRM",
     },
     {
@@ -201,8 +201,8 @@ const fallbackIntegrations = {
   ],
   governance_card: {
     label: "Enterprise Governance",
-    title: "Security and compliance built into every integration.",
-    body: "Approval workflows, audit trails, and data handling policies govern every connection. Your security team maintains full visibility.",
+    title: "Security and compliance stay attached to every connection.",
+    body: "Approvals, audit logs, and documented data handling guard every integration so your security team can say yes faster.",
     items: [
       "Data encryption in transit and at rest",
       "Role-based access with granular permissions",
@@ -213,11 +213,11 @@ const fallbackIntegrations = {
 };
 
 const fallbackCta = {
-  title: "Ready to unify your website, CRM, and AI operations?",
-  body: "Book a strategy call to map your platform architecture, integration requirements, and rollout plan. Or request an architecture review to see how your current stack compares.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  title: "The fastest way to grow is to stop making your team work around a fragmented system.",
+  body: "Book a platform review and we will map your current stack, identify the highest-friction revenue handoffs, and show how Ingenium would replace them with one governed operating model.",
+  primary_cta: { label: "Book a Platform Review", href: "/contact" },
   secondary_cta: { label: "Request an Architecture Review", href: "/contact" },
-  reassurance: "30-minute call - Custom architecture diagram - No obligation",
+  reassurance: "30-minute call - current-state teardown - architecture recommendation",
 };
 
 /* -- Helpers ---------------------------------------------------------- */
@@ -364,7 +364,7 @@ export default async function PlatformPage() {
                 href={hero.primary_cta?.href ?? "/contact"}
                 className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
               >
-                {hero.primary_cta?.label ?? "Book a Strategy Call"}
+                {hero.primary_cta?.label ?? "Book a Platform Strategy Call"}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
@@ -838,7 +838,7 @@ export default async function PlatformPage() {
               href={cta.primary_cta?.href ?? "/contact"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
             >
-              {cta.primary_cta?.label ?? "Book a Strategy Call"}
+              {cta.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link

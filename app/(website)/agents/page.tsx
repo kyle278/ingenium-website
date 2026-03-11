@@ -19,11 +19,11 @@ import {
 import AnimatedMetric from "../components/AnimatedMetric";
 
 export const metadata: Metadata = {
-  title: "AI Agents for Marketing and Sales Teams | Ingenium",
+  title: "Governed AI Agents for Revenue Teams | Ingenium",
   description:
-    "Deploy governed AI agents across marketing and sales workflows. Human-approved, measurable, and integrated into your revenue stack.",
+    "Deploy AI agents for research, qualification, drafting, and revenue operations with human approval gates and measurable business outcomes.",
   openGraph: {
-    title: "AI Agents for Marketing and Sales Teams | Ingenium",
+    title: "Governed AI Agents for Revenue Teams | Ingenium",
     description:
       "Deploy governed AI agents across marketing and sales workflows with human approvals and measurable outcomes.",
     url: "/agents",
@@ -56,10 +56,10 @@ const ghostButton =
 
 const fallbackHero = {
   label: "AI Agents for Revenue Teams",
-  title: "AI agents that close gaps in your marketing and sales workflows.",
-  body: "Deploy governed, human-approved agents across marketing ops, sales development, and RevOps. Every action is measurable, every output auditable.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
-  secondary_cta: { label: "Explore Agent Departments", href: "/departments" },
+  title: "AI agents your team will actually use because the governance is already built in.",
+  body: "Ingenium deploys AI operators across marketing, sales, and RevOps with clear task boundaries, approval gates, and performance visibility. Faster execution without black-box risk.",
+  primary_cta: { label: "Book an AI Workflow Review", href: "/contact" },
+  secondary_cta: { label: "Explore Agent Use Cases", href: "/departments" },
   workflow: {
     label: "Agent workflow",
     badge: "Human-approved",
@@ -80,8 +80,8 @@ const fallbackHero = {
 
 const fallbackCapabilities = {
   label: "Capabilities",
-  title: "Role-specific agents for every revenue function.",
-  body: "Each agent is scoped to a workflow, produces concrete outputs, and reports to your governance model.",
+  title: "Role-specific AI execution, not vague automation theater.",
+  body: "Each agent is tied to a workflow, an approver, and an outcome your team can inspect.",
   roles: [
     {
       role: "Marketing Ops",
@@ -119,8 +119,8 @@ const fallbackCapabilities = {
 
 const fallbackGovernance = {
   label: "Governance",
-  title: "Every agent action passes through a human approval gate.",
-  body: "No black-box outputs. Every agent follows an explicit approval lifecycle with full audit trails.",
+  title: "Every agent action passes through a visible control model.",
+  body: "No black-box outputs. Every agent follows an explicit approval lifecycle with full audit trails and policy boundaries.",
   lifecycle: [
     { step: "Trigger", description: "Signal or schedule initiates the agent", icon: "zap" },
     { step: "Agent Action", description: "Agent executes scoped task", icon: "bot" },
@@ -172,9 +172,9 @@ const fallbackImpact = {
 };
 
 const fallbackCta = {
-  title: "Deploy AI agents that your team actually trusts.",
-  body: "Map your agent strategy, define governance rules, and see a sample playbook tailored to your revenue workflow.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  title: "Deploy AI where speed matters and trust still has to survive review.",
+  body: "Map the workflows where governed AI will save your team the most time, then launch them with the approvals and reporting already in place.",
+  primary_cta: { label: "Book an AI Workflow Review", href: "/contact" },
   secondary_cta: { label: "View a Sample Agent Playbook", href: "/contact?intent=playbook" },
 };
 
@@ -258,7 +258,7 @@ export default async function AgentsPage() {
               href={hero.primary_cta?.href ?? "/contact"}
               className={primaryButton}
             >
-              {hero.primary_cta?.label ?? "Book a Strategy Call"}
+              {hero.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
@@ -619,7 +619,7 @@ export default async function AgentsPage() {
               href={cta.primary_cta?.href ?? "/contact"}
               className={primaryButton}
             >
-              {cta.primary_cta?.label ?? "Book a Strategy Call"}
+              {cta.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link

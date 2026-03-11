@@ -18,13 +18,13 @@ import {
 import AnimatedMetric from "../components/AnimatedMetric";
 
 export const metadata: Metadata = {
-  title: "Enterprise Website Case Studies | Ingenium",
+  title: "Revenue Platform Case Studies | Ingenium",
   description:
-    "Real results from enterprise website rebuilds - conversion lift, pipeline growth, and system integration outcomes with measurable timelines.",
+    "See how Ingenium improved pipeline velocity, signal quality, routing speed, and attribution by replacing fragmented revenue systems with one platform.",
   openGraph: {
-    title: "Enterprise Website Case Studies | Ingenium",
+    title: "Revenue Platform Case Studies | Ingenium",
     description:
-      "Real results from enterprise website rebuilds - conversion lift, pipeline growth, and system integration outcomes with measurable timelines.",
+      "See how Ingenium improved pipeline velocity, signal quality, routing speed, and attribution by replacing fragmented revenue systems with one platform.",
   },
   alternates: { canonical: "/case-studies" },
 };
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
 
 const fallbackHero = {
   label: "Evidence Library",
-  title: "Enterprise website case studies with measurable outcomes.",
-  body: "Every engagement produces data. These are the results from enterprise website rebuilds - conversion architecture, pipeline integration, and system-level transformation with verified timelines.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  title: "Revenue platform case studies with measurable outcomes.",
+  body: "Every engagement produces data. These are the outcomes from replacing fragmented acquisition, CRM, AI, and workflow systems with one operating model.",
+  primary_cta: { label: "Book a Platform Strategy Call", href: "/contact" },
   secondary_cta: { label: "Download the Full Case Pack", href: "/contact" },
   aggregate_metrics: [
     { metric: "+34%", label: "Avg. conversion lift", detail: "across all engagements" },
@@ -180,8 +180,8 @@ const fallbackCaseList = {
 
 const fallbackCta = {
   title: "Your results belong in this library.",
-  body: "Book a strategy call to scope your website rebuild and define the metrics that matter. We will map your conversion architecture, timeline, and expected outcomes within 48 hours.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  body: "Book a platform strategy call and we will scope the revenue-system changes most likely to move your next quarter, not just your next website launch.",
+  primary_cta: { label: "Book a Platform Strategy Call", href: "/contact" },
   secondary_cta: { label: "Download the Full Case Pack", href: "/contact" },
   reassurance: "30-minute call - Scoped roadmap - No obligation",
 };
@@ -305,7 +305,7 @@ export default async function CaseStudiesPage() {
               href={hero.primary_cta?.href ?? "/contact"}
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
             >
-              {hero.primary_cta?.label ?? "Book a Strategy Call"}
+              {hero.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
@@ -554,7 +554,7 @@ export default async function CaseStudiesPage() {
               href={cta.primary_cta?.href ?? "/contact"}
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
             >
-              {cta.primary_cta?.label ?? "Book a Strategy Call"}
+              {cta.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link

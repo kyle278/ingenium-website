@@ -1,6 +1,7 @@
 # Website Area Architecture
 
 ## UI Flow
+- Shared navigation now emphasizes Platform, Acquisition Engine, CRM, AI Agents, Automation, Security, proof, and contact in the primary buyer path.
 - Shared website header renders Portal-auth Login and Sign Up actions in the top nav on desktop and at the top of the mobile drawer.
 - Contact page renders a progressive two-step client component.
 - Contact page resolves active form metadata server-side and passes canonical Portal form identity into the client component.

@@ -20,7 +20,7 @@ import {
 
 
 export const metadata: Metadata = {
-  title: "Enterprise Security and AI Governance | Ingenium",
+  title: "Trust, Security, and AI Governance | Ingenium",
   description:
     "Enterprise-grade security controls, AI governance frameworks, and compliance readiness. Built for regulated industries and procurement teams.",
   openGraph: {
@@ -55,10 +55,10 @@ const darkCardLg =
 
 const fallbackHero = {
   label: "Enterprise Security & Governance",
-  title: "Security and governance engineered into every layer.",
-  body: "Ingenium is built for organizations where security is non-negotiable. Every system ships with enterprise-grade controls, audit infrastructure, and compliance documentation designed to satisfy CTOs, procurement teams, and regulated industry requirements.",
+  title: "Trust is part of the product story, not a slide added after procurement asks for it.",
+  body: "Ingenium is built for teams that need urgency and control at the same time. Security, governance, and auditability are engineered into the operating model so buyers can move forward with confidence.",
   primary_cta: {
-    label: "Book a Strategy Call",
+    label: "Book a Trust Review",
     href: "/contact",
   },
   secondary_cta: {
@@ -189,10 +189,10 @@ const fallbackGovernance = {
 };
 
 const fallbackCta = {
-  title: "Your security team has questions. We have documentation.",
-  body: "Whether you need a security review pack for procurement, a technical architecture walkthrough, or a strategy discussion, we are ready.",
+  title: "Your security team has questions. The right answer is a system they can actually inspect.",
+  body: "Whether you need a security review pack for procurement, a technical architecture walkthrough, or a governance discussion, we are ready.",
   primary_cta: {
-    label: "Book a Strategy Call",
+    label: "Book a Trust Review",
     href: "/contact",
   },
   secondary_cta: {
@@ -275,7 +275,7 @@ export default async function SecurityPage() {
               href={hero.primary_cta?.href ?? "/contact"}
               className={primaryButton}
             >
-              {hero.primary_cta?.label ?? "Book a Strategy Call"}
+              {hero.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
@@ -613,7 +613,7 @@ export default async function SecurityPage() {
             href={cta.primary_cta?.href ?? "/contact"}
             className={primaryButton}
           >
-            {cta.primary_cta?.label ?? "Book a Strategy Call"}
+            {cta.primary_cta?.label ?? "Book a Platform Strategy Call"}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
           <Link

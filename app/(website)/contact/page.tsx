@@ -8,13 +8,13 @@ import { getPortalFormBySlug } from "@/lib/portalIntegration/server";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Book a Website Strategy Consultation | Ingenium",
+  title: "Book a Platform Strategy Call | Ingenium",
   description:
-    "Start with a strategy call. Tell us your biggest growth challenge and get a tailored conversion roadmap within 48 hours.",
+    "Start with a platform strategy call. Tell us where revenue is leaking and Ingenium will map the system, rollout priorities, and next decisions.",
   openGraph: {
-    title: "Book a Website Strategy Consultation | Ingenium",
+    title: "Book a Platform Strategy Call | Ingenium",
     description:
-      "Start with a strategy call and get a tailored website, CRM, and automation roadmap for pipeline growth.",
+      "Start with a strategy call and get a tailored acquisition, CRM, AI, and automation roadmap for pipeline growth.",
     url: "/contact",
   },
   alternates: { canonical: "/contact" },
@@ -25,15 +25,15 @@ const darkCard = "rounded-2xl border border-slate-800 bg-slate-900/70 p-6";
 
 const expectations = [
   "Response within 1 business day",
-  "Conversion roadmap delivered within 48 hours",
-  "Security review support for enterprise buyers",
+  "Architecture and rollout direction within 48 hours",
+  "Security and stakeholder review support included",
 ];
 
 const callExpectations = [
-  "Current funnel and conversion leak analysis",
-  "Priority fixes by impact and implementation effort",
-  "Recommended website, CRM, and automation architecture",
-  "Next-step plan with owners and timeline",
+  "Current-state revenue systems audit",
+  "Highest-friction handoff analysis across acquisition, CRM, AI, and ops",
+  "Recommended platform architecture and rollout order",
+  "Next-step plan with owners, risks, and timing",
 ];
 
 const infoCards = [
@@ -59,13 +59,13 @@ export default async function ContactPage() {
     <div className="space-y-24 md:space-y-28">
       <section className="grid items-start gap-8 lg:grid-cols-[1.05fr,0.95fr]">
         <div>
-          <p className={sectionLabel}>Website Strategy Consultation</p>
+          <p className={sectionLabel}>Platform Strategy Call</p>
           <h1 className="mt-5 max-w-3xl font-(--font-display) text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Tell us your growth challenge. We will map the conversion system.
+            Tell us where revenue is leaking. We will map the system that fixes it.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-400">
-            Start with a short strategy intake. We design a practical plan covering website
-            conversion, CRM pipeline flow, AI automation, and governance.
+            Start with a short intake. We will design a practical plan covering acquisition,
+            CRM execution, AI workflows, automation, and governance.
           </p>
 
           <div className="mt-8 space-y-3">
@@ -151,7 +151,7 @@ export default async function ContactPage() {
             href="/contact?intent=strategy-call"
             className="cta-lift inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-500"
           >
-            Book a Strategy Call
+            Book a Platform Strategy Call
             <ArrowUpRight className="h-4 w-4" />
           </Link>
           <Link
@@ -164,7 +164,7 @@ export default async function ContactPage() {
             href="/case-studies"
             className="cta-lift inline-flex items-center gap-2 text-sm font-semibold text-emerald-300 transition hover:text-emerald-200"
           >
-            Review enterprise website case studies
+            Review revenue platform case studies
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

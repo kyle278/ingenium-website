@@ -16,13 +16,13 @@ import AnimatedMetric from "../components/AnimatedMetric";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "CRM Implementation and RevOps Services | Ingenium",
+  title: "CRM Command Layer | Ingenium",
   description:
-    "CRM implementation, migration, and revenue operations consulting. Clean data, smart routing, and pipeline accuracy from day one.",
+    "Ingenium turns your CRM into a real command layer with lifecycle design, routing logic, attribution, and operator trust built in.",
   openGraph: {
-    title: "CRM Implementation and RevOps Services | Ingenium",
+    title: "CRM Command Layer | Ingenium",
     description:
-      "CRM implementation, migration, and RevOps services for clean data, smart lead routing, and forecast confidence.",
+      "CRM lifecycle design, routing, attribution, and migration built for accountable revenue execution.",
     url: "/crm",
   },
   alternates: { canonical: "/crm" },
@@ -48,10 +48,10 @@ const softCard =
 /* ------------------------------------------------------------------ */
 
 const fallbackHero = {
-  label: "CRM Implementation Services",
-  title: "Your pipeline starts with a CRM that actually works.",
-  body: "We implement CRM systems built for pipeline accuracy, smart lead routing, and revenue forecasting you can trust. Clean data from day one means every decision is backed by signal, not guesswork.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  label: "CRM Command Layer",
+  title: "Turn your CRM from a record warehouse into the operating system for revenue action.",
+  body: "Ingenium designs the lifecycle logic, routing rules, attribution, and governance that make a CRM usable under pressure. Your reps move faster because the system is trusted. Leadership moves faster because the reporting is real.",
+  primary_cta: { label: "Book a CRM Review", href: "/contact" },
   secondary_cta: { label: "Request a Migration Assessment", href: "/contact" },
   dashboard: {
     label: "CRM Dashboard",
@@ -65,14 +65,14 @@ const fallbackHero = {
   },
   proof: {
     metric: "97%",
-    label: "pipeline accuracy across active CRM implementations",
+    label: "pipeline accuracy after lifecycle and routing redesign",
   },
 };
 
 const fallbackFoundation = {
   label: "CRM Foundation",
-  title: "Lifecycle stages, routing rules, and attribution - built right.",
-  body: "Every CRM implementation starts with the operational foundation: lifecycle stages that match your funnel, lead routing that eliminates manual handoffs, attribution that connects revenue to source, and data hygiene that keeps everything trustworthy.",
+  title: "Lifecycle, ownership, and attribution built as one system.",
+  body: "A CRM only becomes powerful when the lifecycle model, routing engine, attribution logic, and data hygiene rules agree with each other.",
   flow: {
     label: "Lead lifecycle in action",
     description:
@@ -111,8 +111,8 @@ const fallbackFoundation = {
 
 const fallbackMigration = {
   label: "CRM Migration",
-  title: "Migration with risk controls at every gate.",
-  body: "CRM migrations fail when teams rush. We build in data validation checkpoints, parallel running periods, and documented rollback plans so you never lose a record or break a workflow.",
+  title: "Migration with buyer-safe risk controls at every gate.",
+  body: "When the CRM is the command layer, migration errors become revenue errors. We use validation checkpoints, staged cutover, and rollback controls so your team keeps operating during the transition.",
   timeline: {
     label: "Migration timeline",
     gates: [
@@ -162,9 +162,9 @@ const fallbackMigration = {
 };
 
 const fallbackCta = {
-  title: "Ready to build a pipeline you can trust?",
-  body: "Whether you're implementing from scratch or migrating from a system that's holding you back, we'll map the path to pipeline accuracy.",
-  primary_cta: { label: "Book a Strategy Call", href: "/contact" },
+  title: "If reps do not trust the CRM, your revenue engine is already leaking.",
+  body: "Book a CRM review and we will map the lifecycle, routing, and migration changes required to turn your system into a real command layer.",
+  primary_cta: { label: "Book a CRM Review", href: "/contact" },
   secondary_cta: {
     label: "Request a Migration Assessment",
     href: "/contact",
@@ -256,7 +256,7 @@ export default async function CrmPage() {
               href={hero.primary_cta?.href ?? "/contact"}
               className={primaryButton}
             >
-              {hero.primary_cta?.label ?? "Book a Strategy Call"}
+              {hero.primary_cta?.label ?? "Book a Platform Strategy Call"}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
@@ -579,7 +579,7 @@ export default async function CrmPage() {
             href={cta.primary_cta?.href ?? "/contact"}
             className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
           >
-            {cta.primary_cta?.label ?? "Book a Strategy Call"}
+            {cta.primary_cta?.label ?? "Book a Platform Strategy Call"}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
           <Link

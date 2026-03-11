@@ -626,5 +626,11 @@ export function bootstrapIngeniumTracker(config: PortalPublicConfig) {
 }
 
 export function getPortalTrackingSnapshot() {
-  return window.IngeniumTracker?.getTrackingSnapshot() ?? null;
+  const tracker = window.IngeniumTracker as
+    | { getTrackingSnapshot?: (() => PortalTrackingSnapshot) | unknown }
+    | undefined;
+
+  return typeof tracker?.getTrackingSnapshot === "function"
+    ? tracker.getTrackingSnapshot()
+    : null;
 }

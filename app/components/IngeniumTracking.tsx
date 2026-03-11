@@ -13,8 +13,8 @@ type IngeniumTrackingProps = {
 export default function IngeniumTracking({ portalAppUrl, siteId }: IngeniumTrackingProps) {
   const hasBootstrappedRef = useRef(false);
 
-  const bootstrapTracker = useCallback(() => {
-    if (!portalAppUrl || !siteId || hasBootstrappedRef.current) {
+  const bootstrapTracker = useCallback((force = false) => {
+    if (!portalAppUrl || !siteId || (hasBootstrappedRef.current && !force)) {
       return;
     }
 
@@ -23,7 +23,7 @@ export default function IngeniumTracking({ portalAppUrl, siteId }: IngeniumTrack
   }, [portalAppUrl, siteId]);
 
   const onScriptLoad = useCallback(() => {
-    bootstrapTracker();
+    bootstrapTracker(true);
   }, [bootstrapTracker]);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function IngeniumTracking({ portalAppUrl, siteId }: IngeniumTrack
       src={`${portalAppUrl}/ingenium-tracker.js`}
       strategy="afterInteractive"
       onLoad={onScriptLoad}
-      onError={bootstrapTracker}
+      onError={() => bootstrapTracker()}
     />
   );
 }

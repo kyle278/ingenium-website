@@ -64,6 +64,19 @@ This file is mandatory for all tasks.
   - `lib/ingeniumTrackingPayload.ts`
   - `Agents/lessons.md`
 
+- Date: 2026-03-11
+- Task: Fix tracker TypeScript build regression
+- Categories: `BUG FIX`, `IMPROVEMENT`, `PROCESS`
+- Summary:
+  - Fixed a TypeScript build failure in the Portal tracker runtime by normalizing the `flushPromise` fetch chain to `Promise<void>`.
+  - Added a lessons entry to explicitly review async helper return types when local TypeScript verification is unavailable.
+- Impact:
+  - Next.js type checking no longer fails on `lib/portalIntegration/browserTracker.ts`.
+  - Tracker queue flush behavior is unchanged, but the runtime now matches its declared promise contract.
+- Key files:
+  - `lib/portalIntegration/browserTracker.ts`
+  - `Agents/lessons.md`
+
 - Date: 2026-03-10
 - Task: Move Login and Sign Up to the top navigation on all devices
 - Categories: `UI CHANGE`, `UX CHANGE`, `IMPROVEMENT`, `DOCUMENTATION`, `PROCESS`

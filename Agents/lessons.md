@@ -11,3 +11,10 @@
 - Root cause: I relied on static review in an environment without Node tooling and did not do a targeted operator-precedence scan for client files touched by the rewrite.
 - Prevention rule: When build tooling is unavailable, run a focused syntax-risk scan on touched client files for patterns Turbopack commonly rejects, especially mixed `??` with `||` or `&&`.
 - Verification step added: After UI/client rewrites, grep touched files for `??` mixed with logical operators and resolve precedence explicitly with parentheses.
+
+- Date: 2026-03-11
+- Task: Portal tracker build follow-up
+- What went wrong: I fixed the first build regression but still missed a TypeScript promise-type mismatch in the tracker runtime.
+- Root cause: I did not do a targeted review of async helper return types in touched client/runtime files after changing the tracker bootstrap flow.
+- Prevention rule: When TypeScript cannot be run locally, inspect touched async helpers for declared promise types versus chained `fetch`/`then`/`catch` return values and normalize them explicitly.
+- Verification step added: For touched async helpers, check whether the declared promise type matches the final chained expression type and add `then(() => undefined)` or explicit annotations where needed.

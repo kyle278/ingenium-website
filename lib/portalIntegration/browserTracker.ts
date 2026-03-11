@@ -342,6 +342,7 @@ async function flushQueue() {
     body: JSON.stringify(payload),
     keepalive: true,
   })
+    .then(() => undefined)
     .catch(() => {
       state.queue.unshift(...events);
     })

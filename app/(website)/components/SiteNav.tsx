@@ -14,10 +14,8 @@ interface NavItem {
 interface SiteNavContent {
   brand: string;
   items: NavItem[];
-  login_label: string;
-  login_href: string;
-  signup_label: string;
-  signup_href: string;
+  cta_label: string;
+  cta_href: string;
 }
 
 interface SiteNavProps {
@@ -188,19 +186,13 @@ export default function SiteNav({ content }: SiteNavProps) {
             })}
           </nav>
 
-          {/* Desktop Auth Actions */}
+          {/* Desktop CTA */}
           <div className="hidden items-center gap-4 lg:flex">
             <Link
-              href={content.login_href}
-              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:text-white"
-            >
-              {content.login_label}
-            </Link>
-            <Link
-              href={content.signup_href}
+              href={content.cta_href}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
             >
-              {content.signup_label}
+              {content.cta_label}
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -223,18 +215,11 @@ export default function SiteNav({ content }: SiteNavProps) {
           <nav className="mx-auto max-w-7xl space-y-1 px-6 py-6">
             <div className="grid gap-3 pb-3">
               <Link
-                href={content.login_href}
-                onClick={() => setOpen(false)}
-                className="block rounded-xl border border-slate-700 bg-slate-900/70 px-4 py-3 text-center text-sm font-semibold text-slate-100 transition hover:border-slate-600 hover:text-white"
-              >
-                {content.login_label}
-              </Link>
-              <Link
-                href={content.signup_href}
+                href={content.cta_href}
                 onClick={() => setOpen(false)}
                 className="block rounded-xl bg-emerald-600 px-4 py-3.5 text-center text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
               >
-                {content.signup_label}
+                {content.cta_label}
               </Link>
             </div>
             <div className="rounded-xl border border-slate-800/80 bg-slate-900/60 p-3">

@@ -1,12 +1,8 @@
 import SiteNav from "./components/SiteNav";
 import SiteFooter from "./components/SiteFooter";
 import RouteStructuredData from "./components/RouteStructuredData";
-import { getPortalPublicConfigOrNull } from "@/lib/portalIntegration/config";
 
 export const revalidate = 300;
-
-const portalPublicConfig = getPortalPublicConfigOrNull();
-const portalAppUrl = portalPublicConfig?.portalAppUrl ?? "";
 
 const navContent = {
   brand: "Ingenium",
@@ -21,10 +17,8 @@ const navContent = {
     { href: "/about", label: "Why Ingenium" },
     { href: "/contact", label: "Contact" },
   ],
-  login_label: "Login",
-  login_href: portalAppUrl ? `${portalAppUrl}/login` : "#",
-  signup_label: "Sign Up",
-  signup_href: portalAppUrl ? `${portalAppUrl}/signup` : "#",
+  cta_label: "Book a Strategy Call",
+  cta_href: "/contact",
 };
 
 const footerContent = {

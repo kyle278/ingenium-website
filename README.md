@@ -15,7 +15,7 @@ Open `http://localhost:3000`.
 - Styling: Tailwind CSS + `app/globals.css`
 - Content model: static in-code fallback objects per route page
 - Contact flow: contact page resolves the canonical Portal form UUID server-side and the progressive client form posts to `app/api/portal-form-submit/route.ts`
-- Tracking flow: root layout loads `${PORTAL_APP_URL}/ingenium-tracker.js`, then the website runtime guarantees durable `visitor_id`, rotating `session_id`, `page_view`, `form_view`, and `scroll_depth` delivery to `${PORTAL_APP_URL}/api/websites/tracking/events`
+- Tracking flow: root layout loads `${PORTAL_APP_URL}/ingenium-tracker.js`, then the website runtime guarantees durable `visitor_id`, rotating `session_id`, `page_view`, `form_view`, and `scroll_depth` delivery to `${PORTAL_APP_URL}/api/websites/tracking/events`, with a local bootstrap fallback if the external script fails
 
 The website keeps page content static in code, while form submissions are forwarded to Ingenium Portal.
 
@@ -32,7 +32,7 @@ PORTAL_SITE_ID=<website-site-uuid>
 PORTAL_DEFAULT_FORM_SLUG=contact
 ```
 
-The browser does not read these env vars directly. `app/layout.tsx` reads the public subset server-side and passes it into the client tracker bootstrap.
+The browser does not read these env vars directly. The shared Portal config module reads the public subset server-side and passes it into the client tracker bootstrap and website auth links.
 
 ## Canonical Form Setup
 

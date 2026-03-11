@@ -23,6 +23,7 @@ Ingenium website is a Next.js App Router project that sells Ingenium as a unifie
 
 ## Current Operational Assumptions
 - Tracker script initializes from `PORTAL_APP_URL` and `PORTAL_SITE_ID` passed server-side into the root client bootstrap.
+- Website shell auth links and tracker bootstrap both read Portal host configuration through the shared config module rather than direct env access in scattered files.
 - Website runtime owns `visitor_id` cookie + `localStorage` sync and `session_id` rotation via `sessionStorage`.
 - Browser tracking runtime emits `session_start`, `page_view`, `form_view`, and `scroll_depth` using canonical payload shape and page-scoped resets.
 - Public IA now prioritizes platform, acquisition, CRM, AI agents, automation, security, proof, and contact over secondary brochure-style pages.

@@ -4,3 +4,10 @@
 - Root cause: I did not enforce a strict pre-flight checklist for workflow-first execution and PowerShell path quoting.
 - Prevention rule: Before any code edit, complete workflow pre-read steps and quote all paths containing special shell characters (for example `app/(website)`).
 - Verification step added: Run a pre-edit command checklist (`workflow read`, `context read`, `quoted path scan`) and validate search commands execute without shell parsing errors.
+
+- Date: 2026-03-11
+- Task: Platform-led website rewrite build follow-up
+- What went wrong: I closed and pushed the rewrite without catching a client-side syntax error that broke the production build.
+- Root cause: I relied on static review in an environment without Node tooling and did not do a targeted operator-precedence scan for client files touched by the rewrite.
+- Prevention rule: When build tooling is unavailable, run a focused syntax-risk scan on touched client files for patterns Turbopack commonly rejects, especially mixed `??` with `||` or `&&`.
+- Verification step added: After UI/client rewrites, grep touched files for `??` mixed with logical operators and resolve precedence explicitly with parentheses.

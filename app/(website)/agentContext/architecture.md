@@ -7,7 +7,7 @@
 - Contact page resolves active form metadata server-side and passes canonical Portal form identity into the client component.
 - Step 1 collects required core fields.
 - Step 2 collects qualification fields and submits payload.
-- Root layout mounts a client tracking component that initializes Ingenium tracker script.
+- Root layout mounts a client tracking component that loads the Ingenium tracker script and still bootstraps the local runtime if the external script fails to load.
 
 ## Data Flow
 - Browser tracker posts interaction events to `${PORTAL_APP_URL}/api/websites/tracking/events`.
@@ -17,7 +17,7 @@
 - UI shows loading, success, or error states based on API response.
 
 ## Risks
-- Tracker script/load failure can reduce event coverage.
+- Cross-origin/domain fragmentation can still split `visitor_id` across apex/www mismatches, preview/staging domains, or unrelated subdomains.
 - Missing tracking normalization can break downstream attribution.
 - Missing canonical linkage IDs can break event-to-form correlation.
 - Missing canonical Portal form UUID can intentionally disable the form to prevent corrupted reporting.

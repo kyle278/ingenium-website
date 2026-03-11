@@ -51,6 +51,19 @@ This file is mandatory for all tasks.
   - `Agents/Plans/platform-led-website-rewrite.md`
   - `Agents/agentCommunications/platform-led-website-rewrite-comms.md`
 
+- Date: 2026-03-11
+- Task: Fix build regression from platform-led website rewrite
+- Categories: `BUG FIX`, `IMPROVEMENT`, `PROCESS`
+- Summary:
+  - Fixed a Turbopack parse error in the client tracking payload helper by making nullish-coalescing precedence explicit when falling back to `document.referrer`.
+  - Added a workflow lesson to scan touched client files for mixed `??` with logical operators when build tooling is unavailable locally.
+- Impact:
+  - Production builds no longer fail on `lib/ingeniumTrackingPayload.ts`.
+  - The contact form tracking payload remains unchanged semantically, but the expression is now valid for Next.js/Turbopack parsing.
+- Key files:
+  - `lib/ingeniumTrackingPayload.ts`
+  - `Agents/lessons.md`
+
 - Date: 2026-03-10
 - Task: Move Login and Sign Up to the top navigation on all devices
 - Categories: `UI CHANGE`, `UX CHANGE`, `IMPROVEMENT`, `DOCUMENTATION`, `PROCESS`
@@ -78,13 +91,16 @@ This file is mandatory for all tasks.
   - Added centralized Portal config/types and a server-side form resolver so the contact page now requires the real Portal `website_forms.id` UUID before rendering a tracked form.
   - Reworked the Portal submission handler to resolve the active form by slug, enforce canonical `form_id` matching, write required tracking columns (`tracking_visitor_id`, `tracking_session_id`, `campaign_cid`), and include the required `data` and `metadata` payload contents.
   - Added idempotent SQL for the canonical `contact` form setup in Portal and updated repository docs/context to the new contract.
+  - Hardened the integration so the shared website shell also reads Portal host values through the central config module and the local tracker runtime still bootstraps if the external Portal tracker script fails to load.
 - Impact:
   - Anonymous visitor/session identity is now stable enough for Portal analytics stitching and CRM identity backfill.
   - Website > Reports form performance can aggregate by canonical Portal form UUID instead of unstable DOM identifiers.
   - Browser code no longer depends on legacy public env names or fake form ids, and the server remains the only place where the service-role key is used.
+  - Shared navigation auth links and tracking bootstrap now derive from the same centralized Portal host config, reducing config drift risk.
 - Key files:
   - `app/components/IngeniumTracking.tsx`
   - `app/layout.tsx`
+  - `app/(website)/layout.tsx`
   - `app/(website)/contact/page.tsx`
   - `app/(website)/contact/ContactForm.tsx`
   - `app/api/portal/_lib/formSubmit.ts`

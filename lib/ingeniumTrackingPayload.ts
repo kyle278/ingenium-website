@@ -29,7 +29,7 @@ export function getIngeniumTrackingPayload(): IngeniumTrackingPayload {
     session_id: snapshot?.session_id ?? null,
     submission_url: snapshot?.submission_url ?? window.location.href,
     landing_url: snapshot?.landing_url ?? null,
-    referrer: snapshot?.referrer ?? document.referrer || null,
+    referrer: snapshot?.referrer ?? (document.referrer || null),
     site_id: snapshot?.site_id ?? null,
   };
 }

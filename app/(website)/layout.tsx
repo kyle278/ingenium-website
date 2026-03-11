@@ -1,10 +1,12 @@
 import SiteNav from "./components/SiteNav";
 import SiteFooter from "./components/SiteFooter";
 import RouteStructuredData from "./components/RouteStructuredData";
+import { getPortalPublicConfigOrNull } from "@/lib/portalIntegration/config";
 
 export const revalidate = 300;
 
-const portalAppUrl = process.env.PORTAL_APP_URL?.replace(/\/$/, "") ?? "";
+const portalPublicConfig = getPortalPublicConfigOrNull();
+const portalAppUrl = portalPublicConfig?.portalAppUrl ?? "";
 
 const navContent = {
   brand: "Ingenium",

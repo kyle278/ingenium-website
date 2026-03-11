@@ -146,12 +146,13 @@ Replace the current partial Portal integration with a production-grade integrati
     - [x] ST9.3 - Review diffs and collect deliverable examples
   - Verification note:
     - `npm`, `npx`, and `node` are unavailable in the current shell, so automated lint/typecheck/build could not be executed in this environment.
+    - Follow-up hardening pass centralized Portal auth-link config through `lib/portalIntegration/config.ts` and added tracker bootstrap fallback if the external script fails to load.
 
 ## Inter-Agent Communication
 - Communication file: `Agents/agentCommunications/portal-production-website-integration-comms.md`
 - Open items summary:
-  - [ ] Msg-001 - Legacy tracker/bootstrap and submission path need replacement with canonical Portal contract.
-  - [ ] Msg-002 - Final implementation must include Portal form SQL and explicit UUID/slug mapping.
+  - [x] Msg-001 - Legacy tracker/bootstrap and submission path need replacement with canonical Portal contract.
+  - [x] Msg-002 - Final implementation must include Portal form SQL and explicit UUID/slug mapping.
 
 ## Persona Validation
 - UI engineer sign-off expectation: acceptable if contact form UX remains stable while hidden tracking attributes/state are added cleanly.

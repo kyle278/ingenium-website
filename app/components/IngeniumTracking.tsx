@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import { bootstrapIngeniumTracker } from "@/lib/portalIntegration/browserTracker";
 
@@ -11,10 +11,24 @@ type IngeniumTrackingProps = {
 };
 
 export default function IngeniumTracking({ portalAppUrl, siteId }: IngeniumTrackingProps) {
-  const onScriptLoad = useCallback(() => {
-    if (!portalAppUrl || !siteId) return;
+  const hasBootstrappedRef = useRef(false);
+
+  const bootstrapTracker = useCallback(() => {
+    if (!portalAppUrl || !siteId || hasBootstrappedRef.current) {
+      return;
+    }
+
     bootstrapIngeniumTracker({ portalAppUrl, siteId });
+    hasBootstrappedRef.current = true;
   }, [portalAppUrl, siteId]);
+
+  const onScriptLoad = useCallback(() => {
+    bootstrapTracker();
+  }, [bootstrapTracker]);
+
+  useEffect(() => {
+    bootstrapTracker();
+  }, [bootstrapTracker]);
 
   if (!portalAppUrl || !siteId) return null;
 
@@ -23,6 +37,7 @@ export default function IngeniumTracking({ portalAppUrl, siteId }: IngeniumTrack
       src={`${portalAppUrl}/ingenium-tracker.js`}
       strategy="afterInteractive"
       onLoad={onScriptLoad}
+      onError={bootstrapTracker}
     />
   );
 }

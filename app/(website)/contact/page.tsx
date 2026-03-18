@@ -109,8 +109,10 @@ export default async function ContactPage() {
               </h2>
               <p className="text-sm leading-relaxed text-slate-300">
                 The website requires the canonical Portal form UUID for reporting and submission
-                tracking. Upsert the "{WEBSITE_FORM_NAMES.contact}" row with slug "
-                {WEBSITE_FORM_SLUGS.contact}" in Portal, then reload this page.
+                tracking. Upsert the form row named{" "}
+                <span className="font-medium text-white">{WEBSITE_FORM_NAMES.contact}</span> with
+                slug <span className="font-medium text-white">{WEBSITE_FORM_SLUGS.contact}</span>{" "}
+                in Portal, then reload this page.
               </p>
               {formResolutionError ? (
                 <p className="text-xs text-rose-200/80">{formResolutionError}</p>

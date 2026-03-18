@@ -122,7 +122,7 @@ export default async function WebsiteBriefPage() {
               <p className="text-sm leading-relaxed text-slate-300">
                 Upsert the form row named{" "}
                 <span className="font-medium text-white">
-                  {WEBSITE_FORM_NAMES.websiteProjectBrief}
+                  {WEBSITE_FORM_NAMES[WEBSITE_FORM_SLUGS.websiteProjectBrief]}
                 </span>{" "}
                 with slug{" "}
                 <span className="font-medium text-white">

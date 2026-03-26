@@ -17,14 +17,14 @@ const navContent = {
     { href: "/about", label: "Why Ingenium" },
     { href: "/contact", label: "Contact" },
   ],
-  cta_label: "Book a Strategy Call",
+  cta_label: "Book a Strategy Review",
   cta_href: "/contact",
 };
 
 const footerContent = {
   brand: "Ingenium",
   summary:
-    "Ingenium is the revenue platform and implementation partner that connects acquisition, CRM, AI execution, and automation into one accountable growth system.",
+    "Ingenium is the revenue platform and implementation partner that connects acquisition, CRM, AI execution, automation, and named proof into one accountable growth system.",
   product_title: "Platform",
   product_links: [
     { href: "/platform", label: "Platform" },
@@ -37,15 +37,16 @@ const footerContent = {
   company_title: "Proof & Company",
   company_links: [
     { href: "/about", label: "About" },
+    { href: "/projects", label: "Client Projects" },
     { href: "/case-studies", label: "Case Studies" },
     { href: "/security", label: "Security" },
     { href: "/contact", label: "Contact" },
   ],
   contact_title: "Get in touch",
   contact_items: [
-    "Architecture review and rollout planning",
+    "Strategy, architecture, and rollout reviews available",
+    "Named client work and deeper proof packs on request",
     "US and EU buying teams supported",
-    "Portal onboarding and implementation available",
   ],
   security_link_label: "Security overview",
   legal_line: "\u00a9 2026 Ingenium Digital Consulting. All rights reserved.",

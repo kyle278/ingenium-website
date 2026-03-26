@@ -161,11 +161,17 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
-                href="/contact"
+                href="/contact?intent=strategy-call"
                 className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-500"
               >
-                Discuss a Similar Project
+                Discuss a Similar Build
                 <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/contact?intent=architecture-review"
+                className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
+              >
+                Request Architecture Review
               </Link>
             </div>
           </div>
@@ -307,8 +313,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             Need a similar project outcome?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            We can scope website, CRM, AI, and automation delivery around measurable business
-            targets.
+            We can scope the website structure, proof system, and conversion path your next build
+            needs.
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
             <Link

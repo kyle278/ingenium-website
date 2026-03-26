@@ -20,6 +20,7 @@ import {
 
 import AnimatedMetric from "./components/AnimatedMetric";
 import ScrollReveal from "./components/ScrollReveal";
+import { projects } from "@/src/lib/projects";
 
 export const metadata: Metadata = {
   title: "Ingenium Revenue Platform | Website, CRM, AI, and Automation",
@@ -41,19 +42,19 @@ const fallbackHero = {
   title: "Replace disconnected tools with one revenue system that moves buyers to pipeline faster.",
   body: "Ingenium combines your acquisition engine, CRM command layer, AI agents, and automation workflows into one governed platform. We do not just install software. We architect the system, launch it with your team, and keep it compounding.",
   primary_cta: { label: "Book a Platform Strategy Call", href: "/contact" },
-  secondary_cta: { label: "Explore the Platform", href: "/platform" },
-  proof_metric: "31d",
-  proof_label: "average time from kickoff to live revenue workflows",
-  badges: ["One customer data layer", "Human-approved AI execution", "Revenue visibility from first touch"],
+  secondary_cta: { label: "See Named Client Work", href: "/projects" },
+  proof_metric: "76",
+  proof_label: "published routes across the named client portfolio currently on site",
+  badges: ["Named client examples on site", "Human-approved AI execution", "Revenue visibility from first touch"],
 };
 
 const fallbackMetrics = {
-  label: "Representative outcomes from platform launches across growth-stage and enterprise teams",
+  label: "Current portfolio proof drawn from real client websites in the local workspace.",
   items: [
-    { metric: "2.7x", label: "Faster pipeline velocity", context: "after full-system rollout" },
-    { metric: "<45s", label: "Lead-to-owner routing", context: "with enrichment and context" },
-    { metric: "100%", label: "Attribution coverage", context: "from session to CRM record" },
-    { metric: "31d", label: "Time to first impact", context: "for launch-ready revenue teams" },
+    { metric: "8", label: "Named client builds", context: "represented across projects and case studies" },
+    { metric: "76", label: "Published routes", context: "across the current client portfolio" },
+    { metric: "17", label: "Largest build depth", context: "for project-library and catalogue-led websites" },
+    { metric: "10", label: "Featured decision paths", context: "across the four named case studies" },
   ],
 };
 
@@ -144,39 +145,28 @@ const fallbackProcess = {
 };
 
 const fallbackProof = {
-  label: "Proof",
-  title: "Outcomes from teams that stopped buying isolated fixes.",
-  link: { label: "View all revenue platform case studies", href: "/case-studies" },
-  items: [
-    {
-      client_type: "Series B SaaS Company",
-      industry: "Fintech",
-      challenge: "Traffic was healthy, but CRM routing was manual and leadership had no clean attribution to pipeline.",
-      intervention: "Unified acquisition, CRM, and routing system with real-time qualification and accountable reporting.",
-      metric: "2.3x",
-      metric_label: "Marketing-attributed pipeline",
-      timeframe: "90 days",
-    },
-    {
-      client_type: "Healthcare SaaS Platform",
-      industry: "Healthcare",
-      challenge: "Three disconnected buyer journeys and no way to scale enterprise follow-up without increasing headcount.",
-      intervention: "Role-based acquisition paths, governed AI briefs, and automated qualification handoff.",
-      metric: "<2m",
-      metric_label: "Intent-to-brief turnaround",
-      timeframe: "60 days",
-    },
-    {
-      client_type: "Enterprise Services Firm",
-      industry: "Professional Services",
-      challenge: "Regional websites, inconsistent governance, and no shared pipeline visibility across markets.",
-      intervention: "Unified platform with localized journeys, approval workflows, and region-level attribution.",
-      metric: "48h",
-      metric_label: "Content approval cycle after rollout",
-      timeframe: "Across 4 regions",
-    },
-  ],
+  label: "Delivery Proof",
+  title: "Recent client work that moved from website intent to operational improvement.",
+  link: { label: "View the full client project library", href: "/projects" },
 };
+
+const buyerPaths = [
+  {
+    label: "Revenue leaders",
+    title: "Need a rollout plan tied to pipeline movement",
+    href: "/contact?intent=strategy-call",
+  },
+  {
+    label: "Technical teams",
+    title: "Need architecture, integration, or governance detail first",
+    href: "/contact?intent=architecture-review",
+  },
+  {
+    label: "Procurement and security",
+    title: "Need proof, controls, and review support before a call",
+    href: "/contact?intent=security-review",
+  },
+];
 
 const fallbackGovernance = {
   label: "Trust and Governance",
@@ -196,10 +186,10 @@ const fallbackGovernance = {
 
 const fallbackCta = {
   title: "If your stack is slowing revenue, the fix is not another isolated tool.",
-  body: "Book a platform strategy call and we will map how Ingenium can replace disconnected acquisition, CRM, AI, and automation workflows with one accountable operating system.",
+  body: "Book a platform strategy call and we will map the shortest route from your current website and systems to a more accountable acquisition, CRM, AI, and automation setup.",
   primary_cta: { label: "Book a Platform Strategy Call", href: "/contact" },
-  secondary_cta: { label: "Request an Architecture Review", href: "/contact" },
-  reassurance: "30-minute call - revenue systems audit - implementation roadmap",
+  secondary_cta: { label: "Review Client Projects", href: "/projects" },
+  reassurance: "30-minute call - named examples available - implementation roadmap",
 };
 
 /* -- Helpers ---------------------------------------------------------- */
@@ -284,6 +274,15 @@ export default async function HomePage() {
   const governance = fallbackGovernance;
   const cta = fallbackCta;
   const industryItems = normalizeIndustryItems(industries.items);
+  const featuredProjects = projects.slice(0, 3).map((project) => ({
+    client_type: project.clientName,
+    industry: project.industry,
+    challenge: project.summary,
+    intervention: project.services.slice(0, 3).join(" - "),
+    metric: project.outcomeMetrics[0]?.value ?? "Operational gain",
+    metric_label: project.outcomeMetrics[0]?.label ?? "Measured outcome",
+    timeframe: project.timeframe,
+  }));
 
   return (
     <div className="space-y-28 md:space-y-40">
@@ -316,10 +315,17 @@ export default async function HomePage() {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href={hero.secondary_cta?.href ?? "#process"}
+              href={hero.secondary_cta?.href ?? "/projects"}
               className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
             >
-              {hero.secondary_cta?.label ?? "See How It Works"}
+              {hero.secondary_cta?.label ?? "See Named Client Work"}
+            </Link>
+            <Link
+              href="/contact?intent=security-review"
+              className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
+            >
+              Request security and architecture review
+              <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>
 
@@ -334,6 +340,9 @@ export default async function HomePage() {
               {hero.proof_label ?? fallbackHero.proof_label}
             </span>
           </div>
+          <p className="mt-4 font-(--font-mono) text-xs text-slate-600">
+            Named client work is published across the project library and case-study pages.
+          </p>
         </div>
 
         {/* Badge strip */}
@@ -346,6 +355,24 @@ export default async function HomePage() {
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               {badge}
             </span>
+          ))}
+        </div>
+        <div className="mx-auto mt-10 grid max-w-5xl gap-3 text-left md:grid-cols-3">
+          {buyerPaths.map((path) => (
+            <Link
+              key={path.title}
+              href={path.href}
+              className="group rounded-2xl border border-slate-800 bg-slate-900/45 p-4 transition hover:border-emerald-500/30 hover:bg-slate-900/70"
+            >
+              <p className="font-(--font-mono) text-[10px] uppercase tracking-widest text-cyan-400">
+                {path.label}
+              </p>
+              <p className="mt-2 text-sm font-medium text-white">{path.title}</p>
+              <span className="mt-3 inline-flex items-center gap-2 text-sm text-slate-400 transition group-hover:text-emerald-300">
+                Choose this path
+                <ArrowRight className="h-3.5 w-3.5" />
+              </span>
+            </Link>
           ))}
         </div>
       </section>
@@ -595,15 +622,15 @@ export default async function HomePage() {
             </h2>
           </div>
           <Link
-            href={proof.link?.href ?? "/case-studies"}
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white"
-          >
-            {proof.link?.label ?? "View all revenue platform case studies"}
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          {(proof.items ?? fallbackProof.items).map((item: { client_type: string; industry: string; challenge: string; intervention: string; metric: string; metric_label: string; timeframe: string }) => (
+              href={proof.link?.href ?? "/projects"}
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white"
+            >
+              {proof.link?.label ?? "View the full client project library"}
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          {featuredProjects.map((item) => (
             <div
               key={item.client_type}
               className="metric-card group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-slate-700"
@@ -625,11 +652,27 @@ export default async function HomePage() {
                 <p className="mt-1 text-sm text-slate-300">{item.client_type}</p>
                 <p className="mt-3 text-xs font-medium uppercase tracking-wider text-slate-500">Challenge</p>
                 <p className="mt-1 text-sm text-slate-400">{item.challenge}</p>
-                <p className="mt-3 text-xs font-medium uppercase tracking-wider text-slate-500">Intervention</p>
+                <p className="mt-3 text-xs font-medium uppercase tracking-wider text-slate-500">Delivered</p>
                 <p className="mt-1 text-sm text-slate-400">{item.intervention}</p>
               </div>
             </div>
           ))}
+        </div>
+        <div className="mt-6 flex flex-wrap items-center gap-4">
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
+          >
+            Review full project breakdowns
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            href="/contact?intent=case-study-pack"
+            className="inline-flex items-center gap-2 text-sm text-slate-500 transition hover:text-slate-300"
+          >
+            Request a deeper proof pack
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
       </section>
 
@@ -706,14 +749,21 @@ export default async function HomePage() {
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
-              href={cta.secondary_cta?.href ?? "/contact"}
+              href="/projects"
               className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
             >
-              {cta.secondary_cta?.label ?? "Request an Architecture Review"}
+              Review Client Projects
+            </Link>
+            <Link
+              href="/contact?intent=security-review"
+              className="inline-flex items-center gap-2 text-sm font-medium text-emerald-300 transition hover:text-emerald-200"
+            >
+              Prefer a technical review first?
+              <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>
           <p className="mt-6 font-(--font-mono) text-xs text-slate-600">
-            {cta.reassurance ?? fallbackCta.reassurance}
+            30-minute call - two-step intake - strategy, technical, and security paths available
           </p>
         </div>
       </section>

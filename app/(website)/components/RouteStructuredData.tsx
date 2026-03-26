@@ -3,9 +3,14 @@
 import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 
+import { caseStudies } from "@/src/lib/caseStudies";
+import { projects } from "@/src/lib/projects";
+
 type JsonLd = Record<string, unknown>;
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumconsulting.net").replace(/\/$/, "");
+
+const ORGANIZATION_NAME = "Ingenium Digital Consulting";
 
 const routeLabelMap: Record<string, string> = {
   "/": "Home",
@@ -15,7 +20,7 @@ const routeLabelMap: Record<string, string> = {
   "/departments": "AI Departments",
   "/crm": "CRM",
   "/automations": "Automation",
-  "/case-studies": "Revenue Platform Case Studies",
+  "/case-studies": "Named Client Case Studies",
   "/projects": "Projects",
   "/security": "Trust and Security",
   "/about": "Why Ingenium",
@@ -86,6 +91,37 @@ function humanizeSegment(segment: string) {
   return raw.replace(/\b\w/g, (match) => match.toUpperCase());
 }
 
+function buildOrganizationSchema(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: ORGANIZATION_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo.svg`,
+    email: "hello@ingeniumconsulting.net",
+    description:
+      "Ingenium connects acquisition, CRM execution, AI agents, and automation into one governed revenue platform for ambitious teams.",
+    areaServed: ["United States", "Europe"],
+    knowsAbout: [
+      "Website strategy",
+      "CRM implementation",
+      "Revenue operations",
+      "AI agents",
+      "Automation",
+      "Technical SEO",
+    ],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: "hello@ingeniumconsulting.net",
+        areaServed: ["US", "EU"],
+        availableLanguage: ["English"],
+      },
+    ],
+  };
+}
+
 function buildBreadcrumb(pathname: string): JsonLd {
   const segments = pathname.split("/").filter(Boolean);
   const itemListElement = [
@@ -118,31 +154,17 @@ function buildBreadcrumb(pathname: string): JsonLd {
 
 function buildHomeSchemas(): JsonLd[] {
   return [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Ingenium Digital Consulting",
-      url: SITE_URL,
-      logo: `${SITE_URL}/logo.svg`,
-      sameAs: [],
-      contactPoint: [
-        {
-          "@type": "ContactPoint",
-          contactType: "sales",
-          email: "hello@ingeniumconsulting.net",
-          areaServed: "US",
-          availableLanguage: ["English"],
-        },
-      ],
-    },
+    buildOrganizationSchema(),
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "Ingenium",
       url: SITE_URL,
+      description:
+        "Revenue platform, acquisition engine, CRM command, AI agents, automation, and governance.",
       publisher: {
         "@type": "Organization",
-        name: "Ingenium Digital Consulting",
+        name: ORGANIZATION_NAME,
       },
     },
   ];
@@ -162,11 +184,34 @@ function buildServiceSchema(pathname: string): JsonLd | null {
     description: service.description,
     provider: {
       "@type": "Organization",
-      name: "Ingenium Digital Consulting",
+      name: ORGANIZATION_NAME,
       url: SITE_URL,
     },
-    areaServed: "United States",
+    areaServed: ["United States", "Europe"],
     url: toAbsoluteUrl(pathname),
+  };
+}
+
+function buildCollectionPageSchema(
+  pathname: string,
+  name: string,
+  description: string,
+): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    description,
+    url: toAbsoluteUrl(pathname),
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Ingenium",
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: ORGANIZATION_NAME,
+    },
   };
 }
 
@@ -215,13 +260,13 @@ function buildCaseStudiesSchema(): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Revenue Platform Case Studies",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Fintech SaaS Website Rebuild" },
-      { "@type": "ListItem", position: 2, name: "Healthcare Platform Conversion Program" },
-      { "@type": "ListItem", position: 3, name: "Enterprise Services Revenue Site" },
-      { "@type": "ListItem", position: 4, name: "B2B Technology Pipeline Website" },
-    ],
+    name: "Named Client Case Studies",
+    itemListElement: caseStudies.map((study, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: study.projectName,
+      url: `${SITE_URL}/case-studies#${study.id}`,
+    })),
   };
 }
 
@@ -230,12 +275,12 @@ function buildProjectsSchema(): JsonLd {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "Selected Delivery Projects",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Northstar Pay Growth Platform" },
-      { "@type": "ListItem", position: 2, name: "Meridian Health Demand Engine" },
-      { "@type": "ListItem", position: 3, name: "Arclight Security Enterprise Rebuild" },
-      { "@type": "ListItem", position: 4, name: "PilotGrid Logistics Revenue System" },
-    ],
+    itemListElement: projects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: project.projectName,
+      url: `${SITE_URL}/projects/${project.slug}`,
+    })),
   };
 }
 
@@ -259,10 +304,24 @@ export default function RouteStructuredData() {
     }
 
     if (pathname === "/case-studies") {
+      items.push(
+        buildCollectionPageSchema(
+          pathname,
+          "Named Client Case Studies",
+          "Named client delivery examples from Ingenium focused on website structure, proof, trust, and conversion paths.",
+        ),
+      );
       items.push(buildCaseStudiesSchema());
     }
 
     if (pathname === "/projects") {
+      items.push(
+        buildCollectionPageSchema(
+          pathname,
+          "Client Projects and Delivery Outcomes",
+          "Detailed Ingenium project pages covering website delivery, positioning, and operational proof.",
+        ),
+      );
       items.push(buildProjectsSchema());
     }
 

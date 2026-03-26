@@ -9,11 +9,11 @@ import { projects } from "@/src/lib/projects";
 export const metadata: Metadata = {
   title: "Client Projects and Delivery Outcomes | Ingenium",
   description:
-    "Explore recent Ingenium client projects across website rebuilds, custom CRM, AI agents, and automation delivery with measurable outcomes.",
+    "Explore recent Ingenium client projects across website delivery, conversion architecture, service messaging, and proof-led customer journeys.",
   openGraph: {
     title: "Client Projects and Delivery Outcomes | Ingenium",
     description:
-      "Recent client projects with measurable outcomes across website, CRM, AI agents, and automation.",
+      "Recent client projects across websites, conversion architecture, portfolio systems, and service-led customer journeys.",
     url: "/projects",
   },
   alternates: { canonical: "/projects" },
@@ -44,11 +44,11 @@ export default function ProjectsPage() {
       <section className="pt-8 text-center">
         <p className={sectionLabel}>Projects</p>
         <h1 className="mx-auto mt-6 max-w-4xl font-(--font-display) text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          Real delivery projects with measurable outcomes.
+          Real client delivery work, not placeholder proof.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-400">
-          Each project combines service delivery and operations design. Review what was delivered,
-          what changed, and where results came from.
+          Review named client projects across service websites, project libraries, booking paths,
+          quote flows, and proof systems built to make buying easier.
         </p>
       </section>
 
@@ -127,33 +127,32 @@ export default function ProjectsPage() {
       <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-14">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-35" />
         <div className="relative">
-          <p className={sectionLabel}>Next Project</p>
+          <p className={sectionLabel}>Next Step</p>
           <h2 className="mx-auto mt-4 max-w-3xl font-(--font-display) text-2xl font-bold text-white sm:text-3xl">
-            Want your project outcomes in this library?
+            Want proof packaged this clearly for your own sales process?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            We map delivery scope, implementation sequence, and measurable targets before we
-            start.
+            We scope the architecture, proof system, and conversion path before design drift or tool sprawl slows the build down.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/contact"
+              href="/contact?intent=strategy-call"
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-500"
             >
-              Book a Strategy Call
+              Book a Strategy Review
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/case-studies"
+              href="/contact?intent=case-study-request"
               className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 hover:border-slate-600 hover:text-white"
             >
-              Review Case Studies
+              Request Named Work Samples
               <BriefcaseBusiness className="h-4 w-4" />
             </Link>
           </div>
           <p className="mt-5 flex items-center justify-center gap-2 font-(--font-mono) text-xs text-slate-600">
             <Clock className="h-3.5 w-3.5" />
-            Typical implementation window: 6-10 weeks
+            Typical implementation window: 6-10 weeks | Strategy, technical, and security review paths available
           </p>
         </div>
       </section>

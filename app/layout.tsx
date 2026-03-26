@@ -31,9 +31,38 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumconsulting.
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: "Ingenium",
   title: "Ingenium Revenue Platform | Acquisition, CRM, AI, and Automation",
   description:
     "Ingenium connects acquisition, CRM execution, AI agents, and automation into one governed revenue platform for ambitious teams.",
+  keywords: [
+    "revenue platform",
+    "CRM implementation",
+    "AI agents",
+    "revenue automation",
+    "website strategy",
+    "RevOps",
+  ],
+  authors: [{ name: "Ingenium Digital Consulting" }],
+  creator: "Ingenium Digital Consulting",
+  publisher: "Ingenium Digital Consulting",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  referrer: "origin-when-cross-origin",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title: "Ingenium Revenue Platform | Acquisition, CRM, AI, and Automation",
     description:
@@ -41,6 +70,13 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Ingenium",
     url: "/",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ingenium Revenue Platform | Acquisition, CRM, AI, and Automation",
+    description:
+      "One governed revenue platform for acquisition, CRM execution, AI agents, automation, and measurable growth.",
   },
   alternates: { canonical: "/" },
 };

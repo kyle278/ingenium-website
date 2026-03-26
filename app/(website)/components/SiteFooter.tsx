@@ -41,24 +41,34 @@ export default function SiteFooter({ content }: SiteFooterProps) {
             Ready to replace disconnected revenue tooling with one operating system?
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-slate-400">
-            Book a platform strategy call and get a practical rollout direction for acquisition,
-            CRM, AI execution, and automation.
+            Book a strategy review and get a practical rollout direction for acquisition, CRM, AI
+            execution, automation, and the proof buyers need to say yes.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contact"
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
             >
-              Book a Platform Strategy Call
+              Book a Strategy Review
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/case-studies"
+              href="/projects"
               className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
             >
-              View Case Studies
+              See Named Client Work
+            </Link>
+            <Link
+              href="/contact?intent=security-review"
+              className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
+            >
+              Need a security review path?
+              <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>
+          <p className="mt-5 font-(--font-mono) text-xs text-slate-600">
+            Two-step intake, 1-business-day response, named work samples and technical follow-up available.
+          </p>
         </div>
 
         {/* Link columns */}

@@ -189,6 +189,12 @@ export default function SiteNav({ content }: SiteNavProps) {
           {/* Desktop CTA */}
           <div className="hidden items-center gap-4 lg:flex">
             <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition hover:text-white"
+            >
+              Named Client Work
+            </Link>
+            <Link
               href={content.cta_href}
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
             >
@@ -215,6 +221,13 @@ export default function SiteNav({ content }: SiteNavProps) {
           <nav className="mx-auto max-w-7xl space-y-1 px-6 py-6">
             <div className="grid gap-3 pb-3">
               <Link
+                href="/projects"
+                onClick={() => setOpen(false)}
+                className="block rounded-xl border border-slate-700/70 bg-slate-900/60 px-4 py-3.5 text-center text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:text-white"
+              >
+                See Named Client Work
+              </Link>
+              <Link
                 href={content.cta_href}
                 onClick={() => setOpen(false)}
                 className="block rounded-xl bg-emerald-600 px-4 py-3.5 text-center text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
@@ -222,6 +235,9 @@ export default function SiteNav({ content }: SiteNavProps) {
                 {content.cta_label}
               </Link>
             </div>
+            <p className="pb-3 font-(--font-mono) text-[10px] uppercase tracking-widest text-slate-600">
+              Strategy, technical, and proof paths
+            </p>
             <div className="rounded-xl border border-slate-800/80 bg-slate-900/60 p-3">
               <p className="px-2 pb-2 font-(--font-mono) text-[10px] uppercase tracking-widest text-slate-500">
                 Solutions

@@ -1,20 +1,7 @@
-import type { Metadata } from "next";
-
 import RevenueExitCalculator from "./RevenueExitCalculator";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Revenue Exit Calculator | Ingenium Internal",
-  description: "Internal revenue planning calculator for project and MRR growth forecasting.",
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
-  },
-  alternates: { canonical: "/internal/revenue-calculator" },
-};
+export const metadata = buildMetadata(pageSeo["/internal/revenue-calculator"]);
 
 export default function RevenueCalculatorPage() {
   return <RevenueExitCalculator />;

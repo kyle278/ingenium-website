@@ -1,5 +1,4 @@
 ﻿import Link from "next/link";
-import type { Metadata } from "next";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -19,18 +18,9 @@ import {
 
 import AnimatedMetric from "../components/AnimatedMetric";
 import ScrollReveal from "../components/ScrollReveal";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Revenue Platform Architecture | Ingenium",
-  description:
-    "See how Ingenium connects acquisition, CRM execution, AI agents, automation, and governance into one revenue platform for growing teams.",
-  openGraph: {
-    title: "Revenue Platform Architecture | Ingenium",
-    description:
-      "One governed revenue platform connecting acquisition, CRM execution, AI agents, automation, and reporting.",
-  },
-  alternates: { canonical: "/platform" },
-};
+export const metadata = buildMetadata(pageSeo["/platform"]);
 
 /* -- Fallback Content ------------------------------------------------ */
 

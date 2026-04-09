@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import type { Metadata } from "next";
 import {
   ArrowRight,
@@ -17,19 +17,9 @@ import {
 
 import AnimatedMetric from "../components/AnimatedMetric";
 import ScrollReveal from "../components/ScrollReveal";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Revenue Automation Layer | Ingenium",
-  description:
-    "Revenue automations for routing, follow-up, enrichment, and escalation with SLA tracking, rollback controls, and governance built in.",
-  openGraph: {
-    title: "Revenue Automation Layer | Ingenium",
-    description:
-      "Marketing automation and lead routing built for speed, governance, and measurable pipeline impact.",
-    url: "/automations",
-  },
-  alternates: { canonical: "/automations" },
-};
+export const metadata: Metadata = buildMetadata(pageSeo["/automations"]);
 
 /* ---------- shared dark-theme utility classes ---------- */
 

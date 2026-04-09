@@ -4,21 +4,11 @@ import { ArrowRight, ArrowUpRight, CheckCircle2, Mail, MapPin, PhoneCall } from 
 
 import { WEBSITE_FORM_NAMES, WEBSITE_FORM_SLUGS } from "@/lib/portalIntegration/forms";
 import { getPortalFormBySlug } from "@/lib/portalIntegration/server";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
 import ContactForm from "./ContactForm";
 
-export const metadata: Metadata = {
-  title: "Book a Strategy Review | Ingenium",
-  description:
-    "Start with a strategy review. Tell us where revenue is leaking and Ingenium will map the system, rollout priorities, proof needs, and next decisions.",
-  openGraph: {
-    title: "Book a Strategy Review | Ingenium",
-    description:
-      "Start with a strategy review and get a tailored acquisition, CRM, AI, and automation roadmap for pipeline growth.",
-    url: "/contact",
-  },
-  alternates: { canonical: "/contact" },
-};
+export const metadata: Metadata = buildMetadata(pageSeo["/contact"]);
 
 const sectionLabel = "font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400";
 const darkCard = "rounded-2xl border border-slate-800 bg-slate-900/70 p-6";

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { CheckCircle2, FileText, Globe, Layers3, LockKeyhole } from "lucide-react";
 
 import {
@@ -6,20 +5,11 @@ import {
   WEBSITE_FORM_SLUGS,
 } from "@/lib/portalIntegration/forms";
 import { getPortalFormBySlug } from "@/lib/portalIntegration/server";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
 import WebsiteBriefForm from "./WebsiteBriefForm";
 
-export const metadata: Metadata = {
-  title: "Website Project Brief | Ingenium",
-  description:
-    "Private client intake form for collecting the details needed to plan a new website build with Ingenium.",
-  robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-  },
-  alternates: { canonical: "/website-brief" },
-};
+export const metadata = buildMetadata(pageSeo["/website-brief"]);
 
 export const dynamic = "force-dynamic";
 

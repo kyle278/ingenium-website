@@ -12,20 +12,11 @@ import {
 } from "lucide-react";
 
 import { caseStudies } from "@/src/lib/caseStudies";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
 import AnimatedMetric from "../components/AnimatedMetric";
 
-export const metadata: Metadata = {
-  title: "Client Website Case Studies | Ingenium",
-  description:
-    "Named client case studies showing how Ingenium structures websites, proof systems, and conversion paths for real businesses.",
-  openGraph: {
-    title: "Client Website Case Studies | Ingenium",
-    description:
-      "Named client case studies across healthcare, construction, specialist services, and commercial operations.",
-  },
-  alternates: { canonical: "/case-studies" },
-};
+export const metadata: Metadata = buildMetadata(pageSeo["/case-studies"]);
 
 const hero = {
   label: "Evidence Library",

@@ -1,21 +1,11 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Clock3, Globe, ShieldCheck, Users } from "lucide-react";
 
 import AnimatedMetric from "../components/AnimatedMetric";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Why Ingenium | Revenue Platform Implementation Partner",
-  description:
-    "See how Ingenium works as the implementation partner behind the platform: strategy, rollout, governance, and execution for revenue teams.",
-  openGraph: {
-    title: "Why Ingenium | Revenue Platform Implementation Partner",
-    description:
-      "See how Ingenium operates across platform strategy, rollout, governance, and global execution for revenue teams.",
-    url: "/about",
-  },
-  alternates: { canonical: "/about" },
-};
+export const metadata: Metadata = buildMetadata(pageSeo["/about"]);
 
 const sectionLabel = "font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400";
 const darkCard = "rounded-2xl border border-slate-800 bg-slate-900/70 p-6";

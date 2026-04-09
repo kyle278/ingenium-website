@@ -1,5 +1,4 @@
 ﻿import Link from "next/link";
-import type { Metadata } from "next";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -15,18 +14,9 @@ import {
 import AnimatedMetric from "../components/AnimatedMetric";
 import FaqAccordion from "../components/FaqAccordion";
 import ScrollReveal from "../components/ScrollReveal";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Acquisition Engine | Ingenium",
-  description:
-    "Ingenium builds acquisition systems, not brochure websites. High-conviction buyer journeys, proof architecture, and conversion paths wired directly into CRM action.",
-  openGraph: {
-    title: "Acquisition Engine | Ingenium",
-    description:
-      "Acquisition journeys, proof architecture, CRM-connected forms, and rollout execution built to move revenue.",
-  },
-  alternates: { canonical: "/websites" },
-};
+export const metadata = buildMetadata(pageSeo["/websites"]);
 
 /* -- Fallback Content ------------------------------------------------ */
 

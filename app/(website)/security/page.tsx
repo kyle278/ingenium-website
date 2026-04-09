@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import type { Metadata } from "next";
 import {
   ArrowRight,
@@ -18,19 +18,9 @@ import {
   UserCheck,
 } from "lucide-react";
 
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Trust, Security, and AI Governance | Ingenium",
-  description:
-    "Enterprise-grade security controls, AI governance frameworks, and compliance readiness. Built for regulated industries and procurement teams.",
-  openGraph: {
-    title: "Enterprise Security and AI Governance | Ingenium",
-    description:
-      "Enterprise-grade security controls and AI governance frameworks for regulated and procurement-heavy organizations.",
-    url: "/security",
-  },
-  alternates: { canonical: "/security" },
-};
+export const metadata: Metadata = buildMetadata(pageSeo["/security"]);
 
 /* ------------------------------------------------------------------ */
 /*  Shared style tokens (dark theme)                                   */

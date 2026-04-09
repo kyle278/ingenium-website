@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -14,19 +14,9 @@ import {
 
 import AnimatedMetric from "../components/AnimatedMetric";
 import ScrollReveal from "../components/ScrollReveal";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "CRM Command Layer | Ingenium",
-  description:
-    "Ingenium turns your CRM into a real command layer with lifecycle design, routing logic, attribution, and operator trust built in.",
-  openGraph: {
-    title: "CRM Command Layer | Ingenium",
-    description:
-      "CRM lifecycle design, routing, attribution, and migration built for accountable revenue execution.",
-    url: "/crm",
-  },
-  alternates: { canonical: "/crm" },
-};
+export const metadata: Metadata = buildMetadata(pageSeo["/crm"]);
 
 /* ------------------------------------------------------------------ */
 /*  Dark-theme design tokens                                          */

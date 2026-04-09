@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 
 import IngeniumTracking from "@/app/components/IngeniumTracking";
 import { getPortalPublicConfigOrNull } from "@/lib/portalIntegration/config";
+import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL, buildMetadata, keywordClusters, pageSeo } from "@/lib/seo";
 
 import "./globals.css";
 
@@ -27,21 +28,18 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumconsulting.net";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  applicationName: "Ingenium",
-  title: "Ingenium Revenue Platform | Acquisition, CRM, AI, and Automation",
-  description:
-    "Ingenium connects acquisition, CRM execution, AI agents, and automation into one governed revenue platform for ambitious teams.",
+  ...buildMetadata(pageSeo["/"]),
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
+  description: DEFAULT_DESCRIPTION,
   keywords: [
-    "revenue platform",
-    "CRM implementation",
-    "AI agents",
-    "revenue automation",
-    "website strategy",
-    "RevOps",
+    ...keywordClusters.platform,
+    ...keywordClusters.websites,
+    ...keywordClusters.crm,
+    ...keywordClusters.ai,
+    ...keywordClusters.automation,
+    ...keywordClusters.governance,
   ],
   authors: [{ name: "Ingenium Digital Consulting" }],
   creator: "Ingenium Digital Consulting",
@@ -63,22 +61,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  openGraph: {
-    title: "Ingenium Revenue Platform | Acquisition, CRM, AI, and Automation",
-    description:
-      "One governed revenue platform for acquisition, CRM execution, AI agents, automation, and measurable growth.",
-    type: "website",
-    siteName: "Ingenium",
-    url: "/",
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Ingenium Revenue Platform | Acquisition, CRM, AI, and Automation",
-    description:
-      "One governed revenue platform for acquisition, CRM execution, AI agents, automation, and measurable growth.",
-  },
-  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

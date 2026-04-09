@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -20,20 +20,10 @@ import {
 
 import AnimatedMetric from "./components/AnimatedMetric";
 import ScrollReveal from "./components/ScrollReveal";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 import { projects } from "@/src/lib/projects";
 
-export const metadata: Metadata = {
-  title: "Ingenium Revenue Platform | Website, CRM, AI, and Automation",
-  description:
-    "Ingenium gives revenue teams one system for acquisition, CRM execution, AI agents, and automation so pipeline moves faster and every signal is accountable.",
-  openGraph: {
-    title: "Ingenium Revenue Platform | Website, CRM, AI, and Automation",
-    description:
-      "One revenue platform for acquisition, CRM execution, AI agents, and automation - deployed with the team and governance to make it stick.",
-    url: "/",
-  },
-  alternates: { canonical: "/" },
-};
+export const metadata: Metadata = buildMetadata(pageSeo["/"]);
 
 /* -- Fallback Content ------------------------------------------------ */
 

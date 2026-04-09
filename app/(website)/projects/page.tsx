@@ -5,19 +5,9 @@ import { ArrowRight, ArrowUpRight, BriefcaseBusiness, CheckCircle2, Clock } from
 import AnimatedMetric from "../components/AnimatedMetric";
 import ScrollReveal from "../components/ScrollReveal";
 import { projects } from "@/src/lib/projects";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Client Projects and Delivery Outcomes | Ingenium",
-  description:
-    "Explore recent Ingenium client projects across website delivery, conversion architecture, service messaging, and proof-led customer journeys.",
-  openGraph: {
-    title: "Client Projects and Delivery Outcomes | Ingenium",
-    description:
-      "Recent client projects across websites, conversion architecture, portfolio systems, and service-led customer journeys.",
-    url: "/projects",
-  },
-  alternates: { canonical: "/projects" },
-};
+export const metadata: Metadata = buildMetadata(pageSeo["/projects"]);
 
 const sectionLabel = "font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400";
 

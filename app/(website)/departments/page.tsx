@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -15,19 +15,9 @@ import {
 } from "lucide-react";
 
 import AnimatedMetric from "../components/AnimatedMetric";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "AI Departments for Revenue Teams | Ingenium",
-  description:
-    "Structure AI operations into governed departments with human oversight. Scale automation without losing control of quality or compliance.",
-  openGraph: {
-    title: "AI Departments for Revenue Teams | Ingenium",
-    description:
-      "Structure AI operations into governed departments with measurable KPIs, human oversight, and escalation controls.",
-    url: "/departments",
-  },
-  alternates: { canonical: "/departments" },
-};
+export const metadata: Metadata = buildMetadata(pageSeo["/departments"]);
 
 /* -- Fallback Content ------------------------------------------------ */
 

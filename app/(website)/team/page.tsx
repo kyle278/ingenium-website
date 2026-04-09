@@ -1,19 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
+import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Meet the Team | Ingenium",
-  description:
-    "Meet the Ingenium leadership team across technical architecture, sales strategy, and brand design.",
-  openGraph: {
-    title: "Meet the Team | Ingenium",
-    description:
-      "Meet the Ingenium leadership team across technical architecture, sales strategy, and brand design.",
-    url: "/team",
-  },
-  alternates: { canonical: "/team" },
-};
+export const metadata: Metadata = buildMetadata(pageSeo["/team"]);
 
 const teamMembers = [
   {

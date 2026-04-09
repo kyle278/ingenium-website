@@ -116,6 +116,24 @@ function formatPercent(value: number) {
   return `${formatNumber(value, 1)}%`;
 }
 
+function calculateTakeHomeForRevenue(revenue: number) {
+  const profit = Math.max(0, revenue - MONTHLY_EXPENSES);
+  const eachGross = profit * PROFIT_SPLIT;
+  const yourBusinessNetBefore = eachGross * (1 - YOUR_EMPLOYED_BUSINESS_TAX_RATE);
+  const claytonBusinessNetBefore = eachGross * (1 - CLAYTON_EMPLOYED_BUSINESS_TAX_RATE);
+  const yourTotalBefore = YOUR_PAYE_TAKE_HOME + yourBusinessNetBefore;
+  const claytonTotalBefore = CLAYTON_PAYE_TAKE_HOME + claytonBusinessNetBefore;
+  const eachNetAfterQuit = eachGross * (1 - AFTER_QUIT_TAX_RATE);
+
+  return {
+    profit,
+    eachGross,
+    yourTotalBefore,
+    claytonTotalBefore,
+    eachNetAfterQuit,
+  };
+}
+
 function buildForecast(inputs: ParsedInputs) {
   let cumulativeMrr = 0;
 
@@ -243,6 +261,9 @@ function ForecastChart({ data }: { data: ForecastPoint[] }) {
   const cumulativeMrrPath = buildLinePath((point) => point.cumulativeMrr);
   const targetPath = buildLinePath((point) => point.target);
   const activePoint = data[Math.min(activeIndex, data.length - 1)] ?? data[0];
+  const activeTakeHome = activePoint
+    ? calculateTakeHomeForRevenue(activePoint.totalRevenue)
+    : null;
 
   function handlePointerMove(clientX: number) {
     const container = ref.current;
@@ -341,7 +362,7 @@ function ForecastChart({ data }: { data: ForecastPoint[] }) {
       </div>
 
       {activePoint ? (
-        <div className="grid gap-3 rounded-2xl border border-slate-800 bg-slate-950/60 p-4 md:grid-cols-2 xl:grid-cols-5">
+        <div className="grid gap-3 rounded-2xl border border-slate-800 bg-slate-950/60 p-4 md:grid-cols-2 xl:grid-cols-4">
           <div>
             <p className="font-(--font-mono) text-[11px] uppercase tracking-[0.24em] text-cyan-400">
               {activePoint.month}
@@ -355,6 +376,53 @@ function ForecastChart({ data }: { data: ForecastPoint[] }) {
           <TooltipMetric label="Total project revenue per month" value={formatCurrency(activePoint.projectRevenue)} />
           <TooltipMetric label="Total cumulative MRR per month" value={formatCurrency(activePoint.cumulativeMrr)} />
           <TooltipMetric label="Revenue target line" value={formatCurrency(activePoint.target)} />
+          {activeTakeHome ? (
+            <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/8 p-3 md:col-span-2 xl:col-span-4">
+              <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.22em] text-emerald-300">
+                Take-home at this forecast point
+              </p>
+              <div className="mt-3 grid gap-3 lg:grid-cols-2">
+                <div className="rounded-xl border border-slate-800 bg-slate-950/65 p-3">
+                  <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.22em] text-slate-500">
+                    Employed
+                  </p>
+                  <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                    <div>
+                      <p className="text-xs text-slate-400">You</p>
+                      <p className="text-sm font-semibold text-white">
+                        {formatCurrency(activeTakeHome.yourTotalBefore)}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-400">Clayton</p>
+                      <p className="text-sm font-semibold text-white">
+                        {formatCurrency(activeTakeHome.claytonTotalBefore)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-xl border border-cyan-500/20 bg-slate-950/65 p-3">
+                  <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.22em] text-cyan-300">
+                    After quitting
+                  </p>
+                  <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                    <div>
+                      <p className="text-xs text-slate-400">You</p>
+                      <p className="text-sm font-semibold text-white">
+                        {formatCurrency(activeTakeHome.eachNetAfterQuit)}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-400">Clayton</p>
+                      <p className="text-sm font-semibold text-white">
+                        {formatCurrency(activeTakeHome.eachNetAfterQuit)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>
@@ -377,13 +445,7 @@ export default function RevenueExitCalculator() {
   );
 
   const calculations = useMemo(() => {
-    const profit = Math.max(0, parsedInputs.revenueTarget - MONTHLY_EXPENSES);
-    const eachGross = profit * PROFIT_SPLIT;
-    const yourBusinessNetBefore = eachGross * (1 - YOUR_EMPLOYED_BUSINESS_TAX_RATE);
-    const claytonBusinessNetBefore = eachGross * (1 - CLAYTON_EMPLOYED_BUSINESS_TAX_RATE);
-    const yourTotalBefore = YOUR_PAYE_TAKE_HOME + yourBusinessNetBefore;
-    const claytonTotalBefore = CLAYTON_PAYE_TAKE_HOME + claytonBusinessNetBefore;
-    const eachNetAfterQuit = eachGross * (1 - AFTER_QUIT_TAX_RATE);
+    const takeHome = calculateTakeHomeForRevenue(parsedInputs.revenueTarget);
 
     const monthlyProjectRevenue =
       parsedInputs.averageProjectCost * parsedInputs.averageProjectsPerMonth;
@@ -413,11 +475,7 @@ export default function RevenueExitCalculator() {
     const vatAmount = parsedInputs.averageProjectCost * VAT_RATE;
 
     return {
-      profit,
-      eachGross,
-      yourTotalBefore,
-      claytonTotalBefore,
-      eachNetAfterQuit,
+      ...takeHome,
       monthlyProjectRevenue,
       monthlyNewMrrAdded,
       totalProjectMonthlyRevenue,

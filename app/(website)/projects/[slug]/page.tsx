@@ -13,6 +13,7 @@ import {
 
 import AnimatedMetric from "../../components/AnimatedMetric";
 import ScrollReveal from "../../components/ScrollReveal";
+import { buildMetadata, keywordClusters } from "@/lib/seo";
 import { getProjectBySlug, projects } from "@/src/lib/projects";
 
 interface ProjectPageProps {
@@ -86,16 +87,18 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     };
   }
 
-  return {
+  return buildMetadata({
     title: `${project.projectName} Project | Ingenium`,
     description: project.summary,
-    openGraph: {
-      title: `${project.projectName} Project | Ingenium`,
-      description: project.summary,
-      url: `/projects/${project.slug}`,
-    },
-    alternates: { canonical: `/projects/${project.slug}` },
-  };
+    path: `/projects/${project.slug}`,
+    keywords: [
+      ...keywordClusters.proof,
+      ...project.services.map((service) => service.toLowerCase()),
+      project.industry.toLowerCase(),
+      project.clientName.toLowerCase(),
+    ],
+    pageType: "WebPage",
+  });
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {

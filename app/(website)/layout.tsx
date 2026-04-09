@@ -31,6 +31,7 @@ const footerContent = {
     { href: "/websites", label: "Acquisition Engine" },
     { href: "/crm", label: "CRM Command" },
     { href: "/agents", label: "AI Agents" },
+    { href: "/departments", label: "AI Departments" },
     { href: "/automations", label: "Automation Layer" },
     { href: "/security", label: "Trust & Governance" },
   ],

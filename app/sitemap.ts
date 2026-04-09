@@ -1,37 +1,36 @@
 import type { MetadataRoute } from "next";
 
+import { PUBLIC_DISCOVERY_PATHS, SITE_URL } from "@/lib/seo";
 import { projects } from "@/src/lib/projects";
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumconsulting.net").replace(/\/$/, "");
-
-const staticRoutes = [
-  { path: "/", priority: 1, changeFrequency: "weekly" as const },
-  { path: "/platform", priority: 0.9, changeFrequency: "weekly" as const },
-  { path: "/websites", priority: 0.9, changeFrequency: "weekly" as const },
-  { path: "/crm", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/agents", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/automations", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/case-studies", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/projects", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/security", priority: 0.7, changeFrequency: "monthly" as const },
-  { path: "/about", priority: 0.6, changeFrequency: "monthly" as const },
-  { path: "/team", priority: 0.5, changeFrequency: "monthly" as const },
-  { path: "/contact", priority: 0.9, changeFrequency: "weekly" as const },
-  { path: "/departments", priority: 0.6, changeFrequency: "monthly" as const },
-];
+const routePriority: Record<string, { priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }> = {
+  "/": { priority: 1, changeFrequency: "weekly" },
+  "/platform": { priority: 0.9, changeFrequency: "weekly" },
+  "/websites": { priority: 0.9, changeFrequency: "weekly" },
+  "/contact": { priority: 0.9, changeFrequency: "weekly" },
+  "/crm": { priority: 0.8, changeFrequency: "weekly" },
+  "/agents": { priority: 0.8, changeFrequency: "weekly" },
+  "/automations": { priority: 0.8, changeFrequency: "weekly" },
+  "/case-studies": { priority: 0.8, changeFrequency: "weekly" },
+  "/projects": { priority: 0.8, changeFrequency: "weekly" },
+  "/security": { priority: 0.7, changeFrequency: "monthly" },
+  "/about": { priority: 0.6, changeFrequency: "monthly" },
+  "/departments": { priority: 0.6, changeFrequency: "monthly" },
+  "/team": { priority: 0.5, changeFrequency: "monthly" },
+};
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
-  const staticEntries = staticRoutes.map((route) => ({
-    url: `${siteUrl}${route.path}`,
+  const staticEntries = PUBLIC_DISCOVERY_PATHS.map((path) => ({
+    url: path === "/" ? SITE_URL : `${SITE_URL}${path}`,
     lastModified,
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
+    changeFrequency: routePriority[path]?.changeFrequency ?? "monthly",
+    priority: routePriority[path]?.priority ?? 0.5,
   }));
 
   const projectEntries = projects.map((project) => ({
-    url: `${siteUrl}/projects/${project.slug}`,
+    url: `${SITE_URL}/projects/${project.slug}`,
     lastModified,
     changeFrequency: "monthly" as const,
     priority: 0.7,

@@ -1,16 +1,19 @@
 "use client";
 
-import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 
 import { caseStudies } from "@/src/lib/caseStudies";
 import { projects } from "@/src/lib/projects";
+import {
+  ORGANIZATION_NAME,
+  PRIVATE_PATHS,
+  PRIVATE_PATH_PREFIXES,
+  SITE_NAME,
+  SITE_URL,
+  pageSeo,
+} from "@/lib/seo";
 
 type JsonLd = Record<string, unknown>;
-
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumconsulting.net").replace(/\/$/, "");
-
-const ORGANIZATION_NAME = "Ingenium Digital Consulting";
 
 const routeLabelMap: Record<string, string> = {
   "/": "Home",
@@ -89,6 +92,13 @@ function humanizeSegment(segment: string) {
   }
 
   return raw.replace(/\b\w/g, (match) => match.toUpperCase());
+}
+
+function isPrivatePath(pathname: string) {
+  return (
+    PRIVATE_PATHS.includes(pathname as (typeof PRIVATE_PATHS)[number]) ||
+    PRIVATE_PATH_PREFIXES.some((prefix) => pathname.startsWith(prefix))
+  );
 }
 
 function buildOrganizationSchema(): JsonLd {
@@ -192,6 +202,44 @@ function buildServiceSchema(pathname: string): JsonLd | null {
   };
 }
 
+function buildWebPageSchema(pathname: string): JsonLd | null {
+  if (!pageSeo[pathname]) {
+    if (!pathname.startsWith("/projects/")) {
+      return null;
+    }
+  }
+
+  const routeSeo = pageSeo[pathname];
+  const title = routeSeo?.title ?? routeLabelMap[pathname] ?? humanizeSegment(pathname.split("/").pop() ?? "Page");
+  const description =
+    routeSeo?.description ??
+    "Ingenium page describing a revenue platform, implementation, or proof-led delivery topic.";
+  const pageType = routeSeo?.pageType ?? "WebPage";
+
+  return {
+    "@context": "https://schema.org",
+    "@type": pageType,
+    name: title,
+    description,
+    url: toAbsoluteUrl(pathname),
+    isPartOf: {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    about: {
+      "@type": "Organization",
+      name: ORGANIZATION_NAME,
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: ORGANIZATION_NAME,
+      url: SITE_URL,
+    },
+  };
+}
+
 function buildCollectionPageSchema(
   pathname: string,
   name: string,
@@ -287,46 +335,51 @@ function buildProjectsSchema(): JsonLd {
 export default function RouteStructuredData() {
   const pathname = usePathname() || "/";
 
-  const schemas = useMemo(() => {
-    const items: JsonLd[] = [buildBreadcrumb(pathname)];
+  if (isPrivatePath(pathname)) {
+    return null;
+  }
 
-    if (pathname === "/") {
-      items.push(...buildHomeSchemas());
-    }
+  const schemas: JsonLd[] = [buildBreadcrumb(pathname)];
 
-    const serviceSchema = buildServiceSchema(pathname);
-    if (serviceSchema) {
-      items.push(serviceSchema);
-    }
+  if (pathname === "/") {
+    schemas.push(...buildHomeSchemas());
+  }
 
-    if (pathname === "/websites") {
-      items.push(buildWebsitesFaqSchema());
-    }
+  const pageSchema = buildWebPageSchema(pathname);
+  if (pageSchema) {
+    schemas.push(pageSchema);
+  }
 
-    if (pathname === "/case-studies") {
-      items.push(
-        buildCollectionPageSchema(
-          pathname,
-          "Named Client Case Studies",
-          "Named client delivery examples from Ingenium focused on website structure, proof, trust, and conversion paths.",
-        ),
-      );
-      items.push(buildCaseStudiesSchema());
-    }
+  const serviceSchema = buildServiceSchema(pathname);
+  if (serviceSchema) {
+    schemas.push(serviceSchema);
+  }
 
-    if (pathname === "/projects") {
-      items.push(
-        buildCollectionPageSchema(
-          pathname,
-          "Client Projects and Delivery Outcomes",
-          "Detailed Ingenium project pages covering website delivery, positioning, and operational proof.",
-        ),
-      );
-      items.push(buildProjectsSchema());
-    }
+  if (pathname === "/websites") {
+    schemas.push(buildWebsitesFaqSchema());
+  }
 
-    return items;
-  }, [pathname]);
+  if (pathname === "/case-studies") {
+    schemas.push(
+      buildCollectionPageSchema(
+        pathname,
+        "Named Client Case Studies",
+        "Named client delivery examples from Ingenium focused on website structure, proof, trust, and conversion paths.",
+      ),
+    );
+    schemas.push(buildCaseStudiesSchema());
+  }
+
+  if (pathname === "/projects") {
+    schemas.push(
+      buildCollectionPageSchema(
+        pathname,
+        "Client Projects and Delivery Outcomes",
+        "Detailed Ingenium project pages covering website delivery, positioning, and operational proof.",
+      ),
+    );
+    schemas.push(buildProjectsSchema());
+  }
 
   return (
     <>

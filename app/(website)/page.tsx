@@ -295,12 +295,18 @@ export default function HomePage() {
           a more accountable system.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} className="bg-white text-[var(--color-text)]" />
-          <ButtonLink
-            action={{ label: "Get a Revenue Systems Teardown", href: "/contact?intent=revenue-systems-teardown" }}
-            variant="secondary"
-            className="border-white/18 bg-white/8 text-white"
-          />
+          <Link
+            href="/contact?intent=book-demo"
+            className="cta-lift inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-[var(--color-text)] shadow-[0_18px_40px_rgba(255,255,255,0.08)]"
+          >
+            Book Demo
+          </Link>
+          <Link
+            href="/contact?intent=revenue-systems-teardown"
+            className="cta-lift inline-flex items-center justify-center rounded-full border border-white/18 bg-white/10 px-5 py-3 text-sm font-semibold text-white"
+          >
+            Get a Revenue Systems Teardown
+          </Link>
         </div>
       </section>
     </div>

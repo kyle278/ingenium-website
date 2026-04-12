@@ -21,42 +21,44 @@ export function SystemStackVisual() {
   ];
 
   return (
-    <div className="relative mx-auto h-[420px] w-full max-w-[560px]">
-      <div className="absolute inset-x-10 top-10 h-20 rounded-full bg-[rgba(18,121,255,0.12)] blur-3xl" />
+    <div className="relative mx-auto h-[390px] w-full max-w-[560px] sm:h-[430px]">
+      <div className="absolute inset-x-12 top-12 h-20 rounded-full bg-[rgba(18,121,255,0.12)] blur-3xl" />
       {modules.map((module, index) => (
         <div
           key={module.label}
-          className="absolute left-1/2 w-[84%] -translate-x-1/2 rounded-[28px] border border-white/70 bg-gradient-to-br px-6 py-5 shadow-[0_24px_60px_rgba(22,32,51,0.10)] backdrop-blur-xl"
+          className="absolute left-1/2 w-[86%] -translate-x-1/2 rounded-[28px] border border-white/70 bg-gradient-to-br px-5 py-4 shadow-[0_24px_60px_rgba(22,32,51,0.10)] backdrop-blur-xl sm:w-[84%] sm:px-6 sm:py-5"
           style={{
-            top: `${24 + index * 48}px`,
+            top: `${18 + index * 44}px`,
             transform: `translateX(-50%) rotateX(58deg) translateY(${index * 2}px)`,
             backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))`,
           }}
         >
           <div className={`absolute inset-0 rounded-[28px] bg-gradient-to-br ${moduleColors[index]} opacity-90`} />
-          <div className="relative flex items-center justify-between">
+          <div className="relative flex items-center justify-between gap-4">
             <div>
               <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
                 Module {String(index + 1).padStart(2, "0")}
               </p>
               <p className="mt-2 text-base font-semibold text-[var(--color-text)]">{module.label}</p>
             </div>
-            <p className="max-w-[190px] text-right text-sm text-[var(--color-text-soft)]">
+            <p className="max-w-[180px] text-right text-xs leading-5 text-[var(--color-text-soft)] sm:max-w-[190px] sm:text-sm sm:leading-6">
               {module.detail}
             </p>
           </div>
         </div>
       ))}
 
-      <div className="absolute bottom-1 left-1/2 h-20 w-[82%] -translate-x-1/2 rounded-[32px] border border-[var(--color-line)] bg-[rgba(22,32,51,0.9)] px-6 py-5 text-white shadow-[0_30px_70px_rgba(8,15,28,0.26)]">
-        <div className="flex items-center justify-between">
+      <div className="absolute bottom-0 left-1/2 w-[88%] -translate-x-1/2 rounded-[32px] border border-[var(--color-line)] bg-[rgba(22,32,51,0.9)] px-5 py-5 text-white shadow-[0_30px_70px_rgba(8,15,28,0.26)] sm:w-[82%] sm:px-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-5">
           <div>
             <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-white/55">
               Operating layer
             </p>
-            <p className="mt-2 text-base font-semibold">Shared governed revenue model</p>
+            <p className="mt-2 max-w-[220px] text-base font-semibold leading-6">
+              Shared governed revenue model
+            </p>
           </div>
-          <p className="max-w-[210px] text-right text-sm text-white/68">
+          <p className="max-w-[260px] text-sm leading-6 text-white/68 sm:text-right">
             One context layer underneath acquisition, pipeline, delivery, and AI action.
           </p>
         </div>

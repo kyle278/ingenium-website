@@ -14,7 +14,7 @@ type ContactFormProps = {
 };
 
 const fieldClassName =
-  "w-full rounded-lg border border-slate-700 bg-slate-800/60 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30";
+  "w-full rounded-2xl border border-[var(--color-line-strong)] bg-white/80 px-4 py-3 text-sm text-[var(--color-text)] outline-none transition focus:border-[var(--color-brand)] focus:ring-2 focus:ring-[rgba(18,121,255,0.14)]";
 
 function splitFullName(fullName: string) {
   const parts = fullName
@@ -23,31 +23,19 @@ function splitFullName(fullName: string) {
     .filter(Boolean);
 
   if (parts.length === 0) {
-    return {
-      firstName: null,
-      lastName: null,
-    };
+    return { firstName: null, lastName: null };
   }
 
   if (parts.length === 1) {
-    return {
-      firstName: parts[0] ?? null,
-      lastName: null,
-    };
+    return { firstName: parts[0] ?? null, lastName: null };
   }
 
-  return {
-    firstName: parts[0] ?? null,
-    lastName: parts.slice(1).join(" "),
-  };
+  return { firstName: parts[0] ?? null, lastName: parts.slice(1).join(" ") };
 }
 
 function getQueryParam(query: URLSearchParams, key: string) {
   const value = query.get(key);
-  if (!value) {
-    return null;
-  }
-
+  if (!value) return null;
   const normalized = value.trim();
   return normalized.length > 0 ? normalized : null;
 }
@@ -65,7 +53,6 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [stepAnimationKey, setStepAnimationKey] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [challenge, setChallenge] = useState("");
@@ -95,9 +82,7 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
       return;
     }
 
-    if (isSubmitting) {
-      return;
-    }
+    if (isSubmitting) return;
 
     const trimmedName = name.trim();
     const trimmedEmail = email.trim();
@@ -166,12 +151,14 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
 
   if (submitState === "success") {
     return (
-      <div className="py-8 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10">
-          <CheckCircle2 className="h-6 w-6 text-emerald-400" />
+      <div className="rounded-[28px] border border-[var(--color-line)] bg-white/72 px-6 py-10 text-center">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(18,121,255,0.10)]">
+          <CheckCircle2 className="h-6 w-6 text-[var(--color-brand)]" />
         </div>
-        <h3 className="mt-4 font-(--font-display) text-lg font-bold text-white">Request submitted</h3>
-        <p className="mt-2 text-sm text-slate-400">
+        <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+          Request submitted
+        </h3>
+        <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
           Thanks. We will reply from hello@ingeniumconsulting.net within 1 business day.
         </p>
       </div>
@@ -187,18 +174,18 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
       data-form-slug={formSlug}
       data-form-name={formName}
     >
-      <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2">
-        <p className="font-(--font-mono) text-[11px] uppercase tracking-widest text-slate-500">
+      <div className="flex items-center justify-between rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-3">
+        <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
           Step {step} of 2
         </p>
-        <p className="text-xs text-slate-500">
-          {step === 1 ? "Quick intake" : "Qualification details"}
+        <p className="text-xs text-[var(--color-text-muted)]">
+          {step === 1 ? "Core intent" : "Qualification details"}
         </p>
       </div>
 
-      <div className="h-1.5 rounded-full bg-slate-800">
+      <div className="h-1.5 rounded-full bg-[var(--color-bg-strong)]">
         <div
-          className="h-full rounded-full bg-emerald-500 transition-[width] duration-300 ease-out"
+          className="h-full rounded-full bg-[var(--color-brand)] transition-[width] duration-300"
           style={{ width: step === 1 ? "50%" : "100%" }}
         />
       </div>
@@ -206,37 +193,16 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
       {step === 1 ? (
         <div key={`step-1-${stepAnimationKey}`} className="form-step-enter space-y-5">
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Name *</span>
-            <input
-              className={fieldClassName}
-              type="text"
-              placeholder="Your full name"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              required
-            />
+            <span className="text-sm font-medium text-[var(--color-text)]">Name *</span>
+            <input className={fieldClassName} type="text" value={name} onChange={(event) => setName(event.target.value)} required />
           </label>
-
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Work Email *</span>
-            <input
-              className={fieldClassName}
-              type="email"
-              placeholder="name@company.com"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              required
-            />
+            <span className="text-sm font-medium text-[var(--color-text)]">Work Email *</span>
+            <input className={fieldClassName} type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
           </label>
-
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Biggest Growth Challenge *</span>
-            <select
-              className={fieldClassName}
-              value={challenge}
-              onChange={(event) => setChallenge(event.target.value)}
-              required
-            >
+            <span className="text-sm font-medium text-[var(--color-text)]">Biggest Growth Challenge *</span>
+            <select className={fieldClassName} value={challenge} onChange={(event) => setChallenge(event.target.value)} required>
               <option value="">Select your challenge</option>
               <option value="Website conversion">Website conversion</option>
               <option value="CRM and pipeline">CRM and pipeline</option>
@@ -250,12 +216,8 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
       ) : (
         <div key={`step-2-${stepAnimationKey}`} className="form-step-enter space-y-5">
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Company Size</span>
-            <select
-              className={fieldClassName}
-              value={companySize}
-              onChange={(event) => setCompanySize(event.target.value)}
-            >
+            <span className="text-sm font-medium text-[var(--color-text)]">Company Size</span>
+            <select className={fieldClassName} value={companySize} onChange={(event) => setCompanySize(event.target.value)}>
               <option value="">Select company size</option>
               <option value="1-10">1-10</option>
               <option value="11-50">11-50</option>
@@ -264,26 +226,14 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
               <option value="1000+">1000+</option>
             </select>
           </label>
-
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Current Stack</span>
-            <input
-              className={fieldClassName}
-              type="text"
-              placeholder="Example: Next.js, HubSpot, Salesforce"
-              value={stack}
-              onChange={(event) => setStack(event.target.value)}
-            />
+            <span className="text-sm font-medium text-[var(--color-text)]">Current Stack</span>
+            <input className={fieldClassName} type="text" value={stack} onChange={(event) => setStack(event.target.value)} />
           </label>
-
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-300">Timeline</span>
-              <select
-                className={fieldClassName}
-                value={timeline}
-                onChange={(event) => setTimeline(event.target.value)}
-              >
+              <span className="text-sm font-medium text-[var(--color-text)]">Timeline</span>
+              <select className={fieldClassName} value={timeline} onChange={(event) => setTimeline(event.target.value)}>
                 <option value="">Select timeline</option>
                 <option value="Immediately">Immediately</option>
                 <option value="Within 30 days">Within 30 days</option>
@@ -292,14 +242,9 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
                 <option value="Exploring options">Exploring options</option>
               </select>
             </label>
-
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-300">Budget Range</span>
-              <select
-                className={fieldClassName}
-                value={budgetRange}
-                onChange={(event) => setBudgetRange(event.target.value)}
-              >
+              <span className="text-sm font-medium text-[var(--color-text)]">Budget Range</span>
+              <select className={fieldClassName} value={budgetRange} onChange={(event) => setBudgetRange(event.target.value)}>
                 <option value="">Select budget range</option>
                 <option value="Under 25k">Under 25k</option>
                 <option value="25k-50k">25k-50k</option>
@@ -308,15 +253,9 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
               </select>
             </label>
           </div>
-
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Additional Goals</span>
-            <textarea
-              className={`min-h-[120px] ${fieldClassName}`}
-              placeholder="Share goals, constraints, or stakeholder requirements."
-              value={goals}
-              onChange={(event) => setGoals(event.target.value)}
-            />
+            <span className="text-sm font-medium text-[var(--color-text)]">Additional Goals</span>
+            <textarea className={`min-h-[120px] ${fieldClassName}`} value={goals} onChange={(event) => setGoals(event.target.value)} />
           </label>
         </div>
       )}
@@ -325,7 +264,7 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
         <div className="grid gap-3 sm:grid-cols-2">
           <button
             type="button"
-            className="cta-lift inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900 px-7 py-3.5 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:text-white"
+            className="cta-lift inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-line-strong)] bg-white px-5 py-3 text-sm font-semibold text-[var(--color-text)]"
             onClick={() => setStep(1)}
             disabled={isSubmitting}
           >
@@ -333,19 +272,19 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
             Back
           </button>
           <button
-            className="cta-lift inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
+            className="cta-lift inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-text)] px-5 py-3 text-sm font-semibold text-white"
             type="submit"
             disabled={isSubmitting}
             data-track-cta="contact_submit"
-            data-track-label="Get Started"
+            data-track-label="Submit Request"
           >
-            {isSubmitting ? "Submitting..." : "Get Started"}
+            {isSubmitting ? "Submitting..." : "Submit Request"}
             {isSubmitting ? null : <ArrowRight className="h-4 w-4" />}
           </button>
         </div>
       ) : (
         <button
-          className="cta-lift inline-flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500"
+          className="cta-lift inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-text)] px-5 py-3 text-sm font-semibold text-white"
           type="submit"
           disabled={isSubmitting}
           data-track-cta="contact_continue"
@@ -356,11 +295,10 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
         </button>
       )}
 
-      {errorMessage ? <p className="text-sm text-rose-400">{errorMessage}</p> : null}
+      {errorMessage ? <p className="text-sm text-rose-500">{errorMessage}</p> : null}
 
-      <p className="text-center text-xs text-slate-600">
-        Prefer email? Reach us at{" "}
-        <span className="font-medium text-emerald-400">hello@ingeniumconsulting.net</span>
+      <p className="text-center text-xs text-[var(--color-text-muted)]">
+        Prefer email? Reach us at <span className="font-medium text-[var(--color-brand)]">hello@ingeniumconsulting.net</span>
       </p>
     </form>
   );

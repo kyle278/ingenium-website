@@ -1,606 +1,127 @@
-﻿import Link from "next/link";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  CheckCircle2,
-  Clock,
-  ShieldCheck,
-  PenTool,
-  Target,
-  Rocket,
-  ChevronRight,
-} from "lucide-react";
+import type { Metadata } from "next";
 
-import AnimatedMetric from "../components/AnimatedMetric";
-import FaqAccordion from "../components/FaqAccordion";
-import ScrollReveal from "../components/ScrollReveal";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata = buildMetadata(pageSeo["/websites"]);
+import { PortalPreview } from "../components/siteVisuals";
+import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
-/* -- Fallback Content ------------------------------------------------ */
+export const metadata: Metadata = buildMetadata(pageSeo["/websites"]);
 
-const fallbackHero = {
-  label: "Acquisition Engine",
-  title: "Your website should act like the front end of the platform, not a disconnected marketing asset.",
-  body: "Ingenium builds acquisition systems that create urgency, collect better signals, and push context directly into CRM and workflow execution. Every page earns its place by moving buyers closer to revenue.",
-  primary_cta: { label: "Book an Acquisition Review", href: "/contact" },
-  secondary_cta: { label: "See Our Process", href: "#implementation" },
-  proof_metric: "2.2x",
-  proof_label: "increase in qualified intent after acquisition-engine rollout",
-};
-
-const fallbackEngine = {
-  label: "The Conversion Architecture",
-  title: "How an Ingenium acquisition engine converts.",
-  body: "Every page is engineered around buyer movement, proof density, form strategy, and direct connection to the rest of the revenue system.",
-  flow: [
-    "Visitor lands on a service page built around a specific conversion hypothesis",
-    "Problem framing and proof elements build confidence and urgency",
-    "Contextual CTA triggers a progressive form - low friction, high intent",
-    "Lead enriched with firmographic data, scored, and routed to the right rep in under 60 seconds",
-    "Automated follow-up sequence triggered, with full engagement context attached in CRM",
-  ],
-};
-
-const fallbackComparison = {
-  label: "Why This Approach",
-  title: "Acquisition engine: system vs. project.",
-  columns: [
-    {
-      title: "Ingenium System",
-      emphasis: true,
-      items: [
-        { label: "Conversion rate", value: "Optimised continuously with AI-assisted testing" },
-        { label: "Time to value", value: "Measurable pipeline impact within 30 days" },
-        { label: "CRM integration", value: "Forms, routing, and attribution wired at build" },
-        { label: "Post-launch", value: "Ongoing operation with weekly experimentation" },
-        { label: "Attribution", value: "End-to-end pipeline attribution from first touch" },
-      ],
-    },
-    {
-      title: "Traditional Agency",
-      items: [
-        { label: "Conversion rate", value: "Set at launch, rarely iterated" },
-        { label: "Time to value", value: "Impact unmeasured beyond design metrics" },
-        { label: "CRM integration", value: "Basic form submission, no routing or scoring" },
-        { label: "Post-launch", value: "Handoff to internal team after go-live" },
-        { label: "Attribution", value: "GA4 traffic metrics, no pipeline connection" },
-      ],
-    },
-    {
-      title: "DIY / Template",
-      items: [
-        { label: "Conversion rate", value: "Generic layout, no conversion architecture" },
-        { label: "Time to value", value: "Faster launch, no strategic foundation" },
-        { label: "CRM integration", value: "Manual or Zapier-level connections" },
-        { label: "Post-launch", value: "Competes with internal priorities" },
-        { label: "Attribution", value: "Minimal visibility into lead quality" },
-      ],
-    },
-  ],
-};
-
-const fallbackPillars = {
-  items: [
-    {
-      title: "Messaging Architecture",
-      description: "Positioning, narrative flow, and CTA copy engineered to each buyer persona.",
-      output: "Messaging architecture document with 12+ page-level conversion hypotheses",
-      icon: "pen",
-    },
-    {
-      title: "Conversion-Grade Design",
-      description: "Enterprise UI that guides decision-makers through proof to action.",
-      output: "Full design system with responsive components and interaction specifications",
-      icon: "target",
-    },
-    {
-      title: "Launch + Growth System",
-      description: "SEO, analytics, CRM integration, AI workflows, and experimentation cadence built in.",
-      output: "Complete technical deployment with attribution dashboards and A/B test framework",
-      icon: "rocket",
-    },
-  ],
-};
-
-const fallbackImplementation = {
-  label: "Implementation Path",
-  title: "Acquisition engine rollout in weeks, not quarters.",
-  phases: [
-    {
-      week: "Week 1-2",
-      title: "Discovery & Strategy",
-      deliverables: "Conversion audit, messaging architecture, KPI framework, technical requirements",
-      owner: "Ingenium leads discovery; your team validates direction and priorities",
-    },
-    {
-      week: "Week 3-4",
-      title: "Design & Build",
-      deliverables: "Design system, page builds, CRM integration, analytics instrumentation",
-      owner: "Ingenium builds; your team reviews at design and content gates",
-    },
-    {
-      week: "Week 5-6",
-      title: "Launch & Optimise",
-      deliverables: "Staged go-live, AI agent deployment, automation workflows, first optimisation cycle",
-      owner: "Joint ownership with weekly performance reporting",
-    },
-  ],
-};
-
-const fallbackFirst30 = {
-  title: "Your first 30 days after engagement starts",
-  body: "By day 30, you will have a conversion-optimised website live, attribution dashboards reporting, and your first A/B test generating data.",
-  items: [
-    "Conversion blueprint with page-level hypotheses baselined",
-    "Design system and key templates deployed",
-    "CRM integration with lead routing active",
-    "Analytics instrumentation with attribution dashboards live",
-    "First experiment live and generating data",
-  ],
-};
-
-const fallbackProof = {
-  label: "Results",
-  title: "Acquisition engine results with measurable outcomes.",
-  case: {
-    client_type: "Series B SaaS Company (Fintech)",
-    challenge: "Website generating 50K+ monthly visits but less than 0.8% converting to demo requests. Marketing couldn't prove which campaigns drove revenue. Sales received leads without context.",
-    approach: "Full acquisition-engine rollout: conversion architecture, role-based messaging, progressive forms, CRM integration with automated routing, and AI-assisted follow-up sequences.",
-    changes: [
-      "Rebuilt 14 pages with buyer-persona messaging architecture",
-      "Implemented progressive lead capture reducing form abandonment by 62%",
-      "Wired lead routing delivering qualified context to reps in under 45 seconds",
-      "Deployed automated follow-up triggering within 2 hours of form submission",
-    ],
-    results: [
-      { metric: "+38%", label: "Qualified demo requests" },
-      { metric: "2.1x", label: "Marketing-attributed pipeline" },
-      { metric: "<45s", label: "Lead-to-rep routing time" },
-      { metric: "62%", label: "Reduction in form abandonment" },
-    ],
-    timeframe: "Results measured at 90 days post-launch",
-  },
-  link: { label: "View all revenue platform case studies", href: "/case-studies" },
-};
-
-const fallbackFaq = {
-  title: "Acquisition engine FAQ",
-  items: [
-    {
-      question: "How long does an acquisition engine rollout take?",
-      answer: "Most acquisition-engine rollouts launch in 4-6 weeks with staged releases. Discovery and strategy take 1-2 weeks, build and integration take 2-3 weeks, and launch plus initial optimisation completes the cycle.",
-    },
-    {
-      question: "What does an acquisition engine rollout cost?",
-      answer: "Pricing depends on acquisition scope, CRM complexity, workflow depth, and post-launch optimisation. We provide a scoped estimate after a strategy call based on the system you need, not a generic design package.",
-    },
-    {
-      question: "How do you handle migration from our existing site?",
-      answer: "We audit your current site for content, SEO equity, and technical dependencies. High-value pages are migrated with proper redirects. Content that converts stays; everything else is rebuilt around your new conversion architecture.",
-    },
-    {
-      question: "What about change management and team adoption?",
-      answer: "We train your team on the CMS, provide documentation for content updates, and establish an approval workflow. Most teams are self-sufficient for content changes within the first week post-launch.",
-    },
-    {
-      question: "How do you integrate with our existing CRM and marketing stack?",
-      answer: "We build native integrations with HubSpot, Salesforce, and major CRM platforms. Forms, lead routing, attribution tracking, and automation triggers are wired during the build phase - not bolted on after launch.",
-    },
-    {
-      question: "What happens if we need changes after launch?",
-      answer: "Ongoing optimisation is part of the system. We run weekly experimentation cycles, monitor conversion metrics, and iterate based on data. You're never left to maintain the system alone.",
-    },
-  ],
-  enterprise_card: {
-    label: "Enterprise Ready",
-    title: "Security and governance baked into the acquisition engine.",
-    body: "Your acquisition engine includes approval workflows, audit trails, and compliance-ready infrastructure from day one.",
-    items: [
-      "SOC 2 readiness framework and documentation",
-      "Role-based access controls and approval workflows",
-      "Audit trails with complete activity logging",
-    ],
-    link: { label: "Review enterprise security and AI governance", href: "/security" },
-  },
-};
-
-const fallbackCta = {
-  title: "If your current site cannot prove pipeline impact, it is underperforming no matter how polished it looks.",
-  body: "Book an acquisition review to map your buyer journey, rollout path, and the signal model needed to connect the site to real revenue action.",
-  primary_cta: { label: "Book an Acquisition Review", href: "/contact" },
-  secondary_cta: { label: "Request a Launch Blueprint", href: "/contact" },
-  reassurance: "30-minute call - rollout blueprint - no obligation - typical launch in 4-6 weeks",
-};
-
-/* -- Helpers ---------------------------------------------------------- */
-
-function getPillarIcon(iconName: string | undefined) {
-  switch (iconName) {
-    case "pen": return PenTool;
-    case "rocket": return Rocket;
-    default: return Target;
-  }
-}
-
-function pickText(value: unknown, fallback: string) {
-  return typeof value === "string" && value.trim().length > 0 ? value : fallback;
-}
-
-function normalizePillarItem(
-  item: unknown,
-  fallback: (typeof fallbackPillars.items)[number],
-) {
-  const record = item && typeof item === "object" ? (item as Record<string, unknown>) : {};
-
-  return {
-    title: pickText(record.title, fallback.title),
-    description: pickText(record.description, fallback.description),
-    output: pickText(
-      record.output ?? record.deliverable ?? record.concrete_output,
-      fallback.output,
-    ),
-    icon: pickText(record.icon, fallback.icon),
-  };
-}
-
-/* -- Page Component --------------------------------------------------- */
-
-export default async function WebsitesPage() {
-  const hero = fallbackHero;
-  const engine = fallbackEngine;
-  const comparison = fallbackComparison;
-  const pillars = fallbackPillars;
-  const implementation = fallbackImplementation;
-  const first30 = fallbackFirst30;
-  const proof = fallbackProof;
-  const faq = fallbackFaq;
-  const cta = fallbackCta;
-  const rawPillarItems = Array.isArray(pillars.items) ? pillars.items : [];
-  const pillarItems = fallbackPillars.items.map((fallbackItem, index) =>
-    normalizePillarItem(rawPillarItems[index], fallbackItem),
-  );
-
+export default function WebsitesPage() {
   return (
-    <div className="space-y-28 md:space-y-40">
-      {/* ======= HERO ======= */}
-      <section className="pt-8">
-        <div className="mx-auto max-w-4xl text-center">
-          <p
-            className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-          >
-            {hero.label}
+    <div className="space-y-24 pb-8 md:space-y-32">
+      <section className="grid items-center gap-10 pt-6 lg:grid-cols-[1fr,1fr]">
+        <div>
+          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
+            Websites
           </p>
-          <h1
-            className="mt-6 font-(--font-display) text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl"
-          >
-            {hero.title}
+          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
+            Your website should work like part of the system.
           </h1>
-          <p
-            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-400"
-          >
-            {hero.body}
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
+            Ingenium turns websites into active revenue infrastructure with high-intent journeys, form capture, routing, and proof-driven conversion.
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href={hero.primary_cta?.href ?? "/contact"}
-              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
-            >
-              {hero.primary_cta?.label ?? "Book a Platform Strategy Call"}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href={hero.secondary_cta?.href ?? "#implementation"}
-              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
-            >
-              {hero.secondary_cta?.label ?? "See Our Process"}
-            </Link>
-          </div>
-
-          {/* Proof indicator */}
-          <div className="mt-10 inline-flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-5 py-3">
-            <AnimatedMetric
-              as="span"
-              className="metric-display text-3xl font-bold text-emerald-400"
-              value={hero.proof_metric ?? fallbackHero.proof_metric}
-            />
-            <span className="text-left text-sm text-slate-400">
-              {hero.proof_label ?? fallbackHero.proof_label}
-            </span>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
+            <ButtonLink action={{ label: "See the Platform", href: "/platform" }} variant="secondary" />
           </div>
         </div>
+        <PortalPreview
+          eyebrow="Acquisition engine"
+          title="Website intent flowing directly into the operating layer"
+          rows={[
+            { label: "Progressive form path", value: "Buyer context captured before submit", state: "Live" },
+            { label: "Submission routing", value: "CRM owner and SLA assigned", state: "Connected" },
+            { label: "Proof-led page system", value: "Named outcomes attached to service paths", state: "Visible" },
+          ]}
+        />
       </section>
 
-      {/* ======= CONVERSION ENGINE DETAIL ======= */}
-      <section className="rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
-        <p
-          className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-        >
-          {engine.label}
-        </p>
-        <h2
-          className="mt-4 max-w-2xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-        >
-          {engine.title}
-        </h2>
-        <p className="mt-4 max-w-2xl text-slate-400">
-          {engine.body}
-        </p>
-
-        {/* Flow visualization */}
-        <div className="mt-10 space-y-0">
-          {(engine.flow ?? fallbackEngine.flow).map((step: string, i: number) => (
-            <ScrollReveal key={step} className="timeline-step" delayMs={i * 55}>
-              <div className="relative pl-10">
-                {i < (engine.flow ?? fallbackEngine.flow).length - 1 && (
-                  <div className="timeline-line absolute left-[15px] top-8 h-full w-px bg-emerald-800/40" />
-                )}
-                <div className="timeline-dot absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-lg border border-emerald-500/20 bg-slate-900">
-                  <span className="font-(--font-mono) text-xs text-emerald-400">{String(i + 1).padStart(2, "0")}</span>
-                </div>
-                <div className="pb-6">
-                  <p className="text-sm leading-relaxed text-slate-300">{step}</p>
-                </div>
-              </div>
-            </ScrollReveal>
+      <section>
+        <SectionIntro
+          eyebrow="What a modern acquisition engine does"
+          title="Turn your public site into accountable acquisition infrastructure."
+          body="The website should create qualified intent, preserve context, and make the next action obvious."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          {[
+            "High-intent page architecture",
+            "Progressive forms",
+            "CRM-connected submissions",
+            "Attribution-ready tracking",
+            "Proof-led conversion paths",
+          ].map((item) => (
+            <SurfaceCard key={item} className="panel-hover p-6 text-sm leading-7 text-[var(--color-text-soft)]">
+              {item}
+            </SurfaceCard>
           ))}
         </div>
       </section>
 
-      {/* ======= COMPARISON ======= */}
-      <section>
-        <p className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400">
-          {comparison.label ?? fallbackComparison.label}
-        </p>
-        <h2 className="mt-4 max-w-2xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl">
-          {comparison.title ?? fallbackComparison.title}
-        </h2>
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {(comparison.columns ?? fallbackComparison.columns).map((col: { title: string; emphasis?: boolean; items: { label: string; value: string }[] }) => (
-            <div
-              key={col.title}
-              className={`rounded-xl border p-6 ${
-                col.emphasis
-                  ? "border-emerald-500/30 bg-emerald-950/30"
-                  : "border-slate-800 bg-slate-900/40"
-              }`}
-            >
-              <h3 className={`text-sm font-semibold ${col.emphasis ? "text-emerald-400" : "text-slate-400"}`}>
-                {col.title}
-              </h3>
-              <div className="mt-5 space-y-4">
-                {col.items.map((item: { label: string; value: string }) => (
-                  <div key={item.label}>
-                    <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-600">{item.label}</p>
-                    <p className={`mt-1 text-sm ${col.emphasis ? "text-slate-200" : "text-slate-500"}`}>{item.value}</p>
-                  </div>
-                ))}
+      <section className="grid gap-6 xl:grid-cols-2">
+        <SurfaceCard className="p-8">
+          <SectionIntro
+            eyebrow="Before and after"
+            title="Most websites stop at form capture. Ingenium carries the signal forward."
+          />
+          <div className="mt-8 grid gap-4">
+            {[
+              ["Before", "Pages convert in isolation. Buyer context is lost after the click."],
+              ["After", "Buyer intent, source, service interest, and urgency enter the CRM as one record."],
+            ].map(([title, body]) => (
+              <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/72 p-5">
+                <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                  {title}
+                </p>
+                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
               </div>
-            </div>
+            ))}
+          </div>
+        </SurfaceCard>
+        <SurfaceCard dark className="p-8">
+          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+            CRM and automation continuity
+          </p>
+          <div className="mt-8 grid gap-3">
+            {[
+              "Forms route directly into governed CRM logic.",
+              "Attribution stays attached to the commercial record.",
+              "Automation starts from real intent instead of a generic list entry.",
+              "Teams act with the page journey already visible.",
+            ].map((item) => (
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/75">
+                {item}
+              </div>
+            ))}
+          </div>
+        </SurfaceCard>
+      </section>
+
+      <section>
+        <SectionIntro
+          eyebrow="30-day outcomes"
+          title="The first month should clarify conversion, not create more ambiguity."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {[
+            "Clearer buyer pathways for high-value services",
+            "Portal-linked form capture and routing still intact",
+            "Early reporting on source, conversion path, and response speed",
+          ].map((item) => (
+            <SurfaceCard key={item} className="panel-hover p-6 text-sm leading-7 text-[var(--color-text-soft)]">
+              {item}
+            </SurfaceCard>
           ))}
         </div>
       </section>
 
-      {/* ======= CAPABILITY PILLARS ======= */}
-      <section className="grid gap-6 lg:grid-cols-3">
-        {pillarItems.map((item, i: number) => {
-          const Icon = getPillarIcon(item.icon);
-          const bgVariants = ["dot-grid", "grid-lines", ""];
-          return (
-            <div
-              key={item.title}
-              className={`relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 p-6 ${bgVariants[i] ?? ""}`}
-            >
-              <div className="relative">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10">
-                  <Icon className="h-5 w-5 text-emerald-400" />
-                </div>
-                <h3 className="mt-4 font-(--font-display) text-lg font-bold text-white">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-400">{item.description}</p>
-                <div className="mt-4 rounded-lg border border-slate-800 bg-slate-900/60 p-3">
-                  <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-600">Concrete output</p>
-                  <p className="mt-1 text-xs text-slate-300">{item.output}</p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </section>
-
-      {/* ======= IMPLEMENTATION PATH ======= */}
-      <section id="implementation" className="grid gap-12 lg:grid-cols-2">
-        <div>
-          <p
-            className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-          >
-            {implementation.label}
-          </p>
-          <h2
-            className="mt-4 max-w-lg font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-          >
-            {implementation.title}
-          </h2>
-
-          <div className="mt-10 space-y-0">
-            {(implementation.phases ?? fallbackImplementation.phases).map((phase: { week: string; title: string; deliverables: string; owner: string }, i: number) => (
-              <ScrollReveal key={phase.week} className="timeline-step" delayMs={i * 70}>
-                <div className="relative pl-8">
-                  {i < (implementation.phases ?? fallbackImplementation.phases).length - 1 && (
-                    <div className="timeline-line absolute left-[11px] top-8 h-full w-px bg-slate-800" />
-                  )}
-                  <div className="timeline-dot absolute left-0 top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-emerald-500/30 bg-slate-900">
-                    <div className="h-2 w-2 rounded-full bg-emerald-500" />
-                  </div>
-                  <div className="pb-8">
-                    <div className="flex items-center gap-3">
-                      <h3 className="text-base font-semibold text-white">{phase.title}</h3>
-                      <span className="font-(--font-mono) text-[11px] text-emerald-400">{phase.week}</span>
-                    </div>
-                    <p className="mt-2 text-sm text-slate-400">{phase.deliverables}</p>
-                    <p className="mt-1 font-(--font-mono) text-[11px] text-slate-600">{phase.owner}</p>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-
-        {/* First 30 days */}
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
-          <p className="font-(--font-mono) text-xs uppercase tracking-widest text-cyan-400">First 30 Days</p>
-          <h3 className="mt-4 font-(--font-display) text-xl font-bold text-white">
-            {first30.title ?? fallbackFirst30.title}
-          </h3>
-          <p className="mt-2 text-sm text-slate-400">
-            {first30.body ?? fallbackFirst30.body}
-          </p>
-          <div className="mt-6 space-y-4">
-            {(first30.items ?? fallbackFirst30.items).map((item: string, i: number) => (
-              <ScrollReveal key={item} delayMs={i * 55}>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
-                  <span className="text-sm text-slate-300">{item}</span>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ======= PROOF - FULL MINI CASE ======= */}
-      <section>
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400">
-              {proof.label}
-            </p>
-            <h2 className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              {proof.title}
-            </h2>
-          </div>
-          <Link
-            href={proof.link?.href ?? "/case-studies"}
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white"
-          >
-            {proof.link?.label ?? "View all revenue platform case studies"}
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
-
-        <div className="mt-10 rounded-2xl border border-slate-800 bg-slate-900/40 p-8 md:p-10">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="rounded-md bg-slate-800 px-2.5 py-1 font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-400">
-              {(proof.case ?? fallbackProof.case).client_type}
-            </span>
-            <span className="font-(--font-mono) text-[11px] text-slate-600">
-              {(proof.case ?? fallbackProof.case).timeframe}
-            </span>
-          </div>
-
-          <div className="mt-6 grid gap-8 lg:grid-cols-2">
-            <div>
-              <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Challenge</p>
-              <p className="mt-2 text-sm leading-relaxed text-slate-300">{(proof.case ?? fallbackProof.case).challenge}</p>
-              <p className="mt-4 text-xs font-medium uppercase tracking-wider text-slate-500">Approach</p>
-              <p className="mt-2 text-sm leading-relaxed text-slate-300">{(proof.case ?? fallbackProof.case).approach}</p>
-              <p className="mt-4 text-xs font-medium uppercase tracking-wider text-slate-500">What changed</p>
-              <div className="mt-2 space-y-2">
-                {(proof.case ?? fallbackProof.case).changes.map((change: string) => (
-                  <div key={change} className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                    <span className="text-sm text-slate-400">{change}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {(proof.case ?? fallbackProof.case).results.map((r: { metric: string; label: string }) => (
-                <div key={r.label} className="metric-card rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-                  <AnimatedMetric
-                    as="p"
-                    className="metric-display text-2xl font-bold text-emerald-400"
-                    value={r.metric}
-                  />
-                  <p className="mt-1 text-xs text-slate-400">{r.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ======= FAQ ======= */}
-      <section className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
-        <div>
-          <h2 className="font-(--font-display) text-2xl font-bold text-white">
-            {faq.title}
-          </h2>
-          <div className="mt-8">
-            <FaqAccordion
-              items={faq.items ?? fallbackFaq.items}
-            />
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-emerald-500/20 bg-emerald-950/20 p-8">
-          <span className="inline-flex items-center rounded-md border border-emerald-500/20 bg-emerald-950/40 px-2.5 py-1 font-(--font-mono) text-[10px] uppercase tracking-wider text-emerald-400">
-            {faq.enterprise_card?.label ?? fallbackFaq.enterprise_card.label}
-          </span>
-          <h3 className="mt-4 font-(--font-display) text-xl font-bold text-white">
-            {faq.enterprise_card?.title ?? fallbackFaq.enterprise_card.title}
-          </h3>
-          <p className="mt-3 text-sm leading-relaxed text-slate-400">
-            {faq.enterprise_card?.body ?? fallbackFaq.enterprise_card.body}
-          </p>
-          <div className="mt-6 space-y-3">
-            {(faq.enterprise_card?.items ?? fallbackFaq.enterprise_card.items).map((item: string) => (
-              <div key={item} className="flex items-center gap-3">
-                <ShieldCheck className="h-4 w-4 shrink-0 text-emerald-400" />
-                <span className="text-sm text-slate-300">{item}</span>
-              </div>
-            ))}
-          </div>
-          <Link
-            href={faq.enterprise_card?.link?.href ?? "/security"}
-            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300"
-          >
-            {faq.enterprise_card?.link?.label ?? "Review enterprise security and AI governance"}
-            <ChevronRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
-
-      {/* ======= FINAL CTA ======= */}
-      <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
-        <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
-        <div className="relative">
-          <h2 className="mx-auto max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            {cta.title}
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            {cta.body}
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href={cta.primary_cta?.href ?? "/contact"}
-              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
-            >
-              {cta.primary_cta?.label ?? "Book a Platform Strategy Call"}
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href={cta.secondary_cta?.href ?? "/contact"}
-              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
-            >
-              {cta.secondary_cta?.label ?? "Request a Launch Blueprint"}
-            </Link>
-          </div>
-          <p className="mt-6 flex items-center justify-center gap-2 font-(--font-mono) text-xs text-slate-600">
-            <Clock className="h-3.5 w-3.5" />
-            {cta.reassurance ?? fallbackCta.reassurance}
-          </p>
+      <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
+        <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
+          Your site should qualify, route, and inform the next action before a rep ever opens the record.
+        </h2>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} className="bg-white text-[var(--color-text)]" />
+          <ButtonLink action={{ label: "Get a Revenue Systems Teardown", href: "/contact?intent=revenue-systems-teardown" }} variant="secondary" className="border-white/18 bg-white/8 text-white" />
         </div>
       </section>
     </div>

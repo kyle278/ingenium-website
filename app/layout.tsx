@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { IBM_Plex_Mono, Manrope, Plus_Jakarta_Sans } from "next/font/google";
 
 import IngeniumTracking from "@/app/components/IngeniumTracking";
 import { getPortalPublicConfigOrNull } from "@/lib/portalIntegration/config";
@@ -7,23 +7,21 @@ import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL, buildMetadata, keywordCluster
 
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   variable: "--font-display",
   display: "swap",
 });
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600"],
   variable: "--font-mono",
   display: "swap",
 });
@@ -69,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-slate-950 font-[var(--font-body)] text-slate-50 antialiased`}
+        className={`${manrope.variable} ${plusJakartaSans.variable} ${ibmPlexMono.variable} min-h-screen bg-[var(--color-bg)] font-[var(--font-body)] text-[var(--color-text)] antialiased`}
       >
         {portalPublicConfig ? (
           <IngeniumTracking

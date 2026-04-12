@@ -1,5 +1,5 @@
-import SiteNav from "./components/SiteNav";
 import SiteFooter from "./components/SiteFooter";
+import SiteNav from "./components/SiteNav";
 import RouteStructuredData from "./components/RouteStructuredData";
 
 export const revalidate = 300;
@@ -8,67 +8,55 @@ const navContent = {
   brand: "Ingenium",
   items: [
     { href: "/platform", label: "Platform" },
-    { href: "/websites", label: "Acquisition Engine" },
+    { href: "/websites", label: "Websites" },
     { href: "/crm", label: "CRM" },
-    { href: "/agents", label: "AI Agents" },
-    { href: "/automations", label: "Automation" },
-    { href: "/case-studies", label: "Case Studies" },
+    { href: "/ai-agents", label: "AI Agents" },
+    { href: "/automations", label: "Automations" },
     { href: "/security", label: "Security" },
-    { href: "/about", label: "Why Ingenium" },
+    { href: "/case-studies", label: "Case Studies" },
+    { href: "/implementation", label: "Implementation" },
     { href: "/contact", label: "Contact" },
   ],
-  cta_label: "Book a Strategy Review",
-  cta_href: "/contact",
+  primaryCta: { label: "Book Demo", href: "/contact?intent=book-demo" },
+  secondaryCta: { label: "See the Platform", href: "/platform" },
 };
 
 const footerContent = {
-  brand: "Ingenium",
   summary:
-    "Ingenium is the revenue platform and implementation partner that connects acquisition, CRM, AI execution, automation, and named proof into one accountable growth system.",
-  product_title: "Platform",
-  product_links: [
+    "Ingenium connects lead capture, CRM execution, workflow automation, delivery visibility, reporting, and AI agents in one governed operating layer.",
+  sitemap: [
+    { href: "/", label: "Home" },
     { href: "/platform", label: "Platform" },
-    { href: "/websites", label: "Acquisition Engine" },
-    { href: "/crm", label: "CRM Command" },
-    { href: "/agents", label: "AI Agents" },
-    { href: "/departments", label: "AI Departments" },
-    { href: "/automations", label: "Automation Layer" },
-    { href: "/security", label: "Trust & Governance" },
-  ],
-  company_title: "Proof & Company",
-  company_links: [
-    { href: "/about", label: "About" },
-    { href: "/projects", label: "Client Projects" },
-    { href: "/case-studies", label: "Case Studies" },
+    { href: "/websites", label: "Websites" },
+    { href: "/crm", label: "CRM" },
+    { href: "/ai-agents", label: "AI Agents" },
+    { href: "/automations", label: "Automations" },
     { href: "/security", label: "Security" },
+    { href: "/case-studies", label: "Case Studies" },
+    { href: "/implementation", label: "Implementation" },
     { href: "/contact", label: "Contact" },
   ],
-  contact_title: "Get in touch",
-  contact_items: [
-    "Strategy, architecture, and rollout reviews available",
-    "Named client work and deeper proof packs on request",
-    "US and EU buying teams supported",
+  actions: [
+    { href: "/contact?intent=book-demo", label: "Book Demo" },
+    { href: "/platform", label: "See the Platform" },
+    { href: "/contact?intent=revenue-systems-teardown", label: "Get a Revenue Systems Teardown" },
   ],
-  security_link_label: "Security overview",
-  legal_line: "\u00a9 2026 Ingenium Digital Consulting. All rights reserved.",
-  legal_tagline: "Revenue platform and implementation partner",
-  tags: ["Platform", "CRM", "AI Agents", "Automation"],
 };
 
 export default function WebsiteLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative min-h-screen bg-slate-950">
+    <div className="relative min-h-screen overflow-hidden bg-[var(--color-bg)]">
       <RouteStructuredData />
 
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="ambient-drift-a absolute -top-40 right-[-8rem] h-96 w-96 rounded-full bg-emerald-500/8 blur-[100px]" />
-        <div className="ambient-drift-b absolute top-1/3 left-[-10rem] h-[500px] w-[500px] rounded-full bg-cyan-500/5 blur-[120px]" />
-        <div className="ambient-drift-c absolute bottom-[-12rem] right-1/4 h-80 w-80 rounded-full bg-emerald-500/5 blur-[100px]" />
+        <div className="ambient-drift-a absolute -top-24 right-[-5rem] h-72 w-72 rounded-full bg-[rgba(18,121,255,0.10)] blur-[100px]" />
+        <div className="ambient-drift-b absolute top-[24%] left-[-8rem] h-96 w-96 rounded-full bg-[rgba(14,165,164,0.08)] blur-[120px]" />
+        <div className="ambient-drift-c absolute bottom-[-10rem] right-[18%] h-80 w-80 rounded-full bg-[rgba(22,32,51,0.06)] blur-[100px]" />
       </div>
 
       <div className="relative">
         <SiteNav content={navContent} />
-        <main className="mx-auto max-w-7xl px-4 pb-24 pt-12 sm:px-6 md:pt-20">
+        <main className="mx-auto max-w-[1280px] px-4 pb-24 pt-10 sm:px-6 md:pt-16 lg:px-8">
           {children}
         </main>
         <SiteFooter content={footerContent} />

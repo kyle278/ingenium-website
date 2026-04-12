@@ -7,67 +7,66 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumco
   "",
 );
 export const DEFAULT_DESCRIPTION =
-  "Ingenium is a revenue platform implementation partner connecting website acquisition, CRM execution, AI agents, automation, and governance into one accountable growth system.";
+  "Ingenium is the revenue operating system for lean service businesses, connecting website lead capture, CRM execution, automation, reporting, delivery visibility, and governed AI agents.";
 
 export const keywordClusters = {
   platform: [
-    "revenue platform",
-    "revenue platform implementation partner",
-    "revenue operations consulting",
-    "RevOps implementation partner",
-    "revenue systems consulting",
-    "go to market systems integration",
+    "revenue operating system",
+    "revenue operating system for service businesses",
+    "governed revenue platform",
+    "revenue systems platform",
+    "lean service business platform",
   ],
   websites: [
-    "B2B website strategy",
-    "conversion focused website",
-    "acquisition engine",
-    "CRM connected website",
-    "website conversion optimization for B2B",
+    "crm connected website",
+    "b2b service business website",
+    "high intent website journeys",
+    "lead capture system",
+    "proof led conversion paths",
   ],
   crm: [
-    "CRM implementation consultant",
-    "CRM migration services",
-    "RevOps CRM consulting",
-    "lead routing and attribution",
-    "CRM lifecycle design",
+    "crm execution system",
+    "lead routing for service businesses",
+    "crm lifecycle design",
+    "pipeline visibility",
+    "sales to delivery handoff",
   ],
   ai: [
-    "AI agents for revenue teams",
-    "governed AI agents",
-    "AI operations consulting",
-    "AI departments",
-    "human approved AI workflows",
+    "governed ai agents",
+    "ai agents for service businesses",
+    "human approval ai workflows",
+    "ai workflow governance",
+    "operational ai agents",
   ],
   automation: [
-    "revenue automation consulting",
+    "revenue workflow automation",
+    "sla driven automation",
+    "pipeline automation",
     "lead routing automation",
-    "sales workflow automation",
-    "marketing and sales automation",
-    "workflow SLA automation",
+    "workflow rollback control",
   ],
   governance: [
-    "AI governance consulting",
-    "enterprise AI security",
-    "security review for AI systems",
-    "compliance ready automation",
-    "governed AI implementation",
+    "ai governance",
+    "audit trail automation",
+    "technical review support",
+    "role based workflow approvals",
+    "secure revenue operations",
   ],
   proof: [
-    "revenue platform case studies",
-    "B2B website case studies",
-    "CRM implementation examples",
-    "AI workflow examples",
-    "conversion architecture examples",
+    "service business case studies",
+    "revenue systems case studies",
+    "platform implementation outcomes",
+    "named customer outcomes",
+    "proof led product website",
   ],
 } as const;
 
 export const aeoQueryThemes = [
-  "What does a revenue platform implementation partner do?",
-  "How do you connect a website, CRM, AI agents, and automation into one system?",
-  "How do you implement AI agents safely for a revenue team?",
-  "What should procurement review before approving AI automation?",
-  "How do you prove ROI from website, CRM, and automation work?",
+  "What does a revenue operating system do for a lean service business?",
+  "How do you connect website lead capture, CRM action, automation, AI agents, and reporting?",
+  "How do you keep AI agents inside governed workflows?",
+  "What should leadership review before trusting the forecast?",
+  "How do you reduce sales-to-delivery handoff friction without more tools?",
 ];
 
 type PageSeoConfig = {
@@ -78,129 +77,128 @@ type PageSeoConfig = {
   ogTitle?: string;
   ogDescription?: string;
   noIndex?: boolean;
-  pageType?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
+  pageType?: "WebPage" | "ContactPage" | "CollectionPage";
 };
 
 export const pageSeo: Record<string, PageSeoConfig> = {
   "/": {
-    title: "Revenue Platform Implementation Partner | Ingenium",
+    title: "Revenue Operating System for Lean Service Businesses | Ingenium",
     description:
-      "Ingenium helps ambitious teams connect website acquisition, CRM execution, AI agents, automation, and governance into one accountable revenue platform.",
+      "Ingenium connects website lead capture, CRM execution, automation, delivery visibility, reporting, and governed AI agents in one accountable operating layer.",
     path: "/",
-    keywords: [...keywordClusters.platform, "CRM AI automation integration"],
-    ogTitle: "Revenue Platform Implementation Partner | Ingenium",
-    ogDescription:
-      "One governed revenue platform for acquisition, CRM execution, AI agents, automation, and measurable growth.",
+    keywords: [...keywordClusters.platform],
   },
   "/platform": {
-    title: "Revenue Platform Architecture | Ingenium",
+    title: "Revenue Operating System Platform | Ingenium",
     description:
-      "See how Ingenium designs revenue platform architecture across acquisition, CRM, AI agents, automation, and governance for growing teams.",
+      "See how Ingenium connects websites, CRM, workflow automation, AI agents, and reporting in one governed revenue operating system.",
     path: "/platform",
-    keywords: [...keywordClusters.platform, "revenue platform architecture"],
+    keywords: [...keywordClusters.platform, "shared data model"],
   },
   "/websites": {
-    title: "B2B Website Strategy | Ingenium",
+    title: "Websites That Work Like Part of the System | Ingenium",
     description:
-      "Ingenium builds B2B acquisition engines with conversion-focused website strategy, CRM-connected forms, proof architecture, and measurable pipeline intent.",
+      "Ingenium turns websites into active revenue infrastructure with high-intent journeys, proof-led conversion, CRM routing, and attribution-ready tracking.",
     path: "/websites",
-    keywords: [...keywordClusters.websites, "website conversion system"],
+    keywords: [...keywordClusters.websites],
   },
   "/crm": {
-    title: "CRM Implementation Consultant | Ingenium",
+    title: "CRM Execution System | Ingenium",
     description:
-      "Ingenium delivers CRM implementation, migration, lifecycle design, routing, and attribution so revenue teams can trust pipeline action and reporting.",
+      "Turn your CRM into a system people trust with cleaner routing, lifecycle logic, attribution, delivery continuity, and revenue visibility.",
     path: "/crm",
-    keywords: [...keywordClusters.crm, "CRM operating model"],
+    keywords: [...keywordClusters.crm],
   },
-  "/agents": {
+  "/ai-agents": {
     title: "Governed AI Agents for Revenue Teams | Ingenium",
     description:
-      "Deploy governed AI agents for research, drafting, qualification, and operator assistance with approval gates, auditability, and production controls.",
-    path: "/agents",
-    keywords: [...keywordClusters.ai, "AI implementation partner"],
+      "Deploy AI agents inside governed workflows with approvals, task boundaries, audit history, and operational visibility.",
+    path: "/ai-agents",
+    keywords: [...keywordClusters.ai],
   },
-  "/departments": {
-    title: "AI Departments Operating Model | Ingenium",
-    description:
-      "Design AI departments with KPI ownership, human oversight, governance rules, and role-based escalation for safe revenue operations at scale.",
-    path: "/departments",
-    keywords: [
-      "AI departments",
-      "AI operations consulting",
-      "AI organization design",
-      "AI governance for teams",
-      "AI operating model",
-    ],
+  "/agents": {
+    title: "AI Agents Redirect | Ingenium",
+    description: "Legacy route redirecting to the governed AI agents page.",
+    path: "/agents",
+    keywords: ["legacy ai agents route"],
+    noIndex: true,
   },
   "/automations": {
-    title: "Revenue Automation Consulting | Ingenium",
+    title: "Revenue Workflow Automation | Ingenium",
     description:
-      "Ingenium builds revenue automation for lead routing, follow-up, escalation, and workflow timing with SLA visibility and rollback control.",
+      "Ingenium turns important signals into action with timing guarantees, escalation paths, rollback control, and execution visibility.",
     path: "/automations",
-    keywords: [...keywordClusters.automation, "revenue workflow design"],
+    keywords: [...keywordClusters.automation],
   },
   "/security": {
-    title: "AI Governance Consulting | Ingenium",
+    title: "Security and Governance | Ingenium",
     description:
-      "Support procurement, compliance, and stakeholder review with AI governance consulting, enterprise security controls, and auditable automation design.",
+      "Review role-based access, approval paths, audit trails, AI governance, and technical review support built into the Ingenium operating model.",
     path: "/security",
-    keywords: [...keywordClusters.governance, "procurement readiness for AI"],
-  },
-  "/about": {
-    title: "Why Ingenium | Revenue Platform Implementation Partner",
-    description:
-      "Ingenium is a revenue platform implementation partner for teams that need website, CRM, AI, automation, and governance to ship as one system.",
-    path: "/about",
-    keywords: [...keywordClusters.platform, "implementation partner"],
-    pageType: "AboutPage",
-  },
-  "/team": {
-    title: "Ingenium Leadership Team",
-    description:
-      "Meet the Ingenium leadership team across technical architecture, sales strategy, delivery, and brand systems.",
-    path: "/team",
-    keywords: ["Ingenium team", "technical architecture leadership", "sales strategy leadership"],
-  },
-  "/contact": {
-    title: "Revenue Systems Strategy Review | Ingenium",
-    description:
-      "Book a strategy review to map revenue leaks, rollout priorities, governance needs, and the fastest route to a stronger website, CRM, AI, and automation system.",
-    path: "/contact",
-    keywords: [
-      "revenue systems strategy review",
-      "RevOps consultation",
-      "CRM and AI implementation consultation",
-      "platform strategy review",
-    ],
-    pageType: "ContactPage",
+    keywords: [...keywordClusters.governance],
   },
   "/case-studies": {
-    title: "Revenue Platform and Website Case Studies | Ingenium",
+    title: "Case Studies | Ingenium",
     description:
-      "Review named Ingenium case studies covering website conversion structure, CRM-connected journeys, proof systems, and measurable delivery outcomes.",
+      "See named case studies, workflow outcomes, and implementation proof showing how Ingenium improves buyer journeys and operational clarity.",
     path: "/case-studies",
-    keywords: [...keywordClusters.proof, "named client case studies"],
+    keywords: [...keywordClusters.proof],
     pageType: "CollectionPage",
   },
-  "/projects": {
-    title: "Client Projects and Delivery Outcomes | Ingenium",
+  "/implementation": {
+    title: "Implementation Model | Ingenium",
     description:
-      "Explore Ingenium client projects across website delivery, conversion architecture, service messaging, and proof-led customer journeys.",
+      "Structured rollout for websites, CRM, automation, reporting, and governed AI so teams can launch quickly and keep control.",
+    path: "/implementation",
+    keywords: [...keywordClusters.platform, "implementation model"],
+  },
+  "/contact": {
+    title: "Book Demo, Teardown, or Technical Review | Ingenium",
+    description:
+      "Start with a demo, revenue systems teardown, or technical review depending on your buying stage.",
+    path: "/contact",
+    keywords: ["book demo", "technical review", "revenue systems teardown", ...keywordClusters.platform],
+    pageType: "ContactPage",
+  },
+  "/projects": {
+    title: "Legacy Project Library | Ingenium",
+    description: "Legacy project library retained for reference.",
     path: "/projects",
-    keywords: ["client website projects", "conversion architecture examples", "website redesign portfolio"],
+    keywords: ["legacy project library"],
+    noIndex: true,
     pageType: "CollectionPage",
+  },
+  "/about": {
+    title: "Legacy About Page | Ingenium",
+    description: "Legacy about page retained for reference.",
+    path: "/about",
+    keywords: ["legacy about page"],
+    noIndex: true,
+  },
+  "/team": {
+    title: "Legacy Team Page | Ingenium",
+    description: "Legacy team page retained for reference.",
+    path: "/team",
+    keywords: ["legacy team page"],
+    noIndex: true,
+  },
+  "/departments": {
+    title: "Legacy Departments Page | Ingenium",
+    description: "Legacy departments page retained for reference.",
+    path: "/departments",
+    keywords: ["legacy departments page"],
+    noIndex: true,
   },
   "/website-brief": {
     title: "Website Project Brief | Ingenium",
-    description: "Private client intake form for collecting the details needed to plan a new website build with Ingenium.",
+    description: "Private client intake form.",
     path: "/website-brief",
-    keywords: ["website brief", "private client intake"],
+    keywords: ["website brief"],
     noIndex: true,
   },
   "/internal/revenue-calculator": {
-    title: "Revenue Exit Calculator | Ingenium Internal",
-    description: "Internal revenue planning calculator for project and MRR growth forecasting.",
+    title: "Revenue Calculator | Ingenium Internal",
+    description: "Internal revenue calculator.",
     path: "/internal/revenue-calculator",
     keywords: ["internal revenue calculator"],
     noIndex: true,
@@ -210,16 +208,15 @@ export const pageSeo: Record<string, PageSeoConfig> = {
 export const PAGE_SEO = pageSeo;
 
 export const PRIVATE_PATHS = ["/website-brief"] as const;
-
 export const PRIVATE_PATH_PREFIXES = ["/internal/"] as const;
 
-export const PUBLIC_DISCOVERY_PATHS = Object.keys(pageSeo).filter((path) => {
-  if (PRIVATE_PATHS.includes(path as (typeof PRIVATE_PATHS)[number])) {
-    return false;
-  }
-
-  return !PRIVATE_PATH_PREFIXES.some((prefix) => path.startsWith(prefix));
-});
+export const PUBLIC_DISCOVERY_PATHS = Object.entries(pageSeo)
+  .filter(([, config]) => !config.noIndex)
+  .map(([path]) => path)
+  .filter((path) => {
+    if (PRIVATE_PATHS.includes(path as (typeof PRIVATE_PATHS)[number])) return false;
+    return !PRIVATE_PATH_PREFIXES.some((prefix) => path.startsWith(prefix));
+  });
 
 export function buildMetadata(config: PageSeoConfig): Metadata {
   const canonical = config.path === "/" ? "/" : config.path;

@@ -1,760 +1,306 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  CheckCircle2,
-  ChevronRight,
-  LayoutPanelTop,
-  LineChart,
-  Lock,
-  Sparkles,
-  Workflow,
-  Layers,
-  Shield,
-  Zap,
-  BarChart3,
-  Globe,
-  Users,
-} from "lucide-react";
 
-import AnimatedMetric from "./components/AnimatedMetric";
-import ScrollReveal from "./components/ScrollReveal";
 import { buildMetadata, pageSeo } from "@/lib/seo";
-import { projects } from "@/src/lib/projects";
+
+import {
+  ComparisonVisual,
+  GovernanceStack,
+  PortalPreview,
+  SystemStackVisual,
+  WorkflowStoryboard,
+} from "./components/siteVisuals";
+import { ButtonLink, MonoTag, SectionIntro, SurfaceCard } from "./components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/"]);
 
-/* -- Fallback Content ------------------------------------------------ */
+const trustItems = [
+  "Governed workflows",
+  "Audit-ready actions",
+  "Human approval paths",
+  "Website-to-delivery visibility",
+];
 
-const fallbackHero = {
-  label: "Ingenium Revenue Platform",
-  title: "Replace disconnected tools with one revenue system that moves buyers to pipeline faster.",
-  body: "Ingenium combines your acquisition engine, CRM command layer, AI agents, and automation workflows into one governed platform. We do not just install software. We architect the system, launch it with your team, and keep it compounding.",
-  primary_cta: { label: "Book a Platform Strategy Call", href: "/contact" },
-  secondary_cta: { label: "See Named Client Work", href: "/projects" },
-  proof_metric: "76",
-  proof_label: "published routes across the named client portfolio currently on site",
-  badges: ["Named client examples on site", "Human-approved AI execution", "Revenue visibility from first touch"],
-};
-
-const fallbackMetrics = {
-  label: "Current portfolio proof drawn from real client websites in the local workspace.",
-  items: [
-    { metric: "8", label: "Named client builds", context: "represented across projects and case studies" },
-    { metric: "76", label: "Published routes", context: "across the current client portfolio" },
-    { metric: "17", label: "Largest build depth", context: "for project-library and catalogue-led websites" },
-    { metric: "10", label: "Featured decision paths", context: "across the four named case studies" },
-  ],
-};
-
-const fallbackIndustries = {
-  label: "Built for teams that cannot afford broken handoffs between marketing, sales, and operations",
-  items: [
-    { name: "B2B SaaS", icon: "zap" },
-    { name: "Enterprise Services", icon: "users" },
-    { name: "Healthcare Platforms", icon: "shield" },
-    { name: "Financial Services", icon: "bar_chart" },
-    { name: "Multi-Region GTM Teams", icon: "globe" },
-    { name: "RevOps-Led Organizations", icon: "layers" },
-  ],
-};
-
-const fallbackProblem = {
-  label: "Why Teams Switch",
-  title: "Most revenue teams are still buying pipeline with a stack that cannot agree on what happened.",
-  problems: [
-    {
-      persona: "Marketing",
-      pain: "Traffic rises, but attribution is partial, page journeys are invisible, and campaign proof still depends on spreadsheets.",
-      icon: "bar_chart",
-    },
-    {
-      persona: "Sales",
-      pain: "Leads arrive late, context is missing, and reps chase records instead of acting on live buyer intent.",
-      icon: "users",
-    },
-    {
-      persona: "Technical",
-      pain: "Your stack is duct-taped together, workflows are brittle, and no one trusts the underlying data model.",
-      icon: "layers",
-    },
-  ],
-};
-
-const fallbackEngine = {
-  label: "The Platform",
-  title: "A single operating system for revenue execution.",
-  body: "Salesforce and HubSpot sell the power of one system of record. Ingenium goes further by combining that shared data model with the implementation layer, the AI execution layer, and the revenue workflows that actually move deals.",
-  nodes: [
-    { title: "Acquisition Engine", outcome: "Pages, forms, and proof flows built to create qualified intent", href: "/websites", icon: "layout" },
-    { title: "CRM Command", outcome: "Shared pipeline truth with routing, ownership, and lifecycle accuracy", href: "/crm", icon: "layers" },
-    { title: "AI Agents", outcome: "Research, brief, qualify, and assist with human approval gates", href: "/agents", icon: "sparkles" },
-    { title: "Automation Layer", outcome: "Trigger-to-action workflows with SLA enforcement and rollback control", href: "/automations", icon: "workflow" },
-    { title: "Trust Layer", outcome: "Security, governance, and auditability across every action", href: "/security", icon: "shield" },
-  ],
-};
-
-const fallbackProcess = {
-  label: "How We Deploy",
-  title: "Platform strategy, rollout, and operating rhythm in one engagement.",
-  body: "The sale does not stop at the software layer. We define the architecture, launch the system with your team, and establish the measurement model that proves whether it is working.",
-  phases: [
-    {
-      num: "01",
-      title: "Revenue Systems Audit",
-      timeline: "Week 1",
-      deliverables: "Signal map, funnel leak analysis, role requirements, and architecture blueprint",
-      owner: "Ingenium leads; your operators pressure-test the model",
-    },
-    {
-      num: "02",
-      title: "Build the Core System",
-      timeline: "Week 2-4",
-      deliverables: "Acquisition journeys, CRM configuration, AI workflows, automations, and dashboards",
-      owner: "Ingenium builds; your team approves at structured gates",
-    },
-    {
-      num: "03",
-      title: "Launch and Optimize",
-      timeline: "Week 5+",
-      deliverables: "Go-live, operator training, KPI reviews, experiment backlog, and governance cadence",
-      owner: "Joint operating rhythm with weekly decision reviews",
-    },
-  ],
-  first_30_days: {
-    title: "Your first 30 days",
-    items: [
-      "One shared signal model connecting website behavior to CRM action",
-      "Role-specific dashboards for marketing, sales, and leadership",
-      "Live lead-routing and follow-up workflows with SLA visibility",
-      "Governed AI agents operating inside approved tasks",
-      "A prioritized growth backlog tied to revenue outcomes",
-    ],
-  },
-};
-
-const fallbackProof = {
-  label: "Delivery Proof",
-  title: "Recent client work that moved from website intent to operational improvement.",
-  link: { label: "View the full client project library", href: "/projects" },
-};
-
-const buyerPaths = [
+const problemCards = [
   {
-    label: "Revenue leaders",
-    title: "Need a rollout plan tied to pipeline movement",
-    href: "/contact?intent=strategy-call",
+    title: "Marketing",
+    body: "Campaigns run, but attribution and buyer context break.",
   },
   {
-    label: "Technical teams",
-    title: "Need architecture, integration, or governance detail first",
-    href: "/contact?intent=architecture-review",
+    title: "Sales",
+    body: "Leads arrive late and reps work around the CRM.",
   },
   {
-    label: "Procurement and security",
-    title: "Need proof, controls, and review support before a call",
-    href: "/contact?intent=security-review",
+    title: "Operations",
+    body: "Handoffs, ownership, and reporting drift under pressure.",
+  },
+  {
+    title: "Leadership",
+    body: "Forecasts look polished but cannot be trusted.",
   },
 ];
 
-const fallbackGovernance = {
-  label: "Trust and Governance",
-  title: "Urgency wins the deal only when trust survives procurement.",
-  body: "The platform story is stronger because it is backed by governance. Approval workflows, audit trails, environment separation, and role-based controls sit under every automated or AI-assisted action.",
-  link: { label: "Review trust, security, and AI governance", href: "/security" },
-  secondary_link: { label: "Request an architecture review", href: "/contact" },
-  items: [
-    "Shared governance model across website, CRM, AI, and automation",
-    "Role-based approvals before sensitive actions or launches",
-    "Complete audit trails and execution history",
-    "Security review pack and architecture walkthroughs on request",
-    "Data handling boundaries designed for regulated buyers",
-    "Implementation partner accountability after launch",
-  ],
-};
+const moduleCards = [
+  {
+    title: "Websites",
+    body: "Capture high-intent signals with forms, journeys, and proof-led pages.",
+    href: "/websites",
+  },
+  {
+    title: "CRM",
+    body: "Route, enrich, track, and act from one reliable revenue workspace.",
+    href: "/crm",
+  },
+  {
+    title: "Automations",
+    body: "Move critical actions instantly with real ownership and SLA control.",
+    href: "/automations",
+  },
+  {
+    title: "AI Agents",
+    body: "Deploy AI inside governed workflows, not outside the business.",
+    href: "/ai-agents",
+  },
+  {
+    title: "Analytics",
+    body: "See what is working, what is leaking, and what is likely to close.",
+    href: "/platform",
+  },
+];
 
-const fallbackCta = {
-  title: "If your stack is slowing revenue, the fix is not another isolated tool.",
-  body: "Book a platform strategy call and we will map the shortest route from your current website and systems to a more accountable acquisition, CRM, AI, and automation setup.",
-  primary_cta: { label: "Book a Platform Strategy Call", href: "/contact" },
-  secondary_cta: { label: "Review Client Projects", href: "/projects" },
-  reassurance: "30-minute call - named examples available - implementation roadmap",
-};
+const switchReasons = [
+  "Faster follow-up",
+  "Cleaner handoffs",
+  "Better forecasting",
+  "Less tool sprawl",
+  "More leverage without more headcount",
+];
 
-/* -- Helpers ---------------------------------------------------------- */
+const proofCards = [
+  "Website to CRM routing view",
+  "AI brief approval flow",
+  "Automation SLA panel",
+  "Revenue dashboard",
+  "Named case study outcome",
+];
 
-function getIcon(iconName: string | undefined) {
-  switch (iconName) {
-    case "layers": return Layers;
-    case "sparkles": return Sparkles;
-    case "workflow": return Workflow;
-    case "line_chart": return LineChart;
-    case "bar_chart": return BarChart3;
-    case "shield": return Shield;
-    case "zap": return Zap;
-    case "globe": return Globe;
-    case "users": return Users;
-    default: return LayoutPanelTop;
-  }
-}
-
-type IndustryTrustItem = {
-  name: string;
-  icon: string;
-};
-
-function normalizeIndustryItems(items: unknown): IndustryTrustItem[] {
-  if (!Array.isArray(items)) {
-    return fallbackIndustries.items;
-  }
-
-  const normalized = items
-    .map((item, index) => {
-      const fallbackItem = fallbackIndustries.items[index % fallbackIndustries.items.length];
-
-      if (typeof item === "string") {
-        const name = item.trim();
-        if (!name) {
-          return null;
-        }
-        return { name, icon: fallbackItem.icon };
-      }
-
-      if (item && typeof item === "object") {
-        const record = item as Record<string, unknown>;
-        const possibleName =
-          typeof record.name === "string"
-            ? record.name
-            : typeof record.label === "string"
-              ? record.label
-              : typeof record.title === "string"
-                ? record.title
-                : "";
-        const name = possibleName.trim();
-        if (!name) {
-          return null;
-        }
-        return {
-          name,
-          icon:
-            typeof record.icon === "string" && record.icon.trim().length > 0
-              ? record.icon
-              : fallbackItem.icon,
-        };
-      }
-
-      return null;
-    })
-    .filter((item): item is IndustryTrustItem => Boolean(item));
-
-  return normalized.length > 0 ? normalized : fallbackIndustries.items;
-}
-
-/* -- Page Component --------------------------------------------------- */
-
-export default async function HomePage() {
-  const hero = fallbackHero;
-  const metrics = fallbackMetrics;
-  const industries = fallbackIndustries;
-  const problem = fallbackProblem;
-  const engine = fallbackEngine;
-  const process = fallbackProcess;
-  const proof = fallbackProof;
-  const governance = fallbackGovernance;
-  const cta = fallbackCta;
-  const industryItems = normalizeIndustryItems(industries.items);
-  const featuredProjects = projects.slice(0, 3).map((project) => ({
-    client_type: project.clientName,
-    industry: project.industry,
-    challenge: project.summary,
-    intervention: project.services.slice(0, 3).join(" - "),
-    metric: project.outcomeMetrics[0]?.value ?? "Operational gain",
-    metric_label: project.outcomeMetrics[0]?.label ?? "Measured outcome",
-    timeframe: project.timeframe,
-  }));
-
+export default function HomePage() {
   return (
-    <div className="space-y-28 md:space-y-40">
-      {/* ======= HERO ======= */}
-      <section className="relative pt-8">
-        <div className="mx-auto max-w-4xl text-center">
-          <p
-            className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-          >
-            {hero.label}
+    <div className="space-y-24 pb-8 md:space-y-32">
+      <section className="grid items-center gap-12 pt-6 lg:grid-cols-[1.02fr,0.98fr]">
+        <div className="max-w-3xl">
+          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
+            Revenue Operating System
           </p>
-          <h1
-            className="mt-6 font-(--font-display) text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
-          >
-            {hero.title}
+          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl lg:text-[4.4rem]">
+            One system for lead capture, sales, delivery, and AI execution.
           </h1>
-          <p
-            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-400"
-          >
-            {hero.body}
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
+            Ingenium gives lean service businesses one governed platform for website intent, CRM
+            action, workflow automation, reporting, and AI-assisted execution.
           </p>
-
-          {/* CTAs */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href={hero.primary_cta?.href ?? "/contact"}
-              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500 hover:shadow-emerald-500/30"
-            >
-              {hero.primary_cta?.label ?? "Book a Platform Strategy Call"}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href={hero.secondary_cta?.href ?? "/projects"}
-              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
-            >
-              {hero.secondary_cta?.label ?? "See Named Client Work"}
-            </Link>
-            <Link
-              href="/contact?intent=security-review"
-              className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
-            >
-              Request security and architecture review
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
+            <ButtonLink action={{ label: "See the Platform", href: "/platform" }} variant="secondary" />
           </div>
-
-          {/* Proof indicator */}
-          <div className="mt-10 inline-flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-5 py-3">
-            <AnimatedMetric
-              as="span"
-              className="metric-display text-3xl font-bold text-emerald-400"
-              value={hero.proof_metric ?? fallbackHero.proof_metric}
-            />
-            <span className="text-left text-sm text-slate-400">
-              {hero.proof_label ?? fallbackHero.proof_label}
-            </span>
+          <div className="mt-8 flex flex-wrap gap-2">
+            <MonoTag>Lead capture</MonoTag>
+            <MonoTag>CRM execution</MonoTag>
+            <MonoTag>Delivery continuity</MonoTag>
+            <MonoTag>AI governance</MonoTag>
           </div>
-          <p className="mt-4 font-(--font-mono) text-xs text-slate-600">
-            Named client work is published across the project library and case-study pages.
-          </p>
         </div>
+        <SystemStackVisual />
+      </section>
 
-        {/* Badge strip */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-          {(hero.badges ?? fallbackHero.badges).map((badge: string) => (
-            <span
-              key={badge}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/50 px-4 py-2 text-xs text-slate-400"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              {badge}
-            </span>
-          ))}
+      <section className="mineral-panel rounded-[32px] px-6 py-6 sm:px-8">
+        <div className="grid gap-6 lg:grid-cols-[0.85fr,1.15fr] lg:items-center">
+          <div>
+            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+              Trust strip
+            </p>
+            <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+              Built for teams that need speed, control, and proof.
+            </h2>
+            <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
+              Replace disconnected tools with one accountable operating layer.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {trustItems.map((item) => (
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
+                {item}
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="mx-auto mt-10 grid max-w-5xl gap-3 text-left md:grid-cols-3">
-          {buyerPaths.map((path) => (
-            <Link
-              key={path.title}
-              href={path.href}
-              className="group rounded-2xl border border-slate-800 bg-slate-900/45 p-4 transition hover:border-emerald-500/30 hover:bg-slate-900/70"
-            >
-              <p className="font-(--font-mono) text-[10px] uppercase tracking-widest text-cyan-400">
-                {path.label}
+      </section>
+
+      <section>
+        <SectionIntro
+          eyebrow="The problem"
+          title="Most revenue teams are still working across systems that do not agree."
+          align="center"
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {problemCards.map((card) => (
+            <SurfaceCard key={card.title} className="panel-hover p-6">
+              <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                {card.title}
               </p>
-              <p className="mt-2 text-sm font-medium text-white">{path.title}</p>
-              <span className="mt-3 inline-flex items-center gap-2 text-sm text-slate-400 transition group-hover:text-emerald-300">
-                Choose this path
-                <ArrowRight className="h-3.5 w-3.5" />
-              </span>
-            </Link>
+              <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{card.body}</p>
+            </SurfaceCard>
           ))}
         </div>
       </section>
 
-      {/* ======= METRICS STRIP ======= */}
-      <section className="relative rounded-2xl border border-slate-800 bg-slate-900/50 p-8 dot-grid">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {(metrics.items ?? fallbackMetrics.items).map((item: { metric: string; label: string; context?: string }) => (
-            <div
-              key={item.label}
-              className="metric-card rounded-lg border border-slate-800/80 bg-slate-900/55 p-4"
-            >
-              <AnimatedMetric
-                as="p"
-                className="metric-display text-3xl font-bold text-white"
-                value={item.metric}
-                delayMs={40}
-              />
-              <p className="mt-1 text-sm font-medium text-slate-300">{item.label}</p>
-              {item.context && (
-                <p className="mt-1 font-(--font-mono) text-[11px] text-slate-600">{item.context}</p>
-              )}
-            </div>
-          ))}
-        </div>
-        <p
-          className="mt-8 border-t border-slate-800 pt-4 font-(--font-mono) text-[11px] text-slate-600"
-        >
-          {metrics.label}
-        </p>
-      </section>
-
-      {/* ======= INDUSTRY TRUST ======= */}
       <section>
-        <p
-          className="text-center text-sm text-slate-500"
-        >
-          {industries.label}
-        </p>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-          {industryItems.map((item, index) => {
-            const Icon = getIcon(item.icon);
-            return (
-              <ScrollReveal key={`${item.name}-${index}`} delayMs={index * 40}>
-                <div
-                  className="flex items-center gap-2.5 rounded-lg border border-slate-800 bg-slate-900/40 px-4 py-2.5"
-                >
-                  <Icon className="h-4 w-4 text-slate-500" />
-                  <span className="text-sm text-slate-400">{item.name}</span>
-                </div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ======= PROBLEM STATEMENT ======= */}
-      <section className="rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950 p-8 md:p-12">
-        <p
-          className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-        >
-          {problem.label}
-        </p>
-        <h2
-          className="mt-4 max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-        >
-          {problem.title}
-        </h2>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {(problem.problems ?? fallbackProblem.problems).map((item: { persona: string; pain: string; icon?: string }) => {
-            const Icon = getIcon(item.icon);
-            return (
-              <div
-                key={item.persona}
-                className="rounded-xl border border-slate-800 bg-slate-900/50 p-6"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-800">
-                    <Icon className="h-4 w-4 text-slate-400" />
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                    {item.persona}
-                  </span>
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-slate-400">{item.pain}</p>
-              </div>
-            );
-          })}
-        </div>
-        <div className="mt-8">
-          <Link
-            href="/websites"
-            className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
-          >
-            See how the acquisition engine solves this
-            <ChevronRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
-
-      {/* ======= CONVERSION ENGINE ======= */}
-      <section>
-        <div className="text-center">
-          <p
-            className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-          >
-            {engine.label}
-          </p>
-          <h2
-            className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-          >
-            {engine.title}
-          </h2>
-          <p
-            className="mx-auto mt-4 max-w-2xl text-slate-400"
-          >
-            {engine.body}
-          </p>
-        </div>
-
-        {/* System flow - horizontal pipeline */}
-        <div className="mt-12 grid gap-3 md:grid-cols-5">
-          {(engine.nodes ?? fallbackEngine.nodes).map((node: { title: string; outcome: string; href?: string; icon?: string }, i: number) => {
-            const Icon = getIcon(node.icon);
-            return (
-              <ScrollReveal key={node.title} className="group relative" delayMs={i * 55}>
-                <div>
-                  <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-5 transition hover:border-emerald-800/60 hover:bg-slate-900/80">
-                    <div className="flex items-center gap-3">
-                      <div className="data-flow-dot flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10">
-                        <Icon className="h-4 w-4 text-emerald-400" />
-                      </div>
-                      <span className="font-(--font-mono) text-[10px] text-slate-600">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                    <h3 className="mt-3 text-sm font-semibold text-white">{node.title}</h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-slate-500">{node.outcome}</p>
-                    {node.href && (
-                      <Link href={node.href} className="mt-3 inline-flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300">
-                        Learn more <ArrowRight className="h-3 w-3" />
-                      </Link>
-                    )}
-                  </div>
-                  {i < (engine.nodes ?? fallbackEngine.nodes).length - 1 && (
-                    <div className="absolute right-0 top-1/2 hidden h-px w-3 -translate-y-1/2 translate-x-full bg-slate-800 md:block" />
-                  )}
-                </div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ======= PROCESS ======= */}
-      <section id="process">
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Left: Timeline */}
-          <div>
-            <p
-              className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-            >
-              {process.label}
-            </p>
-            <h2
-              className="mt-4 max-w-lg font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            >
-              {process.title}
-            </h2>
-            <p
-              className="mt-4 text-slate-400"
-            >
-              {process.body}
-            </p>
-
-            {/* Timeline steps */}
-            <div className="mt-10 space-y-0">
-              {(process.phases ?? fallbackProcess.phases).map((phase: { num: string; title: string; timeline: string; deliverables: string; owner: string }, i: number) => (
-                <ScrollReveal key={phase.num} className="timeline-step" delayMs={i * 70}>
-                  <div className="relative pl-8">
-                    {/* Timeline line */}
-                    {i < (process.phases ?? fallbackProcess.phases).length - 1 && (
-                      <div className="timeline-line absolute left-[11px] top-8 h-full w-px bg-slate-800" />
-                    )}
-                    {/* Timeline dot */}
-                    <div className="timeline-dot absolute left-0 top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-emerald-500/30 bg-slate-900">
-                      <div className="h-2 w-2 rounded-full bg-emerald-500" />
-                    </div>
-                    <div className="pb-8">
-                      <div className="flex items-center gap-3">
-                        <h3 className="text-base font-semibold text-white">{phase.title}</h3>
-                        <span className="font-(--font-mono) text-[11px] text-emerald-400">{phase.timeline}</span>
-                      </div>
-                      <p className="mt-2 text-sm text-slate-400">{phase.deliverables}</p>
-                      <p className="mt-1 font-(--font-mono) text-[11px] text-slate-600">{phase.owner}</p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: First 30 days card */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
-            <p className="font-(--font-mono) text-xs uppercase tracking-widest text-cyan-400">First 30 Days</p>
-            <h3
-              className="mt-4 font-(--font-display) text-xl font-bold text-white"
-            >
-              {process.first_30_days?.title ?? fallbackProcess.first_30_days.title}
-            </h3>
-            <div className="mt-6 space-y-4">
-              {(process.first_30_days?.items ?? fallbackProcess.first_30_days.items).map((item: string, i: number) => (
-                <ScrollReveal key={item} delayMs={i * 55}>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
-                    <span className="text-sm text-slate-300">{item}</span>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
-            <div className="mt-8">
+        <SectionIntro
+          eyebrow="Product architecture"
+          title="The platform that connects the whole journey."
+          body="Ingenium links first touch, pipeline movement, delivery execution, and reporting in one shared system."
+        />
+        <div className="mt-10 grid gap-4 xl:grid-cols-[1.2fr,0.8fr]">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {moduleCards.map((card) => (
               <Link
-                href="/websites"
-                className="cta-lift inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300"
+                key={card.title}
+                href={card.href}
+                className="mineral-panel panel-hover rounded-[28px] p-6"
               >
-                See the full acquisition engine
-                <ArrowRight className="h-3.5 w-3.5" />
+                <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                  {card.title}
+                </p>
+                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{card.body}</p>
               </Link>
-            </div>
+            ))}
           </div>
+          <PortalPreview
+            eyebrow="Shared operating layer"
+            title="Portal workflow snapshot"
+            rows={[
+              { label: "Buyer submits high-intent form", value: "Website signal with service context", state: "Captured" },
+              { label: "Record enriched and routed", value: "Owner, SLA, and attribution set", state: "Assigned" },
+              { label: "AI brief prepared", value: "Suggested action awaiting review", state: "Approval" },
+              { label: "Delivery handoff created", value: "Commercial context retained after close", state: "Visible" },
+            ]}
+          />
         </div>
       </section>
 
-      {/* ======= PROOF / CASE SNAPSHOTS ======= */}
       <section>
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p
-              className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-            >
-              {proof.label}
-            </p>
-            <h2
-              className="mt-4 font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-            >
-              {proof.title}
-            </h2>
-          </div>
-          <Link
-              href={proof.link?.href ?? "/projects"}
-              className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white"
-            >
-              {proof.link?.label ?? "View the full client project library"}
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          {featuredProjects.map((item) => (
-            <div
-              key={item.client_type}
-              className="metric-card group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-slate-700"
-            >
-              <div className="flex items-center justify-between">
-                <span className="rounded-md bg-slate-800 px-2.5 py-1 font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-400">
-                  {item.industry}
-                </span>
-                <span className="font-(--font-mono) text-[11px] text-slate-600">{item.timeframe}</span>
-              </div>
-              <AnimatedMetric
-                as="p"
-                className="metric-display mt-5 text-4xl font-bold text-emerald-400"
-                value={item.metric}
-              />
-              <p className="mt-1 text-sm font-medium text-white">{item.metric_label}</p>
-              <div className="mt-4 border-t border-slate-800 pt-4">
-                <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Client</p>
-                <p className="mt-1 text-sm text-slate-300">{item.client_type}</p>
-                <p className="mt-3 text-xs font-medium uppercase tracking-wider text-slate-500">Challenge</p>
-                <p className="mt-1 text-sm text-slate-400">{item.challenge}</p>
-                <p className="mt-3 text-xs font-medium uppercase tracking-wider text-slate-500">Delivered</p>
-                <p className="mt-1 text-sm text-slate-400">{item.intervention}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 flex flex-wrap items-center gap-4">
-          <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition hover:text-emerald-300"
-          >
-            Review full project breakdowns
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="/contact?intent=case-study-pack"
-            className="inline-flex items-center gap-2 text-sm text-slate-500 transition hover:text-slate-300"
-          >
-            Request a deeper proof pack
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </Link>
+        <SectionIntro
+          eyebrow="From website intent to revenue action"
+          title="From website intent to revenue action."
+          body="Each state answers one operational question: who owns this signal, what happens next, what gets approved, and what stays visible after the close."
+        />
+        <div className="mt-10">
+          <WorkflowStoryboard />
         </div>
       </section>
 
-      {/* ======= GOVERNANCE ======= */}
-      <section className="grid gap-12 lg:grid-cols-[1.1fr,0.9fr]">
+      <section className="grid gap-6 xl:grid-cols-[0.82fr,1.18fr]">
+        <SurfaceCard className="p-8">
+          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+            Why Ingenium
+          </p>
+          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+            Why teams switch.
+          </h2>
+          <div className="mt-8 grid gap-3">
+            {switchReasons.map((reason) => (
+              <div key={reason} className="rounded-2xl border border-[var(--color-line)] bg-white/70 px-4 py-4 text-sm text-[var(--color-text-soft)]">
+                {reason}
+              </div>
+            ))}
+          </div>
+        </SurfaceCard>
         <div>
-          <p
-            className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400"
-          >
-            {governance.label}
-          </p>
-          <h2
-            className="mt-4 max-w-lg font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-          >
-            {governance.title}
-          </h2>
-          <p
-            className="mt-4 text-slate-400"
-          >
-            {governance.body}
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href={governance.link?.href ?? "/security"}
-              className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300"
-            >
-              {governance.link?.label ?? "Review enterprise security and AI governance"}
-              <ChevronRight className="h-4 w-4" />
-            </Link>
+          <SectionIntro
+            eyebrow="Comparison"
+            title="Not another CRM. Not another AI tool."
+            body="Fragmented tools force teams to translate context by hand. Ingenium keeps the context attached."
+          />
+          <div className="mt-8">
+            <ComparisonVisual />
           </div>
-          <div className="mt-3">
-            <Link
-              href={governance.secondary_link?.href ?? "/contact"}
-              className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-300"
-            >
-              {governance.secondary_link?.label ?? "Request security review pack"}
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-        </div>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {(governance.items ?? fallbackGovernance.items).map((item: string) => (
-            <div
-              key={item}
-              className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/40 px-4 py-3"
-            >
-              <Lock className="h-4 w-4 shrink-0 text-emerald-400" />
-              <span className="text-sm text-slate-300">{item}</span>
-            </div>
-          ))}
         </div>
       </section>
 
-      {/* ======= FINAL CTA ======= */}
-      <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-16">
-        <div className="pointer-events-none absolute inset-0 dot-grid opacity-30" />
-        <div className="relative">
-          <h2
-            className="mx-auto max-w-3xl font-(--font-display) text-2xl font-bold tracking-tight text-white sm:text-3xl"
-          >
-            {cta.title}
-          </h2>
-          <p
-            className="mx-auto mt-4 max-w-xl text-slate-400"
-          >
-            {cta.body}
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href={cta.primary_cta?.href ?? "/contact"}
-              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:bg-emerald-500"
-            >
-              {cta.primary_cta?.label ?? "Book a Platform Strategy Call"}
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/projects"
-              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-medium text-slate-300 transition hover:border-slate-600 hover:text-white"
-            >
-              Review Client Projects
-            </Link>
-            <Link
-              href="/contact?intent=security-review"
-              className="inline-flex items-center gap-2 text-sm font-medium text-emerald-300 transition hover:text-emerald-200"
-            >
-              Prefer a technical review first?
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
+      <section>
+        <SectionIntro
+          eyebrow="Proof"
+          title="Proof should look like workflow, not just words."
+          body="Named screens, named reviews, and named rollout examples work harder than placeholder counters."
+        />
+        <div className="mt-10 grid gap-4 lg:grid-cols-[1.1fr,0.9fr]">
+          <PortalPreview
+            eyebrow="Revenue dashboard"
+            title="Pipeline view connected to delivery and approvals"
+            rows={[
+              { label: "New business review", value: "Website source, owner, and AI brief visible", state: "Today" },
+              { label: "Handoff risk", value: "Commercial scope missing onboarding note", state: "Flagged" },
+              { label: "Forecast note", value: "Leadership sees stage confidence and delivery status", state: "Ready" },
+            ]}
+          />
+          <div className="grid gap-4 sm:grid-cols-2">
+            {proofCards.map((item) => (
+              <SurfaceCard key={item} className="panel-hover p-5">
+                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                  Requested asset
+                </p>
+                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{item}</p>
+              </SurfaceCard>
+            ))}
           </div>
-          <p className="mt-6 font-(--font-mono) text-xs text-slate-600">
-            30-minute call - two-step intake - strategy, technical, and security paths available
+        </div>
+      </section>
+
+      <section className="grid gap-6 xl:grid-cols-[1.05fr,0.95fr]">
+        <SurfaceCard className="p-8">
+          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+            Implementation
           </p>
+          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+            Launch the system without replatforming chaos.
+          </h2>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--color-text-soft)]">
+            Ingenium combines platform software with a structured rollout model so teams can go
+            live quickly and keep control.
+          </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {[
+              ["Week 1", "Audit the leakage points."],
+              ["Weeks 2-4", "Configure the core system."],
+              ["Week 5+", "Launch, train, optimize, and govern."],
+            ].map(([phase, copy]) => (
+              <div key={phase} className="rounded-2xl border border-[var(--color-line)] bg-white/72 p-5">
+                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
+                  {phase}
+                </p>
+                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{copy}</p>
+              </div>
+            ))}
+          </div>
+        </SurfaceCard>
+        <GovernanceStack />
+      </section>
+
+      <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
+        <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
+          If your stack is slowing revenue, the fix is not another isolated tool.
+        </h2>
+        <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-white/72">
+          Book a demo or get a practical teardown of the shortest path from your current stack to
+          a more accountable system.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} className="bg-white text-[var(--color-text)]" />
+          <ButtonLink
+            action={{ label: "Get a Revenue Systems Teardown", href: "/contact?intent=revenue-systems-teardown" }}
+            variant="secondary"
+            className="border-white/18 bg-white/8 text-white"
+          />
         </div>
       </section>
     </div>

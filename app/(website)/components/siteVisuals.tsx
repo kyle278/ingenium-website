@@ -21,16 +21,18 @@ export function SystemStackVisual() {
   ];
 
   return (
-    <div className="relative mx-auto h-[390px] w-full max-w-[560px] sm:h-[430px]">
-      <div className="absolute inset-x-12 top-12 h-20 rounded-full bg-[rgba(18,121,255,0.12)] blur-3xl" />
+    <div className="relative mx-auto w-full max-w-[560px] px-2 pb-28 pt-6 sm:px-0 sm:pb-32 sm:pt-8">
+      <div className="absolute inset-x-12 top-14 h-24 rounded-full bg-[rgba(18,121,255,0.12)] blur-3xl" />
       {modules.map((module, index) => (
         <div
           key={module.label}
-          className="absolute left-1/2 w-[86%] -translate-x-1/2 rounded-[28px] border border-white/70 bg-gradient-to-br px-5 py-4 shadow-[0_24px_60px_rgba(22,32,51,0.10)] backdrop-blur-xl sm:w-[84%] sm:px-6 sm:py-5"
+          className="relative mx-auto rounded-[28px] border border-white/70 bg-gradient-to-br px-5 py-4 shadow-[0_24px_60px_rgba(22,32,51,0.10)] backdrop-blur-xl sm:px-6 sm:py-5"
           style={{
-            top: `${18 + index * 44}px`,
-            transform: `translateX(-50%) rotateX(58deg) translateY(${index * 2}px)`,
             backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))`,
+            width: `${92 - index * 1.5}%`,
+            marginTop: index === 0 ? 0 : "-8px",
+            transform: `translateY(${index * 2}px) scale(${1 - index * 0.012})`,
+            zIndex: modules.length - index,
           }}
         >
           <div className={`absolute inset-0 rounded-[28px] bg-gradient-to-br ${moduleColors[index]} opacity-90`} />
@@ -48,7 +50,7 @@ export function SystemStackVisual() {
         </div>
       ))}
 
-      <div className="absolute bottom-0 left-1/2 w-[88%] -translate-x-1/2 rounded-[32px] border border-[var(--color-line)] bg-[rgba(22,32,51,0.9)] px-5 py-5 text-white shadow-[0_30px_70px_rgba(8,15,28,0.26)] sm:w-[82%] sm:px-6">
+      <div className="relative mx-auto mt-12 w-[92%] rounded-[32px] border border-[var(--color-line)] bg-[rgba(22,32,51,0.92)] px-5 py-5 text-white shadow-[0_30px_70px_rgba(8,15,28,0.26)] sm:w-[84%] sm:px-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-5">
           <div>
             <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-white/55">

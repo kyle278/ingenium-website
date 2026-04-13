@@ -10,7 +10,7 @@ import {
   SystemStackVisual,
   WorkflowStoryboard,
 } from "./components/siteVisuals";
-import { ButtonLink, MonoTag, SectionIntro, SurfaceCard } from "./components/sitePrimitives";
+import { ButtonLink, SectionIntro, SurfaceCard } from "./components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/"]);
 
@@ -87,7 +87,7 @@ const proofCards = [
 export default function HomePage() {
   return (
     <div className="space-y-24 pb-8 md:space-y-32">
-      <section className="grid items-center gap-12 pt-6 lg:grid-cols-[1.02fr,0.98fr]">
+      <section className="grid items-start gap-8 pt-4 lg:grid-cols-[1.02fr,0.98fr] lg:pt-6">
         <div className="max-w-3xl">
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
             Revenue Operating System
@@ -103,11 +103,17 @@ export default function HomePage() {
             <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
             <ButtonLink action={{ label: "See the Platform", href: "/platform" }} variant="secondary" />
           </div>
-          <div className="mt-8 flex flex-wrap gap-2">
-            <MonoTag>Lead capture</MonoTag>
-            <MonoTag>CRM execution</MonoTag>
-            <MonoTag>Delivery continuity</MonoTag>
-            <MonoTag>AI governance</MonoTag>
+          <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-2">
+            {[
+              "Website intent enters the system with source and service context.",
+              "CRM ownership, SLA, and next action stay attached to the same record.",
+              "AI support runs inside approvals instead of outside the workflow.",
+              "Delivery visibility remains connected after the close.",
+            ].map((item) => (
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/62 px-4 py-4 text-sm leading-6 text-[var(--color-text-soft)]">
+                {item}
+              </div>
+            ))}
           </div>
         </div>
         <SystemStackVisual />

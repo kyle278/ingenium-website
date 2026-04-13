@@ -3,68 +3,79 @@ import { ArrowRight, Bot, ChartColumn, CheckCircle2, LayoutTemplate, Shield, Wor
 import ScrollReveal from "./ScrollReveal";
 import { MonoTag, SurfaceCard } from "./sitePrimitives";
 
-const moduleColors = [
-  "from-white/95 to-white/70",
-  "from-sky-50/95 to-white/70",
-  "from-cyan-50/95 to-white/72",
-  "from-slate-100/95 to-white/72",
-  "from-white/95 to-slate-100/84",
-];
-
 export function SystemStackVisual() {
-  const modules = [
-    { label: "Websites", detail: "Intent capture and proof paths" },
-    { label: "CRM", detail: "Routing, ownership, and lifecycle" },
-    { label: "Automations", detail: "SLA-driven execution paths" },
-    { label: "AI Agents", detail: "Governed assistive operators" },
-    { label: "Analytics", detail: "Shared reporting and visibility" },
+  const lanes = [
+    {
+      title: "Website intent",
+      copy: "High-intent submission with source, service path, and buyer context.",
+      state: "Captured",
+    },
+    {
+      title: "CRM action",
+      copy: "Owner assigned, SLA set, enrichment complete, next step prepared.",
+      state: "Routed",
+    },
+    {
+      title: "Governed execution",
+      copy: "AI assist, approvals, handoff, and reporting stay attached to the same record.",
+      state: "Visible",
+    },
   ];
 
   return (
-    <div className="relative mx-auto w-full max-w-[560px] px-2 pb-28 pt-6 sm:px-0 sm:pb-32 sm:pt-8">
-      <div className="absolute inset-x-12 top-14 h-24 rounded-full bg-[rgba(18,121,255,0.12)] blur-3xl" />
-      {modules.map((module, index) => (
-        <div
-          key={module.label}
-          className="relative mx-auto rounded-[28px] border border-white/70 bg-gradient-to-br px-5 py-4 shadow-[0_24px_60px_rgba(22,32,51,0.10)] backdrop-blur-xl sm:px-6 sm:py-5"
-          style={{
-            backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))`,
-            width: `${92 - index * 1.5}%`,
-            marginTop: index === 0 ? 0 : "-8px",
-            transform: `translateY(${index * 2}px) scale(${1 - index * 0.012})`,
-            zIndex: modules.length - index,
-          }}
-        >
-          <div className={`absolute inset-0 rounded-[28px] bg-gradient-to-br ${moduleColors[index]} opacity-90`} />
-          <div className="relative flex items-center justify-between gap-4">
+    <div className="relative mx-auto w-full max-w-[520px]">
+      <div className="absolute inset-x-10 top-10 h-28 rounded-full bg-[rgba(18,121,255,0.10)] blur-3xl" />
+      <SurfaceCard className="relative overflow-hidden p-0">
+        <div className="grid-lines absolute inset-0 opacity-55" />
+        <div className="relative border-b border-[var(--color-line)] px-6 py-5">
+          <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
-                Module {String(index + 1).padStart(2, "0")}
+              <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
+                Product snapshot
               </p>
-              <p className="mt-2 text-base font-semibold text-[var(--color-text)]">{module.label}</p>
+              <h3 className="mt-3 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+                One governed path from website signal to team action.
+              </h3>
             </div>
-            <p className="max-w-[180px] text-right text-xs leading-5 text-[var(--color-text-soft)] sm:max-w-[190px] sm:text-sm sm:leading-6">
-              {module.detail}
-            </p>
+            <MonoTag className="shrink-0 bg-white/80 text-[var(--color-brand)]">Portal-linked</MonoTag>
           </div>
-        </div>
-      ))}
-
-      <div className="relative mx-auto mt-12 w-[92%] rounded-[32px] border border-[var(--color-line)] bg-[rgba(22,32,51,0.92)] px-5 py-5 text-white shadow-[0_30px_70px_rgba(8,15,28,0.26)] sm:w-[84%] sm:px-6">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-5">
-          <div>
-            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-white/55">
-              Operating layer
-            </p>
-            <p className="mt-2 max-w-[220px] text-base font-semibold leading-6">
-              Shared governed revenue model
-            </p>
-          </div>
-          <p className="max-w-[260px] text-sm leading-6 text-white/68 sm:text-right">
-            One context layer underneath acquisition, pipeline, delivery, and AI action.
+          <p className="mt-4 max-w-[420px] text-sm leading-7 text-[var(--color-text-soft)]">
+            Capture intent, route ownership, prepare the next step, and preserve delivery visibility inside one operating model.
           </p>
         </div>
-      </div>
+        <div className="relative space-y-3 px-4 py-4 sm:px-5 sm:py-5">
+          {lanes.map((lane, index) => (
+            <div
+              key={lane.title}
+              className="rounded-[24px] border border-[var(--color-line)] bg-white/76 px-4 py-4 shadow-[0_18px_40px_rgba(22,32,51,0.06)]"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="data-flow-dot flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(18,121,255,0.18)] bg-[rgba(18,121,255,0.08)] font-[var(--font-mono)] text-[11px] font-semibold text-[var(--color-brand)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </div>
+                  <p className="text-sm font-semibold text-[var(--color-text)]">{lane.title}</p>
+                </div>
+                <MonoTag className="bg-slate-50/80 text-[var(--color-brand)]">{lane.state}</MonoTag>
+              </div>
+              <p className="mt-3 pl-11 text-sm leading-6 text-[var(--color-text-soft)]">{lane.copy}</p>
+            </div>
+          ))}
+        </div>
+        <div className="relative border-t border-[var(--color-line)] bg-[rgba(22,32,51,0.94)] px-6 py-5 text-white">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-white/55">
+                Operating layer
+              </p>
+              <p className="mt-2 text-base font-semibold leading-6">Shared context across website, CRM, automation, AI, and reporting.</p>
+            </div>
+            <p className="max-w-[210px] text-sm leading-6 text-white/68 sm:text-right">
+              Faster action without losing approval, ownership, or delivery continuity.
+            </p>
+          </div>
+        </div>
+      </SurfaceCard>
     </div>
   );
 }

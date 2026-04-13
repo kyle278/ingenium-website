@@ -42,30 +42,30 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
   return (
     <header className="sticky top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
       <div
-        className={`mx-auto flex max-w-[1280px] items-center justify-between rounded-full border px-4 py-3 transition-all duration-300 ${
+        className={`mx-auto flex max-w-[1280px] items-center justify-between rounded-full border px-5 py-3 transition-all duration-300 ${
           scrolled
-            ? "border-[var(--color-line)] bg-white/78 shadow-[0_18px_50px_rgba(22,32,51,0.10)] backdrop-blur-xl"
-            : "border-white/50 bg-white/62 backdrop-blur-lg"
+            ? "border-[var(--color-line)] bg-white/88 shadow-[0_18px_50px_rgba(22,32,51,0.10)] backdrop-blur-xl"
+            : "border-white/60 bg-white/74 backdrop-blur-lg"
         }`}
       >
         <Link href="/" className="flex items-center gap-3">
           <Image src="/logo.svg" alt="Ingenium logo" width={30} height={30} className="h-7 w-7" priority />
-          <div>
-            <p className="font-[var(--font-display)] text-base font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+          <div className="min-w-0">
+            <p className="font-[var(--font-display)] text-sm font-semibold tracking-[-0.04em] text-[var(--color-text)] sm:text-base">
               {content.brand}
             </p>
-            <p className="font-[var(--font-mono)] text-[9px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+            <p className="font-[var(--font-mono)] text-[8px] uppercase tracking-[0.24em] text-[var(--color-text-muted)] sm:text-[9px]">
               Revenue operating system
             </p>
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-0.5 lg:flex">
           {content.items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+              className={`rounded-full px-3 py-2 text-sm font-medium transition ${
                 isActive(item.href)
                   ? "bg-[rgba(18,121,255,0.10)] text-[var(--color-brand)]"
                   : "text-[var(--color-text-soft)] hover:bg-white/75 hover:text-[var(--color-text)]"
@@ -76,10 +76,10 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-2 lg:flex">
           <Link
             href={content.secondaryCta.href}
-            className="cta-lift inline-flex rounded-full border border-[var(--color-line)] bg-white/70 px-4 py-2 text-sm font-semibold text-[var(--color-text)]"
+            className="cta-lift inline-flex rounded-full border border-[var(--color-line)] bg-white/72 px-4 py-2 text-sm font-semibold text-[var(--color-text)]"
           >
             {content.secondaryCta.label}
           </Link>
@@ -102,7 +102,7 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
       </div>
 
       {open ? (
-        <div className="mx-auto mt-3 max-w-[1280px] rounded-[28px] border border-[var(--color-line)] bg-white/90 p-5 shadow-[0_30px_70px_rgba(22,32,51,0.12)] backdrop-blur-xl lg:hidden">
+        <div className="mx-auto mt-3 max-w-[1280px] rounded-[28px] border border-[var(--color-line)] bg-white/92 p-5 shadow-[0_30px_70px_rgba(22,32,51,0.12)] backdrop-blur-xl lg:hidden">
           <div className="grid gap-2">
             {content.items.map((item) => (
               <Link

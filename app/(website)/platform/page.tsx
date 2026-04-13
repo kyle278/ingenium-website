@@ -24,8 +24,8 @@ const roles = [
 
 export default function PlatformPage() {
   return (
-    <div className="space-y-24 pb-8 md:space-y-32">
-      <section className="grid items-center gap-10 pt-6 lg:grid-cols-[1fr,1fr]">
+    <div className="space-y-20 pb-8 md:space-y-28">
+      <section className="grid items-center gap-8 pt-6 lg:grid-cols-[0.95fr,1.05fr]">
         <div>
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
             Platform
@@ -59,15 +59,42 @@ export default function PlatformPage() {
           title="Every module is useful alone. The leverage comes from how they work together."
           body="Ingenium removes the translation layer between acquisition, commercial action, delivery visibility, and reporting."
         />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-          {modules.map(([title, body]) => (
-            <SurfaceCard key={title} className="panel-hover p-6">
-              <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
-                {title}
-              </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
-            </SurfaceCard>
-          ))}
+        <div className="mt-10 grid gap-4 xl:grid-cols-[1.1fr,0.9fr]">
+          <SurfaceCard className="p-8">
+            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+              Product suite
+            </p>
+            <h3 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+              One product suite for the work that drives revenue and delivery.
+            </h3>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {modules.map(([title, body]) => (
+                <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/72 p-5">
+                  <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                    {title}
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+                </div>
+              ))}
+            </div>
+          </SurfaceCard>
+          <SurfaceCard dark className="p-8">
+            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+              Why it works
+            </p>
+            <div className="mt-6 grid gap-3">
+              {[
+                "Website intent, CRM action, and automation state stay attached.",
+                "AI works inside operational context instead of beside it.",
+                "Leadership sees the same model that operators are working from.",
+                "Delivery continuity stays visible after the deal is won.",
+              ].map((item) => (
+                <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/75">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </SurfaceCard>
         </div>
       </section>
 

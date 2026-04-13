@@ -19,7 +19,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
     <footer className="border-t border-[var(--color-line)] bg-white/38">
       <div className="mx-auto max-w-[1280px] px-4 py-16 sm:px-6 lg:px-8">
         <div className="mineral-panel rounded-[36px] p-8 md:p-10">
-          <div className="grid gap-10 lg:grid-cols-[1fr,0.9fr]">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr,0.9fr]">
             <div>
               <div className="flex items-center gap-3">
                 <Image src="/logo.svg" alt="Ingenium logo" width={34} height={34} className="h-8 w-8" />
@@ -36,7 +36,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
                 {content.summary}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
-                {["Website intent", "CRM action", "Workflow governance", "AI execution"].map((item) => (
+                {["CRM", "Custom AI Agents", "Process Automations", "Website Design & Builds"].map((item) => (
                   <MonoTag key={item}>{item}</MonoTag>
                 ))}
               </div>
@@ -45,11 +45,15 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
             <div className="grid gap-8 sm:grid-cols-2">
               <div>
                 <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
-                  Sitemap
+                  Platform
                 </p>
                 <div className="mt-4 grid gap-2">
                   {content.sitemap.map((item) => (
-                    <Link key={item.href} href={item.href} className="text-sm text-[var(--color-text-soft)] hover:text-[var(--color-text)]">
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="text-sm text-[var(--color-text-soft)] hover:text-[var(--color-text)]"
+                    >
                       {item.label}
                     </Link>
                   ))}
@@ -57,7 +61,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
               </div>
               <div>
                 <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
-                  Next step
+                  Get started
                 </p>
                 <div className="mt-4 grid gap-3">
                   <ButtonLink action={content.actions[0]} />

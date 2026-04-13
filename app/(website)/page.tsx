@@ -86,8 +86,8 @@ const proofCards = [
 
 export default function HomePage() {
   return (
-    <div className="space-y-24 pb-8 md:space-y-32">
-      <section className="grid items-start gap-8 pt-4 lg:grid-cols-[1.02fr,0.98fr] lg:pt-6">
+    <div className="space-y-20 pb-8 md:space-y-28">
+      <section className="grid items-start gap-8 pt-4 lg:grid-cols-[0.95fr,1.05fr] lg:pt-6">
         <div className="max-w-3xl">
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
             Revenue Operating System
@@ -120,22 +120,30 @@ export default function HomePage() {
       </section>
 
       <section className="mineral-panel rounded-[32px] px-6 py-6 sm:px-8">
-        <div className="grid gap-6 lg:grid-cols-[0.85fr,1.15fr] lg:items-center">
+        <div className="grid gap-6 lg:grid-cols-[0.8fr,1.2fr] lg:items-center">
           <div>
             <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-              Trust strip
+              Platform suite
             </p>
             <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
-              Built for teams that need speed, control, and proof.
+              One system for commercial work that usually lives in separate tools.
             </h2>
             <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
-              Replace disconnected tools with one accountable operating layer.
+              Replace fragmented website, CRM, automation, reporting, and AI layers with one operating model.
             </p>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {trustItems.map((item) => (
-              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
-                {item}
+          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {[
+              ["CRM", "Pipeline structure, routing, lifecycle, and forecast visibility."],
+              ["Custom AI Agents", "Operational AI attached to approvals, context, and ownership."],
+              ["Automations", "Follow-up, handoff, escalation, and SLA-driven process control."],
+              ["Websites", "High-intent journeys and lead capture connected directly to action."],
+            ].map(([title, body]) => (
+              <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4">
+                <p className="font-[var(--font-display)] text-lg font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                  {title}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--color-text-soft)]">{body}</p>
               </div>
             ))}
           </div>
@@ -166,31 +174,56 @@ export default function HomePage() {
           title="The platform that connects the whole journey."
           body="Ingenium links first touch, pipeline movement, delivery execution, and reporting in one shared system."
         />
-        <div className="mt-10 grid gap-4 xl:grid-cols-[1.2fr,0.8fr]">
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {moduleCards.map((card) => (
-              <Link
-                key={card.title}
-                href={card.href}
-                className="mineral-panel panel-hover rounded-[28px] p-6"
-              >
-                <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
-                  {card.title}
-                </p>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{card.body}</p>
-              </Link>
-            ))}
+        <div className="mt-10 grid gap-4 xl:grid-cols-[1.05fr,0.95fr]">
+          <SurfaceCard className="p-8">
+            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+              One platform
+            </p>
+            <h3 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+              Built to connect marketing signal, sales action, delivery continuity, and reporting.
+            </h3>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--color-text-soft)]">
+              The leverage comes from shared context. Website submissions, CRM state, automation runs, approvals, and delivery visibility all stay attached to the same operating model.
+            </p>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {moduleCards.map((card) => (
+                <Link
+                  key={card.title}
+                  href={card.href}
+                  className="rounded-2xl border border-[var(--color-line)] bg-white/72 p-5 transition hover:border-[rgba(18,121,255,0.22)] hover:shadow-[0_18px_40px_rgba(22,32,51,0.08)]"
+                >
+                  <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                    {card.title}
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{card.body}</p>
+                </Link>
+              ))}
+            </div>
+          </SurfaceCard>
+          <div className="grid gap-4">
+            <PortalPreview
+              eyebrow="Portal workflow snapshot"
+              title="How the system behaves when a real lead enters"
+              rows={[
+                { label: "Buyer submits high-intent form", value: "Website signal with service context", state: "Captured" },
+                { label: "Record enriched and routed", value: "Owner, SLA, and attribution set", state: "Assigned" },
+                { label: "AI brief prepared", value: "Suggested action awaiting review", state: "Approval" },
+                { label: "Delivery handoff created", value: "Commercial context retained after close", state: "Visible" },
+              ]}
+            />
+            <SurfaceCard dark className="p-6">
+              <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+                Built for accountability
+              </p>
+              <div className="mt-4 grid gap-3">
+                {trustItems.map((item) => (
+                  <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/75">
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </SurfaceCard>
           </div>
-          <PortalPreview
-            eyebrow="Shared operating layer"
-            title="Portal workflow snapshot"
-            rows={[
-              { label: "Buyer submits high-intent form", value: "Website signal with service context", state: "Captured" },
-              { label: "Record enriched and routed", value: "Owner, SLA, and attribution set", state: "Assigned" },
-              { label: "AI brief prepared", value: "Suggested action awaiting review", state: "Approval" },
-              { label: "Delivery handoff created", value: "Commercial context retained after close", state: "Visible" },
-            ]}
-          />
         </div>
       </section>
 

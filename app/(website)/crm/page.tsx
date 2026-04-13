@@ -23,7 +23,7 @@ export default function CrmPage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
-            <ButtonLink action={{ label: "See Platform", href: "/platform" }} variant="secondary" />
+            <ButtonLink action={{ label: "See CRM Workflows", href: "/platform" }} variant="secondary" />
           </div>
         </div>
         <PortalPreview

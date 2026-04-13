@@ -74,7 +74,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
 
           <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--color-line)] pt-6 text-sm text-[var(--color-text-muted)]">
             <p>© 2026 Ingenium Digital Consulting</p>
-            <p>Portal-linked tracking, governed workflows, and buyer-ready technical review paths.</p>
+            <p>Portal-linked tracking, phased rollout support, and buyer-ready technical review paths.</p>
           </div>
         </div>
       </div>

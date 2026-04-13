@@ -56,7 +56,7 @@ export default function PlatformPage() {
       <section id="suite">
         <SectionIntro
           eyebrow="Platform suite"
-          title="Everything connected in one operating system."
+          title="Everything connected in one platform."
           body="Most teams buy separate tools, then spend time translating between them. Ingenium removes that gap."
         />
         <div className="mt-10 grid gap-4 xl:grid-cols-[1.08fr,0.92fr]">

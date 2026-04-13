@@ -210,9 +210,9 @@ export function GovernanceStack() {
           <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-white/55">
             Governance layer
           </p>
-          <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-white">
-            Control the parts of automation and AI that buyers actually worry about.
-          </h3>
+            <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-white">
+              Control the parts of automation and AI that buyers actually worry about.
+            </h3>
         </div>
         <Shield className="h-8 w-8 text-cyan-300" />
       </div>
@@ -277,7 +277,7 @@ export function ComparisonVisual() {
               Ingenium
             </p>
             <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-white">
-              Replace the fragmented stack with one operating system.
+              Replace the fragmented stack with one connected platform.
             </h3>
           </div>
           <Sparkles className="h-5 w-5 text-cyan-300" />

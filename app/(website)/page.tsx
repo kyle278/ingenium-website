@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { buildMetadata, pageSeo } from "@/lib/seo";
+import { caseStudies } from "@/src/lib/caseStudies";
 
 import {
   ComparisonVisual,
@@ -70,8 +71,6 @@ const outcomes = [
   "Fewer tools to manage",
 ];
 
-const trustLogos = ["Client logo", "Case study", "ROI proof", "Portal view"];
-
 export default function HomePage() {
   return (
     <div className="space-y-20 pb-8 md:space-y-28">
@@ -90,12 +89,19 @@ export default function HomePage() {
             <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
             <ButtonLink action={{ label: "See Platform", href: "/platform" }} variant="secondary" />
           </div>
-          <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-2">
+          <div className="mt-6 rounded-[28px] border border-[var(--color-line)] bg-white/72 px-5 py-4">
+            <p className="text-sm font-semibold text-[var(--color-text)]">
+              Website + CRM + Automation + AI + Reporting. Fully connected in one platform.
+            </p>
+            <p className="mt-2 text-sm leading-6 text-[var(--color-text-soft)]">
+              Built for founder-led agencies, consultancies, and B2B service businesses that have outgrown disconnected tools.
+            </p>
+          </div>
+          <div className="mt-6 grid max-w-2xl gap-3 sm:grid-cols-3">
             {[
-              ["Website", "Forms and pages feed the same system your team works in."],
-              ["CRM", "Ownership, pipeline, and follow-up stay current."],
-              ["Automations and AI", "Useful actions happen inside the workflow, not beside it."],
-              ["Reporting", "Leadership sees cleaner pipeline and delivery signals."],
+              ["Software + rollout", "Platform software with phased implementation support."],
+              ["Portal-linked tracking", "Lead capture and attribution stay attached to the workflow."],
+              ["Technical review path", "Security and architecture questions can be reviewed early."],
             ].map(([title, body]) => (
               <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/70 px-4 py-4">
                 <p className="text-sm font-semibold text-[var(--color-text)]">{title}</p>
@@ -127,15 +133,13 @@ export default function HomePage() {
       <section className="rounded-[34px] border border-[var(--color-line)] bg-white/62 px-6 py-6 shadow-[0_22px_55px_rgba(22,32,51,0.06)] sm:px-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl">
-            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-              Built for growing service businesses
-            </p>
+            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">Built for growing service businesses</p>
             <p className="mt-3 text-lg leading-8 text-[var(--color-text-soft)]">
               Replace disconnected tools with one platform that handles lead capture, CRM work, automations, AI support, and reporting.
             </p>
           </div>
           <div className="grid flex-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            {["Founder-led agencies", "Consultancies", "Lean B2B service teams", "Revenue and ops leaders"].map((item) => (
+            {["Founder-led agencies", "Consultancies", "B2B service businesses", "Revenue and ops leaders"].map((item) => (
               <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/78 px-4 py-4 text-sm font-medium text-[var(--color-text)]">
                 {item}
               </div>
@@ -166,7 +170,7 @@ export default function HomePage() {
       <section>
         <SectionIntro
           eyebrow="The solution"
-          title="Everything connected in one operating system."
+          title="Everything connected in one platform."
           body="This is the part buyers need to understand quickly: Ingenium gives you website, CRM, automation, AI, and reporting in one connected platform."
         />
         <div className="mt-10 grid gap-4 lg:grid-cols-[1.08fr,0.92fr]">
@@ -269,30 +273,33 @@ export default function HomePage() {
         <SectionIntro
           eyebrow="Proof"
           title="Trust has to be visible."
-          body="Put proof near the top: customer stories, portal screenshots, ROI snapshots, and implementation evidence. No filler counters."
+          body="Use named examples, product screenshots, and rollout evidence to show that Ingenium solves real commercial problems."
         />
         <div className="mt-10 grid gap-4 lg:grid-cols-[0.95fr,1.05fr]">
           <SurfaceCard className="p-8">
-            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-              Social proof block
-            </p>
+            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">Implementation evidence</p>
             <h3 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
-              Make the platform feel proven, not just polished.
+              Show buyers the kinds of workflow improvements Ingenium already delivers.
             </h3>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {trustLogos.map((item) => (
-                <div key={item} className="rounded-2xl border border-dashed border-[var(--color-line-strong)] bg-white/74 px-4 py-5">
-                  <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
-                    Placeholder
-                  </p>
-                  <p className="mt-3 text-sm font-medium text-[var(--color-text)]">{item}</p>
+            <div className="mt-8 grid gap-3">
+              {caseStudies.slice(0, 3).map((study) => (
+                <div key={study.id} className="rounded-2xl border border-[var(--color-line)] bg-white/74 p-5">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <p className="font-[var(--font-display)] text-lg font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                      {study.client}
+                    </p>
+                    <span className="tech-pill inline-flex rounded-full px-3 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-soft)]">
+                      {study.industry}
+                    </span>
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{study.intervention}</p>
                 </div>
               ))}
             </div>
             <div className="mt-6 rounded-3xl border border-[var(--color-line)] bg-[rgba(18,121,255,0.06)] px-5 py-5">
-              <p className="text-sm font-semibold text-[var(--color-text)]">Testimonial slot</p>
+              <p className="text-sm font-semibold text-[var(--color-text)]">Why this helps conversion</p>
               <p className="mt-2 text-sm leading-7 text-[var(--color-text-soft)]">
-                Add one named quote that explains the business result in plain English, not a broad endorsement.
+                Named examples reduce the risk that Ingenium feels like a concept. They show buyers the kind of rollout, clarity, and workflow improvement they can expect.
               </p>
             </div>
           </SurfaceCard>

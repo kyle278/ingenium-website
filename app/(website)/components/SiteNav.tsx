@@ -83,15 +83,15 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
 
         <div className="flex items-center justify-between px-5 py-4">
           <Link href="/" className="flex items-center gap-3">
-          <Image src="/logo.svg" alt="Ingenium logo" width={30} height={30} className="h-7 w-7" priority />
-          <div className="min-w-0">
-            <p className="font-[var(--font-display)] text-sm font-semibold tracking-[-0.04em] text-[var(--color-text)] sm:text-base">
-              {content.brand}
-            </p>
-            <p className="font-[var(--font-mono)] text-[8px] uppercase tracking-[0.24em] text-[var(--color-text-muted)] sm:text-[9px]">
-              Revenue and operations platform
-            </p>
-          </div>
+            <Image src="/logo.svg" alt="Ingenium logo" width={30} height={30} className="h-7 w-7" priority />
+            <div className="min-w-0">
+              <p className="font-[var(--font-display)] text-sm font-semibold tracking-[-0.04em] text-[var(--color-text)] sm:text-base">
+                {content.brand}
+              </p>
+              <p className="font-[var(--font-mono)] text-[8px] uppercase tracking-[0.24em] text-[var(--color-text-muted)] sm:text-[9px]">
+                Website + CRM + Automation + AI
+              </p>
+            </div>
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">

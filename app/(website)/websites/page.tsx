@@ -22,7 +22,7 @@ export default function WebsitesPage() {
             Ingenium turns your website into a working part of the revenue system, with better lead capture, cleaner routing, and clearer proof for buyers.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
+            <ButtonLink action={{ label: "Get a Revenue Systems Teardown", href: "/contact?intent=revenue-systems-teardown" }} />
             <ButtonLink action={{ label: "See Platform", href: "/platform" }} variant="secondary" />
           </div>
         </div>

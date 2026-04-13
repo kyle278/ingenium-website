@@ -22,8 +22,8 @@ export default function AiAgentsPage() {
             Ingenium uses AI inside real business workflows, so teams get useful support without losing control, visibility, or accountability.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
-            <ButtonLink action={{ label: "Technical Review", href: "/contact?intent=technical-review" }} variant="secondary" />
+            <ButtonLink action={{ label: "See AI in the Platform", href: "/platform" }} />
+            <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} variant="secondary" />
           </div>
         </div>
         <PortalPreview

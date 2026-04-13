@@ -8,10 +8,32 @@ const navContent = {
   brand: "Ingenium",
   items: [
     { href: "/platform", label: "Platform" },
-    { href: "/websites", label: "Websites" },
-    { href: "/crm", label: "CRM" },
-    { href: "/ai-agents", label: "AI Agents" },
-    { href: "/automations", label: "Automations" },
+    {
+      label: "Solutions",
+      description: "Explore the core parts of the Ingenium platform for marketing, sales, operations, and delivery teams.",
+      children: [
+        {
+          href: "/websites",
+          label: "Websites",
+          description: "Turn your website into a lead capture and conversion system that feeds the CRM.",
+        },
+        {
+          href: "/crm",
+          label: "CRM",
+          description: "Keep pipeline, ownership, follow-up, and delivery handoff in one working system.",
+        },
+        {
+          href: "/ai-agents",
+          label: "AI Agents",
+          description: "Use custom AI agents for prep work, summaries, monitoring, and guided next steps.",
+        },
+        {
+          href: "/automations",
+          label: "Automations",
+          description: "Run routing, escalation, lifecycle, and SLA workflows without fragile glue.",
+        },
+      ],
+    },
     { href: "/security", label: "Security" },
     { href: "/case-studies", label: "Case Studies" },
     { href: "/implementation", label: "Implementation" },
@@ -23,7 +45,7 @@ const navContent = {
 
 const footerContent = {
   summary:
-    "Ingenium connects lead capture, CRM execution, workflow automation, delivery visibility, reporting, and AI agents in one governed operating layer.",
+    "Ingenium brings website lead capture, CRM work, automations, reporting, and custom AI agents into one connected platform for modern service businesses.",
   sitemap: [
     { href: "/", label: "Home" },
     { href: "/platform", label: "Platform" },

@@ -9,30 +9,30 @@ export const metadata: Metadata = buildMetadata(pageSeo["/crm"]);
 
 export default function CrmPage() {
   return (
-    <div className="space-y-24 pb-8 md:space-y-32">
-      <section className="grid items-center gap-10 pt-6 lg:grid-cols-[1fr,1fr]">
+    <div className="space-y-20 pb-8 md:space-y-28">
+      <section className="grid items-center gap-10 pt-4 lg:grid-cols-[0.94fr,1.06fr]">
         <div>
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
             CRM
           </p>
           <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
-            Turn your CRM into a system people trust.
+            Turn your CRM into the system your team actually uses.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            Ingenium makes CRM action-ready with cleaner lifecycle logic, routing, attribution, and visibility across pipeline and delivery.
+            Ingenium keeps pipeline, ownership, follow-up, handoff, and reporting in one working CRM instead of scattered across inboxes, docs, and side tools.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
-            <ButtonLink action={{ label: "See the Platform", href: "/platform" }} variant="secondary" />
+            <ButtonLink action={{ label: "See Platform", href: "/platform" }} variant="secondary" />
           </div>
         </div>
         <PortalPreview
-          eyebrow="CRM command layer"
-          title="Commercial records that keep their context"
+          eyebrow="CRM snapshot"
+          title="A clean record should tell the team what happened and what comes next"
           rows={[
-            { label: "Lead routing", value: "Assigned in under 60 seconds", state: "SLA" },
-            { label: "Lifecycle logic", value: "Stage rules reflect actual ownership", state: "Aligned" },
-            { label: "Delivery handoff", value: "Won context retained after close", state: "Continuous" },
+            { label: "Lead routing", value: "Owner assigned quickly and clearly", state: "Fast" },
+            { label: "Pipeline stage", value: "Stage reflects the real sales process", state: "Current" },
+            { label: "Delivery handoff", value: "Won deal keeps its commercial context", state: "Tracked" },
           ]}
         />
       </section>
@@ -41,16 +41,15 @@ export default function CrmPage() {
         <SurfaceCard className="p-8">
           <SectionIntro
             eyebrow="Why CRM breaks"
-            title="Most CRM drift is workflow drift."
-            body="The system stops being trusted when owners, stages, attribution, and handoffs stop matching what the team is actually doing."
+            title="Most CRM problems are really workflow problems."
+            body="The CRM stops being trusted when owners, stages, next steps, and delivery handoff stop matching how the team actually works."
           />
           <div className="mt-8 grid gap-3">
             {[
-              "Lead routing in under 60 seconds",
-              "Ownership and stage logic that reflect reality",
-              "Attribution tied back to revenue",
-              "Follow-up visibility across the team",
-              "Handoff into delivery without losing context",
+              "Leads sit unassigned or get picked up too late.",
+              "Stages look tidy but do not reflect real deal progress.",
+              "Follow-up happens outside the system.",
+              "Delivery starts without the full commercial picture.",
             ].map((item) => (
               <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
                 {item}
@@ -64,12 +63,12 @@ export default function CrmPage() {
           </p>
           <div className="mt-8 grid gap-3">
             {[
-              "Routing and data quality stay governed instead of improvised.",
-              "Marketing and sales look at the same commercial record.",
-              "Leadership sees a forecast with operational context beneath it.",
-              "Delivery inherits the account story instead of restarting discovery.",
+              "Routing, ownership, and lifecycle rules stay clear.",
+              "Sales and ops work from the same record.",
+              "Follow-up discipline becomes visible instead of assumed.",
+              "Forecasting improves because the underlying workflow is cleaner.",
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/75">
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
                 {item}
               </div>
             ))}
@@ -79,15 +78,15 @@ export default function CrmPage() {
 
       <section>
         <SectionIntro
-          eyebrow="Data flow"
-          title="The record should move through the business without losing its history."
+          eyebrow="What good CRM looks like"
+          title="The record should move through the business without losing its story."
         />
-        <div className="mt-10 grid gap-4 md:grid-cols-4">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {[
-            "Website intent enters the record with source and page context.",
-            "Routing rules assign the right owner and response expectation.",
-            "AI and automation act on the same record, not a copy.",
-            "Delivery status continues the same customer story after close.",
+            "Website lead enters with source and service context",
+            "Owner and response expectations are attached immediately",
+            "AI and automations act on the same live record",
+            "Delivery continues the same customer story after close",
           ].map((item) => (
             <SurfaceCard key={item} className="panel-hover p-6 text-sm leading-7 text-[var(--color-text-soft)]">
               {item}
@@ -98,7 +97,7 @@ export default function CrmPage() {
 
       <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
-          A CRM only becomes strategic when the team believes it reflects reality.
+          A CRM becomes useful when the team believes it reflects reality.
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} className="bg-white text-[var(--color-text)]" />

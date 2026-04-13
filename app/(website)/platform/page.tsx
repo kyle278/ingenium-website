@@ -8,68 +8,68 @@ import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimiti
 export const metadata: Metadata = buildMetadata(pageSeo["/platform"]);
 
 const modules = [
-  ["Websites", "High-intent capture, proof-led journeys, and CRM-connected forms."],
-  ["CRM", "Routing, lifecycle logic, follow-up visibility, and cleaner ownership."],
-  ["Automations", "Execution paths with timing, escalation, and rollback control."],
-  ["AI Agents", "Assistive operators inside bounded tasks, approvals, and audit trails."],
-  ["Analytics", "Shared reporting across acquisition, pipeline, and delivery."],
+  ["Websites", "Capture leads and send them into the right workflow from the start."],
+  ["CRM", "Keep pipeline, ownership, follow-up, and handoff in one working system."],
+  ["Automations", "Move work forward with rules, alerts, escalations, and approvals."],
+  ["AI Agents", "Use AI for prep work, summaries, monitoring, and next-step recommendations."],
+  ["Reporting", "See pipeline, activity, and delivery signals in one place."],
 ];
 
 const roles = [
-  ["Marketing", "See intent and attribution clearly."],
-  ["Sales", "Act faster with better context."],
-  ["Ops", "Control routing, workflows, and data quality."],
-  ["Leadership", "Trust the pipeline and the reporting."],
+  ["Marketing", "See what is creating demand and what is actually turning into pipeline."],
+  ["Sales", "Respond faster with better context and cleaner next steps."],
+  ["Operations", "Control routing, workflow quality, and cross-team handoffs."],
+  ["Leadership", "Trust the numbers because they come from the same system the team is using."],
 ];
 
 export default function PlatformPage() {
   return (
     <div className="space-y-20 pb-8 md:space-y-28">
-      <section className="grid items-center gap-8 pt-6 lg:grid-cols-[0.95fr,1.05fr]">
+      <section className="grid items-center gap-10 pt-4 lg:grid-cols-[0.92fr,1.08fr]">
         <div>
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
             Platform
           </p>
           <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
-            The revenue operating system for lean service teams.
+            One platform for the work that drives revenue.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            Ingenium connects websites, CRM, automation, AI agents, and reporting in one governed platform.
+            Ingenium brings your website, CRM, automation, AI tools, and reporting into one connected system, so teams can move faster without losing context.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
-            <ButtonLink action={{ label: "See the Platform", href: "#overview" }} variant="secondary" />
+            <ButtonLink action={{ label: "See Solutions", href: "#suite" }} variant="secondary" />
           </div>
         </div>
         <PortalPreview
-          eyebrow="Shared data model"
-          title="Every module writing into the same operating context"
+          eyebrow="Platform snapshot"
+          title="The same lead stays connected from first enquiry to delivery"
           rows={[
-            { label: "Website submission", value: "Source, service path, and urgency captured", state: "Signal" },
-            { label: "CRM routing", value: "Owner, SLA, and stage logic aligned", state: "Action" },
-            { label: "Automation run", value: "Escalation and rollback state preserved", state: "Governed" },
-            { label: "AI agent support", value: "Approval and execution history attached", state: "Bounded" },
+            { label: "Website lead", value: "Source, service interest, and urgency captured", state: "Live" },
+            { label: "CRM update", value: "Owner, stage, and next action set", state: "Active" },
+            { label: "Automation", value: "Follow-up and escalation running", state: "On" },
+            { label: "Reporting", value: "Pipeline and delivery visibility updated", state: "Ready" },
           ]}
         />
       </section>
 
-      <section id="overview">
+      <section id="suite">
         <SectionIntro
-          eyebrow="Platform overview"
-          title="Every module is useful alone. The leverage comes from how they work together."
-          body="Ingenium removes the translation layer between acquisition, commercial action, delivery visibility, and reporting."
+          eyebrow="Platform suite"
+          title="Everything connected in one operating system."
+          body="Most teams buy separate tools, then spend time translating between them. Ingenium removes that gap."
         />
-        <div className="mt-10 grid gap-4 xl:grid-cols-[1.1fr,0.9fr]">
+        <div className="mt-10 grid gap-4 xl:grid-cols-[1.08fr,0.92fr]">
           <SurfaceCard className="p-8">
             <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-              Product suite
+              Core products
             </p>
             <h3 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
-              One product suite for the work that drives revenue and delivery.
+              Each part works on its own. The value comes from how they work together.
             </h3>
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               {modules.map(([title, body]) => (
-                <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/72 p-5">
+                <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/74 p-5">
                   <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
                     {title}
                   </p>
@@ -80,16 +80,16 @@ export default function PlatformPage() {
           </SurfaceCard>
           <SurfaceCard dark className="p-8">
             <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
-              Why it works
+              Why buyers care
             </p>
             <div className="mt-6 grid gap-3">
               {[
-                "Website intent, CRM action, and automation state stay attached.",
-                "AI works inside operational context instead of beside it.",
-                "Leadership sees the same model that operators are working from.",
-                "Delivery continuity stays visible after the deal is won.",
+                "Leads do not disappear between the website and the CRM.",
+                "Teams stop rebuilding the same customer story in different tools.",
+                "Automation supports the workflow instead of hiding it.",
+                "Reporting reflects what is actually happening across pipeline and delivery.",
               ].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/75">
+                <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
                   {item}
                 </div>
               ))}
@@ -100,21 +100,22 @@ export default function PlatformPage() {
 
       <section>
         <SectionIntro
-          eyebrow="Workflow continuity"
-          title="One model across the whole revenue journey."
-          body="The point is not having five products. The point is preserving the same context from website intent through delivery execution."
+          eyebrow="How it works"
+          title="One journey from first click to fulfilment."
+          body="Ingenium keeps the same record moving through marketing, sales, operations, and delivery."
+          align="center"
         />
         <div className="mt-10">
           <WorkflowStoryboard />
         </div>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1.05fr,0.95fr]">
+      <section className="grid gap-6 xl:grid-cols-[1.04fr,0.96fr]">
         <SurfaceCard className="p-8">
           <SectionIntro
-            eyebrow="Different operators. One system."
-            title="Different operators. One system."
-            body="Each team sees the part of the platform they need without losing the shared context underneath it."
+            eyebrow="Different teams, one system"
+            title="Different operators. One platform."
+            body="Each team gets what it needs without losing the shared context underneath the work."
           />
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {roles.map(([role, body]) => (
@@ -129,19 +130,19 @@ export default function PlatformPage() {
         </SurfaceCard>
         <SurfaceCard dark className="p-8">
           <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
-            Trust and governance
+            Trust and control
           </p>
           <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-white">
-            Speed and control in the same operating model.
+            Fast enough for operators. Clear enough for stakeholders.
           </h2>
           <div className="mt-8 grid gap-3">
             {[
-              "Governed workflows across every module",
               "Approval paths for sensitive actions",
               "Execution history attached to the record",
-              "Review-ready materials for technical buyers",
+              "Clear review path for technical buyers",
+              "Delivery continuity visible after the sale",
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/75">
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
                 {item}
               </div>
             ))}
@@ -151,10 +152,10 @@ export default function PlatformPage() {
 
       <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
-          The value is not one more tool. It is one more layer of agreement across the system.
+          The point is not more software. The point is fewer gaps between teams.
         </h2>
         <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-white/72">
-          Start with the platform view, then decide where to roll out first.
+          Start with a demo or a teardown and see where your current stack is creating drag.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} className="bg-white text-[var(--color-text)]" />

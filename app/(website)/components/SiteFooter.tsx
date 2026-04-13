@@ -28,7 +28,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
                     Ingenium
                   </p>
                   <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
-                    Governed revenue operating system
+                    Revenue and operations platform
                   </p>
                 </div>
               </div>

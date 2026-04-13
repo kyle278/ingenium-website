@@ -13,17 +13,17 @@ export const dynamic = "force-dynamic";
 const routes = [
   {
     title: "Book Demo",
-    body: "Best for product evaluation and fit.",
+    body: "Best if you want to see the platform and decide whether it fits.",
     intent: "book-demo",
   },
   {
     title: "Revenue Systems Teardown",
-    body: "Best for diagnosing leakage and rollout priorities.",
+    body: "Best if you want help finding the biggest gaps in your current stack.",
     intent: "revenue-systems-teardown",
   },
   {
     title: "Technical Review",
-    body: "Best for architecture, security, and stakeholder review.",
+    body: "Best if security, architecture, or stakeholder review matters early.",
     intent: "technical-review",
   },
 ];
@@ -40,17 +40,17 @@ export default async function ContactPage() {
   }
 
   return (
-    <div className="space-y-24 pb-8 md:space-y-32">
-      <section className="grid items-start gap-8 pt-6 lg:grid-cols-[0.95fr,1.05fr]">
+    <div className="space-y-20 pb-8 md:space-y-28">
+      <section className="grid items-start gap-8 pt-4 lg:grid-cols-[0.95fr,1.05fr]">
         <div>
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
             Contact
           </p>
           <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
-            See the platform. Then decide the right path.
+            See the platform. Then choose the right next step.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            Start with a demo, a teardown, or a technical review depending on where you are in the buying process.
+            Start with a demo, a teardown, or a technical review depending on what you need to decide.
           </p>
 
           <div className="mt-10 grid gap-4">
@@ -70,13 +70,13 @@ export default async function ContactPage() {
 
         <SurfaceCard className="p-6 sm:p-8">
           <SectionIntro
-            eyebrow="Route request"
-            title="Short first step, full Portal tracking retained."
-            body="Name, work email, and your biggest growth challenge first. The rest helps us prepare the right follow-up."
+            eyebrow="Start here"
+            title="Short first step. Full Portal tracking still in place."
+            body="We ask for the basics first, then capture the extra context needed to prepare a useful follow-up."
           />
 
           <div className="mt-6 rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
-            Response within 1 business day. Technical review and teardown paths route through the same team with clear next steps.
+            Responses within 1 business day. Demo, teardown, and technical review requests all route through the same tracked Portal flow.
           </div>
 
           <div className="mt-6">
@@ -91,9 +91,7 @@ export default async function ContactPage() {
                   Upsert the Portal form named <strong>{WEBSITE_FORM_NAMES.contact}</strong> with slug{" "}
                   <strong>{WEBSITE_FORM_SLUGS.contact}</strong>, then reload this page.
                 </p>
-                {formResolutionError ? (
-                  <p className="mt-3 text-xs text-rose-500">{formResolutionError}</p>
-                ) : null}
+                {formResolutionError ? <p className="mt-3 text-xs text-rose-500">{formResolutionError}</p> : null}
               </div>
             )}
           </div>
@@ -103,13 +101,13 @@ export default async function ContactPage() {
       <section>
         <SectionIntro
           eyebrow="What happens next"
-          title="You leave with a clearer path, not a vague follow-up."
+          title="You should leave with a clearer path, not a vague follow-up."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[
-            "Current-state leakage and workflow friction identified",
-            "Recommended rollout path across website, CRM, AI, and automation",
-            "Technical and stakeholder review path if required",
+            "Current workflow gaps and leakage points identified",
+            "Recommended next step across website, CRM, automation, and AI",
+            "Technical review path available if stakeholders need it",
           ].map((item) => (
             <SurfaceCard key={item} className="panel-hover p-6 text-sm leading-7 text-[var(--color-text-soft)]">
               {item}

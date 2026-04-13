@@ -14,136 +14,130 @@ import { ButtonLink, SectionIntro, SurfaceCard } from "./components/sitePrimitiv
 
 export const metadata: Metadata = buildMetadata(pageSeo["/"]);
 
-const trustItems = [
-  "Governed workflows",
-  "Audit-ready actions",
-  "Human approval paths",
-  "Website-to-delivery visibility",
-];
-
-const problemCards = [
+const painCards = [
   {
-    title: "Marketing",
-    body: "Campaigns run, but attribution and buyer context break.",
+    title: "Leads fall through cracks",
+    body: "Website enquiries come in, but follow-up depends on manual checks and personal memory.",
   },
   {
-    title: "Sales",
-    body: "Leads arrive late and reps work around the CRM.",
+    title: "CRM goes out of date",
+    body: "Teams work outside the CRM because it feels slower than the real work happening around it.",
   },
   {
-    title: "Operations",
-    body: "Handoffs, ownership, and reporting drift under pressure.",
+    title: "Automation breaks between systems",
+    body: "Triggers fail, context gets lost, and nobody is quite sure what actually ran.",
   },
   {
-    title: "Leadership",
-    body: "Forecasts look polished but cannot be trusted.",
+    title: "Leadership lacks real visibility",
+    body: "Reports look clean, but they do not reflect what is happening across pipeline and delivery.",
   },
 ];
 
-const moduleCards = [
+const solutionCards = [
   {
-    title: "Websites",
-    body: "Capture high-intent signals with forms, journeys, and proof-led pages.",
+    title: "Websites that feed your CRM",
+    body: "Capture better leads and send them straight into the right workflow with the right context.",
     href: "/websites",
   },
   {
-    title: "CRM",
-    body: "Route, enrich, track, and act from one reliable revenue workspace.",
+    title: "CRM built for real operations",
+    body: "Keep ownership, pipeline, follow-up, and handoff in a system your team can actually use.",
     href: "/crm",
   },
   {
-    title: "Automations",
-    body: "Move critical actions instantly with real ownership and SLA control.",
+    title: "Automations that run the business",
+    body: "Move work forward with routing, reminders, approvals, and escalation that do not rely on duct tape.",
     href: "/automations",
   },
   {
-    title: "AI Agents",
-    body: "Deploy AI inside governed workflows, not outside the business.",
+    title: "AI agents inside the workflow",
+    body: "Use AI where it helps most: prep work, summaries, monitoring, and next-step recommendations.",
     href: "/ai-agents",
   },
   {
-    title: "Analytics",
-    body: "See what is working, what is leaking, and what is likely to close.",
+    title: "Reporting you can trust",
+    body: "See pipeline, activity, and delivery signals in one place instead of stitching reports together by hand.",
     href: "/platform",
   },
 ];
 
-const switchReasons = [
-  "Faster follow-up",
+const outcomes = [
+  "Faster lead response",
+  "Better follow-up discipline",
   "Cleaner handoffs",
-  "Better forecasting",
-  "Less tool sprawl",
-  "More leverage without more headcount",
+  "More accurate forecasting",
+  "Less admin work",
+  "Fewer tools to manage",
 ];
 
-const proofCards = [
-  "Website to CRM routing view",
-  "AI brief approval flow",
-  "Automation SLA panel",
-  "Revenue dashboard",
-  "Named case study outcome",
-];
+const trustLogos = ["Client logo", "Case study", "ROI proof", "Portal view"];
 
 export default function HomePage() {
   return (
     <div className="space-y-20 pb-8 md:space-y-28">
-      <section className="grid items-start gap-8 pt-4 lg:grid-cols-[0.95fr,1.05fr] lg:pt-6">
-        <div className="max-w-3xl">
+      <section className="grid items-start gap-10 pt-2 lg:grid-cols-[0.88fr,1.12fr] lg:pt-4">
+        <div className="max-w-3xl pt-6">
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
-            Revenue Operating System
+            All-in-one revenue and operations platform
           </p>
-          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl lg:text-[4.4rem]">
-            One system for lead capture, sales, delivery, and AI execution.
+          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl lg:text-[4.65rem]">
+            Run your entire revenue operation in one platform.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            Ingenium gives lean service businesses one governed platform for website intent, CRM
-            action, workflow automation, reporting, and AI-assisted execution.
+            Ingenium combines your website, CRM, automation, AI tools, and reporting into one connected system so your team moves faster, closes more deals, and never loses context.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
-            <ButtonLink action={{ label: "See the Platform", href: "/platform" }} variant="secondary" />
+            <ButtonLink action={{ label: "See Platform", href: "/platform" }} variant="secondary" />
           </div>
-          <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-2">
+          <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-2">
             {[
-              "Website intent enters the system with source and service context.",
-              "CRM ownership, SLA, and next action stay attached to the same record.",
-              "AI support runs inside approvals instead of outside the workflow.",
-              "Delivery visibility remains connected after the close.",
-            ].map((item) => (
-              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/62 px-4 py-4 text-sm leading-6 text-[var(--color-text-soft)]">
-                {item}
+              ["Website", "Forms and pages feed the same system your team works in."],
+              ["CRM", "Ownership, pipeline, and follow-up stay current."],
+              ["Automations and AI", "Useful actions happen inside the workflow, not beside it."],
+              ["Reporting", "Leadership sees cleaner pipeline and delivery signals."],
+            ].map(([title, body]) => (
+              <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/70 px-4 py-4">
+                <p className="text-sm font-semibold text-[var(--color-text)]">{title}</p>
+                <p className="mt-2 text-sm leading-6 text-[var(--color-text-soft)]">{body}</p>
               </div>
             ))}
           </div>
         </div>
-        <SystemStackVisual />
-      </section>
 
-      <section className="mineral-panel rounded-[32px] px-6 py-6 sm:px-8">
-        <div className="grid gap-6 lg:grid-cols-[0.8fr,1.2fr] lg:items-center">
-          <div>
-            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-              Platform suite
-            </p>
-            <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
-              One system for commercial work that usually lives in separate tools.
-            </h2>
-            <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
-              Replace fragmented website, CRM, automation, reporting, and AI layers with one operating model.
-            </p>
-          </div>
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <div className="space-y-4">
+          <SystemStackVisual />
+          <div className="grid gap-4 md:grid-cols-3">
             {[
-              ["CRM", "Pipeline structure, routing, lifecycle, and forecast visibility."],
-              ["Custom AI Agents", "Operational AI attached to approvals, context, and ownership."],
-              ["Automations", "Follow-up, handoff, escalation, and SLA-driven process control."],
-              ["Websites", "High-intent journeys and lead capture connected directly to action."],
+              ["Response speed", "Leads are routed and queued faster."],
+              ["Cleaner pipeline", "Sales and ops work from the same context."],
+              ["Better visibility", "Leadership sees what changed and why."],
             ].map(([title, body]) => (
-              <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4">
+              <SurfaceCard key={title} className="p-5">
                 <p className="font-[var(--font-display)] text-lg font-semibold tracking-[-0.03em] text-[var(--color-text)]">
                   {title}
                 </p>
                 <p className="mt-2 text-sm leading-6 text-[var(--color-text-soft)]">{body}</p>
+              </SurfaceCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-[34px] border border-[var(--color-line)] bg-white/62 px-6 py-6 shadow-[0_22px_55px_rgba(22,32,51,0.06)] sm:px-8">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+              Built for growing service businesses
+            </p>
+            <p className="mt-3 text-lg leading-8 text-[var(--color-text-soft)]">
+              Replace disconnected tools with one platform that handles lead capture, CRM work, automations, AI support, and reporting.
+            </p>
+          </div>
+          <div className="grid flex-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {["Founder-led agencies", "Consultancies", "Lean B2B service teams", "Revenue and ops leaders"].map((item) => (
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/78 px-4 py-4 text-sm font-medium text-[var(--color-text)]">
+                {item}
               </div>
             ))}
           </div>
@@ -153,11 +147,12 @@ export default function HomePage() {
       <section>
         <SectionIntro
           eyebrow="The problem"
-          title="Most revenue teams are still working across systems that do not agree."
+          title="Most growing businesses are held back by disconnected tools."
+          body="When the website, CRM, automations, AI tools, and reporting all live in different places, the work slows down and the numbers get harder to trust."
           align="center"
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {problemCards.map((card) => (
+          {painCards.map((card) => (
             <SurfaceCard key={card.title} className="panel-hover p-6">
               <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
                 {card.title}
@@ -170,27 +165,24 @@ export default function HomePage() {
 
       <section>
         <SectionIntro
-          eyebrow="Product architecture"
-          title="The platform that connects the whole journey."
-          body="Ingenium links first touch, pipeline movement, delivery execution, and reporting in one shared system."
+          eyebrow="The solution"
+          title="Everything connected in one operating system."
+          body="This is the part buyers need to understand quickly: Ingenium gives you website, CRM, automation, AI, and reporting in one connected platform."
         />
-        <div className="mt-10 grid gap-4 xl:grid-cols-[1.05fr,0.95fr]">
+        <div className="mt-10 grid gap-4 lg:grid-cols-[1.08fr,0.92fr]">
           <SurfaceCard className="p-8">
             <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-              One platform
+              Platform pillars
             </p>
             <h3 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
-              Built to connect marketing signal, sales action, delivery continuity, and reporting.
+              One place for the work that creates revenue and keeps delivery on track.
             </h3>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--color-text-soft)]">
-              The leverage comes from shared context. Website submissions, CRM state, automation runs, approvals, and delivery visibility all stay attached to the same operating model.
-            </p>
             <div className="mt-8 grid gap-4 md:grid-cols-2">
-              {moduleCards.map((card) => (
+              {solutionCards.map((card) => (
                 <Link
                   key={card.title}
                   href={card.href}
-                  className="rounded-2xl border border-[var(--color-line)] bg-white/72 p-5 transition hover:border-[rgba(18,121,255,0.22)] hover:shadow-[0_18px_40px_rgba(22,32,51,0.08)]"
+                  className="rounded-2xl border border-[var(--color-line)] bg-white/74 p-5 transition hover:border-[rgba(18,121,255,0.22)] hover:shadow-[0_18px_40px_rgba(22,32,51,0.08)]"
                 >
                   <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
                     {card.title}
@@ -200,24 +192,30 @@ export default function HomePage() {
               ))}
             </div>
           </SurfaceCard>
+
           <div className="grid gap-4">
             <PortalPreview
-              eyebrow="Portal workflow snapshot"
-              title="How the system behaves when a real lead enters"
+              eyebrow="Platform snapshot"
+              title="How Ingenium behaves when a lead turns into revenue work"
               rows={[
-                { label: "Buyer submits high-intent form", value: "Website signal with service context", state: "Captured" },
-                { label: "Record enriched and routed", value: "Owner, SLA, and attribution set", state: "Assigned" },
-                { label: "AI brief prepared", value: "Suggested action awaiting review", state: "Approval" },
-                { label: "Delivery handoff created", value: "Commercial context retained after close", state: "Visible" },
+                { label: "Lead captured", value: "Website form with source and service context", state: "Live" },
+                { label: "Ownership set", value: "Rep, SLA, and next step assigned", state: "Active" },
+                { label: "AI assist ready", value: "Suggested response and account brief prepared", state: "Review" },
+                { label: "Delivery connected", value: "Handoff remains visible after close", state: "Tracked" },
               ]}
             />
             <SurfaceCard dark className="p-6">
               <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
-                Built for accountability
+                Why it matters
               </p>
               <div className="mt-4 grid gap-3">
-                {trustItems.map((item) => (
-                  <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/75">
+                {[
+                  "Less context switching across teams",
+                  "Better follow-up discipline",
+                  "Clearer handoffs from sales to delivery",
+                  "Reporting that reflects the real workflow",
+                ].map((item) => (
+                  <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
                     {item}
                   </div>
                 ))}
@@ -229,27 +227,28 @@ export default function HomePage() {
 
       <section>
         <SectionIntro
-          eyebrow="From website intent to revenue action"
-          title="From website intent to revenue action."
-          body="Each state answers one operational question: who owns this signal, what happens next, what gets approved, and what stays visible after the close."
+          eyebrow="How it works"
+          title="From first click to fulfilment."
+          body="Ingenium connects the full journey, so your team can move from lead capture to delivery without rebuilding the customer story at every step."
+          align="center"
         />
         <div className="mt-10">
           <WorkflowStoryboard />
         </div>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[0.82fr,1.18fr]">
+      <section className="grid gap-6 xl:grid-cols-[0.9fr,1.1fr]">
         <SurfaceCard className="p-8">
           <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-            Why Ingenium
+            Outcomes
           </p>
           <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
-            Why teams switch.
+            What changes after switching.
           </h2>
           <div className="mt-8 grid gap-3">
-            {switchReasons.map((reason) => (
-              <div key={reason} className="rounded-2xl border border-[var(--color-line)] bg-white/70 px-4 py-4 text-sm text-[var(--color-text-soft)]">
-                {reason}
+            {outcomes.map((item) => (
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm font-medium text-[var(--color-text)]">
+                {item}
               </div>
             ))}
           </div>
@@ -257,8 +256,8 @@ export default function HomePage() {
         <div>
           <SectionIntro
             eyebrow="Comparison"
-            title="Not another CRM. Not another AI tool."
-            body="Fragmented tools force teams to translate context by hand. Ingenium keeps the context attached."
+            title="Replace your fragmented stack."
+            body="Most teams are paying for separate tools, then paying again in delay, admin, and messy handoffs. Ingenium replaces that sprawl with one connected platform."
           />
           <div className="mt-8">
             <ComparisonVisual />
@@ -269,53 +268,70 @@ export default function HomePage() {
       <section>
         <SectionIntro
           eyebrow="Proof"
-          title="Proof should look like workflow, not just words."
-          body="Named screens, named reviews, and named rollout examples work harder than placeholder counters."
+          title="Trust has to be visible."
+          body="Put proof near the top: customer stories, portal screenshots, ROI snapshots, and implementation evidence. No filler counters."
         />
-        <div className="mt-10 grid gap-4 lg:grid-cols-[1.1fr,0.9fr]">
+        <div className="mt-10 grid gap-4 lg:grid-cols-[0.95fr,1.05fr]">
+          <SurfaceCard className="p-8">
+            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+              Social proof block
+            </p>
+            <h3 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+              Make the platform feel proven, not just polished.
+            </h3>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {trustLogos.map((item) => (
+                <div key={item} className="rounded-2xl border border-dashed border-[var(--color-line-strong)] bg-white/74 px-4 py-5">
+                  <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                    Placeholder
+                  </p>
+                  <p className="mt-3 text-sm font-medium text-[var(--color-text)]">{item}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 rounded-3xl border border-[var(--color-line)] bg-[rgba(18,121,255,0.06)] px-5 py-5">
+              <p className="text-sm font-semibold text-[var(--color-text)]">Testimonial slot</p>
+              <p className="mt-2 text-sm leading-7 text-[var(--color-text-soft)]">
+                Add one named quote that explains the business result in plain English, not a broad endorsement.
+              </p>
+            </div>
+          </SurfaceCard>
+
           <PortalPreview
-            eyebrow="Revenue dashboard"
-            title="Pipeline view connected to delivery and approvals"
+            eyebrow="Portal view"
+            title="Revenue dashboard connected to sales and delivery"
             rows={[
-              { label: "New business review", value: "Website source, owner, and AI brief visible", state: "Today" },
-              { label: "Handoff risk", value: "Commercial scope missing onboarding note", state: "Flagged" },
-              { label: "Forecast note", value: "Leadership sees stage confidence and delivery status", state: "Ready" },
+              { label: "Lead response queue", value: "Urgent enquiries visible by owner and SLA", state: "Today" },
+              { label: "Pipeline hygiene", value: "Missing next steps and stale records flagged", state: "Review" },
+              { label: "Delivery continuity", value: "Won deals still carry scope and handoff notes", state: "Tracked" },
+              { label: "Leadership summary", value: "Cleaner reporting across the whole workflow", state: "Ready" },
             ]}
           />
-          <div className="grid gap-4 sm:grid-cols-2">
-            {proofCards.map((item) => (
-              <SurfaceCard key={item} className="panel-hover p-5">
-                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
-                  Requested asset
-                </p>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{item}</p>
-              </SurfaceCard>
-            ))}
-          </div>
         </div>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1.05fr,0.95fr]">
+      <section className="grid gap-6 xl:grid-cols-[1.04fr,0.96fr]">
         <SurfaceCard className="p-8">
           <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
             Implementation
           </p>
           <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
-            Launch the system without replatforming chaos.
+            Implemented with you, not dumped on you.
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--color-text-soft)]">
-            Ingenium combines platform software with a structured rollout model so teams can go
-            live quickly and keep control.
+            Ingenium combines software with a practical rollout. We help teams clean up the stack, configure the platform, launch with confidence, and keep improving over time.
           </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="mt-8 grid gap-4 md:grid-cols-5">
             {[
-              ["Week 1", "Audit the leakage points."],
-              ["Weeks 2-4", "Configure the core system."],
-              ["Week 5+", "Launch, train, optimize, and govern."],
-            ].map(([phase, copy]) => (
-              <div key={phase} className="rounded-2xl border border-[var(--color-line)] bg-white/72 p-5">
+              ["1", "Audit current stack"],
+              ["2", "Configure platform"],
+              ["3", "Migrate and launch"],
+              ["4", "Train team"],
+              ["5", "Optimise over time"],
+            ].map(([step, copy]) => (
+              <div key={step} className="rounded-2xl border border-[var(--color-line)] bg-white/72 p-5">
                 <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
-                  {phase}
+                  Step {step}
                 </p>
                 <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{copy}</p>
               </div>
@@ -327,11 +343,10 @@ export default function HomePage() {
 
       <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
-          If your stack is slowing revenue, the fix is not another isolated tool.
+          If your team is drowning in disconnected tools, start here.
         </h2>
         <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-white/72">
-          Book a demo or get a practical teardown of the shortest path from your current stack to
-          a more accountable system.
+          Book a demo and see how Ingenium can unify your website, CRM, automation, and AI into one scalable operating system.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
@@ -341,10 +356,10 @@ export default function HomePage() {
             Book Demo
           </Link>
           <Link
-            href="/contact?intent=revenue-systems-teardown"
+            href="/platform"
             className="cta-lift inline-flex items-center justify-center rounded-full border border-white/18 bg-white/10 px-5 py-3 text-sm font-semibold text-white"
           >
-            Get a Revenue Systems Teardown
+            See Platform
           </Link>
         </div>
       </section>

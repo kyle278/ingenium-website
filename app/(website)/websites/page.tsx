@@ -9,47 +9,47 @@ export const metadata: Metadata = buildMetadata(pageSeo["/websites"]);
 
 export default function WebsitesPage() {
   return (
-    <div className="space-y-24 pb-8 md:space-y-32">
-      <section className="grid items-center gap-10 pt-6 lg:grid-cols-[1fr,1fr]">
+    <div className="space-y-20 pb-8 md:space-y-28">
+      <section className="grid items-center gap-10 pt-4 lg:grid-cols-[0.94fr,1.06fr]">
         <div>
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
             Websites
           </p>
           <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
-            Your website should work like part of the system.
+            Your website should create pipeline, not just traffic.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            Ingenium turns websites into active revenue infrastructure with high-intent journeys, form capture, routing, and proof-driven conversion.
+            Ingenium turns your website into a working part of the revenue system, with better lead capture, cleaner routing, and clearer proof for buyers.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
-            <ButtonLink action={{ label: "See the Platform", href: "/platform" }} variant="secondary" />
+            <ButtonLink action={{ label: "See Platform", href: "/platform" }} variant="secondary" />
           </div>
         </div>
         <PortalPreview
-          eyebrow="Acquisition engine"
-          title="Website intent flowing directly into the operating layer"
+          eyebrow="Website flow"
+          title="A website lead should arrive with enough context to act on"
           rows={[
-            { label: "Progressive form path", value: "Buyer context captured before submit", state: "Live" },
-            { label: "Submission routing", value: "CRM owner and SLA assigned", state: "Connected" },
-            { label: "Proof-led page system", value: "Named outcomes attached to service paths", state: "Visible" },
+            { label: "Lead captured", value: "Form, source, and service interest recorded", state: "Live" },
+            { label: "CRM updated", value: "Owner and next step assigned", state: "Active" },
+            { label: "Follow-up started", value: "Automation and alerts running", state: "On" },
           ]}
         />
       </section>
 
       <section>
         <SectionIntro
-          eyebrow="What a modern acquisition engine does"
-          title="Turn your public site into accountable acquisition infrastructure."
-          body="The website should create qualified intent, preserve context, and make the next action obvious."
+          eyebrow="What a modern website should do"
+          title="Turn the site into part of the sales process."
+          body="A strong website does more than look polished. It helps the right buyers convert and gives the team enough context to move fast."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           {[
-            "High-intent page architecture",
-            "Progressive forms",
-            "CRM-connected submissions",
-            "Attribution-ready tracking",
-            "Proof-led conversion paths",
+            "Clear service pages for high-value work",
+            "Forms that capture useful context",
+            "Submissions connected directly to the CRM",
+            "Tracking that supports attribution",
+            "Proof blocks that help buyers say yes",
           ].map((item) => (
             <SurfaceCard key={item} className="panel-hover p-6 text-sm leading-7 text-[var(--color-text-soft)]">
               {item}
@@ -62,12 +62,12 @@ export default function WebsitesPage() {
         <SurfaceCard className="p-8">
           <SectionIntro
             eyebrow="Before and after"
-            title="Most websites stop at form capture. Ingenium carries the signal forward."
+            title="Most sites stop at the form. Ingenium carries the lead forward."
           />
           <div className="mt-8 grid gap-4">
             {[
-              ["Before", "Pages convert in isolation. Buyer context is lost after the click."],
-              ["After", "Buyer intent, source, service interest, and urgency enter the CRM as one record."],
+              ["Before", "The form submits, then the team has to piece together what the buyer wanted and where they came from."],
+              ["After", "The lead enters the CRM with source, service path, urgency, and a clearer next action attached."],
             ].map(([title, body]) => (
               <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/72 p-5">
                 <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
@@ -80,16 +80,16 @@ export default function WebsitesPage() {
         </SurfaceCard>
         <SurfaceCard dark className="p-8">
           <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
-            CRM and automation continuity
+            Why this matters
           </p>
           <div className="mt-8 grid gap-3">
             {[
-              "Forms route directly into governed CRM logic.",
-              "Attribution stays attached to the commercial record.",
-              "Automation starts from real intent instead of a generic list entry.",
-              "Teams act with the page journey already visible.",
+              "Sales replies faster because the lead is easier to understand.",
+              "Marketing sees which pages are producing real pipeline, not just visits.",
+              "Operations gets cleaner handoff into the rest of the workflow.",
+              "Leadership can connect website performance to revenue outcomes.",
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/75">
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
                 {item}
               </div>
             ))}
@@ -99,14 +99,14 @@ export default function WebsitesPage() {
 
       <section>
         <SectionIntro
-          eyebrow="30-day outcomes"
-          title="The first month should clarify conversion, not create more ambiguity."
+          eyebrow="Early outcomes"
+          title="The first month should make lead flow easier to trust."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[
-            "Clearer buyer pathways for high-value services",
-            "Portal-linked form capture and routing still intact",
-            "Early reporting on source, conversion path, and response speed",
+            "Clearer buyer paths for your main services",
+            "Better form quality and faster routing into the CRM",
+            "Cleaner reporting on source, conversion, and response speed",
           ].map((item) => (
             <SurfaceCard key={item} className="panel-hover p-6 text-sm leading-7 text-[var(--color-text-soft)]">
               {item}
@@ -117,7 +117,7 @@ export default function WebsitesPage() {
 
       <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
-          Your site should qualify, route, and inform the next action before a rep ever opens the record.
+          Your website should help the team act before anyone opens a second tool.
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} className="bg-white text-[var(--color-text)]" />

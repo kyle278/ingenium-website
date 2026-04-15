@@ -164,24 +164,24 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
-                href="/contact?intent=strategy-call"
+                href="/revenue-systems-teardown"
                 className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-500"
               >
-                Discuss a Similar Build
+                Request a Similar Teardown
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/contact?intent=architecture-review"
+                href="/technical-review"
                 className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
               >
-                Request Architecture Review
+                Request Technical Review
               </Link>
             </div>
           </div>
 
           <div className="rounded-xl border border-slate-800 bg-slate-900/55 p-5">
             <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-500">
-              Core Outcomes
+              Scope Signals
             </p>
             <div className="mt-4 space-y-3">
               {project.outcomeMetrics.map((metric) => (
@@ -316,15 +316,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             Need a similar project outcome?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            We can scope the website structure, proof system, and conversion path your next build
-            needs.
+            We can scope the website structure, proof system, and conversion path your next build needs.
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/contact"
+              href="/demo"
               className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-500"
             >
-              Book a Strategy Call
+              Book Demo
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link

@@ -58,15 +58,15 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
   return (
     <header className="sticky top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
       <div
-        className={`mx-auto max-w-[1280px] rounded-[28px] border transition-all duration-300 ${
+        className={`mx-auto max-w-[1280px] rounded-[28px] transition-all duration-300 ${
           scrolled
-            ? "border-[var(--color-line)] bg-white/94 shadow-[0_20px_55px_rgba(22,32,51,0.10)] backdrop-blur-xl"
-            : "border-white/60 bg-white/84 backdrop-blur-lg"
+            ? "ghost-outline bg-[rgba(247,250,254,0.88)] shadow-[0_4px_24px_rgba(24,28,31,0.08)] backdrop-blur-xl"
+            : "bg-[rgba(247,250,254,0.78)] shadow-[0_4px_18px_rgba(24,28,31,0.04)] backdrop-blur-lg"
         }`}
       >
-        <div className="hidden items-center justify-between border-b border-[var(--color-line)] px-6 py-2 text-[11px] text-[var(--color-text-muted)] lg:flex">
+        <div className="hidden items-center justify-between px-6 py-3 text-[11px] text-[var(--color-text-muted)] lg:flex">
           <p className="font-[var(--font-mono)] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-            Revenue and operations platform
+            Revenue operating system for service businesses
           </p>
           <div className="flex items-center gap-5">
             <Link href="/case-studies" className="hover:text-[var(--color-text)]">
@@ -75,7 +75,7 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
             <Link href="/implementation" className="hover:text-[var(--color-text)]">
               Implementation
             </Link>
-            <Link href="/contact?intent=technical-review" className="hover:text-[var(--color-text)]">
+            <Link href="/technical-review" className="hover:text-[var(--color-text)]">
               Technical review
             </Link>
           </div>
@@ -89,7 +89,7 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
                 {content.brand}
               </p>
               <p className="font-[var(--font-mono)] text-[8px] uppercase tracking-[0.24em] text-[var(--color-text-muted)] sm:text-[9px]">
-                Website + CRM + Automation + AI
+                Revenue systems for service businesses
               </p>
             </div>
           </Link>
@@ -106,18 +106,18 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
                   <button
                     type="button"
                     onClick={() => setOpenDropdown((value) => (value === item.label ? null : item.label))}
-                    className={`rounded-xl px-3 py-2 text-sm font-medium transition ${
+                    className={`rounded-md px-3 py-2 text-sm font-medium transition ${
                       isDropdownActive(item)
-                        ? "bg-[rgba(18,121,255,0.10)] text-[var(--color-brand)]"
-                        : "text-[var(--color-text-soft)] hover:bg-[rgba(22,32,51,0.04)] hover:text-[var(--color-text)]"
+                        ? "bg-[var(--color-panel-high)] text-[var(--color-brand)]"
+                        : "text-[var(--color-text-soft)] hover:bg-[var(--color-panel-low)] hover:text-[var(--color-text)]"
                     }`}
                   >
                     {item.label}
                   </button>
 
                   {openDropdown === item.label ? (
-                    <div className="absolute left-0 top-full z-20 mt-3 w-[420px] rounded-[28px] border border-[var(--color-line)] bg-white/96 p-4 shadow-[0_24px_60px_rgba(22,32,51,0.12)] backdrop-blur-xl">
-                      <div className="rounded-[22px] bg-[rgba(18,121,255,0.05)] px-4 py-4">
+                    <div className="ghost-outline absolute left-0 top-full z-20 mt-3 w-[420px] rounded-[28px] bg-[rgba(247,250,254,0.96)] p-4 shadow-[0_4px_24px_rgba(24,28,31,0.08)] backdrop-blur-xl">
+                      <div className="rounded-[22px] bg-[var(--color-panel-low)] px-4 py-4">
                         <p className="font-[var(--font-display)] text-lg font-semibold tracking-[-0.03em] text-[var(--color-text)]">
                           {item.label}
                         </p>
@@ -130,7 +130,7 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
                           <Link
                             key={child.href}
                             href={child.href}
-                            className="rounded-2xl border border-[var(--color-line)] bg-white/78 px-4 py-4 transition hover:border-[rgba(18,121,255,0.22)] hover:bg-white"
+                            className="rounded-2xl bg-white px-4 py-4 transition hover:bg-[var(--color-panel-low)]"
                           >
                             <p className="text-sm font-semibold text-[var(--color-text)]">{child.label}</p>
                             <p className="mt-1 text-sm leading-6 text-[var(--color-text-soft)]">{child.description}</p>
@@ -144,10 +144,10 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
                 <Link
                   key={item.href}
                   href={item.href!}
-                  className={`rounded-xl px-3 py-2 text-sm font-medium transition ${
+                  className={`rounded-md px-3 py-2 text-sm font-medium transition ${
                     isActive(item.href)
-                      ? "bg-[rgba(18,121,255,0.10)] text-[var(--color-brand)]"
-                      : "text-[var(--color-text-soft)] hover:bg-[rgba(22,32,51,0.04)] hover:text-[var(--color-text)]"
+                      ? "bg-[var(--color-panel-high)] text-[var(--color-brand)]"
+                      : "text-[var(--color-text-soft)] hover:bg-[var(--color-panel-low)] hover:text-[var(--color-text)]"
                   }`}
                 >
                   {item.label}
@@ -165,7 +165,7 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
             </Link>
             <Link
               href={content.primaryCta.href}
-              className="cta-lift inline-flex rounded-full bg-[var(--color-text)] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_18px_38px_rgba(22,32,51,0.14)]"
+              className="cta-lift inline-flex rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(24,28,31,0.08)]"
             >
               {content.primaryCta.label}
             </Link>
@@ -175,7 +175,7 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
             type="button"
             aria-label="Toggle navigation"
             onClick={() => setOpen((value) => !value)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-line)] bg-white/72 text-[var(--color-text)] lg:hidden"
+            className="ghost-outline inline-flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(255,255,255,0.86)] text-[var(--color-text)] lg:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -183,17 +183,17 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
       </div>
 
       {open ? (
-        <div className="mx-auto mt-3 max-w-[1280px] rounded-[28px] border border-[var(--color-line)] bg-white/92 p-5 shadow-[0_30px_70px_rgba(22,32,51,0.12)] backdrop-blur-xl lg:hidden">
+        <div className="ghost-outline mx-auto mt-3 max-w-[1280px] rounded-[28px] bg-[rgba(247,250,254,0.94)] p-5 shadow-[0_4px_24px_rgba(24,28,31,0.08)] backdrop-blur-xl lg:hidden">
           <div className="grid gap-2">
             {content.items.map((item) => (
               item.children ? (
-                <div key={item.label} className="rounded-[24px] border border-[var(--color-line)] bg-white/60 p-2">
+                <div key={item.label} className="rounded-[24px] bg-[var(--color-panel-low)] p-2">
                   <button
                     type="button"
                     onClick={() => setOpenDropdown((value) => (value === item.label ? null : item.label))}
                     className={`w-full rounded-2xl px-4 py-3 text-left text-sm font-medium transition ${
                       isDropdownActive(item)
-                        ? "bg-[rgba(18,121,255,0.10)] text-[var(--color-brand)]"
+                        ? "bg-white text-[var(--color-brand)]"
                         : "text-[var(--color-text-soft)]"
                     }`}
                   >
@@ -222,8 +222,8 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
                   onClick={() => setOpen(false)}
                   className={`rounded-2xl px-4 py-3 text-sm font-medium transition ${
                     isActive(item.href)
-                      ? "bg-[rgba(18,121,255,0.10)] text-[var(--color-brand)]"
-                      : "bg-white/50 text-[var(--color-text-soft)]"
+                      ? "bg-white text-[var(--color-brand)]"
+                      : "bg-[var(--color-panel-low)] text-[var(--color-text-soft)]"
                   }`}
                 >
                   {item.label}
@@ -235,14 +235,14 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
             <Link
               href={content.secondaryCta.href}
               onClick={() => setOpen(false)}
-              className="cta-lift inline-flex justify-center rounded-full border border-[var(--color-line)] bg-white px-4 py-3 text-sm font-semibold text-[var(--color-text)]"
+              className="cta-lift inline-flex justify-center rounded-md bg-[var(--color-panel-high)] px-4 py-3 text-sm font-semibold text-[var(--color-brand)]"
             >
               {content.secondaryCta.label}
             </Link>
             <Link
               href={content.primaryCta.href}
               onClick={() => setOpen(false)}
-              className="cta-lift inline-flex justify-center rounded-full bg-[var(--color-text)] px-4 py-3 text-sm font-semibold text-white"
+              className="cta-lift inline-flex justify-center rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-4 py-3 text-sm font-semibold text-white"
             >
               {content.primaryCta.label}
             </Link>

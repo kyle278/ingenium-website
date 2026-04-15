@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 
 import {
   ORGANIZATION_NAME,
+  ORGANIZATION_LEGAL_NAME,
   PRIVATE_PATHS,
   PRIVATE_PATH_PREFIXES,
   SITE_NAME,
@@ -24,6 +25,9 @@ const routeLabelMap: Record<string, string> = {
   "/case-studies": "Case Studies",
   "/implementation": "Implementation",
   "/contact": "Contact",
+  "/demo": "Demo",
+  "/revenue-systems-teardown": "Revenue Systems Teardown",
+  "/technical-review": "Technical Review",
 };
 
 function toAbsoluteUrl(pathname: string) {
@@ -64,11 +68,12 @@ function buildOrganizationSchema(): JsonLd {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: ORGANIZATION_NAME,
+    legalName: ORGANIZATION_LEGAL_NAME,
     url: SITE_URL,
     logo: `${SITE_URL}/logo.svg`,
     email: "hello@ingeniumconsulting.net",
     description:
-      "Ingenium is the revenue operating system for lean service businesses, connecting website lead capture, CRM execution, workflow automation, delivery visibility, reporting, and governed AI agents.",
+      "Ingenium helps service businesses replace disconnected websites, CRM, automation, reporting, and AI tools with one revenue operating system.",
   };
 }
 
@@ -112,6 +117,18 @@ function buildServiceSchema(pathname: string): JsonLd | null {
     "/security": {
       name: "Ingenium Governance",
       description: "Role-based access, approval paths, audit history, and technical review support.",
+    },
+    "/demo": {
+      name: "Ingenium Demo",
+      description: "A guided platform walkthrough for service businesses evaluating their revenue operating model.",
+    },
+    "/revenue-systems-teardown": {
+      name: "Revenue Systems Teardown",
+      description: "An audit of the gaps between website, CRM, automation, handoff, and reporting.",
+    },
+    "/technical-review": {
+      name: "Technical Review",
+      description: "Architecture, governance, and data-handling review for technical stakeholders.",
     },
   };
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 
 import { getIngeniumTrackingPayload } from "@/lib/ingeniumTrackingPayload";
@@ -11,10 +12,13 @@ type ContactFormProps = {
   formId: string;
   formSlug: string;
   formName: string;
+  intent?: string;
+  submitLabel?: string;
+  successRedirect?: string;
 };
 
 const fieldClassName =
-  "w-full rounded-2xl border border-[var(--color-line-strong)] bg-white/80 px-4 py-3 text-sm text-[var(--color-text)] outline-none transition focus:border-[var(--color-brand)] focus:ring-2 focus:ring-[rgba(18,121,255,0.14)]";
+  "w-full rounded-lg bg-[var(--color-panel-low)] px-4 py-3 text-sm text-[var(--color-text)] outline-none transition focus:bg-white focus:ring-2 focus:ring-[rgba(0,87,191,0.18)]";
 
 function splitFullName(fullName: string) {
   const parts = fullName
@@ -48,7 +52,15 @@ function createIdempotencyKey() {
   return `contact_submit_${Date.now()}`;
 }
 
-export default function ContactForm({ formId, formSlug, formName }: ContactFormProps) {
+export default function ContactForm({
+  formId,
+  formSlug,
+  formName,
+  intent,
+  submitLabel = "Submit Request",
+  successRedirect,
+}: ContactFormProps) {
+  const router = useRouter();
   const [step, setStep] = useState<FormStep>(1);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [stepAnimationKey, setStepAnimationKey] = useState(0);
@@ -89,7 +101,7 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
     const trimmedStack = stack.trim();
     const trimmedGoals = goals.trim();
     const { firstName, lastName } = splitFullName(trimmedName);
-    const intent = getQueryParam(new URLSearchParams(window.location.search), "intent");
+    const resolvedIntent = intent ?? getQueryParam(new URLSearchParams(window.location.search), "intent");
 
     const fields: Record<string, unknown> = {
       name: trimmedName,
@@ -107,7 +119,7 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
       current_stack: trimmedStack || null,
       budget_range: budgetRange || null,
       additional_goals: trimmedGoals || null,
-      intent,
+      intent: resolvedIntent,
     };
 
     try {
@@ -136,6 +148,11 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
         throw new Error(message);
       }
 
+      if (successRedirect) {
+        router.push(successRedirect);
+        return;
+      }
+
       setSubmitState("success");
       setErrorMessage("");
     } catch (error) {
@@ -151,8 +168,8 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
 
   if (submitState === "success") {
     return (
-      <div className="rounded-[28px] border border-[var(--color-line)] bg-white/72 px-6 py-10 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(18,121,255,0.10)]">
+      <div className="rounded-[28px] bg-white px-6 py-10 text-center shadow-[0_4px_24px_rgba(24,28,31,0.06)]">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(0,87,191,0.10)]">
           <CheckCircle2 className="h-6 w-6 text-[var(--color-brand)]" />
         </div>
         <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
@@ -174,7 +191,7 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
       data-form-slug={formSlug}
       data-form-name={formName}
     >
-      <div className="flex items-center justify-between rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-3">
+      <div className="flex items-center justify-between rounded-2xl bg-[var(--color-panel-low)] px-4 py-3">
         <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
           Step {step} of 2
         </p>
@@ -183,9 +200,9 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
         </p>
       </div>
 
-      <div className="h-1.5 rounded-full bg-[var(--color-bg-strong)]">
+      <div className="h-1.5 rounded-full bg-[var(--color-panel-mid)]">
         <div
-          className="h-full rounded-full bg-[var(--color-brand)] transition-[width] duration-300"
+          className="h-full rounded-full bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] transition-[width] duration-300"
           style={{ width: step === 1 ? "50%" : "100%" }}
         />
       </div>
@@ -264,7 +281,7 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
         <div className="grid gap-3 sm:grid-cols-2">
           <button
             type="button"
-            className="cta-lift inline-flex items-center justify-center gap-2 rounded-full border border-[var(--color-line-strong)] bg-white px-5 py-3 text-sm font-semibold text-[var(--color-text)]"
+            className="cta-lift inline-flex items-center justify-center gap-2 rounded-md bg-[var(--color-panel-high)] px-5 py-3 text-sm font-semibold text-[var(--color-brand)]"
             onClick={() => setStep(1)}
             disabled={isSubmitting}
           >
@@ -272,19 +289,19 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
             Back
           </button>
           <button
-            className="cta-lift inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-text)] px-5 py-3 text-sm font-semibold text-white"
+            className="cta-lift inline-flex items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 text-sm font-semibold text-white"
             type="submit"
             disabled={isSubmitting}
             data-track-cta="contact_submit"
             data-track-label="Submit Request"
           >
-            {isSubmitting ? "Submitting..." : "Submit Request"}
+            {isSubmitting ? "Submitting..." : submitLabel}
             {isSubmitting ? null : <ArrowRight className="h-4 w-4" />}
           </button>
         </div>
       ) : (
         <button
-          className="cta-lift inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-text)] px-5 py-3 text-sm font-semibold text-white"
+          className="cta-lift inline-flex w-full items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 text-sm font-semibold text-white"
           type="submit"
           disabled={isSubmitting}
           data-track-cta="contact_continue"
@@ -295,7 +312,7 @@ export default function ContactForm({ formId, formSlug, formName }: ContactFormP
         </button>
       )}
 
-      {errorMessage ? <p className="text-sm text-rose-500">{errorMessage}</p> : null}
+      {errorMessage ? <p className="text-sm text-[var(--color-error)]">{errorMessage}</p> : null}
 
       <p className="text-center text-xs text-[var(--color-text-muted)]">
         Prefer email? Reach us at <span className="font-medium text-[var(--color-brand)]">hello@ingeniumconsulting.net</span>

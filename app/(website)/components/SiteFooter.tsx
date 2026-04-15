@@ -16,7 +16,7 @@ type SiteFooterContent = {
 
 export default function SiteFooter({ content }: { content: SiteFooterContent }) {
   return (
-    <footer className="border-t border-[var(--color-line)] bg-white/38">
+    <footer className="bg-[rgba(241,244,248,0.76)]">
       <div className="mx-auto max-w-[1280px] px-4 py-16 sm:px-6 lg:px-8">
         <div className="mineral-panel rounded-[36px] p-8 md:p-10">
           <div className="grid gap-10 lg:grid-cols-[1.1fr,0.9fr]">
@@ -28,7 +28,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
                     Ingenium
                   </p>
                   <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
-                    Revenue and operations platform
+                    Revenue operating system
                   </p>
                 </div>
               </div>
@@ -36,7 +36,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
                 {content.summary}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
-                {["CRM", "Custom AI Agents", "Process Automations", "Website Design & Builds"].map((item) => (
+                {["Website capture", "CRM execution", "Workflow automation", "Governed AI support"].map((item) => (
                   <MonoTag key={item}>{item}</MonoTag>
                 ))}
               </div>
@@ -72,9 +72,9 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
             </div>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--color-line)] pt-6 text-sm text-[var(--color-text-muted)]">
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 pt-6 text-sm text-[var(--color-text-muted)]">
             <p>© 2026 Ingenium Digital Consulting</p>
-            <p>Portal-linked tracking, phased rollout support, and buyer-ready technical review paths.</p>
+            <p>Clear paths for demos, teardown audits, and technical review.</p>
           </div>
         </div>
       </div>

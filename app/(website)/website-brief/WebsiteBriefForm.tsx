@@ -14,10 +14,10 @@ type WebsiteBriefFormProps = {
 type SubmitState = "idle" | "success";
 
 const fieldClassName =
-  "w-full rounded-lg border border-slate-700 bg-slate-800/60 px-4 py-3 text-sm text-slate-200 placeholder-slate-500 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30";
+  "w-full rounded-lg bg-[var(--color-panel-low)] px-4 py-3 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] outline-none transition focus:bg-white focus:ring-2 focus:ring-[rgba(0,87,191,0.18)]";
 
 const checkboxClassName =
-  "h-4 w-4 rounded border-slate-600 bg-slate-900 text-emerald-500 focus:ring-emerald-500/40";
+  "h-4 w-4 rounded border-[var(--color-ghost)] bg-white text-[var(--color-brand)] focus:ring-[rgba(0,87,191,0.2)]";
 
 const steps = [
   { title: "Contact", detail: "Who we are planning with" },
@@ -244,13 +244,13 @@ export default function WebsiteBriefForm({
   if (submitState === "success") {
     return (
       <div className="py-8 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10">
-          <CheckCircle2 className="h-6 w-6 text-emerald-400" />
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(0,87,191,0.10)]">
+          <CheckCircle2 className="h-6 w-6 text-[var(--color-brand)]" />
         </div>
-        <h3 className="mt-4 font-(--font-display) text-lg font-bold text-white">
+        <h3 className="mt-4 font-[var(--font-display)] text-lg font-semibold text-[var(--color-text)]">
           Brief received
         </h3>
-        <p className="mt-2 text-sm text-slate-400">
+        <p className="mt-2 text-sm text-[var(--color-text-soft)]">
           Thanks. We have the core details we need and will follow up with next steps shortly.
         </p>
       </div>
@@ -266,19 +266,19 @@ export default function WebsiteBriefForm({
       data-form-slug={formSlug}
       data-form-name={formName}
     >
-      <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2">
+      <div className="flex items-center justify-between rounded-lg bg-[var(--color-panel-low)] px-3 py-2">
         <div>
-          <p className="font-(--font-mono) text-[11px] uppercase tracking-widest text-slate-500">
+          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
             Step {step + 1} of {steps.length}
           </p>
-          <p className="mt-1 text-xs text-slate-500">{steps[step]?.detail}</p>
+          <p className="mt-1 text-xs text-[var(--color-text-muted)]">{steps[step]?.detail}</p>
         </div>
-        <p className="text-xs font-medium text-emerald-300">{steps[step]?.title}</p>
+        <p className="text-xs font-medium text-[var(--color-brand)]">{steps[step]?.title}</p>
       </div>
 
-      <div className="h-1.5 rounded-full bg-slate-800">
+      <div className="h-1.5 rounded-full bg-[var(--color-panel-mid)]">
         <div
-          className="h-full rounded-full bg-emerald-500 transition-[width] duration-300 ease-out"
+          className="h-full rounded-full bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] transition-[width] duration-300 ease-out"
           style={{ width: progressPercent }}
         />
       </div>
@@ -286,7 +286,7 @@ export default function WebsiteBriefForm({
       {step === 0 ? (
         <div key={`step-0-${stepAnimationKey}`} className="form-step-enter grid gap-5 sm:grid-cols-2">
           <label className="block space-y-2 sm:col-span-2">
-            <span className="text-sm font-medium text-slate-300">Full name *</span>
+            <span className="text-sm font-medium text-[var(--color-text)]">Full name *</span>
             <input
               className={fieldClassName}
               type="text"
@@ -298,7 +298,7 @@ export default function WebsiteBriefForm({
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Work email *</span>
+            <span className="text-sm font-medium text-[var(--color-text)]">Work email *</span>
             <input
               className={fieldClassName}
               type="email"
@@ -310,7 +310,7 @@ export default function WebsiteBriefForm({
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Phone</span>
+            <span className="text-sm font-medium text-[var(--color-text)]">Phone</span>
             <input
               className={fieldClassName}
               type="tel"
@@ -321,7 +321,7 @@ export default function WebsiteBriefForm({
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Company *</span>
+            <span className="text-sm font-medium text-[var(--color-text)]">Company *</span>
             <input
               className={fieldClassName}
               type="text"
@@ -333,7 +333,7 @@ export default function WebsiteBriefForm({
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Current website</span>
+            <span className="text-sm font-medium text-[var(--color-text)]">Current website</span>
             <input
               className={fieldClassName}
               type="url"
@@ -348,7 +348,7 @@ export default function WebsiteBriefForm({
       {step === 1 ? (
         <div key={`step-1-${stepAnimationKey}`} className="form-step-enter space-y-5">
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">
+              <span className="text-sm font-medium text-[var(--color-text)]">
               What does the business do, and what should the site help achieve? *
             </span>
             <textarea
@@ -361,7 +361,7 @@ export default function WebsiteBriefForm({
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Who is the site for?</span>
+            <span className="text-sm font-medium text-[var(--color-text)]">Who is the site for?</span>
             <input
               className={fieldClassName}
               type="text"
@@ -373,7 +373,7 @@ export default function WebsiteBriefForm({
 
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-300">Current website status *</span>
+              <span className="text-sm font-medium text-[var(--color-text)]">Current website status *</span>
               <select
                 className={fieldClassName}
                 value={currentSiteStatus}
@@ -389,7 +389,7 @@ export default function WebsiteBriefForm({
             </label>
 
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-300">Primary goal *</span>
+              <span className="text-sm font-medium text-[var(--color-text)]">Primary goal *</span>
               <select
                 className={fieldClassName}
                 value={primaryGoal}
@@ -411,7 +411,7 @@ export default function WebsiteBriefForm({
       {step === 2 ? (
         <div key={`step-2-${stepAnimationKey}`} className="form-step-enter space-y-5">
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">
+              <span className="text-sm font-medium text-[var(--color-text)]">
               What pages or sections do you expect on the site? *
             </span>
             <textarea
@@ -424,14 +424,14 @@ export default function WebsiteBriefForm({
           </label>
 
           <fieldset className="space-y-3">
-            <legend className="text-sm font-medium text-slate-300">
+            <legend className="text-sm font-medium text-[var(--color-text)]">
               Which features feel important?
             </legend>
             <div className="grid gap-3 sm:grid-cols-2">
               {featureOptions.map((option) => (
                 <label
                   key={option}
-                  className="flex items-center gap-3 rounded-lg border border-slate-800 bg-slate-900/55 px-4 py-3 text-sm text-slate-300"
+                  className="flex items-center gap-3 rounded-lg bg-[var(--color-panel-low)] px-4 py-3 text-sm text-[var(--color-text-soft)]"
                 >
                   <input
                     className={checkboxClassName}
@@ -451,7 +451,7 @@ export default function WebsiteBriefForm({
         <div key={`step-3-${stepAnimationKey}`} className="form-step-enter space-y-5">
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-300">Ideal timeline *</span>
+              <span className="text-sm font-medium text-[var(--color-text)]">Ideal timeline *</span>
               <select
                 className={fieldClassName}
                 value={timeline}
@@ -468,7 +468,7 @@ export default function WebsiteBriefForm({
             </label>
 
             <label className="block space-y-2">
-              <span className="text-sm font-medium text-slate-300">Brand assets ready?</span>
+              <span className="text-sm font-medium text-[var(--color-text)]">Brand assets ready?</span>
               <select
                 className={fieldClassName}
                 value={brandAssets}
@@ -483,7 +483,7 @@ export default function WebsiteBriefForm({
           </div>
 
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Do you need copy support?</span>
+            <span className="text-sm font-medium text-[var(--color-text)]">Do you need copy support?</span>
             <select
               className={fieldClassName}
               value={copySupport}
@@ -497,7 +497,7 @@ export default function WebsiteBriefForm({
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Reference or inspiration sites</span>
+            <span className="text-sm font-medium text-[var(--color-text)]">Reference or inspiration sites</span>
             <textarea
               className={`min-h-[96px] ${fieldClassName}`}
               placeholder="Share links or describe styles you like."
@@ -507,7 +507,7 @@ export default function WebsiteBriefForm({
           </label>
 
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-slate-300">Anything else we should know?</span>
+            <span className="text-sm font-medium text-[var(--color-text)]">Anything else we should know?</span>
             <textarea
               className={`min-h-[120px] ${fieldClassName}`}
               placeholder="Stakeholders, approvals, integrations, constraints, or launch deadlines."
@@ -521,7 +521,7 @@ export default function WebsiteBriefForm({
       <div className="grid gap-3 sm:grid-cols-2">
         <button
           type="button"
-          className="cta-lift inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900 px-7 py-3.5 text-sm font-semibold text-slate-200 transition hover:border-slate-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+          className="cta-lift inline-flex items-center justify-center gap-2 rounded-md bg-[var(--color-panel-high)] px-7 py-3.5 text-sm font-semibold text-[var(--color-brand)] transition disabled:cursor-not-allowed disabled:opacity-60"
           onClick={goToPreviousStep}
           disabled={step === 0 || isSubmitting}
         >
@@ -530,7 +530,7 @@ export default function WebsiteBriefForm({
         </button>
 
         <button
-          className="cta-lift inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-70"
+          className="cta-lift inline-flex items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(24,28,31,0.08)] transition disabled:cursor-not-allowed disabled:opacity-70"
           type="submit"
           disabled={isSubmitting}
           data-track-cta={isLastStep ? "website_brief_submit" : "website_brief_continue"}
@@ -541,9 +541,9 @@ export default function WebsiteBriefForm({
         </button>
       </div>
 
-      {errorMessage ? <p className="text-sm text-rose-400">{errorMessage}</p> : null}
+      {errorMessage ? <p className="text-sm text-[var(--color-error)]">{errorMessage}</p> : null}
 
-      <p className="text-center text-xs text-slate-600">
+      <p className="text-center text-xs text-[var(--color-text-muted)]">
         This page is only used for project intake and is not listed publicly on the main site.
       </p>
     </form>

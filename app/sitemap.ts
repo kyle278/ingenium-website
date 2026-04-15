@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { PUBLIC_DISCOVERY_PATHS, SITE_URL } from "@/lib/seo";
+import { caseStudies } from "@/src/lib/caseStudies";
 
 const routePriority: Record<
   string,
@@ -20,11 +21,19 @@ const routePriority: Record<
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-
-  return PUBLIC_DISCOVERY_PATHS.map((path) => ({
+  const staticRoutes = PUBLIC_DISCOVERY_PATHS.map((path) => ({
     url: path === "/" ? SITE_URL : `${SITE_URL}${path}`,
     lastModified,
     changeFrequency: routePriority[path]?.changeFrequency ?? "monthly",
     priority: routePriority[path]?.priority ?? 0.5,
   }));
+
+  const caseStudyRoutes = caseStudies.map((study) => ({
+    url: `${SITE_URL}/case-studies/${study.id}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...caseStudyRoutes];
 }

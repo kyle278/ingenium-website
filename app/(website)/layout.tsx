@@ -15,22 +15,22 @@ const navContent = {
         {
           href: "/websites",
           label: "Websites",
-          description: "Turn your website into a lead capture and conversion system that feeds the CRM.",
+          description: "Conversion architecture that captures better enquiries and feeds the CRM cleanly.",
         },
         {
           href: "/crm",
           label: "CRM",
-          description: "Keep pipeline, ownership, follow-up, and delivery handoff in one working system.",
+          description: "Record design, pipeline discipline, and handoff continuity in one operating layer.",
         },
         {
           href: "/ai-agents",
           label: "AI Agents",
-          description: "Use custom AI agents for prep work, summaries, monitoring, and guided next steps.",
+          description: "Governed AI support with approvals, review paths, and audit history.",
         },
         {
           href: "/automations",
           label: "Automations",
-          description: "Run routing, escalation, lifecycle, and SLA workflows without fragile glue.",
+          description: "Trigger-owner-escalation logic that keeps the work moving.",
         },
       ],
     },
@@ -39,13 +39,13 @@ const navContent = {
     { href: "/implementation", label: "Implementation" },
     { href: "/contact", label: "Contact" },
   ],
-  primaryCta: { label: "Book Demo", href: "/contact?intent=book-demo" },
+  primaryCta: { label: "Book Demo", href: "/demo" },
   secondaryCta: { label: "See the Platform", href: "/platform" },
 };
 
 const footerContent = {
   summary:
-    "Ingenium brings website lead capture, CRM work, automations, reporting, and custom AI agents into one connected platform for modern service businesses.",
+    "Ingenium helps service businesses run acquisition, CRM execution, handoff, reporting, and governed AI support in one accountable operating system.",
   sitemap: [
     { href: "/", label: "Home" },
     { href: "/platform", label: "Platform" },
@@ -59,9 +59,9 @@ const footerContent = {
     { href: "/contact", label: "Contact" },
   ],
   actions: [
-    { href: "/contact?intent=book-demo", label: "Book Demo" },
+    { href: "/demo", label: "Book Demo" },
     { href: "/platform", label: "See the Platform" },
-    { href: "/contact?intent=revenue-systems-teardown", label: "Get a Revenue Systems Teardown" },
+    { href: "/revenue-systems-teardown", label: "Get a Revenue Systems Teardown" },
   ],
 };
 
@@ -71,9 +71,9 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
       <RouteStructuredData />
 
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="ambient-drift-a absolute -top-24 right-[-5rem] h-72 w-72 rounded-full bg-[rgba(18,121,255,0.10)] blur-[100px]" />
-        <div className="ambient-drift-b absolute top-[24%] left-[-8rem] h-96 w-96 rounded-full bg-[rgba(14,165,164,0.08)] blur-[120px]" />
-        <div className="ambient-drift-c absolute bottom-[-10rem] right-[18%] h-80 w-80 rounded-full bg-[rgba(22,32,51,0.06)] blur-[100px]" />
+        <div className="ambient-drift-a absolute -top-24 right-[-5rem] h-72 w-72 rounded-full bg-[rgba(0,87,191,0.08)] blur-[100px]" />
+        <div className="ambient-drift-b absolute top-[24%] left-[-8rem] h-96 w-96 rounded-full bg-[rgba(0,103,102,0.08)] blur-[120px]" />
+        <div className="ambient-drift-c absolute bottom-[-10rem] right-[18%] h-80 w-80 rounded-full bg-[rgba(24,28,31,0.05)] blur-[100px]" />
       </div>
 
       <div className="relative">

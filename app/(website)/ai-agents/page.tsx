@@ -10,45 +10,44 @@ export const metadata: Metadata = buildMetadata(pageSeo["/ai-agents"]);
 export default function AiAgentsPage() {
   return (
     <div className="space-y-20 pb-8 md:space-y-28">
-      <section className="grid items-center gap-10 pt-4 lg:grid-cols-[0.94fr,1.06fr]">
+      <section className="grid items-center gap-10 pt-4 lg:grid-cols-[0.92fr,1.08fr]">
         <div>
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
-            AI Agents
+            AI Support
           </p>
           <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
-            AI agents your team can actually trust.
+            AI support with approval, control, and audit history.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            Ingenium uses AI inside real business workflows, so teams get useful support without losing control, visibility, or accountability.
+            For service businesses that want practical AI without governance drift, Ingenium replaces sidecar tools with workflow-bound AI so teams get useful prep, monitoring, and summaries while keeping sensitive actions inside clear approval rules.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink action={{ label: "See AI in the Platform", href: "/platform" }} />
-            <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} variant="secondary" />
+            <ButtonLink action={{ label: "Book Demo", href: "/demo" }} />
+            <ButtonLink action={{ label: "Technical Review", href: "/technical-review" }} variant="secondary" />
           </div>
         </div>
         <PortalPreview
-          eyebrow="AI workflow"
-          title="AI helps where it saves time and still leaves the team in control"
+          eyebrow="Governed AI"
+          title="Useful AI starts with bounded tasks and visible review"
           rows={[
-            { label: "Sales prep", value: "Briefs and next-step suggestions generated", state: "Ready" },
-            { label: "Ops support", value: "Routing and hygiene issues flagged", state: "Visible" },
-            { label: "Leadership", value: "Summaries and alerts prepared", state: "Review" },
+            { label: "Scope", value: "AI prepares work inside approved task boundaries", state: "Defined" },
+            { label: "Approval", value: "Sensitive actions pause for review when needed", state: "Required" },
+            { label: "History", value: "Output and operator decisions stay attached to the record", state: "Tracked" },
           ]}
         />
       </section>
 
       <section>
         <SectionIntro
-          eyebrow="What AI should actually do"
-          title="Use AI for useful work, not vague promises."
-          body="The best AI use cases are practical: preparing work, surfacing risk, summarising information, and helping the team move faster."
+          eyebrow="Good use cases"
+          title="Keep AI close to the workflow and far from vague promises."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {[
-            "Draft follow-up and account prep",
-            "QA marketing and campaign work",
-            "Monitor hygiene, routing, and reporting issues",
-            "Create summaries and alerts for leadership",
+            "Draft account prep and follow-up suggestions.",
+            "Flag hygiene, routing, or reporting issues for review.",
+            "Prepare summaries for sales, ops, and leadership.",
+            "Support approvals without hiding what was generated.",
           ].map((item) => (
             <SurfaceCard key={item} className="panel-hover p-6 text-sm leading-7 text-[var(--color-text-soft)]">
               {item}
@@ -60,15 +59,15 @@ export default function AiAgentsPage() {
       <section className="grid gap-6 xl:grid-cols-2">
         <SurfaceCard className="p-8">
           <SectionIntro
-            eyebrow="Control"
-            title="The team should know what the AI did, where it fits, and what happens next."
+            eyebrow="Control layer"
+            title="The AI page should feel like governance, not theatre."
           />
           <div className="mt-8 grid gap-3">
             {[
-              "Each task has a clear scope before the agent runs.",
-              "Sensitive actions can require approval.",
-              "Operators can review what the AI prepared.",
-              "Execution history stays attached to the record.",
+              "Each AI task has a clear scope before it runs.",
+              "Approvals can be required by risk, stage, or stakeholder role.",
+              "Operators can review output before anything customer-facing happens.",
+              "The audit trail shows what the AI prepared and what the human approved.",
             ].map((item) => (
               <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
                 {item}
@@ -82,10 +81,10 @@ export default function AiAgentsPage() {
           </p>
           <div className="mt-8 grid gap-3">
             {[
-              "Teams save time on prep work and routine analysis.",
-              "AI output stays tied to the actual customer record.",
-              "Leaders get more visibility without more manual reporting.",
-              "The business gets leverage without creating a sidecar AI mess.",
+              "Teams save time on prep and routine analysis.",
+              "Buyers see that AI is governed instead of bolted on.",
+              "Technical reviewers get a cleaner story around controls.",
+              "Leaders gain leverage without creating a second shadow workflow.",
             ].map((item) => (
               <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
                 {item}
@@ -97,11 +96,11 @@ export default function AiAgentsPage() {
 
       <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
-          AI is valuable when it helps the workflow instead of sitting beside it.
+          AI becomes commercially useful when it stays inside the same approval and audit model as the rest of the workflow.
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} className="bg-white text-[var(--color-text)]" />
-          <ButtonLink action={{ label: "Technical Review", href: "/contact?intent=technical-review" }} variant="secondary" className="border-white/18 bg-white/8 text-white" />
+          <ButtonLink action={{ label: "Book Demo", href: "/demo" }} className="bg-white text-[var(--color-text)]" />
+          <ButtonLink action={{ label: "Technical Review", href: "/technical-review" }} variant="secondary" className="border-white/18 bg-white/8 text-white" />
         </div>
       </section>
     </div>

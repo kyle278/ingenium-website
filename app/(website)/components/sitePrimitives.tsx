@@ -12,16 +12,16 @@ type ButtonLinkProps = {
 };
 
 export const sectionEyebrowClass =
-  "font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]";
+  "font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]";
 
 export const primaryButtonClass =
-  "cta-lift inline-flex items-center justify-center rounded-full bg-[var(--color-text)] px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(22,32,51,0.12)]";
+  "cta-lift inline-flex items-center justify-center rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(24,28,31,0.08)]";
 
 export const secondaryButtonClass =
-  "cta-lift inline-flex items-center justify-center rounded-full border border-[var(--color-line-strong)] bg-white/70 px-5 py-3 text-sm font-semibold text-[var(--color-text)]";
+  "cta-lift inline-flex items-center justify-center rounded-md bg-[var(--color-panel-high)] px-5 py-3 text-sm font-semibold text-[var(--color-brand)]";
 
 export const tertiaryButtonClass =
-  "inline-flex items-center justify-center text-sm font-semibold text-[var(--color-brand)]";
+  "inline-flex items-center justify-center text-sm font-semibold text-[var(--color-brand)] hover:underline";
 
 export function ButtonLink({ action, variant = "primary", className = "" }: ButtonLinkProps) {
   const baseClass =

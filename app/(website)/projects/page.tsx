@@ -9,7 +9,7 @@ import { buildMetadata, pageSeo } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/projects"]);
 
-const sectionLabel = "font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400";
+const sectionLabel = "font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]";
 
 export default function ProjectsPage() {
   const itemListSchema = {
@@ -33,10 +33,10 @@ export default function ProjectsPage() {
 
       <section className="pt-8 text-center">
         <p className={sectionLabel}>Projects</p>
-        <h1 className="mx-auto mt-6 max-w-4xl font-(--font-display) text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          Real client delivery work, not placeholder proof.
+        <h1 className="mx-auto mt-6 max-w-4xl font-[var(--font-display)] text-4xl font-semibold tracking-[-0.03em] text-[var(--color-text)] sm:text-5xl">
+          Real client delivery work, organised around what changed for the buyer journey.
         </h1>
-        <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-400">
+        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
           Review named client projects across service websites, project libraries, booking paths,
           quote flows, and proof systems built to make buying easier.
         </p>
@@ -50,29 +50,29 @@ export default function ProjectsPage() {
               aria-label={`View ${project.projectName} project details`}
               className="group block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70"
             >
-              <article className="metric-card rounded-2xl border border-slate-800 bg-slate-900/50 p-6">
+              <article className="mineral-panel metric-card rounded-[28px] p-6">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-md border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1 font-(--font-mono) text-[10px] uppercase tracking-wider text-emerald-400">
+                  <span className="tech-pill rounded-md px-2.5 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-wider text-[var(--color-brand)]">
                     {project.industry}
                   </span>
-                  <span className="rounded-md border border-slate-800 bg-slate-900 px-2.5 py-1 font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-500">
+                  <span className="rounded-md bg-[var(--color-panel-low)] px-2.5 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">
                     {project.timeframe}
                   </span>
                 </div>
 
-                <h2 className="mt-4 font-(--font-display) text-2xl font-bold text-white">
+                <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold text-[var(--color-text)]">
                   {project.projectName}
                 </h2>
-                <p className="mt-1 text-sm text-slate-500">
+                <p className="mt-1 text-sm text-[var(--color-text-muted)]">
                   {project.clientName} - {project.clientSize}
                 </p>
-                <p className="mt-4 text-sm leading-relaxed text-slate-400">{project.teaser}</p>
+                <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{project.teaser}</p>
 
                 <div className="mt-5 flex flex-wrap gap-2">
                   {project.services.map((service) => (
                     <span
                       key={`${project.slug}-${service}`}
-                      className="rounded-md border border-slate-800 bg-slate-900/70 px-2.5 py-1 text-xs text-slate-400"
+                      className="rounded-md bg-[var(--color-panel-low)] px-2.5 py-1 text-xs text-[var(--color-text-soft)]"
                     >
                       {service}
                     </span>
@@ -82,8 +82,8 @@ export default function ProjectsPage() {
                 <div className="mt-5 space-y-2">
                   {project.insights.slice(0, 3).map((insight) => (
                     <div key={insight} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                      <p className="text-sm text-slate-300">{insight}</p>
+                      <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--color-accent)]" />
+                      <p className="text-sm text-[var(--color-text-soft)]">{insight}</p>
                     </div>
                   ))}
                 </div>
@@ -92,19 +92,15 @@ export default function ProjectsPage() {
                   {project.outcomeMetrics.map((metric) => (
                     <div
                       key={`${project.slug}-${metric.label}`}
-                      className="rounded-lg border border-slate-800 bg-slate-900/70 p-3 text-center"
+                      className="rounded-lg bg-[var(--color-panel-low)] p-3 text-center"
                     >
-                      <AnimatedMetric
-                        as="p"
-                        className="metric-display text-xl font-bold text-emerald-400"
-                        value={metric.value}
-                      />
-                      <p className="mt-1 text-[11px] leading-tight text-slate-500">{metric.label}</p>
-                    </div>
-                  ))}
+                  <AnimatedMetric as="p" className="metric-display text-xl font-bold text-[var(--color-brand)]" value={metric.value} />
+                  <p className="mt-1 text-[11px] leading-tight text-[var(--color-text-muted)]">{metric.label}</p>
+                </div>
+              ))}
                 </div>
 
-                <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-emerald-400 transition group-hover:text-emerald-300">
+                <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[var(--color-brand)] transition group-hover:text-[var(--color-brand-strong)]">
                   View full project breakdown
                   <ArrowRight className="h-4 w-4" />
                 </div>
@@ -114,33 +110,33 @@ export default function ProjectsPage() {
         ))}
       </section>
 
-      <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-14">
+      <section className="graphite-panel relative overflow-hidden rounded-[36px] p-10 text-center md:p-14">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-35" />
         <div className="relative">
           <p className={sectionLabel}>Next Step</p>
-          <h2 className="mx-auto mt-4 max-w-3xl font-(--font-display) text-2xl font-bold text-white sm:text-3xl">
+          <h2 className="mx-auto mt-4 max-w-3xl font-[var(--font-display)] text-2xl font-semibold text-white sm:text-3xl">
             Want proof packaged this clearly for your own sales process?
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-slate-400">
+          <p className="mx-auto mt-4 max-w-xl text-white/72">
             We scope the architecture, proof system, and conversion path before design drift or tool sprawl slows the build down.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/contact?intent=strategy-call"
-              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-500"
+              href="/revenue-systems-teardown"
+              className="cta-lift inline-flex items-center gap-2 rounded-md bg-white px-6 py-3 text-sm font-semibold text-[var(--color-text)]"
             >
-              Book a Strategy Review
+              Request a Revenue Systems Teardown
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/contact?intent=case-study-request"
-              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 hover:border-slate-600 hover:text-white"
+              href="/demo"
+              className="cta-lift inline-flex items-center gap-2 rounded-md bg-white/10 px-6 py-3 text-sm font-semibold text-white"
             >
-              Request Named Work Samples
+              Book Demo
               <BriefcaseBusiness className="h-4 w-4" />
             </Link>
           </div>
-          <p className="mt-5 flex items-center justify-center gap-2 font-(--font-mono) text-xs text-slate-600">
+          <p className="mt-5 flex items-center justify-center gap-2 font-[var(--font-mono)] text-xs text-white/55">
             <Clock className="h-3.5 w-3.5" />
             Typical implementation window: 6-10 weeks | Strategy, technical, and security review paths available
           </p>

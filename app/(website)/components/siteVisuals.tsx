@@ -21,10 +21,10 @@ export function SystemStackVisual() {
 
   return (
     <div className="relative mx-auto w-full max-w-[620px]">
-      <div className="absolute inset-x-10 top-10 h-40 rounded-full bg-[rgba(18,121,255,0.10)] blur-3xl" />
+      <div className="absolute inset-x-10 top-10 h-40 rounded-full bg-[rgba(0,87,191,0.10)] blur-3xl" />
       <SurfaceCard className="relative overflow-hidden p-0">
         <div className="grid-lines absolute inset-0 opacity-40" />
-        <div className="relative border-b border-[var(--color-line)] px-6 py-5">
+        <div className="relative px-6 py-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
@@ -34,11 +34,11 @@ export function SystemStackVisual() {
                 Website, CRM, automation, AI, and reporting in one view.
               </h3>
             </div>
-            <MonoTag className="bg-white/80 text-[var(--color-brand)]">Portal-linked</MonoTag>
+            <MonoTag className="bg-white/80 text-[var(--color-brand)]">Connected workflow</MonoTag>
           </div>
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
             {stages.map((stage) => (
-              <div key={stage.label} className="rounded-2xl border border-[var(--color-line)] bg-white/76 px-4 py-4">
+              <div key={stage.label} className="editorial-card rounded-2xl px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)]">{stage.label}</p>
                 <p className="mt-2 text-base font-semibold text-[var(--color-text)]">{stage.value}</p>
               </div>
@@ -47,7 +47,7 @@ export function SystemStackVisual() {
         </div>
 
         <div className="relative grid gap-4 px-5 py-5 lg:grid-cols-[1.05fr,0.95fr]">
-          <div className="rounded-[28px] border border-[var(--color-line)] bg-white/82 p-5 shadow-[0_18px_40px_rgba(22,32,51,0.05)]">
+          <div className="editorial-card rounded-[28px] p-5">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold text-[var(--color-text)]">Lead capture</p>
@@ -65,7 +65,7 @@ export function SystemStackVisual() {
               ].map(([label, value]) => (
                 <div
                   key={label}
-                  className="grid grid-cols-[auto,1fr] items-center gap-3 rounded-2xl border border-[var(--color-line)] bg-[rgba(245,248,252,0.9)] px-4 py-3"
+                  className="grid grid-cols-[auto,1fr] items-center gap-3 rounded-2xl bg-[var(--color-panel-low)] px-4 py-3"
                 >
                   <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">{label}</p>
                   <p className="text-sm font-medium text-[var(--color-text)]">{value}</p>
@@ -75,7 +75,7 @@ export function SystemStackVisual() {
           </div>
 
           <div className="grid gap-4">
-            <div className="rounded-[28px] border border-[var(--color-line)] bg-white/78 p-5">
+            <div className="rounded-[28px] bg-[var(--color-panel-low)] p-5">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold text-[var(--color-text)]">Pipeline</p>
                 <ChartColumn className="h-4 w-4 text-[var(--color-brand)]" />
@@ -86,7 +86,7 @@ export function SystemStackVisual() {
                   ["Proposal", "7"],
                   ["Handoff ready", "3"],
                 ].map(([label, value]) => (
-                  <div key={label} className="flex items-center justify-between rounded-2xl bg-[rgba(245,248,252,0.9)] px-4 py-3">
+                  <div key={label} className="flex items-center justify-between rounded-2xl bg-white px-4 py-3">
                     <span className="text-sm text-[var(--color-text-soft)]">{label}</span>
                     <span className="text-sm font-semibold text-[var(--color-text)]">{value}</span>
                   </div>
@@ -94,7 +94,7 @@ export function SystemStackVisual() {
               </div>
             </div>
 
-            <div className="rounded-[28px] border border-[rgba(18,121,255,0.14)] bg-[linear-gradient(180deg,rgba(18,121,255,0.08),rgba(255,255,255,0.9))] p-5">
+            <div className="rounded-[28px] bg-[linear-gradient(180deg,rgba(0,87,191,0.08),rgba(255,255,255,0.96))] p-5 shadow-[0_4px_24px_rgba(24,28,31,0.06)]">
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <p className="text-sm font-semibold text-[var(--color-text)]">AI suggestion</p>
@@ -104,7 +104,7 @@ export function SystemStackVisual() {
                 </div>
                 <Bot className="h-4 w-4 text-[var(--color-brand)]" />
               </div>
-              <div className="mt-4 rounded-2xl border border-white/70 bg-white/82 px-4 py-4 text-sm leading-6 text-[var(--color-text-soft)]">
+              <div className="mt-4 rounded-2xl bg-white px-4 py-4 text-sm leading-6 text-[var(--color-text-soft)]">
                 Buyer is asking for CRM cleanup, response speed, and clearer reporting. Recommend 30-minute demo with operations lead present.
               </div>
             </div>
@@ -126,7 +126,7 @@ export function PortalPreview({
 }) {
   return (
     <SurfaceCard className="overflow-hidden p-0">
-      <div className="border-b border-[var(--color-line)] px-5 py-4">
+      <div className="px-5 py-4">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
@@ -145,7 +145,7 @@ export function PortalPreview({
         {rows.map((row) => (
           <div
             key={`${row.label}-${row.value}`}
-            className="grid grid-cols-[1.1fr,1fr,auto] items-center gap-3 rounded-2xl border border-[var(--color-line)] bg-white/68 px-4 py-3"
+            className="grid grid-cols-[1.1fr,1fr,auto] items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-[0_2px_14px_rgba(24,28,31,0.04)]"
           >
             <p className="text-sm font-medium text-[var(--color-text)]">{row.label}</p>
             <p className="text-sm text-[var(--color-text-soft)]">{row.value}</p>
@@ -177,7 +177,7 @@ export function WorkflowStoryboard() {
           <ScrollReveal key={step.title} className="timeline-step" delayMs={index * 40}>
             <SurfaceCard className="panel-hover h-full p-6">
               <div className="flex items-start justify-between gap-4">
-                <div className="data-flow-dot flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(18,121,255,0.18)] bg-[rgba(18,121,255,0.08)] font-[var(--font-mono)] text-[11px] font-semibold text-[var(--color-brand)]">
+                <div className="data-flow-dot flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(0,87,191,0.08)] font-[var(--font-mono)] text-[11px] font-semibold text-[var(--color-brand)]">
                   {String(index + 1).padStart(2, "0")}
                 </div>
                 <Icon className="h-4 w-4 text-[var(--color-brand)]" />
@@ -220,7 +220,7 @@ export function GovernanceStack() {
         {items.map((item) => (
           <div
             key={item}
-            className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78"
+            className="rounded-2xl bg-white/8 px-4 py-4 text-sm text-white/78"
           >
             {item}
           </div>
@@ -259,7 +259,7 @@ export function ComparisonVisual() {
           {oldStack.map((item) => (
             <div
               key={item}
-              className="flex items-center justify-between rounded-2xl border border-[var(--color-line)] bg-white/70 px-4 py-3 text-sm text-[var(--color-text-soft)]"
+              className="flex items-center justify-between rounded-2xl bg-[var(--color-panel-low)] px-4 py-3 text-sm text-[var(--color-text-soft)]"
             >
               <span>{item}</span>
               <span className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
@@ -282,9 +282,9 @@ export function ComparisonVisual() {
           </div>
           <Sparkles className="h-5 w-5 text-cyan-300" />
         </div>
-        <div className="mt-6 rounded-[28px] border border-white/10 bg-white/6 p-5">
+        <div className="mt-6 rounded-[28px] bg-white/8 p-5">
           {ingenium.map((item) => (
-            <div key={item} className="flex items-start gap-3 border-b border-white/8 py-3 last:border-b-0">
+            <div key={item} className="flex items-start gap-3 py-3 last:border-b-0">
               <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />
               <p className="text-sm text-white/78">{item}</p>
             </div>

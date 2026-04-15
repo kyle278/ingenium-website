@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { buildMetadata, pageSeo } from "@/lib/seo";
 import { caseStudies } from "@/src/lib/caseStudies";
@@ -16,80 +17,96 @@ export default function CaseStudiesPage() {
             Case Studies
           </p>
           <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
-            Proof that the system works in the real world.
+            Real client work, explained in plain language.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            Show the work, the change, and the result clearly. Buyers should be able to understand what improved and why it mattered.
+            Each case study shows who it was for, what was getting in the way, what changed, and what a customer would notice.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} />
-            <ButtonLink action={{ label: "Get a Revenue Systems Teardown", href: "/contact?intent=revenue-systems-teardown" }} variant="secondary" />
+            <ButtonLink action={{ label: "Book Demo", href: "/demo" }} />
+            <ButtonLink
+              action={{ label: "Revenue Systems Teardown", href: "/revenue-systems-teardown" }}
+              variant="secondary"
+            />
           </div>
         </div>
       </section>
 
       <section>
         <SectionIntro
-          eyebrow="What each case proves"
-          title="Named work, clear change, and visible business value."
+          eyebrow="Client Proof"
+          title="Who it was for, what was blocking progress, and what improved."
         />
-        <div className="mt-10 space-y-6">
+        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {caseStudies.map((study) => (
-            <SurfaceCard key={study.id} className="p-8">
-              <div className="grid gap-6 xl:grid-cols-[0.9fr,1.1fr]">
-                <div>
-                  <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-                    {study.client}
-                  </p>
-                  <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
-                    {study.projectName}
-                  </h2>
-                  <div className="mt-5 grid gap-3 text-sm leading-7 text-[var(--color-text-soft)]">
-                    <p><strong className="text-[var(--color-text)]">Problem:</strong> {study.challenge}</p>
-                    <p><strong className="text-[var(--color-text)]">What changed:</strong> {study.intervention}</p>
-                    <p><strong className="text-[var(--color-text)]">What Ingenium improved:</strong> Clearer buyer journey, better workflow continuity, and stronger commercial visibility.</p>
-                    <p><strong className="text-[var(--color-text)]">Modules involved:</strong> Website, CRM structure, automation flow, and reporting visibility.</p>
-                  </div>
-                </div>
-                <div className="grid gap-4">
-                  <div className="rounded-[28px] border border-[var(--color-line)] bg-white/72 p-5">
-                    <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
-                      Delivered
+            <Link
+              key={study.id}
+              href={`/case-studies/${study.id}`}
+              aria-label={`View ${study.projectName} case study`}
+              className="group block rounded-[28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)]/45"
+            >
+              <SurfaceCard className="flex h-full flex-col p-5 transition group-hover:-translate-y-0.5">
+                <div className="flex h-full flex-col gap-4">
+                  <div>
+                    <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+                      {study.client} - {study.industry}
                     </p>
-                    <div className="mt-4 grid gap-3">
-                      {study.deliveredAssets.map((asset) => (
-                        <div key={asset} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
+                    <h2 className="mt-2 font-[var(--font-display)] text-xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+                      {study.projectName}
+                    </h2>
+                    <p className="mt-3 text-sm leading-6 text-[var(--color-text-soft)]">{study.challenge}</p>
+                  </div>
+
+                  <div className="rounded-[22px] border border-black/6 bg-white/72 p-4">
+                    <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                      What changed
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-[var(--color-text-soft)]">{study.intervention}</p>
+                  </div>
+
+                  <div className="mt-auto rounded-[22px] border border-black/6 bg-white/60 p-4">
+                    <div className="flex flex-wrap gap-1.5">
+                      {study.deliveredAssets.slice(0, 3).map((asset) => (
+                        <span
+                          key={asset}
+                          className="tech-pill inline-flex rounded-full px-2.5 py-1 text-[11px] leading-5 text-[var(--color-text-soft)]"
+                        >
                           {asset}
-                        </div>
+                        </span>
                       ))}
                     </div>
-                  </div>
-                  <div className="rounded-[28px] border border-[var(--color-line)] bg-white/72 p-5">
-                    <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
-                      Evidence
-                    </p>
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-3 flex flex-wrap gap-1.5">
                       {study.buildMetrics.map((metric) => (
-                        <span key={metric.label} className="tech-pill inline-flex rounded-full px-3 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-soft)]">
+                        <span
+                          key={metric.label}
+                          className="tech-pill inline-flex rounded-full px-2.5 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-soft)]"
+                        >
                           {metric.label}: {metric.value}
                         </span>
                       ))}
                     </div>
+                    <p className="mt-4 text-sm font-medium text-[var(--color-brand)]">
+                      View full case study
+                    </p>
                   </div>
                 </div>
-              </div>
-            </SurfaceCard>
+              </SurfaceCard>
+            </Link>
           ))}
         </div>
       </section>
 
       <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
-          Proof lands better when buyers can see the workflow change, not just a headline claim.
+          Buyers trust proof faster when they can see the issue, the fix, and the outcome.
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <ButtonLink action={{ label: "Book Demo", href: "/contact?intent=book-demo" }} className="bg-white text-[var(--color-text)]" />
-          <ButtonLink action={{ label: "Technical Review", href: "/contact?intent=technical-review" }} variant="secondary" className="border-white/18 bg-white/8 text-white" />
+          <ButtonLink action={{ label: "Book Demo", href: "/demo" }} className="bg-white text-[var(--color-text)]" />
+          <ButtonLink
+            action={{ label: "Technical Review", href: "/technical-review" }}
+            variant="secondary"
+            className="border-white/18 bg-white/8 text-white"
+          />
         </div>
       </section>
     </div>

@@ -13,8 +13,8 @@ export const metadata = buildMetadata(pageSeo["/website-brief"]);
 
 export const dynamic = "force-dynamic";
 
-const sectionLabel = "font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400";
-const darkCard = "rounded-2xl border border-slate-800 bg-slate-900/70 p-6";
+const sectionLabel = "font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]";
+const lightCard = "mineral-panel rounded-[28px] p-6";
 
 const valuePoints = [
   "Takes around 3 to 5 minutes",
@@ -61,18 +61,18 @@ export default async function WebsiteBriefPage() {
       <section className="grid items-start gap-8 lg:grid-cols-[1.05fr,0.95fr]">
         <div>
           <p className={sectionLabel}>Private Client Intake</p>
-          <h1 className="mt-5 max-w-3xl font-(--font-display) text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          <h1 className="mt-5 max-w-3xl font-[var(--font-display)] text-4xl font-semibold tracking-[-0.03em] text-[var(--color-text)] sm:text-5xl">
             Share the essentials for your new website build.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-400">
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
             This short project brief helps us understand your business, the shape of the site,
             and what needs to be ready for launch without dragging you through a heavy form.
           </p>
 
           <div className="mt-8 space-y-3">
             {valuePoints.map((item) => (
-              <div key={item} className="flex items-center gap-3 text-sm text-slate-300">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+              <div key={item} className="flex items-center gap-3 text-sm text-[var(--color-text-soft)]">
+                <CheckCircle2 className="h-4 w-4 text-[var(--color-accent)]" />
                 {item}
               </div>
             ))}
@@ -82,19 +82,19 @@ export default async function WebsiteBriefPage() {
             {intakeIncludes.map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.title} className={`${darkCard} min-h-[180px]`}>
-                  <Icon className="h-5 w-5 text-emerald-400" />
-                  <h2 className="mt-4 font-(--font-display) text-lg font-semibold text-white">
+                <div key={item.title} className={`${lightCard} min-h-[180px]`}>
+                  <Icon className="h-5 w-5 text-[var(--color-accent)]" />
+                  <h2 className="mt-4 font-[var(--font-display)] text-lg font-semibold text-[var(--color-text)]">
                     {item.title}
                   </h2>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-400">{item.body}</p>
+                  <p className="mt-2 text-sm leading-7 text-[var(--color-text-soft)]">{item.body}</p>
                 </div>
               );
             })}
           </div>
         </div>
 
-        <div className={`${darkCard} grid-lines`}>
+        <div className={`${lightCard} grid-lines`}>
           {websiteBriefForm ? (
             <WebsiteBriefForm
               formId={websiteBriefForm.id}
@@ -102,26 +102,26 @@ export default async function WebsiteBriefPage() {
               formName={websiteBriefForm.name}
             />
           ) : (
-            <div className="space-y-4 rounded-xl border border-rose-500/40 bg-rose-500/10 p-5">
-              <p className="font-(--font-mono) text-xs uppercase tracking-widest text-rose-300">
+            <div className="space-y-4 rounded-xl bg-rose-50 p-5">
+              <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-rose-500">
                 Form Configuration Required
               </p>
-              <h2 className="font-(--font-display) text-xl font-semibold text-white">
+              <h2 className="font-[var(--font-display)] text-xl font-semibold text-[var(--color-text)]">
                 Website brief form is not configured in Ingenium Portal.
               </h2>
-              <p className="text-sm leading-relaxed text-slate-300">
+              <p className="text-sm leading-7 text-[var(--color-text-soft)]">
                 Upsert the form row named{" "}
-                <span className="font-medium text-white">
+                <span className="font-medium text-[var(--color-text)]">
                   {WEBSITE_FORM_NAMES[WEBSITE_FORM_SLUGS.websiteProjectBrief]}
                 </span>{" "}
                 with slug{" "}
-                <span className="font-medium text-white">
+                <span className="font-medium text-[var(--color-text)]">
                   {WEBSITE_FORM_SLUGS.websiteProjectBrief}
                 </span>{" "}
                 in Portal, then reload this page.
               </p>
               {formResolutionError ? (
-                <p className="text-xs text-rose-200/80">{formResolutionError}</p>
+                <p className="text-xs text-rose-500">{formResolutionError}</p>
               ) : null}
             </div>
           )}

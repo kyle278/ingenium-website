@@ -2,19 +2,27 @@
 
 :root {
   color-scheme: light;
-  --color-brand: #1279ff;
-  --color-brand-strong: #0d64e8;
-  --color-accent: #0ea5a4;
-  --color-bg: #f5f2eb;
-  --color-bg-strong: #ece7dd;
-  --color-panel: rgba(255, 255, 255, 0.72);
-  --color-panel-strong: rgba(255, 255, 255, 0.9);
-  --color-line: rgba(34, 44, 62, 0.12);
-  --color-line-strong: rgba(34, 44, 62, 0.2);
-  --color-text: #162033;
-  --color-text-soft: #516079;
-  --color-text-muted: #718096;
-  --color-shadow: rgba(22, 32, 51, 0.08);
+  --color-brand: #0057bf;
+  --color-brand-strong: #006fef;
+  --color-accent: #006766;
+  --color-accent-soft: #7df5f4;
+  --color-bg: #f7fafe;
+  --color-bg-strong: #f1f4f8;
+  --color-panel: rgba(247, 250, 254, 0.78);
+  --color-panel-strong: rgba(255, 255, 255, 0.94);
+  --color-panel-low: #f1f4f8;
+  --color-panel-mid: #ebeef2;
+  --color-panel-high: #e0e3e7;
+  --color-panel-lifted: #ffffff;
+  --color-text: #181c1f;
+  --color-text-soft: #414755;
+  --color-text-muted: #667084;
+  --color-shadow: rgba(24, 28, 31, 0.06);
+  --color-shadow-strong: rgba(24, 28, 31, 0.08);
+  --color-ghost: rgba(193, 198, 215, 0.15);
+  --color-trust: #111b2e;
+  --color-trust-soft: #dbe7ff;
+  --color-error: #ba1a1a;
   --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -25,55 +33,67 @@ html {
 
 body {
   background:
-    radial-gradient(circle at top left, rgba(18, 121, 255, 0.08), transparent 26%),
-    radial-gradient(circle at 85% 12%, rgba(14, 165, 164, 0.08), transparent 18%),
-    linear-gradient(180deg, #f8f6f1 0%, var(--color-bg) 38%, #f1ede5 100%);
+    radial-gradient(circle at top left, rgba(0, 87, 191, 0.08), transparent 26%),
+    radial-gradient(circle at 85% 12%, rgba(0, 103, 102, 0.08), transparent 18%),
+    linear-gradient(180deg, #fbfdff 0%, var(--color-bg) 36%, var(--color-bg-strong) 100%);
   color: var(--color-text);
 }
 
 ::selection {
-  background: rgba(18, 121, 255, 0.18);
+  background: rgba(0, 87, 191, 0.16);
   color: var(--color-text);
 }
 
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(22, 32, 51, 0.09) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(24, 28, 31, 0.08) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 
 .grid-lines {
   background-image:
-    linear-gradient(rgba(22, 32, 51, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(22, 32, 51, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(24, 28, 31, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(24, 28, 31, 0.04) 1px, transparent 1px);
   background-size: 44px 44px;
 }
 
 .mineral-panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.66));
-  border: 1px solid var(--color-line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(241, 244, 248, 0.92));
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.75) inset,
-    0 24px 60px var(--color-shadow);
-  backdrop-filter: blur(20px);
+    0 4px 24px var(--color-shadow),
+    0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  backdrop-filter: blur(18px);
 }
 
 .graphite-panel {
   background:
-    linear-gradient(180deg, rgba(22, 32, 51, 0.96), rgba(28, 38, 56, 0.96));
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 28px 70px rgba(8, 15, 28, 0.28);
+    linear-gradient(180deg, rgba(17, 27, 46, 0.98), rgba(24, 36, 60, 0.98));
+  box-shadow: 0 18px 52px rgba(17, 27, 46, 0.18);
+}
+
+.tonal-section {
+  background: linear-gradient(180deg, var(--color-panel-low), rgba(235, 238, 242, 0.92));
+}
+
+.editorial-card {
+  background: var(--color-panel-lifted);
+  box-shadow: 0 4px 24px var(--color-shadow);
+}
+
+.ghost-outline {
+  outline: 1px solid var(--color-ghost);
 }
 
 .brushed-metal {
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(228, 233, 240, 0.88)),
-    linear-gradient(90deg, rgba(22, 32, 51, 0.04), rgba(255, 255, 255, 0.22), rgba(22, 32, 51, 0.04));
-  border: 1px solid rgba(34, 44, 62, 0.12);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(235, 238, 242, 0.96)),
+    linear-gradient(90deg, rgba(24, 28, 31, 0.03), rgba(255, 255, 255, 0.2), rgba(24, 28, 31, 0.03));
+  box-shadow: 0 4px 18px rgba(24, 28, 31, 0.04);
 }
 
 .tech-pill {
-  border: 1px solid rgba(34, 44, 62, 0.12);
-  background: rgba(255, 255, 255, 0.56);
+  background: rgba(235, 238, 242, 0.9);
   backdrop-filter: blur(12px);
 }
 
@@ -108,8 +128,7 @@ body {
 
 .panel-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 30px 70px rgba(22, 32, 51, 0.12);
-  border-color: rgba(18, 121, 255, 0.22);
+  box-shadow: 0 8px 28px var(--color-shadow-strong);
 }
 
 .timeline-step .timeline-dot {
@@ -133,7 +152,7 @@ body {
 .timeline-step[data-revealed="true"] .timeline-dot {
   transform: scale(1);
   opacity: 1;
-  box-shadow: 0 0 0 8px rgba(18, 121, 255, 0.08);
+  box-shadow: 0 0 0 8px rgba(0, 87, 191, 0.08);
 }
 
 .timeline-step[data-revealed="true"] .timeline-line {
@@ -150,7 +169,7 @@ body {
   position: absolute;
   inset: -5px;
   border-radius: 999px;
-  border: 1px solid rgba(18, 121, 255, 0.22);
+  border: 1px solid rgba(0, 87, 191, 0.22);
   opacity: 0;
   animation: flow-pulse 1.9s var(--motion-ease-out) infinite;
   animation-delay: calc(var(--flow-index, 0) * 120ms);
@@ -230,7 +249,7 @@ body {
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
   html {
     scrollbar-width: thin;
-    scrollbar-color: rgba(18, 121, 255, 0.5) rgba(241, 237, 229, 0.9);
+    scrollbar-color: rgba(0, 87, 191, 0.45) rgba(241, 244, 248, 0.95);
   }
 
   html::-webkit-scrollbar {
@@ -239,16 +258,16 @@ body {
   }
 
   html::-webkit-scrollbar-track {
-    background: rgba(241, 237, 229, 0.95);
+    background: rgba(241, 244, 248, 0.95);
   }
 
   html::-webkit-scrollbar-thumb {
-    background: rgba(18, 121, 255, 0.45);
+    background: rgba(0, 87, 191, 0.42);
     border-radius: 999px;
   }
 
   html::-webkit-scrollbar-thumb:hover {
-    background: rgba(18, 121, 255, 0.65);
+    background: rgba(0, 87, 191, 0.6);
   }
 }
 

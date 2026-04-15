@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 
 export const SITE_NAME = "Ingenium";
-export const ORGANIZATION_NAME = "Ingenium Digital Consulting";
+export const ORGANIZATION_NAME = "Ingenium";
+export const ORGANIZATION_LEGAL_NAME = "Ingenium Digital Consulting";
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumconsulting.net").replace(
   /\/$/,
   "",
 );
 export const DEFAULT_DESCRIPTION =
-  "Ingenium is the revenue operating system for lean service businesses, connecting website lead capture, CRM execution, automation, reporting, delivery visibility, and governed AI agents.";
+  "Ingenium helps service businesses replace disconnected websites, CRM, automation, reporting, and AI tools with one revenue operating system.";
 
 export const keywordClusters = {
   platform: [
@@ -82,9 +83,9 @@ type PageSeoConfig = {
 
 export const pageSeo: Record<string, PageSeoConfig> = {
   "/": {
-    title: "Revenue Operating System for Lean Service Businesses | Ingenium",
+    title: "Revenue Operating System for Service Businesses | Ingenium",
     description:
-      "Ingenium connects website lead capture, CRM execution, automation, delivery visibility, reporting, and governed AI agents in one accountable operating layer.",
+      "Replace disconnected website, CRM, automation, reporting, and AI tools with one revenue operating system for service businesses.",
     path: "/",
     keywords: [...keywordClusters.platform],
   },
@@ -153,11 +154,35 @@ export const pageSeo: Record<string, PageSeoConfig> = {
     keywords: [...keywordClusters.platform, "implementation model"],
   },
   "/contact": {
-    title: "Book Demo, Teardown, or Technical Review | Ingenium",
+    title: "Contact Ingenium | Revenue Systems for Service Businesses",
     description:
-      "Start with a demo, revenue systems teardown, or technical review depending on your buying stage.",
+      "Contact Ingenium to discuss your website, CRM, automation, reporting, or AI operating model.",
     path: "/contact",
     keywords: ["book demo", "technical review", "revenue systems teardown", ...keywordClusters.platform],
+    pageType: "ContactPage",
+  },
+  "/demo": {
+    title: "Book a Demo | Ingenium",
+    description:
+      "See how Ingenium connects website leads, CRM execution, automation, reporting, and governed AI support for service businesses.",
+    path: "/demo",
+    keywords: ["book ingenium demo", "revenue systems demo", ...keywordClusters.platform],
+    pageType: "ContactPage",
+  },
+  "/revenue-systems-teardown": {
+    title: "Revenue Systems Teardown | Ingenium",
+    description:
+      "Request a teardown of the gaps between your website, CRM, automation, delivery handoff, and reporting.",
+    path: "/revenue-systems-teardown",
+    keywords: ["revenue systems teardown", "crm teardown", "lead routing audit", ...keywordClusters.platform],
+    pageType: "ContactPage",
+  },
+  "/technical-review": {
+    title: "Technical Review | Ingenium",
+    description:
+      "Request a technical review covering architecture, approvals, audit history, and data-handling boundaries.",
+    path: "/technical-review",
+    keywords: ["technical review", "security review", "workflow approvals", ...keywordClusters.governance],
     pageType: "ContactPage",
   },
   "/projects": {
@@ -219,7 +244,7 @@ export const PUBLIC_DISCOVERY_PATHS = Object.entries(pageSeo)
   });
 
 export function buildMetadata(config: PageSeoConfig): Metadata {
-  const canonical = config.path === "/" ? "/" : config.path;
+  const canonical = config.path === "/" ? SITE_URL : `${SITE_URL}${config.path}`;
 
   return {
     title: config.title,

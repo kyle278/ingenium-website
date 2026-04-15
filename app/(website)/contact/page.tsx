@@ -5,7 +5,6 @@ import { getPortalFormBySlug } from "@/lib/portalIntegration/server";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
-import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/contact"]);
 export const dynamic = "force-dynamic";
@@ -13,27 +12,26 @@ export const dynamic = "force-dynamic";
 const routes = [
   {
     title: "Book Demo",
-    body: "Best if you want to see the platform and decide whether it fits.",
-    intent: "book-demo",
+    body: "See the operating model, the workflow handoff, and where your team fits.",
+    href: "/demo",
   },
   {
     title: "Revenue Systems Teardown",
-    body: "Best if you want help finding the biggest gaps in your current stack.",
-    intent: "revenue-systems-teardown",
+    body: "Map the gaps between your website, CRM, automation, delivery handoff, and reporting.",
+    href: "/revenue-systems-teardown",
   },
   {
     title: "Technical Review",
-    body: "Best if security, architecture, or stakeholder review matters early.",
-    intent: "technical-review",
+    body: "Give technical stakeholders a clear route into architecture, controls, and review material.",
+    href: "/technical-review",
   },
 ];
 
 export default async function ContactPage() {
-  let contactForm = null;
   let formResolutionError: string | null = null;
 
   try {
-    contactForm = await getPortalFormBySlug(WEBSITE_FORM_SLUGS.contact);
+    await getPortalFormBySlug(WEBSITE_FORM_SLUGS.contact);
   } catch (error) {
     formResolutionError =
       error instanceof Error ? error.message : "Unknown Portal form resolution error.";
@@ -41,79 +39,79 @@ export default async function ContactPage() {
 
   return (
     <div className="space-y-20 pb-8 md:space-y-28">
-      <section className="grid items-start gap-8 pt-4 lg:grid-cols-[0.95fr,1.05fr]">
-        <div>
+      <section className="pt-4">
+        <div className="max-w-4xl">
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
             Contact
           </p>
           <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
-            See the platform. Then choose the right next step.
+            Choose the buying path that matches the question you need answered.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            Start with a demo, a teardown, or a technical review depending on what you need to decide.
+            Ingenium uses one backend intake, but the public journey is now split by buyer intent so demos, teardown audits, and technical reviews each have a cleaner front end.
           </p>
-
-          <div className="mt-10 grid gap-4">
-            {routes.map((route) => (
-              <SurfaceCard key={route.title} className="panel-hover p-6">
-                <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
-                  {route.title}
-                </p>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{route.body}</p>
-                <div className="mt-4">
-                  <ButtonLink action={{ label: route.title, href: `/contact?intent=${route.intent}` }} variant="tertiary" />
-                </div>
-              </SurfaceCard>
-            ))}
-          </div>
         </div>
-
-        <SurfaceCard className="p-6 sm:p-8">
-          <SectionIntro
-            eyebrow="Start here"
-            title="Short first step. Full Portal tracking still in place."
-            body="We ask for the basics first, then capture the extra context needed to prepare a useful follow-up."
-          />
-
-          <div className="mt-6 rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
-            Responses within 1 business day. Demo, teardown, and technical review requests all route through the same tracked Portal flow.
-          </div>
-
-          <div className="mt-6">
-            {contactForm ? (
-              <ContactForm formId={contactForm.id} formSlug={contactForm.slug} formName={contactForm.name} />
-            ) : (
-              <div className="rounded-[28px] border border-rose-200 bg-rose-50 p-6">
-                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-rose-500">
-                  Form configuration required
-                </p>
-                <p className="mt-4 text-sm leading-7 text-slate-700">
-                  Upsert the Portal form named <strong>{WEBSITE_FORM_NAMES.contact}</strong> with slug{" "}
-                  <strong>{WEBSITE_FORM_SLUGS.contact}</strong>, then reload this page.
-                </p>
-                {formResolutionError ? <p className="mt-3 text-xs text-rose-500">{formResolutionError}</p> : null}
-              </div>
-            )}
-          </div>
-        </SurfaceCard>
       </section>
 
       <section>
         <SectionIntro
-          eyebrow="What happens next"
-          title="You should leave with a clearer path, not a vague follow-up."
+          eyebrow="Paths"
+          title="Three entry points. Three clearer next steps."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {[
-            "Current workflow gaps and leakage points identified",
-            "Recommended next step across website, CRM, automation, and AI",
-            "Technical review path available if stakeholders need it",
-          ].map((item) => (
-            <SurfaceCard key={item} className="panel-hover p-6 text-sm leading-7 text-[var(--color-text-soft)]">
-              {item}
+          {routes.map((route) => (
+            <SurfaceCard key={route.title} className="panel-hover p-6">
+              <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                {route.title}
+              </p>
+              <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{route.body}</p>
+              <div className="mt-4">
+                <ButtonLink action={{ label: route.title, href: route.href }} variant="tertiary" />
+              </div>
             </SurfaceCard>
           ))}
         </div>
+      </section>
+
+      <section className="grid gap-6 xl:grid-cols-2">
+        <SurfaceCard className="p-8">
+          <SectionIntro
+            eyebrow="What changed"
+            title="The public journey is tailored even when the backend stays efficient."
+          />
+          <div className="mt-8 grid gap-3">
+            {[
+              "Demo requests now land in a walkthrough-first path.",
+              "Teardown requests now land in an audit-first path.",
+              "Technical reviews now land in a controls-first path.",
+              "Only the clean contact URL is being promoted publicly.",
+            ].map((item) => (
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]">
+                {item}
+              </div>
+            ))}
+          </div>
+        </SurfaceCard>
+
+        <SurfaceCard dark className="p-8">
+          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+            Ops note
+          </p>
+          <div className="mt-6 grid gap-3">
+            {[
+              "Canonical contact hygiene is handled at the page level.",
+              "Parameterised contact links are no longer the primary site journey.",
+              "Thin or unfinished legacy pages remain noindexed.",
+              formResolutionError
+                ? `Portal form status: ${formResolutionError}`
+                : `Portal form status: ${WEBSITE_FORM_NAMES.contact} is resolving correctly.`,
+            ].map((item) => (
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
+                {item}
+              </div>
+            ))}
+          </div>
+        </SurfaceCard>
       </section>
     </div>
   );

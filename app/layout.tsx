@@ -1,19 +1,27 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import { IBM_Plex_Mono, Inter } from "next/font/google";
 
 import IngeniumTracking from "@/app/components/IngeniumTracking";
 import { getPortalPublicConfigOrNull } from "@/lib/portalIntegration/config";
-import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL, buildMetadata, keywordClusters, pageSeo } from "@/lib/seo";
+import {
+  DEFAULT_DESCRIPTION,
+  ORGANIZATION_LEGAL_NAME,
+  SITE_NAME,
+  SITE_URL,
+  buildMetadata,
+  keywordClusters,
+  pageSeo,
+} from "@/lib/seo";
 
 import "./globals.css";
 
-const manrope = Manrope({
+const interDisplay = Inter({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const interBody = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -39,15 +47,18 @@ export const metadata: Metadata = {
     ...keywordClusters.automation,
     ...keywordClusters.governance,
   ],
-  authors: [{ name: "Ingenium Digital Consulting" }],
-  creator: "Ingenium Digital Consulting",
-  publisher: "Ingenium Digital Consulting",
+  authors: [{ name: ORGANIZATION_LEGAL_NAME }],
+  creator: ORGANIZATION_LEGAL_NAME,
+  publisher: ORGANIZATION_LEGAL_NAME,
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   referrer: "origin-when-cross-origin",
+  icons: {
+    icon: "/logo.svg",
+  },
   robots: {
     index: true,
     follow: true,
@@ -67,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body
-        className={`${manrope.variable} ${plusJakartaSans.variable} ${ibmPlexMono.variable} min-h-screen bg-[var(--color-bg)] font-[var(--font-body)] text-[var(--color-text)] antialiased`}
+        className={`${interDisplay.variable} ${interBody.variable} ${ibmPlexMono.variable} min-h-screen bg-[var(--color-bg)] font-[var(--font-body)] text-[var(--color-text)] antialiased`}
       >
         {portalPublicConfig ? (
           <IngeniumTracking

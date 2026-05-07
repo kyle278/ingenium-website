@@ -9,6 +9,7 @@ export interface TeamMemberRecord {
   role: string;
   email: string;
   linkedinUrl: string;
+  websiteUrl?: string;
   category: string;
   accent: string;
   summary: string;
@@ -48,7 +49,8 @@ export const teamMembers: TeamMemberRecord[] = [
     role: "Lead Design Consultant",
     email: "sophie@ingeniumconsulting.net",
     linkedinUrl: "https://www.linkedin.com/in/sophie-coleman-912384205/",
-    category: "Design",
+    websiteUrl: "https://sophie-coleman-design-website.vercel.app",
+    category: "Lead Design Consultant",
     accent: "from-[rgba(24,28,31,0.08)] via-white to-[rgba(0,87,191,0.12)]",
     summary:
       "Sophie shapes the visual system across brand, layout, and presentation so the work feels polished, legible, and commercially credible from first impression onward.",

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Linkedin, Mail } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Globe, Linkedin, Mail } from "lucide-react";
 
 import { LAST_REVIEWED_ISO } from "@/lib/review";
 import { ORGANIZATION_NAME, ORGANIZATION_SAME_AS, SITE_URL, buildMetadata, pageSeo } from "@/lib/seo";
@@ -14,16 +14,16 @@ export const metadata: Metadata = buildMetadata(pageSeo["/team"]);
 
 export default function TeamPage() {
   const personSchemas = teamMembers.map((member) => ({
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": `${SITE_URL}/team#${member.name.toLowerCase().replace(/\s+/g, "-")}`,
-    name: member.name,
-    jobTitle: member.role,
-    email: member.email,
-    sameAs: [member.linkedinUrl],
-    worksFor: { "@id": `${SITE_URL}/#organization` },
-    url: `${SITE_URL}/team`,
-    knowsAbout: member.focus,
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": `${SITE_URL}/team#${member.name.toLowerCase().replace(/\s+/g, "-")}`,
+      name: member.name,
+      jobTitle: member.role,
+      email: member.email,
+      sameAs: member.websiteUrl ? [member.linkedinUrl, member.websiteUrl] : [member.linkedinUrl],
+      worksFor: { "@id": `${SITE_URL}/#organization` },
+      url: `${SITE_URL}/team`,
+      knowsAbout: member.focus,
     dateModified: LAST_REVIEWED_ISO,
   }));
 
@@ -133,15 +133,28 @@ export default function TeamPage() {
                 <h2 className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
                   {member.name}
                 </h2>
-                <a
-                  href={member.linkedinUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`${member.name} LinkedIn`}
-                  className="cta-lift inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-panel-low)] text-[var(--color-brand)] transition hover:text-[var(--color-brand-strong)]"
-                >
-                  <Linkedin className="h-4 w-4" />
-                </a>
+                <div className="flex shrink-0 items-center gap-2">
+                  {member.websiteUrl ? (
+                    <a
+                      href={member.websiteUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${member.name} website`}
+                      className="cta-lift inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-panel-low)] text-[var(--color-brand)] transition hover:text-[var(--color-brand-strong)]"
+                    >
+                      <Globe className="h-4 w-4" />
+                    </a>
+                  ) : null}
+                  <a
+                    href={member.linkedinUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${member.name} LinkedIn`}
+                    className="cta-lift inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-panel-low)] text-[var(--color-brand)] transition hover:text-[var(--color-brand-strong)]"
+                  >
+                    <Linkedin className="h-4 w-4" />
+                  </a>
+                </div>
               </div>
               <p className="mt-1 text-sm font-medium text-[var(--color-brand)]">{member.role}</p>
               <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{member.summary}</p>

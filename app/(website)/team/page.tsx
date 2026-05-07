@@ -40,27 +40,27 @@ export default function TeamPage() {
       <section className="pt-8">
         <ScrollReveal>
           <div className="max-w-4xl">
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+          <p className="type-meta-kicker text-[var(--color-brand)]">
             Meet the Team
           </p>
-          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-4xl font-semibold tracking-[-0.03em] text-[var(--color-text)] sm:text-5xl">
+          <h1 className="mt-6 max-w-4xl type-page-title text-[var(--color-text)]">
             The people building Ingenium with you.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-5 max-w-[65ch] type-body-lead text-[var(--color-text-soft)]">
             Ingenium stays intentionally small. That means strategy, sales, development, and design are handled by
             named people instead of being buried behind a generic agency structure.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="/contact"
-              className="cta-lift inline-flex items-center gap-2 rounded-[10px] bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-6 py-3 text-sm font-semibold text-white"
+              className="cta-lift inline-flex items-center gap-2 rounded-[10px] bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-6 py-3 type-action text-white"
             >
               Talk to the Team
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
               href="/about"
-              className="cta-lift inline-flex items-center gap-2 rounded-[10px] border border-[var(--color-brand)] bg-transparent px-6 py-3 text-sm font-semibold text-[var(--color-brand)]"
+              className="cta-lift type-action inline-flex items-center gap-2 rounded-[10px] border border-[var(--color-brand)] bg-transparent px-6 py-3 text-[var(--color-brand)]"
             >
               Learn How We Work
               <ArrowRight className="h-4 w-4" />
@@ -74,13 +74,13 @@ export default function TeamPage() {
       <section className="space-y-10">
         <ScrollReveal className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+            <p className="type-meta-kicker text-[var(--color-brand)]">
               Our team
             </p>
-            <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)] sm:text-4xl">
+            <h2 className="mt-4 type-section-title text-[var(--color-text)]">
               The people you will actually work with.
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--color-text-soft)] sm:text-lg">
+            <p className="mt-4 max-w-[64ch] type-body-lead text-[var(--color-text-soft)]">
               Clear roles, short context, and direct access to the people behind the work.
             </p>
           </div>
@@ -88,7 +88,7 @@ export default function TeamPage() {
             {["All", "Founder / Delivery", "Sales", "Design"].map((tag, index) => (
               <span
                 key={tag}
-                className={`inline-flex rounded-full px-4 py-2 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] ${
+                className={`inline-flex rounded-full px-4 py-2 type-detail-kicker ${
                   index === 0
                     ? "bg-[var(--color-secondary)] text-white"
                     : "bg-[var(--color-panel-high)] text-[var(--color-text-soft)]"
@@ -109,10 +109,10 @@ export default function TeamPage() {
             <div className={`relative overflow-hidden bg-gradient-to-br ${member.accent} p-6`}>
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.7),transparent_42%)]" />
               <div className="relative flex items-start justify-between gap-4">
-                <span className="inline-flex rounded-full bg-white/80 px-3 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-soft)]">
+                <span className="inline-flex rounded-full bg-white/80 px-3 py-1 type-detail-kicker text-[var(--color-text-soft)]">
                   {member.category}
                 </span>
-                <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                <span className="type-meta-kicker text-[var(--color-text-muted)]">
                   {ORGANIZATION_NAME}
                 </span>
               </div>
@@ -130,7 +130,7 @@ export default function TeamPage() {
 
             <div className="p-6">
               <div className="flex items-start justify-between gap-3">
-                <h2 className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                <h2 className="type-card-title text-[var(--color-text)]">
                   {member.name}
                 </h2>
                 <div className="flex shrink-0 items-center gap-2">
@@ -157,13 +157,13 @@ export default function TeamPage() {
                 </div>
               </div>
               <p className="mt-1 text-sm font-medium text-[var(--color-brand)]">{member.role}</p>
-              <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{member.summary}</p>
+              <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{member.summary}</p>
 
               <div className="mt-5 flex flex-wrap gap-2">
                 {member.focus.map((item) => (
                   <span
                     key={item}
-                    className="inline-flex rounded-full bg-[var(--color-panel-low)] px-3 py-1.5 text-xs text-[var(--color-text-soft)]"
+                    className="inline-flex rounded-full bg-[var(--color-panel-low)] px-3 py-1.5 type-body-xs text-[var(--color-text-soft)]"
                   >
                     {item}
                   </span>
@@ -173,7 +173,7 @@ export default function TeamPage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
                   href={`mailto:${member.email}`}
-                  className="cta-lift inline-flex items-center gap-2 rounded-[10px] border border-[var(--color-brand)] bg-transparent px-4 py-2.5 text-sm font-medium text-[var(--color-brand)]"
+                  className="cta-lift type-action inline-flex items-center gap-2 rounded-[10px] border border-[var(--color-brand)] bg-transparent px-4 py-2.5 text-[var(--color-brand)]"
                 >
                   <Mail className="h-4 w-4" />
                   {member.email}
@@ -188,10 +188,10 @@ export default function TeamPage() {
 
       <section className="grid gap-6 lg:grid-cols-[0.92fr,1.08fr]">
         <ScrollReveal className="mineral-panel rounded-[32px] p-8">
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+          <p className="type-meta-kicker text-[var(--color-brand)]">
             Why this matters
           </p>
-          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+          <h2 className="mt-4 type-section-title text-[var(--color-text)]">
             You should know who is doing the work before you start the conversation.
           </h2>
           <div className="mt-6 grid gap-3">
@@ -200,7 +200,7 @@ export default function TeamPage() {
               "Clear commercial contact from the first sales conversation onward.",
               "Dedicated design ownership so the visual standard stays consistent.",
             ].map((point) => (
-              <div key={point} className="rounded-2xl bg-[var(--color-panel-low)] px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]">
+              <div key={point} className="rounded-2xl bg-[var(--color-panel-low)] px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
                 {point}
               </div>
             ))}
@@ -210,10 +210,10 @@ export default function TeamPage() {
         <ScrollReveal className="graphite-panel relative overflow-hidden rounded-[36px] p-10 md:p-14" delayMs={80} direction="left" blur>
           <div className="pointer-events-none absolute inset-0 dot-grid opacity-35" />
           <div className="relative">
-            <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-cyan-200">
+            <p className="type-meta-kicker text-cyan-200">
               Start the conversation
             </p>
-            <h2 className="mt-4 max-w-3xl font-[var(--font-display)] text-2xl font-semibold text-white sm:text-3xl">
+            <h2 className="mt-4 max-w-3xl type-card-title text-white">
               Want to speak with the team directly?
             </h2>
             <p className="mt-4 max-w-xl text-white/72">
@@ -222,14 +222,14 @@ export default function TeamPage() {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="/contact"
-                className="cta-lift inline-flex items-center gap-2 rounded-[10px] bg-white px-6 py-3 text-sm font-semibold text-[var(--color-text)]"
+                className="cta-lift inline-flex items-center gap-2 rounded-[10px] bg-white px-6 py-3 type-action text-[var(--color-text)]"
               >
                 Book a Strategy Call
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/about"
-                className="cta-lift inline-flex items-center gap-2 rounded-[10px] border border-white/24 bg-white/10 px-6 py-3 text-sm font-semibold text-white"
+                className="cta-lift inline-flex items-center gap-2 rounded-[10px] border border-white/24 bg-white/10 px-6 py-3 type-action text-white"
               >
                 Learn How We Work
                 <ArrowRight className="h-4 w-4" />
@@ -238,7 +238,7 @@ export default function TeamPage() {
                 href={ORGANIZATION_SAME_AS[1]}
                 target="_blank"
                 rel="noreferrer"
-                className="cta-lift inline-flex items-center gap-2 rounded-[10px] border border-white/24 bg-white/10 px-6 py-3 text-sm font-semibold text-white"
+                className="cta-lift inline-flex items-center gap-2 rounded-[10px] border border-white/24 bg-white/10 px-6 py-3 type-action text-white"
               >
                 Company LinkedIn
                 <Linkedin className="h-4 w-4" />

@@ -13,8 +13,8 @@
 
 ## Typography
 - Display: `Manrope` via `--font-display`
-- Body: `Plus Jakarta Sans` via `--font-body`
-- Mono: `IBM Plex Mono` via `--font-mono`
+- Body: `Public Sans` via `--font-body`
+- Mono: `Azeret Mono` via `--font-mono`
 
 ## Core Rules
 - Lead with product architecture, not consultancy framing

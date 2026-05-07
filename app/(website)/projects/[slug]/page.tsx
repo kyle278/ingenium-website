@@ -102,7 +102,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       <section className="pt-4">
         <Link
           href="/projects"
-          className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-text-muted)] transition hover:text-[var(--color-text)]"
+          className="inline-flex items-center gap-2 type-action text-[var(--color-text-muted)] transition hover:text-[var(--color-text)]"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to projects
@@ -111,25 +111,25 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         <div className="mt-8">
           <ScrollReveal>
             <div className="max-w-4xl">
-              <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.26em] text-[var(--color-brand)]">
+              <p className="type-page-kicker text-[var(--color-brand)]">
                 {project.clientName} / {project.industry}
               </p>
               {websiteStatus ? (
                 <div className="mt-4">
                   <span
-                    className={`inline-flex rounded-full px-3 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] ${websiteStatus.pillClass}`}
+                    className={`inline-flex rounded-full px-3 py-1 type-detail-kicker ${websiteStatus.pillClass}`}
                   >
                     {websiteStatus.label}
                   </span>
                 </div>
               ) : null}
-              <h1 className="mt-4 max-w-4xl font-[var(--font-display)] text-4xl font-semibold tracking-[-0.05em] text-[var(--color-text)] sm:text-5xl">
+              <h1 className="mt-4 max-w-4xl type-page-title text-[var(--color-text)]">
                 {project.projectName}
               </h1>
-              <p className="mt-4 max-w-3xl text-lg leading-8 text-[var(--color-text-soft)]">
+              <p className="mt-4 max-w-[68ch] type-body-lead text-[var(--color-text-soft)]">
                 {project.teaser}
               </p>
-              <p className="mt-6 max-w-3xl text-base leading-8 text-[var(--color-text-soft)]">
+              <p className="mt-6 max-w-[68ch] type-body-base text-[var(--color-text-soft)]">
                 {project.summary}
               </p>
               <PageReviewMeta />
@@ -138,14 +138,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 {project.services.map((service) => (
                   <span
                     key={service}
-                    className="tech-pill inline-flex rounded-full px-3 py-1.5 text-sm font-medium text-[var(--color-text)]"
+                    className="tech-pill inline-flex rounded-full px-3 py-1.5 type-form-label text-[var(--color-text)]"
                   >
                     {service}
                   </span>
                 ))}
               </div>
 
-              <div className="mt-6 grid gap-3 text-sm leading-6 text-[var(--color-text-soft)] sm:grid-cols-2 lg:max-w-3xl">
+              <div className="mt-6 grid gap-3 type-body-sm text-[var(--color-text-soft)] sm:grid-cols-2 lg:max-w-3xl">
                 <div className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4">
                   Client type: {project.clientSize}
                 </div>
@@ -211,7 +211,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             />
             <div className="mt-6 space-y-3">
               {project.insights.map((insight) => (
-                <div key={insight} className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]">
+                <div key={insight} className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
                   {insight}
                 </div>
               ))}
@@ -243,7 +243,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 {relatedCaseStudy.deliveredAssets.map((asset) => (
                   <div
                     key={asset}
-                    className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]"
+                    className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]"
                   >
                     {asset}
                   </div>
@@ -266,15 +266,15 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           {project.serviceInsights.map((serviceInsight, index) => (
             <ScrollReveal key={serviceInsight.key} delayMs={index * 45}>
               <SurfaceCard className="p-6">
-                <p className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                <p className="type-card-title text-[var(--color-text)]">
                   {serviceInsight.title}
                 </p>
-                <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{serviceInsight.summary}</p>
+                <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{serviceInsight.summary}</p>
                 <div className="mt-5 grid gap-3">
                   {serviceInsight.highlights.map((highlight) => (
                     <div
                       key={highlight}
-                      className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]"
+                      className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]"
                     >
                       {highlight}
                     </div>
@@ -289,9 +289,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                       <AnimatedMetric
                         as="p"
                         value={metric.value}
-                        className="metric-display font-[var(--font-display)] text-xl font-semibold tracking-[-0.04em] text-[var(--color-brand)]"
+                        className="metric-display text-[1.5rem] font-semibold text-[var(--color-brand)]"
                       />
-                      <p className="mt-1 text-[11px] leading-tight text-[var(--color-text-muted)]">
+                      <p className="mt-1 type-body-xs text-[var(--color-text-muted)]">
                         {metric.label}
                       </p>
                     </div>
@@ -315,7 +315,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               {project.stack.map((item) => (
                 <span
                   key={item}
-                  className="tech-pill inline-flex rounded-full px-3 py-1 text-sm text-[var(--color-text-soft)]"
+                  className="tech-pill inline-flex rounded-full px-3 py-1 type-body-sm text-[var(--color-text-soft)]"
                 >
                   {item}
                 </span>
@@ -326,26 +326,26 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
         <ScrollReveal delayMs={80} direction="left" blur>
           <SurfaceCard dark className="p-6 md:p-8">
-            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+            <p className="type-section-kicker text-cyan-300">
               Next Step
             </p>
-            <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-white">
+            <h2 className="mt-4 type-section-title text-white">
               Need something similar for your own project?
             </h2>
-            <p className="mt-4 text-base leading-7 text-white/72">
+            <p className="mt-4 type-body-base text-white/72">
               We can map the structure, proof, and conversion path before the build gets bloated or unclear.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/demo"
-                className="cta-lift inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[var(--color-text)]"
+                className="cta-lift inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 type-action text-[var(--color-text)]"
               >
                 Book Demo
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/projects"
-                className="cta-lift inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/10 px-5 py-3 text-sm font-semibold text-white"
+                className="cta-lift inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/10 px-5 py-3 type-action text-white"
               >
                 View More Projects
               </Link>

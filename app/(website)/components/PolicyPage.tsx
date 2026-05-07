@@ -19,16 +19,16 @@ export default function PolicyPage({ eyebrow, title, summary, updatedLabel, sect
     <div className="space-y-16 pb-8 md:space-y-20">
       <section className="pt-4">
         <div className="max-w-4xl">
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-secondary)]">
+          <p className="type-page-kicker text-[var(--color-secondary)]">
             {eyebrow}
           </p>
-          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
+          <h1 className="mt-6 max-w-4xl type-page-title text-[var(--color-text)]">
             {title}
           </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-6 max-w-[68ch] type-body-lead text-[var(--color-text-soft)]">
             {summary}
           </p>
-          <p className="mt-5 font-[var(--font-mono)] text-[11px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+          <p className="mt-5 type-meta-kicker text-[var(--color-text-muted)]">
             {updatedLabel}
           </p>
         </div>
@@ -37,10 +37,10 @@ export default function PolicyPage({ eyebrow, title, summary, updatedLabel, sect
       <section className="grid gap-5">
         {sections.map((section) => (
           <SurfaceCard key={section.title} className="p-6 md:p-8">
-            <h2 className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+            <h2 className="type-card-title text-[var(--color-text)]">
               {section.title}
             </h2>
-            <p className="mt-4 max-w-4xl text-base leading-8 text-[var(--color-text-soft)]">
+            <p className="mt-4 max-w-[68ch] type-body-base text-[var(--color-text-soft)]">
               {section.body}
             </p>
             {section.items ? (

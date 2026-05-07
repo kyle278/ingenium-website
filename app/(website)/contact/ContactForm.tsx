@@ -208,10 +208,10 @@ export default function ContactForm({
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(0,87,191,0.10)]">
           <CheckCircle2 className="h-6 w-6 text-[var(--color-brand)]" />
         </div>
-        <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+        <h3 className="mt-4 type-card-title text-[var(--color-text)]">
           Request submitted
         </h3>
-        <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
+        <p className="mt-3 type-body-sm text-[var(--color-text-soft)]">
           Thanks. We will reply from hello@ingeniumconsulting.net within 1 business day.
         </p>
       </div>
@@ -252,10 +252,10 @@ export default function ContactForm({
       <input ref={consentCapturedAtRef} name="consent_captured_at" type="hidden" value="" />
 
       <div className="flex items-center justify-between rounded-2xl bg-[var(--color-panel-low)] px-4 py-3">
-        <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+        <p className="type-detail-kicker text-[var(--color-text-muted)]">
           Step {step} of 3
         </p>
-        <p className="text-xs text-[var(--color-text-muted)]">
+        <p className="type-body-xs text-[var(--color-text-muted)]">
           {step === 1 ? "Core intent" : step === 2 ? "Qualification details" : "Consent and submit"}
         </p>
       </div>
@@ -269,7 +269,7 @@ export default function ContactForm({
 
       <div hidden={step !== 1} key={`step-1-${stepAnimationKey}`} className="form-step-enter space-y-5">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-[var(--color-text)]">Name *</span>
+          <span className="type-form-label text-[var(--color-text)]">Name *</span>
           <input
             className={fieldClassName}
             name="name"
@@ -280,7 +280,7 @@ export default function ContactForm({
           />
         </label>
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-[var(--color-text)]">Work Email *</span>
+          <span className="type-form-label text-[var(--color-text)]">Work Email *</span>
           <input
             className={fieldClassName}
             name="email"
@@ -291,7 +291,7 @@ export default function ContactForm({
           />
         </label>
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-[var(--color-text)]">Biggest Growth Challenge *</span>
+          <span className="type-form-label text-[var(--color-text)]">Biggest Growth Challenge *</span>
           <select
             className={fieldClassName}
             name="challenge"
@@ -312,7 +312,7 @@ export default function ContactForm({
 
       <div hidden={step !== 2} key={`step-2-${stepAnimationKey}`} className="form-step-enter space-y-5">
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-[var(--color-text)]">Company Size</span>
+          <span className="type-form-label text-[var(--color-text)]">Company Size</span>
           <select
             className={fieldClassName}
             name="companySize"
@@ -328,7 +328,7 @@ export default function ContactForm({
           </select>
         </label>
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-[var(--color-text)]">Current Stack</span>
+          <span className="type-form-label text-[var(--color-text)]">Current Stack</span>
           <input
             className={fieldClassName}
             name="stack"
@@ -339,7 +339,7 @@ export default function ContactForm({
         </label>
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-[var(--color-text)]">Timeline</span>
+            <span className="type-form-label text-[var(--color-text)]">Timeline</span>
             <select
               className={fieldClassName}
               name="timeline"
@@ -355,7 +355,7 @@ export default function ContactForm({
             </select>
           </label>
           <label className="block space-y-2">
-            <span className="text-sm font-medium text-[var(--color-text)]">Budget Range</span>
+            <span className="type-form-label text-[var(--color-text)]">Budget Range</span>
             <select
               className={fieldClassName}
               name="budgetRange"
@@ -371,7 +371,7 @@ export default function ContactForm({
           </label>
         </div>
         <label className="block space-y-2">
-          <span className="text-sm font-medium text-[var(--color-text)]">Additional Goals</span>
+          <span className="type-form-label text-[var(--color-text)]">Additional Goals</span>
           <textarea
             className={`min-h-[120px] ${fieldClassName}`}
             name="goals"
@@ -382,7 +382,7 @@ export default function ContactForm({
       </div>
 
       <div hidden={step !== 3} key={`step-3-${stepAnimationKey}`} className="form-step-enter space-y-5">
-        <div className="rounded-2xl bg-[var(--color-panel-low)] px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]">
+        <div className="rounded-2xl bg-[var(--color-panel-low)] px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
           We use these details only to reply to this request and scope the right next step. Marketing updates stay
           optional and separate.
         </div>
@@ -412,7 +412,7 @@ export default function ContactForm({
 
       {step === 1 ? (
         <button
-          className="cta-lift inline-flex w-full items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 text-sm font-semibold text-white"
+          className="cta-lift inline-flex w-full items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 type-action text-white"
           disabled={isSubmitting}
           onClick={handleContinueFromStepOne}
           type="button"
@@ -425,7 +425,7 @@ export default function ContactForm({
       {step === 2 ? (
         <div className="grid gap-3 sm:grid-cols-2">
           <button
-            className="cta-lift inline-flex items-center justify-center gap-2 rounded-md bg-[var(--color-panel-high)] px-5 py-3 text-sm font-semibold text-[var(--color-brand)]"
+            className="cta-lift type-action inline-flex items-center justify-center gap-2 rounded-md bg-[var(--color-panel-high)] px-5 py-3 text-[var(--color-brand)]"
             disabled={isSubmitting}
             onClick={() => goToStep(1)}
             type="button"
@@ -434,7 +434,7 @@ export default function ContactForm({
             Back
           </button>
           <button
-            className="cta-lift inline-flex items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 text-sm font-semibold text-white"
+            className="cta-lift inline-flex items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 type-action text-white"
             disabled={isSubmitting}
             onClick={handleContinueFromStepTwo}
             type="button"
@@ -448,7 +448,7 @@ export default function ContactForm({
       {step === 3 ? (
         <div className="grid gap-3 sm:grid-cols-2">
           <button
-            className="cta-lift inline-flex items-center justify-center gap-2 rounded-md bg-[var(--color-panel-high)] px-5 py-3 text-sm font-semibold text-[var(--color-brand)]"
+            className="cta-lift type-action inline-flex items-center justify-center gap-2 rounded-md bg-[var(--color-panel-high)] px-5 py-3 text-[var(--color-brand)]"
             disabled={isSubmitting}
             onClick={() => goToStep(2)}
             type="button"
@@ -457,7 +457,7 @@ export default function ContactForm({
             Back
           </button>
           <button
-            className="cta-lift inline-flex items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 text-sm font-semibold text-white"
+            className="cta-lift inline-flex items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 type-action text-white"
             data-track-cta="contact_submit"
             data-track-label="Submit Request"
             disabled={isSubmitting}
@@ -469,7 +469,7 @@ export default function ContactForm({
         </div>
       ) : null}
 
-      <div className="rounded-2xl bg-[var(--color-panel-low)] px-4 py-3 text-xs leading-6 text-[var(--color-text-muted)]">
+      <div className="rounded-2xl bg-[var(--color-panel-low)] px-4 py-3 type-body-xs text-[var(--color-text-muted)]">
         We reply from hello@ingeniumconsulting.net within 1 business day. This form is used only to route your enquiry
         and scope the right next step.
       </div>
@@ -478,7 +478,7 @@ export default function ContactForm({
         <p className="text-sm text-[var(--color-error)]">{errorMessage}</p>
       ) : null}
 
-      <p className="text-center text-xs text-[var(--color-text-muted)]">
+      <p className="text-center type-body-xs text-[var(--color-text-muted)]">
         Prefer email? Reach us at <span className="font-medium text-[var(--color-brand)]">hello@ingeniumconsulting.net</span>
       </p>
     </form>

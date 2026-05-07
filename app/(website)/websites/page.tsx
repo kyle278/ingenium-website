@@ -31,13 +31,13 @@ export default function WebsitesPage() {
     <div className="space-y-20 pb-8 md:space-y-28">
       <section className="grid items-center gap-10 pt-4 lg:grid-cols-[0.96fr,1.04fr]">
         <div>
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-secondary)]">
+          <p className="type-page-kicker text-[var(--color-secondary)]">
             Websites
           </p>
-          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
+          <h1 className="mt-6 max-w-4xl type-page-title text-[var(--color-text)]">
             Websites that do more than launch.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-6 max-w-[65ch] type-body-lead text-[var(--color-text-soft)]">
             Ingenium builds high-performance websites designed to capture leads, support your brand, and feed your CRM
             and marketing system with better context from the first interaction.
           </p>
@@ -49,7 +49,7 @@ export default function WebsitesPage() {
         </div>
 
         <SurfaceCard className="p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+          <p className="type-section-kicker text-[var(--color-secondary)]">
             What a connected website changes
           </p>
           <div className="mt-6 grid gap-3">
@@ -58,7 +58,7 @@ export default function WebsitesPage() {
               "Every lead reaches the CRM with source and service context attached.",
               "Campaigns and follow-up start from the same record instead of a separate handoff.",
             ].map((item) => (
-              <div key={item} className="rounded-[18px] border border-[var(--color-line)] bg-white/80 px-4 py-4 text-sm text-[var(--color-text-soft)]">
+              <div key={item} className="rounded-[18px] border border-[var(--color-line)] bg-white/80 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
                 {item}
               </div>
             ))}
@@ -68,13 +68,13 @@ export default function WebsitesPage() {
 
       <section>
         <SurfaceCard className="p-6 md:p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+          <p className="type-section-kicker text-[var(--color-secondary)]">
             Direct answer
           </p>
-          <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+          <h2 className="mt-4 type-card-title text-[var(--color-text)]">
             What is a CRM-connected website?
           </h2>
-          <p className="mt-4 max-w-3xl text-base leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-4 max-w-[68ch] type-body-base text-[var(--color-text-soft)]">
             A CRM-connected website captures visitor intent and sends the right context into the CRM immediately:
             source, service interest, contact details, and next-step signals. That makes follow-up faster and gives
             marketing, sales, and delivery the same starting point.
@@ -95,10 +95,10 @@ export default function WebsitesPage() {
             ["Routing", "Capture enough detail so the CRM and marketing workflows can act immediately."],
           ].map(([title, body]) => (
             <SurfaceCard key={title} className="panel-hover p-6">
-              <p className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+              <p className="type-card-title text-[var(--color-text)]">
                 {title}
               </p>
-              <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+              <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{body}</p>
             </SurfaceCard>
           ))}
         </div>
@@ -122,10 +122,10 @@ export default function WebsitesPage() {
             ],
           ].map(([title, body]) => (
             <SurfaceCard key={title} className="panel-hover p-6">
-              <p className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+              <p className="type-card-title text-[var(--color-text)]">
                 {title}
               </p>
-              <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+              <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{body}</p>
             </SurfaceCard>
           ))}
         </div>
@@ -138,7 +138,7 @@ export default function WebsitesPage() {
       />
 
       <section className="graphite-panel rounded-[18px] px-8 py-12 text-center md:px-12">
-        <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
+        <h2 className="mx-auto max-w-4xl type-section-title text-white">
           Build a website that works with the rest of your system from day one.
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">

@@ -36,13 +36,13 @@ export default function ContactPage() {
     <div className="space-y-20 pb-8 md:space-y-28">
       <section className="pt-4">
         <div className="max-w-4xl">
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
+          <p className="type-page-kicker text-[var(--color-brand)]">
             Contact
           </p>
-          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
+          <h1 className="mt-6 max-w-4xl type-page-title text-[var(--color-text)]">
             Choose the buying path that matches the question you need answered.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-6 max-w-[65ch] type-body-lead text-[var(--color-text-soft)]">
             Three entry points. Three clearer next steps. If you are unsure, a quick call will point you to the right
             route.
           </p>
@@ -55,10 +55,10 @@ export default function ContactPage() {
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {routes.map((route) => (
             <SurfaceCard key={route.title} className="panel-hover p-6">
-              <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+              <p className="type-card-title-sm text-[var(--color-text)]">
                 {route.title}
               </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{route.body}</p>
+              <p className="mt-3 type-body-sm text-[var(--color-text-soft)]">{route.body}</p>
               <div className="mt-4">
                 <ButtonLink action={{ label: route.title, href: route.href }} variant="tertiary" />
               </div>
@@ -79,7 +79,7 @@ export default function ContactPage() {
               "You get a clearer recommendation instead of a generic sales call.",
               "The next step matches your buying stage and stakeholder needs.",
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]">
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
                 {item}
               </div>
             ))}
@@ -87,7 +87,7 @@ export default function ContactPage() {
         </SurfaceCard>
 
         <SurfaceCard dark className="p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+          <p className="type-section-kicker text-cyan-300">
             Support info
           </p>
           <div className="mt-6 grid gap-3">
@@ -100,7 +100,7 @@ export default function ContactPage() {
               "Technical stakeholder route: /technical-review",
               "If a form is unavailable, email hello@ingeniumconsulting.net and we will route the next step manually.",
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 type-body-sm text-white/78">
                 {item}
               </div>
             ))}
@@ -110,7 +110,7 @@ export default function ContactPage() {
               href={ORGANIZATION_SAME_AS[0]}
               target="_blank"
               rel="noreferrer"
-              className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78 transition hover:text-white"
+              className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 type-body-sm text-white/78 transition hover:text-white"
             >
               Google Business Profile
             </a>
@@ -118,7 +118,7 @@ export default function ContactPage() {
               href={ORGANIZATION_SAME_AS[1]}
               target="_blank"
               rel="noreferrer"
-              className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78 transition hover:text-white"
+              className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 type-body-sm text-white/78 transition hover:text-white"
             >
               Company LinkedIn
             </a>

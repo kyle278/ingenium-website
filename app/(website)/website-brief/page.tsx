@@ -10,7 +10,7 @@ import WebsiteBriefForm from "./WebsiteBriefForm";
 
 export const metadata = buildMetadata(pageSeo["/website-brief"]);
 
-const sectionLabel = "font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]";
+const sectionLabel = "type-meta-kicker text-[var(--color-brand)]";
 const lightCard = "mineral-panel rounded-[28px] p-6";
 
 const valuePoints = [
@@ -48,17 +48,17 @@ export default function WebsiteBriefPage() {
       <section className="grid items-start gap-8 lg:grid-cols-[1.05fr,0.95fr]">
         <div>
           <p className={sectionLabel}>Private Client Intake</p>
-          <h1 className="mt-5 max-w-3xl font-[var(--font-display)] text-4xl font-semibold tracking-[-0.03em] text-[var(--color-text)] sm:text-5xl">
+          <h1 className="mt-5 max-w-3xl type-page-title text-[var(--color-text)]">
             Share the essentials for your new website build.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-5 max-w-[65ch] type-body-lead text-[var(--color-text-soft)]">
             This short project brief helps us understand your business, the shape of the site,
             and what needs to be ready for launch without dragging you through a heavy form.
           </p>
 
           <div className="mt-8 space-y-3">
             {valuePoints.map((item) => (
-              <div key={item} className="flex items-center gap-3 text-sm text-[var(--color-text-soft)]">
+              <div key={item} className="flex items-center gap-3 type-body-sm text-[var(--color-text-soft)]">
                 <CheckCircle2 className="h-4 w-4 text-[var(--color-accent)]" />
                 {item}
               </div>
@@ -71,10 +71,10 @@ export default function WebsiteBriefPage() {
               return (
                 <div key={item.title} className={`${lightCard} min-h-[180px]`}>
                   <Icon className="h-5 w-5 text-[var(--color-accent)]" />
-                  <h2 className="mt-4 font-[var(--font-display)] text-lg font-semibold text-[var(--color-text)]">
+                  <h2 className="mt-4 type-card-title-sm text-[var(--color-text)]">
                     {item.title}
                   </h2>
-                  <p className="mt-2 text-sm leading-7 text-[var(--color-text-soft)]">{item.body}</p>
+                  <p className="mt-2 type-body-sm text-[var(--color-text-soft)]">{item.body}</p>
                 </div>
               );
             })}

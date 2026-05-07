@@ -1,8 +1,8 @@
 import type { StaticImageData } from "next/image";
 
-import claytonHeadshot from "../../ingeniumTeam/clayton long.jpg";
-import kyleHeadshot from "../../ingeniumTeam/kyle redmond.jpg";
-import sophieHeadshot from "../../ingeniumTeam/Sophie_Headshot.jpg";
+import claytonHeadshot from "../../ingeniumTeam/claytonlong.png";
+import kyleHeadshot from "../../ingeniumTeam/kyle redmond.png";
+import sophieHeadshot from "../../ingeniumTeam/sophiecoleman.png";
 
 export interface TeamMemberRecord {
   name: string;
@@ -42,7 +42,6 @@ export const teamMembers: TeamMemberRecord[] = [
       "Clayton owns commercial conversations, qualification, and sales process clarity so prospects understand the work, the rollout, and the right next step quickly.",
     focus: ["Sales discovery", "Commercial fit", "Buyer guidance"],
     image: claytonHeadshot,
-    imageClassName: "grayscale",
   },
   {
     name: "Sophie Coleman",

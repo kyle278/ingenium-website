@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Azeret_Mono, Manrope, Public_Sans } from "next/font/google";
 
 import IngeniumTracking from "@/app/components/IngeniumTracking";
 import {
@@ -14,15 +14,21 @@ import {
 
 import "./globals.css";
 
-const interDisplay = Inter({
+const manropeDisplay = Manrope({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
-const interBody = Inter({
+const publicSansBody = Public_Sans({
   subsets: ["latin"],
   variable: "--font-body",
+  display: "swap",
+});
+
+const azeretMono = Azeret_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -69,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body
-        className={`${interDisplay.variable} ${interBody.variable} min-h-screen bg-[var(--color-bg)] font-[var(--font-body)] text-[var(--color-text)] antialiased`}
+        className={`${manropeDisplay.variable} ${publicSansBody.variable} ${azeretMono.variable} min-h-screen bg-[var(--color-bg)] font-[var(--font-body)] text-[var(--color-text)] antialiased`}
       >
         <IngeniumTracking />
         {children}

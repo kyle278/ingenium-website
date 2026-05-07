@@ -207,7 +207,7 @@ export default function SiteNav() {
         }`}
       >
         <div className="hidden items-center justify-between px-6 py-3 text-[11px] text-[var(--color-text-muted)] lg:flex">
-          <p className="font-semibold uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+          <p className="type-meta-kicker text-[var(--color-secondary)]">
             Connected websites. Intelligent growth.
           </p>
           <div className="flex items-center gap-5">
@@ -223,10 +223,10 @@ export default function SiteNav() {
           <Link href="/" className="flex items-center gap-3">
             <Image src="/logo.svg" alt="Ingenium logo" width={30} height={30} className="h-7 w-7" priority />
             <div className="min-w-0">
-              <p className="font-[var(--font-display)] text-sm font-semibold tracking-[-0.04em] text-[var(--color-text)] sm:text-base">
+              <p className="type-nav-brand text-[var(--color-text)]">
                 {navContent.brand}
               </p>
-              <p className="text-[9px] font-medium uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+              <p className="type-caption-kicker font-medium text-[var(--color-text-muted)]">
                 Website + CRM + AI
               </p>
             </div>
@@ -257,7 +257,7 @@ export default function SiteNav() {
                   {openDropdown === item.label ? (
                     <div className="ghost-outline absolute left-0 top-full z-20 mt-3 w-[440px] rounded-[28px] bg-[rgba(247,250,254,0.96)] p-4 shadow-[0_4px_24px_rgba(24,28,31,0.08)] backdrop-blur-xl">
                       <div className="rounded-[22px] bg-[var(--color-panel-low)] px-4 py-4">
-                        <p className="font-[var(--font-display)] text-lg font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                        <p className="type-card-title-sm text-[var(--color-text)]">
                           {item.label}
                         </p>
                         {item.description ? (
@@ -271,7 +271,7 @@ export default function SiteNav() {
                             href={child.href}
                             className="rounded-2xl bg-white px-4 py-4 transition hover:bg-[var(--color-panel-low)]"
                           >
-                            <p className="text-sm font-semibold text-[var(--color-text)]">{child.label}</p>
+                            <p className="type-action text-[var(--color-text)]">{child.label}</p>
                             <p className="mt-1 text-sm leading-6 text-[var(--color-text-soft)]">{child.description}</p>
                           </Link>
                         ))}
@@ -298,13 +298,13 @@ export default function SiteNav() {
           <div className="hidden items-center gap-3 lg:flex">
             <Link
               href={navContent.secondaryCta.href}
-              className="text-sm font-semibold text-[var(--color-text-soft)] transition hover:text-[var(--color-text)]"
+              className="type-action text-[var(--color-text-soft)] transition hover:text-[var(--color-text)]"
             >
               {navContent.secondaryCta.label}
             </Link>
             <Link
               href={navContent.primaryCta.href}
-              className="cta-lift inline-flex rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(24,28,31,0.08)]"
+              className="cta-lift inline-flex rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-4 py-2.5 type-action text-white shadow-[0_4px_24px_rgba(24,28,31,0.08)]"
             >
               {navContent.primaryCta.label}
             </Link>
@@ -345,14 +345,14 @@ export default function SiteNav() {
             <Link
               href={navContent.primaryCta.href}
               onClick={() => setOpen(false)}
-              className="cta-lift inline-flex justify-center rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-4 py-3 text-sm font-semibold text-white"
+              className="cta-lift inline-flex justify-center rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-4 py-3 type-action text-white"
             >
               {navContent.primaryCta.label}
             </Link>
             <Link
               href={navContent.secondaryCta.href}
               onClick={() => setOpen(false)}
-              className="cta-lift inline-flex justify-center rounded-md bg-[var(--color-panel-high)] px-4 py-3 text-sm font-semibold text-[var(--color-brand)]"
+              className="cta-lift type-action inline-flex justify-center rounded-md bg-[var(--color-panel-high)] px-4 py-3 text-[var(--color-brand)]"
             >
               {navContent.secondaryCta.label}
             </Link>
@@ -382,7 +382,7 @@ export default function SiteNav() {
                           onClick={() => setOpen(false)}
                           className="rounded-2xl bg-white px-4 py-3"
                         >
-                          <p className="text-sm font-semibold text-[var(--color-text)]">{child.label}</p>
+                          <p className="type-action text-[var(--color-text)]">{child.label}</p>
                           <p className="mt-1 text-sm leading-6 text-[var(--color-text-soft)]">{child.description}</p>
                         </Link>
                       ))}
@@ -412,7 +412,7 @@ export default function SiteNav() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="inline-flex min-h-10 items-center rounded-xl px-4 py-2 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-panel-low)] hover:text-[var(--color-text)]"
+                className="type-action inline-flex min-h-10 items-center rounded-xl px-4 py-2 text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-panel-low)] hover:text-[var(--color-text)]"
               >
                 {link.label}
               </Link>

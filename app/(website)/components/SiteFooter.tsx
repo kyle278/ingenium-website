@@ -25,15 +25,15 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
               <div className="flex items-center gap-3">
                 <Image src="/logo.svg" alt="Ingenium logo" width={34} height={34} className="h-8 w-8" />
                 <div>
-                  <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+                  <p className="type-card-title-sm text-[var(--color-text)]">
                     Ingenium Consulting
                   </p>
-                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                  <p className="type-detail-kicker font-medium text-[var(--color-text-muted)]">
                     Connected websites. Intelligent growth.
                   </p>
                 </div>
               </div>
-              <p className="mt-5 max-w-xl text-base leading-7 text-[var(--color-text-soft)]">
+              <p className="mt-5 max-w-[60ch] type-body-base text-[var(--color-text-soft)]">
                 {content.summary}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
@@ -45,7 +45,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
 
             <div className="grid gap-8 sm:grid-cols-3">
               <div>
-                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                <p className="type-section-kicker text-[var(--color-text-muted)]">
                   Platform
                 </p>
                 <div className="mt-4 grid gap-2">
@@ -53,7 +53,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="text-sm text-[var(--color-text-soft)] hover:text-[var(--color-text)]"
+                      className="type-body-sm text-[var(--color-text-soft)] hover:text-[var(--color-text)]"
                     >
                       {item.label}
                     </Link>
@@ -61,7 +61,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
                 </div>
               </div>
               <div>
-                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                <p className="type-section-kicker text-[var(--color-text-muted)]">
                   Trust
                 </p>
                 <div className="mt-4 grid gap-2">
@@ -69,7 +69,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="text-sm text-[var(--color-text-soft)] hover:text-[var(--color-text)]"
+                      className="type-body-sm text-[var(--color-text-soft)] hover:text-[var(--color-text)]"
                     >
                       {item.label}
                     </Link>
@@ -77,7 +77,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
                 </div>
               </div>
               <div>
-                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                <p className="type-section-kicker text-[var(--color-text-muted)]">
                   Get started
                 </p>
                 <div className="mt-4 grid gap-3">
@@ -89,7 +89,7 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
             </div>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 pt-6 text-sm text-[var(--color-text-muted)]">
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 pt-6 type-body-sm text-[var(--color-text-muted)]">
             <p>(c) 2026 Ingenium Digital Consulting</p>
             <p>Designed for startups and SMEs that want smarter growth.</p>
           </div>

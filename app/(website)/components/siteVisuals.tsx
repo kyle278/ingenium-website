@@ -27,10 +27,10 @@ export function SystemStackVisual() {
         <div className="relative px-6 py-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
+              <p className="type-detail-kicker text-[var(--color-brand)]">
                 Product overview
               </p>
-              <h3 className="mt-3 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+              <h3 className="mt-3 type-card-title text-[var(--color-text)]">
                 Website, CRM, automation, AI, and reporting in one view.
               </h3>
             </div>
@@ -39,8 +39,8 @@ export function SystemStackVisual() {
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
             {stages.map((stage) => (
               <div key={stage.label} className="editorial-card rounded-2xl px-4 py-4">
-                <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)]">{stage.label}</p>
-                <p className="mt-2 text-base font-semibold text-[var(--color-text)]">{stage.value}</p>
+                <p className="type-detail-kicker text-[var(--color-text-muted)]">{stage.label}</p>
+                <p className="mt-2 type-card-title-sm text-[var(--color-text)]">{stage.value}</p>
               </div>
             ))}
           </div>
@@ -50,7 +50,7 @@ export function SystemStackVisual() {
           <div className="editorial-card rounded-[28px] p-5">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-sm font-semibold text-[var(--color-text)]">Lead capture</p>
+                <p className="type-action text-[var(--color-text)]">Lead capture</p>
                 <p className="mt-1 text-sm text-[var(--color-text-soft)]">Form, source, service, urgency</p>
               </div>
               <span className="rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-semibold text-emerald-700">
@@ -67,8 +67,8 @@ export function SystemStackVisual() {
                   key={label}
                   className="grid grid-cols-[auto,1fr] items-center gap-3 rounded-2xl bg-[var(--color-panel-low)] px-4 py-3"
                 >
-                  <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-text-muted)]">{label}</p>
-                  <p className="text-sm font-medium text-[var(--color-text)]">{value}</p>
+                  <p className="type-detail-kicker text-[var(--color-text-muted)]">{label}</p>
+                  <p className="type-form-label text-[var(--color-text)]">{value}</p>
                 </div>
               ))}
             </div>
@@ -77,7 +77,7 @@ export function SystemStackVisual() {
           <div className="grid gap-4">
             <div className="rounded-[28px] bg-[var(--color-panel-low)] p-5">
               <div className="flex items-center justify-between">
-                <p className="text-sm font-semibold text-[var(--color-text)]">Pipeline</p>
+                <p className="type-action text-[var(--color-text)]">Pipeline</p>
                 <ChartColumn className="h-4 w-4 text-[var(--color-brand)]" />
               </div>
               <div className="mt-4 space-y-3">
@@ -88,7 +88,7 @@ export function SystemStackVisual() {
                 ].map(([label, value]) => (
                   <div key={label} className="flex items-center justify-between rounded-2xl bg-white px-4 py-3">
                     <span className="text-sm text-[var(--color-text-soft)]">{label}</span>
-                    <span className="text-sm font-semibold text-[var(--color-text)]">{value}</span>
+                    <span className="type-action text-[var(--color-text)]">{value}</span>
                   </div>
                 ))}
               </div>
@@ -97,14 +97,14 @@ export function SystemStackVisual() {
             <div className="rounded-[28px] bg-[linear-gradient(180deg,rgba(0,87,191,0.08),rgba(255,255,255,0.96))] p-5 shadow-[0_4px_24px_rgba(24,28,31,0.06)]">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-sm font-semibold text-[var(--color-text)]">AI suggestion</p>
+                  <p className="type-action text-[var(--color-text)]">AI suggestion</p>
                   <p className="mt-1 text-sm text-[var(--color-text-soft)]">
                     Draft follow-up and prepare account brief.
                   </p>
                 </div>
                 <Bot className="h-4 w-4 text-[var(--color-brand)]" />
               </div>
-              <div className="mt-4 rounded-2xl bg-white px-4 py-4 text-sm leading-6 text-[var(--color-text-soft)]">
+              <div className="mt-4 rounded-2xl bg-white px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
                 Buyer is asking for CRM cleanup, response speed, and clearer reporting. Recommend 30-minute demo with operations lead present.
               </div>
             </div>
@@ -129,10 +129,10 @@ export function PortalPreview({
       <div className="px-5 py-4">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
+            <p className="type-detail-kicker text-[var(--color-brand)]">
               {eyebrow}
             </p>
-            <p className="mt-2 text-sm font-semibold text-[var(--color-text)]">{title}</p>
+            <p className="mt-2 type-action text-[var(--color-text)]">{title}</p>
           </div>
           <div className="flex gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-slate-300" />
@@ -147,7 +147,7 @@ export function PortalPreview({
             key={`${row.label}-${row.value}`}
             className="grid grid-cols-[1.1fr,1fr,auto] items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-[0_2px_14px_rgba(24,28,31,0.04)]"
           >
-            <p className="text-sm font-medium text-[var(--color-text)]">{row.label}</p>
+            <p className="type-form-label text-[var(--color-text)]">{row.label}</p>
             <p className="text-sm text-[var(--color-text-soft)]">{row.value}</p>
             {row.state ? (
               <MonoTag className="bg-slate-50/80 text-[var(--color-brand)]">{row.state}</MonoTag>
@@ -177,15 +177,15 @@ export function WorkflowStoryboard() {
           <ScrollReveal key={step.title} className="timeline-step" delayMs={index * 40}>
             <SurfaceCard className="panel-hover h-full p-6">
               <div className="flex items-start justify-between gap-4">
-                <div className="data-flow-dot flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(0,87,191,0.08)] font-[var(--font-mono)] text-[11px] font-semibold text-[var(--color-brand)]">
+                <div className="data-flow-dot flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(0,87,191,0.08)] type-meta-kicker text-[var(--color-brand)]">
                   {String(index + 1).padStart(2, "0")}
                 </div>
                 <Icon className="h-4 w-4 text-[var(--color-brand)]" />
               </div>
-              <p className="mt-5 font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+              <p className="mt-5 type-card-title-sm text-[var(--color-text)]">
                 {step.title}
               </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{step.copy}</p>
+              <p className="mt-3 type-body-sm text-[var(--color-text-soft)]">{step.copy}</p>
             </SurfaceCard>
           </ScrollReveal>
         );
@@ -207,10 +207,10 @@ export function GovernanceStack() {
     <SurfaceCard dark className="overflow-hidden p-8">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-white/55">
+          <p className="type-section-kicker text-white/55">
             Governance layer
           </p>
-            <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-white">
+            <h3 className="mt-4 type-card-title text-white">
               Control the parts of automation and AI that buyers actually worry about.
             </h3>
         </div>
@@ -220,7 +220,7 @@ export function GovernanceStack() {
         {items.map((item) => (
           <div
             key={item}
-            className="rounded-2xl bg-white/8 px-4 py-4 text-sm text-white/78"
+            className="rounded-2xl bg-white/8 px-4 py-4 type-body-sm text-white/78"
           >
             {item}
           </div>
@@ -252,7 +252,7 @@ export function ComparisonVisual() {
   return (
     <div className="grid gap-6 lg:grid-cols-[0.92fr,1.08fr]">
       <SurfaceCard className="p-7">
-        <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+        <p className="type-section-kicker text-[var(--color-text-muted)]">
           Old stack
         </p>
         <div className="mt-6 grid gap-3">
@@ -273,10 +273,10 @@ export function ComparisonVisual() {
       <SurfaceCard dark className="p-7">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+            <p className="type-section-kicker text-cyan-300">
               Ingenium
             </p>
-            <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-white">
+            <h3 className="mt-4 type-card-title text-white">
               Replace the fragmented stack with one connected platform.
             </h3>
           </div>
@@ -286,7 +286,7 @@ export function ComparisonVisual() {
           {ingenium.map((item) => (
             <div key={item} className="flex items-start gap-3 py-3 last:border-b-0">
               <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />
-              <p className="text-sm text-white/78">{item}</p>
+              <p className="type-body-sm text-white/78">{item}</p>
             </div>
           ))}
         </div>

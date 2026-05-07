@@ -41,10 +41,10 @@ export default function ServiceFaqSection({
       <div className="mt-10 grid gap-4 lg:grid-cols-2">
         {items.map((item) => (
           <SurfaceCard key={item.question} className="panel-hover p-6 md:p-7">
-            <h3 className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+            <h3 className="type-card-title text-[var(--color-text)]">
               {item.question}
             </h3>
-            <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)] md:text-base">
+            <p className="mt-4 type-body-base text-[var(--color-text-soft)]">
               {item.answer}
             </p>
           </SurfaceCard>

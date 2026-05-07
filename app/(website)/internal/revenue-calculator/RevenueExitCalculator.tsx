@@ -24,7 +24,7 @@ const AFTER_QUIT_TAX_RATE = 0.27;
 const VAT_RATE = 0.23;
 const FORECAST_MONTHS = 12;
 
-const sectionLabelClassName = "font-(--font-mono) text-xs uppercase tracking-[0.28em] text-emerald-400";
+const sectionLabelClassName = "type-page-kicker text-emerald-400";
 const panelClassName = "rounded-3xl border border-slate-800 bg-slate-900/65 backdrop-blur-sm";
 const inputClassName =
   "w-full rounded-xl border border-slate-700 bg-slate-950/70 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/30";
@@ -184,8 +184,8 @@ function useChartWidth() {
 function TooltipMetric({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-3">
-      <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.22em] text-slate-500">{label}</p>
-      <p className="mt-2 text-base font-semibold text-white">{value}</p>
+      <p className="type-detail-kicker text-slate-500">{label}</p>
+      <p className="mt-2 type-card-title-sm text-white">{value}</p>
     </div>
   );
 }
@@ -213,13 +213,13 @@ function MetricCard({
   return (
     <div className="metric-card rounded-2xl border border-slate-800 bg-slate-900/55 p-5">
       <div className="flex items-center justify-between gap-3">
-        <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.24em] text-slate-500">{label}</p>
+        <p className="type-section-kicker text-slate-500">{label}</p>
         <span className={`inline-flex h-9 w-9 items-center justify-center rounded-xl border ${accentClasses}`}>
           <Icon className="h-4 w-4" />
         </span>
       </div>
-      <p className="metric-display mt-4 text-3xl font-semibold tracking-tight text-white">{value}</p>
-      {detail ? <p className="mt-2 text-sm leading-relaxed text-slate-400">{detail}</p> : null}
+      <p className="metric-display mt-4 text-[2rem] font-semibold text-white">{value}</p>
+      {detail ? <p className="mt-2 type-body-sm text-slate-400">{detail}</p> : null}
     </div>
   );
 }
@@ -364,10 +364,10 @@ function ForecastChart({ data }: { data: ForecastPoint[] }) {
       {activePoint ? (
         <div className="grid gap-3 rounded-2xl border border-slate-800 bg-slate-950/60 p-4 md:grid-cols-2 xl:grid-cols-4">
           <div>
-            <p className="font-(--font-mono) text-[11px] uppercase tracking-[0.24em] text-cyan-400">
+            <p className="type-meta-kicker text-cyan-400">
               {activePoint.month}
             </p>
-            <p className="mt-2 text-sm text-slate-300">
+            <p className="mt-2 type-body-sm text-slate-300">
               {formatNumber(activePoint.projectsThisMonth, 2)} projects generating{" "}
               {formatCurrency(activePoint.newMrrThisMonth)} in new MRR this month.
             </p>
@@ -378,43 +378,43 @@ function ForecastChart({ data }: { data: ForecastPoint[] }) {
           <TooltipMetric label="Revenue target line" value={formatCurrency(activePoint.target)} />
           {activeTakeHome ? (
             <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/8 p-3 md:col-span-2 xl:col-span-4">
-              <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.22em] text-emerald-300">
+              <p className="type-detail-kicker text-emerald-300">
                 Take-home at this forecast point
               </p>
               <div className="mt-3 grid gap-3 lg:grid-cols-2">
                 <div className="rounded-xl border border-slate-800 bg-slate-950/65 p-3">
-                  <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.22em] text-slate-500">
+                  <p className="type-detail-kicker text-slate-500">
                     Employed
                   </p>
                   <div className="mt-2 grid gap-2 sm:grid-cols-2">
                     <div>
-                      <p className="text-xs text-slate-400">You</p>
-                      <p className="text-sm font-semibold text-white">
+                      <p className="type-body-xs text-slate-400">You</p>
+                      <p className="type-action text-white">
                         {formatCurrency(activeTakeHome.yourTotalBefore)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400">Clayton</p>
-                      <p className="text-sm font-semibold text-white">
+                      <p className="type-body-xs text-slate-400">Clayton</p>
+                      <p className="type-action text-white">
                         {formatCurrency(activeTakeHome.claytonTotalBefore)}
                       </p>
                     </div>
                   </div>
                 </div>
                 <div className="rounded-xl border border-cyan-500/20 bg-slate-950/65 p-3">
-                  <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.22em] text-cyan-300">
+                  <p className="type-detail-kicker text-cyan-300">
                     After quitting
                   </p>
                   <div className="mt-2 grid gap-2 sm:grid-cols-2">
                     <div>
-                      <p className="text-xs text-slate-400">You</p>
-                      <p className="text-sm font-semibold text-white">
+                      <p className="type-body-xs text-slate-400">You</p>
+                      <p className="type-action text-white">
                         {formatCurrency(activeTakeHome.eachNetAfterQuit)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400">Clayton</p>
-                      <p className="text-sm font-semibold text-white">
+                      <p className="type-body-xs text-slate-400">Clayton</p>
+                      <p className="type-action text-white">
                         {formatCurrency(activeTakeHome.eachNetAfterQuit)}
                       </p>
                     </div>
@@ -507,26 +507,26 @@ export default function RevenueExitCalculator() {
         <div className="relative grid gap-8 xl:grid-cols-[1.1fr,0.9fr]">
           <div>
             <p className={sectionLabelClassName}>Internal Planning Tool</p>
-            <h1 className="mt-5 max-w-4xl font-(--font-display) text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            <h1 className="mt-5 max-w-4xl type-page-title text-white">
               Model the revenue point where project work and MRR make the exit math obvious.
             </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-400">
+            <p className="mt-5 max-w-[65ch] type-body-lead text-slate-400">
               This hidden calculator turns your project economics, MRR contribution, and growth
               assumptions into a clean founder planning view with live take-home math and a
               12-month forecast.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <span className="rounded-full border border-slate-800 bg-slate-900/75 px-4 py-2 font-(--font-mono) text-[11px] uppercase tracking-[0.22em] text-slate-400">
+              <span className="rounded-full border border-slate-800 bg-slate-900/75 px-4 py-2 type-meta-kicker text-slate-400">
                 Route hidden from nav and footer
               </span>
-              <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 font-(--font-mono) text-[11px] uppercase tracking-[0.22em] text-emerald-300">
+              <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 type-meta-kicker text-emerald-300">
                 Live monthly scenario modeling
               </span>
             </div>
           </div>
 
           <div className="rounded-3xl border border-emerald-500/20 bg-emerald-500/8 p-6 shadow-lg shadow-emerald-500/5">
-            <p className="font-(--font-mono) text-[11px] uppercase tracking-[0.26em] text-emerald-300">
+            <p className="type-page-kicker text-emerald-300">
               Live Summary
             </p>
             <div className="mt-5 space-y-6">
@@ -536,18 +536,18 @@ export default function RevenueExitCalculator() {
                 </p>
               </div>
               <div>
-                <p className="font-(--font-mono) text-[11px] uppercase tracking-[0.24em] text-slate-300">
+                <p className="type-meta-kicker text-slate-300">
                   Before quitting
                 </p>
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-2xl border border-slate-800 bg-slate-950/55 p-4">
-                    <p className="text-sm text-slate-400">You</p>
+                    <p className="type-body-sm text-slate-400">You</p>
                     <p className="metric-display mt-2 text-3xl font-semibold text-white">
                       {formatCurrency(calculations.yourTotalBefore)}
                     </p>
                   </div>
                   <div className="rounded-2xl border border-slate-800 bg-slate-950/55 p-4">
-                    <p className="text-sm text-slate-400">Clayton</p>
+                    <p className="type-body-sm text-slate-400">Clayton</p>
                     <p className="metric-display mt-2 text-3xl font-semibold text-white">
                       {formatCurrency(calculations.claytonTotalBefore)}
                     </p>
@@ -555,11 +555,11 @@ export default function RevenueExitCalculator() {
                 </div>
               </div>
               <div>
-                <p className="font-(--font-mono) text-[11px] uppercase tracking-[0.24em] text-cyan-300">
+                <p className="type-meta-kicker text-cyan-300">
                   After quitting
                 </p>
                 <div className="mt-3 rounded-2xl border border-cyan-500/20 bg-slate-950/55 p-4">
-                  <p className="text-sm text-slate-400">Both</p>
+                  <p className="type-body-sm text-slate-400">Both</p>
                   <p className="metric-display mt-2 text-3xl font-semibold text-white">
                     ~{formatCurrency(calculations.eachNetAfterQuit)}
                   </p>
@@ -575,15 +575,15 @@ export default function RevenueExitCalculator() {
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className={sectionLabelClassName}>Input Model</p>
-              <h2 className="mt-3 font-(--font-display) text-2xl font-semibold text-white">
+              <h2 className="mt-3 type-card-title text-white">
                 Compact assumptions, live revenue logic
               </h2>
             </div>
             <div className="rounded-2xl border border-slate-800 bg-slate-950/60 px-4 py-3">
-              <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.24em] text-slate-500">
+              <p className="type-section-kicker text-slate-500">
                 Informational VAT
               </p>
-              <p className="mt-2 text-sm text-slate-300">
+              <p className="mt-2 type-body-sm text-slate-300">
                 Plus VAT:{" "}
                 <span className="font-semibold text-white">{formatCurrency(calculations.vatAmount)}</span>
               </p>
@@ -593,7 +593,7 @@ export default function RevenueExitCalculator() {
           <div className="mt-6 grid gap-6">
             <div className="grid gap-4 md:grid-cols-2">
               <label className="space-y-2">
-                <span className="text-sm font-medium text-slate-300">Monthly revenue target</span>
+                <span className="type-form-label text-slate-300">Monthly revenue target</span>
                 <input
                   className={inputClassName}
                   inputMode="decimal"
@@ -603,7 +603,7 @@ export default function RevenueExitCalculator() {
                 />
               </label>
               <label className="space-y-2">
-                <span className="text-sm font-medium text-slate-300">Average project cost</span>
+                <span className="type-form-label text-slate-300">Average project cost</span>
                 <div className="grid gap-3 sm:grid-cols-[1fr,auto]">
                   <input
                     className={inputClassName}
@@ -612,7 +612,7 @@ export default function RevenueExitCalculator() {
                     onChange={(event) => updateInput("averageProjectCost", event.target.value)}
                     placeholder="4500"
                   />
-                  <div className="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300">
+                  <div className="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 type-body-sm text-slate-300">
                     Plus VAT
                     <span className="ml-2 font-semibold text-white">
                       {formatCurrency(calculations.vatAmount)}
@@ -624,7 +624,7 @@ export default function RevenueExitCalculator() {
 
             <div className="grid gap-4 md:grid-cols-2">
               <label className="space-y-2">
-                <span className="text-sm font-medium text-slate-300">Average projects per month</span>
+                <span className="type-form-label text-slate-300">Average projects per month</span>
                 <input
                   className={inputClassName}
                   inputMode="decimal"
@@ -634,7 +634,7 @@ export default function RevenueExitCalculator() {
                 />
               </label>
               <label className="space-y-2">
-                <span className="text-sm font-medium text-slate-300">Average MRR generated after each project</span>
+                <span className="type-form-label text-slate-300">Average MRR generated after each project</span>
                 <input
                   className={inputClassName}
                   inputMode="decimal"
@@ -647,7 +647,7 @@ export default function RevenueExitCalculator() {
 
             <div className="grid gap-4 md:grid-cols-2">
               <label className="space-y-2">
-                <span className="text-sm font-medium text-slate-300">Monthly project growth rate</span>
+                <span className="type-form-label text-slate-300">Monthly project growth rate</span>
                 <input
                   className={inputClassName}
                   inputMode="decimal"
@@ -657,7 +657,7 @@ export default function RevenueExitCalculator() {
                 />
               </label>
               <label className="space-y-2">
-                <span className="text-sm font-medium text-slate-300">Monthly MRR growth rate</span>
+                <span className="type-form-label text-slate-300">Monthly MRR growth rate</span>
                 <input
                   className={inputClassName}
                   inputMode="decimal"
@@ -672,13 +672,13 @@ export default function RevenueExitCalculator() {
 
         <ScrollReveal className={`${panelClassName} p-6 sm:p-7`} delayMs={70} blur>
           <p className={sectionLabelClassName}>Static Assumptions</p>
-          <h2 className="mt-3 font-(--font-display) text-2xl font-semibold text-white">
+          <h2 className="mt-3 type-card-title text-white">
             Built-in constants for the current planning model
           </h2>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             {assumptionRows.map((assumption) => (
               <div key={assumption.label} className="rounded-2xl border border-slate-800 bg-slate-950/55 p-4">
-                <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.22em] text-slate-500">
+                <p className="type-detail-kicker text-slate-500">
                   {assumption.label}
                 </p>
                 <p className="mt-2 text-sm font-medium text-white">{assumption.value}</p>
@@ -767,35 +767,35 @@ export default function RevenueExitCalculator() {
           <p className={sectionLabelClassName}>Revenue Composition</p>
           <div className="mt-5 grid gap-4">
             <div className="rounded-2xl border border-slate-800 bg-slate-950/55 p-5">
-              <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.22em] text-slate-500">
+              <p className="type-detail-kicker text-slate-500">
                 Total project monthly revenue
               </p>
               <p className="metric-display mt-3 text-3xl font-semibold text-white">
                 {formatCurrency(calculations.totalProjectMonthlyRevenue)}
               </p>
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 type-body-sm text-slate-400">
                 Project revenue plus newly added MRR in the current month.
               </p>
             </div>
             <div className="rounded-2xl border border-slate-800 bg-slate-950/55 p-5">
-              <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.22em] text-slate-500">
+              <p className="type-detail-kicker text-slate-500">
                 Total project revenue per month
               </p>
               <p className="metric-display mt-3 text-3xl font-semibold text-white">
                 {formatCurrency(calculations.monthlyProjectRevenue)}
               </p>
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 type-body-sm text-slate-400">
                 Fee revenue generated from average projects per month.
               </p>
             </div>
             <div className="rounded-2xl border border-slate-800 bg-slate-950/55 p-5">
-              <p className="font-(--font-mono) text-[10px] uppercase tracking-[0.22em] text-slate-500">
+              <p className="type-detail-kicker text-slate-500">
                 Total cumulative MRR per month
               </p>
               <p className="metric-display mt-3 text-3xl font-semibold text-white">
                 {formatCurrency(calculations.monthlyNewMrrAdded)}
               </p>
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 type-body-sm text-slate-400">
                 Current-month new MRR contribution before the forecast compounds it.
               </p>
             </div>
@@ -806,11 +806,11 @@ export default function RevenueExitCalculator() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className={sectionLabelClassName}>Forecast Overview</p>
-              <h2 className="mt-3 font-(--font-display) text-2xl font-semibold text-white">
+              <h2 className="mt-3 type-card-title text-white">
                 12-month revenue forecast
               </h2>
             </div>
-            <p className="max-w-xl text-sm text-slate-400">
+            <p className="max-w-xl type-body-sm text-slate-400">
               Total project monthly revenue tracks project revenue plus cumulative MRR. The target
               line stays fixed so you can see exactly when the model crosses it.
             </p>

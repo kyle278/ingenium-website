@@ -31,13 +31,13 @@ export default function AiAgentsPage() {
     <div className="space-y-20 pb-8 md:space-y-28">
       <section className="grid items-center gap-10 pt-4 lg:grid-cols-[0.96fr,1.04fr]">
         <div>
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-secondary)]">
+          <p className="type-page-kicker text-[var(--color-secondary)]">
             AI Workflows
           </p>
-          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
+          <h1 className="mt-6 max-w-4xl type-page-title text-[var(--color-text)]">
             AI support that works with your data, not beside it.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-6 max-w-[65ch] type-body-lead text-[var(--color-text-soft)]">
             Ingenium uses AI-enabled workflows to help with follow-up, summaries, recommendations, and reporting so
             your team moves faster while keeping the real business context in view.
           </p>
@@ -49,7 +49,7 @@ export default function AiAgentsPage() {
         </div>
 
         <SurfaceCard className="p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+          <p className="type-section-kicker text-[var(--color-secondary)]">
             AI-enabled workflows
           </p>
           <div className="mt-6 grid gap-3">
@@ -58,7 +58,7 @@ export default function AiAgentsPage() {
               "Campaign ideas and summaries start from your actual business data.",
               "Recommendations support the workflow instead of creating a parallel toolset.",
             ].map((item) => (
-              <div key={item} className="rounded-[18px] border border-[var(--color-line)] bg-white/80 px-4 py-4 text-sm text-[var(--color-text-soft)]">
+              <div key={item} className="rounded-[18px] border border-[var(--color-line)] bg-white/80 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
                 {item}
               </div>
             ))}
@@ -68,13 +68,13 @@ export default function AiAgentsPage() {
 
       <section>
         <SurfaceCard className="p-6 md:p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+          <p className="type-section-kicker text-[var(--color-secondary)]">
             Direct answer
           </p>
-          <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+          <h2 className="mt-4 type-card-title text-[var(--color-text)]">
             What is an AI-enabled workflow?
           </h2>
-          <p className="mt-4 max-w-3xl text-base leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-4 max-w-[68ch] type-body-base text-[var(--color-text-soft)]">
             An AI-enabled workflow uses AI inside an existing business process, such as lead follow-up, account
             research, summaries, recommendations, and reporting. The useful part is the connection to CRM context,
             approvals, and human review rather than a standalone chatbot.
@@ -95,7 +95,7 @@ export default function AiAgentsPage() {
             "Support marketing activation with clearer recommendations.",
             "Keep leadership reporting and next steps easier to review.",
           ].map((item) => (
-            <SurfaceCard key={item} className="panel-hover p-6 text-sm leading-7 text-[var(--color-text-soft)]">
+            <SurfaceCard key={item} className="panel-hover p-6 type-body-sm text-[var(--color-text-soft)]">
               {item}
             </SurfaceCard>
           ))}
@@ -120,10 +120,10 @@ export default function AiAgentsPage() {
             ],
           ].map(([title, body]) => (
             <SurfaceCard key={title} className="panel-hover p-6">
-              <p className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+              <p className="type-card-title text-[var(--color-text)]">
                 {title}
               </p>
-              <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+              <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{body}</p>
             </SurfaceCard>
           ))}
         </div>
@@ -136,7 +136,7 @@ export default function AiAgentsPage() {
       />
 
       <section className="graphite-panel rounded-[18px] px-8 py-12 text-center md:px-12">
-        <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
+        <h2 className="mx-auto max-w-4xl type-section-title text-white">
           AI becomes more useful when it is connected to the same system your team already trusts.
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">

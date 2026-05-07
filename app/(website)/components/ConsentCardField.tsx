@@ -36,7 +36,7 @@ export default function ConsentCardField({
             type="checkbox"
           />
           <span className="space-y-1">
-            <span className="block text-sm font-medium text-[var(--color-text)]">
+            <span className="block type-form-label text-[var(--color-text)]">
               {label}
               {required ? " *" : ""}
             </span>

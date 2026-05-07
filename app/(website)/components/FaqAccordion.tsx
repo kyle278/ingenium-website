@@ -32,7 +32,7 @@ export default function FaqAccordion({ items, editorAttrs }: FaqAccordionProps) 
               className="flex w-full items-center justify-between gap-4 px-4 py-3 text-left"
               {...editorAttrs}
             >
-              <span className="text-sm font-semibold text-white">{item.question}</span>
+              <span className="type-action text-white">{item.question}</span>
               <ChevronDown
                 className="faq-chevron h-4 w-4 shrink-0 text-slate-500"
                 data-open={isOpen ? "true" : "false"}

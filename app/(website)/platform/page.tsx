@@ -23,13 +23,13 @@ export default function PlatformPage() {
       <section className="grid items-start gap-10 pt-4 lg:grid-cols-[0.96fr,1.04fr]">
         <ScrollReveal>
           <div>
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
+          <p className="type-page-kicker text-[var(--color-brand)]">
             Platform
           </p>
-          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
+          <h1 className="mt-6 max-w-4xl type-page-title text-[var(--color-text)]">
             One operating layer across acquisition, CRM execution, handoff, reporting, and AI support.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-6 max-w-[65ch] type-body-lead text-[var(--color-text-soft)]">
             Ingenium is most useful when the whole buyer and delivery path is connected instead of patched together.
           </p>
           <PageReviewMeta />
@@ -42,7 +42,7 @@ export default function PlatformPage() {
 
         <ScrollReveal delayMs={80} direction="left" blur>
           <SurfaceCard className="p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+          <p className="type-section-kicker text-[var(--color-brand)]">
             Connection map
           </p>
           <div className="mt-6 grid gap-3">
@@ -53,7 +53,7 @@ export default function PlatformPage() {
               ["AI", "Recommendations, summaries, and operational assistance tied to your data."],
             ].map(([title, body]) => (
               <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/72 p-5">
-                <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                <p className="type-card-title-sm text-[var(--color-text)]">
                   {title}
                 </p>
                 <p className="mt-2 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
@@ -67,13 +67,13 @@ export default function PlatformPage() {
       <section>
         <ScrollReveal>
           <SurfaceCard className="p-6 md:p-8">
-            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+            <p className="type-section-kicker text-[var(--color-brand)]">
               Direct answer
             </p>
-            <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+            <h2 className="mt-4 type-card-title text-[var(--color-text)]">
               What is the Ingenium platform?
             </h2>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-[var(--color-text-soft)]">
+            <p className="mt-4 max-w-[68ch] type-body-base text-[var(--color-text-soft)]">
               The Ingenium platform is an operating layer that connects website lead capture, CRM records, marketing
               automation, AI support, handoff workflows, and reporting. It is designed for teams that need fewer gaps
               between first enquiry, sales follow-up, delivery, and management visibility.
@@ -95,13 +95,13 @@ export default function PlatformPage() {
           {workflowSteps.map(([index, title, body], stepIndex) => (
             <ScrollReveal key={index} delayMs={stepIndex * 45}>
               <SurfaceCard className="panel-hover p-6">
-              <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
+              <p className="type-detail-kicker text-[var(--color-brand)]">
                 {index}
               </p>
-              <p className="mt-3 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+              <p className="mt-3 type-card-title text-[var(--color-text)]">
                 {title}
               </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+              <p className="mt-3 type-body-sm text-[var(--color-text-soft)]">{body}</p>
               </SurfaceCard>
             </ScrollReveal>
           ))}
@@ -123,7 +123,7 @@ export default function PlatformPage() {
               "Automation glued together without a clear owner or audit trail.",
               "AI tools running beside the workflow instead of inside it.",
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
                 {item}
               </div>
             ))}
@@ -133,7 +133,7 @@ export default function PlatformPage() {
 
         <ScrollReveal delayMs={80} direction="left" blur>
           <SurfaceCard dark className="p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+          <p className="type-section-kicker text-cyan-300">
             Why AI matters
           </p>
           <div className="mt-6 grid gap-3">
@@ -143,7 +143,7 @@ export default function PlatformPage() {
               "Recommendations stay tied to approvals and review paths.",
               "Teams move faster without losing accountability.",
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 type-body-sm text-white/78">
                 {item}
               </div>
             ))}
@@ -153,7 +153,7 @@ export default function PlatformPage() {
       </section>
 
       <ScrollReveal className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12" blur>
-        <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
+        <h2 className="mx-auto max-w-4xl type-section-title text-white">
           See the operating system that keeps every step connected.
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">

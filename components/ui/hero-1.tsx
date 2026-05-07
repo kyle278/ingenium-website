@@ -363,12 +363,12 @@ export function HeroLanding(props: HeroLandingProps) {
   const getTitleSizeClasses = () => {
     switch (titleSize) {
       case 'small':
-        return 'text-3xl sm:text-4xl lg:text-6xl';
+        return 'type-section-title';
       case 'medium':
-        return 'text-4xl sm:text-5xl lg:text-[4.4rem]';
+        return 'type-page-title';
       case 'large':
       default:
-        return 'text-5xl sm:text-6xl lg:text-[5rem]';
+        return 'type-hero-title';
     }
   };
 
@@ -378,7 +378,7 @@ export function HeroLanding(props: HeroLandingProps) {
         <Link
           key={index}
           href={cta.href}
-          className="cta-lift inline-flex items-center justify-center rounded-[12px] bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_rgba(20,36,61,0.12)]"
+          className="cta-lift type-action inline-flex items-center justify-center rounded-[12px] bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 text-white shadow-[0_14px_28px_rgba(20,36,61,0.12)]"
         >
           {cta.text}
         </Link>
@@ -389,7 +389,7 @@ export function HeroLanding(props: HeroLandingProps) {
       <Link
         key={index}
         href={cta.href}
-        className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-text)] transition hover:text-[var(--color-brand)]"
+        className="type-action inline-flex items-center gap-2 text-[var(--color-text)] transition hover:text-[var(--color-brand)]"
       >
         {cta.text}
         <ArrowRight className="h-4 w-4" />
@@ -478,7 +478,7 @@ export function HeroLanding(props: HeroLandingProps) {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-sm font-semibold text-[var(--color-text-soft)] transition hover:text-[var(--color-text)]"
+                    className="type-action text-[var(--color-text-soft)] transition hover:text-[var(--color-text)]"
                   >
                     {item.name}
                   </Link>
@@ -489,7 +489,7 @@ export function HeroLanding(props: HeroLandingProps) {
               <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                 <Link
                   href={loginHref}
-                  className="text-sm font-semibold text-[var(--color-text)] transition hover:text-[var(--color-brand)]"
+                  className="type-action text-[var(--color-text)] transition hover:text-[var(--color-brand)]"
                 >
                   {loginText}
                 </Link>
@@ -522,7 +522,7 @@ export function HeroLanding(props: HeroLandingProps) {
                     key={item.name}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="rounded-2xl px-4 py-3 text-base font-semibold text-[var(--color-text)] transition hover:bg-[var(--color-panel-low)]"
+                    className="type-action rounded-2xl px-4 py-3 text-[var(--color-text)] transition hover:bg-[var(--color-panel-low)]"
                   >
                     {item.name}
                   </Link>
@@ -532,7 +532,7 @@ export function HeroLanding(props: HeroLandingProps) {
                 <Link
                   href={loginHref}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="mt-4 inline-flex justify-center rounded-[12px] border border-[var(--color-line)] bg-white px-4 py-3 text-sm font-semibold text-[var(--color-text)]"
+                  className="type-action mt-4 inline-flex justify-center rounded-[12px] border border-[var(--color-line)] bg-white px-4 py-3 text-[var(--color-text)]"
                 >
                   {loginText}
                 </Link>
@@ -549,12 +549,12 @@ export function HeroLanding(props: HeroLandingProps) {
         )}
       >
         {announcementBanner ? (
-          <div className="mb-6 flex justify-center sm:mb-8">
-            <div className="relative rounded-full border border-[rgba(23,103,195,0.14)] bg-white/88 px-4 py-2 text-xs text-[var(--color-text-soft)] shadow-[0_12px_24px_rgba(20,36,61,0.06)] sm:text-sm">
+            <div className="mb-6 flex justify-center sm:mb-8">
+            <div className="relative rounded-full border border-[rgba(23,103,195,0.14)] bg-white/88 px-4 py-2 type-body-sm text-[var(--color-text-soft)] shadow-[0_12px_24px_rgba(20,36,61,0.06)]">
               {announcementBanner.text}{' '}
               <Link
                 href={announcementBanner.linkHref}
-                className="font-semibold text-[var(--color-brand)] transition hover:text-[var(--color-brand-strong)]"
+                className="type-action text-[var(--color-brand)] transition hover:text-[var(--color-brand-strong)]"
               >
                 <span aria-hidden="true" className="absolute inset-0" />
                 {announcementBanner.linkText} <span aria-hidden="true">&rarr;</span>
@@ -563,10 +563,10 @@ export function HeroLanding(props: HeroLandingProps) {
           </div>
         ) : null}
 
-        <h1 className={cn(getTitleSizeClasses(), 'font-[var(--font-display)] font-semibold tracking-[-0.065em] text-balance text-[var(--color-text)]')}>
+        <h1 className={cn(getTitleSizeClasses(), 'text-balance text-[var(--color-text)]')}>
           {title}
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)] sm:text-xl">
+        <p className="mx-auto mt-6 max-w-[60ch] type-body-lead text-[var(--color-text-soft)]">
           {description}
         </p>
 
@@ -577,13 +577,13 @@ export function HeroLanding(props: HeroLandingProps) {
         ) : null}
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3 text-left">
-          <div className="rounded-full border border-[var(--color-line)] bg-white/84 px-4 py-2 text-sm text-[var(--color-text-soft)] shadow-[0_10px_22px_rgba(20,36,61,0.05)]">
+          <div className="rounded-full border border-[var(--color-line)] bg-white/84 px-4 py-2 type-body-sm text-[var(--color-text-soft)] shadow-[0_10px_22px_rgba(20,36,61,0.05)]">
             Website + CRM + AI in one system
           </div>
-          <div className="rounded-full border border-[var(--color-line)] bg-white/84 px-4 py-2 text-sm text-[var(--color-text-soft)] shadow-[0_10px_22px_rgba(20,36,61,0.05)]">
+          <div className="rounded-full border border-[var(--color-line)] bg-white/84 px-4 py-2 type-body-sm text-[var(--color-text-soft)] shadow-[0_10px_22px_rgba(20,36,61,0.05)]">
             Ready in weeks, not months
           </div>
-          <div className="rounded-full border border-[var(--color-line)] bg-white/84 px-4 py-2 text-sm text-[var(--color-text-soft)] shadow-[0_10px_22px_rgba(20,36,61,0.05)]">
+          <div className="rounded-full border border-[var(--color-line)] bg-white/84 px-4 py-2 type-body-sm text-[var(--color-text-soft)] shadow-[0_10px_22px_rgba(20,36,61,0.05)]">
             Built for startups and SMEs
           </div>
         </div>

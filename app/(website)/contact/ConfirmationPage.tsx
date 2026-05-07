@@ -21,20 +21,20 @@ export default function ConfirmationPage({
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[rgba(0,87,191,0.10)]">
             <CheckCircle2 className="h-7 w-7 text-[var(--color-brand)]" />
           </div>
-          <h1 className="mt-6 font-[var(--font-display)] text-4xl font-semibold tracking-[-0.05em] text-[var(--color-text)] sm:text-5xl">
+          <h1 className="mt-6 type-page-title text-[var(--color-text)]">
             {title}
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-[var(--color-text-soft)]">{body}</p>
+          <p className="mx-auto mt-4 max-w-[64ch] type-body-base text-[var(--color-text-soft)]">{body}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               href={primaryHref}
-              className="cta-lift inline-flex items-center justify-center rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 text-sm font-semibold text-white"
+              className="cta-lift inline-flex items-center justify-center rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 type-action text-white"
             >
               {primaryLabel}
             </Link>
             <Link
               href="/"
-              className="cta-lift inline-flex items-center justify-center rounded-md bg-[var(--color-panel-high)] px-5 py-3 text-sm font-semibold text-[var(--color-brand)]"
+              className="cta-lift type-action inline-flex items-center justify-center rounded-md bg-[var(--color-panel-high)] px-5 py-3 text-[var(--color-brand)]"
             >
               Return Home
             </Link>

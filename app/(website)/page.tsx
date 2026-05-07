@@ -103,10 +103,10 @@ export default function HomePage() {
           {benefits.map((item, index) => (
             <ScrollReveal key={item.title} delayMs={index * 55} blur>
               <SurfaceCard className="panel-hover p-6">
-              <h3 className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+              <h3 className="type-card-title text-[var(--color-text)]">
                 {item.title}
               </h3>
-              <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{item.body}</p>
+              <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{item.body}</p>
               </SurfaceCard>
             </ScrollReveal>
           ))}
@@ -126,13 +126,13 @@ export default function HomePage() {
           {steps.map(([index, title, body], stepIndex) => (
             <ScrollReveal key={index} delayMs={stepIndex * 45}>
               <SurfaceCard className="panel-hover p-6">
-              <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
+              <p className="type-detail-kicker text-[var(--color-brand)]">
                 Step {index}
               </p>
-              <p className="mt-3 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+              <p className="mt-3 type-card-title text-[var(--color-text)]">
                 {title}
               </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+              <p className="mt-3 type-body-sm text-[var(--color-text-soft)]">{body}</p>
               </SurfaceCard>
             </ScrollReveal>
           ))}
@@ -149,7 +149,7 @@ export default function HomePage() {
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             {capabilities.map((item) => (
-              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
                 {item}
               </div>
             ))}
@@ -159,14 +159,14 @@ export default function HomePage() {
 
         <ScrollReveal delayMs={80} direction="left">
           <SurfaceCard dark className="p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+          <p className="type-section-kicker text-cyan-300">
             Built for startups and SMEs
           </p>
           <div className="mt-6 grid gap-3">
             {audiences.map((item) => (
               <div key={item.title} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4">
-                <p className="text-sm font-semibold text-white">{item.title}</p>
-                <p className="mt-2 text-sm leading-7 text-white/78">{item.body}</p>
+                <p className="type-action text-white">{item.title}</p>
+                <p className="mt-2 type-body-sm text-white/78">{item.body}</p>
               </div>
             ))}
           </div>
@@ -187,13 +187,13 @@ export default function HomePage() {
             <ScrollReveal key={study.id} delayMs={index * 55}>
               <Link href={getCanonicalProofPathForCaseStudy(study.id) ?? "/projects"} className="group block rounded-[28px]">
                 <SurfaceCard className="panel-hover h-full p-6">
-                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
+                <p className="type-detail-kicker text-[var(--color-brand)]">
                   {study.client}
                 </p>
-                <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
+                <h3 className="mt-4 type-card-title text-[var(--color-text)]">
                   {study.projectName}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{study.intervention}</p>
+                <p className="mt-3 type-body-sm text-[var(--color-text-soft)]">{study.intervention}</p>
                 <p className="mt-4 text-sm font-medium text-[var(--color-brand)]">View project record</p>
                 </SurfaceCard>
               </Link>
@@ -205,13 +205,13 @@ export default function HomePage() {
       <ScrollReveal className="graphite-panel rounded-[36px] px-8 py-12 md:px-12" blur>
         <div className="grid gap-8 lg:grid-cols-[0.9fr,1.1fr] lg:items-center">
           <div>
-            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+            <p className="type-section-kicker text-cyan-300">
               Final CTA
             </p>
-            <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
+            <h2 className="mt-4 type-section-title text-white">
               Ready to build a smarter website system?
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-white/72">
+            <p className="mt-4 max-w-[64ch] type-body-base text-white/72">
               Talk to an expert and see how your website can work with your CRM and marketing to drive growth.
             </p>
           </div>

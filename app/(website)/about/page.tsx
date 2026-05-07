@@ -20,13 +20,13 @@ export default function AboutPage() {
       <section className="grid items-start gap-10 pt-4 lg:grid-cols-[1fr,0.95fr]">
         <ScrollReveal>
           <div>
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
+          <p className="type-page-kicker text-[var(--color-brand)]">
             About Ingenium
           </p>
-          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
+          <h1 className="mt-6 max-w-4xl type-page-title text-[var(--color-text)]">
             We help startups and SMEs grow with intelligent digital systems.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-6 max-w-[65ch] type-body-lead text-[var(--color-text-soft)]">
             Ingenium Consulting combines website design, CRM strategy, marketing automation, and AI execution so
             growing teams can run on one connected system instead of a patchwork of tools.
           </p>
@@ -40,12 +40,12 @@ export default function AboutPage() {
 
         <ScrollReveal delayMs={80} direction="left">
           <SurfaceCard className="p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+          <p className="type-section-kicker text-[var(--color-brand)]">
             Core values
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             {["Friendly", "Helpful", "Professional", "Connected", "Empowering"].map((item) => (
-              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
                 {item}
               </div>
             ))}
@@ -57,30 +57,30 @@ export default function AboutPage() {
       <section>
         <ScrollReveal>
           <SurfaceCard className="p-6 md:p-8">
-            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+            <p className="type-section-kicker text-[var(--color-brand)]">
               Source identity
             </p>
-          <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+          <h2 className="mt-4 type-card-title text-[var(--color-text)]">
             Ingenium Digital Consulting is the company behind this website.
           </h2>
-          <p className="mt-4 max-w-3xl text-base leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-4 max-w-[68ch] type-body-base text-[var(--color-text-soft)]">
             Ingenium Consulting is the public brand for Ingenium Digital Consulting. The team builds connected
             websites, CRM systems, marketing automation, and AI-enabled workflows for startups, SMEs, and service
             businesses that need clearer operational follow-through.
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]">
+            <div className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
               Address: {ORGANIZATION_ADDRESS.streetAddress}, {ORGANIZATION_ADDRESS.addressLocality},{" "}
               {ORGANIZATION_ADDRESS.postalCode}, Ireland
             </div>
-            <div className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]">
+            <div className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
               Phone: {ORGANIZATION_PHONE}
             </div>
             <a
               href={ORGANIZATION_SAME_AS[0]}
               target="_blank"
               rel="noreferrer"
-              className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)] transition hover:text-[var(--color-text)]"
+              className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)] transition hover:text-[var(--color-text)]"
             >
               Google Business Profile
             </a>
@@ -88,7 +88,7 @@ export default function AboutPage() {
               href={ORGANIZATION_SAME_AS[1]}
               target="_blank"
               rel="noreferrer"
-              className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)] transition hover:text-[var(--color-text)]"
+              className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)] transition hover:text-[var(--color-text)]"
             >
               Company LinkedIn
             </a>
@@ -101,7 +101,7 @@ export default function AboutPage() {
         <ScrollReveal>
           <SurfaceCard className="p-8">
           <SectionIntro eyebrow="Our Mission" title="Build digital systems that make growth easier to run." />
-          <p className="mt-6 text-base leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-6 type-body-base text-[var(--color-text-soft)]">
             We make powerful digital systems feel friendly, useful, and easy to own. That means the site, CRM,
             campaigns, and AI support all move from the same business context.
           </p>
@@ -110,7 +110,7 @@ export default function AboutPage() {
 
         <ScrollReveal delayMs={80} direction="left" blur>
           <SurfaceCard dark className="p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+          <p className="type-section-kicker text-cyan-300">
             Why Ingenium
           </p>
           <div className="mt-6 grid gap-3">
@@ -120,7 +120,7 @@ export default function AboutPage() {
               "Friendly support, professional delivery.",
               "Built for startups and small teams that need clarity.",
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 type-body-sm text-white/78">
                 {item}
               </div>
             ))}
@@ -145,10 +145,10 @@ export default function AboutPage() {
           ].map(([title, body], index) => (
             <ScrollReveal key={title} delayMs={index * 45}>
               <SurfaceCard className="panel-hover p-6">
-              <p className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+              <p className="type-card-title text-[var(--color-text)]">
                 {title}
               </p>
-              <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+              <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{body}</p>
               </SurfaceCard>
             </ScrollReveal>
           ))}
@@ -156,7 +156,7 @@ export default function AboutPage() {
       </section>
 
       <ScrollReveal className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12" blur>
-        <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
+        <h2 className="mx-auto max-w-4xl type-section-title text-white">
           Talk to a team that makes technical growth easier to understand and easier to run.
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">

@@ -11,13 +11,13 @@ export default function SecurityPage() {
     <div className="space-y-20 pb-8 md:space-y-28">
       <section className="pt-4">
         <div className="max-w-4xl">
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
+          <p className="type-page-kicker text-[var(--color-brand)]">
             Security
           </p>
-          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
+          <h1 className="mt-6 max-w-4xl type-page-title text-[var(--color-text)]">
             Technical buyers need visible controls, not implied maturity.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
+          <p className="mt-6 max-w-[65ch] type-body-lead text-[var(--color-text-soft)]">
             Permissions, approvals, audit history, and operational governance are built into the operating model.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -39,7 +39,7 @@ export default function SecurityPage() {
               "Approval gates pause AI and automation when review is required.",
               "Audit history keeps actions traceable inside the workflow record.",
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
                 {item}
               </div>
             ))}
@@ -47,7 +47,7 @@ export default function SecurityPage() {
         </SurfaceCard>
 
         <SurfaceCard dark className="p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+          <p className="type-section-kicker text-cyan-300">
             Technical review path
           </p>
           <div className="mt-6 grid gap-3">
@@ -57,7 +57,7 @@ export default function SecurityPage() {
               "Deployment and recovery assumptions.",
               "Review materials for stakeholder conversations.",
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 type-body-sm text-white/78">
                 {item}
               </div>
             ))}
@@ -87,10 +87,10 @@ export default function SecurityPage() {
             ],
           ].map(([title, body]) => (
             <SurfaceCard key={title} className="panel-hover p-6">
-              <p className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+              <p className="type-card-title text-[var(--color-text)]">
                 {title}
               </p>
-              <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+              <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{body}</p>
             </SurfaceCard>
           ))}
         </div>
@@ -116,7 +116,7 @@ export default function SecurityPage() {
       </section>
 
       <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
-        <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
+        <h2 className="mx-auto max-w-4xl type-section-title text-white">
           The fastest buying path is usually the clearest review path.
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">

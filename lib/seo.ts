@@ -1,12 +1,39 @@
 import type { Metadata } from "next";
 
+function resolveSiteUrl() {
+  const fallback = "https://www.ingeniumconsulting.net";
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim() || fallback;
+
+  try {
+    const url = new URL(raw);
+
+    if (url.hostname === "ingeniumconsulting.net") {
+      url.hostname = "www.ingeniumconsulting.net";
+    }
+
+    return url.origin.replace(/\/$/, "");
+  } catch {
+    return fallback;
+  }
+}
+
 export const SITE_NAME = "Ingenium Consulting";
-export const ORGANIZATION_NAME = "Ingenium Consulting";
+export const ORGANIZATION_NAME = "Ingenium Digital Consulting";
+export const ORGANIZATION_ALTERNATE_NAME = "Ingenium Consulting";
 export const ORGANIZATION_LEGAL_NAME = "Ingenium Digital Consulting";
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumconsulting.net").replace(
-  /\/$/,
-  "",
-);
+export const ORGANIZATION_PHONE = "+353 85 830 2554";
+export const ORGANIZATION_EMAIL = "hello@ingeniumconsulting.net";
+export const ORGANIZATION_ADDRESS = {
+  streetAddress: "87 Barrowvale, Graiguecullen",
+  addressLocality: "Carlow",
+  postalCode: "R93 P8D4",
+  addressCountry: "IE",
+} as const;
+export const ORGANIZATION_SAME_AS = [
+  "https://share.google/ehEnUKclDy5MII9Gh",
+  "https://www.linkedin.com/company/ingeniumconsulting",
+] as const;
+export const SITE_URL = resolveSiteUrl();
 export const DEFAULT_DESCRIPTION =
   "Ingenium Consulting builds connected websites, CRM systems, marketing automation, and AI workflows for startups and SMEs.";
 export const DEFAULT_SOCIAL_IMAGE = `${SITE_URL}/opengraph-image`;
@@ -188,12 +215,12 @@ export const pageSeo: Record<string, PageSeoConfig> = {
     keywords: ["implementation methodology", "website crm implementation", ...keywordClusters.platform],
   },
   "/case-studies": {
-    title: "Case Studies | Ingenium",
-    description:
-      "See named case studies, workflow outcomes, and implementation proof showing how Ingenium improves buyer journeys and operational clarity.",
+    title: "Legacy Case Studies Redirect | Ingenium",
+    description: "Legacy case studies hub redirecting to the canonical projects library.",
     path: "/case-studies",
     keywords: [...keywordClusters.proof],
     pageType: "CollectionPage",
+    noIndex: true,
   },
   "/implementation": {
     title: "Implementation and Rollout | Ingenium",

@@ -1,50 +1,41 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
-import { buildMetadata, pageSeo } from "@/lib/seo";
+import { ArrowRight, ArrowUpRight, Linkedin, Mail } from "lucide-react";
+
+import { LAST_REVIEWED_ISO } from "@/lib/review";
+import { ORGANIZATION_NAME, ORGANIZATION_SAME_AS, SITE_URL, buildMetadata, pageSeo } from "@/lib/seo";
+import { teamMembers } from "@/src/lib/team";
+
+import PageReviewMeta from "../components/PageReviewMeta";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/team"]);
 
-const teamMembers = [
-  {
-    name: "Kyle Redmond",
-    role: "Founder and Developer",
-    email: "kyle@ingeniumconsulting.net",
-    category: "Leadership",
-    initials: "KR",
-    accent: "from-[rgba(0,87,191,0.18)] via-white to-[rgba(0,103,102,0.14)]",
-    summary:
-      "Kyle leads delivery architecture, product implementation, and the technical decisions that keep websites, CRM, and automation working as one operating system.",
-    focus: ["Web architecture", "CRM implementation", "Automation design"],
-  },
-  {
-    name: "Clayton Long",
-    role: "Co-owner and Sales Lead",
-    email: "clayton@ingeniumconsulting.net",
-    category: "Sales",
-    initials: "CL",
-    accent: "from-[rgba(0,103,102,0.16)] via-white to-[rgba(0,87,191,0.10)]",
-    summary:
-      "Clayton owns commercial conversations, qualification, and sales process clarity so prospects understand the work, the rollout, and the right next step quickly.",
-    focus: ["Sales discovery", "Commercial fit", "Buyer guidance"],
-  },
-  {
-    name: "Sophie Coleman",
-    role: "Graphic Designer",
-    email: "sophie@ingeniumconsulting.net",
-    category: "Design",
-    initials: "SC",
-    accent: "from-[rgba(24,28,31,0.08)] via-white to-[rgba(0,87,191,0.12)]",
-    summary:
-      "Sophie shapes the visual system across brand, layout, and presentation so the work feels polished, legible, and commercially credible from first impression onward.",
-    focus: ["Brand design", "Page layouts", "Visual consistency"],
-  },
-];
-
 export default function TeamPage() {
+  const personSchemas = teamMembers.map((member) => ({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${SITE_URL}/team#${member.name.toLowerCase().replace(/\s+/g, "-")}`,
+    name: member.name,
+    jobTitle: member.role,
+    email: member.email,
+    sameAs: [member.linkedinUrl],
+    worksFor: { "@id": `${SITE_URL}/#organization` },
+    url: `${SITE_URL}/team`,
+    knowsAbout: member.focus,
+    dateModified: LAST_REVIEWED_ISO,
+  }));
+
   return (
     <div className="space-y-24 pb-4 md:space-y-32">
+      {personSchemas.map((schema, index) => (
+        <script
+          key={`team-person-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+
       <section className="pt-8">
         <ScrollReveal>
           <div className="max-w-4xl">
@@ -74,6 +65,7 @@ export default function TeamPage() {
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
+          <PageReviewMeta />
           </div>
         </ScrollReveal>
       </section>
@@ -120,7 +112,7 @@ export default function TeamPage() {
                   {member.category}
                 </span>
                 <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
-                  Ingenium Consulting
+                  {ORGANIZATION_NAME}
                 </span>
               </div>
               <div className="relative mt-8 flex aspect-[4/5] items-end rounded-[26px] bg-[rgba(255,255,255,0.62)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
@@ -148,13 +140,24 @@ export default function TeamPage() {
                 ))}
               </div>
 
-              <a
-                href={`mailto:${member.email}`}
-                className="cta-lift mt-6 inline-flex items-center gap-2 rounded-[10px] border border-[var(--color-brand)] bg-transparent px-4 py-2.5 text-sm font-medium text-[var(--color-brand)]"
-              >
-                <Mail className="h-4 w-4" />
-                {member.email}
-              </a>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  href={`mailto:${member.email}`}
+                  className="cta-lift inline-flex items-center gap-2 rounded-[10px] border border-[var(--color-brand)] bg-transparent px-4 py-2.5 text-sm font-medium text-[var(--color-brand)]"
+                >
+                  <Mail className="h-4 w-4" />
+                  {member.email}
+                </a>
+                <a
+                  href={member.linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="cta-lift inline-flex items-center gap-2 rounded-[10px] bg-[var(--color-panel-low)] px-4 py-2.5 text-sm font-medium text-[var(--color-text)]"
+                >
+                  <Linkedin className="h-4 w-4 text-[var(--color-brand)]" />
+                  LinkedIn
+                </a>
+              </div>
             </div>
             </article>
           </ScrollReveal>
@@ -210,6 +213,15 @@ export default function TeamPage() {
                 Learn How We Work
                 <ArrowRight className="h-4 w-4" />
               </Link>
+              <a
+                href={ORGANIZATION_SAME_AS[1]}
+                target="_blank"
+                rel="noreferrer"
+                className="cta-lift inline-flex items-center gap-2 rounded-[10px] border border-white/24 bg-white/10 px-6 py-3 text-sm font-semibold text-white"
+              >
+                Company LinkedIn
+                <Linkedin className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </ScrollReveal>

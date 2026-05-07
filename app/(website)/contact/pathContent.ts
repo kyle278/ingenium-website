@@ -23,7 +23,7 @@ export const intakePaths: Record<IntakePathConfig["slug"], IntakePathConfig> = {
       "Best for founders, revenue leaders, and operators comparing options.",
       "Focused on lead capture, CRM execution, handoff, reporting, and governed AI support.",
       "Ends with a guided walkthrough and recommended rollout shape.",
-      "Last updated: April 15, 2026.",
+      "Last reviewed: May 7, 2026.",
     ],
     faq: [
       {
@@ -51,7 +51,7 @@ export const intakePaths: Record<IntakePathConfig["slug"], IntakePathConfig> = {
       "Best for teams with traffic, leads, or CRM activity that still feels operationally messy.",
       "Focused on routing, ownership, handoff, reporting, and missing controls.",
       "Ends with an intake review and audit handoff.",
-      "Last updated: April 15, 2026.",
+      "Last reviewed: May 7, 2026.",
     ],
     faq: [
       {
@@ -79,7 +79,7 @@ export const intakePaths: Record<IntakePathConfig["slug"], IntakePathConfig> = {
       "Best for technical leaders, procurement reviewers, and stakeholders evaluating risk.",
       "Focused on access, approvals, audit trail, data boundaries, and rollout controls.",
       "Ends with a security pack or architecture briefing request.",
-      "Last updated: April 15, 2026.",
+      "Last reviewed: May 7, 2026.",
     ],
     faq: [
       {

@@ -3,10 +3,13 @@ import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
 
-import { buildMetadata, keywordClusters } from "@/lib/seo";
+import { LAST_REVIEWED_ISO } from "@/lib/review";
+import { SITE_URL, buildMetadata, keywordClusters } from "@/lib/seo";
+import { getCaseStudyByProjectSlug } from "@/src/lib/caseStudies";
 import { getProjectBySlug, projects } from "@/src/lib/projects";
 
 import AnimatedMetric from "../../components/AnimatedMetric";
+import PageReviewMeta from "../../components/PageReviewMeta";
 import ProjectWebsiteEmbed from "../../components/ProjectWebsiteEmbed";
 import ScrollReveal from "../../components/ScrollReveal";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../../components/sitePrimitives";
@@ -71,6 +74,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
   const hasEmbeddedWebsite = Boolean(project.websiteUrl);
   const websiteStatus = project.websiteIncluded ? getWebsiteStatusMeta(project.websiteStatus) : null;
+  const relatedCaseStudy = getCaseStudyByProjectSlug(project.slug);
 
   const projectSchema = {
     "@context": "https://schema.org",
@@ -78,11 +82,13 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     name: project.projectName,
     description: project.summary,
     about: project.services,
+    dateModified: LAST_REVIEWED_ISO,
     creator: {
       "@type": "Organization",
       name: "Ingenium Digital Consulting",
     },
-    url: `https://ingeniumconsulting.net/projects/${project.slug}`,
+    url: `${SITE_URL}/projects/${project.slug}`,
+    abstract: relatedCaseStudy?.challenge,
   };
 
   return (
@@ -125,6 +131,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               <p className="mt-6 max-w-3xl text-base leading-8 text-[var(--color-text-soft)]">
                 {project.summary}
               </p>
+              <PageReviewMeta />
 
               <div className="mt-6 flex flex-wrap gap-2">
                 {project.services.map((service) => (
@@ -208,6 +215,40 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </SurfaceCard>
         </ScrollReveal>
       </section>
+
+      {relatedCaseStudy ? (
+        <section className="grid gap-6 lg:grid-cols-[1.02fr,0.98fr]">
+          <ScrollReveal>
+            <SurfaceCard className="p-6 md:p-8">
+              <SectionIntro
+                eyebrow="Case Study Detail"
+                title="What problem the client needed to solve"
+                body={relatedCaseStudy.challenge}
+              />
+            </SurfaceCard>
+          </ScrollReveal>
+
+          <ScrollReveal delayMs={80} direction="left">
+            <SurfaceCard className="p-6 md:p-8">
+              <SectionIntro
+                eyebrow="Intervention"
+                title="How the project was structured"
+                body={relatedCaseStudy.intervention}
+              />
+              <div className="mt-6 space-y-3">
+                {relatedCaseStudy.deliveredAssets.map((asset) => (
+                  <div
+                    key={asset}
+                    className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]"
+                  >
+                    {asset}
+                  </div>
+                ))}
+              </div>
+            </SurfaceCard>
+          </ScrollReveal>
+        </section>
+      ) : null}
 
       <section>
         <ScrollReveal>

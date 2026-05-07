@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
+import PageReviewMeta from "../components/PageReviewMeta";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/services"]);
@@ -39,6 +40,7 @@ export default function ServicesPage() {
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
             We build websites, custom CRMs, and marketing automation that work together as one system.
           </p>
+          <PageReviewMeta />
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink action={{ label: "Start a Discovery Call", href: "/contact" }} />
             <ButtonLink action={{ label: "Book a Demo", href: "/demo" }} variant="secondary" />

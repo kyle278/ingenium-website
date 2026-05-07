@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 
-import { buildMetadata, pageSeo } from "@/lib/seo";
+import {
+  ORGANIZATION_ADDRESS,
+  ORGANIZATION_PHONE,
+  ORGANIZATION_SAME_AS,
+  buildMetadata,
+  pageSeo,
+} from "@/lib/seo";
 
+import PageReviewMeta from "../components/PageReviewMeta";
 import ScrollReveal from "../components/ScrollReveal";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
@@ -23,6 +30,7 @@ export default function AboutPage() {
             Ingenium Consulting combines website design, CRM strategy, marketing automation, and AI execution so
             growing teams can run on one connected system instead of a patchwork of tools.
           </p>
+          <PageReviewMeta />
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink action={{ label: "Talk to Our Team", href: "/contact" }} />
             <ButtonLink action={{ label: "Start a Project", href: "/demo" }} variant="secondary" />
@@ -52,17 +60,42 @@ export default function AboutPage() {
             <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
               Source identity
             </p>
-            <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
-              Ingenium Digital Consulting is the company behind this website.
-            </h2>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-[var(--color-text-soft)]">
-              Ingenium Consulting is the public brand for Ingenium Digital Consulting. The team builds connected
-              websites, CRM systems, marketing automation, and AI-enabled workflows for startups, SMEs, and service
-              businesses that need clearer operational follow-through.
-            </p>
-          </SurfaceCard>
-        </ScrollReveal>
-      </section>
+          <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+            Ingenium Digital Consulting is the company behind this website.
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-[var(--color-text-soft)]">
+            Ingenium Consulting is the public brand for Ingenium Digital Consulting. The team builds connected
+            websites, CRM systems, marketing automation, and AI-enabled workflows for startups, SMEs, and service
+            businesses that need clearer operational follow-through.
+          </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]">
+              Address: {ORGANIZATION_ADDRESS.streetAddress}, {ORGANIZATION_ADDRESS.addressLocality},{" "}
+              {ORGANIZATION_ADDRESS.postalCode}, Ireland
+            </div>
+            <div className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]">
+              Phone: {ORGANIZATION_PHONE}
+            </div>
+            <a
+              href={ORGANIZATION_SAME_AS[0]}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)] transition hover:text-[var(--color-text)]"
+            >
+              Google Business Profile
+            </a>
+            <a
+              href={ORGANIZATION_SAME_AS[1]}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)] transition hover:text-[var(--color-text)]"
+            >
+              Company LinkedIn
+            </a>
+          </div>
+        </SurfaceCard>
+      </ScrollReveal>
+    </section>
 
       <section className="grid gap-6 xl:grid-cols-2">
         <ScrollReveal>

@@ -430,7 +430,7 @@ const ingeniumNavbarData: Navbar1Props = {
       items: [
         {
           title: "Case Studies",
-          url: "/case-studies",
+                      url: "/projects",
           description: "Outcome-led examples showing how route structure and systems design improve conversion.",
           icon: <FolderKanban className="size-5 shrink-0" />,
         },

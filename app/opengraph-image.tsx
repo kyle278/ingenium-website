@@ -1,5 +1,7 @@
 import { ImageResponse } from "next/og";
 
+import { ORGANIZATION_NAME } from "@/lib/seo";
+
 export const size = {
   width: 1200,
   height: 630,
@@ -31,13 +33,13 @@ export default function OpenGraphImage() {
             border: "1px solid rgba(148, 163, 184, 0.24)",
             background: "rgba(255,255,255,0.08)",
             padding: "14px 22px",
-            fontSize: 24,
+            fontSize: 22,
             fontWeight: 600,
             letterSpacing: "0.14em",
             textTransform: "uppercase",
           }}
         >
-          Ingenium Consulting
+          {ORGANIZATION_NAME}
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "18px", maxWidth: 920 }}>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
+import PageReviewMeta from "../components/PageReviewMeta";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/websites"]);
@@ -21,6 +22,7 @@ export default function WebsitesPage() {
             Ingenium builds high-performance websites designed to capture leads, support your brand, and feed your CRM
             and marketing system with better context from the first interaction.
           </p>
+          <PageReviewMeta />
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink action={{ label: "Book a Demo", href: "/demo" }} />
             <ButtonLink action={{ label: "See the Platform", href: "/platform" }} variant="secondary" />

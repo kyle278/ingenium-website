@@ -20,7 +20,6 @@ const routePriority: Record<
   "/security-review": { priority: 0.62, changeFrequency: "monthly" },
   "/support": { priority: 0.58, changeFrequency: "monthly" },
   "/implementation-methodology": { priority: 0.62, changeFrequency: "monthly" },
-  "/case-studies": { priority: 0.8, changeFrequency: "monthly" },
   "/projects": { priority: 0.75, changeFrequency: "monthly" },
   "/implementation": { priority: 0.8, changeFrequency: "monthly" },
   "/about": { priority: 0.7, changeFrequency: "monthly" },
@@ -32,18 +31,11 @@ const routePriority: Record<
 };
 
 const SITE_CONTENT_LAST_REVIEWED = new Date("2026-05-07");
-const APRIL_REVIEW_DATE = new Date("2026-04-15");
-
-const routeLastModified: Partial<Record<string, Date>> = {
-  "/demo": APRIL_REVIEW_DATE,
-  "/revenue-systems-teardown": APRIL_REVIEW_DATE,
-  "/technical-review": APRIL_REVIEW_DATE,
-};
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = PUBLIC_DISCOVERY_PATHS.map((path) => ({
     url: path === "/" ? SITE_URL : `${SITE_URL}${path}`,
-    lastModified: routeLastModified[path] ?? SITE_CONTENT_LAST_REVIEWED,
+    lastModified: SITE_CONTENT_LAST_REVIEWED,
     changeFrequency: routePriority[path]?.changeFrequency ?? "monthly",
     priority: routePriority[path]?.priority ?? 0.5,
   }));

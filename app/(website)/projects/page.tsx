@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, BriefcaseBusiness, CheckCircle2, Clock } from "lucide-react";
 
 import AnimatedMetric from "../components/AnimatedMetric";
+import PageReviewMeta from "../components/PageReviewMeta";
 import ScrollReveal from "../components/ScrollReveal";
 import { projects } from "@/src/lib/projects";
-import { buildMetadata, pageSeo } from "@/lib/seo";
+import { SITE_URL, buildMetadata, pageSeo } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/projects"]);
 
@@ -34,7 +35,7 @@ export default function ProjectsPage() {
       "@type": "ListItem",
       position: index + 1,
       name: project.projectName,
-      url: `https://ingeniumconsulting.net/projects/${project.slug}`,
+      url: `${SITE_URL}/projects/${project.slug}`,
     })),
   };
 
@@ -54,6 +55,7 @@ export default function ProjectsPage() {
           Review named client projects across service websites, project libraries, booking paths,
           quote flows, and proof systems built to make buying easier.
         </p>
+        <PageReviewMeta />
       </section>
 
       <section className="grid gap-6 lg:grid-cols-2">

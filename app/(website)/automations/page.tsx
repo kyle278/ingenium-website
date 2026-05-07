@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
+import PageReviewMeta from "../components/PageReviewMeta";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/automations"]);
@@ -21,6 +22,7 @@ export default function AutomationsPage() {
             Ingenium connects email, SMS, nurture journeys, and follow-up flows to your CRM so campaigns launch from
             the same customer context instead of disconnected tools.
           </p>
+          <PageReviewMeta />
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink action={{ label: "Book a Demo", href: "/demo" }} />
             <ButtonLink action={{ label: "See the Platform", href: "/platform" }} variant="secondary" />

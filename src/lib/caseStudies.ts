@@ -127,3 +127,7 @@ export const caseStudies: CaseStudyRecord[] = [
 export function getCaseStudyById(id: string) {
   return caseStudies.find((study) => study.id === id);
 }
+
+export function getCaseStudyByProjectSlug(projectSlug: string) {
+  return caseStudies.find((study) => study.relatedProjectSlug === projectSlug);
+}

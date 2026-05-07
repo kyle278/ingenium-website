@@ -6,6 +6,7 @@ import { buildMetadata, pageSeo } from "@/lib/seo";
 import { caseStudies } from "@/src/lib/caseStudies";
 import { getCanonicalProofPathForCaseStudy } from "@/src/lib/proofStories";
 
+import PageReviewMeta from "./components/PageReviewMeta";
 import ScrollReveal from "./components/ScrollReveal";
 import { ButtonLink, SectionIntro, SurfaceCard } from "./components/sitePrimitives";
 
@@ -61,26 +62,33 @@ export default function HomePage() {
   return (
     <div className="space-y-20 pb-8 md:space-y-28">
       <ScrollReveal offsetPx={22}>
-        <HeroLanding
-          showHeader={false}
-          surface="seamless"
-          className="relative left-1/2 right-1/2 -mt-10 min-h-[calc(100vh-7rem)] w-screen -translate-x-1/2 px-4 sm:-mt-12 sm:px-6 lg:px-8"
-          title="Next-gen websites that connect your CRM, marketing and AI without the complexity."
-          description="Ingenium Consulting builds websites that do more than launch. They become the center of your growth engine, connecting lead capture, CRM, campaigns, and AI support from day one."
-          announcementBanner={{
-            text: "Connected websites. Intelligent growth.",
-            linkText: "See the implementation approach",
-            linkHref: "/implementation",
-          }}
-          callToActions={[
-            { text: "Book a Demo", href: "/demo", variant: "primary" },
-            { text: "See How It Works", href: "/platform", variant: "secondary" },
-          ]}
-          gradientColors={{
-            from: "rgba(23, 103, 195, 0.34)",
-            to: "rgba(19, 183, 168, 0.34)",
-          }}
-        />
+        <>
+          <HeroLanding
+            showHeader={false}
+            surface="seamless"
+            className="relative left-1/2 right-1/2 -mt-10 min-h-[calc(100vh-7rem)] w-screen -translate-x-1/2 px-4 sm:-mt-12 sm:px-6 lg:px-8"
+            title="Next-gen websites that connect your CRM, marketing and AI without the complexity."
+            description="Ingenium Consulting builds websites that do more than launch. They become the center of your growth engine, connecting lead capture, CRM, campaigns, and AI support from day one."
+            announcementBanner={{
+              text: "Connected websites. Intelligent growth.",
+              linkText: "See the implementation approach",
+              linkHref: "/implementation",
+            }}
+            callToActions={[
+              { text: "Book a Demo", href: "/demo", variant: "primary" },
+              { text: "See How It Works", href: "/platform", variant: "secondary" },
+            ]}
+            gradientColors={{
+              from: "rgba(23, 103, 195, 0.34)",
+              to: "rgba(19, 183, 168, 0.34)",
+            }}
+          />
+          <div className="px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-[1280px]">
+              <PageReviewMeta />
+            </div>
+          </div>
+        </>
       </ScrollReveal>
 
       <section id="why-ingenium">

@@ -11,7 +11,7 @@ export default function Demo() {
     navigation: [
       { name: 'Services', href: '/services' },
       { name: 'Platform', href: '/platform' },
-      { name: 'Proof', href: '/case-studies' },
+      { name: 'Projects', href: '/projects' },
       { name: 'About', href: '/about' },
       { name: 'Contact', href: '/contact' },
     ],

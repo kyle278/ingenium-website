@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 
-import { buildMetadata, pageSeo } from "@/lib/seo";
+import {
+  ORGANIZATION_ADDRESS,
+  ORGANIZATION_PHONE,
+  ORGANIZATION_SAME_AS,
+  buildMetadata,
+  pageSeo,
+} from "@/lib/seo";
 
+import PageReviewMeta from "../components/PageReviewMeta";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/contact"]);
@@ -39,6 +46,7 @@ export default function ContactPage() {
             Three entry points. Three clearer next steps. If you are unsure, a quick call will point you to the right
             route.
           </p>
+          <PageReviewMeta />
         </div>
       </section>
 
@@ -85,6 +93,8 @@ export default function ContactPage() {
           <div className="mt-6 grid gap-3">
             {[
               "Email: hello@ingeniumconsulting.net",
+              `Phone: ${ORGANIZATION_PHONE}`,
+              `Office: ${ORGANIZATION_ADDRESS.streetAddress}, ${ORGANIZATION_ADDRESS.addressLocality}, ${ORGANIZATION_ADDRESS.postalCode}, Ireland`,
               "We reply to new enquiries within 1 business day.",
               "Primary route for demos and project discussions: /demo",
               "Technical stakeholder route: /technical-review",
@@ -94,6 +104,24 @@ export default function ContactPage() {
                 {item}
               </div>
             ))}
+          </div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <a
+              href={ORGANIZATION_SAME_AS[0]}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78 transition hover:text-white"
+            >
+              Google Business Profile
+            </a>
+            <a
+              href={ORGANIZATION_SAME_AS[1]}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78 transition hover:text-white"
+            >
+              Company LinkedIn
+            </a>
           </div>
         </SurfaceCard>
       </section>

@@ -153,7 +153,7 @@ const navContent: {
   topLinks: [
     { label: "Technical review", href: "/technical-review" },
     { label: "Revenue teardown", href: "/revenue-systems-teardown" },
-    { label: "Case studies", href: "/case-studies" },
+    { label: "Projects", href: "/projects" },
     { label: "Contact", href: "/contact" },
   ],
 };

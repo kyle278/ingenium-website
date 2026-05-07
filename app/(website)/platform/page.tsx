@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
+import PageReviewMeta from "../components/PageReviewMeta";
 import ScrollReveal from "../components/ScrollReveal";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
@@ -31,6 +32,7 @@ export default function PlatformPage() {
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
             Ingenium is most useful when the whole buyer and delivery path is connected instead of patched together.
           </p>
+          <PageReviewMeta />
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink action={{ label: "See the Platform", href: "/contact" }} />
             <ButtonLink action={{ label: "Book a Demo", href: "/demo" }} variant="secondary" />

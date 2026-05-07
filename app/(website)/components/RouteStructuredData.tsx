@@ -3,14 +3,20 @@
 import { usePathname } from "next/navigation";
 
 import {
+  ORGANIZATION_ADDRESS,
+  ORGANIZATION_ALTERNATE_NAME,
+  ORGANIZATION_EMAIL,
   ORGANIZATION_NAME,
   ORGANIZATION_LEGAL_NAME,
+  ORGANIZATION_PHONE,
+  ORGANIZATION_SAME_AS,
   PRIVATE_PATHS,
   PRIVATE_PATH_PREFIXES,
   SITE_NAME,
   SITE_URL,
   pageSeo,
 } from "@/lib/seo";
+import { LAST_REVIEWED_ISO } from "@/lib/review";
 
 type JsonLd = Record<string, unknown>;
 
@@ -28,7 +34,7 @@ const routeLabelMap: Record<string, string> = {
   "/privacy": "Privacy",
   "/support": "Support",
   "/implementation-methodology": "Implementation Methodology",
-  "/case-studies": "Case Studies",
+  "/case-studies": "Projects",
   "/implementation": "Implementation",
   "/projects": "Projects",
   "/about": "About",
@@ -96,19 +102,27 @@ function buildOrganizationSchema(): JsonLd {
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: ORGANIZATION_NAME,
+    alternateName: ORGANIZATION_ALTERNATE_NAME,
     legalName: ORGANIZATION_LEGAL_NAME,
     url: SITE_URL,
     logo: `${SITE_URL}/logo.svg`,
-    email: "hello@ingeniumconsulting.net",
+    email: ORGANIZATION_EMAIL,
+    telephone: ORGANIZATION_PHONE,
+    address: {
+      "@type": "PostalAddress",
+      ...ORGANIZATION_ADDRESS,
+    },
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales and support",
-      email: "hello@ingeniumconsulting.net",
+      email: ORGANIZATION_EMAIL,
+      telephone: ORGANIZATION_PHONE,
       url: `${SITE_URL}/contact`,
     },
     areaServed: ["Ireland", "United Kingdom", "United States"],
+    sameAs: [...ORGANIZATION_SAME_AS],
     description:
-      "Ingenium Consulting builds connected websites, CRM systems, marketing automation, and AI workflows for startups and SMEs.",
+      "Ingenium Digital Consulting builds connected websites, CRM systems, marketing automation, and AI workflows for startups and SMEs.",
   };
 }
 
@@ -135,6 +149,7 @@ function buildWebPageSchema(pathname: string): JsonLd | null {
     name: config.title,
     description: config.description,
     url: toAbsoluteUrl(normalizedPathname),
+    dateModified: LAST_REVIEWED_ISO,
     isPartOf: { "@id": `${SITE_URL}/#website` },
     breadcrumb: { "@id": `${toAbsoluteUrl(normalizedPathname)}#breadcrumb` },
     publisher: { "@id": `${SITE_URL}/#organization` },
@@ -193,6 +208,7 @@ function buildServiceSchema(pathname: string): JsonLd | null {
     description: service.description,
     provider: { "@id": `${SITE_URL}/#organization` },
     url: toAbsoluteUrl(normalizedPathname),
+    dateModified: LAST_REVIEWED_ISO,
   };
 }
 

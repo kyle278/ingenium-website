@@ -56,7 +56,7 @@ const defaultProps: Partial<HeroLandingProps> = {
   navigation: [
     { name: 'Services', href: '/services' },
     { name: 'Platform', href: '/platform' },
-    { name: 'Proof', href: '/case-studies' },
+    { name: 'Projects', href: '/projects' },
     { name: 'Implementation', href: '/implementation' },
     { name: 'Contact', href: '/contact' },
   ],

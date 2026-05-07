@@ -4,14 +4,11 @@ import {
   WEBSITE_FORM_NAMES,
   WEBSITE_FORM_SLUGS,
 } from "@/lib/portalIntegration/forms";
-import { getPortalFormBySlug } from "@/lib/portalIntegration/server";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
 import WebsiteBriefForm from "./WebsiteBriefForm";
 
 export const metadata = buildMetadata(pageSeo["/website-brief"]);
-
-export const dynamic = "force-dynamic";
 
 const sectionLabel = "font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]";
 const lightCard = "mineral-panel rounded-[28px] p-6";
@@ -45,17 +42,7 @@ const intakeIncludes = [
   },
 ];
 
-export default async function WebsiteBriefPage() {
-  let websiteBriefForm = null;
-  let formResolutionError: string | null = null;
-
-  try {
-    websiteBriefForm = await getPortalFormBySlug(WEBSITE_FORM_SLUGS.websiteProjectBrief);
-  } catch (error) {
-    formResolutionError =
-      error instanceof Error ? error.message : "Unknown Portal form resolution error.";
-  }
-
+export default function WebsiteBriefPage() {
   return (
     <div className="space-y-20 md:space-y-24">
       <section className="grid items-start gap-8 lg:grid-cols-[1.05fr,0.95fr]">
@@ -95,36 +82,10 @@ export default async function WebsiteBriefPage() {
         </div>
 
         <div className={`${lightCard} grid-lines`}>
-          {websiteBriefForm ? (
-            <WebsiteBriefForm
-              formId={websiteBriefForm.id}
-              formSlug={websiteBriefForm.slug}
-              formName={websiteBriefForm.name}
-            />
-          ) : (
-            <div className="space-y-4 rounded-xl bg-rose-50 p-5">
-              <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-rose-500">
-                Form Configuration Required
-              </p>
-              <h2 className="font-[var(--font-display)] text-xl font-semibold text-[var(--color-text)]">
-                Website brief form is not configured in Ingenium Portal.
-              </h2>
-              <p className="text-sm leading-7 text-[var(--color-text-soft)]">
-                Upsert the form row named{" "}
-                <span className="font-medium text-[var(--color-text)]">
-                  {WEBSITE_FORM_NAMES[WEBSITE_FORM_SLUGS.websiteProjectBrief]}
-                </span>{" "}
-                with slug{" "}
-                <span className="font-medium text-[var(--color-text)]">
-                  {WEBSITE_FORM_SLUGS.websiteProjectBrief}
-                </span>{" "}
-                in Portal, then reload this page.
-              </p>
-              {formResolutionError ? (
-                <p className="text-xs text-rose-500">{formResolutionError}</p>
-              ) : null}
-            </div>
-          )}
+          <WebsiteBriefForm
+            formName={WEBSITE_FORM_NAMES[WEBSITE_FORM_SLUGS.websiteProjectBrief]}
+            formSlug={WEBSITE_FORM_SLUGS.websiteProjectBrief}
+          />
         </div>
       </section>
     </div>

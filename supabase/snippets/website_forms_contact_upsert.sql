@@ -14,7 +14,7 @@ insert into public.website_forms (
 )
 values (
   'd253b486-faa4-47b9-b10f-67a7c6da3374'::uuid,
-  'e4ae228f-de23-455e-b6b8-fe64b7e39f37'::uuid,
+  '13f9d31e-022c-4fd6-83bb-39cd1a51a85e'::uuid,
   'Contact Form',
   'contact',
   'Main website contact form',
@@ -52,6 +52,6 @@ do update set
 
 select id, slug, name
 from public.website_forms
-where site_id = 'e4ae228f-de23-455e-b6b8-fe64b7e39f37'::uuid
+where site_id = '13f9d31e-022c-4fd6-83bb-39cd1a51a85e'::uuid
   and organisation_id = 'd253b486-faa4-47b9-b10f-67a7c6da3374'::uuid
   and slug = 'contact';

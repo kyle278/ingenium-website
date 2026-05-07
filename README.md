@@ -14,34 +14,33 @@ Open `http://localhost:3000`.
 - Framework: Next.js App Router
 - Styling: Tailwind CSS + `app/globals.css`
 - Content model: static in-code fallback objects per route page
-- Contact flow: contact page resolves the canonical Portal form UUID server-side and the progressive client form posts to `app/api/portal-form-submit/route.ts`
-- Tracking flow: root layout loads `${PORTAL_APP_URL}/ingenium-tracker.js`, then the website runtime guarantees durable `visitor_id`, rotating `session_id`, `page_view`, `form_view`, and `scroll_depth` delivery to `${PORTAL_APP_URL}/api/websites/tracking/events`, with a local bootstrap fallback if the external script fails
+- Form flow: standard lead forms are real HTML forms with `method="post"` and `data-ingenium-submit="portal"`, resolved by canonical Portal slugs
+- Tracking flow: root layout loads the hosted production tracker from `https://portal.ingeniumconsulting.net/ingenium-tracker.js` and initializes it against the production event ingest path
 
-The website keeps page content static in code, while form submissions are forwarded to Ingenium Portal.
+The website keeps page content static in code, while the hosted tracker owns analytics delivery and standard form submission into Ingenium Portal.
 
-## Portal Form Integration Env
+## Portal Tracker Config
 
-Set these values in `.env.local`:
+The default production tracker config lives in `lib/portalIntegration/public.ts`:
 
 ```bash
-PORTAL_APP_URL=https://<portal-app-host>
-PORTAL_SUPABASE_URL=https://<portal-project>.supabase.co
-PORTAL_SUPABASE_SERVICE_ROLE_KEY=<portal-service-role-key>
-PORTAL_ORGANISATION_ID=<organisation-uuid>
-PORTAL_SITE_ID=<website-site-uuid>
-PORTAL_DEFAULT_FORM_SLUG=contact
+PORTAL_ORIGIN=https://portal.ingeniumconsulting.net
+PORTAL_SITE_ID=13f9d31e-022c-4fd6-83bb-39cd1a51a85e
 ```
 
-The browser does not read these env vars directly. The shared Portal config module reads the public subset server-side and passes it into the client tracker bootstrap and website auth links.
+If the website is reassigned to a different Portal site, update the `PORTAL_SITE_ID` string in that file before deployment.
 
 ## Canonical Form Setup
 
-Before the contact form can render as a tracked, reportable Portal form, create or update the matching `website_forms` row:
+Before the tracked forms can resolve in Portal, create or update the matching `website_forms` rows:
 
 - SQL upsert: `supabase/snippets/website_forms_contact_upsert.sql`
-- Query result to retrieve UUID: included at the end of that SQL file
+- SQL upsert: `supabase/snippets/website_forms_website_project_brief_upsert.sql`
 
-The website requires the real Portal `website_forms.id` UUID at runtime and stamps it into `data-form-id` on the rendered form. It does not fall back to DOM ids or slugs for reporting.
+The frontend now uses `data-form-slug` on the real `<form>` element, so the Portal `website_forms.slug` rows must exist and stay aligned with:
+
+- `contact`
+- `website-project-brief`
 
 ## Key Route Files
 

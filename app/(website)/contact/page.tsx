@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
 
-import { WEBSITE_FORM_NAMES, WEBSITE_FORM_SLUGS } from "@/lib/portalIntegration/forms";
-import { getPortalFormBySlug } from "@/lib/portalIntegration/server";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/contact"]);
-export const dynamic = "force-dynamic";
 
 const routes = [
   {
@@ -27,15 +24,7 @@ const routes = [
   },
 ];
 
-export default async function ContactPage() {
-  let formResolutionError: string | null = null;
-
-  try {
-    await getPortalFormBySlug(WEBSITE_FORM_SLUGS.contact);
-  } catch (error) {
-    formResolutionError = error instanceof Error ? error.message : "Unknown Portal form resolution error.";
-  }
-
+export default function ContactPage() {
   return (
     <div className="space-y-20 pb-8 md:space-y-28">
       <section className="pt-4">
@@ -96,11 +85,10 @@ export default async function ContactPage() {
           <div className="mt-6 grid gap-3">
             {[
               "Email: hello@ingeniumconsulting.net",
+              "We reply to new enquiries within 1 business day.",
               "Primary route for demos and project discussions: /demo",
               "Technical stakeholder route: /technical-review",
-              formResolutionError
-                ? `Portal form status: ${formResolutionError}`
-                : `Portal form status: ${WEBSITE_FORM_NAMES.contact} is resolving correctly.`,
+              "If a form is unavailable, email hello@ingeniumconsulting.net and we will route the next step manually.",
             ].map((item) => (
               <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
                 {item}

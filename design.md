@@ -122,6 +122,6 @@
 
 ## Launch Notes
 - Global CTAs standardized to `Book Demo`, `See the Platform`, and `Get a Revenue Systems Teardown`
-- Portal tracking remains bootstrapped globally in the root layout
-- Contact form still submits through `/api/portal-form-submit` with tracking payload attached
+- Portal tracking remains installed globally from the hosted production script in the root layout
+- Standard lead forms now submit through the hosted Portal tracker using canonical `data-form-slug` mapping
 - Public sitemap now matches the rebuilt route set

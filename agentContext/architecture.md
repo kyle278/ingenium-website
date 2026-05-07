@@ -1,23 +1,21 @@
 # Global Architecture
 
 ## Runtime Layers
-- Client layer: React components in `app/(website)` for page rendering, contact interaction, and tracking payload generation.
+- Client layer: React components in `app/(website)` for page rendering, multi-step intake UX, and consent handling.
 - Tracking script layer: `ingenium-tracker.js` loaded at runtime from Portal app and initialized in root layout.
-- Server/API layer: Next.js route handlers in `app/api`.
-- Data layer: Portal Supabase project (remote) accessed with anon key for read-only scenarios and service role key for secure form inserts.
+- Server/API layer: Next.js route handlers in `app/api` for site content only; standard Portal form submission no longer uses local proxy routes.
+- Data layer: Portal-managed tracking and form ingestion endpoints hosted at `https://portal.ingeniumconsulting.net`.
 
 ## Integration Boundary
-- Browser tracking events post directly to `${PORTAL_APP_URL}/api/websites/tracking/events`.
-- Contact form submits to internal API route `/api/portal-form-submit`.
-- Contact page resolves the active `website_forms` row by slug before rendering the tracked form.
-- Internal API route validates payload, resolves the active form by `organisation_id`, `site_id`, and slug, then inserts into `website_form_submissions`.
-- Canonical form linkage IDs (`visitor_id`, `session_id`, `site_id`) are propagated via tracking payload and persisted in submission data/metadata.
-- Attribution and CRM linkage occur in Portal DB triggers, not in website runtime.
+- Browser tracking events post directly to `https://portal.ingeniumconsulting.net/api/websites/tracking/events`.
+- Standard lead forms submit directly to `https://portal.ingeniumconsulting.net/api/websites/forms/submit` through the hosted tracker.
+- The frontend identifies forms by canonical slug via `data-form-slug`.
+- Canonical linkage IDs (`visitor_id`, `session_id`, `site_id`) are injected by the hosted tracker into the real form DOM before submit.
+- Attribution, persistence in `website_form_submissions`, and downstream CRM linkage occur in Portal, not in website runtime.
 
 ## Change Impact Map
 - Public marketing route copy, metadata, nav, and footer now carry a platform-first narrative modeled on unified-system selling patterns.
 - Named client proof now lives in the `/projects` library and the `/case-studies` route, with shared structured-data support and static sitemap/robots generation in the App Router layer.
-- Form UX changes impact conversion flow and visible success/error states.
-- API route changes impact data integrity and attribution downstream.
+- Form UX changes impact conversion flow, consent capture, and visible success/error states.
 - Tracking runtime changes impact event completeness, unique visitor/session quality, and Website > Reports form metrics.
-- Environment configuration impacts runtime reliability and security posture.
+- The editable `PORTAL_SITE_ID` constant impacts runtime form resolution and tracking destination accuracy.

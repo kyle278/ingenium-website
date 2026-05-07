@@ -45,7 +45,7 @@ export const teamMembers: TeamMemberRecord[] = [
   },
   {
     name: "Sophie Coleman",
-    role: "Graphic Designer",
+    role: "Lead Design Consultant",
     email: "sophie@ingeniumconsulting.net",
     linkedinUrl: "https://www.linkedin.com/in/sophie-coleman-912384205/",
     category: "Design",

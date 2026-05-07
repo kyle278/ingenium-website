@@ -1,74 +1,34 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  CheckCircle2,
-  Clock,
-  Layers,
-  Monitor,
-  Server,
-} from "lucide-react";
 
-import AnimatedMetric from "../../components/AnimatedMetric";
-import ScrollReveal from "../../components/ScrollReveal";
 import { buildMetadata, keywordClusters } from "@/lib/seo";
 import { getProjectBySlug, projects } from "@/src/lib/projects";
+
+import AnimatedMetric from "../../components/AnimatedMetric";
+import ProjectWebsiteEmbed from "../../components/ProjectWebsiteEmbed";
+import ScrollReveal from "../../components/ScrollReveal";
+import { ButtonLink, SectionIntro, SurfaceCard } from "../../components/sitePrimitives";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
 }
 
-function WebsitePreview({
-  title,
-  subtitle,
-  navItems,
-  trustLine,
-}: {
-  title: string;
-  subtitle: string;
-  navItems: string[];
-  trustLine: string;
-}) {
-  return (
-    <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-950/70">
-      <div className="flex items-center gap-1.5 border-b border-slate-800 px-4 py-2">
-        <span className="h-2.5 w-2.5 rounded-full bg-rose-400/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-amber-400/70" />
-        <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/70" />
-        <span className="ml-3 font-(--font-mono) text-[10px] text-slate-600">homepage-preview</span>
-      </div>
-      <div className="p-5">
-        <div className="flex flex-wrap gap-2">
-          {navItems.map((item) => (
-            <span
-              key={item}
-              className="rounded-md border border-slate-800 bg-slate-900/80 px-2 py-1 text-[10px] text-slate-500"
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-        <h3 className="mt-5 max-w-xl font-(--font-display) text-2xl font-bold text-white">{title}</h3>
-        <p className="mt-2 max-w-xl text-sm text-slate-400">{subtitle}</p>
-        <div className="mt-5 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3 py-2">
-          <p className="text-xs text-emerald-300">{trustLine}</p>
-        </div>
-        <div className="mt-5 grid gap-3 md:grid-cols-3">
-          <div className="rounded-lg border border-slate-800 bg-slate-900/70 p-3">
-            <p className="font-(--font-mono) text-[10px] text-slate-600">Hero + Value Prop</p>
-          </div>
-          <div className="rounded-lg border border-slate-800 bg-slate-900/70 p-3">
-            <p className="font-(--font-mono) text-[10px] text-slate-600">Proof + Insights</p>
-          </div>
-          <div className="rounded-lg border border-slate-800 bg-slate-900/70 p-3">
-            <p className="font-(--font-mono) text-[10px] text-slate-600">CTA + Form Pathway</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+function getWebsiteStatusMeta(status?: "live" | "mockup") {
+  if (status === "live") {
+    return {
+      label: "Live Website",
+      description: "This project includes a live website.",
+      pillClass: "bg-emerald-100 text-emerald-700",
+    };
+  }
+
+  return {
+    label: "Mockup Website",
+    description: "This project is currently shown as a mockup or concept view.",
+    pillClass: "bg-amber-100 text-amber-700",
+  };
 }
 
 export function generateStaticParams() {
@@ -109,6 +69,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  const hasEmbeddedWebsite = Boolean(project.websiteUrl);
+  const websiteStatus = project.websiteIncluded ? getWebsiteStatusMeta(project.websiteStatus) : null;
+
   const projectSchema = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
@@ -123,217 +86,227 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   };
 
   return (
-    <div className="space-y-24 md:space-y-32">
+    <div className="space-y-20 pb-8 md:space-y-28">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
       />
 
-      <section className="pt-8">
+      <section className="pt-4">
         <Link
           href="/projects"
-          className="cta-lift inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white"
+          className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-text-muted)] transition hover:text-[var(--color-text)]"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Projects
+          Back to projects
         </Link>
 
-        <div className="mt-6 grid gap-10 lg:grid-cols-[1.2fr,0.8fr]">
-          <div>
-            <p className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400">
-              Project Detail
-            </p>
-            <h1 className="mt-5 max-w-3xl font-(--font-display) text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              {project.projectName}
-            </h1>
-            <p className="mt-3 text-sm text-slate-500">
-              {project.clientName} - {project.industry} - {project.clientSize}
-            </p>
-            <p className="mt-6 max-w-2xl text-lg text-slate-400">{project.summary}</p>
-
-            <div className="mt-6 flex flex-wrap gap-2">
-              {project.services.map((service) => (
-                <span
-                  key={service}
-                  className="rounded-md border border-slate-800 bg-slate-900/80 px-2.5 py-1 text-xs text-slate-400"
-                >
-                  {service}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link
-                href="/revenue-systems-teardown"
-                className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-500"
-              >
-                Request a Similar Teardown
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/technical-review"
-                className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition hover:border-slate-600 hover:text-white"
-              >
-                Request Technical Review
-              </Link>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-slate-800 bg-slate-900/55 p-5">
-            <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-500">
-              Scope Signals
-            </p>
-            <div className="mt-4 space-y-3">
-              {project.outcomeMetrics.map((metric) => (
-                <div
-                  key={metric.label}
-                  className="metric-card rounded-lg border border-slate-800 bg-slate-900/70 p-3"
-                >
-                  <AnimatedMetric
-                    as="p"
-                    className="metric-display text-2xl font-bold text-emerald-400"
-                    value={metric.value}
-                  />
-                  <p className="mt-1 text-sm text-slate-400">{metric.label}</p>
+        <div className="mt-8">
+          <ScrollReveal>
+            <div className="max-w-4xl">
+              <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.26em] text-[var(--color-brand)]">
+                {project.clientName} / {project.industry}
+              </p>
+              {websiteStatus ? (
+                <div className="mt-4">
+                  <span
+                    className={`inline-flex rounded-full px-3 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] ${websiteStatus.pillClass}`}
+                  >
+                    {websiteStatus.label}
+                  </span>
                 </div>
-              ))}
+              ) : null}
+              <h1 className="mt-4 max-w-4xl font-[var(--font-display)] text-4xl font-semibold tracking-[-0.05em] text-[var(--color-text)] sm:text-5xl">
+                {project.projectName}
+              </h1>
+              <p className="mt-4 max-w-3xl text-lg leading-8 text-[var(--color-text-soft)]">
+                {project.teaser}
+              </p>
+              <p className="mt-6 max-w-3xl text-base leading-8 text-[var(--color-text-soft)]">
+                {project.summary}
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                {project.services.map((service) => (
+                  <span
+                    key={service}
+                    className="tech-pill inline-flex rounded-full px-3 py-1.5 text-sm font-medium text-[var(--color-text)]"
+                  >
+                    {service}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-6 grid gap-3 text-sm leading-6 text-[var(--color-text-soft)] sm:grid-cols-2 lg:max-w-3xl">
+                <div className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4">
+                  Client type: {project.clientSize}
+                </div>
+                <div className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4">
+                  Timeline: {project.timeframe}
+                </div>
+                {websiteStatus ? (
+                  <div className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 sm:col-span-2">
+                    Website status: {websiteStatus.description}
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <ButtonLink action={{ label: "Book Demo", href: "/demo" }} />
+                <ButtonLink
+                  action={{ label: "Revenue Systems Teardown", href: "/revenue-systems-teardown" }}
+                  variant="secondary"
+                />
+              </div>
             </div>
-            <p className="mt-5 flex items-center gap-2 font-(--font-mono) text-xs text-slate-600">
-              <Clock className="h-3.5 w-3.5" />
-              Delivery timeline: {project.timeframe}
-            </p>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {project.websiteIncluded && project.websitePreview ? (
+      {hasEmbeddedWebsite ? (
         <section>
           <ScrollReveal>
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 md:p-8">
-              <div className="mb-5 flex items-center gap-2">
-                <Monitor className="h-4 w-4 text-emerald-400" />
-                <p className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400">
-                  Homepage Visual
-                </p>
-              </div>
-              <WebsitePreview
-                title={project.websitePreview.heroTitle}
-                subtitle={project.websitePreview.heroSubtitle}
-                navItems={project.websitePreview.primaryNav}
-                trustLine={project.websitePreview.trustLine}
-              />
-            </div>
+            <SectionIntro
+              eyebrow="Live Project"
+              title="A live embedded view of the delivered project."
+              body="Add a project website URL in the project record to show the embed here."
+            />
+          </ScrollReveal>
+          <ScrollReveal className="mt-8" delayMs={70} blur>
+            <ProjectWebsiteEmbed
+              url={project.websiteUrl!}
+              title={`${project.clientName} project preview`}
+            />
           </ScrollReveal>
         </section>
       ) : null}
 
+      <section className="grid gap-6 lg:grid-cols-[0.9fr,1.1fr]">
+        <ScrollReveal>
+          <SurfaceCard className="p-6 md:p-8">
+            <SectionIntro
+              eyebrow="Project Outcome"
+              title="What changed for the buyer journey"
+              body={project.summary}
+            />
+          </SurfaceCard>
+        </ScrollReveal>
+
+        <ScrollReveal delayMs={80} direction="left">
+          <SurfaceCard className="p-6 md:p-8">
+            <SectionIntro
+              eyebrow="Why it worked"
+              title="The key operational and conversion shifts"
+            />
+            <div className="mt-6 space-y-3">
+              {project.insights.map((insight) => (
+                <div key={insight} className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]">
+                  {insight}
+                </div>
+              ))}
+            </div>
+          </SurfaceCard>
+        </ScrollReveal>
+      </section>
+
       <section>
-        <p className="font-(--font-mono) text-xs uppercase tracking-widest text-emerald-400">
-          Services Delivered
-        </p>
-        <h2 className="mt-4 font-(--font-display) text-3xl font-bold text-white">
-          Service-by-service outcomes
-        </h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ScrollReveal>
+          <SectionIntro
+            eyebrow="Services Delivered"
+            title="What Ingenium delivered across the project"
+            body="Each delivery area is framed around clearer structure, better trust signals, and a more direct conversion path."
+          />
+        </ScrollReveal>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {project.serviceInsights.map((serviceInsight, index) => (
-            <ScrollReveal key={serviceInsight.key} delayMs={index * 55}>
-              <article className="metric-card rounded-xl border border-slate-800 bg-slate-900/55 p-5">
-                <h3 className="font-(--font-display) text-xl font-semibold text-white">
+            <ScrollReveal key={serviceInsight.key} delayMs={index * 45}>
+              <SurfaceCard className="p-6">
+                <p className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
                   {serviceInsight.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-400">{serviceInsight.summary}</p>
-                <div className="mt-4 space-y-2">
+                </p>
+                <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{serviceInsight.summary}</p>
+                <div className="mt-5 grid gap-3">
                   {serviceInsight.highlights.map((highlight) => (
-                    <div key={highlight} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
-                      <p className="text-sm text-slate-300">{highlight}</p>
+                    <div
+                      key={highlight}
+                      className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]"
+                    >
+                      {highlight}
                     </div>
                   ))}
                 </div>
-                <div className="mt-4 grid grid-cols-2 gap-2">
+                <div className="mt-5 grid grid-cols-2 gap-3">
                   {serviceInsight.metrics.map((metric) => (
                     <div
                       key={`${serviceInsight.key}-${metric.label}`}
-                      className="rounded-lg border border-slate-800 bg-slate-900/70 p-2.5 text-center"
+                      className="rounded-2xl border border-black/6 bg-[var(--color-panel-low)] p-4 text-center"
                     >
                       <AnimatedMetric
                         as="p"
-                        className="metric-display text-lg font-bold text-cyan-400"
                         value={metric.value}
+                        className="metric-display font-[var(--font-display)] text-xl font-semibold tracking-[-0.04em] text-[var(--color-brand)]"
                       />
-                      <p className="mt-1 text-[11px] leading-tight text-slate-500">{metric.label}</p>
+                      <p className="mt-1 text-[11px] leading-tight text-[var(--color-text-muted)]">
+                        {metric.label}
+                      </p>
                     </div>
                   ))}
                 </div>
-              </article>
+              </SurfaceCard>
             </ScrollReveal>
           ))}
         </div>
       </section>
 
-      <section className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-6">
-          <div className="flex items-center gap-2">
-            <Layers className="h-4 w-4 text-emerald-400" />
-            <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-500">
-              Key Insights
-            </p>
-          </div>
-          <div className="mt-4 space-y-3">
-            {project.insights.map((insight) => (
-              <div key={insight} className="flex items-start gap-2.5">
-                <span className="data-flow-dot mt-1.5 h-2 w-2 rounded-full bg-cyan-400" />
-                <p className="text-sm text-slate-300">{insight}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section className="grid gap-6 lg:grid-cols-[1.1fr,0.9fr]">
+        <ScrollReveal>
+          <SurfaceCard className="p-6 md:p-8">
+            <SectionIntro
+              eyebrow="Technology"
+              title="Build stack"
+              body="The implementation used a modern stack that keeps the public site fast, maintainable, and easier to extend."
+            />
+            <div className="mt-6 flex flex-wrap gap-2">
+              {project.stack.map((item) => (
+                <span
+                  key={item}
+                  className="tech-pill inline-flex rounded-full px-3 py-1 text-sm text-[var(--color-text-soft)]"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </SurfaceCard>
+        </ScrollReveal>
 
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-6">
-          <div className="flex items-center gap-2">
-            <Server className="h-4 w-4 text-emerald-400" />
-            <p className="font-(--font-mono) text-[10px] uppercase tracking-wider text-slate-500">
-              Project Stack
+        <ScrollReveal delayMs={80} direction="left" blur>
+          <SurfaceCard dark className="p-6 md:p-8">
+            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+              Next Step
             </p>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {project.stack.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-md border border-slate-800 bg-slate-900 px-2.5 py-1 text-xs text-slate-400"
+            <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-white">
+              Need something similar for your own project?
+            </h2>
+            <p className="mt-4 text-base leading-7 text-white/72">
+              We can map the structure, proof, and conversion path before the build gets bloated or unclear.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/demo"
+                className="cta-lift inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[var(--color-text)]"
               >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-900/40 to-slate-900 p-10 text-center md:p-14">
-        <div className="pointer-events-none absolute inset-0 dot-grid opacity-35" />
-        <div className="relative">
-          <h2 className="mx-auto max-w-3xl font-(--font-display) text-2xl font-bold text-white sm:text-3xl">
-            Need a similar project outcome?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            We can scope the website structure, proof system, and conversion path your next build needs.
-          </p>
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/demo"
-              className="cta-lift inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-500"
-            >
-              Book Demo
-              <ArrowUpRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/projects"
-              className="cta-lift inline-flex items-center gap-2 rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 hover:border-slate-600 hover:text-white"
-            >
-              View More Projects
-            </Link>
-          </div>
-        </div>
+                Book Demo
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/projects"
+                className="cta-lift inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/10 px-5 py-3 text-sm font-semibold text-white"
+              >
+                View More Projects
+              </Link>
+            </div>
+          </SurfaceCard>
+        </ScrollReveal>
       </section>
     </div>
   );

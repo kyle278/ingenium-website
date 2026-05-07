@@ -1,43 +1,49 @@
-"use client";
-
 import Script from "next/script";
-import { useCallback, useEffect, useRef } from "react";
 
-import { bootstrapIngeniumTracker } from "@/lib/portalIntegration/browserTracker";
+import { PORTAL_SITE_ID, PORTAL_TRACKING_ENDPOINT } from "@/lib/portalIntegration/public";
 
-type IngeniumTrackingProps = {
-  portalAppUrl: string;
-  siteId: string;
-};
+const trackerInitScript = `
+(function () {
+  var portalUrl = "https://portal.ingeniumconsulting.net";
+  var siteId = "${PORTAL_SITE_ID}";
 
-export default function IngeniumTracking({ portalAppUrl, siteId }: IngeniumTrackingProps) {
-  const hasBootstrappedRef = useRef(false);
+  function initTracker() {
+    if (!window.IngeniumTracker || !siteId) return false;
 
-  const bootstrapTracker = useCallback((force = false) => {
-    if (!portalAppUrl || !siteId || (hasBootstrappedRef.current && !force)) {
-      return;
-    }
+    window.IngeniumTracker.init({
+      endpoint: "${PORTAL_TRACKING_ENDPOINT}",
+      siteId: siteId
+    });
 
-    bootstrapIngeniumTracker({ portalAppUrl, siteId });
-    hasBootstrappedRef.current = true;
-  }, [portalAppUrl, siteId]);
+    return true;
+  }
 
-  const onScriptLoad = useCallback(() => {
-    bootstrapTracker(true);
-  }, [bootstrapTracker]);
+  if (!initTracker()) {
+    var attempts = 0;
+    var timer = window.setInterval(function () {
+      attempts += 1;
+      if (initTracker() || attempts > 40) {
+        window.clearInterval(timer);
+      }
+    }, 150);
+  }
+})();
+`;
 
-  useEffect(() => {
-    bootstrapTracker();
-  }, [bootstrapTracker]);
-
-  if (!portalAppUrl || !siteId) return null;
+export default function IngeniumTracking() {
+  if (!PORTAL_SITE_ID) return null;
 
   return (
-    <Script
-      src={`${portalAppUrl}/ingenium-tracker.js`}
-      strategy="afterInteractive"
-      onLoad={onScriptLoad}
-      onError={() => bootstrapTracker()}
-    />
+    <>
+      <Script
+        src="https://portal.ingeniumconsulting.net/ingenium-tracker.js"
+        strategy="afterInteractive"
+      />
+      <Script
+        id="ingenium-tracker-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: trackerInitScript }}
+      />
+    </>
   );
 }

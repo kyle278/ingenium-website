@@ -12,13 +12,13 @@ type ButtonLinkProps = {
 };
 
 export const sectionEyebrowClass =
-  "font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]";
+  "text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--color-secondary)]";
 
 export const primaryButtonClass =
-  "cta-lift inline-flex items-center justify-center rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(24,28,31,0.08)]";
+  "cta-lift inline-flex items-center justify-center rounded-[10px] bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(20,36,61,0.12)]";
 
 export const secondaryButtonClass =
-  "cta-lift inline-flex items-center justify-center rounded-md bg-[var(--color-panel-high)] px-5 py-3 text-sm font-semibold text-[var(--color-brand)]";
+  "cta-lift inline-flex items-center justify-center rounded-[10px] border border-[var(--color-brand)] bg-transparent px-5 py-3 text-sm font-semibold text-[var(--color-brand)]";
 
 export const tertiaryButtonClass =
   "inline-flex items-center justify-center text-sm font-semibold text-[var(--color-brand)] hover:underline";
@@ -75,7 +75,7 @@ export function SurfaceCard({
 }) {
   return (
     <div
-      className={`${dark ? "graphite-panel text-white" : "mineral-panel"} rounded-[28px] ${className}`.trim()}
+      className={`${dark ? "graphite-panel text-white" : "mineral-panel"} rounded-[18px] ${className}`.trim()}
     >
       {children}
     </div>
@@ -85,7 +85,7 @@ export function SurfaceCard({
 export function MonoTag({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <span
-      className={`tech-pill inline-flex rounded-full px-3 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-soft)] ${className}`.trim()}
+      className={`tech-pill inline-flex rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-text-soft)] ${className}`.trim()}
     >
       {children}
     </span>

@@ -16,6 +16,34 @@ This file is mandatory for all tasks.
 
 ---
 
+- Date: 2026-03-25
+- Task: Replace placeholder proof with named client work and strengthen conversion plus technical SEO
+- Categories: `UI CHANGE`, `UX CHANGE`, `IMPROVEMENT`, `FUNCTIONAL CHANGE`, `DOCUMENTATION`, `PROCESS`
+- Summary:
+  - Replaced the invented client portfolio in `/projects` with named client work sourced from sibling project folders, including Carlow Hearing, Kenny Construction Limited, Farrell Contract Cleaning, Holland Pianos, Stone Clear, Sophie Coleman Design, Annos Beauty, and Attic Jiu Jitsu Carlow.
+  - Rebuilt `/case-studies` around named client examples and concrete delivery proof instead of anonymous placeholder metrics.
+  - Tightened homepage, nav, footer, and contact-page conversion paths with clearer proof access, segmented buyer routes, and stronger reassurance around next steps.
+  - Added a stronger technical SEO baseline through root metadata improvements, richer structured data, and new `robots.txt` and `sitemap.xml` generation.
+- Impact:
+  - Visitors now encounter real client names and more credible proof instead of placeholder projects.
+  - Buyers have clearer paths into strategy, technical, and security conversations without leaving the primary marketing experience.
+  - Search engines and AI crawlers now receive cleaner crawl/index signals, explicit sitemap support, and improved organization/service schemas.
+- Key files:
+  - `app/layout.tsx`
+  - `app/robots.ts`
+  - `app/sitemap.ts`
+  - `app/(website)/components/RouteStructuredData.tsx`
+  - `app/(website)/components/SiteNav.tsx`
+  - `app/(website)/components/SiteFooter.tsx`
+  - `app/(website)/layout.tsx`
+  - `app/(website)/page.tsx`
+  - `app/(website)/contact/page.tsx`
+  - `app/(website)/case-studies/page.tsx`
+  - `app/(website)/projects/page.tsx`
+  - `app/(website)/projects/[slug]/page.tsx`
+  - `src/lib/projects.ts`
+  - `src/lib/caseStudies.ts`
+
 - Date: 2026-03-11
 - Task: Rewrite the public website around a platform-first revenue story
 - Categories: `UI CHANGE`, `UX CHANGE`, `IMPROVEMENT`, `DOCUMENTATION`, `PROCESS`

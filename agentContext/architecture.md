@@ -16,6 +16,7 @@
 
 ## Change Impact Map
 - Public marketing route copy, metadata, nav, and footer now carry a platform-first narrative modeled on unified-system selling patterns.
+- Named client proof now lives in the `/projects` library and the `/case-studies` route, with shared structured-data support and static sitemap/robots generation in the App Router layer.
 - Form UX changes impact conversion flow and visible success/error states.
 - API route changes impact data integrity and attribution downstream.
 - Tracking runtime changes impact event completeness, unique visitor/session quality, and Website > Reports form metrics.

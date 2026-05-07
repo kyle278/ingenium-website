@@ -1,255 +1,218 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { HeroLanding } from "@/components/ui/hero-1";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 import { caseStudies } from "@/src/lib/caseStudies";
+import { getCanonicalProofPathForCaseStudy } from "@/src/lib/proofStories";
 
-import { PortalPreview, WorkflowStoryboard } from "./components/siteVisuals";
+import ScrollReveal from "./components/ScrollReveal";
 import { ButtonLink, SectionIntro, SurfaceCard } from "./components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/"]);
 
-const proofCards = [
+const benefits = [
   {
-    title: "Website leads arrive with better context",
-    body: "Service path, source, urgency, and buyer intent are captured before the CRM handoff starts.",
+    title: "Connected data",
+    body: "Every form, chat, and campaign updates your CRM in real time so leads stay in sync.",
   },
   {
-    title: "CRM records stay usable after the sale",
-    body: "Ownership, next step, commercial notes, and delivery handoff stay connected instead of being rebuilt in side tools.",
+    title: "AI-assisted workflows",
+    body: "Smart agents act on your business data to automate follow-up and campaign actions.",
   },
   {
-    title: "AI and automation stay inside approval rules",
-    body: "Teams move faster without losing review paths, history, or accountability for sensitive steps.",
+    title: "Built for growth",
+    body: "Fast launches, easy campaigns, and clear measurement designed for startups and SMEs.",
   },
 ];
 
-const buyerFits = [
-  "Founder-led service businesses",
-  "Consultancies with multi-step sales cycles",
-  "Revenue and ops teams cleaning up handoff and reporting",
-  "Technical buyers who need visible controls before rollout",
+const steps = [
+  ["01", "Capture leads", "Smart landing pages, forms, and chat tools gather the right prospects without friction."],
+  ["02", "Store everything", "Every interaction flows into your custom CRM so your team stays aligned and informed."],
+  ["03", "Activate marketing", "Automated campaigns launch from the same data, without manual handoffs or missing steps."],
+  ["04", "Let AI help", "AI agents suggest follow-up, optimize campaigns, and keep growth moving forward."],
 ];
 
-const implementationSteps = [
-  ["1", "Map leakage", "Audit lead capture, routing, ownership, handoff, and reporting gaps."],
-  ["2", "Rebuild the operating path", "Connect website, CRM, automation, approvals, and reporting around one process."],
-  ["3", "Launch with control", "Roll out the workflow, train owners, and keep review paths visible."],
+const capabilities = [
+  "CRM-connected websites",
+  "Automated campaigns",
+  "Lead intelligence",
+  "AI recommendations",
+  "Custom reporting",
+  "Ongoing optimization",
+];
+
+const audiences = [
+  {
+    title: "Startups",
+    body: "Launch faster with a connected digital platform that supports growth from day one.",
+  },
+  {
+    title: "SMEs",
+    body: "Replace fragmented tools with a system that keeps your marketing and sales coordinated.",
+  },
+  {
+    title: "Marketing teams",
+    body: "Keep campaigns, funnels, and data in sync with one partner and one operating model.",
+  },
 ];
 
 export default function HomePage() {
   return (
     <div className="space-y-20 pb-8 md:space-y-28">
-      <section className="grid items-start gap-10 pt-2 lg:grid-cols-[0.92fr,1.08fr] lg:pt-4">
-        <div className="max-w-3xl pt-6">
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
-            Revenue operating system
-          </p>
-          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl lg:text-[4.6rem]">
-            Replace disconnected website, CRM, automation, and AI tools with one revenue operating system for service businesses.
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            For service businesses that have outgrown a fragmented stack, Ingenium replaces scattered tools and handoffs with one operating model so teams respond faster, hand work over cleanly, and trust the numbers they are using.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink action={{ label: "Book Demo", href: "/demo" }} />
-            <ButtonLink action={{ label: "Get a Revenue Systems Teardown", href: "/revenue-systems-teardown" }} variant="secondary" />
-          </div>
-          <div className="mt-8 rounded-[28px] border border-[var(--color-line)] bg-white/72 px-5 py-5">
-            <p className="text-sm font-semibold text-[var(--color-text)]">Who this is for</p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {buyerFits.map((item) => (
-                <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/80 px-4 py-4 text-sm text-[var(--color-text-soft)]">
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      <ScrollReveal offsetPx={22}>
+        <HeroLanding
+          showHeader={false}
+          surface="seamless"
+          className="relative left-1/2 right-1/2 -mt-10 min-h-[calc(100vh-7rem)] w-screen -translate-x-1/2 px-4 sm:-mt-12 sm:px-6 lg:px-8"
+          title="Next-gen websites that connect your CRM, marketing and AI without the complexity."
+          description="Ingenium Consulting builds websites that do more than launch. They become the center of your growth engine, connecting lead capture, CRM, campaigns, and AI support from day one."
+          announcementBanner={{
+            text: "Connected websites. Intelligent growth.",
+            linkText: "See the implementation approach",
+            linkHref: "/implementation",
+          }}
+          callToActions={[
+            { text: "Book a Demo", href: "/demo", variant: "primary" },
+            { text: "See How It Works", href: "/platform", variant: "secondary" },
+          ]}
+          gradientColors={{
+            from: "rgba(23, 103, 195, 0.34)",
+            to: "rgba(19, 183, 168, 0.34)",
+          }}
+        />
+      </ScrollReveal>
 
-        <div className="space-y-4">
-          <PortalPreview
-            eyebrow="Product walkthrough"
-            title="One record moving from lead capture to delivery continuity"
-            rows={[
-              { label: "Lead captured", value: "Website form records source, pain, and service context", state: "Live" },
-              { label: "Owner assigned", value: "CRM sets owner, SLA, and next step", state: "Active" },
-              { label: "Approvals held", value: "Automation and AI pause when review is required", state: "Scoped" },
-              { label: "Handoff kept", value: "Delivery keeps the same commercial context", state: "Tracked" },
-            ]}
+      <section id="why-ingenium">
+        <ScrollReveal>
+          <SectionIntro
+            eyebrow="Why Ingenium"
+            title="Website, CRM, marketing, and AI all working together."
+            body="Your website should not be a separate tool. We connect your site, CRM, and marketing so every lead becomes part of a single growth system."
           />
-          <div className="grid gap-4 md:grid-cols-3">
-            {proofCards.map((card) => (
-              <SurfaceCard key={card.title} className="p-5">
-                <p className="font-[var(--font-display)] text-lg font-semibold tracking-[-0.03em] text-[var(--color-text)]">
-                  {card.title}
-                </p>
-                <p className="mt-2 text-sm leading-6 text-[var(--color-text-soft)]">{card.body}</p>
+        </ScrollReveal>
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {benefits.map((item, index) => (
+            <ScrollReveal key={item.title} delayMs={index * 55} blur>
+              <SurfaceCard className="panel-hover p-6">
+              <h3 className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                {item.title}
+              </h3>
+              <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{item.body}</p>
               </SurfaceCard>
-            ))}
-          </div>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
-      <section>
-        <SectionIntro
-          eyebrow="Proof"
-          title="Three proof blocks before the buyer has to trust the concept."
-          body="The site should show operational depth early: named work, concrete workflow change, and visible controls."
-        />
+      <section id="how-it-works">
+        <ScrollReveal>
+          <SectionIntro
+            eyebrow="How It Works"
+            title="A connected system makes every step faster and easier."
+            body="Website, CRM, marketing, and AI all working together instead of pushing work between disconnected tools."
+            align="center"
+          />
+        </ScrollReveal>
+        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {steps.map(([index, title, body], stepIndex) => (
+            <ScrollReveal key={index} delayMs={stepIndex * 45}>
+              <SurfaceCard className="panel-hover p-6">
+              <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
+                Step {index}
+              </p>
+              <p className="mt-3 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                {title}
+              </p>
+              <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+              </SurfaceCard>
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="grid gap-6 xl:grid-cols-[1.04fr,0.96fr]">
+        <ScrollReveal>
+          <SurfaceCard className="p-8">
+          <SectionIntro
+            eyebrow="Core Capabilities"
+            title="The platform is built around connection, automation, and clarity."
+            body="Everything is designed to keep your team working from the same information and the same momentum."
+          />
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            {capabilities.map((item) => (
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
+                {item}
+              </div>
+            ))}
+          </div>
+          </SurfaceCard>
+        </ScrollReveal>
+
+        <ScrollReveal delayMs={80} direction="left">
+          <SurfaceCard dark className="p-8">
+          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+            Built for startups and SMEs
+          </p>
+          <div className="mt-6 grid gap-3">
+            {audiences.map((item) => (
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4">
+                <p className="text-sm font-semibold text-white">{item.title}</p>
+                <p className="mt-2 text-sm leading-7 text-white/78">{item.body}</p>
+              </div>
+            ))}
+          </div>
+          </SurfaceCard>
+        </ScrollReveal>
+      </section>
+
+      <section id="proof">
+        <ScrollReveal>
+          <SectionIntro
+            eyebrow="Proof"
+            title="Results that feel simple"
+            body="Three proof blocks before the buyer has to trust the concept: operational depth, visible workflow change, and cleaner outcomes."
+          />
+        </ScrollReveal>
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {caseStudies.slice(0, 3).map((study) => (
-            <Link key={study.id} href={`/case-studies/${study.id}`} className="group block rounded-[28px]">
-              <SurfaceCard className="panel-hover h-full p-6">
+          {caseStudies.slice(0, 3).map((study, index) => (
+            <ScrollReveal key={study.id} delayMs={index * 55}>
+              <Link href={getCanonicalProofPathForCaseStudy(study.id) ?? "/projects"} className="group block rounded-[28px]">
+                <SurfaceCard className="panel-hover h-full p-6">
                 <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
                   {study.client}
                 </p>
                 <h3 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
                   {study.projectName}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">
-                  {study.intervention}
-                </p>
-                <p className="mt-4 text-sm font-medium text-[var(--color-text)]">What changed</p>
-                <p className="mt-2 text-sm leading-7 text-[var(--color-text-soft)]">
-                  {study.deliveredAssets[0]}
-                </p>
-                <p className="mt-4 text-sm font-medium text-[var(--color-brand)]">View full case study</p>
-              </SurfaceCard>
-            </Link>
+                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{study.intervention}</p>
+                <p className="mt-4 text-sm font-medium text-[var(--color-brand)]">View project record</p>
+                </SurfaceCard>
+              </Link>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
-      <section>
-        <SectionIntro
-          eyebrow="Platform"
-          title="One operating model across acquisition, CRM execution, handoff, reporting, and governed AI."
-          body="Ingenium is most useful when the whole buyer and delivery path is connected instead of patched together."
-        />
-        <div className="mt-10 grid gap-4 lg:grid-cols-[1.08fr,0.92fr]">
-          <SurfaceCard className="p-8">
-            <div className="grid gap-4 md:grid-cols-2">
-              {[
-                ["Website capture", "High-intent pages, better forms, and cleaner enquiry context."],
-                ["CRM execution", "Record design, ownership rules, pipeline hygiene, and handoff continuity."],
-                ["Workflow automation", "Trigger-owner-escalation logic with visible outcomes."],
-                ["Governed AI support", "Approvals, task boundaries, audit history, and useful prep work."],
-              ].map(([title, body]) => (
-                <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/74 p-5">
-                  <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
-                    {title}
-                  </p>
-                  <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
-                </div>
-              ))}
-            </div>
-          </SurfaceCard>
-
-          <SurfaceCard dark className="p-6">
+      <ScrollReveal className="graphite-panel rounded-[36px] px-8 py-12 md:px-12" blur>
+        <div className="grid gap-8 lg:grid-cols-[0.9fr,1.1fr] lg:items-center">
+          <div>
             <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
-              What this replaces
+              Final CTA
             </p>
-            <div className="mt-4 grid gap-3">
-              {[
-                "A website that collects leads but does not help sales act.",
-                "A CRM that looks populated but cannot be trusted.",
-                "Automation glued together without a clear owner or audit trail.",
-                "AI tools running beside the workflow instead of inside it.",
-              ].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
-                  {item}
-                </div>
-              ))}
-            </div>
-          </SurfaceCard>
-        </div>
-      </section>
-
-      <section>
-        <SectionIntro
-          eyebrow="Implementation"
-          title="The page has to earn the scroll with a believable rollout."
-          body="Ingenium combines software with implementation so the operating model survives contact with the team."
-          align="center"
-        />
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {implementationSteps.map(([step, title, body]) => (
-            <SurfaceCard key={step} className="panel-hover p-6">
-              <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] text-[var(--color-brand)]">
-                Step {step}
-              </p>
-              <p className="mt-3 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
-                {title}
-              </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
-            </SurfaceCard>
-          ))}
-        </div>
-      </section>
-
-      <section className="grid gap-6 xl:grid-cols-[0.96fr,1.04fr]">
-        <SurfaceCard dark className="p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
-            Security and trust
-          </p>
-          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.04em] text-white">
-            Technical buyers need visible controls, not implied maturity.
-          </h2>
-          <div className="mt-8 grid gap-3">
-            {[
-              "Role-based access and clear ownership boundaries.",
-              "Approvals for sensitive actions and AI-assisted work.",
-              "Audit history attached to the workflow record.",
-              "A clean technical review path for architecture and procurement questions.",
-            ].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
-                {item}
-              </div>
-            ))}
+            <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
+              Ready to build a smarter website system?
+            </h2>
+            <p className="mt-4 max-w-2xl text-base leading-8 text-white/72">
+              Talk to an expert and see how your website can work with your CRM and marketing to drive growth.
+            </p>
           </div>
-        </SurfaceCard>
-
-        <div>
-          <SectionIntro
-            eyebrow="Workflow"
-            title="One commercial story from first enquiry to fulfilment."
-            body="The master narrative is acquisition, CRM execution, handoff, delivery continuity, reporting, and governed AI support."
-          />
-          <div className="mt-8">
-            <WorkflowStoryboard />
+          <div className="flex flex-wrap gap-3 lg:justify-end">
+            <ButtonLink action={{ label: "Book a Demo", href: "/demo" }} className="bg-white text-[var(--color-text)]" />
+            <ButtonLink action={{ label: "Contact Us", href: "/contact" }} variant="secondary" className="border-white/18 bg-white/8 text-white" />
           </div>
         </div>
-      </section>
-
-      <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
-        <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
-          Choose the path that matches how you buy.
-        </h2>
-        <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-white/72">
-          Start with a demo, a teardown, or a technical review. Each path now has its own landing flow and confirmation step.
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link
-            href="/demo"
-            className="cta-lift inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-[var(--color-text)]"
-          >
-            Book Demo
-          </Link>
-          <Link
-            href="/revenue-systems-teardown"
-            className="cta-lift inline-flex items-center justify-center rounded-full border border-white/18 bg-white/10 px-5 py-3 text-sm font-semibold text-white"
-          >
-            Revenue Systems Teardown
-          </Link>
-          <Link
-            href="/technical-review"
-            className="cta-lift inline-flex items-center justify-center rounded-full border border-white/18 bg-white/10 px-5 py-3 text-sm font-semibold text-white"
-          >
-            Technical Review
-          </Link>
-        </div>
-      </section>
+      </ScrollReveal>
     </div>
   );
 }

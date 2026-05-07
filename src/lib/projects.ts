@@ -18,6 +18,8 @@ export interface ProjectWebsitePreview {
   trustLine: string;
 }
 
+export type ProjectWebsiteStatus = "live" | "mockup";
+
 export interface ProjectRecord {
   slug: string;
   projectName: string;
@@ -31,6 +33,8 @@ export interface ProjectRecord {
   insights: string[];
   outcomeMetrics: ProjectMetric[];
   websiteIncluded: boolean;
+  websiteStatus?: ProjectWebsiteStatus;
+  websiteUrl?: string;
   websitePreview?: ProjectWebsitePreview;
   serviceInsights: ProjectServiceInsight[];
   stack: string[];
@@ -75,6 +79,8 @@ export const projects: ProjectRecord[] = [
       { value: "Aftercare", label: "trust signal made visible" },
     ],
     websiteIncluded: true,
+    websiteStatus: "mockup",
+    websiteUrl: undefined,
     websitePreview: {
       heroTitle: "Hearing Care with Clear Support and Aftercare",
       heroSubtitle: "Assessments, devices, PRSI guidance, and long-term care in one calm journey.",
@@ -146,6 +152,8 @@ export const projects: ProjectRecord[] = [
       { value: "Enterprise", label: "tone shifted upmarket" },
     ],
     websiteIncluded: true,
+    websiteStatus: "mockup",
+    websiteUrl: "https://kenny-construction-six.vercel.app",
     websitePreview: {
       heroTitle: "Construction Delivery Built on Clarity and Confidence",
       heroSubtitle: "New builds, extensions, renovations, and grant-supported upgrades.",
@@ -217,6 +225,8 @@ export const projects: ProjectRecord[] = [
       { value: "Leinster", label: "regional footprint framed clearly" },
     ],
     websiteIncluded: true,
+    websiteStatus: "mockup",
+    websiteUrl: undefined,
     websitePreview: {
       heroTitle: "Consider It Clean",
       heroSubtitle: "Residential, commercial, and industrial cleaning with a faster route to a tailored quote.",
@@ -288,6 +298,8 @@ export const projects: ProjectRecord[] = [
       { value: "Carlow", label: "showroom identity anchored" },
     ],
     websiteIncluded: true,
+    websiteStatus: "mockup",
+    websiteUrl: undefined,
     websitePreview: {
       heroTitle: "Fine Pianos and Specialist Care",
       heroSubtitle: "Showroom, tuning, hire, restoration, and moving guided by seven generations of expertise.",
@@ -359,6 +371,8 @@ export const projects: ProjectRecord[] = [
       { value: "Ireland", label: "national footprint positioned clearly" },
     ],
     websiteIncluded: true,
+    websiteStatus: "mockup",
+    websiteUrl: undefined,
     websitePreview: {
       heroTitle: "Premium Surface Restoration and Exterior Cleaning",
       heroSubtitle: "Marble, limestone, terrazzo, porcelain, epoxy, and exterior work across Ireland.",
@@ -430,6 +444,8 @@ export const projects: ProjectRecord[] = [
       { value: "Portfolio", label: "work-led enquiry path" },
     ],
     websiteIncluded: true,
+    websiteStatus: "mockup",
+    websiteUrl: undefined,
     websitePreview: {
       heroTitle: "Brand Identity and Logo Design for Growing Businesses",
       heroSubtitle: "A cleaner portfolio path for founders and teams who need a stronger visual brand system.",
@@ -501,6 +517,8 @@ export const projects: ProjectRecord[] = [
       { value: "Carlow", label: "local brand identity anchored" },
     ],
     websiteIncluded: true,
+    websiteStatus: "mockup",
+    websiteUrl: undefined,
     websitePreview: {
       heroTitle: "Hair and Beauty in the Heart of Carlow",
       heroSubtitle: "A warmer, more confident salon experience with hair and beauty under one roof.",
@@ -572,6 +590,8 @@ export const projects: ProjectRecord[] = [
       { value: "Family", label: "community offer made visible" },
     ],
     websiteIncluded: true,
+    websiteStatus: "mockup",
+    websiteUrl: undefined,
     websitePreview: {
       heroTitle: "Brazilian Jiu Jitsu in Carlow for Beginners to Competitors",
       heroSubtitle: "Adults, kids, teens, gi, and no-gi classes shaped around coaching quality and academy culture.",

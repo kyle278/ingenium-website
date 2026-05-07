@@ -33,8 +33,7 @@ export default async function ContactPage() {
   try {
     await getPortalFormBySlug(WEBSITE_FORM_SLUGS.contact);
   } catch (error) {
-    formResolutionError =
-      error instanceof Error ? error.message : "Unknown Portal form resolution error.";
+    formResolutionError = error instanceof Error ? error.message : "Unknown Portal form resolution error.";
   }
 
   return (
@@ -48,16 +47,14 @@ export default async function ContactPage() {
             Choose the buying path that matches the question you need answered.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            Ingenium uses one backend intake, but the public journey is now split by buyer intent so demos, teardown audits, and technical reviews each have a cleaner front end.
+            Three entry points. Three clearer next steps. If you are unsure, a quick call will point you to the right
+            route.
           </p>
         </div>
       </section>
 
       <section>
-        <SectionIntro
-          eyebrow="Paths"
-          title="Three entry points. Three clearer next steps."
-        />
+        <SectionIntro eyebrow="Paths" title="Book a demo, request a teardown, or start a technical review." />
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {routes.map((route) => (
             <SurfaceCard key={route.title} className="panel-hover p-6">
@@ -76,15 +73,14 @@ export default async function ContactPage() {
       <section className="grid gap-6 xl:grid-cols-2">
         <SurfaceCard className="p-8">
           <SectionIntro
-            eyebrow="What changed"
-            title="The public journey is tailored even when the backend stays efficient."
+            eyebrow="Why connect"
+            title="A quick conversation helps us map your current tools and growth plan."
           />
           <div className="mt-8 grid gap-3">
             {[
-              "Demo requests now land in a walkthrough-first path.",
-              "Teardown requests now land in an audit-first path.",
-              "Technical reviews now land in a controls-first path.",
-              "Only the clean contact URL is being promoted publicly.",
+              "Website, CRM, marketing automation, and AI can be scoped together.",
+              "You get a clearer recommendation instead of a generic sales call.",
+              "The next step matches your buying stage and stakeholder needs.",
             ].map((item) => (
               <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm leading-7 text-[var(--color-text-soft)]">
                 {item}
@@ -95,13 +91,13 @@ export default async function ContactPage() {
 
         <SurfaceCard dark className="p-8">
           <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
-            Ops note
+            Support info
           </p>
           <div className="mt-6 grid gap-3">
             {[
-              "Canonical contact hygiene is handled at the page level.",
-              "Parameterised contact links are no longer the primary site journey.",
-              "Thin or unfinished legacy pages remain noindexed.",
+              "Email: hello@ingeniumconsulting.net",
+              "Primary route for demos and project discussions: /demo",
+              "Technical stakeholder route: /technical-review",
               formResolutionError
                 ? `Portal form status: ${formResolutionError}`
                 : `Portal form status: ${WEBSITE_FORM_NAMES.contact} is resolving correctly.`,

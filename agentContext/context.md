@@ -27,6 +27,7 @@ Ingenium website is a Next.js App Router project that sells Ingenium as a unifie
 - Website runtime owns `visitor_id` cookie + `localStorage` sync and `session_id` rotation via `sessionStorage`.
 - Browser tracking runtime emits `session_start`, `page_view`, `form_view`, and `scroll_depth` using canonical payload shape and page-scoped resets.
 - Public IA now prioritizes platform, acquisition, CRM, AI agents, automation, security, proof, and contact over secondary brochure-style pages.
+- Public proof surfaces now use named client work sourced from sibling project folders instead of anonymous placeholder brands.
 - Portal form definitions are stored in `public.website_forms`.
 - Submissions are written to `public.website_form_submissions`.
 - Portal-side trigger handles downstream CRM attribution logic and event processing.

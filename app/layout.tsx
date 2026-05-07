@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import IngeniumTracking from "@/app/components/IngeniumTracking";
-import { getPortalPublicConfigOrNull } from "@/lib/portalIntegration/config";
 import {
   DEFAULT_DESCRIPTION,
   ORGANIZATION_LEGAL_NAME,
@@ -24,13 +23,6 @@ const interDisplay = Inter({
 const interBody = Inter({
   subsets: ["latin"],
   variable: "--font-body",
-  display: "swap",
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-mono",
   display: "swap",
 });
 
@@ -57,7 +49,8 @@ export const metadata: Metadata = {
   },
   referrer: "origin-when-cross-origin",
   icons: {
-    icon: "/logo.svg",
+    icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
+    shortcut: "/logo.svg",
   },
   robots: {
     index: true,
@@ -73,19 +66,12 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const portalPublicConfig = getPortalPublicConfigOrNull();
-
   return (
     <html lang="en">
       <body
-        className={`${interDisplay.variable} ${interBody.variable} ${ibmPlexMono.variable} min-h-screen bg-[var(--color-bg)] font-[var(--font-body)] text-[var(--color-text)] antialiased`}
+        className={`${interDisplay.variable} ${interBody.variable} min-h-screen bg-[var(--color-bg)] font-[var(--font-body)] text-[var(--color-text)] antialiased`}
       >
-        {portalPublicConfig ? (
-          <IngeniumTracking
-            portalAppUrl={portalPublicConfig.portalAppUrl}
-            siteId={portalPublicConfig.siteId}
-          />
-        ) : null}
+        <IngeniumTracking />
         {children}
       </body>
     </html>

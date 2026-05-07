@@ -27,10 +27,7 @@ export default function ScrollReveal({
       return false;
     }
 
-    return (
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      window.matchMedia("(max-width: 767px)").matches
-    );
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   });
 
   useEffect(() => {
@@ -38,9 +35,7 @@ export default function ScrollReveal({
       return;
     }
 
-    const skipRevealAnimation =
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      window.matchMedia("(max-width: 767px)").matches;
+    const skipRevealAnimation = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (skipRevealAnimation) {
       const rafId = window.requestAnimationFrame(() => setVisible(true));

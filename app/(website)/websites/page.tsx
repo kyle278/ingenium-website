@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
-import { PortalPreview } from "../components/siteVisuals";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/websites"]);
@@ -10,85 +9,35 @@ export const metadata: Metadata = buildMetadata(pageSeo["/websites"]);
 export default function WebsitesPage() {
   return (
     <div className="space-y-20 pb-8 md:space-y-28">
-      <section className="grid items-center gap-10 pt-4 lg:grid-cols-[0.92fr,1.08fr]">
+      <section className="grid items-center gap-10 pt-4 lg:grid-cols-[0.96fr,1.04fr]">
         <div>
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
+          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-secondary)]">
             Websites
           </p>
           <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
-            Build conversion architecture, not a brochure.
+            Websites that do more than launch.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            For service businesses with unclear buyer journeys, Ingenium replaces page sprawl and generic contact forms with one website process so high-intent leads arrive with enough context to route, reply, and qualify quickly.
+            Ingenium builds high-performance websites designed to capture leads, support your brand, and feed your CRM
+            and marketing system with better context from the first interaction.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink action={{ label: "Get a Revenue Systems Teardown", href: "/revenue-systems-teardown" }} />
-            <ButtonLink action={{ label: "Book Demo", href: "/demo" }} variant="secondary" />
+            <ButtonLink action={{ label: "Book a Demo", href: "/demo" }} />
+            <ButtonLink action={{ label: "See the Platform", href: "/platform" }} variant="secondary" />
           </div>
         </div>
-        <PortalPreview
-          eyebrow="Conversion architecture"
-          title="The site should explain the offer, surface proof, and route the lead cleanly"
-          rows={[
-            { label: "Offer clarity", value: "One buyer problem and one next step per page", state: "Defined" },
-            { label: "Proof", value: "Named examples and trust cues visible before contact", state: "Live" },
-            { label: "Routing", value: "Lead reaches the CRM with service and intent context", state: "Tracked" },
-          ]}
-        />
-      </section>
 
-      <section>
-        <SectionIntro
-          eyebrow="What changes"
-          title="A website page should do four jobs before anyone fills a form."
-        />
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {[
-            "Define the pain in buyer-plain language.",
-            "Show the operating change, not just the feature label.",
-            "Use proof blocks that reduce risk before the CTA.",
-            "Capture enough context for the CRM handoff to be useful.",
-          ].map((item) => (
-            <SurfaceCard key={item} className="panel-hover p-6 text-sm leading-7 text-[var(--color-text-soft)]">
-              {item}
-            </SurfaceCard>
-          ))}
-        </div>
-      </section>
-
-      <section className="grid gap-6 xl:grid-cols-[1.08fr,0.92fr]">
         <SurfaceCard className="p-8">
-          <SectionIntro
-            eyebrow="Page system"
-            title="Each page should have one ICP, one pain, one operational change, one proof block, and one CTA."
-          />
-          <div className="mt-8 grid gap-4">
-            {[
-              ["Hero", "State the buyer problem and the operational outcome first."],
-              ["Proof", "Move screenshots, examples, and implementation evidence above lower-value overview content."],
-              ["Routing", "Tie forms, CTA paths, and CRM ownership to the specific page intent."],
-            ].map(([title, body]) => (
-              <div key={title} className="rounded-2xl border border-[var(--color-line)] bg-white/72 p-5">
-                <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
-                  {title}
-                </p>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
-              </div>
-            ))}
-          </div>
-        </SurfaceCard>
-        <SurfaceCard dark className="p-8">
-          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
-            The buyer outcome
+          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+            What a connected website changes
           </p>
-          <div className="mt-8 grid gap-3">
+          <div className="mt-6 grid gap-3">
             {[
-              "Service buyers understand the offer faster.",
-              "Sales gets cleaner enquiry context from the first touch.",
-              "Reporting becomes more useful because page intent is clearer.",
-              "The site feels like operating infrastructure instead of a polished template.",
+              "Landing pages, forms, and chat capture the right information without friction.",
+              "Every lead reaches the CRM with source and service context attached.",
+              "Campaigns and follow-up start from the same record instead of a separate handoff.",
             ].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
+              <div key={item} className="rounded-[18px] border border-[var(--color-line)] bg-white/80 px-4 py-4 text-sm text-[var(--color-text-soft)]">
                 {item}
               </div>
             ))}
@@ -96,13 +45,78 @@ export default function WebsitesPage() {
         </SurfaceCard>
       </section>
 
-      <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
+      <section>
+        <SurfaceCard className="p-6 md:p-8">
+          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+            Direct answer
+          </p>
+          <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+            What is a CRM-connected website?
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-[var(--color-text-soft)]">
+            A CRM-connected website captures visitor intent and sends the right context into the CRM immediately:
+            source, service interest, contact details, and next-step signals. That makes follow-up faster and gives
+            marketing, sales, and delivery the same starting point.
+          </p>
+        </SurfaceCard>
+      </section>
+
+      <section>
+        <SectionIntro
+          eyebrow="Website Focus"
+          title="The site should explain the offer, show proof, and route the lead cleanly."
+          body="The website is not a brochure. It is the front end of a connected growth system."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {[
+            ["Offer clarity", "State the business value quickly and make the next step obvious."],
+            ["Proof", "Use outcomes, screenshots, and examples to build trust before the form."],
+            ["Routing", "Capture enough detail so the CRM and marketing workflows can act immediately."],
+          ].map(([title, body]) => (
+            <SurfaceCard key={title} className="panel-hover p-6">
+              <p className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                {title}
+              </p>
+              <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+            </SurfaceCard>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <SectionIntro
+          eyebrow="Fit Check"
+          title="A connected website is strongest when lead context matters after the form."
+          body="It is less useful when the site is only a static brochure and the business has no follow-up process for captured enquiries."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {[
+            [
+              "Use it when",
+              "Forms, calls, campaign traffic, and service pages need to feed CRM records and follow-up workflows.",
+            ],
+            [
+              "Avoid it when",
+              "The immediate need is a temporary one-page presence with no reporting, routing, or campaign handoff.",
+            ],
+          ].map(([title, body]) => (
+            <SurfaceCard key={title} className="panel-hover p-6">
+              <p className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                {title}
+              </p>
+              <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+            </SurfaceCard>
+          ))}
+        </div>
+      </section>
+
+      <section className="graphite-panel rounded-[18px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
-          A website earns trust when it clarifies the buying path before asking for contact.
+          Build a website that works with the rest of your system from day one.
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <ButtonLink action={{ label: "Revenue Systems Teardown", href: "/revenue-systems-teardown" }} className="bg-white text-[var(--color-text)]" />
-          <ButtonLink action={{ label: "Book Demo", href: "/demo" }} variant="secondary" className="border-white/18 bg-white/8 text-white" />
+          <ButtonLink action={{ label: "Book a Demo", href: "/demo" }} className="bg-white text-[var(--color-text)]" />
+          <ButtonLink action={{ label: "Contact Us", href: "/contact" }} variant="secondary" className="border-white/30 text-white" />
         </div>
       </section>
     </div>

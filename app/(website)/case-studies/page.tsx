@@ -3,7 +3,10 @@ import Link from "next/link";
 
 import { buildMetadata, pageSeo } from "@/lib/seo";
 import { caseStudies } from "@/src/lib/caseStudies";
+import { getCanonicalProofPathForCaseStudy } from "@/src/lib/proofStories";
 
+import AnimatedMetric from "../components/AnimatedMetric";
+import ScrollReveal from "../components/ScrollReveal";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/case-studies"]);
@@ -12,40 +15,43 @@ export default function CaseStudiesPage() {
   return (
     <div className="space-y-20 pb-8 md:space-y-28">
       <section className="pt-4">
-        <div className="max-w-4xl">
+        <ScrollReveal className="max-w-4xl">
           <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
-            Case Studies
+            Proof
           </p>
           <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
-            Real client work, explained in plain language.
+            Proof that the operating model works.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            Each case study shows who it was for, what was getting in the way, what changed, and what a customer would notice.
+            Case studies for service businesses that changed how leads, teams, and delivery connect.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ButtonLink action={{ label: "Book Demo", href: "/demo" }} />
-            <ButtonLink
-              action={{ label: "Revenue Systems Teardown", href: "/revenue-systems-teardown" }}
+          <ButtonLink
+              action={{ label: "View the Platform", href: "/platform" }}
               variant="secondary"
             />
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section>
-        <SectionIntro
-          eyebrow="Client Proof"
-          title="Who it was for, what was blocking progress, and what improved."
-        />
+        <ScrollReveal>
+          <SectionIntro
+            eyebrow="Client Proof"
+            title="Operational depth, workflow change, and visible proof."
+            body="Three proof blocks before the buyer has to trust the concept: named work, concrete workflow change, and clearer outcomes."
+          />
+        </ScrollReveal>
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {caseStudies.map((study) => (
-            <Link
-              key={study.id}
-              href={`/case-studies/${study.id}`}
-              aria-label={`View ${study.projectName} case study`}
-              className="group block rounded-[28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)]/45"
-            >
-              <SurfaceCard className="flex h-full flex-col p-5 transition group-hover:-translate-y-0.5">
+          {caseStudies.map((study, index) => (
+            <ScrollReveal key={study.id} delayMs={index * 45} blur>
+              <Link
+                href={getCanonicalProofPathForCaseStudy(study.id) ?? "/projects"}
+                aria-label={`View ${study.projectName} project record`}
+                className="group block rounded-[28px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)]/45"
+              >
+                <SurfaceCard className="flex h-full flex-col p-5 transition group-hover:-translate-y-0.5">
                 <div className="flex h-full flex-col gap-4">
                   <div>
                     <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
@@ -76,39 +82,41 @@ export default function CaseStudiesPage() {
                       ))}
                     </div>
                     <div className="mt-3 flex flex-wrap gap-1.5">
-                      {study.buildMetrics.map((metric) => (
+                      {study.buildMetrics.map((metric, metricIndex) => (
                         <span
                           key={metric.label}
                           className="tech-pill inline-flex rounded-full px-2.5 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-soft)]"
                         >
-                          {metric.label}: {metric.value}
+                          {metric.label}:{" "}
+                          <AnimatedMetric value={metric.value} delayMs={metricIndex * 70} className="metric-display" />
                         </span>
                       ))}
                     </div>
                     <p className="mt-4 text-sm font-medium text-[var(--color-brand)]">
-                      View full case study
+                      View canonical project record
                     </p>
                   </div>
                 </div>
-              </SurfaceCard>
-            </Link>
+                </SurfaceCard>
+              </Link>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
-      <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
+      <ScrollReveal className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12" blur>
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
           Buyers trust proof faster when they can see the issue, the fix, and the outcome.
         </h2>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <ButtonLink action={{ label: "Book Demo", href: "/demo" }} className="bg-white text-[var(--color-text)]" />
           <ButtonLink
-            action={{ label: "Technical Review", href: "/technical-review" }}
+            action={{ label: "Contact Us", href: "/contact" }}
             variant="secondary"
             className="border-white/18 bg-white/8 text-white"
           />
         </div>
-      </section>
+      </ScrollReveal>
     </div>
   );
 }

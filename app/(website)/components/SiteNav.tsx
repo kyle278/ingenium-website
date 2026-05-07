@@ -2,35 +2,164 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+
+type NavChild = {
+  href: string;
+  label: string;
+  description: string;
+};
 
 type NavItem = {
   href?: string;
   label: string;
   description?: string;
-  children?: Array<{
-    href: string;
-    label: string;
-    description: string;
-  }>;
+  children?: NavChild[];
 };
 
-type CtaItem = {
-  href: string;
-  label: string;
-};
-
-type SiteNavContent = {
+const navContent: {
   brand: string;
   items: NavItem[];
-  primaryCta: CtaItem;
-  secondaryCta: CtaItem;
+  primaryCta: { label: string; href: string };
+  secondaryCta: { label: string; href: string };
+  topLinks: { label: string; href: string }[];
+} = {
+  brand: "Ingenium Consulting",
+  items: [
+    {
+      label: "Solutions",
+      description: "Website acquisition, CRM execution, automation, and AI support grouped into one path.",
+      children: [
+        {
+          href: "/services",
+          label: "Services",
+          description: "Overview of the connected website, CRM, automation, and AI service stack.",
+        },
+        {
+          href: "/websites",
+          label: "Websites",
+          description: "Lead-focused sites designed to feed the wider operating system.",
+        },
+        {
+          href: "/crm",
+          label: "CRM",
+          description: "Custom pipeline structure, ownership rules, and shared commercial visibility.",
+        },
+        {
+          href: "/automations",
+          label: "Automations",
+          description: "Campaign, follow-up, and operational handoffs without brittle manual work.",
+        },
+        {
+          href: "/ai-agents",
+          label: "AI Agents",
+          description: "AI support embedded into real business workflows rather than running beside them.",
+        },
+      ],
+    },
+    {
+      label: "Platform",
+      description: "Platform design, rollout, and governance routes.",
+      children: [
+        {
+          href: "/platform",
+          label: "Platform Overview",
+          description: "The operating layer connecting acquisition, CRM execution, reporting, and AI.",
+        },
+        {
+          href: "/implementation",
+          label: "Implementation",
+          description: "How we scope, build, connect, and roll out the system with your team.",
+        },
+        {
+          href: "/security",
+          label: "Security",
+          description: "Controls, auditability, and operational discipline across the connected stack.",
+        },
+        {
+          href: "/security-review",
+          label: "Security Review",
+          description: "How access, data flows, approvals, and launch risks are reviewed.",
+        },
+        {
+          href: "/data-handling",
+          label: "Data Handling",
+          description: "Boundaries for CRM, automation, reporting, and workflow data.",
+        },
+        {
+          href: "/support",
+          label: "Support",
+          description: "Support scope, request handling, and response expectations.",
+        },
+        {
+          href: "/implementation-methodology",
+          label: "Methodology",
+          description: "How connected systems are scoped, built, reviewed, and launched.",
+        },
+      ],
+    },
+    {
+      label: "Proof",
+      description: "Examples, detailed projects, and diagnostic entry points.",
+      children: [
+        {
+          href: "/projects",
+          label: "Projects",
+          description: "Browse website delivery work and the service insights behind each build.",
+        },
+        {
+          href: "/technical-review",
+          label: "Technical Review",
+          description: "A sharper view of your current setup, architecture, and risk.",
+        },
+        {
+          href: "/revenue-systems-teardown",
+          label: "Revenue Systems Teardown",
+          description: "A guided review of acquisition, handoff, automation, and reporting gaps.",
+        },
+      ],
+    },
+    {
+      label: "Company",
+      description: "Who Ingenium is and how to start the conversation.",
+      children: [
+        {
+          href: "/about",
+          label: "About",
+          description: "The mission, values, and operating philosophy behind Ingenium Consulting.",
+        },
+        {
+          href: "/team",
+          label: "Team",
+          description: "Meet the team behind the connected growth system.",
+        },
+        {
+          href: "/contact",
+          label: "Contact",
+          description: "Start with a direct conversation about your current stack and next step.",
+        },
+        {
+          href: "/privacy",
+          label: "Privacy",
+          description: "Website visitor, enquiry, and business contact privacy notice.",
+        },
+      ],
+    },
+  ],
+  primaryCta: { label: "Book Demo", href: "/demo" },
+  secondaryCta: { label: "See the Platform", href: "/platform" },
+  topLinks: [
+    { label: "Technical review", href: "/technical-review" },
+    { label: "Revenue teardown", href: "/revenue-systems-teardown" },
+    { label: "Case studies", href: "/case-studies" },
+    { label: "Contact", href: "/contact" },
+  ],
 };
 
-export default function SiteNav({ content }: { content: SiteNavContent }) {
-  const pathname = usePathname();
+export default function SiteNav() {
+  const pathname = usePathname() ?? "/";
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -49,8 +178,7 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
     };
   }, [open]);
 
-  const isActive = (href?: string) =>
-    Boolean(href && (pathname === href || pathname.startsWith(`${href}/`)));
+  const isActive = (href?: string) => Boolean(href && (pathname === href || pathname.startsWith(`${href}/`)));
 
   const isDropdownActive = (item: NavItem) =>
     Boolean(item.children?.some((child) => pathname === child.href || pathname.startsWith(`${child.href}/`)));
@@ -65,19 +193,15 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
         }`}
       >
         <div className="hidden items-center justify-between px-6 py-3 text-[11px] text-[var(--color-text-muted)] lg:flex">
-          <p className="font-[var(--font-mono)] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-            Revenue operating system for service businesses
+          <p className="font-semibold uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+            Connected websites. Intelligent growth.
           </p>
           <div className="flex items-center gap-5">
-            <Link href="/case-studies" className="hover:text-[var(--color-text)]">
-              Customer stories
-            </Link>
-            <Link href="/implementation" className="hover:text-[var(--color-text)]">
-              Implementation
-            </Link>
-            <Link href="/technical-review" className="hover:text-[var(--color-text)]">
-              Technical review
-            </Link>
+            {navContent.topLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="hover:text-[var(--color-text)]">
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
 
@@ -86,16 +210,16 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
             <Image src="/logo.svg" alt="Ingenium logo" width={30} height={30} className="h-7 w-7" priority />
             <div className="min-w-0">
               <p className="font-[var(--font-display)] text-sm font-semibold tracking-[-0.04em] text-[var(--color-text)] sm:text-base">
-                {content.brand}
+                {navContent.brand}
               </p>
-              <p className="font-[var(--font-mono)] text-[8px] uppercase tracking-[0.24em] text-[var(--color-text-muted)] sm:text-[9px]">
-                Revenue systems for service businesses
+              <p className="text-[9px] font-medium uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                Website + CRM + AI
               </p>
             </div>
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">
-            {content.items.map((item) => (
+            {navContent.items.map((item) =>
               item.children ? (
                 <div
                   key={item.label}
@@ -106,17 +230,18 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
                   <button
                     type="button"
                     onClick={() => setOpenDropdown((value) => (value === item.label ? null : item.label))}
-                    className={`rounded-md px-3 py-2 text-sm font-medium transition ${
+                    className={`inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition ${
                       isDropdownActive(item)
                         ? "bg-[var(--color-panel-high)] text-[var(--color-brand)]"
                         : "text-[var(--color-text-soft)] hover:bg-[var(--color-panel-low)] hover:text-[var(--color-text)]"
                     }`}
                   >
                     {item.label}
+                    <ChevronDown className="h-4 w-4" />
                   </button>
 
                   {openDropdown === item.label ? (
-                    <div className="ghost-outline absolute left-0 top-full z-20 mt-3 w-[420px] rounded-[28px] bg-[rgba(247,250,254,0.96)] p-4 shadow-[0_4px_24px_rgba(24,28,31,0.08)] backdrop-blur-xl">
+                    <div className="ghost-outline absolute left-0 top-full z-20 mt-3 w-[440px] rounded-[28px] bg-[rgba(247,250,254,0.96)] p-4 shadow-[0_4px_24px_rgba(24,28,31,0.08)] backdrop-blur-xl">
                       <div className="rounded-[22px] bg-[var(--color-panel-low)] px-4 py-4">
                         <p className="font-[var(--font-display)] text-lg font-semibold tracking-[-0.03em] text-[var(--color-text)]">
                           {item.label}
@@ -152,22 +277,22 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
                 >
                   {item.label}
                 </Link>
-              )
-            ))}
+              ),
+            )}
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
             <Link
-              href={content.secondaryCta.href}
+              href={navContent.secondaryCta.href}
               className="text-sm font-semibold text-[var(--color-text-soft)] transition hover:text-[var(--color-text)]"
             >
-              {content.secondaryCta.label}
+              {navContent.secondaryCta.label}
             </Link>
             <Link
-              href={content.primaryCta.href}
+              href={navContent.primaryCta.href}
               className="cta-lift inline-flex rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(24,28,31,0.08)]"
             >
-              {content.primaryCta.label}
+              {navContent.primaryCta.label}
             </Link>
           </div>
 
@@ -184,8 +309,25 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
 
       {open ? (
         <div className="ghost-outline mx-auto mt-3 max-w-[1280px] rounded-[28px] bg-[rgba(247,250,254,0.94)] p-5 shadow-[0_4px_24px_rgba(24,28,31,0.08)] backdrop-blur-xl lg:hidden">
-          <div className="grid gap-2">
-            {content.items.map((item) => (
+          <div className="mt-1 grid gap-2">
+            <Link
+              href={navContent.primaryCta.href}
+              onClick={() => setOpen(false)}
+              className="cta-lift inline-flex justify-center rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-4 py-3 text-sm font-semibold text-white"
+            >
+              {navContent.primaryCta.label}
+            </Link>
+            <Link
+              href={navContent.secondaryCta.href}
+              onClick={() => setOpen(false)}
+              className="cta-lift inline-flex justify-center rounded-md bg-[var(--color-panel-high)] px-4 py-3 text-sm font-semibold text-[var(--color-brand)]"
+            >
+              {navContent.secondaryCta.label}
+            </Link>
+          </div>
+
+          <div className="mt-4 grid gap-2">
+            {navContent.items.map((item) =>
               item.children ? (
                 <div key={item.label} className="rounded-[24px] bg-[var(--color-panel-low)] p-2">
                   <button
@@ -228,24 +370,21 @@ export default function SiteNav({ content }: { content: SiteNavContent }) {
                 >
                   {item.label}
                 </Link>
-              )
-            ))}
+              ),
+            )}
           </div>
-          <div className="mt-4 grid gap-2">
-            <Link
-              href={content.secondaryCta.href}
-              onClick={() => setOpen(false)}
-              className="cta-lift inline-flex justify-center rounded-md bg-[var(--color-panel-high)] px-4 py-3 text-sm font-semibold text-[var(--color-brand)]"
-            >
-              {content.secondaryCta.label}
-            </Link>
-            <Link
-              href={content.primaryCta.href}
-              onClick={() => setOpen(false)}
-              className="cta-lift inline-flex justify-center rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-4 py-3 text-sm font-semibold text-white"
-            >
-              {content.primaryCta.label}
-            </Link>
+
+          <div className="mt-4 grid grid-cols-2 gap-2 border-t border-[var(--color-line)] pt-4">
+            {navContent.topLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="inline-flex min-h-10 items-center rounded-xl px-4 py-2 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-panel-low)] hover:text-[var(--color-text)]"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       ) : null}

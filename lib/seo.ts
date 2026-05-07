@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 
-export const SITE_NAME = "Ingenium";
-export const ORGANIZATION_NAME = "Ingenium";
+export const SITE_NAME = "Ingenium Consulting";
+export const ORGANIZATION_NAME = "Ingenium Consulting";
 export const ORGANIZATION_LEGAL_NAME = "Ingenium Digital Consulting";
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumconsulting.net").replace(
   /\/$/,
   "",
 );
 export const DEFAULT_DESCRIPTION =
-  "Ingenium helps service businesses replace disconnected websites, CRM, automation, reporting, and AI tools with one revenue operating system.";
+  "Ingenium Consulting builds connected websites, CRM systems, marketing automation, and AI workflows for startups and SMEs.";
 
 export const keywordClusters = {
   platform: [
-    "revenue operating system",
-    "revenue operating system for service businesses",
-    "governed revenue platform",
-    "revenue systems platform",
-    "lean service business platform",
+    "connected website platform",
+    "website crm integration",
+    "marketing automation platform",
+    "ai workflow platform",
+    "digital growth platform",
   ],
   websites: [
     "crm connected website",
@@ -63,11 +63,11 @@ export const keywordClusters = {
 } as const;
 
 export const aeoQueryThemes = [
-  "What does a revenue operating system do for a lean service business?",
-  "How do you connect website lead capture, CRM action, automation, AI agents, and reporting?",
-  "How do you keep AI agents inside governed workflows?",
-  "What should leadership review before trusting the forecast?",
-  "How do you reduce sales-to-delivery handoff friction without more tools?",
+  "How do you connect a website to a CRM and marketing automation?",
+  "What does a connected website and CRM system do for a growing business?",
+  "How can AI workflows support lead follow-up and reporting?",
+  "What should startups and SMEs review before rebuilding their website stack?",
+  "How do you replace disconnected sales and marketing tools with one system?",
 ];
 
 type PageSeoConfig = {
@@ -83,37 +83,50 @@ type PageSeoConfig = {
 
 export const pageSeo: Record<string, PageSeoConfig> = {
   "/": {
-    title: "Revenue Operating System for Service Businesses | Ingenium",
+    title: "Connected Websites, CRM, Marketing and AI | Ingenium",
     description:
-      "Replace disconnected website, CRM, automation, reporting, and AI tools with one revenue operating system for service businesses.",
+      "Launch a connected website that works with your CRM, marketing tools, and AI. Ingenium builds digital growth systems for startups and SMEs.",
     path: "/",
     keywords: [...keywordClusters.platform],
   },
   "/platform": {
-    title: "Revenue Operating System Platform | Ingenium",
+    title: "Connected Growth Platform | Ingenium",
     description:
-      "See how Ingenium connects websites, CRM, workflow automation, AI agents, and reporting in one governed revenue operating system.",
+      "See how Ingenium connects website capture, CRM workflows, marketing activation, reporting, and AI support in one operating layer.",
     path: "/platform",
-    keywords: [...keywordClusters.platform, "shared data model"],
+    keywords: [...keywordClusters.platform, "crm marketing ai platform"],
+  },
+  "/services": {
+    title: "Website, CRM, Automation and AI Services | Ingenium",
+    description:
+      "Ingenium delivers custom website development, CRM integration, marketing automation, and AI-enabled workflows designed to work as one system.",
+    path: "/services",
+    keywords: [
+      "website development services",
+      "crm integration services",
+      "marketing automation services",
+      "ai workflow services",
+      ...keywordClusters.platform,
+    ],
   },
   "/websites": {
-    title: "Websites That Work Like Part of the System | Ingenium",
+    title: "CRM-Connected Website Development | Ingenium Consulting",
     description:
-      "Ingenium turns websites into active revenue infrastructure with high-intent journeys, proof-led conversion, CRM routing, and attribution-ready tracking.",
+      "Ingenium builds CRM-connected websites that capture better leads, support your brand, and connect directly to marketing automation and reporting.",
     path: "/websites",
     keywords: [...keywordClusters.websites],
   },
   "/crm": {
-    title: "CRM Execution System | Ingenium",
+    title: "Custom CRM Integration | Ingenium Consulting",
     description:
-      "Turn your CRM into a system people trust with cleaner routing, lifecycle logic, attribution, delivery continuity, and revenue visibility.",
+      "Build a custom CRM workspace with cleaner lead routing, lifecycle logic, reporting, and handoff continuity across your business.",
     path: "/crm",
     keywords: [...keywordClusters.crm],
   },
   "/ai-agents": {
-    title: "Governed AI Agents for Revenue Teams | Ingenium",
+    title: "AI-Enabled Workflows | Ingenium Consulting",
     description:
-      "Deploy AI agents inside governed workflows with approvals, task boundaries, audit history, and operational visibility.",
+      "Use AI-enabled workflows for follow-up, summaries, recommendations, and reporting with context from your website, CRM, and marketing system.",
     path: "/ai-agents",
     keywords: [...keywordClusters.ai],
   },
@@ -125,18 +138,53 @@ export const pageSeo: Record<string, PageSeoConfig> = {
     noIndex: true,
   },
   "/automations": {
-    title: "Revenue Workflow Automation | Ingenium",
+    title: "Marketing Automation and Follow-Up Flows | Ingenium Consulting",
     description:
-      "Ingenium turns important signals into action with timing guarantees, escalation paths, rollback control, and execution visibility.",
+      "Connect email, SMS, nurture journeys, and follow-up flows to your CRM so campaigns launch from live business data.",
     path: "/automations",
     keywords: [...keywordClusters.automation],
   },
   "/security": {
-    title: "Security and Governance | Ingenium",
+    title: "Security and Reliability | Ingenium",
     description:
-      "Review role-based access, approval paths, audit trails, AI governance, and technical review support built into the Ingenium operating model.",
+      "Review the visible controls, approval paths, audit history, and technical review support built into the Ingenium platform.",
     path: "/security",
     keywords: [...keywordClusters.governance],
+  },
+  "/data-handling": {
+    title: "Data Handling | Ingenium Consulting",
+    description:
+      "Review how Ingenium handles business, customer, CRM, automation, reporting, and workflow data during implementation and support.",
+    path: "/data-handling",
+    keywords: ["data handling", "crm data handling", "workflow data boundaries", ...keywordClusters.governance],
+  },
+  "/privacy": {
+    title: "Privacy Notice | Ingenium Consulting",
+    description:
+      "Read Ingenium's basic privacy notice for website visitors, business enquiries, form submissions, and project conversations.",
+    path: "/privacy",
+    keywords: ["privacy notice", "website privacy", "business enquiry privacy", ...keywordClusters.governance],
+  },
+  "/security-review": {
+    title: "Security Review Process | Ingenium Consulting",
+    description:
+      "See how Ingenium reviews access, approvals, data flows, AI workflow boundaries, deployment assumptions, and operational risks.",
+    path: "/security-review",
+    keywords: ["security review process", "technical security review", ...keywordClusters.governance],
+  },
+  "/support": {
+    title: "Support Process | Ingenium Consulting",
+    description:
+      "Review Ingenium's basic support process for active website, CRM, automation, reporting, and AI workflow clients.",
+    path: "/support",
+    keywords: ["support process", "website support", "crm support", "automation support", ...keywordClusters.platform],
+  },
+  "/implementation-methodology": {
+    title: "Implementation Methodology | Ingenium Consulting",
+    description:
+      "See how Ingenium scopes, builds, reviews, launches, and improves connected websites, CRM systems, automations, and AI workflows.",
+    path: "/implementation-methodology",
+    keywords: ["implementation methodology", "website crm implementation", ...keywordClusters.platform],
   },
   "/case-studies": {
     title: "Case Studies | Ingenium",
@@ -147,16 +195,16 @@ export const pageSeo: Record<string, PageSeoConfig> = {
     pageType: "CollectionPage",
   },
   "/implementation": {
-    title: "Implementation Model | Ingenium",
+    title: "Implementation and Rollout | Ingenium",
     description:
-      "Structured rollout for websites, CRM, automation, reporting, and governed AI so teams can launch quickly and keep control.",
+      "See how Ingenium maps gaps, rebuilds the operating path, and launches connected website, CRM, marketing, and AI systems with control.",
     path: "/implementation",
     keywords: [...keywordClusters.platform, "implementation model"],
   },
   "/contact": {
-    title: "Contact Ingenium | Revenue Systems for Service Businesses",
+    title: "Contact Ingenium | Connected Website and CRM Partner",
     description:
-      "Contact Ingenium to discuss your website, CRM, automation, reporting, or AI operating model.",
+      "Contact Ingenium to discuss your website, CRM, marketing automation, or AI implementation and choose the right next step.",
     path: "/contact",
     keywords: ["book demo", "technical review", "revenue systems teardown", ...keywordClusters.platform],
     pageType: "ContactPage",
@@ -186,26 +234,40 @@ export const pageSeo: Record<string, PageSeoConfig> = {
     pageType: "ContactPage",
   },
   "/projects": {
-    title: "Legacy Project Library | Ingenium",
-    description: "Legacy project library retained for reference.",
+    title: "Project Library | Ingenium Consulting",
+    description:
+      "Browse Ingenium project examples showing website delivery, service positioning, CRM-connected journeys, proof structure, and conversion improvements.",
     path: "/projects",
-    keywords: ["legacy project library"],
-    noIndex: true,
+    keywords: [
+      "ingenium projects",
+      "website project examples",
+      "crm connected website examples",
+      ...keywordClusters.proof,
+    ],
     pageType: "CollectionPage",
   },
   "/about": {
-    title: "Legacy About Page | Ingenium",
-    description: "Legacy about page retained for reference.",
+    title: "About Ingenium Consulting",
+    description: "Learn how Ingenium helps startups and SMEs grow with connected websites, CRM systems, marketing automation, and AI workflows.",
     path: "/about",
-    keywords: ["legacy about page"],
-    noIndex: true,
+    keywords: [
+      "about ingenium consulting",
+      "website crm automation agency",
+      "connected growth partner",
+    ],
   },
   "/team": {
-    title: "Legacy Team Page | Ingenium",
-    description: "Legacy team page retained for reference.",
+    title: "Meet the Team | Ingenium Consulting",
+    description:
+      "Meet the Ingenium Consulting team behind strategy, sales, development, and design for connected websites, CRM systems, automation, and AI delivery.",
     path: "/team",
-    keywords: ["legacy team page"],
-    noIndex: true,
+    keywords: [
+      "ingenium team",
+      "meet the team",
+      "founder led delivery",
+      "website crm automation team",
+      "service business consulting team",
+    ],
   },
   "/departments": {
     title: "Legacy Departments Page | Ingenium",

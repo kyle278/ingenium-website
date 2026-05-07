@@ -11,6 +11,20 @@ export const metadata: Metadata = buildMetadata(pageSeo["/projects"]);
 
 const sectionLabel = "font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]";
 
+function getWebsiteStatusMeta(status?: "live" | "mockup") {
+  if (status === "live") {
+    return {
+      label: "Live Website",
+      className: "bg-emerald-100 text-emerald-700",
+    };
+  }
+
+  return {
+    label: "Mockup Website",
+    className: "bg-amber-100 text-amber-700",
+  };
+}
+
 export default function ProjectsPage() {
   const itemListSchema = {
     "@context": "https://schema.org",
@@ -43,7 +57,10 @@ export default function ProjectsPage() {
       </section>
 
       <section className="grid gap-6 lg:grid-cols-2">
-        {projects.map((project, index) => (
+        {projects.map((project, index) => {
+          const websiteStatus = project.websiteIncluded ? getWebsiteStatusMeta(project.websiteStatus) : null;
+
+          return (
           <ScrollReveal key={project.slug} delayMs={index * 45}>
             <Link
               href={`/projects/${project.slug}`}
@@ -58,6 +75,13 @@ export default function ProjectsPage() {
                   <span className="rounded-md bg-[var(--color-panel-low)] px-2.5 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">
                     {project.timeframe}
                   </span>
+                  {websiteStatus ? (
+                    <span
+                      className={`rounded-md px-2.5 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-wider ${websiteStatus.className}`}
+                    >
+                      {websiteStatus.label}
+                    </span>
+                  ) : null}
                 </div>
 
                 <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold text-[var(--color-text)]">
@@ -107,7 +131,8 @@ export default function ProjectsPage() {
               </article>
             </Link>
           </ScrollReveal>
-        ))}
+          );
+        })}
       </section>
 
       <section className="graphite-panel relative overflow-hidden rounded-[36px] p-10 text-center md:p-14">

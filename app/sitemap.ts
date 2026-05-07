@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { PUBLIC_DISCOVERY_PATHS, SITE_URL } from "@/lib/seo";
-import { caseStudies } from "@/src/lib/caseStudies";
+import { projects } from "@/src/lib/projects";
 
 const routePriority: Record<
   string,
@@ -14,26 +14,33 @@ const routePriority: Record<
   "/ai-agents": { priority: 0.85, changeFrequency: "weekly" },
   "/automations": { priority: 0.85, changeFrequency: "weekly" },
   "/security": { priority: 0.8, changeFrequency: "monthly" },
+  "/data-handling": { priority: 0.58, changeFrequency: "monthly" },
+  "/privacy": { priority: 0.5, changeFrequency: "monthly" },
+  "/security-review": { priority: 0.62, changeFrequency: "monthly" },
+  "/support": { priority: 0.58, changeFrequency: "monthly" },
+  "/implementation-methodology": { priority: 0.62, changeFrequency: "monthly" },
   "/case-studies": { priority: 0.8, changeFrequency: "monthly" },
+  "/projects": { priority: 0.75, changeFrequency: "monthly" },
   "/implementation": { priority: 0.8, changeFrequency: "monthly" },
   "/contact": { priority: 0.9, changeFrequency: "weekly" },
 };
 
+const SITE_CONTENT_LAST_REVIEWED = new Date("2026-05-07");
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
   const staticRoutes = PUBLIC_DISCOVERY_PATHS.map((path) => ({
     url: path === "/" ? SITE_URL : `${SITE_URL}${path}`,
-    lastModified,
+    lastModified: SITE_CONTENT_LAST_REVIEWED,
     changeFrequency: routePriority[path]?.changeFrequency ?? "monthly",
     priority: routePriority[path]?.priority ?? 0.5,
   }));
 
-  const caseStudyRoutes = caseStudies.map((study) => ({
-    url: `${SITE_URL}/case-studies/${study.id}`,
-    lastModified,
+  const projectRoutes = projects.map((project) => ({
+    url: `${SITE_URL}/projects/${project.slug}`,
+    lastModified: SITE_CONTENT_LAST_REVIEWED,
     changeFrequency: "monthly" as const,
-    priority: 0.7,
+    priority: 0.65,
   }));
 
-  return [...staticRoutes, ...caseStudyRoutes];
+  return [...staticRoutes, ...projectRoutes];
 }

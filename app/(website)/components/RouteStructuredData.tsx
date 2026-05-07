@@ -72,8 +72,29 @@ function buildOrganizationSchema(): JsonLd {
     url: SITE_URL,
     logo: `${SITE_URL}/logo.svg`,
     email: "hello@ingeniumconsulting.net",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "sales and support",
+      email: "hello@ingeniumconsulting.net",
+      url: `${SITE_URL}/contact`,
+    },
+    areaServed: ["Ireland", "United Kingdom", "United States"],
+    sameAs: [
+      `${SITE_URL}/about`,
+      `${SITE_URL}/team`,
+    ],
     description:
-      "Ingenium helps service businesses replace disconnected websites, CRM, automation, reporting, and AI tools with one revenue operating system.",
+      "Ingenium Consulting builds connected websites, CRM systems, marketing automation, and AI workflows for startups and SMEs.",
+  };
+}
+
+function buildWebSiteSchema(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+    publisher: { "@type": "Organization", name: ORGANIZATION_NAME, url: SITE_URL },
   };
 }
 
@@ -150,7 +171,7 @@ export default function RouteStructuredData() {
 
   if (isPrivatePath(pathname)) return null;
 
-  const schemas = [buildBreadcrumb(pathname), buildOrganizationSchema()];
+  const schemas = [buildBreadcrumb(pathname), buildOrganizationSchema(), buildWebSiteSchema()];
   const pageSchema = buildWebPageSchema(pathname);
   const serviceSchema = buildServiceSchema(pathname);
 

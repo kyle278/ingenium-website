@@ -11,6 +11,7 @@ type FooterLink = {
 type SiteFooterContent = {
   summary: string;
   sitemap: FooterLink[];
+  trust: FooterLink[];
   actions: FooterLink[];
 };
 
@@ -25,10 +26,10 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
                 <Image src="/logo.svg" alt="Ingenium logo" width={34} height={34} className="h-8 w-8" />
                 <div>
                   <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
-                    Ingenium
+                    Ingenium Consulting
                   </p>
-                  <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
-                    Revenue operating system
+                  <p className="text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                    Connected websites. Intelligent growth.
                   </p>
                 </div>
               </div>
@@ -36,19 +37,35 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
                 {content.summary}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
-                {["Website capture", "CRM execution", "Workflow automation", "Governed AI support"].map((item) => (
+                {["Connected websites", "CRM integration", "Marketing automation", "AI workflows"].map((item) => (
                   <MonoTag key={item}>{item}</MonoTag>
                 ))}
               </div>
             </div>
 
-            <div className="grid gap-8 sm:grid-cols-2">
+            <div className="grid gap-8 sm:grid-cols-3">
               <div>
                 <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
                   Platform
                 </p>
                 <div className="mt-4 grid gap-2">
                   {content.sitemap.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="text-sm text-[var(--color-text-soft)] hover:text-[var(--color-text)]"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                  Trust
+                </p>
+                <div className="mt-4 grid gap-2">
+                  {content.trust.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
@@ -73,8 +90,8 @@ export default function SiteFooter({ content }: { content: SiteFooterContent }) 
           </div>
 
           <div className="mt-10 flex flex-wrap items-center justify-between gap-3 pt-6 text-sm text-[var(--color-text-muted)]">
-            <p>© 2026 Ingenium Digital Consulting</p>
-            <p>Clear paths for demos, teardown audits, and technical review.</p>
+            <p>(c) 2026 Ingenium Digital Consulting</p>
+            <p>Designed for startups and SMEs that want smarter growth.</p>
           </div>
         </div>
       </div>

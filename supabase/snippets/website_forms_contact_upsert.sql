@@ -13,8 +13,8 @@ insert into public.website_forms (
   metadata
 )
 values (
-  '<PORTAL_ORGANISATION_ID>'::uuid,
-  '<PORTAL_SITE_ID>'::uuid,
+  'd253b486-faa4-47b9-b10f-67a7c6da3374'::uuid,
+  'e4ae228f-de23-455e-b6b8-fe64b7e39f37'::uuid,
   'Contact Form',
   'contact',
   'Main website contact form',
@@ -52,6 +52,6 @@ do update set
 
 select id, slug, name
 from public.website_forms
-where site_id = '<PORTAL_SITE_ID>'::uuid
-  and organisation_id = '<PORTAL_ORGANISATION_ID>'::uuid
+where site_id = 'e4ae228f-de23-455e-b6b8-fe64b7e39f37'::uuid
+  and organisation_id = 'd253b486-faa4-47b9-b10f-67a7c6da3374'::uuid
   and slug = 'contact';

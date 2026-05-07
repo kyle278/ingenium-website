@@ -17,8 +17,8 @@ export default function RevenueSystemsTeardownConfirmedPage() {
     <ConfirmationPage
       title="Teardown request received"
       body="We will review the intake, confirm scope, and move your request into the audit handoff. The next step is a prioritised gap review."
-      primaryLabel="See Case Studies"
-      primaryHref="/case-studies"
+      primaryLabel="View Projects"
+      primaryHref="/projects"
     />
   );
 }

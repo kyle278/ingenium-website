@@ -1,148 +1,136 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = buildMetadata(pageSeo["/about"]);
+import ScrollReveal from "../components/ScrollReveal";
+import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
-const primaryButton =
-  "inline-flex items-center gap-2 rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-6 py-3 text-sm font-semibold text-white";
-const secondaryButton =
-  "inline-flex items-center gap-2 rounded-md bg-[var(--color-panel-high)] px-6 py-3 text-sm font-semibold text-[var(--color-brand)]";
+export const metadata: Metadata = buildMetadata(pageSeo["/about"]);
 
 export default function AboutPage() {
   return (
-    <div className="space-y-24 pb-4 md:space-y-28">
-      <section className="grid items-start gap-10 lg:grid-cols-[1.05fr,0.95fr]">
-        <div>
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+    <div className="space-y-20 pb-8 md:space-y-28">
+      <section className="grid items-start gap-10 pt-4 lg:grid-cols-[1fr,0.95fr]">
+        <ScrollReveal>
+          <div>
+          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.28em] text-[var(--color-brand)]">
             About Ingenium
           </p>
-          <h1 className="mt-5 max-w-3xl font-[var(--font-display)] text-4xl font-semibold tracking-[-0.03em] text-[var(--color-text)] sm:text-5xl">
-            Ingenium exists to make service businesses easier to run.
+          <h1 className="mt-6 max-w-4xl font-[var(--font-display)] text-5xl font-semibold tracking-[-0.06em] text-[var(--color-text)] sm:text-6xl">
+            We help startups and SMEs grow with intelligent digital systems.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            The company story is simple: too many service businesses are trying to grow on top of disconnected websites, CRM setups, automations, reporting tools, and AI experiments. Ingenium was built to replace that sprawl with one accountable operating system.
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
+            Ingenium Consulting combines website design, CRM strategy, marketing automation, and AI execution so
+            growing teams can run on one connected system instead of a patchwork of tools.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link href="/demo" className={primaryButton}>
-              Book Demo
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link href="/case-studies" className={secondaryButton}>
-              Review Proof
-            </Link>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <ButtonLink action={{ label: "Talk to Our Team", href: "/contact" }} />
+            <ButtonLink action={{ label: "Start a Project", href: "/demo" }} variant="secondary" />
           </div>
-        </div>
+          </div>
+        </ScrollReveal>
 
-        <div className="mineral-panel rounded-[28px] p-6">
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
-            Company facts
+        <ScrollReveal delayMs={80} direction="left">
+          <SurfaceCard className="p-8">
+          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+            Core values
           </p>
-          <div className="mt-5 grid gap-3">
-            {[
-              "Company name: Ingenium",
-              "Descriptor: revenue operating system for service businesses",
-              "Built for: founder-led service companies, consultancies, and revenue or ops teams cleaning up growth systems",
-              "Delivery model: software plus rollout support",
-            ].map((item) => (
-              <div key={item} className="rounded-2xl bg-[var(--color-panel-low)] px-4 py-4 text-sm text-[var(--color-text-soft)]">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {["Friendly", "Helpful", "Professional", "Connected", "Empowering"].map((item) => (
+              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 text-sm text-[var(--color-text-soft)]">
                 {item}
               </div>
             ))}
           </div>
-        </div>
+          </SurfaceCard>
+        </ScrollReveal>
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-2">
-        <div className="mineral-panel rounded-[28px] p-6">
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-            Why it exists
-          </p>
-          <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
-            The commercial problem is usually fragmentation, not lack of software.
-          </h2>
-          <div className="mt-6 grid gap-3">
-            {[
-              "Leads arrive without enough context.",
-              "CRM records stop reflecting reality.",
-              "Sales-to-delivery handoff loses the original story.",
-              "Automation and AI create more hidden complexity instead of less.",
-            ].map((item) => (
-              <div key={item} className="rounded-xl bg-[var(--color-panel-low)] p-4 text-sm text-[var(--color-text-soft)]">
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mineral-panel rounded-[28px] p-6">
-          <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-            Operating principles
-          </p>
-          <div className="mt-6 grid gap-3">
-            {[
-              "Outcome first: business result before mechanism.",
-              "One operating record: shared context across website, CRM, handoff, and reporting.",
-              "Visible control: approvals, ownership, and history must be reviewable.",
-              "Plain language: buyer-plain copy over internal systems language.",
-            ].map((item) => (
-              <div key={item} className="rounded-xl bg-[var(--color-panel-low)] p-4 text-sm text-[var(--color-text-soft)]">
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
+      <section>
+        <ScrollReveal>
+          <SurfaceCard className="p-6 md:p-8">
+            <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
+              Source identity
+            </p>
+            <h2 className="mt-4 font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+              Ingenium Digital Consulting is the company behind this website.
+            </h2>
+            <p className="mt-4 max-w-3xl text-base leading-8 text-[var(--color-text-soft)]">
+              Ingenium Consulting is the public brand for Ingenium Digital Consulting. The team builds connected
+              websites, CRM systems, marketing automation, and AI-enabled workflows for startups, SMEs, and service
+              businesses that need clearer operational follow-through.
+            </p>
+          </SurfaceCard>
+        </ScrollReveal>
       </section>
 
-      <section className="mineral-panel rounded-[28px] p-8">
-        <p className="font-[var(--font-mono)] text-[11px] uppercase tracking-[0.24em] text-[var(--color-brand)]">
-          Delivery model
-        </p>
-        <h2 className="mt-4 font-[var(--font-display)] text-3xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
-          Software plus rollout, review support, and a clearer path for buyers.
-        </h2>
-        <div className="mt-8 grid gap-4 lg:grid-cols-3">
+      <section className="grid gap-6 xl:grid-cols-2">
+        <ScrollReveal>
+          <SurfaceCard className="p-8">
+          <SectionIntro eyebrow="Our Mission" title="Build digital systems that make growth easier to run." />
+          <p className="mt-6 text-base leading-8 text-[var(--color-text-soft)]">
+            We make powerful digital systems feel friendly, useful, and easy to own. That means the site, CRM,
+            campaigns, and AI support all move from the same business context.
+          </p>
+          </SurfaceCard>
+        </ScrollReveal>
+
+        <ScrollReveal delayMs={80} direction="left" blur>
+          <SurfaceCard dark className="p-8">
+          <p className="font-[var(--font-mono)] text-[10px] uppercase tracking-[0.24em] text-cyan-300">
+            Why Ingenium
+          </p>
+          <div className="mt-6 grid gap-3">
+            {[
+              "Custom systems, not one-size-fits-all templates.",
+              "Integrated tools, not disconnected apps.",
+              "Friendly support, professional delivery.",
+              "Built for startups and small teams that need clarity.",
+            ].map((item) => (
+              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 text-sm text-white/78">
+                {item}
+              </div>
+            ))}
+          </div>
+          </SurfaceCard>
+        </ScrollReveal>
+      </section>
+
+      <section>
+        <ScrollReveal>
+          <SectionIntro
+            eyebrow="Our Approach"
+            title="A practical model that connects strategy, build, and improvement."
+            align="center"
+          />
+        </ScrollReveal>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[
-            ["Commercial review", "Founders and revenue leaders review the buyer path, routing logic, and rollout priority."],
-            ["Operational rollout", "CRM execution, automation, handoff, and reporting are configured around the target workflow."],
-            ["Technical review", "Approvals, access, audit history, and architecture questions have a dedicated path."],
-          ].map(([title, body]) => (
-            <div key={title} className="rounded-2xl bg-[var(--color-panel-low)] p-5">
-              <p className="font-[var(--font-display)] text-xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+            ["Design with purpose", "Every website is built for conversion, clarity, and connection."],
+            ["Build the system", "We link your site, CRM, and marketing so data moves without friction."],
+            ["Keep improving", "Automation and AI are tuned over time to help your business grow."],
+          ].map(([title, body], index) => (
+            <ScrollReveal key={title} delayMs={index * 45}>
+              <SurfaceCard className="panel-hover p-6">
+              <p className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
                 {title}
               </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
-            </div>
+              <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{body}</p>
+              </SurfaceCard>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
-      <section className="graphite-panel rounded-[36px] px-8 py-12">
-        <h2 className="font-[var(--font-display)] text-3xl font-semibold tracking-[-0.03em] text-white">
-          Buyers remember companies that have a point of view.
+      <ScrollReveal className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12" blur>
+        <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
+          Talk to a team that makes technical growth easier to understand and easier to run.
         </h2>
-        <p className="mt-4 max-w-3xl text-slate-300">
-          Ingenium&apos;s point of view is that growth systems should be simpler to trust, simpler to review, and simpler to run.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Link href="/demo" className={primaryButton}>
-            Book Demo
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-          <Link href="/technical-review" className={secondaryButton}>
-            Request a Technical Review
-          </Link>
-          <Link
-            href="/revenue-systems-teardown"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-300 transition hover:text-emerald-200"
-          >
-            Request a Revenue Systems Teardown
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <ButtonLink action={{ label: "Talk to Us", href: "/contact" }} className="bg-white text-[var(--color-text)]" />
+          <ButtonLink action={{ label: "View Projects", href: "/projects" }} variant="secondary" className="border-white/18 bg-white/8 text-white" />
         </div>
-      </section>
+      </ScrollReveal>
     </div>
   );
 }

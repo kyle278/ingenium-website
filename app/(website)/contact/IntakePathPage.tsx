@@ -4,12 +4,11 @@ import type { IntakePathConfig } from "./pathContent";
 
 type IntakePathPageProps = {
   config: IntakePathConfig;
-  formId: string;
-  formSlug: string;
   formName: string;
+  formSlug: string;
 };
 
-export default function IntakePathPage({ config, formId, formSlug, formName }: IntakePathPageProps) {
+export default function IntakePathPage({ config, formName, formSlug }: IntakePathPageProps) {
   return (
     <div className="space-y-20 pb-8 md:space-y-28">
       <section className="grid items-start gap-8 pt-4 lg:grid-cols-[0.95fr,1.05fr]">
@@ -43,9 +42,8 @@ export default function IntakePathPage({ config, formId, formSlug, formName }: I
 
           <div className="mt-6">
             <ContactForm
-              formId={formId}
-              formSlug={formSlug}
               formName={formName}
+              formSlug={formSlug}
               intent={config.intent}
               submitLabel={config.ctaLabel}
               successRedirect={config.confirmationPath}

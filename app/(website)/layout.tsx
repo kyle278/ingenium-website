@@ -4,64 +4,28 @@ import RouteStructuredData from "./components/RouteStructuredData";
 
 export const revalidate = 300;
 
-const navContent = {
-  brand: "Ingenium",
-  items: [
-    { href: "/platform", label: "Platform" },
-    {
-      label: "Solutions",
-      description: "Explore the core parts of the Ingenium platform for marketing, sales, operations, and delivery teams.",
-      children: [
-        {
-          href: "/websites",
-          label: "Websites",
-          description: "Conversion architecture that captures better enquiries and feeds the CRM cleanly.",
-        },
-        {
-          href: "/crm",
-          label: "CRM",
-          description: "Record design, pipeline discipline, and handoff continuity in one operating layer.",
-        },
-        {
-          href: "/ai-agents",
-          label: "AI Agents",
-          description: "Governed AI support with approvals, review paths, and audit history.",
-        },
-        {
-          href: "/automations",
-          label: "Automations",
-          description: "Trigger-owner-escalation logic that keeps the work moving.",
-        },
-      ],
-    },
-    { href: "/case-studies", label: "Proof" },
-    { href: "/security", label: "Security" },
-    { href: "/implementation", label: "Implementation" },
-    { href: "/contact", label: "Contact" },
-  ],
-  primaryCta: { label: "Book Demo", href: "/demo" },
-  secondaryCta: { label: "See the Platform", href: "/platform" },
-};
-
 const footerContent = {
   summary:
-    "Ingenium helps service businesses run acquisition, CRM execution, handoff, reporting, and governed AI support in one accountable operating system.",
+    "Connected websites. Intelligent growth. Ingenium helps startups and SMEs launch websites, CRM systems, marketing automation, and AI workflows that work together.",
   sitemap: [
     { href: "/", label: "Home" },
+    { href: "/services", label: "Services" },
     { href: "/platform", label: "Platform" },
-    { href: "/websites", label: "Websites" },
-    { href: "/crm", label: "CRM" },
-    { href: "/ai-agents", label: "AI Agents" },
-    { href: "/automations", label: "Automations" },
-    { href: "/case-studies", label: "Proof" },
-    { href: "/security", label: "Security" },
-    { href: "/implementation", label: "Implementation" },
+    { href: "/projects", label: "Projects" },
+    { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
+  ],
+  trust: [
+    { href: "/data-handling", label: "Data Handling" },
+    { href: "/privacy", label: "Privacy" },
+    { href: "/security-review", label: "Security Review" },
+    { href: "/support", label: "Support" },
+    { href: "/implementation-methodology", label: "Methodology" },
   ],
   actions: [
     { href: "/demo", label: "Book Demo" },
-    { href: "/platform", label: "See the Platform" },
-    { href: "/revenue-systems-teardown", label: "Get a Revenue Systems Teardown" },
+    { href: "/contact", label: "Contact Us" },
+    { href: "/revenue-systems-teardown", label: "Revenue Systems Teardown" },
   ],
 };
 
@@ -77,7 +41,7 @@ export default function WebsiteLayout({ children }: { children: React.ReactNode 
       </div>
 
       <div className="relative">
-        <SiteNav content={navContent} />
+        <SiteNav />
         <main className="mx-auto max-w-[1280px] px-4 pb-24 pt-10 sm:px-6 md:pt-16 lg:px-8">
           {children}
         </main>

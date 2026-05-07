@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Linkedin, Mail } from "lucide-react";
 
@@ -115,10 +116,15 @@ export default function TeamPage() {
                   {ORGANIZATION_NAME}
                 </span>
               </div>
-              <div className="relative mt-8 flex aspect-[4/5] items-end rounded-[26px] bg-[rgba(255,255,255,0.62)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
-                <div className="flex h-24 w-24 items-center justify-center rounded-full bg-white text-3xl font-semibold tracking-[-0.06em] text-[var(--color-text)] shadow-[0_8px_24px_rgba(24,28,31,0.08)]">
-                  {member.initials}
-                </div>
+              <div className="relative mt-8 aspect-[4/5] overflow-hidden rounded-[26px] bg-[rgba(255,255,255,0.62)] shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
+                <Image
+                  src={member.image}
+                  alt={`${member.name} portrait`}
+                  fill
+                  sizes="(min-width: 1280px) 24rem, (min-width: 768px) 45vw, 100vw"
+                  className={`object-cover object-center ${member.imageClassName ?? ""}`}
+                />
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0)_45%,rgba(24,28,31,0.08)_100%)]" />
               </div>
             </div>
 

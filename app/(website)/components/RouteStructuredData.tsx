@@ -16,19 +16,44 @@ type JsonLd = Record<string, unknown>;
 
 const routeLabelMap: Record<string, string> = {
   "/": "Home",
+  "/services": "Services",
   "/platform": "Platform",
   "/websites": "Websites",
   "/crm": "CRM",
   "/ai-agents": "AI Agents",
   "/automations": "Automations",
   "/security": "Security",
+  "/security-review": "Security Review",
+  "/data-handling": "Data Handling",
+  "/privacy": "Privacy",
+  "/support": "Support",
+  "/implementation-methodology": "Implementation Methodology",
   "/case-studies": "Case Studies",
   "/implementation": "Implementation",
+  "/projects": "Projects",
+  "/about": "About",
+  "/team": "Team",
   "/contact": "Contact",
   "/demo": "Demo",
   "/revenue-systems-teardown": "Revenue Systems Teardown",
   "/technical-review": "Technical Review",
 };
+
+function normalizePathname(pathname: string) {
+  if (pathname === "/index") {
+    return "/";
+  }
+
+  const trimmed = pathname.replace(/\/+$/, "");
+  return trimmed.length > 0 ? trimmed : "/";
+}
+
+function formatSegmentLabel(segment: string) {
+  return segment
+    .split("-")
+    .map((part) => (part.length > 0 ? `${part.charAt(0).toUpperCase()}${part.slice(1)}` : part))
+    .join(" ");
+}
 
 function toAbsoluteUrl(pathname: string) {
   return pathname && pathname !== "/" ? `${SITE_URL}${pathname}` : SITE_URL;
@@ -42,7 +67,8 @@ function isPrivatePath(pathname: string) {
 }
 
 function buildBreadcrumb(pathname: string): JsonLd {
-  const segments = pathname.split("/").filter(Boolean);
+  const normalizedPathname = normalizePathname(pathname);
+  const segments = normalizedPathname.split("/").filter(Boolean);
   const items = [{ "@type": "ListItem", position: 1, name: "Home", item: SITE_URL }];
   let builtPath = "";
 
@@ -51,7 +77,7 @@ function buildBreadcrumb(pathname: string): JsonLd {
     items.push({
       "@type": "ListItem",
       position: index + 2,
-      name: routeLabelMap[builtPath] ?? segment,
+      name: routeLabelMap[builtPath] ?? formatSegmentLabel(segment),
       item: toAbsoluteUrl(builtPath),
     });
   });
@@ -59,6 +85,7 @@ function buildBreadcrumb(pathname: string): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${toAbsoluteUrl(normalizedPathname)}#breadcrumb`,
     itemListElement: items,
   };
 }
@@ -67,6 +94,7 @@ function buildOrganizationSchema(): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
     name: ORGANIZATION_NAME,
     legalName: ORGANIZATION_LEGAL_NAME,
     url: SITE_URL,
@@ -79,10 +107,6 @@ function buildOrganizationSchema(): JsonLd {
       url: `${SITE_URL}/contact`,
     },
     areaServed: ["Ireland", "United Kingdom", "United States"],
-    sameAs: [
-      `${SITE_URL}/about`,
-      `${SITE_URL}/team`,
-    ],
     description:
       "Ingenium Consulting builds connected websites, CRM systems, marketing automation, and AI workflows for startups and SMEs.",
   };
@@ -92,28 +116,33 @@ function buildWebSiteSchema(): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
     name: SITE_NAME,
     url: SITE_URL,
-    publisher: { "@type": "Organization", name: ORGANIZATION_NAME, url: SITE_URL },
+    publisher: { "@id": `${SITE_URL}/#organization` },
   };
 }
 
 function buildWebPageSchema(pathname: string): JsonLd | null {
-  const config = pageSeo[pathname];
+  const normalizedPathname = normalizePathname(pathname);
+  const config = pageSeo[normalizedPathname];
   if (!config || config.noIndex) return null;
 
   return {
     "@context": "https://schema.org",
     "@type": config.pageType ?? "WebPage",
+    "@id": `${toAbsoluteUrl(normalizedPathname)}#webpage`,
     name: config.title,
     description: config.description,
-    url: toAbsoluteUrl(pathname),
-    isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
-    publisher: { "@type": "Organization", name: ORGANIZATION_NAME, url: SITE_URL },
+    url: toAbsoluteUrl(normalizedPathname),
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    breadcrumb: { "@id": `${toAbsoluteUrl(normalizedPathname)}#breadcrumb` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
   };
 }
 
 function buildServiceSchema(pathname: string): JsonLd | null {
+  const normalizedPathname = normalizePathname(pathname);
   const services: Record<string, { name: string; description: string }> = {
     "/platform": {
       name: "Ingenium Revenue Operating System",
@@ -153,16 +182,17 @@ function buildServiceSchema(pathname: string): JsonLd | null {
     },
   };
 
-  const service = services[pathname];
+  const service = services[normalizedPathname];
   if (!service) return null;
 
   return {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${toAbsoluteUrl(normalizedPathname)}#service`,
     name: service.name,
     description: service.description,
-    provider: { "@type": "Organization", name: ORGANIZATION_NAME, url: SITE_URL },
-    url: toAbsoluteUrl(pathname),
+    provider: { "@id": `${SITE_URL}/#organization` },
+    url: toAbsoluteUrl(normalizedPathname),
   };
 }
 

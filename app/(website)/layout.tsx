@@ -10,9 +10,13 @@ const footerContent = {
   sitemap: [
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
+    { href: "/websites", label: "Websites" },
+    { href: "/crm", label: "CRM" },
+    { href: "/automations", label: "Automations" },
+    { href: "/ai-agents", label: "AI Agents" },
     { href: "/platform", label: "Platform" },
     { href: "/projects", label: "Projects" },
-    { href: "/about", label: "About" },
+    { href: "/team", label: "Team" },
     { href: "/contact", label: "Contact" },
   ],
   trust: [

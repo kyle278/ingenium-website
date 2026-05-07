@@ -158,6 +158,20 @@ const navContent: {
   ],
 };
 
+const crawlPriorityPaths = new Set([
+  "/services",
+  "/websites",
+  "/crm",
+  "/automations",
+  "/ai-agents",
+  "/team",
+  "/projects",
+]);
+
+const crawlPriorityLinks = navContent.items
+  .flatMap((item) => item.children ?? [])
+  .filter((child) => crawlPriorityPaths.has(child.href));
+
 export default function SiteNav() {
   const pathname = usePathname() ?? "/";
   const [open, setOpen] = useState(false);
@@ -304,6 +318,24 @@ export default function SiteNav() {
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
+        </div>
+
+        <div className="hidden border-t border-[var(--color-line)] px-5 pb-4 lg:block">
+          <div className="flex flex-wrap gap-2 pt-3">
+            {crawlPriorityLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`inline-flex rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+                  isActive(link.href)
+                    ? "border-[rgba(0,87,191,0.18)] bg-[var(--color-panel-high)] text-[var(--color-brand)]"
+                    : "border-[var(--color-line)] bg-white/72 text-[var(--color-text-soft)] hover:border-[rgba(0,87,191,0.18)] hover:text-[var(--color-text)]"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 

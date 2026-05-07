@@ -9,6 +9,7 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://ingeniumco
 );
 export const DEFAULT_DESCRIPTION =
   "Ingenium Consulting builds connected websites, CRM systems, marketing automation, and AI workflows for startups and SMEs.";
+export const DEFAULT_SOCIAL_IMAGE = `${SITE_URL}/opengraph-image`;
 
 export const keywordClusters = {
   platform: [
@@ -307,6 +308,12 @@ export const PUBLIC_DISCOVERY_PATHS = Object.entries(pageSeo)
 
 export function buildMetadata(config: PageSeoConfig): Metadata {
   const canonical = config.path === "/" ? SITE_URL : `${SITE_URL}${config.path}`;
+  const socialImage = {
+    url: DEFAULT_SOCIAL_IMAGE,
+    width: 1200,
+    height: 630,
+    alt: `${SITE_NAME} social preview`,
+  };
 
   return {
     title: config.title,
@@ -320,11 +327,13 @@ export function buildMetadata(config: PageSeoConfig): Metadata {
       siteName: SITE_NAME,
       locale: "en_US",
       type: "website",
+      images: [socialImage],
     },
     twitter: {
       card: "summary_large_image",
       title: config.ogTitle ?? config.title,
       description: config.ogDescription ?? config.description,
+      images: [socialImage.url],
     },
     robots: config.noIndex
       ? {

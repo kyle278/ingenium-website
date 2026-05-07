@@ -109,7 +109,7 @@ export default function AnimatedMetric({
   const tokens = useMemo(() => parseTokens(textValue), [textValue]);
   const ref = useRef<HTMLElement | null>(null);
   const [hasEntered, setHasEntered] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(1);
 
   useEffect(() => {
     if (tokens.length === 0) {
@@ -151,7 +151,7 @@ export default function AnimatedMetric({
   }, [tokens.length]);
 
   useEffect(() => {
-    if (!hasEntered || tokens.length === 0) {
+    if (!hasEntered || tokens.length === 0 || progress >= 1) {
       return;
     }
 
@@ -176,7 +176,7 @@ export default function AnimatedMetric({
 
     rafId = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(rafId);
-  }, [delayMs, durationMs, hasEntered, tokens.length]);
+  }, [delayMs, durationMs, hasEntered, progress, tokens.length]);
 
   const displayValue = useMemo(
     () => buildDisplayValue(textValue, tokens, progress),

@@ -75,6 +75,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const hasEmbeddedWebsite = Boolean(project.websiteUrl);
   const websiteStatus = project.websiteIncluded ? getWebsiteStatusMeta(project.websiteStatus) : null;
   const relatedCaseStudy = getCaseStudyByProjectSlug(project.slug);
+  const deliveryDate = project.deliveryDate ?? "Available on request";
 
   const projectSchema = {
     "@context": "https://schema.org",
@@ -149,7 +150,10 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   Client type: {project.clientSize}
                 </div>
                 <div className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4">
-                  Timeline: {project.timeframe}
+                  Delivery date: {deliveryDate}
+                </div>
+                <div className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 sm:col-span-2">
+                  Delivery context: {project.timeframe}
                 </div>
                 {websiteStatus ? (
                   <div className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 sm:col-span-2">

@@ -3,9 +3,28 @@ import type { Metadata } from "next";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
 import PageReviewMeta from "../components/PageReviewMeta";
+import ServiceFaqSection from "../components/ServiceFaqSection";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/ai-agents"]);
+
+const aiQuestions = [
+  {
+    question: "How can AI agents help me?",
+    answer:
+      "AI agents are most useful when they assist repeatable work that already has clear inputs and clear review points. That usually means faster lead summaries, cleaner follow-up drafts, quicker research, and easier reporting rather than fully autonomous customer decisions.",
+  },
+  {
+    question: "How does this help me?",
+    answer:
+      "The value is time and consistency. Good AI support reduces manual prep, helps the team respond faster, and keeps context attached to the workflow instead of asking staff to retype or reinterpret the same information every day.",
+  },
+  {
+    question: "Do I need a CRM first?",
+    answer:
+      "Usually, yes. AI becomes more reliable when it is connected to structured business data. If there is no clear record of contacts, stages, ownership, or approvals, the AI layer will mostly sit on top of disorder rather than fixing it.",
+  },
+];
 
 export default function AiAgentsPage() {
   return (
@@ -109,6 +128,12 @@ export default function AiAgentsPage() {
           ))}
         </div>
       </section>
+
+      <ServiceFaqSection
+        title="The AI questions most businesses ask first."
+        body="The useful conversation is not whether AI is impressive. It is whether it can save time without creating new risk, confusion, or oversight gaps."
+        items={aiQuestions}
+      />
 
       <section className="graphite-panel rounded-[18px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">

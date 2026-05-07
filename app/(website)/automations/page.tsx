@@ -3,9 +3,28 @@ import type { Metadata } from "next";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
 import PageReviewMeta from "../components/PageReviewMeta";
+import ServiceFaqSection from "../components/ServiceFaqSection";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/automations"]);
+
+const automationQuestions = [
+  {
+    question: "How does this help me?",
+    answer:
+      "Automation helps by removing delay after the enquiry arrives. It can route leads, trigger follow-up, update stages, and keep campaign activity moving without someone re-entering the same details by hand.",
+  },
+  {
+    question: "Do I need a CRM first?",
+    answer:
+      "In most cases, yes. Automation is strongest when it runs from clean customer records, clear ownership, and defined pipeline stages. Without that, the business usually ends up automating confusion instead of removing it.",
+  },
+  {
+    question: "Will this just create more software to manage?",
+    answer:
+      "It should do the opposite. The point is to reduce manual work and disconnected tools, not add another dashboard. Good automation makes the existing operating path easier to run and easier to review.",
+  },
+];
 
 export default function AutomationsPage() {
   return (
@@ -109,6 +128,12 @@ export default function AutomationsPage() {
           ))}
         </div>
       </section>
+
+      <ServiceFaqSection
+        title="The follow-up questions behind most automation projects."
+        body="The point is not to launch more messages. It is to make sure the right message, alert, or task happens at the right time without manual chasing."
+        items={automationQuestions}
+      />
 
       <section className="graphite-panel rounded-[18px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">

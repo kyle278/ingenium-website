@@ -3,9 +3,28 @@ import type { Metadata } from "next";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
 import PageReviewMeta from "../components/PageReviewMeta";
+import ServiceFaqSection from "../components/ServiceFaqSection";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/crm"]);
+
+const crmQuestions = [
+  {
+    question: "Do I need a CRM?",
+    answer:
+      "If leads, follow-up, quotes, or client handoff matter to revenue, you usually need one shared system of record. A CRM becomes useful when the team cannot reliably answer who owns the next step, what the contact asked for, and what happened since the first enquiry.",
+  },
+  {
+    question: "How does this help me?",
+    answer:
+      "CRM work reduces missed follow-up, duplicate admin, and handoff confusion. It gives sales, marketing, and delivery one place to see context, ownership, and stage instead of rebuilding the story from inboxes and spreadsheets.",
+  },
+  {
+    question: "My website already collects enquiries. Why is CRM work still worth doing?",
+    answer:
+      "Capturing a form is only the first step. CRM setup, migrations, and integrations make sure the enquiry lands with the right owner, the right source data, and the right follow-up rules instead of becoming another manual tidy-up job.",
+  },
+];
 
 export default function CrmPage() {
   return (
@@ -19,8 +38,8 @@ export default function CrmPage() {
             A CRM workspace your team can actually trust.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            Ingenium builds custom CRM systems that store, score, route, and organize leads so sales, marketing, and
-            delivery all work from the same record.
+            Ingenium sets up, migrates, and rebuilds CRM systems that store, score, route, and organize leads so
+            sales, marketing, and delivery all work from the same record.
           </p>
           <PageReviewMeta />
           <div className="mt-8 flex flex-wrap gap-3">
@@ -109,6 +128,12 @@ export default function CrmPage() {
           ))}
         </div>
       </section>
+
+      <ServiceFaqSection
+        title="The CRM questions that come up most often."
+        body="Most CRM projects start with frustration about lead ownership, migrations, or disconnected follow-up rather than a desire to buy software for its own sake."
+        items={crmQuestions}
+      />
 
       <section className="graphite-panel rounded-[18px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">

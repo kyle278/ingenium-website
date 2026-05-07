@@ -37,7 +37,7 @@ const intakeIncludes = [
   },
   {
     title: "Private submission",
-    body: "This page is intentionally unlisted and marked noindex for client sharing only.",
+    body: "This page is private, excluded from indexing, and intended only for approved project conversations.",
     icon: LockKeyhole,
   },
 ];

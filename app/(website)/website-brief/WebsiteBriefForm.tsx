@@ -35,7 +35,7 @@ const featureOptions = [
   "Lead capture forms",
   "Booking or consultation flow",
   "Blog or resources",
-  "Case studies or portfolio",
+  "Projects or portfolio",
   "Team profiles",
   "Client testimonials",
   "CMS editing access",
@@ -482,7 +482,7 @@ export default function WebsiteBriefForm({
             className={`min-h-[120px] ${fieldClassName}`}
             name="required_pages"
             onChange={(event) => setRequiredPages(event.target.value)}
-            placeholder="Example: home, about, services, case studies, contact"
+            placeholder="Example: home, about, services, projects, contact"
             required
             value={requiredPages}
           />
@@ -674,7 +674,7 @@ export default function WebsiteBriefForm({
       ) : null}
 
       <p className="text-center text-xs text-[var(--color-text-muted)]">
-        This page is only used for project intake and is not listed publicly on the main site.
+        This private intake link is only used for approved project conversations.
       </p>
     </form>
   );

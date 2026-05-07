@@ -3,9 +3,28 @@ import type { Metadata } from "next";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
 import PageReviewMeta from "../components/PageReviewMeta";
+import ServiceFaqSection from "../components/ServiceFaqSection";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/websites"]);
+
+const websiteQuestions = [
+  {
+    question: "How does this help me?",
+    answer:
+      "A better website helps by turning vague interest into clearer enquiries. It explains the offer faster, surfaces trust earlier, and captures enough context that your next step is not starting from scratch every time someone gets in touch.",
+  },
+  {
+    question: "But my website looks fine, we updated it years ago!",
+    answer:
+      "Looking fine is not the same as doing the job well. If the site still makes visitors hunt for proof, hides the best service route, or sends weak enquiries into a generic inbox, it is probably costing you even if the design still feels acceptable.",
+  },
+  {
+    question: "Do I need a CRM as well?",
+    answer:
+      "If your website is meant to win real business, the answer is often yes. The site should not stop at a contact form. It should pass lead source, service interest, and next-step context into a CRM so follow-up is faster and cleaner.",
+  },
+];
 
 export default function WebsitesPage() {
   return (
@@ -111,6 +130,12 @@ export default function WebsitesPage() {
           ))}
         </div>
       </section>
+
+      <ServiceFaqSection
+        title="What businesses usually ask before rebuilding a site."
+        body="These are the questions behind most website conversations, especially when the existing site is still live but no longer helping the business move cleanly."
+        items={websiteQuestions}
+      />
 
       <section className="graphite-panel rounded-[18px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">

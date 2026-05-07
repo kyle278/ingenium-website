@@ -66,7 +66,7 @@ export default function HomePage() {
           <HeroLanding
             showHeader={false}
             surface="seamless"
-            className="relative left-1/2 right-1/2 -mt-10 min-h-[calc(100vh-7rem)] w-screen -translate-x-1/2 px-4 sm:-mt-12 sm:px-6 lg:px-8"
+            className="relative left-1/2 right-1/2 -mt-10 min-h-[calc(100vh-7rem)] w-screen -translate-x-1/2 px-4 sm:-mt-12 sm:px-6 md:-mt-16 lg:px-8"
             title="Next-gen websites that connect your CRM, marketing and AI without the complexity."
             description="Ingenium Consulting builds websites that do more than launch. They become the center of your growth engine, connecting lead capture, CRM, campaigns, and AI support from day one."
             announcementBanner={{

@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "ingeniumconsulting.net"
+        }
+      ],
+      "destination": "https://www.ingeniumconsulting.net/:path*",
+      "permanent": true
+    }
+  ]
+}

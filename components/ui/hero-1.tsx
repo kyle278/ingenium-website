@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Menu, X } from 'lucide-react';
 
@@ -22,6 +22,18 @@ interface CallToAction {
   text: string;
   href: string;
   variant: 'primary' | 'secondary';
+}
+
+interface HeroSphereDefinition {
+  id: string;
+  color: string;
+  pulseDuration: number;
+  size: string;
+  blurClass: string;
+  opacity: number;
+  originX: number;
+  originY: number;
+  speedRange: [number, number];
 }
 
 interface HeroLandingProps {
@@ -75,6 +87,81 @@ const defaultProps: Partial<HeroLandingProps> = {
   surface: 'card',
 };
 
+const buildSphereStyle = (color: string): CSSProperties => ({
+  backgroundImage: `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.14) 16%, transparent 34%), radial-gradient(circle at center, ${color} 0%, ${color} 38%, transparent 74%)`,
+});
+
+const pickRandomBetween = (min: number, max: number) => min + Math.random() * (max - min);
+
+const createSphereDefinitions = (gradientFrom: string, gradientTo: string): HeroSphereDefinition[] => [
+  {
+    id: 'blue',
+    color: gradientFrom,
+    pulseDuration: 18,
+    size: 'clamp(18rem, 34vw, 34rem)',
+    blurClass: 'blur-[72px]',
+    opacity: 0.96,
+    originX: 12,
+    originY: 32,
+    speedRange: [8, 12],
+  },
+  {
+    id: 'teal',
+    color: gradientTo,
+    pulseDuration: 20,
+    size: 'clamp(16rem, 30vw, 30rem)',
+    blurClass: 'blur-[64px]',
+    opacity: 0.9,
+    originX: 28,
+    originY: 76,
+    speedRange: [7, 11],
+  },
+  {
+    id: 'amber',
+    color: 'rgba(245,166,35,0.24)',
+    pulseDuration: 17,
+    size: 'clamp(15rem, 28vw, 28rem)',
+    blurClass: 'blur-[68px]',
+    opacity: 0.84,
+    originX: 59,
+    originY: 30,
+    speedRange: [6.5, 10],
+  },
+      {
+        id: 'coral',
+        color: 'rgba(129,140,248,0.18)',
+        pulseDuration: 14,
+        size: 'clamp(8rem, 15vw, 17rem)',
+        blurClass: 'blur-[40px]',
+    opacity: 0.78,
+    originX: 76,
+    originY: 60,
+    speedRange: [10, 15],
+  },
+  {
+    id: 'sky',
+    color: 'rgba(125,211,252,0.18)',
+    pulseDuration: 15,
+    size: 'clamp(8rem, 15vw, 17rem)',
+    blurClass: 'blur-[42px]',
+    opacity: 0.74,
+    originX: 42,
+    originY: 18,
+    speedRange: [9, 14],
+  },
+  {
+    id: 'lime',
+    color: 'rgba(163,230,53,0.16)',
+    pulseDuration: 13,
+    size: 'clamp(7rem, 13vw, 15rem)',
+    blurClass: 'blur-[38px]',
+    opacity: 0.72,
+    originX: 82,
+    originY: 20,
+    speedRange: [10, 16],
+  },
+];
+
 export function HeroLanding(props: HeroLandingProps) {
   const {
     logo,
@@ -93,6 +180,185 @@ export function HeroLanding(props: HeroLandingProps) {
   } = { ...defaultProps, ...props };
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const sphereRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const gradientFrom = gradientColors?.from ?? 'rgba(23, 103, 195, 0.32)';
+  const gradientTo = gradientColors?.to ?? 'rgba(19, 183, 168, 0.32)';
+  const sphereDefinitions = createSphereDefinitions(gradientFrom, gradientTo);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (!section || reduceMotion.matches) {
+      return;
+    }
+
+    let frameId = 0;
+    let resizeObserver: ResizeObserver | null = null;
+    let sectionWidth = 0;
+    let sectionHeight = 0;
+    let lastTime = 0;
+
+    type AnimatedSphere = {
+      baseXPct: number;
+      baseYPct: number;
+      driftX: number;
+      driftY: number;
+      node: HTMLDivElement;
+      radius: number;
+      seedA: number;
+      seedB: number;
+      speed: number;
+      vx: number;
+      vy: number;
+    };
+
+    const animatedSphereDefinitions = createSphereDefinitions(gradientFrom, gradientTo);
+    const animatedSpheres: AnimatedSphere[] = animatedSphereDefinitions
+      .map((definition) => {
+        const node = sphereRefs.current[definition.id];
+
+        if (!node) {
+          return null;
+        }
+
+        const speed = pickRandomBetween(definition.speedRange[0], definition.speedRange[1]);
+        const angle = Math.random() * Math.PI * 2;
+
+        return {
+          baseXPct: definition.originX / 100,
+          baseYPct: definition.originY / 100,
+          driftX: pickRandomBetween(-18, 18),
+          driftY: pickRandomBetween(-18, 18),
+          node,
+          radius: 0,
+          seedA: pickRandomBetween(0.4, 1.4),
+          seedB: pickRandomBetween(0.4, 1.4),
+          speed,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+        };
+      })
+      .filter((sphere): sphere is AnimatedSphere => sphere !== null);
+
+    const measureScene = () => {
+      sectionWidth = section.clientWidth;
+      sectionHeight = section.clientHeight;
+
+      for (const sphere of animatedSpheres) {
+        sphere.radius = sphere.node.offsetWidth / 2;
+      }
+    };
+
+    const animatePoints = (now: number) => {
+      const time = now / 1000;
+      const deltaMs = lastTime === 0 ? 16 : Math.min(34, now - lastTime);
+      const deltaSeconds = deltaMs / 1000;
+      lastTime = now;
+
+      for (const sphere of animatedSpheres) {
+        sphere.vx += Math.sin(time * (0.11 + sphere.seedA * 0.03)) * 0.06;
+        sphere.vy += Math.cos(time * (0.13 + sphere.seedB * 0.03)) * 0.06;
+        sphere.driftX += sphere.vx * deltaSeconds;
+        sphere.driftY += sphere.vy * deltaSeconds;
+      }
+
+      for (let index = 0; index < animatedSpheres.length; index += 1) {
+        for (let otherIndex = index + 1; otherIndex < animatedSpheres.length; otherIndex += 1) {
+          const sphere = animatedSpheres[index];
+          const otherSphere = animatedSpheres[otherIndex];
+          const sphereX = sectionWidth * sphere.baseXPct + sphere.driftX;
+          const sphereY = sectionHeight * sphere.baseYPct + sphere.driftY;
+          const otherSphereX = sectionWidth * otherSphere.baseXPct + otherSphere.driftX;
+          const otherSphereY = sectionHeight * otherSphere.baseYPct + otherSphere.driftY;
+          const deltaX = sphereX - otherSphereX;
+          const deltaY = sphereY - otherSphereY;
+          const distance = Math.hypot(deltaX, deltaY) || 1;
+          const minDistance = (sphere.radius + otherSphere.radius) * 0.88;
+
+          if (distance < minDistance) {
+            const pushRatio = (minDistance - distance) / minDistance;
+            const normalX = deltaX / distance;
+            const normalY = deltaY / distance;
+            const positionPush = pushRatio * 10;
+            const velocityPush = pushRatio * 20;
+
+            sphere.driftX += normalX * positionPush;
+            sphere.driftY += normalY * positionPush;
+            otherSphere.driftX -= normalX * positionPush;
+            otherSphere.driftY -= normalY * positionPush;
+            sphere.vx += normalX * velocityPush;
+            sphere.vy += normalY * velocityPush;
+            otherSphere.vx -= normalX * velocityPush;
+            otherSphere.vy -= normalY * velocityPush;
+          }
+        }
+      }
+
+      const horizontalMargin = Math.max(28, sectionWidth * 0.04);
+      const verticalMargin = Math.max(24, sectionHeight * 0.04);
+
+      for (const sphere of animatedSpheres) {
+        const baseX = sectionWidth * sphere.baseXPct;
+        const baseY = sectionHeight * sphere.baseYPct;
+        const centerX = baseX + sphere.driftX;
+        const centerY = baseY + sphere.driftY;
+        const minX = sphere.radius + horizontalMargin;
+        const maxX = sectionWidth - sphere.radius - horizontalMargin;
+        const minY = sphere.radius + verticalMargin;
+        const maxY = sectionHeight - sphere.radius - verticalMargin;
+
+        if (centerX < minX) {
+          sphere.driftX = minX - baseX;
+          sphere.vx = Math.abs(sphere.vx);
+        } else if (centerX > maxX) {
+          sphere.driftX = maxX - baseX;
+          sphere.vx = -Math.abs(sphere.vx);
+        }
+
+        if (centerY < minY) {
+          sphere.driftY = minY - baseY;
+          sphere.vy = Math.abs(sphere.vy);
+        } else if (centerY > maxY) {
+          sphere.driftY = maxY - baseY;
+          sphere.vy = -Math.abs(sphere.vy);
+        }
+
+        const currentSpeed = Math.hypot(sphere.vx, sphere.vy) || 1;
+        const targetSpeed = sphere.speed;
+        const normalizedVelocityX = sphere.vx / currentSpeed;
+        const normalizedVelocityY = sphere.vy / currentSpeed;
+        const easedSpeed = currentSpeed + (targetSpeed - currentSpeed) * 0.02;
+
+        sphere.vx = normalizedVelocityX * easedSpeed;
+        sphere.vy = normalizedVelocityY * easedSpeed;
+        sphere.node.style.transform = `translate3d(${sphere.driftX.toFixed(1)}px, ${sphere.driftY.toFixed(1)}px, 0)`;
+      }
+
+      frameId = window.requestAnimationFrame(animatePoints);
+    };
+
+    measureScene();
+
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        measureScene();
+      });
+
+      resizeObserver.observe(section);
+    } else {
+      window.addEventListener('resize', measureScene);
+    }
+
+    frameId = window.requestAnimationFrame(animatePoints);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      resizeObserver?.disconnect();
+      window.removeEventListener('resize', measureScene);
+    };
+  }, [gradientFrom, gradientTo]);
 
   const getTitleSizeClasses = () => {
     switch (titleSize) {
@@ -143,48 +409,49 @@ export function HeroLanding(props: HeroLandingProps) {
 
   return (
     <section
+      ref={sectionRef}
       className={cn(
-        'relative isolate overflow-hidden px-6 pb-16 pt-8 sm:px-10 lg:px-12 lg:pb-20 lg:pt-10',
+        'relative isolate px-6 pb-16 pt-8 sm:px-10 lg:px-12 lg:pb-20 lg:pt-10',
+        surface === 'seamless' ? 'overflow-visible' : 'overflow-hidden',
         surface === 'card'
           ? 'rounded-[40px] border border-[var(--color-line)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(250,251,253,0.92))] shadow-[0_24px_80px_rgba(20,36,61,0.08)]'
           : 'bg-transparent',
         className
       )}
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -top-28 -z-10 overflow-hidden blur-3xl"
       >
-        <div
-          style={{
-            clipPath:
-              'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-            background: `linear-gradient(to top right, ${gradientColors?.from}, ${gradientColors?.to})`,
-          }}
-          className="relative left-[calc(50%-10rem)] aspect-[1155/678] w-[30rem] max-w-none -translate-x-1/2 rotate-[24deg] opacity-80 sm:left-[calc(50%-20rem)] sm:w-[54rem]"
-        />
-      </div>
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-[-14rem] -z-10 overflow-hidden blur-3xl"
-      >
-        <div
-          style={{
-            clipPath:
-              'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-            background: `linear-gradient(to top right, ${gradientColors?.to}, ${gradientColors?.from})`,
-          }}
-          className="relative left-[calc(50%+8rem)] aspect-[1155/678] w-[32rem] max-w-none -translate-x-1/2 opacity-70 sm:left-[calc(50%+24rem)] sm:w-[56rem]"
-        />
-      </div>
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[12%] -z-10 overflow-hidden blur-3xl"
-      >
-        <div className="relative left-1/2 h-[18rem] w-[18rem] -translate-x-1/2 rounded-full bg-[rgba(245,166,35,0.24)] opacity-90 sm:h-[24rem] sm:w-[24rem]" />
-      </div>
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          {sphereDefinitions.map((sphere) => (
+            <div
+              key={sphere.id}
+              className="absolute"
+              style={{
+                left: `${sphere.originX}%`,
+                top: `${sphere.originY}%`,
+              }}
+            >
+              <div
+                ref={(node) => {
+                  sphereRefs.current[sphere.id] = node;
+                }}
+                className="hero-point"
+              >
+                <div
+                  style={{
+                    ...buildSphereStyle(sphere.color),
+                    animationDuration: `${sphere.pulseDuration}s`,
+                    height: sphere.size,
+                    opacity: sphere.opacity,
+                    width: sphere.size,
+                  }}
+                  className={cn(
+                    'hero-sphere relative -translate-x-1/2 -translate-y-1/2',
+                    sphere.blurClass
+                  )}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
 
       {showHeader ? (
         <header className="relative z-10">

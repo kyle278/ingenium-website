@@ -27,6 +27,7 @@ export interface ProjectRecord {
   industry: string;
   clientSize: string;
   timeframe: string;
+  deliveryDate?: string;
   teaser: string;
   summary: string;
   services: string[];

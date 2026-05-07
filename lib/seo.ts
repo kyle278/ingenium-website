@@ -127,7 +127,7 @@ export const pageSeo: Record<string, PageSeoConfig> = {
   "/services": {
     title: "Website, CRM, Automation and AI Services | Ingenium",
     description:
-      "Ingenium delivers custom website development, CRM integration, marketing automation, and AI-enabled workflows designed to work as one system.",
+      "Ingenium builds websites and CRM systems first, then connects automation and AI where they improve follow-up, migration clarity, and delivery continuity.",
     path: "/services",
     keywords: [
       "website development services",
@@ -140,14 +140,14 @@ export const pageSeo: Record<string, PageSeoConfig> = {
   "/websites": {
     title: "CRM-Connected Website Development | Ingenium Consulting",
     description:
-      "Ingenium builds CRM-connected websites that capture better leads, support your brand, and connect directly to marketing automation and reporting.",
+      "Ingenium builds and rebuilds CRM-connected websites that capture better leads, support your brand, and connect directly to reporting and follow-up.",
     path: "/websites",
     keywords: [...keywordClusters.websites],
   },
   "/crm": {
     title: "Custom CRM Integration | Ingenium Consulting",
     description:
-      "Build a custom CRM workspace with cleaner lead routing, lifecycle logic, reporting, and handoff continuity across your business.",
+      "Set up, migrate, or rebuild a CRM workspace with cleaner lead routing, lifecycle logic, reporting, and handoff continuity across your business.",
     path: "/crm",
     keywords: [...keywordClusters.crm],
   },

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
 import PageReviewMeta from "../components/PageReviewMeta";
+import ServiceFaqSection from "../components/ServiceFaqSection";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/services"]);
@@ -13,8 +14,8 @@ const services = [
     body: "High-performance websites designed to capture leads, support your brand, and feed your growth system.",
   },
   {
-    title: "CRM integration",
-    body: "A custom CRM tailored to your business workflows, ownership rules, and handoff continuity.",
+    title: "CRM setup, integrations, and migrations",
+    body: "A CRM operating model tailored to your workflows, ownership rules, migration needs, and handoff continuity.",
   },
   {
     title: "Marketing automation",
@@ -23,6 +24,29 @@ const services = [
   {
     title: "AI-enabled workflows",
     body: "AI assistants help draft next steps, prepare outreach, and keep follow-up moving through approvals.",
+  },
+];
+
+const serviceQuestions = [
+  {
+    question: "How does this help me?",
+    answer:
+      "The practical value is cleaner lead handling and less guesswork. A stronger website explains the offer better, a CRM keeps ownership clear, and connected follow-up means new enquiries do not disappear between inboxes, spreadsheets, and call-backs.",
+  },
+  {
+    question: "Do I need a CRM?",
+    answer:
+      "Not every business needs a heavy CRM, but most growing service businesses need one shared record of who enquired, what they wanted, who owns the next step, and what happened after the sale. If that context is currently split across email threads and memory, CRM work usually pays off quickly.",
+  },
+  {
+    question: "But my website looks fine, we updated it years ago!",
+    answer:
+      "A site can still look acceptable and underperform commercially. The real question is whether it explains the offer fast enough, routes visitors into the right next step, and passes useful lead context into sales or delivery without extra admin.",
+  },
+  {
+    question: "How can AI agents help me?",
+    answer:
+      "AI is most useful after the website and CRM foundations are in place. It can help with lead summaries, follow-up drafting, campaign recommendations, and reporting support, but only when it is connected to real business data and clear approval rules.",
   },
 ];
 
@@ -38,7 +62,7 @@ export default function ServicesPage() {
             Services for connected growth.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-soft)]">
-            We build websites, custom CRMs, and marketing automation that work together as one system.
+            We build websites and CRM systems first, then connect automation and AI where they make follow-up, reporting, and delivery cleaner.
           </p>
           <PageReviewMeta />
           <div className="mt-8 flex flex-wrap gap-3">
@@ -120,6 +144,12 @@ export default function ServicesPage() {
           </div>
         </SurfaceCard>
       </section>
+
+      <ServiceFaqSection
+        title="Questions buyers usually ask before they commit."
+        body="This is the commercial side of the decision: whether the website, CRM, and follow-up path are strong enough to support the next stage of growth."
+        items={serviceQuestions}
+      />
 
       <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
         <h2 className="mx-auto max-w-4xl font-[var(--font-display)] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">

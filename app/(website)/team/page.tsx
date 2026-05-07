@@ -85,7 +85,7 @@ export default function TeamPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {["All", "Leadership", "Sales", "Design"].map((tag, index) => (
+            {["All", "Founder / Delivery", "Sales", "Design"].map((tag, index) => (
               <span
                 key={tag}
                 className={`inline-flex rounded-full px-4 py-2 font-[var(--font-mono)] text-[10px] uppercase tracking-[0.22em] ${
@@ -129,9 +129,20 @@ export default function TeamPage() {
             </div>
 
             <div className="p-6">
-              <h2 className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
-                {member.name}
-              </h2>
+              <div className="flex items-start justify-between gap-3">
+                <h2 className="font-[var(--font-display)] text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text)]">
+                  {member.name}
+                </h2>
+                <a
+                  href={member.linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${member.name} LinkedIn`}
+                  className="cta-lift inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-panel-low)] text-[var(--color-brand)] transition hover:text-[var(--color-brand-strong)]"
+                >
+                  <Linkedin className="h-4 w-4" />
+                </a>
+              </div>
               <p className="mt-1 text-sm font-medium text-[var(--color-brand)]">{member.role}</p>
               <p className="mt-4 text-sm leading-7 text-[var(--color-text-soft)]">{member.summary}</p>
 
@@ -153,15 +164,6 @@ export default function TeamPage() {
                 >
                   <Mail className="h-4 w-4" />
                   {member.email}
-                </a>
-                <a
-                  href={member.linkedinUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="cta-lift inline-flex items-center gap-2 rounded-[10px] bg-[var(--color-panel-low)] px-4 py-2.5 text-sm font-medium text-[var(--color-text)]"
-                >
-                  <Linkedin className="h-4 w-4 text-[var(--color-brand)]" />
-                  LinkedIn
                 </a>
               </div>
             </div>

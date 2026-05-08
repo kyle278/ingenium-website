@@ -6,7 +6,6 @@ import { buildMetadata, pageSeo } from "@/lib/seo";
 import { caseStudies } from "@/src/lib/caseStudies";
 import { getCanonicalProofPathForCaseStudy } from "@/src/lib/proofStories";
 
-import PageReviewMeta from "./components/PageReviewMeta";
 import ScrollReveal from "./components/ScrollReveal";
 import { ButtonLink, SectionIntro, SurfaceCard } from "./components/sitePrimitives";
 
@@ -83,11 +82,6 @@ export default function HomePage() {
               to: "rgba(19, 183, 168, 0.34)",
             }}
           />
-          <div className="px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-[1280px]">
-              <PageReviewMeta />
-            </div>
-          </div>
         </>
       </ScrollReveal>
 

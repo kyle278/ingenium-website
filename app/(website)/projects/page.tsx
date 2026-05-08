@@ -1,32 +1,29 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, ArrowUpRight, BriefcaseBusiness, CheckCircle2, Clock } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BriefcaseBusiness, Clock } from "lucide-react";
 
-import AnimatedMetric from "../components/AnimatedMetric";
 import PageReviewMeta from "../components/PageReviewMeta";
 import ScrollReveal from "../components/ScrollReveal";
-import { projects } from "@/src/lib/projects";
+import {
+  formatPortalProjectFieldValue,
+  getPortalProjectClientName,
+  getPortalProjectPreviewFields,
+  getPortalProjectSummary,
+  getPortalProjectTitle,
+  getPortalProjectWebsiteUrl,
+  listPortalProjects,
+  PORTAL_PROJECTS_REVALIDATE_SECONDS,
+} from "@/lib/portalIntegration/projects";
 import { SITE_URL, buildMetadata, pageSeo } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/projects"]);
+export const revalidate = PORTAL_PROJECTS_REVALIDATE_SECONDS;
 
 const sectionLabel = "type-meta-kicker text-[var(--color-brand)]";
 
-function getWebsiteStatusMeta(status?: "live" | "mockup") {
-  if (status === "live") {
-    return {
-      label: "Live Website",
-      className: "bg-emerald-100 text-emerald-700",
-    };
-  }
+export default async function ProjectsPage() {
+  const projects = await listPortalProjects();
 
-  return {
-    label: "Mockup Website",
-    className: "bg-amber-100 text-amber-700",
-  };
-}
-
-export default function ProjectsPage() {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -34,7 +31,7 @@ export default function ProjectsPage() {
     itemListElement: projects.map((project, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      name: project.projectName,
+      name: getPortalProjectTitle(project),
       url: `${SITE_URL}/projects/${project.slug}`,
     })),
   };
@@ -49,93 +46,90 @@ export default function ProjectsPage() {
       <section className="pt-8 text-center">
         <p className={sectionLabel}>Projects</p>
         <h1 className="mx-auto mt-6 max-w-4xl type-page-title text-[var(--color-text)]">
-          Real client delivery work, organised around what changed for the buyer journey.
+          Real client delivery work, pulled directly from the portal project feed.
         </h1>
         <p className="mx-auto mt-5 max-w-[65ch] type-body-lead text-[var(--color-text-soft)]">
-          Review named client projects across service websites, project libraries, booking paths,
-          quote flows, and proof systems built to make buying easier.
+          Review the current published project library exactly as it is configured inside
+          Ingenium Portal for this website.
         </p>
         <PageReviewMeta />
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-2">
-        {projects.map((project, index) => {
-          const websiteStatus = project.websiteIncluded ? getWebsiteStatusMeta(project.websiteStatus) : null;
+      {projects.length === 0 ? (
+        <section className="rounded-[32px] border border-dashed border-black/10 bg-white/70 p-10 text-center">
+          <p className="type-card-title text-[var(--color-text)]">No published projects yet.</p>
+          <p className="mx-auto mt-4 max-w-[52ch] type-body-base text-[var(--color-text-soft)]">
+            This website is now reading from the portal project feed. Projects will appear here
+            once they are marked for website display and given website fields in the portal.
+          </p>
+        </section>
+      ) : (
+        <section className="grid gap-6 lg:grid-cols-2">
+          {projects.map((project, index) => {
+            const title = getPortalProjectTitle(project);
+            const clientName = getPortalProjectClientName(project);
+            const summary = getPortalProjectSummary(project);
+            const previewFields = getPortalProjectPreviewFields(project).slice(0, 4);
+            const hasLiveWebsite = Boolean(getPortalProjectWebsiteUrl(project));
 
-          return (
-          <ScrollReveal key={project.slug} delayMs={index * 45}>
-            <Link
-              href={`/projects/${project.slug}`}
-              aria-label={`View ${project.projectName} project details`}
-              className="group block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70"
-            >
-              <article className="mineral-panel metric-card rounded-[28px] p-6">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="tech-pill type-section-kicker rounded-md px-2.5 py-1 text-[var(--color-brand)]">
-                    {project.industry}
-                  </span>
-                  <span className="rounded-md bg-[var(--color-panel-low)] px-2.5 py-1 type-section-kicker text-[var(--color-text-muted)]">
-                    {project.timeframe}
-                  </span>
-                  {websiteStatus ? (
-                    <span
-                      className={`rounded-md px-2.5 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-wider ${websiteStatus.className}`}
-                    >
-                      {websiteStatus.label}
-                    </span>
-                  ) : null}
-                </div>
-
-                <h2 className="mt-4 type-card-title text-[var(--color-text)]">
-                  {project.projectName}
-                </h2>
-                <p className="mt-1 type-body-sm text-[var(--color-text-muted)]">
-                  {project.clientName} - {project.clientSize}
-                </p>
-                <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{project.teaser}</p>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.services.map((service) => (
-                    <span
-                      key={`${project.slug}-${service}`}
-                      className="rounded-md bg-[var(--color-panel-low)] px-2.5 py-1 type-body-xs text-[var(--color-text-soft)]"
-                    >
-                      {service}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-5 space-y-2">
-                  {project.insights.slice(0, 3).map((insight) => (
-                    <div key={insight} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--color-accent)]" />
-                      <p className="type-body-sm text-[var(--color-text-soft)]">{insight}</p>
+            return (
+              <ScrollReveal key={project.id} delayMs={index * 45}>
+                <Link
+                  href={`/projects/${project.slug}`}
+                  aria-label={`View ${title} project details`}
+                  className="group block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70"
+                >
+                  <article className="mineral-panel rounded-[28px] p-6">
+                    <div className="flex flex-wrap items-center gap-2">
+                      {clientName ? (
+                        <span className="tech-pill type-section-kicker rounded-md px-2.5 py-1 text-[var(--color-brand)]">
+                          {clientName}
+                        </span>
+                      ) : null}
+                      <span className="rounded-md bg-[var(--color-panel-low)] px-2.5 py-1 type-section-kicker text-[var(--color-text-muted)]">
+                        Portal-fed project
+                      </span>
+                      {hasLiveWebsite ? (
+                        <span className="rounded-md bg-emerald-100 px-2.5 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-wider text-emerald-700">
+                          Live website linked
+                        </span>
+                      ) : null}
                     </div>
-                  ))}
-                </div>
 
-                <div className="mt-5 grid grid-cols-3 gap-3">
-                  {project.outcomeMetrics.map((metric) => (
-                    <div
-                      key={`${project.slug}-${metric.label}`}
-                      className="rounded-lg bg-[var(--color-panel-low)] p-3 text-center"
-                    >
-                  <AnimatedMetric as="p" className="metric-display text-[1.5rem] font-bold text-[var(--color-brand)]" value={metric.value} />
-                  <p className="mt-1 type-body-xs text-[var(--color-text-muted)]">{metric.label}</p>
-                </div>
-              ))}
-                </div>
+                    <h2 className="mt-4 type-card-title text-[var(--color-text)]">{title}</h2>
+                    <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">
+                      {summary ?? "Project details available in the portal-backed project feed."}
+                    </p>
 
-                <div className="mt-6 inline-flex items-center gap-2 type-action text-[var(--color-brand)] transition group-hover:text-[var(--color-brand-strong)]">
-                  View full project breakdown
-                  <ArrowRight className="h-4 w-4" />
-                </div>
-              </article>
-            </Link>
-          </ScrollReveal>
-          );
-        })}
-      </section>
+                    {previewFields.length > 0 ? (
+                      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                        {previewFields.map((field) => (
+                          <div
+                            key={`${project.id}-${field.key}`}
+                            className="rounded-lg bg-[var(--color-panel-low)] px-3 py-3"
+                          >
+                            <p className="type-body-xs uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
+                              {field.label}
+                            </p>
+                            <p className="mt-1 type-body-sm text-[var(--color-text)]">
+                              {formatPortalProjectFieldValue(field.value)}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : null}
+
+                    <div className="mt-6 inline-flex items-center gap-2 type-action text-[var(--color-brand)] transition group-hover:text-[var(--color-brand-strong)]">
+                      View full project breakdown
+                      <ArrowRight className="h-4 w-4" />
+                    </div>
+                  </article>
+                </Link>
+              </ScrollReveal>
+            );
+          })}
+        </section>
+      )}
 
       <section className="graphite-panel relative overflow-hidden rounded-[36px] p-10 text-center md:p-14">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-35" />
@@ -145,7 +139,8 @@ export default function ProjectsPage() {
             Want proof packaged this clearly for your own sales process?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/72">
-            We scope the architecture, proof system, and conversion path before design drift or tool sprawl slows the build down.
+            We scope the architecture, proof system, and conversion path before design drift or
+            tool sprawl slows the build down.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
@@ -165,7 +160,8 @@ export default function ProjectsPage() {
           </div>
           <p className="mt-5 flex items-center justify-center gap-2 type-body-xs text-white/55">
             <Clock className="h-3.5 w-3.5" />
-            Typical implementation window: 6-10 weeks | Strategy, technical, and security review paths available
+            Typical implementation window: 6-10 weeks | Strategy, technical, and security review
+            paths available
           </p>
         </div>
       </section>

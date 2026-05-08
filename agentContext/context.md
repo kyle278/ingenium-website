@@ -7,6 +7,7 @@ Ingenium website is a Next.js App Router project that sells Ingenium as a unifie
 - Marketing website pages under `app/(website)`
 - Browser tracking runtime via Ingenium tracker script loaded from Portal app
 - Browser event ingestion to `${PORTAL_APP_URL}/api/websites/tracking/events`
+- Portal-backed published project feed from `${PORTAL_APP_URL}/api/websites/projects`
 - Portal submission API under `app/api/portal`
 - Portal-backed Supabase data model for form submissions
 - Portal auth entrypoints exposed from website navigation via `${PORTAL_APP_URL}/login` and `${PORTAL_APP_URL}/signup`
@@ -28,6 +29,7 @@ Ingenium website is a Next.js App Router project that sells Ingenium as a unifie
 - Browser tracking runtime emits `session_start`, `page_view`, `form_view`, and `scroll_depth` using canonical payload shape and page-scoped resets.
 - Public IA now prioritizes platform, acquisition, CRM, AI agents, automation, security, proof, and contact over secondary brochure-style pages.
 - Public proof surfaces now use named client work sourced from sibling project folders instead of anonymous placeholder brands.
+- The `/projects` library now reads published project records from Ingenium Portal using the configured `PORTAL_SITE_ID`, while older static proof data remains in-repo only for legacy case-study mappings and redirects.
 - Portal form definitions are stored in `public.website_forms`.
 - Submissions are written to `public.website_form_submissions`.
 - Portal-side trigger handles downstream CRM attribution logic and event processing.

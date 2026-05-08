@@ -5,5 +5,6 @@ export const PORTAL_SITE_ID = "13f9d31e-022c-4fd6-83bb-39cd1a51a85e";
 
 export const PORTAL_TRACKING_ENDPOINT = `${PORTAL_ORIGIN}/api/websites/tracking/events`;
 export const PORTAL_FORM_SUBMIT_ENDPOINT = `${PORTAL_ORIGIN}/api/websites/forms/submit`;
+export const PORTAL_PROJECTS_ENDPOINT = `${PORTAL_ORIGIN}/api/websites/projects`;
 
 export const PORTAL_CONSENT_VERSION = "2026-05-07";

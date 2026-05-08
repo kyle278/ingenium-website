@@ -13,11 +13,11 @@ Open `http://localhost:3000`.
 
 - Framework: Next.js App Router
 - Styling: Tailwind CSS + `app/globals.css`
-- Content model: static in-code fallback objects per route page
+- Content model: mostly static in-code route content, with `/projects` now read from the Portal published project feed
 - Form flow: standard lead forms are real HTML forms with `method="post"` and `data-ingenium-submit="portal"`, resolved by canonical Portal slugs
 - Tracking flow: root layout loads the hosted production tracker from `https://portal.ingeniumconsulting.net/ingenium-tracker.js` and initializes it against the production event ingest path
 
-The website keeps page content static in code, while the hosted tracker owns analytics delivery and standard form submission into Ingenium Portal.
+The website keeps most page content static in code, while the hosted tracker owns analytics delivery and standard form submission into Ingenium Portal. The `/projects` library is now portal-backed and resolves published project records from the configured site feed.
 
 ## Portal Tracker Config
 
@@ -49,6 +49,16 @@ The frontend now uses `data-form-slug` on the real `<form>` element, so the Port
 - Team: `app/(website)/team/page.tsx`
 - Projects: `app/(website)/projects/page.tsx` and `app/(website)/projects/[slug]/page.tsx`
 - Shared layout/nav/footer: `app/(website)/layout.tsx`
+
+## Portal Project Feed
+
+Published project pages now resolve from:
+
+```bash
+GET https://portal.ingeniumconsulting.net/api/websites/projects?site_id=13f9d31e-022c-4fd6-83bb-39cd1a51a85e
+```
+
+The detail route reads the same endpoint with `&slug=...`. Only fields explicitly allowlisted in the Portal project `Website` tab will render on this site.
 
 ## Design Standards
 

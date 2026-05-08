@@ -3,44 +3,87 @@ import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
 
-import { LAST_REVIEWED_ISO } from "@/lib/review";
-import { SITE_URL, buildMetadata, keywordClusters } from "@/lib/seo";
-import { getCaseStudyByProjectSlug } from "@/src/lib/caseStudies";
-import { getProjectBySlug, projects } from "@/src/lib/projects";
-
-import AnimatedMetric from "../../components/AnimatedMetric";
 import PageReviewMeta from "../../components/PageReviewMeta";
 import ProjectWebsiteEmbed from "../../components/ProjectWebsiteEmbed";
 import ScrollReveal from "../../components/ScrollReveal";
 import { ButtonLink, SectionIntro, SurfaceCard } from "../../components/sitePrimitives";
+import {
+  formatPortalProjectFieldValue,
+  getPortalProjectBySlug,
+  getPortalProjectClientName,
+  getPortalProjectDetailFields,
+  getPortalProjectPreviewFields,
+  getPortalProjectSummary,
+  getPortalProjectTitle,
+  getPortalProjectWebsiteUrl,
+  listPortalProjects,
+  PORTAL_PROJECTS_REVALIDATE_SECONDS,
+  type PortalProjectField,
+} from "@/lib/portalIntegration/projects";
+import { SITE_URL, buildMetadata, keywordClusters } from "@/lib/seo";
+
+export const revalidate = PORTAL_PROJECTS_REVALIDATE_SECONDS;
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
 }
 
-function getWebsiteStatusMeta(status?: "live" | "mockup") {
-  if (status === "live") {
-    return {
-      label: "Live Website",
-      description: "This project includes a live website.",
-      pillClass: "bg-emerald-100 text-emerald-700",
-    };
+function isWideField(field: PortalProjectField) {
+  if (Array.isArray(field.value)) {
+    return field.value.length > 3;
   }
 
-  return {
-    label: "Mockup Website",
-    description: "This project is currently shown as a mockup or concept view.",
-    pillClass: "bg-amber-100 text-amber-700",
-  };
+  return typeof field.value === "string" && field.value.trim().length > 120;
 }
 
-export function generateStaticParams() {
+function renderFieldValue(field: PortalProjectField) {
+  if (Array.isArray(field.value)) {
+    return (
+      <div className="mt-3 flex flex-wrap gap-2">
+        {field.value.map((item) => (
+          <span
+            key={`${field.key}-${item}`}
+            className="tech-pill inline-flex rounded-full px-3 py-1 type-body-sm text-[var(--color-text-soft)]"
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+    );
+  }
+
+  if (
+    typeof field.value === "string" &&
+    /^https?:\/\//i.test(field.value.trim())
+  ) {
+    return (
+      <Link
+        href={field.value}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-3 inline-flex items-center gap-2 type-action text-[var(--color-brand)] hover:text-[var(--color-brand-strong)]"
+      >
+        Open link
+        <ArrowUpRight className="h-4 w-4" />
+      </Link>
+    );
+  }
+
+  return (
+    <p className="mt-3 type-body-base text-[var(--color-text-soft)]">
+      {formatPortalProjectFieldValue(field.value)}
+    </p>
+  );
+}
+
+export async function generateStaticParams() {
+  const projects = await listPortalProjects();
   return projects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getPortalProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -50,15 +93,21 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     };
   }
 
+  const title = getPortalProjectTitle(project);
+  const clientName = getPortalProjectClientName(project);
+  const summary =
+    getPortalProjectSummary(project) ??
+    "Portal-backed project detail published from Ingenium Portal.";
+
   return buildMetadata({
-    title: `${project.projectName} Project | Ingenium`,
-    description: project.summary,
+    title: `${title} Project | Ingenium`,
+    description: summary,
     path: `/projects/${project.slug}`,
     keywords: [
       ...keywordClusters.proof,
-      ...project.services.map((service) => service.toLowerCase()),
-      project.industry.toLowerCase(),
-      project.clientName.toLowerCase(),
+      title.toLowerCase(),
+      ...(clientName ? [clientName.toLowerCase()] : []),
+      ...project.websiteData.map((field) => field.label.toLowerCase()),
     ],
     pageType: "WebPage",
   });
@@ -66,30 +115,33 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getPortalProjectBySlug(slug);
 
   if (!project) {
     notFound();
   }
 
-  const hasEmbeddedWebsite = Boolean(project.websiteUrl);
-  const websiteStatus = project.websiteIncluded ? getWebsiteStatusMeta(project.websiteStatus) : null;
-  const relatedCaseStudy = getCaseStudyByProjectSlug(project.slug);
-  const deliveryDate = project.deliveryDate ?? "Available on request";
+  const title = getPortalProjectTitle(project);
+  const clientName = getPortalProjectClientName(project);
+  const summary =
+    getPortalProjectSummary(project) ??
+    "Portal-backed project detail published from Ingenium Portal.";
+  const websiteUrl = getPortalProjectWebsiteUrl(project);
+  const previewFields = getPortalProjectPreviewFields(project).slice(0, 4);
+  const detailFields = getPortalProjectDetailFields(project);
 
   const projectSchema = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    name: project.projectName,
-    description: project.summary,
-    about: project.services,
-    dateModified: LAST_REVIEWED_ISO,
+    name: title,
+    description: summary,
+    dateModified: project.updatedAt,
     creator: {
       "@type": "Organization",
       name: "Ingenium Digital Consulting",
     },
     url: `${SITE_URL}/projects/${project.slug}`,
-    abstract: relatedCaseStudy?.challenge,
+    about: detailFields.map((field) => field.label),
   };
 
   return (
@@ -112,54 +164,23 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           <ScrollReveal>
             <div className="max-w-4xl">
               <p className="type-page-kicker text-[var(--color-brand)]">
-                {project.clientName} / {project.industry}
+                {clientName ?? "Published Project"}
               </p>
-              {websiteStatus ? (
-                <div className="mt-4">
-                  <span
-                    className={`inline-flex rounded-full px-3 py-1 type-detail-kicker ${websiteStatus.pillClass}`}
-                  >
-                    {websiteStatus.label}
-                  </span>
-                </div>
-              ) : null}
               <h1 className="mt-4 max-w-4xl type-page-title text-[var(--color-text)]">
-                {project.projectName}
+                {title}
               </h1>
               <p className="mt-4 max-w-[68ch] type-body-lead text-[var(--color-text-soft)]">
-                {project.teaser}
-              </p>
-              <p className="mt-6 max-w-[68ch] type-body-base text-[var(--color-text-soft)]">
-                {project.summary}
+                {summary}
               </p>
               <PageReviewMeta />
 
-              <div className="mt-6 flex flex-wrap gap-2">
-                {project.services.map((service) => (
-                  <span
-                    key={service}
-                    className="tech-pill inline-flex rounded-full px-3 py-1.5 type-form-label text-[var(--color-text)]"
-                  >
-                    {service}
-                  </span>
-                ))}
-              </div>
-
               <div className="mt-6 grid gap-3 type-body-sm text-[var(--color-text-soft)] sm:grid-cols-2 lg:max-w-3xl">
                 <div className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4">
-                  Client type: {project.clientSize}
+                  Published from the Ingenium Portal project feed
                 </div>
                 <div className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4">
-                  Delivery date: {deliveryDate}
+                  Last updated: {formatPortalProjectFieldValue(project.updatedAt)}
                 </div>
-                <div className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 sm:col-span-2">
-                  Delivery context: {project.timeframe}
-                </div>
-                {websiteStatus ? (
-                  <div className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 sm:col-span-2">
-                    Website status: {websiteStatus.description}
-                  </div>
-                ) : null}
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -174,31 +195,78 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </div>
       </section>
 
-      {hasEmbeddedWebsite ? (
+      {previewFields.length > 0 ? (
+        <section>
+          <ScrollReveal>
+            <SectionIntro
+              eyebrow="Key Details"
+              title="The main website fields selected for this project"
+              body="These values are driven directly by the Website tab configuration on the project record inside Ingenium Portal."
+            />
+          </ScrollReveal>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {previewFields.map((field, index) => (
+              <ScrollReveal key={field.key} delayMs={index * 45}>
+                <SurfaceCard className="p-5">
+                  <p className="type-detail-kicker text-[var(--color-text-muted)]">
+                    {field.label}
+                  </p>
+                  <p className="mt-3 type-body-base text-[var(--color-text)]">
+                    {formatPortalProjectFieldValue(field.value)}
+                  </p>
+                </SurfaceCard>
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {websiteUrl ? (
         <section>
           <ScrollReveal>
             <SectionIntro
               eyebrow="Live Project"
-              title="A live embedded view of the delivered project."
-              body="Add a project website URL in the project record to show the embed here."
+              title="A live embedded view of the delivered project"
+              body="This preview is shown because the project feed includes a website URL."
             />
           </ScrollReveal>
           <ScrollReveal className="mt-8" delayMs={70} blur>
-            <ProjectWebsiteEmbed
-              url={project.websiteUrl!}
-              title={`${project.clientName} project preview`}
-            />
+            <ProjectWebsiteEmbed url={websiteUrl} title={`${title} project preview`} />
           </ScrollReveal>
         </section>
       ) : null}
 
-      <section className="grid gap-6 lg:grid-cols-[0.9fr,1.1fr]">
+      {detailFields.length > 0 ? (
+        <section>
+          <ScrollReveal>
+            <SectionIntro
+              eyebrow="Project Data"
+              title="All website-visible fields for this project"
+              body="Nothing below is hardcoded in the website. Each field is coming from the portal allowlist for this project."
+            />
+          </ScrollReveal>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {detailFields.map((field, index) => (
+              <ScrollReveal key={field.key} delayMs={index * 35}>
+                <SurfaceCard className={`p-6 ${isWideField(field) ? "md:col-span-2" : ""}`}>
+                  <p className="type-detail-kicker text-[var(--color-text-muted)]">
+                    {field.label}
+                  </p>
+                  {renderFieldValue(field)}
+                </SurfaceCard>
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section className="grid gap-6 lg:grid-cols-[1.1fr,0.9fr]">
         <ScrollReveal>
           <SurfaceCard className="p-6 md:p-8">
             <SectionIntro
-              eyebrow="Project Outcome"
-              title="What changed for the buyer journey"
-              body={project.summary}
+              eyebrow="Portal Workflow"
+              title="How this project gets to the website"
+              body="The project is published from the CRM record. The website receives the site-scoped feed, while the portal resolves organisation scope internally from the configured site ID."
             />
           </SurfaceCard>
         </ScrollReveal>
@@ -206,149 +274,16 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         <ScrollReveal delayMs={80} direction="left">
           <SurfaceCard className="p-6 md:p-8">
             <SectionIntro
-              eyebrow="Why it worked"
-              title="The key operational and conversion shifts"
+              eyebrow="Next Step"
+              title="Want this same publishing workflow for your own project library?"
+              body="We can structure the CRM model, website feed, and public proof surfaces so project updates only need to happen in one place."
             />
-            <div className="mt-6 space-y-3">
-              {project.insights.map((insight) => (
-                <div key={insight} className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
-                  {insight}
-                </div>
-              ))}
-            </div>
-          </SurfaceCard>
-        </ScrollReveal>
-      </section>
-
-      {relatedCaseStudy ? (
-        <section className="grid gap-6 lg:grid-cols-[1.02fr,0.98fr]">
-          <ScrollReveal>
-            <SurfaceCard className="p-6 md:p-8">
-              <SectionIntro
-                eyebrow="Case Study Detail"
-                title="What problem the client needed to solve"
-                body={relatedCaseStudy.challenge}
+            <div className="mt-6 flex flex-wrap gap-3">
+              <ButtonLink action={{ label: "Book Demo", href: "/demo" }} />
+              <ButtonLink
+                action={{ label: "Contact Ingenium", href: "/contact" }}
+                variant="secondary"
               />
-            </SurfaceCard>
-          </ScrollReveal>
-
-          <ScrollReveal delayMs={80} direction="left">
-            <SurfaceCard className="p-6 md:p-8">
-              <SectionIntro
-                eyebrow="Intervention"
-                title="How the project was structured"
-                body={relatedCaseStudy.intervention}
-              />
-              <div className="mt-6 space-y-3">
-                {relatedCaseStudy.deliveredAssets.map((asset) => (
-                  <div
-                    key={asset}
-                    className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]"
-                  >
-                    {asset}
-                  </div>
-                ))}
-              </div>
-            </SurfaceCard>
-          </ScrollReveal>
-        </section>
-      ) : null}
-
-      <section>
-        <ScrollReveal>
-          <SectionIntro
-            eyebrow="Services Delivered"
-            title="What Ingenium delivered across the project"
-            body="Each delivery area is framed around clearer structure, better trust signals, and a more direct conversion path."
-          />
-        </ScrollReveal>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {project.serviceInsights.map((serviceInsight, index) => (
-            <ScrollReveal key={serviceInsight.key} delayMs={index * 45}>
-              <SurfaceCard className="p-6">
-                <p className="type-card-title text-[var(--color-text)]">
-                  {serviceInsight.title}
-                </p>
-                <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{serviceInsight.summary}</p>
-                <div className="mt-5 grid gap-3">
-                  {serviceInsight.highlights.map((highlight) => (
-                    <div
-                      key={highlight}
-                      className="rounded-2xl border border-black/6 bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]"
-                    >
-                      {highlight}
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-5 grid grid-cols-2 gap-3">
-                  {serviceInsight.metrics.map((metric) => (
-                    <div
-                      key={`${serviceInsight.key}-${metric.label}`}
-                      className="rounded-2xl border border-black/6 bg-[var(--color-panel-low)] p-4 text-center"
-                    >
-                      <AnimatedMetric
-                        as="p"
-                        value={metric.value}
-                        className="metric-display text-[1.5rem] font-semibold text-[var(--color-brand)]"
-                      />
-                      <p className="mt-1 type-body-xs text-[var(--color-text-muted)]">
-                        {metric.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </SurfaceCard>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="grid gap-6 lg:grid-cols-[1.1fr,0.9fr]">
-        <ScrollReveal>
-          <SurfaceCard className="p-6 md:p-8">
-            <SectionIntro
-              eyebrow="Technology"
-              title="Build stack"
-              body="The implementation used a modern stack that keeps the public site fast, maintainable, and easier to extend."
-            />
-            <div className="mt-6 flex flex-wrap gap-2">
-              {project.stack.map((item) => (
-                <span
-                  key={item}
-                  className="tech-pill inline-flex rounded-full px-3 py-1 type-body-sm text-[var(--color-text-soft)]"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </SurfaceCard>
-        </ScrollReveal>
-
-        <ScrollReveal delayMs={80} direction="left" blur>
-          <SurfaceCard dark className="p-6 md:p-8">
-            <p className="type-section-kicker text-cyan-300">
-              Next Step
-            </p>
-            <h2 className="mt-4 type-section-title text-white">
-              Need something similar for your own project?
-            </h2>
-            <p className="mt-4 type-body-base text-white/72">
-              We can map the structure, proof, and conversion path before the build gets bloated or unclear.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/demo"
-                className="cta-lift inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 type-action text-[var(--color-text)]"
-              >
-                Book Demo
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/projects"
-                className="cta-lift inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/10 px-5 py-3 type-action text-white"
-              >
-                View More Projects
-              </Link>
             </div>
           </SurfaceCard>
         </ScrollReveal>

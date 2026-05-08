@@ -33,7 +33,7 @@ interface HeroSphereDefinition {
   opacity: number;
   originX: number;
   originY: number;
-  speedRange: [number, number];
+  baseSpeed: number;
 }
 
 interface HeroLandingProps {
@@ -92,6 +92,8 @@ const buildSphereStyle = (color: string): CSSProperties => ({
 });
 
 const pickRandomBetween = (min: number, max: number) => min + Math.random() * (max - min);
+const HERO_SPHERE_SPEED_MULTIPLIER = 3;
+const HERO_SPHERE_SPEED_VARIANCE = 0.2;
 
 const createSphereDefinitions = (gradientFrom: string, gradientTo: string): HeroSphereDefinition[] => [
   {
@@ -103,7 +105,7 @@ const createSphereDefinitions = (gradientFrom: string, gradientTo: string): Hero
     opacity: 0.96,
     originX: 12,
     originY: 32,
-    speedRange: [8, 12],
+    baseSpeed: 10,
   },
   {
     id: 'teal',
@@ -114,7 +116,7 @@ const createSphereDefinitions = (gradientFrom: string, gradientTo: string): Hero
     opacity: 0.9,
     originX: 28,
     originY: 76,
-    speedRange: [7, 11],
+    baseSpeed: 9,
   },
   {
     id: 'amber',
@@ -125,7 +127,7 @@ const createSphereDefinitions = (gradientFrom: string, gradientTo: string): Hero
     opacity: 0.84,
     originX: 59,
     originY: 30,
-    speedRange: [6.5, 10],
+    baseSpeed: 8.25,
   },
       {
         id: 'coral',
@@ -136,7 +138,7 @@ const createSphereDefinitions = (gradientFrom: string, gradientTo: string): Hero
     opacity: 0.78,
     originX: 76,
     originY: 60,
-    speedRange: [10, 15],
+    baseSpeed: 12.5,
   },
   {
     id: 'sky',
@@ -147,7 +149,7 @@ const createSphereDefinitions = (gradientFrom: string, gradientTo: string): Hero
     opacity: 0.74,
     originX: 42,
     originY: 18,
-    speedRange: [9, 14],
+    baseSpeed: 11.5,
   },
   {
     id: 'lime',
@@ -158,7 +160,7 @@ const createSphereDefinitions = (gradientFrom: string, gradientTo: string): Hero
     opacity: 0.72,
     originX: 82,
     originY: 20,
-    speedRange: [10, 16],
+    baseSpeed: 13,
   },
 ];
 
@@ -223,7 +225,11 @@ export function HeroLanding(props: HeroLandingProps) {
           return null;
         }
 
-        const speed = pickRandomBetween(definition.speedRange[0], definition.speedRange[1]);
+        const speedVariance = pickRandomBetween(
+          1 - HERO_SPHERE_SPEED_VARIANCE,
+          1 + HERO_SPHERE_SPEED_VARIANCE
+        );
+        const speed = definition.baseSpeed * HERO_SPHERE_SPEED_MULTIPLIER * speedVariance;
         const angle = Math.random() * Math.PI * 2;
 
         return {

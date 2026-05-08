@@ -1,9 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import {
-  listPortalProjects,
-  PORTAL_PROJECTS_REVALIDATE_SECONDS,
-} from "@/lib/portalIntegration/projects";
+import { listPortalProjects } from "@/lib/portalIntegration/projects";
 import { PUBLIC_DISCOVERY_PATHS, SITE_URL } from "@/lib/seo";
 
 const routePriority: Record<
@@ -35,7 +32,7 @@ const routePriority: Record<
 
 const SITE_CONTENT_LAST_REVIEWED = new Date("2026-05-07");
 
-export const revalidate = PORTAL_PROJECTS_REVALIDATE_SECONDS;
+export const revalidate = 300;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = PUBLIC_DISCOVERY_PATHS.map((path) => ({

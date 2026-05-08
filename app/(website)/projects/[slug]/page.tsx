@@ -17,12 +17,11 @@ import {
   getPortalProjectTitle,
   getPortalProjectWebsiteUrl,
   listPortalProjects,
-  PORTAL_PROJECTS_REVALIDATE_SECONDS,
   type PortalProjectField,
 } from "@/lib/portalIntegration/projects";
 import { SITE_URL, buildMetadata, keywordClusters } from "@/lib/seo";
 
-export const revalidate = PORTAL_PROJECTS_REVALIDATE_SECONDS;
+export const revalidate = 300;
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;

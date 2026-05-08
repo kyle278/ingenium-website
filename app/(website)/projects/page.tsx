@@ -12,12 +12,11 @@ import {
   getPortalProjectTitle,
   getPortalProjectWebsiteUrl,
   listPortalProjects,
-  PORTAL_PROJECTS_REVALIDATE_SECONDS,
 } from "@/lib/portalIntegration/projects";
 import { SITE_URL, buildMetadata, pageSeo } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/projects"]);
-export const revalidate = PORTAL_PROJECTS_REVALIDATE_SECONDS;
+export const revalidate = 300;
 
 const sectionLabel = "type-meta-kicker text-[var(--color-brand)]";
 

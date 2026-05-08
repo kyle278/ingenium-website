@@ -1,24 +1,29 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, ArrowUpRight, BriefcaseBusiness, Clock } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BriefcaseBusiness,
+  CheckCircle2,
+  Clock,
+} from "lucide-react";
 
+import AnimatedMetric from "../components/AnimatedMetric";
 import PageReviewMeta from "../components/PageReviewMeta";
 import ScrollReveal from "../components/ScrollReveal";
-import {
-  formatPortalProjectFieldValue,
-  getPortalProjectClientName,
-  getPortalProjectPreviewFields,
-  getPortalProjectSummary,
-  getPortalProjectTitle,
-  getPortalProjectWebsiteUrl,
-  listPortalProjects,
-} from "@/lib/portalIntegration/projects";
+import { getPortalProjectPresentation, listPortalProjects } from "@/lib/portalIntegration/projects";
 import { SITE_URL, buildMetadata, pageSeo } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/projects"]);
 export const revalidate = 300;
 
 const sectionLabel = "type-meta-kicker text-[var(--color-brand)]";
+
+function placeholderClass(missing: boolean, defaultClass: string) {
+  return missing
+    ? "border border-dashed border-amber-300 bg-amber-50 text-amber-700"
+    : defaultClass;
+}
 
 export default async function ProjectsPage() {
   const projects = await listPortalProjects();
@@ -30,7 +35,7 @@ export default async function ProjectsPage() {
     itemListElement: projects.map((project, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      name: getPortalProjectTitle(project),
+      name: getPortalProjectPresentation(project).projectName.text,
       url: `${SITE_URL}/projects/${project.slug}`,
     })),
   };
@@ -45,11 +50,11 @@ export default async function ProjectsPage() {
       <section className="pt-8 text-center">
         <p className={sectionLabel}>Projects</p>
         <h1 className="mx-auto mt-6 max-w-4xl type-page-title text-[var(--color-text)]">
-          Real client delivery work, pulled directly from the portal project feed.
+          Real client delivery work, organised around what changed for the buyer journey.
         </h1>
         <p className="mx-auto mt-5 max-w-[65ch] type-body-lead text-[var(--color-text-soft)]">
-          Review the current published project library exactly as it is configured inside
-          Ingenium Portal for this website.
+          Review named client projects across service websites, project libraries, booking paths,
+          quote flows, and proof systems built to make buying easier.
         </p>
         <PageReviewMeta />
       </section>
@@ -65,58 +70,126 @@ export default async function ProjectsPage() {
       ) : (
         <section className="grid gap-6 lg:grid-cols-2">
           {projects.map((project, index) => {
-            const title = getPortalProjectTitle(project);
-            const clientName = getPortalProjectClientName(project);
-            const summary = getPortalProjectSummary(project);
-            const previewFields = getPortalProjectPreviewFields(project).slice(0, 4);
-            const hasLiveWebsite = Boolean(getPortalProjectWebsiteUrl(project));
+            const presentation = getPortalProjectPresentation(project);
 
             return (
               <ScrollReveal key={project.id} delayMs={index * 45}>
                 <Link
                   href={`/projects/${project.slug}`}
-                  aria-label={`View ${title} project details`}
+                  aria-label={`View ${presentation.projectName.text} project details`}
                   className="group block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70"
                 >
-                  <article className="mineral-panel rounded-[28px] p-6">
+                  <article className="mineral-panel metric-card rounded-[28px] p-6">
                     <div className="flex flex-wrap items-center gap-2">
-                      {clientName ? (
-                        <span className="tech-pill type-section-kicker rounded-md px-2.5 py-1 text-[var(--color-brand)]">
-                          {clientName}
-                        </span>
-                      ) : null}
-                      <span className="rounded-md bg-[var(--color-panel-low)] px-2.5 py-1 type-section-kicker text-[var(--color-text-muted)]">
-                        Portal-fed project
+                      <span
+                        className={`tech-pill type-section-kicker rounded-md px-2.5 py-1 ${placeholderClass(
+                          presentation.industry.missing,
+                          "text-[var(--color-brand)]"
+                        )}`}
+                      >
+                        {presentation.industry.text}
                       </span>
-                      {hasLiveWebsite ? (
-                        <span className="rounded-md bg-emerald-100 px-2.5 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-wider text-emerald-700">
-                          Live website linked
-                        </span>
-                      ) : null}
+                      <span
+                        className={`rounded-md px-2.5 py-1 type-section-kicker ${placeholderClass(
+                          presentation.timeframe.missing,
+                          "bg-[var(--color-panel-low)] text-[var(--color-text-muted)]"
+                        )}`}
+                      >
+                        {presentation.timeframe.text}
+                      </span>
+                      <span
+                        className={`rounded-md px-2.5 py-1 font-[var(--font-mono)] text-[10px] uppercase tracking-wider ${presentation.websiteStatus.className}`}
+                      >
+                        {presentation.websiteStatus.label}
+                      </span>
                     </div>
 
-                    <h2 className="mt-4 type-card-title text-[var(--color-text)]">{title}</h2>
-                    <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">
-                      {summary ?? "Project details available in the portal-backed project feed."}
+                    <h2 className="mt-4 type-card-title text-[var(--color-text)]">
+                      {presentation.projectName.text}
+                    </h2>
+                    <p
+                      className={`mt-1 type-body-sm ${
+                        presentation.clientName.missing || presentation.clientSize.missing
+                          ? "text-amber-700"
+                          : "text-[var(--color-text-muted)]"
+                      }`}
+                    >
+                      {presentation.clientName.text} - {presentation.clientSize.text}
+                    </p>
+                    <p
+                      className={`mt-4 type-body-sm ${
+                        presentation.teaser.missing
+                          ? "text-amber-700"
+                          : "text-[var(--color-text-soft)]"
+                      }`}
+                    >
+                      {presentation.teaser.text}
                     </p>
 
-                    {previewFields.length > 0 ? (
-                      <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                        {previewFields.map((field) => (
-                          <div
-                            key={`${project.id}-${field.key}`}
-                            className="rounded-lg bg-[var(--color-panel-low)] px-3 py-3"
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {presentation.services.map((service) => (
+                        <span
+                          key={service.key}
+                          className={`rounded-md px-2.5 py-1 type-body-xs ${placeholderClass(
+                            service.missing,
+                            "bg-[var(--color-panel-low)] text-[var(--color-text-soft)]"
+                          )}`}
+                        >
+                          {service.text}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="mt-5 space-y-2">
+                      {presentation.insights.slice(0, 3).map((insight) => (
+                        <div key={insight.key} className="flex items-start gap-2.5">
+                          <CheckCircle2
+                            className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${
+                              insight.missing ? "text-amber-500" : "text-[var(--color-accent)]"
+                            }`}
+                          />
+                          <p
+                            className={`type-body-sm ${
+                              insight.missing ? "text-amber-700" : "text-[var(--color-text-soft)]"
+                            }`}
                           >
-                            <p className="type-body-xs uppercase tracking-[0.12em] text-[var(--color-text-muted)]">
-                              {field.label}
-                            </p>
-                            <p className="mt-1 type-body-sm text-[var(--color-text)]">
-                              {formatPortalProjectFieldValue(field.value)}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    ) : null}
+                            {insight.text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-5 grid grid-cols-3 gap-3">
+                      {presentation.outcomeMetrics.map((metric) => (
+                        <div
+                          key={metric.key}
+                          className={`rounded-lg p-3 text-center ${
+                            metric.missing
+                              ? "border border-dashed border-amber-300 bg-amber-50"
+                              : "bg-[var(--color-panel-low)]"
+                          }`}
+                        >
+                          <AnimatedMetric
+                            as="p"
+                            className={`metric-display text-[1.5rem] font-bold ${
+                              metric.value.missing
+                                ? "text-amber-700"
+                                : "text-[var(--color-brand)]"
+                            }`}
+                            value={metric.value.text}
+                          />
+                          <p
+                            className={`mt-1 type-body-xs ${
+                              metric.label.missing
+                                ? "text-amber-700"
+                                : "text-[var(--color-text-muted)]"
+                            }`}
+                          >
+                            {metric.label.text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
 
                     <div className="mt-6 inline-flex items-center gap-2 type-action text-[var(--color-brand)] transition group-hover:text-[var(--color-brand-strong)]">
                       View full project breakdown

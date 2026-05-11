@@ -62,7 +62,7 @@ export interface PortalRenderableServiceInsight {
 }
 
 export interface PortalRenderableWebsiteStatus {
-  value: "live" | "mockup" | null;
+  value: string | null;
   label: string;
   description: string;
   className: string;
@@ -91,8 +91,8 @@ export interface PortalProjectPresentation {
   serviceInsights: PortalRenderableServiceInsight[];
 }
 
-const TITLE_KEYS = ["project_name", "name", "title"] as const;
-const CLIENT_KEYS = ["client_name", "client", "organisation_name"] as const;
+const TITLE_KEYS = ["project_name", "name", "title", "project_title"] as const;
+const CLIENT_KEYS = ["client_name", "client", "organisation_name", "client"] as const;
 const SUMMARY_KEYS = [
   "project_description",
   "description",
@@ -103,7 +103,7 @@ const SUMMARY_KEYS = [
 const WEBSITE_URL_KEYS = ["website_url", "project_url", "live_url", "url"] as const;
 const INDUSTRY_KEYS = ["industry"] as const;
 const CLIENT_SIZE_KEYS = ["client_size"] as const;
-const TIMEFRAME_KEYS = ["timeframe"] as const;
+const TIMEFRAME_KEYS = ["timeframe", "timframe"] as const;
 const DELIVERY_DATE_KEYS = ["delivery_date", "project_end_date", "end_date"] as const;
 const TEASER_KEYS = ["teaser"] as const;
 const SUMMARY_LAYOUT_KEYS = [
@@ -115,7 +115,7 @@ const SUMMARY_LAYOUT_KEYS = [
 const SERVICES_KEYS = ["services"] as const;
 const INSIGHTS_KEYS = ["insights"] as const;
 const STACK_KEYS = ["stack"] as const;
-const WEBSITE_STATUS_KEYS = ["website_status"] as const;
+const WEBSITE_STATUS_KEYS = ["website_status", "project_status"] as const;
 const CHALLENGE_KEYS = ["challenge"] as const;
 const INTERVENTION_KEYS = ["intervention"] as const;
 const DELIVERED_ASSETS_KEYS = ["delivered_assets"] as const;
@@ -129,6 +129,23 @@ function humanizeSlug(slug: string) {
     .split("-")
     .filter(Boolean)
     .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+    .join(" ");
+}
+
+function normalizeFieldIdentifier(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .replace(/_+/g, "_");
+}
+
+function titleCaseWords(value: string) {
+  return value
+    .split(/[\s_-]+/)
+    .filter(Boolean)
+    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase())
     .join(" ");
 }
 
@@ -146,23 +163,21 @@ function looksLikeIsoDate(value: string) {
 }
 
 function readStringByKeys(project: PortalProjectRecord, keys: readonly string[]) {
-  for (const key of keys) {
-    const value = project.websiteDataMap[key];
-    if (isNonEmptyString(value)) {
-      return value.trim();
-    }
-  }
-
-  return null;
+  const field = findFieldByKeys(project, keys);
+  return field && isNonEmptyString(field.value) ? field.value.trim() : null;
 }
 
 function findFieldByKeys(
   project: PortalProjectRecord,
   keys: readonly string[]
 ): PortalProjectField | null {
-  for (const key of keys) {
-    const field = project.websiteData.find((candidate) => candidate.key === key);
-    if (field) {
+  const normalizedKeys = new Set(keys.map((key) => normalizeFieldIdentifier(key)));
+
+  for (const field of project.websiteData) {
+    const normalizedFieldKey = normalizeFieldIdentifier(field.key);
+    const normalizedFieldLabel = normalizeFieldIdentifier(field.label);
+
+    if (normalizedKeys.has(normalizedFieldKey) || normalizedKeys.has(normalizedFieldLabel)) {
       return field;
     }
   }
@@ -341,9 +356,10 @@ function collectIndexedFieldNumbers(project: PortalProjectRecord, pattern: RegEx
 
 function buildWebsiteStatus(project: PortalProjectRecord): PortalRenderableWebsiteStatus {
   const field = findFieldByKeys(project, WEBSITE_STATUS_KEYS);
-  const rawValue = field ? normalizeTextValue(field.value)?.toLowerCase() ?? null : null;
+  const rawText = field ? normalizeTextValue(field.value) : null;
+  const normalizedValue = rawText ? normalizeFieldIdentifier(rawText) : null;
 
-  if (rawValue === "live") {
+  if (normalizedValue === "live" || normalizedValue === "live_website") {
     return {
       value: "live",
       label: "Live Website",
@@ -354,12 +370,28 @@ function buildWebsiteStatus(project: PortalProjectRecord): PortalRenderableWebsi
     };
   }
 
-  if (rawValue === "mockup") {
+  if (
+    normalizedValue === "mockup" ||
+    normalizedValue === "mock_up" ||
+    normalizedValue === "concept"
+  ) {
     return {
       value: "mockup",
       label: "Mockup Website",
       description: "This project is currently shown as a mockup or concept view.",
       className: "bg-amber-100 text-amber-700",
+      missing: false,
+      requiredFields: [field?.key ?? WEBSITE_STATUS_KEYS[0]],
+    };
+  }
+
+  if (rawText) {
+    const statusLabel = titleCaseWords(rawText);
+    return {
+      value: rawText,
+      label: statusLabel,
+      description: `This project is currently marked as ${statusLabel}.`,
+      className: "bg-slate-100 text-slate-700",
       missing: false,
       requiredFields: [field?.key ?? WEBSITE_STATUS_KEYS[0]],
     };

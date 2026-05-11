@@ -359,11 +359,33 @@ function buildWebsiteStatus(project: PortalProjectRecord): PortalRenderableWebsi
   const rawText = field ? normalizeTextValue(field.value) : null;
   const normalizedValue = rawText ? normalizeFieldIdentifier(rawText) : null;
 
+  if (normalizedValue === "audit") {
+    return {
+      value: "Audit",
+      label: "Audit",
+      description: "This project is currently in the audit stage.",
+      className: "bg-sky-100 text-sky-700",
+      missing: false,
+      requiredFields: [field?.key ?? WEBSITE_STATUS_KEYS[0]],
+    };
+  }
+
+  if (normalizedValue === "in_progress" || normalizedValue === "inprogress") {
+    return {
+      value: "In Progress",
+      label: "In Progress",
+      description: "This project is currently in progress.",
+      className: "bg-blue-100 text-blue-700",
+      missing: false,
+      requiredFields: [field?.key ?? WEBSITE_STATUS_KEYS[0]],
+    };
+  }
+
   if (normalizedValue === "live" || normalizedValue === "live_website") {
     return {
-      value: "live",
-      label: "Live Website",
-      description: "This project includes a live website.",
+      value: "Live",
+      label: "Live",
+      description: "This project is live on the web.",
       className: "bg-emerald-100 text-emerald-700",
       missing: false,
       requiredFields: [field?.key ?? WEBSITE_STATUS_KEYS[0]],
@@ -371,14 +393,16 @@ function buildWebsiteStatus(project: PortalProjectRecord): PortalRenderableWebsi
   }
 
   if (
+    normalizedValue === "mock_website" ||
+    normalizedValue === "mockwebsite" ||
     normalizedValue === "mockup" ||
     normalizedValue === "mock_up" ||
     normalizedValue === "concept"
   ) {
     return {
-      value: "mockup",
-      label: "Mockup Website",
-      description: "This project is currently shown as a mockup or concept view.",
+      value: "Mock Website",
+      label: "Mock Website",
+      description: "This project is currently shown as a mock website or concept view.",
       className: "bg-amber-100 text-amber-700",
       missing: false,
       requiredFields: [field?.key ?? WEBSITE_STATUS_KEYS[0]],
@@ -400,7 +424,7 @@ function buildWebsiteStatus(project: PortalProjectRecord): PortalRenderableWebsi
   return {
     value: null,
     label: missingWebsiteFieldMessage(WEBSITE_STATUS_KEYS),
-    description: "Add website_status with value live or mockup.",
+    description: "Add website_status with one of: Audit, In Progress, Live, Mock Website.",
     className: "border border-dashed border-amber-300 bg-amber-50 text-amber-700",
     missing: true,
     requiredFields: [...WEBSITE_STATUS_KEYS],

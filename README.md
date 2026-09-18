@@ -14,10 +14,13 @@ Open `http://localhost:3000`.
 - Framework: Next.js App Router
 - Styling: Tailwind CSS + `app/globals.css`
 - Content model: mostly static in-code route content, with `/projects` now read from the Portal published project feed
+- Store catalogue: `/products` and `/products/[slug]` read published product snapshots from Ingenium Portal's Cloudflare edge
 - Form flow: standard lead forms are real HTML forms with `method="post"` and `data-ingenium-submit="portal"`, resolved by canonical Portal slugs
 - Tracking flow: root layout loads the hosted production tracker from `https://portal.ingeniumconsulting.net/ingenium-tracker.js` and initializes it against the production event ingest path
 
 The website keeps most page content static in code, while the hosted tracker owns analytics delivery and standard form submission into Ingenium Portal. The `/projects` library is now portal-backed and resolves published project records from the configured site feed.
+
+The Store is catalogue-only for now. Portal is the source of truth for product information and images; checkout remains disabled during internal integration testing. See [`docs/commerce-storefront-setup.md`](docs/commerce-storefront-setup.md) for the connection settings and rollout sequence.
 
 ## Portal Tracker Config
 
@@ -49,6 +52,8 @@ The frontend now uses `data-form-slug` on the real `<form>` element, so the Port
 - Team: `app/(website)/team/page.tsx`
 - Projects: `app/(website)/projects/page.tsx` and `app/(website)/projects/[slug]/page.tsx`
 - Shared layout/nav/footer: `app/(website)/layout.tsx`
+- Store catalogue and product pages: `app/(website)/products/`
+- Signed Portal publication receiver: `app/api/ingenium/revalidate/route.ts`
 
 ## Portal Project Feed
 

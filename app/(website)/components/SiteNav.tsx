@@ -130,6 +130,11 @@ const navContent: {
       ],
     },
     {
+      label: "Store",
+      href: "/products",
+      description: "Browse the current products published from Ingenium Portal.",
+    },
+    {
       label: "Company",
       eyebrow: "People + policies",
       pillars: ["About", "Team", "Contact", "Privacy"],

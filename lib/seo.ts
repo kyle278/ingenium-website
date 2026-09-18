@@ -110,6 +110,13 @@ type PageSeoConfig = {
 };
 
 export const pageSeo: Record<string, PageSeoConfig> = {
+  "/products": {
+    title: "Ingenium Store | Connected Business Tools",
+    description: "Explore the Ingenium Store catalogue, managed and published through Ingenium Portal.",
+    path: "/products",
+    keywords: ["Ingenium store", "business tools", "Ingenium products"],
+    pageType: "CollectionPage",
+  },
   "/": {
     title: "Connected Websites, CRM, Marketing and AI | Ingenium",
     description:

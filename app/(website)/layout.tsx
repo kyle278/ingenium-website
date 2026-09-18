@@ -9,6 +9,7 @@ const footerContent = {
     "Connected websites. Intelligent growth. Ingenium helps startups and SMEs launch websites, CRM systems, marketing automation, and AI workflows that work together.",
   sitemap: [
     { href: "/", label: "Home" },
+    { href: "/products", label: "Store" },
     { href: "/services", label: "Services" },
     { href: "/websites", label: "Websites" },
     { href: "/crm", label: "CRM" },

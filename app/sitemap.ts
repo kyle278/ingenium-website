@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { listPortalProjects } from "@/lib/portalIntegration/projects";
+import { getStoreCatalogue } from "@/lib/commerce/storefront";
 import { PUBLIC_DISCOVERY_PATHS, SITE_URL } from "@/lib/seo";
 
 const routePriority: Record<
@@ -21,6 +22,7 @@ const routePriority: Record<
   "/support": { priority: 0.58, changeFrequency: "monthly" },
   "/implementation-methodology": { priority: 0.62, changeFrequency: "monthly" },
   "/projects": { priority: 0.75, changeFrequency: "monthly" },
+  "/products": { priority: 0.78, changeFrequency: "daily" },
   "/implementation": { priority: 0.8, changeFrequency: "monthly" },
   "/about": { priority: 0.7, changeFrequency: "monthly" },
   "/team": { priority: 0.7, changeFrequency: "monthly" },
@@ -50,5 +52,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
-  return [...staticRoutes, ...projectRoutes];
+  const catalogue = await getStoreCatalogue();
+  const productRoutes = catalogue.status === "ready" ? catalogue.products.map((product) => ({
+    url: `${SITE_URL}/products/${product.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: product.featured ? 0.75 : 0.6,
+  })) : [];
+
+  return [...staticRoutes, ...projectRoutes, ...productRoutes];
 }

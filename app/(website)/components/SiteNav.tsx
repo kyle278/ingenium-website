@@ -64,6 +64,7 @@ export default function SiteNav() {
           <Link href="/contact" className="rebuild-button nav-cta" onClick={close}>Discuss your project <ArrowUpRight size={16} aria-hidden="true" /></Link>
         </nav>
       </div>
+      <div className="site-scroll-progress" aria-hidden="true" />
     </header>
   );
 }

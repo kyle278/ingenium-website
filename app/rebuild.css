@@ -268,3 +268,20 @@ body { background: var(--color-bg); letter-spacing: -.015em; }
   .footer-bottom { flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+/* Motion.dev-inspired progressive motion. Text stays readable without JS. */
+.site-scroll-progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--color-brand); transform: scaleX(0); transform-origin: left; pointer-events: none; }
+.hero-canvas { animation: none; }
+.journey-progress { height: 3px; background: var(--color-line); overflow: hidden; border-radius: 3px; margin: -8px 0 22px; }
+.journey-progress span { display: block; width: 25%; height: 100%; background: var(--teal-ink); transition: transform 280ms cubic-bezier(.22,1,.36,1); }
+.journey-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+.journey-actions button { white-space: nowrap; }
+.journey-steps button { transition: background 180ms ease-out, color 180ms ease-out; }
+.rebuild-button svg, .rebuild-text-link svg, .services-dropdown svg { transition: transform 200ms cubic-bezier(.22,1,.36,1); }
+.rebuild-button:hover svg, .rebuild-text-link:hover svg, .services-dropdown a:hover svg { transform: translate(2px,-2px); }
+.rebuild-button:active { transform: scale(.98); }
+.service-option { transition: background 220ms ease-out; }
+.service-option:hover { background: var(--surface-blue); }
+@media (prefers-reduced-motion: reduce) {
+  .site-scroll-progress { display: none; }
+  .rebuild-button:hover, .rebuild-button:active, .rebuild-button:hover svg, .rebuild-text-link:hover svg, .services-dropdown a:hover svg { transform: none; }
+}

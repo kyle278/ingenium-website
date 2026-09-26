@@ -1,220 +1,78 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-
-import { HeroLanding } from "@/components/ui/hero-1";
+import { ArrowDown, ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import EnquiryJourney from "@/components/rebuild/EnquiryJourney";
+import ProjectProof from "@/components/rebuild/ProjectProof";
 import { buildMetadata, pageSeo } from "@/lib/seo";
-import { caseStudies } from "@/src/lib/caseStudies";
-import { getCanonicalProofPathForCaseStudy } from "@/src/lib/proofStories";
-
-import ScrollReveal from "./components/ScrollReveal";
-import { ButtonLink, SectionIntro, SurfaceCard } from "./components/sitePrimitives";
+import { getPublishedProjects } from "@/lib/portalIntegration/projects";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/"]);
 
-const benefits = [
-  {
-    title: "Connected data",
-    body: "Every form, chat, and campaign updates your CRM in real time so leads stay in sync.",
-  },
-  {
-    title: "AI-assisted workflows",
-    body: "Smart agents act on your business data to automate follow-up and campaign actions.",
-  },
-  {
-    title: "Built for growth",
-    body: "Fast launches, easy campaigns, and clear measurement designed for startups and SMEs.",
-  },
+const services = [
+  { number: "01", title: "A new website", description: "Help customers understand your services, see your work and get in touch. A clear home for your business, built around the people you want to reach.", label: "Explore websites", href: "/websites" },
+  { number: "02", title: "A clearer CRM", description: "Bring customer details, open opportunities and next actions into a shared view. Keep your existing website if it is doing its job.", label: "Explore CRM", href: "/crm" },
+  { number: "03", title: "Both, built together", description: "Connect your website enquiry form to your customer records from the start. One agreed project, with the standard connection included.", label: "Explore Website + CRM", href: "/connected" },
+];
+const process = [
+  ["01", "Understand", "Start with your business, your customers and what needs to work better."],
+  ["02", "Agree", "Define the pages, features, responsibilities and price in writing."],
+  ["03", "Build", "Review the work as it takes shape, with clear points for your feedback."],
+  ["04", "Launch", "Check the experience, hand over your system and agree ongoing care."],
 ];
 
-const steps = [
-  ["01", "Capture leads", "Smart landing pages, forms, and chat tools gather the right prospects without friction."],
-  ["02", "Store everything", "Every interaction flows into your custom CRM so your team stays aligned and informed."],
-  ["03", "Activate marketing", "Automated campaigns launch from the same data, without manual handoffs or missing steps."],
-  ["04", "Let AI help", "AI agents suggest follow-up, optimize campaigns, and keep growth moving forward."],
-];
-
-const capabilities = [
-  "CRM-connected websites",
-  "Automated campaigns",
-  "Lead intelligence",
-  "AI recommendations",
-  "Custom reporting",
-  "Ongoing optimization",
-];
-
-const audiences = [
-  {
-    title: "Startups",
-    body: "Launch faster with a connected digital platform that supports growth from day one.",
-  },
-  {
-    title: "SMEs",
-    body: "Replace fragmented tools with a system that keeps your marketing and sales coordinated.",
-  },
-  {
-    title: "Marketing teams",
-    body: "Keep campaigns, funnels, and data in sync with one partner and one operating model.",
-  },
-];
-
-export default function HomePage() {
-  return (
-    <div className="space-y-20 pb-8 md:space-y-28">
-      <ScrollReveal offsetPx={22}>
-        <>
-          <HeroLanding
-            showHeader={false}
-            surface="seamless"
-            className="relative left-1/2 right-1/2 -mt-10 min-h-[calc(100vh-7rem)] w-screen -translate-x-1/2 px-4 sm:-mt-12 sm:px-6 md:-mt-16 lg:px-8"
-            title="Next-gen websites that connect your CRM, marketing and AI without the complexity."
-            description="Ingenium Consulting builds websites that do more than launch. They become the center of your growth engine, connecting lead capture, CRM, campaigns, and AI support from day one."
-            announcementBanner={{
-              text: "Connected websites. Intelligent growth.",
-              linkText: "See the implementation approach",
-              linkHref: "/implementation",
-            }}
-            callToActions={[
-              { text: "Book a Demo", href: "/demo", variant: "primary" },
-              { text: "See How It Works", href: "/platform", variant: "secondary" },
-            ]}
-            gradientColors={{
-              from: "rgba(23, 103, 195, 0.34)",
-              to: "rgba(19, 183, 168, 0.34)",
-            }}
-          />
-        </>
-      </ScrollReveal>
-
-      <section id="why-ingenium">
-        <ScrollReveal>
-          <SectionIntro
-            eyebrow="Why Ingenium"
-            title="Website, CRM, marketing, and AI all working together."
-            body="Your website should not be a separate tool. We connect your site, CRM, and marketing so every lead becomes part of a single growth system."
-          />
-        </ScrollReveal>
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {benefits.map((item, index) => (
-            <ScrollReveal key={item.title} delayMs={index * 55} blur>
-              <SurfaceCard className="panel-hover p-6">
-              <h3 className="type-card-title text-[var(--color-text)]">
-                {item.title}
-              </h3>
-              <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{item.body}</p>
-              </SurfaceCard>
-            </ScrollReveal>
-          ))}
+export default async function HomePage() {
+  const proof = await getPublishedProjects();
+  return <div>
+    <section className="home-hero" aria-labelledby="home-heading">
+      <div>
+        <p className="rebuild-kicker">Websites & CRM. Built around your business.</p>
+        <h1 id="home-heading">A better website.<br /><span>A clearer next step.</span></h1>
+        <p className="rebuild-lead">Ingenium builds websites and customer relationship management systems — CRMs — around how your business works. Choose the part you need, or have your website and CRM built together.</p>
+        <div className="home-hero-actions"><Link className="rebuild-button" href="/contact">Discuss your project <ArrowUpRight size={18} aria-hidden="true" /></Link><Link className="rebuild-text-link" href="/connected">See how they work together <ArrowRight size={16} aria-hidden="true" /></Link></div>
+        <p className="hero-footnote"><span aria-hidden="true" /> Clear scope. Practical support. Based in Ireland.</p>
+      </div>
+      <div className="hero-canvas" role="img" aria-label="Illustrative website and CRM: an enquiry for a home extension becomes a customer record with a next step. Example data, not a client project.">
+        <div className="hero-canvas-label"><span>Your business, connected.</span><span>Website + CRM</span></div>
+        <div className="example-browser">
+          <div className="example-browser-top"><i /><i /><i /><span>Your business website</span></div>
+          <div className="example-website"><div><span className="example-website-brand">OAK & FORM / EXAMPLE</span><h2>Space for the way you live.</h2><p>Thoughtful home extensions.<br />Built around your family.</p><span className="example-website-cta">Discuss your project ↗</span></div><div className="example-architecture" /></div>
         </div>
-      </section>
+        <div className="hero-connection"><ArrowDown size={15} /><span>The agreed details, in the right place</span></div>
+        <div className="hero-record"><div className="hero-record-top"><span>Customer record</span><span className="hero-record-status"><Check size={10} className="inline" /> New enquiry</span></div><strong>Alex Morgan</strong><p>Home extension · Website enquiry</p><p>Next step: arrange a conversation <ArrowUpRight size={11} className="inline" /></p></div>
+        <p className="hero-canvas-caption">Illustrative design and example data.</p>
+      </div>
+    </section>
 
-      <section id="how-it-works">
-        <ScrollReveal>
-          <SectionIntro
-            eyebrow="How It Works"
-            title="A connected system makes every step faster and easier."
-            body="Website, CRM, marketing, and AI all working together instead of pushing work between disconnected tools."
-            align="center"
-          />
-        </ScrollReveal>
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {steps.map(([index, title, body], stepIndex) => (
-            <ScrollReveal key={index} delayMs={stepIndex * 45}>
-              <SurfaceCard className="panel-hover p-6">
-              <p className="type-detail-kicker text-[var(--color-brand)]">
-                Step {index}
-              </p>
-              <p className="mt-3 type-card-title text-[var(--color-text)]">
-                {title}
-              </p>
-              <p className="mt-3 type-body-sm text-[var(--color-text-soft)]">{body}</p>
-              </SurfaceCard>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
+    <section className="home-services" aria-labelledby="services-heading">
+      <div className="section-heading-row"><h2 id="services-heading" className="rebuild-section-heading">Start where your<br />business needs help.</h2><p>A useful website. A more organised team. Or a better connection between the two.</p></div>
+      <div className="service-options">{services.map(service => <article className="service-option" key={service.href}><span className="service-option-number">{service.number}</span><h3>{service.title}</h3><p>{service.description}</p><Link className="rebuild-text-link" href={service.href}>{service.label} <ArrowUpRight size={17} aria-hidden="true" /></Link></article>)}</div>
+    </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1.04fr,0.96fr]">
-        <ScrollReveal>
-          <SurfaceCard className="p-8">
-          <SectionIntro
-            eyebrow="Core Capabilities"
-            title="The platform is built around connection, automation, and clarity."
-            body="Everything is designed to keep your team working from the same information and the same momentum."
-          />
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            {capabilities.map((item) => (
-              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
-                {item}
-              </div>
-            ))}
-          </div>
-          </SurfaceCard>
-        </ScrollReveal>
+    {proof.projects.length > 0 && <section className="rebuild-section" aria-labelledby="work-heading">
+      <div className="section-heading-row"><div><p className="rebuild-kicker">Our work</p><h2 id="work-heading" className="rebuild-section-heading">Work you can<br />look through.</h2></div><Link href="/projects" className="rebuild-text-link">View our work <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+      <ProjectProof limit={3} />
+    </section>}
 
-        <ScrollReveal delayMs={80} direction="left">
-          <SurfaceCard dark className="p-8">
-          <p className="type-section-kicker text-cyan-300">
-            Built for startups and SMEs
-          </p>
-          <div className="mt-6 grid gap-3">
-            {audiences.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4">
-                <p className="type-action text-white">{item.title}</p>
-                <p className="mt-2 type-body-sm text-white/78">{item.body}</p>
-              </div>
-            ))}
-          </div>
-          </SurfaceCard>
-        </ScrollReveal>
-      </section>
+    <section className="rebuild-section workflow-section" id="workflow" aria-labelledby="workflow-heading">
+      <div><p className="rebuild-kicker">Website + CRM</p><h2 id="workflow-heading" className="rebuild-section-heading">The form is the beginning of the conversation.</h2><p className="rebuild-lead">A good website helps someone decide to contact you. A useful CRM helps your team take it from there. We bring those two parts together so the details are available when your team follows up.</p><Link href="/demo?service=connected" className="rebuild-text-link">Request a walkthrough <ArrowUpRight size={18} aria-hidden="true" /></Link></div>
+      <EnquiryJourney />
+    </section>
 
-      <section id="proof">
-        <ScrollReveal>
-          <SectionIntro
-            eyebrow="Proof"
-            title="Results that feel simple"
-            body="Three proof blocks before the buyer has to trust the concept: operational depth, visible workflow change, and cleaner outcomes."
-          />
-        </ScrollReveal>
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {caseStudies.slice(0, 3).map((study, index) => (
-            <ScrollReveal key={study.id} delayMs={index * 55}>
-              <Link href={getCanonicalProofPathForCaseStudy(study.id) ?? "/projects"} className="group block rounded-[28px]">
-                <SurfaceCard className="panel-hover h-full p-6">
-                <p className="type-detail-kicker text-[var(--color-brand)]">
-                  {study.client}
-                </p>
-                <h3 className="mt-4 type-card-title text-[var(--color-text)]">
-                  {study.projectName}
-                </h3>
-                <p className="mt-3 type-body-sm text-[var(--color-text-soft)]">{study.intervention}</p>
-                <p className="mt-4 text-sm font-medium text-[var(--color-brand)]">View project record</p>
-                </SurfaceCard>
-              </Link>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
+    <section className="rebuild-section" aria-labelledby="process-heading">
+      <div className="section-heading-row"><div><p className="rebuild-kicker">How we work</p><h2 className="rebuild-section-heading" id="process-heading">Clear from the<br />first conversation.</h2></div><Link href="/how-we-work" className="rebuild-text-link">See our approach <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+      <ol className="process-list">{process.map(([number, title, description]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{description}</p></li>)}</ol>
+    </section>
 
-      <ScrollReveal className="graphite-panel rounded-[36px] px-8 py-12 md:px-12" blur>
-        <div className="grid gap-8 lg:grid-cols-[0.9fr,1.1fr] lg:items-center">
-          <div>
-            <p className="type-section-kicker text-cyan-300">
-              Final CTA
-            </p>
-            <h2 className="mt-4 type-section-title text-white">
-              Ready to build a smarter website system?
-            </h2>
-            <p className="mt-4 max-w-[64ch] type-body-base text-white/72">
-              Talk to an expert and see how your website can work with your CRM and marketing to drive growth.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3 lg:justify-end">
-            <ButtonLink action={{ label: "Book a Demo", href: "/demo" }} className="bg-white text-[var(--color-text)]" />
-            <ButtonLink action={{ label: "Contact Us", href: "/contact" }} variant="secondary" className="border-white/18 bg-white/8 text-white" />
-          </div>
-        </div>
-      </ScrollReveal>
-    </div>
-  );
+    <section className="rebuild-section home-pricing" aria-labelledby="pricing-heading">
+      <div className="section-heading-row"><h2 className="rebuild-section-heading" id="pricing-heading">Clear starting points.</h2><Link href="/pricing" className="rebuild-text-link">Compare packages <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+      <div className="home-pricing-grid">{[
+        { title: "Websites", setup: "€1,500", monthly: "€149", href: "/pricing#websites", detail: "A defined website build and ongoing care." },
+        { title: "CRM", setup: "€3,000", monthly: "€249", href: "/pricing#crm", detail: "CRM setup, training and ongoing support." },
+        { title: "Website + CRM", setup: "€4,500", monthly: "€349", href: "/pricing#connected", detail: "Both parts, with the standard connection included." },
+      ].map(offer => <div key={offer.title}><h3>{offer.title}</h3><strong>{offer.setup}</strong><p>setup + {offer.monthly}/month</p><p>{offer.detail}</p><Link href={offer.href} className="rebuild-text-link">See what’s included <ArrowRight size={14} aria-hidden="true" /></Link></div>)}</div>
+      <p className="home-pricing-note">Prices exclude VAT. Defined scope; your requirements and total price are confirmed before work begins. Selling products online? <Link href="/ecommerce" className="rebuild-text-link">Explore ecommerce.</Link></p>
+    </section>
+
+    <section className="rebuild-section home-invitation" aria-labelledby="invitation-heading"><div><h2 className="rebuild-section-heading" id="invitation-heading">Tell us what needs<br />to work better.</h2><p>Whether you need a new website, a more useful CRM or both, start with the problem you want to solve. We will help you identify the right next step.</p></div><Link href="/contact" className="rebuild-button">Discuss your project <ArrowUpRight size={18} aria-hidden="true" /></Link></section>
+  </div>;
 }

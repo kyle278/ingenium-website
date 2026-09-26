@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { PORTAL_PROJECTS_ENDPOINT, PORTAL_SITE_ID } from "./public";
 
 export const PORTAL_PROJECTS_REVALIDATE_SECONDS = 300;
@@ -27,12 +28,6 @@ type PortalProjectsListResponse = {
   site_id: string;
   count: number;
   projects: PortalProjectRecord[];
-};
-
-type PortalProjectsDetailResponse = {
-  ok: boolean;
-  site_id: string;
-  project: PortalProjectRecord;
 };
 
 export interface PortalRenderableText {
@@ -449,35 +444,56 @@ async function fetchPortalJson<T>(query: URLSearchParams): Promise<T> {
   return (await response.json()) as T;
 }
 
-export async function listPortalProjects(): Promise<PortalProjectRecord[]> {
-  if (!PORTAL_SITE_ID) return [];
+export type PublishedProjectsResult =
+  | { status: "ready"; projects: PortalProjectRecord[] }
+  | { status: "unavailable"; projects: [] };
+
+// A public record must be explicitly published and contain usable editorial fields.
+// Never infer publication or copy from a slug or an unrelated long text field.
+export function isPublishableProject(value: unknown): value is PortalProjectRecord {
+  if (!value || typeof value !== "object") return false;
+  const project = value as PortalProjectRecord;
+  if (project.published !== true || typeof project.id !== "string" ||
+      typeof project.slug !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug) ||
+      !Array.isArray(project.websiteData) ||
+      !project.websiteData.every((field) => field && typeof field.key === "string" && typeof field.label === "string")) return false;
+  return Boolean(readStringByKeys(project, TITLE_KEYS) && readStringByKeys(project, SUMMARY_KEYS));
+}
+
+export const getPublishedProjects = cache(async (): Promise<PublishedProjectsResult> => {
+  if (!PORTAL_SITE_ID) return { status: "unavailable", projects: [] };
 
   try {
     const query = new URLSearchParams({
       site_id: PORTAL_SITE_ID,
     });
     const payload = await fetchPortalJson<PortalProjectsListResponse>(query);
-    return Array.isArray(payload.projects) ? payload.projects : [];
+    if (payload.ok !== true || payload.site_id !== PORTAL_SITE_ID || !Array.isArray(payload.projects)) {
+      throw new Error("Invalid portal project response");
+    }
+    const seen = new Set<string>();
+    const projects = payload.projects.filter(isPublishableProject).filter((project) => {
+      if (seen.has(project.slug)) return false;
+      seen.add(project.slug);
+      return true;
+    });
+    return { status: "ready", projects };
   } catch (error) {
     console.error("Failed to load portal projects list", error);
-    return [];
+    return { status: "unavailable", projects: [] };
   }
+});
+
+export async function listPortalProjects(): Promise<PortalProjectRecord[]> {
+  return (await getPublishedProjects()).projects;
 }
 
 export async function getPortalProjectBySlug(slug: string): Promise<PortalProjectRecord | null> {
-  if (!PORTAL_SITE_ID || !slug.trim()) return null;
-
-  try {
-    const query = new URLSearchParams({
-      site_id: PORTAL_SITE_ID,
-      slug,
-    });
-    const payload = await fetchPortalJson<PortalProjectsDetailResponse>(query);
-    return payload.project ?? null;
-  } catch (error) {
-    console.error(`Failed to load portal project '${slug}'`, error);
-    return null;
-  }
+  if (!slug.trim()) return null;
+  const result = await getPublishedProjects();
+  // A dependency failure is not evidence that a previously published URL is missing.
+  if (result.status === "unavailable") throw new Error("Project examples are temporarily unavailable.");
+  return result.projects.find((project) => project.slug === slug) ?? null;
 }
 
 export function getPortalProjectTitle(project: PortalProjectRecord) {
@@ -489,19 +505,7 @@ export function getPortalProjectClientName(project: PortalProjectRecord) {
 }
 
 export function getPortalProjectSummary(project: PortalProjectRecord) {
-  const mapped = readStringByKeys(project, SUMMARY_KEYS);
-  if (mapped) return mapped;
-
-  const firstLongTextField = project.websiteData.find(
-    (field) =>
-      isNonEmptyString(field.value) &&
-      field.value.trim().length > 80 &&
-      !TITLE_KEYS.includes(field.key as (typeof TITLE_KEYS)[number]) &&
-      !CLIENT_KEYS.includes(field.key as (typeof CLIENT_KEYS)[number])
-  );
-
-  const firstLongTextValue = firstLongTextField?.value;
-  return isNonEmptyString(firstLongTextValue) ? firstLongTextValue.trim() : null;
+  return readStringByKeys(project, SUMMARY_KEYS);
 }
 
 export function getPortalProjectWebsiteUrl(project: PortalProjectRecord) {

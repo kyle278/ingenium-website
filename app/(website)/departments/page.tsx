@@ -1,5 +1,2 @@
-import { redirect } from "next/navigation";
-
-export default function DepartmentsRedirectPage() {
-  redirect("/services");
-}
+import { permanentRedirect } from "next/navigation";
+export default function DepartmentsRedirectPage() { permanentRedirect("/services"); }

@@ -1,165 +1,19 @@
-import type { Metadata } from "next";
-
 import { buildMetadata, pageSeo } from "@/lib/seo";
-
-import PageReviewMeta from "../components/PageReviewMeta";
-import ServiceFaqSection from "../components/ServiceFaqSection";
-import { ButtonLink, SectionIntro, SurfaceCard } from "../components/sitePrimitives";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { offers } from "@/components/rebuild/offers";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/services"]);
 
-const services = [
-  {
-    title: "Custom website development",
-    body: "High-performance websites designed to capture leads, support your brand, and feed your growth system.",
-  },
-  {
-    title: "CRM setup, integrations, and migrations",
-    body: "A CRM operating model tailored to your workflows, ownership rules, migration needs, and handoff continuity.",
-  },
-  {
-    title: "Marketing automation",
-    body: "Launch email, SMS, and nurture journeys from your data without manual handoffs.",
-  },
-  {
-    title: "AI-enabled workflows",
-    body: "AI assistants help draft next steps, prepare outreach, and keep follow-up moving through approvals.",
-  },
-];
-
-const serviceQuestions = [
-  {
-    question: "How does this help me?",
-    answer:
-      "The practical value is cleaner lead handling and less guesswork. A stronger website explains the offer better, a CRM keeps ownership clear, and connected follow-up means new enquiries do not disappear between inboxes, spreadsheets, and call-backs.",
-  },
-  {
-    question: "Do I need a CRM?",
-    answer:
-      "Not every business needs a heavy CRM, but most growing service businesses need one shared record of who enquired, what they wanted, who owns the next step, and what happened after the sale. If that context is currently split across email threads and memory, CRM work usually pays off quickly.",
-  },
-  {
-    question: "But my website looks fine, we updated it years ago!",
-    answer:
-      "A site can still look acceptable and underperform commercially. The real question is whether it explains the offer fast enough, routes visitors into the right next step, and passes useful lead context into sales or delivery without extra admin.",
-  },
-  {
-    question: "How can AI agents help me?",
-    answer:
-      "AI is most useful after the website and CRM foundations are in place. It can help with lead summaries, follow-up drafting, campaign recommendations, and reporting support, but only when it is connected to real business data and clear approval rules.",
-  },
-];
-
 export default function ServicesPage() {
-  return (
-    <div className="space-y-20 pb-8 md:space-y-28">
-      <section className="pt-4">
-        <div className="max-w-4xl">
-          <p className="type-page-kicker text-[var(--color-brand)]">
-            Services
-          </p>
-          <h1 className="mt-6 max-w-4xl type-page-title text-[var(--color-text)]">
-            Services for connected growth.
-          </h1>
-          <p className="mt-6 max-w-[65ch] type-body-lead text-[var(--color-text-soft)]">
-            We build websites and CRM systems first, then connect automation and AI where they make follow-up, reporting, and delivery cleaner.
-          </p>
-          <PageReviewMeta />
-          <div className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink action={{ label: "Start a Discovery Call", href: "/contact" }} />
-            <ButtonLink action={{ label: "Book a Demo", href: "/demo" }} variant="secondary" />
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <SurfaceCard className="p-6 md:p-8">
-          <p className="type-section-kicker text-[var(--color-brand)]">
-            Direct answer
-          </p>
-          <h2 className="mt-4 type-card-title text-[var(--color-text)]">
-            What does Ingenium do?
-          </h2>
-          <p className="mt-4 max-w-[68ch] type-body-base text-[var(--color-text-soft)]">
-            Ingenium builds connected digital systems for growing businesses: a website that captures intent, a CRM
-            that stores and routes the lead, automation that moves follow-up forward, and AI-enabled workflows that
-            support the team with summaries, recommendations, and reporting context.
-          </p>
-        </SurfaceCard>
-      </section>
-
-      <section>
-        <SectionIntro
-          eyebrow="What We Build"
-          title="Each service is designed to work as part of the same operating model."
-        />
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {services.map((service) => (
-            <SurfaceCard key={service.title} className="panel-hover p-6">
-              <h2 className="type-card-title text-[var(--color-text)]">
-                {service.title}
-              </h2>
-              <p className="mt-4 type-body-sm text-[var(--color-text-soft)]">{service.body}</p>
-            </SurfaceCard>
-          ))}
-        </div>
-      </section>
-
-      <section className="grid gap-6 xl:grid-cols-2">
-        <SurfaceCard className="p-8">
-          <SectionIntro
-            eyebrow="Our Process"
-            title="A clear, practical implementation process."
-            body="The goal is not to add complexity. It is to give your team a system it can actually use."
-          />
-          <div className="mt-8 grid gap-3">
-            {[
-              "Discovery: understand your business, audience, and growth goals.",
-              "Build: design and develop your connected website, CRM workspace, and campaign flow.",
-              "Connect: link your website, CRM, and marketing tools so data moves without friction.",
-              "Optimize: review performance, refine automation, and improve conversion over time.",
-            ].map((item) => (
-              <div key={item} className="rounded-2xl border border-[var(--color-line)] bg-white/72 px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
-                {item}
-              </div>
-            ))}
-          </div>
-        </SurfaceCard>
-
-        <SurfaceCard dark className="p-8">
-          <p className="type-section-kicker text-cyan-300">
-            Why this matters
-          </p>
-          <div className="mt-6 grid gap-3">
-            {[
-              "No more data silos.",
-              "Faster lead response with automation.",
-              "A single source of truth for growth activity.",
-              "Smarter decisions powered by AI and insights.",
-            ].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/10 bg-white/6 px-4 py-4 type-body-sm text-white/78">
-                {item}
-              </div>
-            ))}
-          </div>
-        </SurfaceCard>
-      </section>
-
-      <ServiceFaqSection
-        title="Questions buyers usually ask before they commit."
-        body="This is the commercial side of the decision: whether the website, CRM, and follow-up path are strong enough to support the next stage of growth."
-        items={serviceQuestions}
-      />
-
-      <section className="graphite-panel rounded-[36px] px-8 py-12 text-center md:px-12">
-        <h2 className="mx-auto max-w-4xl type-section-title text-white">
-          Book a discovery call and scope the right connected system.
-        </h2>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <ButtonLink action={{ label: "Book a Discovery Call", href: "/contact" }} className="bg-white text-[var(--color-text)]" />
-          <ButtonLink action={{ label: "Get a Tailored Scope", href: "/demo" }} variant="secondary" className="border-white/18 bg-white/8 text-white" />
-        </div>
-      </section>
-    </div>
-  );
+  return <div className="rebuild-page">
+    <section className="rebuild-hero"><p className="rebuild-kicker">Our services</p><h1>Start with the part that needs to work better.</h1><p className="rebuild-lead">A clearer website. A more useful CRM. Or both designed together. Choose the work your business needs now, with room to discuss what comes next.</p><Link href="/contact" className="rebuild-button mt-8">Discuss your project<ArrowRight size={18} aria-hidden="true" /></Link></section>
+    <section className="rebuild-section" aria-label="Our three main services"><div className="rebuild-grid">
+      {offers.slice(0, 3).map((offer, index) => <article className="rebuild-panel flex flex-col" key={offer.slug}><p className="rebuild-kicker">0{index + 1}</p><h2 className="rebuild-section-heading">{offer.name}</h2><p className="mt-4">{offer.description}</p><p className="mt-6 font-semibold">{offer.setup} setup + {offer.monthly}/month</p><p className="mt-2 text-sm">Excluding VAT. Defined starting scope.</p><Link href={`/${offer.slug}`} className="rebuild-text-link mt-auto pt-7">Explore {offer.name === "CRM" ? "CRM" : offer.name.toLowerCase()}<ArrowRight size={18} aria-hidden="true" /></Link></article>)}
+    </div></section>
+    <section className="rebuild-section"><div className="rebuild-grid-two"><div><p className="rebuild-kicker">Selling products online</p><h2 className="rebuild-section-heading">A shop built around how you sell.</h2></div><div className="space-y-5"><p>We also scope ecommerce websites around your product range, checkout and day-to-day order process. Platform costs, catalogue preparation and additional connections are made clear in the proposal.</p><Link href="/ecommerce" className="rebuild-text-link">Explore ecommerce<ArrowRight size={18} aria-hidden="true" /></Link></div></div></section>
+    <section className="rebuild-section"><div className="rebuild-grid-two"><h2 className="rebuild-section-heading">You do not need to choose every part at once.</h2><div className="space-y-5"><p>If your website works, a CRM project can stand on its own. If your enquiry process is already clear, start with the website. When both need attention, we can plan the form and the customer record together.</p><p>Tell us about the problem rather than trying to decide on a technical specification. We will discuss what fits and what needs a closer look.</p><Link href="/how-we-work" className="rebuild-text-link">See how we work<ArrowRight size={18} aria-hidden="true" /></Link></div></div></section>
+    <section className="rebuild-section"><div className="rebuild-panel"><h2 className="rebuild-section-heading">Not sure where to start?</h2><p className="rebuild-lead">Bring one example of what is getting in the way. We can use that to identify the right conversation.</p><Link href="/contact" className="rebuild-button mt-7">Discuss your project<ArrowRight size={18} aria-hidden="true" /></Link></div></section>
+  </div>;
 }

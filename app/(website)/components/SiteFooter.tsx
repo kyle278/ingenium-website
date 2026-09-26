@@ -1,100 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ButtonLink, MonoTag } from "./sitePrimitives";
-
-type FooterLink = {
-  href: string;
-  label: string;
-};
-
-type SiteFooterContent = {
-  summary: string;
-  sitemap: FooterLink[];
-  trust: FooterLink[];
-  actions: FooterLink[];
-};
-
-export default function SiteFooter({ content }: { content: SiteFooterContent }) {
+export default function SiteFooter() {
   return (
-    <footer className="bg-[rgba(241,244,248,0.76)]">
-      <div className="mx-auto max-w-[1280px] px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mineral-panel rounded-[36px] p-8 md:p-10">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr,0.9fr]">
-            <div>
-              <div className="flex items-center gap-3">
-                <Image src="/logo.svg" alt="Ingenium logo" width={34} height={34} className="h-8 w-8" />
-                <div>
-                  <p className="type-card-title-sm text-[var(--color-text)]">
-                    Ingenium Consulting
-                  </p>
-                  <p className="type-detail-kicker font-medium text-[var(--color-text-muted)]">
-                    Connected websites. Intelligent growth.
-                  </p>
-                </div>
-              </div>
-              <p className="mt-5 max-w-[60ch] type-body-base text-[var(--color-text-soft)]">
-                {content.summary}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {["Connected websites", "CRM integration", "Marketing automation", "AI workflows"].map((item) => (
-                  <MonoTag key={item}>{item}</MonoTag>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid gap-8 sm:grid-cols-3">
-              <div>
-                <p className="type-section-kicker text-[var(--color-text-muted)]">
-                  Platform
-                </p>
-                <div className="mt-4 grid gap-2">
-                  {content.sitemap.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="type-body-sm text-[var(--color-text-soft)] hover:text-[var(--color-text)]"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="type-section-kicker text-[var(--color-text-muted)]">
-                  Trust
-                </p>
-                <div className="mt-4 grid gap-2">
-                  {content.trust.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="type-body-sm text-[var(--color-text-soft)] hover:text-[var(--color-text)]"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="type-section-kicker text-[var(--color-text-muted)]">
-                  Get started
-                </p>
-                <div className="mt-4 grid gap-3">
-                  <ButtonLink action={content.actions[0]} />
-                  <ButtonLink action={content.actions[1]} variant="secondary" />
-                  <ButtonLink action={content.actions[2]} variant="tertiary" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 pt-6 type-body-sm text-[var(--color-text-muted)]">
-            <p>(c) 2026 Ingenium Digital Consulting</p>
-            <p>Designed for startups and SMEs that want smarter growth.</p>
-          </div>
+    <footer className="site-footer">
+      <div className="site-footer-inner">
+        <div className="footer-intro">
+          <Link href="/" className="site-brand" aria-label="Ingenium — home"><Image src="/logo.svg" width={36} height={36} alt="" /><span>Ingenium.</span></Link>
+          <p>Websites and CRM,<br />built around your business.</p>
+          <span>Carlow, Ireland. Working with businesses everywhere.</span>
         </div>
+        <div><h2>Explore</h2><Link href="/websites">Websites</Link><Link href="/crm">CRM</Link><Link href="/connected">Website + CRM</Link><Link href="/ecommerce">Ecommerce</Link><Link href="/pricing">Pricing</Link></div>
+        <div><h2>Get to know us</h2><Link href="/projects">Our work</Link><Link href="/how-we-work">How we work</Link><Link href="/about">About</Link><Link href="/contact">Contact</Link><Link href="/support">Support</Link></div>
+        <div><h2>Let’s talk</h2><a href="mailto:hello@ingeniumconsulting.net">hello@ingeniumconsulting.net</a><a href="tel:+353858302554">+353 85 830 2554</a><p>Tell us what needs<br />to work better.</p></div>
       </div>
+      <div className="footer-bottom"><span>© {new Date().getFullYear()} Ingenium Digital Consulting</span><div><Link href="/security">Security</Link><Link href="/data-handling">Data handling</Link><Link href="/privacy">Privacy</Link><a href="#cookie-settings">Cookie settings</a></div></div>
     </footer>
   );
 }

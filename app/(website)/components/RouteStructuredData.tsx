@@ -16,14 +16,16 @@ import {
   SITE_URL,
   pageSeo,
 } from "@/lib/seo";
-import { LAST_REVIEWED_ISO } from "@/lib/review";
 
 type JsonLd = Record<string, unknown>;
 
 const routeLabelMap: Record<string, string> = {
   "/": "Home",
   "/services": "Services",
-  "/platform": "Platform",
+  "/connected": "Website + CRM",
+  "/ecommerce": "Ecommerce",
+  "/pricing": "Pricing",
+  "/how-we-work": "How we work",
   "/websites": "Websites",
   "/crm": "CRM",
   "/ai-agents": "AI Agents",
@@ -119,10 +121,10 @@ function buildOrganizationSchema(): JsonLd {
       telephone: ORGANIZATION_PHONE,
       url: `${SITE_URL}/contact`,
     },
-    areaServed: ["Ireland", "United Kingdom", "United States"],
+    areaServed: ["Ireland"],
     sameAs: [...ORGANIZATION_SAME_AS],
     description:
-      "Ingenium Digital Consulting builds connected websites, CRM systems, marketing automation, and AI workflows for startups and SMEs.",
+      "Ingenium Digital Consulting provides business websites, CRM implementation and website + CRM projects.",
   };
 }
 
@@ -149,7 +151,6 @@ function buildWebPageSchema(pathname: string): JsonLd | null {
     name: config.title,
     description: config.description,
     url: toAbsoluteUrl(normalizedPathname),
-    dateModified: LAST_REVIEWED_ISO,
     isPartOf: { "@id": `${SITE_URL}/#website` },
     breadcrumb: { "@id": `${toAbsoluteUrl(normalizedPathname)}#breadcrumb` },
     publisher: { "@id": `${SITE_URL}/#organization` },
@@ -158,46 +159,11 @@ function buildWebPageSchema(pathname: string): JsonLd | null {
 
 function buildServiceSchema(pathname: string): JsonLd | null {
   const normalizedPathname = normalizePathname(pathname);
-  const services: Record<string, { name: string; description: string }> = {
-    "/platform": {
-      name: "Ingenium Revenue Operating System",
-      description: "Governed platform connecting websites, CRM, AI agents, automation, and reporting.",
-    },
-    "/websites": {
-      name: "Ingenium Websites",
-      description: "High-intent website journeys connected directly to CRM execution and routing.",
-    },
-    "/crm": {
-      name: "Ingenium CRM Execution",
-      description: "CRM operating model for routing, attribution, ownership, and delivery continuity.",
-    },
-    "/ai-agents": {
-      name: "Ingenium AI Agents",
-      description: "Governed AI agents operating inside workflow, approval, and audit boundaries.",
-    },
-    "/automations": {
-      name: "Ingenium Automations",
-      description: "SLA-driven automation with escalation, rollback control, and execution visibility.",
-    },
-    "/security": {
-      name: "Ingenium Governance",
-      description: "Role-based access, approval paths, audit history, and technical review support.",
-    },
-    "/demo": {
-      name: "Ingenium Demo",
-      description: "A guided platform walkthrough for service businesses evaluating their revenue operating model.",
-    },
-    "/revenue-systems-teardown": {
-      name: "Revenue Systems Teardown",
-      description: "An audit of the gaps between website, CRM, automation, handoff, and reporting.",
-    },
-    "/technical-review": {
-      name: "Technical Review",
-      description: "Architecture, governance, and data-handling review for technical stakeholders.",
-    },
-  };
-
-  const service = services[normalizedPathname];
+  const servicePaths = ["/websites", "/crm", "/connected", "/ecommerce", "/automations", "/ai-agents"];
+  const config = pageSeo[normalizedPathname];
+  const service = servicePaths.includes(normalizedPathname) && config
+    ? { name: config.title.split(" | ")[0], description: config.description }
+    : null;
   if (!service) return null;
 
   return {
@@ -208,14 +174,13 @@ function buildServiceSchema(pathname: string): JsonLd | null {
     description: service.description,
     provider: { "@id": `${SITE_URL}/#organization` },
     url: toAbsoluteUrl(normalizedPathname),
-    dateModified: LAST_REVIEWED_ISO,
   };
 }
 
 export default function RouteStructuredData() {
   const pathname = usePathname() || "/";
 
-  if (isPrivatePath(pathname)) return null;
+  if (isPrivatePath(pathname) || /\/(confirmed|thanks)$/.test(pathname)) return null;
 
   const schemas = [buildBreadcrumb(pathname), buildOrganizationSchema(), buildWebSiteSchema()];
   const pageSchema = buildWebPageSchema(pathname);
@@ -230,7 +195,7 @@ export default function RouteStructuredData() {
         <script
           key={`${pathname}-jsonld-${index}`}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
         />
       ))}
     </>

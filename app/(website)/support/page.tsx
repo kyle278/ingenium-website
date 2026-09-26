@@ -1,50 +1,13 @@
 import type { Metadata } from "next";
-
-import { buildMetadata, pageSeo } from "@/lib/seo";
-
-import PolicyPage from "../components/PolicyPage";
-
+import Link from "next/link";
+import { buildMetadata, pageSeo, ORGANIZATION_EMAIL } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata(pageSeo["/support"]);
-
 export default function SupportPage() {
-  return (
-    <PolicyPage
-      eyebrow="Support"
-      title="Support process for Ingenium websites, CRM systems, and workflows."
-      summary="This page sets out the basic support model for active Ingenium clients. Specific retainers, service levels, emergency routes, and response expectations should be agreed in writing."
-      updatedLabel="Last reviewed: 7 May 2026"
-      sections={[
-        {
-          title: "Support scope",
-          body: "Support may cover websites, forms, CRM workflows, automation journeys, reporting, AI workflow configuration, and implementation questions connected to an active project or agreed support arrangement.",
-          items: [
-            "Bug investigation and troubleshooting.",
-            "Form, routing, CRM, automation, and reporting issues.",
-            "Small content or configuration updates where included in scope.",
-            "Guidance on workflow use, review steps, and operational handoff.",
-          ],
-        },
-        {
-          title: "Support requests",
-          body: "Good support requests include the affected page or system, what happened, what was expected, urgency, screenshots where useful, and any recent changes that might be related.",
-          items: [
-            "Use the agreed client channel where one exists.",
-            "Use the contact page for general support questions if no channel exists.",
-            "Avoid sending passwords or unnecessary sensitive customer data.",
-            "Mark urgent production issues clearly and explain the business impact.",
-          ],
-        },
-        {
-          title: "Response expectations",
-          body: "Response times depend on the active agreement, issue severity, business hours, and whether third-party vendors are involved. Without a written service level, support is handled on a commercially reasonable basis.",
-          items: [
-            "Critical production issues should be separated from routine requests.",
-            "Vendor outages, DNS changes, payment platforms, and third-party APIs may require outside action.",
-            "Feature requests may need a separate scope, estimate, or delivery slot.",
-            "Post-launch support should include review of access and ownership.",
-          ],
-        },
-      ]}
-    />
-  );
+  return <div className="rebuild-page">
+    <section className="rebuild-hero"><p className="rebuild-kicker">Client support</p><h1>Tell us what needs attention.</h1><p className="rebuild-lead">Use your agreed project or support channel. If you do not have one, email us with the affected page or system and a short description of the issue.</p><a className="rebuild-button" href={`mailto:${ORGANIZATION_EMAIL}?subject=Support%20request`}>Email support</a></section>
+    <section className="rebuild-section"><h2 className="rebuild-section-heading">Help us understand the problem.</h2><ul className="rebuild-list"><li>The website address or system affected.</li><li>What happened, what you expected, and when it started.</li><li>The business impact and any recent changes.</li><li>A screenshot if useful, with unnecessary personal information removed.</li></ul><p>Do not send passwords or sensitive customer records by email. We will agree a suitable way to share information if it is needed.</p></section>
+    <section className="rebuild-section"><h2 className="rebuild-section-heading">What support covers.</h2><p>Your agreement defines the support scope, hours and response expectations. Work may include bug investigation, form or CRM issues, and small changes where included. New features may require a separate estimate.</p><p>Response times depend on issue severity, business hours and third-party involvement. Without a written service level, support is handled on a commercially reasonable basis.</p></section>
+    <section className="rebuild-section"><h2 className="rebuild-section-heading">Urgent production issue?</h2><p>Use the emergency route in your agreement, if one is provided. Explain the business impact and mark the request as urgent. Vendor outages, DNS changes and payment services may need action from another provider.</p><p>This page does not create a 24-hour or emergency response guarantee.</p></section>
+    <section className="rebuild-section"><h2 className="rebuild-section-heading">Planning something new?</h2><Link className="rebuild-text-link" href="/contact">Discuss a new project →</Link>{" "}<Link className="rebuild-text-link" href="/data-handling">Data handling →</Link></section>
+  </div>;
 }

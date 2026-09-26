@@ -1,46 +1,5 @@
 import Link from "next/link";
-import { CheckCircle2 } from "lucide-react";
-
-type ConfirmationPageProps = {
-  title: string;
-  body: string;
-  primaryLabel: string;
-  primaryHref: string;
-};
-
-export default function ConfirmationPage({
-  title,
-  body,
-  primaryLabel,
-  primaryHref,
-}: ConfirmationPageProps) {
-  return (
-    <div className="space-y-20 pb-8 md:space-y-28">
-      <section className="pt-10">
-        <div className="mx-auto max-w-3xl rounded-[36px] border border-[var(--color-line)] bg-white/80 px-8 py-12 text-center shadow-[0_22px_55px_rgba(22,32,51,0.06)]">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[rgba(0,87,191,0.10)]">
-            <CheckCircle2 className="h-7 w-7 text-[var(--color-brand)]" />
-          </div>
-          <h1 className="mt-6 type-page-title text-[var(--color-text)]">
-            {title}
-          </h1>
-          <p className="mx-auto mt-4 max-w-[64ch] type-body-base text-[var(--color-text-soft)]">{body}</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              href={primaryHref}
-              className="cta-lift inline-flex items-center justify-center rounded-md bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] px-5 py-3 type-action text-white"
-            >
-              {primaryLabel}
-            </Link>
-            <Link
-              href="/"
-              className="cta-lift type-action inline-flex items-center justify-center rounded-md bg-[var(--color-panel-high)] px-5 py-3 text-[var(--color-brand)]"
-            >
-              Return Home
-            </Link>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+type Props = { title: string; body: string; primaryLabel: string; primaryHref: string };
+export default function ConfirmationPage({ title, primaryLabel, primaryHref }: Props) {
+  return <section className="rebuild-container rebuild-section"><p className="rebuild-eyebrow">Next steps</p><h1>{title}</h1><p className="rebuild-lead">If you have just sent the form and received confirmation, we’ll review your enquiry and get in touch about the next step. An appointment has not been booked.</p><p>Opening this page directly does not send an enquiry.</p><div className="rebuild-actions"><Link className="rebuild-button" href={primaryHref}>{primaryLabel}</Link><Link href="/contact">Contact Ingenium</Link></div></section>;
 }

@@ -1,0 +1,36 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import vm from 'node:vm';
+import ts from 'typescript';
+import crypto from 'node:crypto';
+const __dirname = import.meta.dirname;
+function compile(file) { return ts.transpileModule(fs.readFileSync(path.join(__dirname, '..', file),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText; }
+const contractModule = {exports:{}};
+vm.runInNewContext(compile('lib/enquiry-contract.ts'),{exports:contractModule.exports,module:contractModule,URL});
+const contract=contractModule.exports;
+const origin='https://website.example.test';
+function payload(id='11111111-1111-4111-8111-111111111111') {return {request_id:id,form_slug:'contact',fields:{name:'Test Person',email:'test@example.test',service:'connected',message:'A useful project description.',budget_range:'2000-5000',privacy_consent:'true',marketing_consent:'false',consent_version:contract.NOTICE_VERSION,consent_text_snapshot:contract.PRIVACY_NOTICE},tracking:{submission_url:origin+'/contact?token=private',utm_source:'linkedin',first_touch:{landing_url:origin+'/?email=private@example.test',utm_source:'linkedin'}}};}
+function request(body=payload(), options={}) {return new Request(origin+'/api/enquiry',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json',...options.headers},body:typeof body==='string'?body:JSON.stringify(body)});}
+function load(fetchImplementation=async()=>Response.json({ok:true,submission_id:'accepted-id'},{status:201})) {
+ const calls=[];const compiledModule={exports:{}};
+ vm.runInNewContext(compile('app/api/enquiry/route.ts'),{module:compiledModule,exports:compiledModule.exports,URL,Buffer,AbortSignal,Date,fetch:async(...args)=>{calls.push(args);return fetchImplementation(...args)},require(name){
+  if(name==='node:crypto')return crypto;
+  if(name==='next/server')return {NextResponse:{json:(body,options)=>Response.json(body,options)}};
+  if(name==='@/lib/enquiry-contract')return contract;
+  if(name==='@/lib/portalIntegration/public')return {PORTAL_FORM_SUBMIT_ENDPOINT:'https://portal.invalid.test/forms',PORTAL_SITE_ID:'test-site'};
+  throw Error('Unexpected module '+name);
+ }});
+ return {...compiledModule.exports,calls};
+}
+test('foreign/missing origin is rejected with no upstream call',async()=>{const api=load();assert.equal((await api.POST(request(payload(),{headers:{Origin:'https://other.test'}}))).status,403);assert.equal((await api.POST(request(payload(),{headers:{Origin:''}}))).status,403);assert.equal(api.calls.length,0)});
+test('invalid payload and missing privacy return 422 without upstream call',async()=>{const api=load();let body=payload();body.fields.email='invalid';assert.equal((await api.POST(request(body))).status,422);body=payload();body.fields.privacy_consent='false';assert.equal((await api.POST(request(body))).status,422);assert.equal(api.calls.length,0)});
+test('malformed JSON and unsupported content type fail before upstream',async()=>{const api=load();assert.equal((await api.POST(request('{'))).status,400);assert.equal((await api.POST(request(payload(),{headers:{'Content-Type':'text/plain'}}))).status,415);assert.equal(api.calls.length,0)});
+test('legitimate receipt returns only accepted ID; sanitised source and request ID reach fixed Portal site',async()=>{const api=load();const response=await api.POST(request());assert.equal(response.status,201);assert.deepEqual(await response.json(),{ok:true,submission_id:'accepted-id'});const [url,options]=api.calls[0];assert.equal(url,'https://portal.invalid.test/forms');const body=JSON.parse(options.body);assert.equal(body.site_id,'test-site');assert.equal(body.metadata.website_request_id,payload().request_id);assert.equal(body.tracking.submission_url,origin+'/contact');assert.equal(body.metadata.first_touch.landing_url,origin+'/');assert.equal(body.fields.marketing_consent,'false')});
+test('HTTP 202 honeypot rejection cannot become successful receipt',async()=>{const api=load(async()=>Response.json({ok:true,accepted:false},{status:202}));const response=await api.POST(request());assert.equal(response.status,502);assert.equal((await response.json()).submission_id,undefined)});
+test('upstream HTTP failure, malformed receipt and network failure are not success',async()=>{for(const fn of [async()=>Response.json({error:'failed'},{status:500}),async()=>Response.json({ok:true}),async()=>{throw Error('offline')}]){const api=load(fn);const response=await api.POST(request());assert.ok([502,503].includes(response.status));assert.equal((await response.json()).submission_id,undefined)}});
+test('concurrent replay uses one upstream operation; later replay keeps original receipt',async()=>{let release;const held=new Promise(resolve=>{release=resolve});const api=load(async()=>{await held;return Response.json({ok:true,submission_id:'same-id'},{status:201})});const first=api.POST(request());const second=api.POST(request());await new Promise(resolve=>setImmediate(resolve));assert.equal(api.calls.length,1);release();const [a,b]=await Promise.all([first,second]);assert.deepEqual(await a.json(),await b.json());const replay=await api.POST(request());assert.equal((await replay.json()).submission_id,'same-id');assert.equal(api.calls.length,1)});
+test('same reference with changed submitted content conflicts without new upstream write',async()=>{const api=load();await api.POST(request());const edited=payload();edited.fields.message='An entirely different project.';const response=await api.POST(request(edited));assert.equal(response.status,409);assert.equal(api.calls.length,1)});
+test('honeypot and oversize body rejected before upstream write',async()=>{const api=load();const bot=payload();bot.fields.website_fax='trap';assert.equal((await api.POST(request(bot))).status,422);assert.equal((await api.POST(request('x'.repeat(64001)))).status,413);assert.equal(api.calls.length,0)});
+test('actual private brief field contract is accepted without contact service/budget fields',async()=>{const api=load();const body={request_id:payload().request_id,form_slug:'website-project-brief',fields:{name:'Test Person',first_name:'Test',last_name:'Person',email:'test@example.test',phone:'',company:'Test Ltd',website_url:'',business_summary:'A small local service business.',target_audience:'Local customers',current_website_status:'No website yet',primary_goal:'Generate enquiries',required_pages:'Home, services, contact',requested_features:'Contact form, gallery',feature_count:'2',pages_summary:'Home, services, contact',project_type:'website_build',timeline:'Within 3 months',brand_assets_status:'Ready',copy_support_needed:'Yes',inspiration_sites:'',extra_notes:'',privacy_consent:'true',marketing_consent:'false',accuracy_confirmation:'true',consent_version:'2026-05-07',consent_text_snapshot:'Existing private brief notice',consent_captured_at:'2026-09-26T12:00:00Z'}};assert.equal((await api.POST(request(body))).status,201);body.fields.consent_captured_at='2026-09-26T12:01:00Z';assert.equal((await api.POST(request(body))).status,201);assert.equal(api.calls.length,1);const invalid={...body,request_id:'22222222-2222-4222-8222-222222222222',fields:{...body.fields,accuracy_confirmation:'false'}};assert.equal((await api.POST(request(invalid))).status,422)});

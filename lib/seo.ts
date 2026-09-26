@@ -35,7 +35,7 @@ export const ORGANIZATION_SAME_AS = [
 ] as const;
 export const SITE_URL = resolveSiteUrl();
 export const DEFAULT_DESCRIPTION =
-  "Ingenium Consulting builds connected websites, CRM systems, marketing automation, and AI workflows for startups and SMEs.";
+  "Ingenium Consulting builds business websites, sets up CRM systems, and brings both together for small businesses.";
 export const DEFAULT_SOCIAL_IMAGE = `${SITE_URL}/opengraph-image`;
 
 export const keywordClusters = {
@@ -238,9 +238,9 @@ export const pageSeo: Record<string, PageSeoConfig> = {
     pageType: "ContactPage",
   },
   "/demo": {
-    title: "Book a Demo | Ingenium",
+    title: "Request a Demo | Ingenium",
     description:
-      "See how Ingenium connects website leads, CRM execution, automation, reporting, and governed AI support for service businesses.",
+      "Request a walkthrough of the website and CRM workflow. The Ingenium team will follow up to arrange a suitable time.",
     path: "/demo",
     keywords: ["book ingenium demo", "revenue systems demo", ...keywordClusters.platform],
     pageType: "ContactPage",
@@ -320,6 +320,31 @@ export const pageSeo: Record<string, PageSeoConfig> = {
   },
 };
 
+// Public metadata follows the services currently offered; redirected URLs are excluded from discovery.
+const rebuiltPages: Record<string, [string, string]> = {
+  "/": ["Websites & CRM for Small Businesses | Ingenium", "Websites, CRM projects, or both built together. Discuss a clearly scoped project with the Ingenium team in Ireland."],
+  "/websites": ["Business Website Design | Ingenium", "A website built around your business, with clear scope, mobile-friendly pages, enquiry forms and a supported launch."],
+  "/crm": ["CRM Setup & Implementation | Ingenium", "Organise contacts, sales stages and follow-up with a CRM project scoped around your team. Setup, migration and training agreed before delivery."],
+  "/connected": ["Website + CRM, Built Together | Ingenium", "Plan your website and CRM as one project, with the core enquiry-to-follow-up connection included in the agreed scope."],
+  "/ecommerce": ["Ecommerce Website Projects | Ingenium", "Discuss an online store with a defined catalogue, checkout and launch scope. Platform, payment and integration costs explained separately."],
+  "/pricing": ["Website & CRM Pricing | Ingenium", "Compare website, CRM and connected project options. Understand setup, ongoing care and what is included before you commit."],
+  "/how-we-work": ["How We Work | Ingenium", "From scope and design to testing, launch and handover. See how Ingenium plans website and CRM projects with you."],
+  "/services": ["Website & CRM Services | Ingenium", "Choose a website, a CRM project, or both built together. Explore ecommerce and supporting automation services."],
+  "/projects": ["Our Work | Ingenium", "Explore published Ingenium project examples, their scope and the work delivered."],
+  "/about": ["About the Ingenium Team", "Meet the people responsible for website design, CRM delivery and project conversations at Ingenium Consulting in Carlow, Ireland."],
+  "/contact": ["Discuss Your Project | Ingenium", "Tell Ingenium about your website, CRM or ecommerce project. Send an enquiry or contact the team directly."],
+  "/demo": ["Request a Demo | Ingenium", "Request a walkthrough of the website and CRM workflow. The Ingenium team will follow up to arrange a suitable time."],
+  "/automations": ["CRM & Follow-Up Automation | Ingenium", "Explore scoped automation for enquiry routing, tasks and follow-up, with clear ownership and review steps."],
+  "/ai-agents": ["AI Workflow Support | Ingenium", "Discuss AI assistance for repeatable work, with agreed inputs, review responsibilities and practical limits."],
+  "/security": ["Security & Project Responsibilities | Ingenium", "Review how access, data boundaries and approval responsibilities are agreed for Ingenium projects."],
+};
+for (const [path, [title, description]] of Object.entries(rebuiltPages)) {
+  pageSeo[path] = { ...pageSeo[path], title, description, path, keywords: ["Ingenium Consulting", title.split(" | ")[0]] };
+}
+for (const path of ["/platform", "/implementation", "/implementation-methodology", "/team"]) {
+  pageSeo[path].noIndex = true;
+}
+
 export const PAGE_SEO = pageSeo;
 
 export const PRIVATE_PATHS = ["/website-brief"] as const;
@@ -352,7 +377,7 @@ export function buildMetadata(config: PageSeoConfig): Metadata {
       description: config.ogDescription ?? config.description,
       url: canonical,
       siteName: SITE_NAME,
-      locale: "en_US",
+      locale: "en_IE",
       type: "website",
       images: [socialImage],
     },

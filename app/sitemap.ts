@@ -1,54 +1,10 @@
 import type { MetadataRoute } from "next";
-
-import { listPortalProjects } from "@/lib/portalIntegration/projects";
+import { getPublishedProjects } from "@/lib/portalIntegration/projects";
 import { PUBLIC_DISCOVERY_PATHS, SITE_URL } from "@/lib/seo";
-
-const routePriority: Record<
-  string,
-  { priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }
-> = {
-  "/": { priority: 1, changeFrequency: "weekly" },
-  "/platform": { priority: 0.9, changeFrequency: "weekly" },
-  "/services": { priority: 0.9, changeFrequency: "weekly" },
-  "/websites": { priority: 0.9, changeFrequency: "weekly" },
-  "/crm": { priority: 0.85, changeFrequency: "weekly" },
-  "/ai-agents": { priority: 0.85, changeFrequency: "weekly" },
-  "/automations": { priority: 0.85, changeFrequency: "weekly" },
-  "/security": { priority: 0.8, changeFrequency: "monthly" },
-  "/data-handling": { priority: 0.58, changeFrequency: "monthly" },
-  "/privacy": { priority: 0.5, changeFrequency: "monthly" },
-  "/security-review": { priority: 0.62, changeFrequency: "monthly" },
-  "/support": { priority: 0.58, changeFrequency: "monthly" },
-  "/implementation-methodology": { priority: 0.62, changeFrequency: "monthly" },
-  "/projects": { priority: 0.75, changeFrequency: "monthly" },
-  "/implementation": { priority: 0.8, changeFrequency: "monthly" },
-  "/about": { priority: 0.7, changeFrequency: "monthly" },
-  "/team": { priority: 0.7, changeFrequency: "monthly" },
-  "/demo": { priority: 0.78, changeFrequency: "monthly" },
-  "/revenue-systems-teardown": { priority: 0.76, changeFrequency: "monthly" },
-  "/technical-review": { priority: 0.76, changeFrequency: "monthly" },
-  "/contact": { priority: 0.9, changeFrequency: "weekly" },
-};
-
-const SITE_CONTENT_LAST_REVIEWED = new Date("2026-05-07");
-
 export const revalidate = 300;
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticRoutes = PUBLIC_DISCOVERY_PATHS.map((path) => ({
-    url: path === "/" ? SITE_URL : `${SITE_URL}${path}`,
-    lastModified: SITE_CONTENT_LAST_REVIEWED,
-    changeFrequency: routePriority[path]?.changeFrequency ?? "monthly",
-    priority: routePriority[path]?.priority ?? 0.5,
-  }));
-
-  const projects = await listPortalProjects();
-  const projectRoutes = projects.map((project) => ({
-    url: `${SITE_URL}/projects/${project.slug}`,
-    lastModified: new Date(project.updatedAt),
-    changeFrequency: "monthly" as const,
-    priority: 0.65,
-  }));
-
+  const staticRoutes = PUBLIC_DISCOVERY_PATHS.map((path) => ({ url: path === "/" ? SITE_URL : `${SITE_URL}${path}` }));
+  const { projects } = await getPublishedProjects();
+  const projectRoutes = projects.map((project) => ({ url: `${SITE_URL}/projects/${project.slug}`, ...(project.updatedAt && Number.isFinite(Date.parse(project.updatedAt)) ? { lastModified: new Date(project.updatedAt) } : {}) }));
   return [...staticRoutes, ...projectRoutes];
 }

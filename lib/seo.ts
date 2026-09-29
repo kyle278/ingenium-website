@@ -341,7 +341,7 @@ const rebuiltPages: Record<string, [string, string]> = {
 for (const [path, [title, description]] of Object.entries(rebuiltPages)) {
   pageSeo[path] = { ...pageSeo[path], title, description, path, keywords: ["Ingenium Consulting", title.split(" | ")[0]] };
 }
-for (const path of ["/platform", "/implementation", "/implementation-methodology", "/team"]) {
+for (const path of ["/platform", "/implementation", "/implementation-methodology"]) {
   pageSeo[path].noIndex = true;
 }
 

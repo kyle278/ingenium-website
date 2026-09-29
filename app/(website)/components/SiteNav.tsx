@@ -18,10 +18,12 @@ export default function SiteNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [serviceOpen, setServiceOpen] = useState(false);
+  const [companyOpen, setCompanyOpen] = useState(false);
+  const companyButton = useRef<HTMLButtonElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
   const serviceButton = useRef<HTMLButtonElement>(null);
   const navRef = useRef<HTMLElement>(null);
-  const close = () => { setOpen(false); setServiceOpen(false); };
+  const close = () => { setOpen(false); setServiceOpen(false); setCompanyOpen(false); };
 
   useEffect(() => {
     function dismiss(event: PointerEvent) {
@@ -34,7 +36,8 @@ export default function SiteNav() {
   return (
     <header className="site-header" ref={navRef} onKeyDown={(event) => {
       if (event.key === "Escape") {
-        if (serviceOpen) { setServiceOpen(false); serviceButton.current?.focus(); }
+        if (companyOpen) { setCompanyOpen(false); companyButton.current?.focus(); }
+        else if (serviceOpen) { setServiceOpen(false); serviceButton.current?.focus(); }
         else if (open) { setOpen(false); menuButton.current?.focus(); }
       }
     }}>
@@ -60,6 +63,23 @@ export default function SiteNav() {
             </div>
           </div>
           {links.map(item => <Link key={item.href} className="nav-link" href={item.href} onClick={close} aria-current={pathname.startsWith(item.href) ? "page" : undefined}>{item.label}</Link>)}
+          <div className="services-navigation" onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) setCompanyOpen(false);
+          }}>
+            <button ref={companyButton} type="button" className="nav-link" aria-expanded={companyOpen} aria-controls="company-navigation" onClick={() => setCompanyOpen(!companyOpen)}>
+              Company <ChevronDown size={14} className={companyOpen ? "rotate-chevron" : ""} />
+            </button>
+            <div id="company-navigation" className="services-dropdown" hidden={!companyOpen}>
+              {[
+                { href: "/about", label: "About Ingenium", description: "Our company, approach and responsibilities." },
+                { href: "/team", label: "Meet the team", description: "The people behind design, delivery and your next steps." },
+                { href: "/contact", label: "Contact", description: "Start a conversation about your project." },
+              ].map(item => <Link key={item.href} href={item.href} onClick={close} aria-current={pathname === item.href ? "page" : undefined}>
+                <span>{item.label}<ArrowUpRight size={17} aria-hidden="true" /></span>
+                <small>{item.description}</small>
+              </Link>)}
+            </div>
+          </div>
           <Link href="/contact" className="rebuild-button nav-cta" onClick={close}>Discuss your project <ArrowUpRight size={16} aria-hidden="true" /></Link>
         </nav>
       </div>

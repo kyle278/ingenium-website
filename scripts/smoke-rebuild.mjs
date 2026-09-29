@@ -3,7 +3,7 @@ import { gzipSync } from 'node:zlib';
 
 const base = process.argv[2] || 'http://localhost:3013';
 if (!['localhost', '127.0.0.1'].includes(new URL(base).hostname)) throw new Error('Use a local production server for this smoke test.');
-const routes = ['/', '/websites', '/crm', '/connected', '/ecommerce', '/pricing', '/services', '/how-we-work', '/projects', '/about', '/contact', '/demo', '/technical-review', '/revenue-systems-teardown', '/support', '/security', '/privacy', '/data-handling', '/security-review', '/automations', '/ai-agents'];
+const routes = ['/', '/websites', '/crm', '/connected', '/ecommerce', '/pricing', '/services', '/how-we-work', '/projects', '/about', '/team', '/contact', '/demo', '/technical-review', '/revenue-systems-teardown', '/support', '/security', '/privacy', '/data-handling', '/security-review', '/automations', '/ai-agents'];
 const html = new Map();
 for (const route of routes) {
   const response = await fetch(base + route);
@@ -14,7 +14,7 @@ for (const route of routes) {
   assert.ok(body.includes(`href="https://www.ingeniumconsulting.net${route === '/' ? '' : route}"`), `${route}: canonical`);
   for (const phrase of ['FINAL CTA', 'earn the scroll', 'Three proof blocks']) assert.ok(!body.includes(phrase), `${route}: editorial text`);
 }
-for (const [oldRoute, target] of Object.entries({'/platform':'/connected', '/team':'/about#team', '/implementation':'/how-we-work', '/implementation-methodology':'/how-we-work', '/departments':'/services', '/agents':'/ai-agents'})) {
+for (const [oldRoute, target] of Object.entries({'/platform':'/connected', '/implementation':'/how-we-work', '/implementation-methodology':'/how-we-work', '/departments':'/services', '/agents':'/ai-agents'})) {
   const response = await fetch(base + oldRoute, {redirect:'manual'});
   assert.equal(response.status, 308, oldRoute);
   assert.ok(response.headers.get('location')?.endsWith(target), oldRoute + ' target');
@@ -36,4 +36,4 @@ for (const source of scripts) {
   assert.ok(source.startsWith('/_next/'), 'No unconditional third-party script');
   compressed += gzipSync(Buffer.from(await (await fetch(base + source)).arrayBuffer())).length;
 }
-console.log(JSON.stringify({pages:routes.length, redirects:6, firstPartyHomeScriptCount:scripts.length, firstPartyHomeGzipBytes:compressed, javascriptBudgetBytes:250*1024, javascriptBudgetMet:compressed<=250*1024}, null, 2));
+console.log(JSON.stringify({pages:routes.length, redirects:5, firstPartyHomeScriptCount:scripts.length, firstPartyHomeGzipBytes:compressed, javascriptBudgetBytes:250*1024, javascriptBudgetMet:compressed<=250*1024}, null, 2));

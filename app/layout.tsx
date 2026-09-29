@@ -50,8 +50,9 @@ export const metadata: Metadata = {
   },
   referrer: "origin-when-cross-origin",
   icons: {
-    icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
-    shortcut: "/logo.svg",
+    icon: [{ url: "/brand/icon-32.png", type: "image/png", sizes: "32x32" }, { url: "/brand/ingenium-icon.png", type: "image/png", sizes: "512x512" }],
+    shortcut: "/brand/icon-32.png",
+    apple: [{ url: "/brand/icon-180.png", sizes: "180x180", type: "image/png" }],
   },
   robots: {
     index: true,

@@ -40,8 +40,7 @@ export default function SiteNav() {
     }}>
       <div className="site-header-inner">
         <Link href="/" className="site-brand" aria-label="Ingenium — home" onClick={close}>
-          <Image src="/logo.svg" alt="" width={38} height={38} priority />
-          <span>Ingenium<span className="brand-period">.</span></span>
+          <Image src="/brand/ingenium-logo.png" alt="" width={1000} height={245} sizes="(max-width: 600px) 180px, 204px" className="site-brand-logo" priority />
         </Link>
         <button ref={menuButton} className="mobile-menu-button" type="button" aria-expanded={open} aria-controls="site-navigation" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen(!open)}>
           {open ? <X size={23} /> : <Menu size={23} />}

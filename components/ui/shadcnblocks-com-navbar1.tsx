@@ -351,7 +351,7 @@ function Navbar1({ logo, menu, mobileExtraLinks = [], primaryAction, secondaryAc
 const ingeniumNavbarData: Navbar1Props = {
   logo: {
     url: "/",
-    src: "/logo.svg",
+    src: "/brand/ingenium-icon.png",
     alt: "Ingenium logo",
     title: "Ingenium Consulting",
     strapline: "Website + CRM + AI",

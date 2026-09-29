@@ -6,7 +6,7 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-inner">
         <div className="footer-intro">
-          <Link href="/" className="site-brand" aria-label="Ingenium — home"><Image src="/logo.svg" width={36} height={36} alt="" /><span>Ingenium.</span></Link>
+          <Link href="/" className="site-brand" aria-label="Ingenium — home"><Image src="/brand/ingenium-logo.png" width={1000} height={245} sizes="204px" className="site-brand-logo" alt="" /></Link>
           <p>Websites and CRM,<br />built around your business.</p>
           <span>Carlow, Ireland. Working with businesses everywhere.</span>
         </div>

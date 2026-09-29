@@ -1,17 +1,17 @@
 /* Public website design system. Legacy utilities remain for preserved policy pages. */
 :root {
-  --color-bg: oklch(97.89% .0029 264.54);
-  --color-panel-lifted: oklch(99.36% .0017 247.84);
-  --color-text: oklch(26.02% .0521 259.01);
-  --color-text-muted: oklch(49.96% .0412 258.83);
-  --color-brand: oklch(52.04% .1615 255.72);
+  --color-bg: #F7F8FA;
+  --color-panel-lifted: #FCFDFE;
+  --color-text: #14243D;
+  --color-text-muted: #55647B;
+  --color-brand: #1767C3;
   --color-brand-strong: oklch(44.72% .137 255.63);
   --color-error: oklch(50.03% .1821 29.51);
-  --color-line: oklch(90.89% .0168 250.85);
+  --color-line: #D9E2EC;
   --font-mono: var(--font-body);
   --surface-blue: oklch(95.6% .02 254);
   --surface-teal: oklch(94.5% .025 185);
-  --teal-ink: oklch(53.82% .0921 187.98);
+  --teal-ink: #087F78;
   --control-border: oklch(63.24% .0293 246.55);
   --space-xs: .5rem;
   --space-sm: .75rem;
@@ -32,8 +32,7 @@ body { background: var(--color-bg); letter-spacing: -.015em; }
 .site-header { position: sticky; z-index: 40; top: 0; border-bottom: 1px solid var(--color-line); background: var(--color-bg); }
 .site-header-inner { width: min(100% - 64px, 1240px); margin: auto; min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
 .site-brand { display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; color: var(--color-text); text-decoration: none; }
-.site-brand > span { font: 750 1.65rem/1 var(--font-display); letter-spacing: -.065em; }
-.brand-period { color: var(--color-brand); }
+.site-brand-logo { display: block; width: 204px; height: auto; }
 .site-navigation { display: flex; align-items: center; gap: 28px; }
 .nav-link { display: inline-flex; align-items: center; gap: 6px; min-height: 48px; font-size: .875rem; font-weight: 550; cursor: pointer; background: none; border: 0; }
 .nav-link:hover, .nav-link[aria-current], .services-dropdown a[aria-current] { color: var(--color-brand); }
@@ -241,7 +240,7 @@ body { background: var(--color-bg); letter-spacing: -.015em; }
 }
 @media (max-width: 540px) {
   .site-main, .site-header-inner, .site-footer-inner, .footer-bottom { width: calc(100% - 40px); }
-  .site-brand > span { font-size: 1.5rem; }
+  .site-brand-logo { width: 180px; }
   .site-navigation { padding-inline: 20px; }
   .home-hero h1 { font-size: 2.75rem; }
   .home-hero-actions { align-items: start; flex-direction: column; gap: 18px; }

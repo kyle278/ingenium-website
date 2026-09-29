@@ -61,7 +61,7 @@ interface HeroLandingProps {
 
 const defaultProps: Partial<HeroLandingProps> = {
   logo: {
-    src: '/logo-full.svg',
+    src: '/brand/ingenium-logo.png',
     alt: 'Ingenium Consulting logo',
     companyName: 'Ingenium Consulting',
   },

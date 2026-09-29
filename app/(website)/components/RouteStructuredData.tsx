@@ -107,7 +107,7 @@ function buildOrganizationSchema(): JsonLd {
     alternateName: ORGANIZATION_ALTERNATE_NAME,
     legalName: ORGANIZATION_LEGAL_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.svg`,
+    logo: `${SITE_URL}/brand/ingenium-logo.png`,
     email: ORGANIZATION_EMAIL,
     telephone: ORGANIZATION_PHONE,
     address: {

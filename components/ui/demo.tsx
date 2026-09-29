@@ -4,7 +4,7 @@ import type { HeroLandingProps } from '@/components/ui/hero-1';
 export default function Demo() {
   const heroProps: HeroLandingProps = {
     logo: {
-      src: '/logo-full.svg',
+      src: '/brand/ingenium-logo.png',
       alt: 'Ingenium Consulting logo',
       companyName: 'Ingenium Consulting',
     },

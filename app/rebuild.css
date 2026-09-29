@@ -193,6 +193,13 @@ body { background: var(--color-bg); letter-spacing: -.015em; }
 .footer-bottom { width: min(100% - 64px,1240px); margin: auto; border-top: 1px solid var(--color-line); padding: 24px 0; display: flex; justify-content: space-between; gap: 24px; font-size: .6875rem; color: var(--color-text-muted); }
 .footer-bottom > div { display: flex; flex-wrap: wrap; gap: 20px; }
 .rebuild-form { display: grid; gap: 24px; }
+.form-step-heading { scroll-margin-top: 110px; }
+.form-step-heading h2 { font: 600 clamp(1.5rem, 2.5vw, 2rem)/1.2 var(--font-display); letter-spacing: -.035em; scroll-margin-top: 110px; }
+.form-step-heading > p:last-child { margin-top: 16px; color: var(--color-text-muted); font-size: .9375rem; }
+.form-step-fields { display: grid; gap: 24px; min-width: 0; border: 0; padding: 0; margin: 0; }
+.form-step-fields[hidden] { display: none; }
+.form-step-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.form-step-actions > button { flex: 1 1 180px; }
 .rebuild-field { display: grid; gap: 8px; }
 .rebuild-field label { font-size: .9375rem; font-weight: 600; }
 .rebuild-field input:not([type=checkbox]), .rebuild-field select, .rebuild-field textarea { width: 100%; min-height: 48px; border: 1px solid var(--control-border); border-radius: 6px; background: var(--color-panel-lifted); padding: 12px; font-size: 1rem; }

@@ -4,6 +4,7 @@ import { useEffect, useEffectEvent, useId, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 
 import ConsentCardField from "../components/ConsentCardField";
+import FormStepHeading from "@/components/rebuild/FormStepHeading";
 
 import { PORTAL_CONSENT_VERSION } from "@/lib/portalIntegration/public";
 
@@ -24,11 +25,8 @@ const checkboxClassName =
   "h-4 w-4 rounded border-[var(--color-ghost)] bg-white text-[var(--color-brand)] focus:ring-[rgba(0,87,191,0.2)]";
 
 const steps = [
-  { title: "Contact", detail: "Who we are planning with" },
-  { title: "Business", detail: "What the site needs to do" },
-  { title: "Scope", detail: "Key pages and functionality" },
-  { title: "Launch", detail: "Assets, timing, and notes" },
-  { title: "Consent", detail: "Privacy and optional updates" },
+  { title: "Your details", detail: "Contact, business, scope and launch" },
+  { title: "Privacy and consent", detail: "The boring but important stuff" },
 ] as const;
 
 const featureOptions = [
@@ -76,7 +74,7 @@ export default function WebsiteBriefForm({
   const formRef = useRef<HTMLFormElement>(null);
   const consentCapturedAtRef = useRef<HTMLInputElement>(null);
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState<0 | 1>(0);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [stepAnimationKey, setStepAnimationKey] = useState(0);
@@ -102,7 +100,6 @@ export default function WebsiteBriefForm({
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [accuracyConfirmation, setAccuracyConfirmation] = useState(false);
 
-  const progressPercent = `${((step + 1) / steps.length) * 100}%`;
   const isLastStep = step === steps.length - 1;
   const { firstName, lastName } = splitFullName(name.trim());
 
@@ -119,21 +116,21 @@ export default function WebsiteBriefForm({
       }
     }
 
-    if (currentStep === 1) {
+    if (currentStep === 0) {
       if (!businessSummary.trim() || !currentSiteStatus || !primaryGoal) {
         return "Please share your business summary, current website status, and primary goal.";
       }
     }
 
-    if (currentStep === 2 && !requiredPages.trim()) {
+    if (currentStep === 0 && !requiredPages.trim()) {
       return "Please tell us the key pages or sections you expect on the site.";
     }
 
-    if (currentStep === 3 && !timeline) {
+    if (currentStep === 0 && !timeline) {
       return "Please choose an ideal timeline so we can plan the build properly.";
     }
 
-    if (currentStep === 4) {
+    if (currentStep === 1) {
       if (!privacyConsent) {
         return "Please confirm the privacy acknowledgment before submitting.";
       }
@@ -233,6 +230,7 @@ export default function WebsiteBriefForm({
   }, []);
 
   function goToNextStep() {
+    if (!formRef.current?.reportValidity()) return;
     const validationMessage = validateStep(step);
     if (validationMessage) {
       setErrorMessage(validationMessage);
@@ -240,18 +238,24 @@ export default function WebsiteBriefForm({
     }
 
     setErrorMessage("");
-    setStep((current) => Math.min(current + 1, steps.length - 1));
+    setStep(1);
     setStepAnimationKey((current) => current + 1);
   }
 
   function goToPreviousStep() {
     setErrorMessage("");
-    setStep((current) => Math.max(current - 1, 0));
+    setStep(0);
     setStepAnimationKey((current) => current + 1);
   }
 
   function handleSubmitCapture(event: React.FormEvent<HTMLFormElement>) {
     if (!isLastStep) {
+      event.preventDefault();
+      goToNextStep();
+      return;
+    }
+
+    if (isSubmitting || !formRef.current?.reportValidity()) {
       event.preventDefault();
       return;
     }
@@ -269,14 +273,6 @@ export default function WebsiteBriefForm({
 
     setIsSubmitting(true);
     setErrorMessage("");
-  }
-
-  function handleKeyDown(event: React.KeyboardEvent<HTMLFormElement>) {
-    if (isLastStep || event.key !== "Enter" || event.target instanceof HTMLTextAreaElement) {
-      return;
-    }
-
-    event.preventDefault();
   }
 
   if (submitState === "success") {
@@ -307,7 +303,7 @@ export default function WebsiteBriefForm({
       id={`${formSlug}-form`}
       method="post"
       name={formName}
-      onKeyDown={handleKeyDown}
+      noValidate
       onSubmitCapture={handleSubmitCapture}
     >
       <input name="first_name" type="hidden" value={firstName} />
@@ -326,22 +322,7 @@ export default function WebsiteBriefForm({
       />
       <input ref={consentCapturedAtRef} name="consent_captured_at" type="hidden" value="" />
 
-      <div className="flex items-center justify-between rounded-lg bg-[var(--color-panel-low)] px-3 py-2">
-        <div>
-          <p className="type-meta-kicker text-[var(--color-text-muted)]">
-            Step {step + 1} of {steps.length}
-          </p>
-          <p className="mt-1 type-body-xs text-[var(--color-text-muted)]">{steps[step]?.detail}</p>
-        </div>
-        <p className="type-body-xs font-medium text-[var(--color-brand)]">{steps[step]?.title}</p>
-      </div>
-
-      <div className="h-1.5 rounded-full bg-[var(--color-panel-mid)]">
-        <div
-          className="h-full rounded-full bg-[linear-gradient(135deg,var(--color-brand),var(--color-brand-strong))] transition-[width] duration-300 ease-out"
-          style={{ width: progressPercent }}
-        />
-      </div>
+      <FormStepHeading step={step} />
 
       <div hidden={step !== 0} key={`step-0-${stepAnimationKey}`} className="form-step-enter grid gap-5 sm:grid-cols-2">
         <label className="block space-y-2 sm:col-span-2">
@@ -408,7 +389,7 @@ export default function WebsiteBriefForm({
         </label>
       </div>
 
-      <div hidden={step !== 1} key={`step-1-${stepAnimationKey}`} className="form-step-enter space-y-5">
+      <div hidden={step !== 0} key={`step-1-${stepAnimationKey}`} className="form-step-enter space-y-5">
         <label className="block space-y-2">
           <span className="type-form-label text-[var(--color-text)]">
             What does the business do, and what should the site help achieve? *
@@ -473,7 +454,7 @@ export default function WebsiteBriefForm({
         </div>
       </div>
 
-      <div hidden={step !== 2} key={`step-2-${stepAnimationKey}`} className="form-step-enter space-y-5">
+      <div hidden={step !== 0} key={`step-2-${stepAnimationKey}`} className="form-step-enter space-y-5">
         <label className="block space-y-2">
           <span className="type-form-label text-[var(--color-text)]">
             What pages or sections do you expect on the site? *
@@ -513,7 +494,7 @@ export default function WebsiteBriefForm({
         </fieldset>
       </div>
 
-      <div hidden={step !== 3} key={`step-3-${stepAnimationKey}`} className="form-step-enter space-y-5">
+      <div hidden={step !== 0} key={`step-3-${stepAnimationKey}`} className="form-step-enter space-y-5">
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block space-y-2">
             <span className="type-form-label text-[var(--color-text)]">Ideal timeline *</span>
@@ -587,11 +568,13 @@ export default function WebsiteBriefForm({
         </label>
       </div>
 
-      <div hidden={step !== 4} key={`step-4-${stepAnimationKey}`} className="form-step-enter space-y-5">
+      <div hidden={step !== 1} key={`step-4-${stepAnimationKey}`} className="form-step-enter space-y-5">
         <div className="rounded-2xl bg-[var(--color-panel-low)] px-4 py-4 type-body-sm text-[var(--color-text-soft)]">
           We use this intake to scope the project, confirm the right next step, and keep an internal record of the
           consent choices attached to the submission.
         </div>
+
+        <p><a className="rebuild-text-link" href="/privacy" target="_blank" rel="noopener noreferrer">Read the Privacy Policy</a></p>
 
         <ConsentCardField
           checked={privacyConsent}
@@ -658,10 +641,10 @@ export default function WebsiteBriefForm({
             data-track-cta="website_brief_continue"
             data-track-label="Continue Website Brief"
             disabled={isSubmitting}
-            onClick={goToNextStep}
+            onClick={(event) => { event.preventDefault(); goToNextStep(); }}
             type="button"
           >
-            Continue
+            Continue to privacy and consent
             <ArrowRight className="h-4 w-4" />
           </button>
         )}

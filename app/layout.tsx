@@ -50,8 +50,8 @@ export const metadata: Metadata = {
   },
   referrer: "origin-when-cross-origin",
   icons: {
-    icon: [{ url: "/brand/icon-32.png", type: "image/png", sizes: "32x32" }, { url: "/brand/ingenium-icon.png", type: "image/png", sizes: "512x512" }],
-    shortcut: "/brand/icon-32.png",
+    icon: [{ url: "/favicon.ico?v=ingenium-mark-v2", type: "image/x-icon", sizes: "16x16 32x32 48x48 64x64" }, { url: "/brand/icon-32.png?v=2", type: "image/png", sizes: "32x32" }, { url: "/brand/ingenium-icon.png?v=2", type: "image/png", sizes: "512x512" }],
+    shortcut: "/favicon.ico?v=ingenium-mark-v2",
     apple: [{ url: "/brand/icon-180.png", sizes: "180x180", type: "image/png" }],
   },
   robots: {

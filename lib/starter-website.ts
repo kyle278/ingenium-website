@@ -15,9 +15,9 @@ export const BOOKING_URL = process.env.NEXT_PUBLIC_STARTER_BOOKING_URL?.trim() |
 // Hero explainer, self-hosted so no third-party player loads before consent.
 // Bump the version in the file names when the video changes, so browsers fetch the new one.
 export const EXPLAINER_VIDEO = {
-  src: "/starter/explainer-v1-1080.mp4",
-  mobileSrc: "/starter/explainer-v1-720.mp4",
-  poster: "/starter/explainer-v1-poster.webp",
+  src: "/starter/explainer-v2-1080.mp4",
+  mobileSrc: "/starter/explainer-v2-720.mp4",
+  poster: "/starter/explainer-v2-poster.webp",
 } as const;
 
 // Live example sites. Leave href empty until each example is published.

@@ -11,7 +11,7 @@ import { ORGANIZATION_ADDRESS, ORGANIZATION_EMAIL, ORGANIZATION_NAME, ORGANIZATI
 import { EXAMPLE_SITES, FOUNDING_PLACES_LEFT, FOUNDING_PLACES_TOTAL, PRICE, STARTER_PATH } from "@/lib/starter-website";
 
 const TITLE = "Starter Website for Carlow & Kilkenny Businesses | Ingenium";
-const DESCRIPTION = "Your business website, written for you and live in 5 working days. €495 + €50/month, domain and hosting included. Based in Carlow.";
+const DESCRIPTION = "Your business website, written for you and live in 5 working days. €495 + €50/month, hosting and monthly changes included. Based in Carlow.";
 const URL = `${SITE_URL}${STARTER_PATH}`;
 
 export const metadata: Metadata = {
@@ -45,7 +45,7 @@ const tiles = [
   { icon: Smartphone, title: "Built for phones", line: "A clean one-page site that looks right on any screen." },
   { icon: Search, title: "Found on Google and AI tools", line: "Set up so Google, Bing and AI assistants like ChatGPT and Claude can find and understand your business." },
   { icon: Send, title: "Enquiries straight to you", line: "A contact form, tap-to-call and a WhatsApp button." },
-  { icon: Globe, title: "Your domain, your name", line: "We register it in your name and renew it while you're with us." },
+  { icon: Globe, title: "Your domain, your name", line: "Registered in your name and paid for by you, so it's always yours. We set it up and connect it." },
   { icon: RefreshCw, title: "Changes every month", line: "Up to 30 minutes of small changes a month. Just send a message." },
 ];
 
@@ -62,7 +62,7 @@ const included = [
   "Business details AI assistants like ChatGPT and Claude can read",
   "Linked to your Google Business Profile",
   "Contact form, tap-to-call and WhatsApp button",
-  "Domain registered in your name",
+  "Your domain set up and connected (you own it and pay for it)",
   "Hosting and SSL certificate",
   "Backups and a monthly check",
   "One round of changes before launch",
@@ -71,8 +71,8 @@ const included = [
 ];
 
 const faqs = [
-  { q: "Do I own my website and domain?", a: "The domain is registered in your name from day one. If you leave, it stays yours, and we'll give you a copy of your site's content." },
-  { q: "What does the €50 a month cover?", a: "Hosting, security, backups, your domain renewal, a monthly check that everything works, and up to 30 minutes of small changes." },
+  { q: "Do I own my website and domain?", a: "Yes. The domain is registered in your name and paid for by you, so it's always yours. If you leave, we'll give you a copy of your site's content." },
+  { q: "What does the €50 a month cover?", a: "Hosting, security, backups, a monthly check that everything works, and up to 30 minutes of small changes. Your domain is separate: you pay for it directly, so it stays in your name." },
   { q: "Is there a contract?", a: "No. Cancel any time with 30 days' notice." },
   { q: "What if I don't have photos?", a: "We'll use good licensed stock photos, and you can swap in your own later as part of your monthly changes." },
   { q: "Will this get me more customers?", a: "It makes you easier to find, trust and contact. We can't promise a number of calls, and nobody honestly can." },

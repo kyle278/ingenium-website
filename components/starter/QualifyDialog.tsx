@@ -176,7 +176,7 @@ export default function QualifyDialog({ open, position, onClose, onSubmitted }: 
 
             <form ref={form} className="starter-form" noValidate onSubmit={submit}>
               <FormStepHeading step={step} />
-              <fieldset className="starter-form-fields" hidden={step !== 0} disabled={status === "sending"} aria-label="Your business details">
+              <fieldset className="starter-form-fields is-details" hidden={step !== 0} disabled={status === "sending"} aria-label="Your business details">
               <Field id={`${ids}-name`} label="Your name" error={errorFor("name")}>
                 <input ref={firstField} id={`${ids}-name`} name="name" type="text" autoComplete="name" required maxLength={160}
                   value={values.name} onChange={(e) => update("name", e.target.value)} onBlur={() => setTouched((t) => ({ ...t, name: true }))}

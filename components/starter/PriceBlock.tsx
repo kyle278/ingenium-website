@@ -28,7 +28,7 @@ export function PriceHeadline() {
 export function PriceDetails() {
   return (
     <div className="starter-price-details">
-      <p className="starter-price-included">Domain, hosting and monthly changes included.</p>
+      <p className="starter-price-included">Hosting and monthly changes included. Your domain is yours, in your name and paid by you.</p>
       <p className="starter-price-yearly">Or pay {PRICE.yearly} for the year up front and <strong>get 2 months free</strong>.</p>
       <p className="starter-price-terms">No contract · No VAT charged</p>
       <details className="starter-price-diff">

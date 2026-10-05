@@ -22,7 +22,7 @@ export default async function StarterOpenGraphImage() {
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
         <div style={{ fontSize: 58, fontWeight: 700 }}>€495 + €50/month</div>
-        <div style={{ display: "flex", padding: "10px 22px", borderRadius: 999, background: "#E8F0FB", fontSize: 26 }}>Domain and hosting included</div>
+        <div style={{ display: "flex", padding: "10px 22px", borderRadius: 999, background: "#E8F0FB", fontSize: 26 }}>Hosting and changes included</div>
       </div>
     </div>,
     { ...size, fonts: [{ name: "Manrope", data: font, weight: 700, style: "normal" }] },

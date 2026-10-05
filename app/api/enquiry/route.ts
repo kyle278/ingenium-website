@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { acceptedReceipt, sanitizeTracking, validateEnquiry } from "@/lib/enquiry-contract";
 import { PORTAL_FORM_SUBMIT_ENDPOINT, PORTAL_SITE_ID } from "@/lib/portalIntegration/public";
+import { LEAD_LABELS, STARTER_FORM_SLUG, routeStarterLead, validateStarterFields } from "@/lib/starter-website";
 
 export const runtime = "nodejs";
 // Bounded same-process replay protection only. Durable cross-instance idempotency
@@ -20,6 +21,14 @@ export async function POST(req: Request) {
   const validation = validateEnquiry(body);
   if (validation) return NextResponse.json({ error: validation }, { status: 422 });
   if (body.fields.website_fax) return NextResponse.json({ error: "We could not accept this request. Please contact us by email." }, { status: 422 });
+  if (body.form_slug === STARTER_FORM_SLUG) {
+    const starterError = validateStarterFields(body.fields);
+    if (starterError) return NextResponse.json({ error: starterError }, { status: 422 });
+    // Routing is recomputed here so the stored label never depends on the browser.
+    const route = routeStarterLead(body.fields);
+    body.fields.lead_route = route;
+    body.fields.lead_label = LEAD_LABELS[route];
+  }
   const now = Date.now();
   for (const [key, entry] of requests) if (entry.expires < now) requests.delete(key);
   for (const [key, entry] of attempts) if (entry.expires < now) attempts.delete(key);
@@ -40,7 +49,7 @@ export async function POST(req: Request) {
       const response = await fetch(PORTAL_FORM_SUBMIT_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", Origin: origin }, body: JSON.stringify({ site_id: PORTAL_SITE_ID, form_slug: body.form_slug, fields: body.fields, tracking, metadata: { website_request_id: body.request_id, consent_captured_at: new Date().toISOString(), first_touch: sanitizeTracking(body.tracking?.first_touch), latest_touch: sanitizeTracking(body.tracking?.latest_touch) } }), signal: AbortSignal.timeout(20000) });
       const receipt = await response.json().catch(() => null);
       if (!response.ok || !acceptedReceipt(receipt)) return { status: 502, body: { error: "We could not confirm receipt. Please email hello@ingeniumconsulting.net before sending again." } };
-      return { status: 201, body: { ok: true, submission_id: receipt.submission_id } };
+      return { status: 201, body: { ok: true, submission_id: receipt.submission_id, ...(body.fields.lead_route ? { lead_route: body.fields.lead_route } : {}) } };
     } catch { return { status: 503, body: { error: "We could not confirm receipt. It may have reached us. Please email hello@ingeniumconsulting.net before sending again." } }; }
   })();
   requests.set(body.request_id, { hash, expires: now + 3600000, result });

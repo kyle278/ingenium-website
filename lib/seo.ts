@@ -336,6 +336,7 @@ const rebuiltPages: Record<string, [string, string]> = {
   "/demo": ["Request a Demo | Ingenium", "Request a walkthrough of the website and CRM workflow. The Ingenium team will follow up to arrange a suitable time."],
   "/automations": ["CRM & Follow-Up Automation | Ingenium", "Explore scoped automation for enquiry routing, tasks and follow-up, with clear ownership and review steps."],
   "/ai-agents": ["AI Workflow Support | Ingenium", "Discuss AI assistance for repeatable work, with agreed inputs, review responsibilities and practical limits."],
+  "/starter-website": ["Starter Website for Carlow & Kilkenny Businesses | Ingenium", "Your business website, written for you and live in 5 working days. €495 + €50/month, domain and hosting included. Based in Carlow."],
   "/security": ["Security & Project Responsibilities | Ingenium", "Review how access, data boundaries and approval responsibilities are agreed for Ingenium projects."],
 };
 for (const [path, [title, description]] of Object.entries(rebuiltPages)) {

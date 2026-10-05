@@ -15,7 +15,7 @@ export function OfferPrice({ offer }: { offer: Offer }) {
   return <div>
     <p className="rebuild-price">{offer.setup} <span className="text-base font-normal">setup</span></p>
     <p className="mt-2 text-xl font-semibold">+ {offer.monthly.toLowerCase()}/month</p>
-    <p className="mt-3 text-sm">Excluding VAT. Scope confirmed before work begins.</p>
+    <p className="mt-3 text-sm">No VAT charged. Scope confirmed before work begins.</p>
   </div>;
 }
 
@@ -40,7 +40,7 @@ export default function OfferPage({ offer }: { offer: Offer }) {
     <section className="rebuild-section" id="included" aria-labelledby="included-title">
       <div className="rebuild-grid-two items-start">
         <div className="rebuild-section-heading"><p className="rebuild-kicker">The starting scope</p><h2 id="included-title">{offer.packageName}</h2><p>{offer.audience}</p><div className="mt-8"><OfferPrice offer={offer} /></div><Link className="rebuild-button mt-8" href={offer.href}>{offer.cta}<ArrowRight size={18} aria-hidden="true" /></Link></div>
-        <div><ul className="rebuild-list">{offer.includes.map((item) => <li key={item}>{item}</li>)}</ul><div className="mt-8 space-y-4 border-t border-current/15 pt-6"><p>{offer.care}</p><p>{offer.exclusions}</p><p className="text-sm">Implementation plus 12 months of service {offer.slug === "ecommerce" ? "starts at" : "totals"} <strong>{offer.annual}</strong>, excluding VAT{offer.slug === "ecommerce" ? ", platform costs" : ""} and agreed extras. This is a cost comparison, not a minimum service term.</p></div></div>
+        <div><ul className="rebuild-list">{offer.includes.map((item) => <li key={item}>{item}</li>)}</ul><div className="mt-8 space-y-4 border-t border-current/15 pt-6"><p>{offer.care}</p><p>{offer.exclusions}</p><p className="text-sm">Implementation plus 12 months of service {offer.slug === "ecommerce" ? "starts at" : "totals"} <strong>{offer.annual}</strong>, excluding {offer.slug === "ecommerce" ? "platform costs and " : ""}agreed extras. This is a cost comparison, not a minimum service term.</p></div></div>
       </div>
     </section>
     {offer.sections.map((section) => <section className="rebuild-section" key={section.title}><div className="rebuild-grid-two"><h2 className="rebuild-section-heading">{section.title}</h2><div className="space-y-5">{section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{section.link && <Link className="rebuild-text-link" href={section.link.href}>{section.link.label}<ArrowRight size={16} aria-hidden="true" /></Link>}</div></div></section>)}

@@ -70,7 +70,7 @@ export default async function HomePage() {
         { title: "CRM", setup: "€3,000", monthly: "€249", href: "/pricing#crm", detail: "CRM setup, training and ongoing support." },
         { title: "Website + CRM", setup: "€4,500", monthly: "€349", href: "/pricing#connected", detail: "Both parts, with the standard connection included." },
       ].map(offer => <div key={offer.title}><h3>{offer.title}</h3><strong>{offer.setup}</strong><p>setup + {offer.monthly}/month</p><p>{offer.detail}</p><Link href={offer.href} className="rebuild-text-link">See what’s included <ArrowRight size={14} aria-hidden="true" /></Link></div>)}</div>
-      <p className="home-pricing-note">Prices exclude VAT. Defined scope; your requirements and total price are confirmed before work begins. Selling products online? <Link href="/ecommerce" className="rebuild-text-link">Explore ecommerce.</Link></p>
+      <p className="home-pricing-note">No VAT charged. Defined scope; your requirements and total price are confirmed before work begins. Selling products online? <Link href="/ecommerce" className="rebuild-text-link">Explore ecommerce.</Link></p>
     </section>
 
     <section className="rebuild-section home-invitation" aria-labelledby="invitation-heading"><div><h2 className="rebuild-section-heading" id="invitation-heading">Tell us what needs<br />to work better.</h2><p>Whether you need a new website, a more useful CRM or both, start with the problem you want to solve. We will help you identify the right next step.</p></div><Link href="/contact" className="rebuild-button">Discuss your project <ArrowUpRight size={18} aria-hidden="true" /></Link></section>

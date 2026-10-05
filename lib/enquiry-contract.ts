@@ -8,12 +8,14 @@ export function validateEnquiry(input: unknown): string | null {
   if (!input || typeof input !== "object") return "Please complete the enquiry form.";
   const body = input as Record<string, unknown>;
   if (typeof body.request_id !== "string" || !/^[a-f0-9-]{36}$/i.test(body.request_id)) return "Invalid request reference. Please reload the page.";
-  if (body.form_slug !== "contact" && body.form_slug !== "website-project-brief") return "This form is not supported.";
+  if (body.form_slug !== "contact" && body.form_slug !== "website-project-brief" && body.form_slug !== "starter-website") return "This form is not supported.";
   const f = body.fields as Record<string, unknown> | undefined;
   if (!f || typeof f !== "object" || Array.isArray(f) || Object.keys(f).length > 100) return "Please complete the enquiry form.";
   if (Object.values(f).some(v => typeof v !== "string" || v.length > 12000)) return "Please shorten your response.";
   if (typeof f.name !== "string" || f.name.trim().length < 2 || f.name.length > 160) return "Please enter your name.";
   if (typeof f.email !== "string" || f.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) return "Please enter a valid email address.";
+  // The starter form shows its privacy line as text, not a checkbox; its own checks live in lib/starter-website.ts.
+  if (body.form_slug === "starter-website") return null;
   if (f.privacy_consent !== "true") return "Please acknowledge the Privacy Policy before sending.";
   if (f.marketing_consent !== "true" && f.marketing_consent !== "false") return "Please confirm your marketing preference.";
   if (body.form_slug === "contact") {

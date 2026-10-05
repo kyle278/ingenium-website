@@ -4,13 +4,14 @@ import { useEffect, useId, useRef, useState } from "react";
 import { AlertCircle, X } from "lucide-react";
 
 import { clearEnquiryRequestId, enquiryRequestId, enquiryTracking, recordAcceptedLead, sendEnquiry } from "@/lib/enquiry-client";
+import { NOTICE_VERSION, PRIVACY_NOTICE, validateEnquiry } from "@/lib/enquiry-contract";
+import FormStepHeading from "@/components/rebuild/FormStepHeading";
 import {
   BOOKING_URL,
   BUSINESS_TYPES,
   DETAILS_MAX,
   MAIN_NEEDS,
   MARKETING_TEXT,
-  PRIVACY_LINE,
   SOMETHING_ELSE,
   STARTER_FORM_SLUG,
   TEAM_SIZES,
@@ -20,10 +21,10 @@ import {
 } from "@/lib/starter-website";
 import { trackStarter } from "./track";
 
-type Values = { name: string; email: string; phone: string; team_size: string; business_type: string; main_need: string; details: string; marketing: boolean };
+type Values = { name: string; email: string; phone: string; team_size: string; business_type: string; main_need: string; details: string; privacy: boolean; marketing: boolean };
 type FieldName = "name" | "email" | "phone" | "details";
 
-const EMPTY: Values = { name: "", email: "", phone: "", team_size: "", business_type: "", main_need: "", details: "", marketing: false };
+const EMPTY: Values = { name: "", email: "", phone: "", team_size: "", business_type: "", main_need: "", details: "", privacy: false, marketing: false };
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function fieldError(field: FieldName, values: Values): string {
@@ -52,6 +53,8 @@ export default function QualifyDialog({ open, position, onClose, onSubmitted }: 
   const ids = useId();
 
   const [values, setValues] = useState<Values>(EMPTY);
+  const [step, setStep] = useState<0 | 1>(0);
+  const pending = useRef(false);
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
   const [submitError, setSubmitError] = useState("");
@@ -63,10 +66,10 @@ export default function QualifyDialog({ open, position, onClose, onSubmitted }: 
     if (open && !element.open) {
       element.showModal();
       if (!openedAt.current) openedAt.current = Date.now();
-      if (!result) requestAnimationFrame(() => firstField.current?.focus());
+      if (!result) requestAnimationFrame(() => step === 0 ? firstField.current?.focus() : form.current?.querySelector<HTMLElement>('[name="privacy_consent"]')?.focus());
     }
     if (!open && element.open) element.close();
-  }, [open, result]);
+  }, [open, result, step]);
 
   function requestClose() {
     if (started.current && !result) trackStarter("starter_form_close_unsubmitted", { cta_position: position });
@@ -87,11 +90,19 @@ export default function QualifyDialog({ open, position, onClose, onSubmitted }: 
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
-    if (status === "sending") return;
+    if (pending.current || result) return;
     setTouched(Object.fromEntries(visibleFields.map((field) => [field, true])));
     const firstInvalid = visibleFields.find((field) => fieldError(field, values));
     if (firstInvalid) {
+      setStep(0);
       form.current?.querySelector<HTMLElement>(`[name="${firstInvalid}"]`)?.focus();
+      return;
+    }
+
+    if (step === 0) { setStep(1); setSubmitError(""); setStatus("idle"); return; }
+    if (!values.privacy) {
+      setStatus("error"); setSubmitError("Please acknowledge the Privacy Policy before sending.");
+      form.current?.querySelector<HTMLElement>('[name="privacy_consent"]')?.focus();
       return;
     }
 
@@ -107,14 +118,28 @@ export default function QualifyDialog({ open, position, onClose, onSubmitted }: 
       main_need: values.main_need,
       details: showDetails ? values.details.trim() : "",
       marketing_consent: values.marketing ? "true" : "false",
+      privacy_consent: values.privacy ? "true" : "false",
+      consent_version: NOTICE_VERSION,
+      consent_text_snapshot: PRIVACY_NOTICE,
+      marketing_consent_text: MARKETING_TEXT,
+      consent_captured_at: new Date().toISOString(),
+      first_name: values.name.trim().split(/\s+/)[0],
+      last_name: values.name.trim().split(/\s+/).slice(1).join(" "),
+      service: "website",
+      intent: STARTER_FORM_SLUG,
+      biggest_growth_challenge: [values.main_need, showDetails ? values.details.trim() : ""].filter(Boolean).join(". "),
       cta_position: position,
       form_opened_from: location.pathname,
       submitted_at: new Date().toISOString(),
       fill_ms: String(Date.now() - openedAt.current),
       website_fax: honeypot.current?.value ?? "",
     };
+    const payload = { request_id: requestId, form_slug: STARTER_FORM_SLUG, fields, tracking: enquiryTracking() };
+    const invalid = validateEnquiry(payload);
+    if (invalid) { setStatus("error"); setSubmitError(invalid); return; }
+    pending.current = true;
     try {
-      const receipt = await sendEnquiry({ request_id: requestId, form_slug: STARTER_FORM_SLUG, fields, tracking: enquiryTracking() });
+      const receipt = await sendEnquiry(payload);
       clearEnquiryRequestId(STARTER_FORM_SLUG);
       const route = (receipt as { lead_route?: LeadRoute }).lead_route ?? routeStarterLead(fields);
       recordAcceptedLead(receipt.submission_id, STARTER_FORM_SLUG);
@@ -126,7 +151,7 @@ export default function QualifyDialog({ open, position, onClose, onSubmitted }: 
     } catch (error) {
       setStatus("error");
       setSubmitError(error instanceof Error ? error.message : "We could not send your answers. Please email hello@ingeniumconsulting.net.");
-    }
+    } finally { pending.current = false; }
   }
 
   const titleId = `${ids}-title`;
@@ -150,6 +175,8 @@ export default function QualifyDialog({ open, position, onClose, onSubmitted }: 
             <p className="starter-dialog-intro">Six quick questions. We&apos;ll reply within 1 working day.</p>
 
             <form ref={form} className="starter-form" noValidate onSubmit={submit}>
+              <FormStepHeading step={step} />
+              <fieldset className="starter-form-fields" hidden={step !== 0} disabled={status === "sending"} aria-label="Your business details">
               <Field id={`${ids}-name`} label="Your name" error={errorFor("name")}>
                 <input ref={firstField} id={`${ids}-name`} name="name" type="text" autoComplete="name" required maxLength={160}
                   value={values.name} onChange={(e) => update("name", e.target.value)} onBlur={() => setTouched((t) => ({ ...t, name: true }))}
@@ -186,17 +213,23 @@ export default function QualifyDialog({ open, position, onClose, onSubmitted }: 
                 <input ref={honeypot} id={`${ids}-fax`} name="website_fax" type="text" tabIndex={-1} autoComplete="off" />
               </div>
 
-              <p className="starter-privacy">{PRIVACY_LINE} <a href="/privacy" target="_blank" rel="noopener">Privacy notice</a>.</p>
-
+              </fieldset>
+              <fieldset className="starter-form-fields" hidden={step !== 1} disabled={step !== 1 || status === "sending"} aria-label="Privacy and consent">
               <label className="starter-check">
-                <input type="checkbox" checked={values.marketing} onChange={(e) => update("marketing", e.target.checked)} />
-                <span>{MARKETING_TEXT}</span>
+                <input name="privacy_consent" type="checkbox" required checked={values.privacy} onChange={(e) => update("privacy", e.target.checked)} />
+                <span>{PRIVACY_NOTICE} <a href="/privacy" target="_blank" rel="noopener">Read the Privacy Policy</a> (required)</span>
               </label>
+              <label className="starter-check">
+                <input name="marketing_consent" type="checkbox" checked={values.marketing} onChange={(e) => update("marketing", e.target.checked)} />
+                <span>{MARKETING_TEXT} <a href="/privacy" target="_blank" rel="noopener">Read how we handle your data under GDPR</a> (optional)</span>
+              </label>
+              </fieldset>
 
               {status === "error" && <p className="starter-submit-error" role="alert"><AlertCircle size={18} aria-hidden="true" />{submitError}</p>}
 
+              {step === 1 && <button type="button" className="rebuild-button-secondary" disabled={status === "sending"} onClick={() => { setStep(0); setSubmitError(""); setStatus("idle"); }}>Back to details</button>}
               <button type="submit" className="rebuild-button starter-submit" disabled={status === "sending"} aria-busy={status === "sending"}>
-                {status === "sending" ? <><span className="starter-spinner" aria-hidden="true" />Sending…</> : "Check my fit"}
+                {status === "sending" ? <><span className="starter-spinner" aria-hidden="true" />Sending…</> : step === 0 ? "Continue to privacy and consent" : "Check my fit"}
               </button>
             </form>
           </>

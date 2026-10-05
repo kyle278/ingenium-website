@@ -1,4 +1,4 @@
-import { analyticsAllowed } from "@/lib/enquiry-client";
+import { analyticsAllowed, trackPortalEvent } from "@/lib/enquiry-client";
 
 export type StarterEvent =
   | "starter_cta_click"
@@ -15,4 +15,5 @@ export function trackStarter(event: StarterEvent, params: Record<string, string>
   const w = window as unknown as { dataLayer?: unknown[] };
   w.dataLayer = w.dataLayer || [];
   w.dataLayer.push({ event, ...params });
+  trackPortalEvent(event, params);
 }

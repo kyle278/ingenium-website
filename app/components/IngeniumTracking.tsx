@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
-import { analyticsAllowed, captureAttribution, clearAttribution, clearEnquiryRequestId, CONSENT_KEY, enquiryRequestId, enquiryTracking, sendEnquiry } from "@/lib/enquiry-client";
+import { analyticsAllowed, captureAttribution, clearAttribution, clearEnquiryRequestId, CONSENT_KEY, enquiryRequestId, enquiryTracking, sendEnquiry, trackPortalEvent } from "@/lib/enquiry-client";
 import "./consent.css";
 
 const GTM_ID = "GTM-KWCQSXC7";
@@ -86,7 +86,9 @@ export default function IngeniumTracking() {
     if (choice === "accepted" && analyticsAllowed()) { captureAttribution(); loadAnalytics(); }
     if (choice === "rejected") { revokeAnalytics(); if (document.getElementById("ingenium-optional-gtm")) location.reload(); }
   }, [choice]);
-  useEffect(() => { if (analyticsAllowed()) captureAttribution(); }, [pathname]);
+  useEffect(() => {
+    if (choice === "accepted" && analyticsAllowed()) { captureAttribution(); trackPortalEvent("page_view"); }
+  }, [pathname, choice]);
   useEffect(() => {
     function openSettings() { if (location.hash === "#cookie-settings") setOpen(true); }
     function onSettingsLink(event: MouseEvent) {

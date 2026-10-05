@@ -14,10 +14,9 @@ export function validateEnquiry(input: unknown): string | null {
   if (Object.values(f).some(v => typeof v !== "string" || v.length > 12000)) return "Please shorten your response.";
   if (typeof f.name !== "string" || f.name.trim().length < 2 || f.name.length > 160) return "Please enter your name.";
   if (typeof f.email !== "string" || f.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) return "Please enter a valid email address.";
-  // The starter form shows its privacy line as text, not a checkbox; its own checks live in lib/starter-website.ts.
-  if (body.form_slug === "starter-website") return null;
   if (f.privacy_consent !== "true") return "Please acknowledge the Privacy Policy before sending.";
   if (f.marketing_consent !== "true" && f.marketing_consent !== "false") return "Please confirm your marketing preference.";
+  if (body.form_slug === "starter-website" && (f.consent_version !== NOTICE_VERSION || f.consent_text_snapshot !== PRIVACY_NOTICE)) return "This form has changed. Reload the page before sending.";
   if (body.form_slug === "contact") {
     if (!validService(f.service)) return "Please choose what you need help with.";
     if (typeof f.message !== "string" || f.message.trim().length < 10 || f.message.length > 5000) return "Please tell us a little about your project (10–5,000 characters).";
@@ -47,6 +46,9 @@ export function sanitizeTracking(input: unknown): Record<string, string> {
   for (const key of ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "cid"]) {
     const value = values[key];
     if (typeof value === "string" && /^[a-z0-9 _.-]{1,160}$/i.test(value)) output[key] = value;
+  }
+  for (const key of ["visitor_id", "session_id"]) {
+    if (typeof values[key] === "string" && /^[a-f0-9-]{36}$/i.test(values[key])) output[key] = values[key];
   }
   return output;
 }

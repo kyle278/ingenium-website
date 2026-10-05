@@ -1,0 +1,140 @@
+{
+  "organisation_id": "d253b486-faa4-47b9-b10f-67a7c6da3374",
+  "site_id": "13f9d31e-022c-4fd6-83bb-39cd1a51a85e",
+  "slug": "starter-website",
+  "name": "Starter Website",
+  "description": "Launch campaign website qualification form",
+  "fields": [
+    {
+      "key": "name",
+      "label": "Name",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "email",
+      "label": "Email",
+      "type": "email",
+      "required": true
+    },
+    {
+      "key": "phone",
+      "label": "Phone",
+      "type": "tel",
+      "required": false
+    },
+    {
+      "key": "team_size",
+      "label": "Team size",
+      "type": "select",
+      "required": false
+    },
+    {
+      "key": "business_type",
+      "label": "Business type",
+      "type": "select",
+      "required": false
+    },
+    {
+      "key": "main_need",
+      "label": "Main website need",
+      "type": "select",
+      "required": false
+    },
+    {
+      "key": "details",
+      "label": "Extra details",
+      "type": "textarea",
+      "required": false
+    },
+    {
+      "key": "privacy_consent",
+      "label": "Privacy acknowledgement",
+      "type": "checkbox",
+      "required": true
+    },
+    {
+      "key": "marketing_consent",
+      "label": "Website tips and marketing consent",
+      "type": "checkbox",
+      "required": false
+    },
+    {
+      "key": "consent_version",
+      "label": "Consent notice version",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "consent_text_snapshot",
+      "label": "Privacy notice shown",
+      "type": "textarea",
+      "required": false
+    },
+    {
+      "key": "marketing_consent_text",
+      "label": "Marketing notice shown",
+      "type": "textarea",
+      "required": false
+    },
+    {
+      "key": "consent_captured_at",
+      "label": "Consent recorded at",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "first_name",
+      "label": "First name",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "last_name",
+      "label": "Last name",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "service",
+      "label": "Service",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "intent",
+      "label": "Intent",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "biggest_growth_challenge",
+      "label": "Website challenge",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "lead_route",
+      "label": "Qualification route",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "lead_label",
+      "label": "Lead label",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "cta_position",
+      "label": "CTA position",
+      "type": "text",
+      "required": false
+    }
+  ],
+  "is_active": true,
+  "metadata": {
+    "source": "ingenium-website",
+    "campaign": "starter-website"
+  }
+}

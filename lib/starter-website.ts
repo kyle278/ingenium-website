@@ -63,8 +63,7 @@ export const SOMETHING_ELSE = "Something else";
 export const DETAILS_MAX = 300;
 export const MIN_FILL_MS = 3000;
 
-export const MARKETING_TEXT = "Send me occasional website tips.";
-export const PRIVACY_LINE = "We'll only use these details to reply about your website.";
+export const MARKETING_TEXT = "I consent to receive occasional website tips and marketing email updates from Ingenium. I can unsubscribe at any time.";
 
 export type LeadRoute = "good-fit" | "needs-chat" | "bigger-needs";
 export const LEAD_LABELS: Record<LeadRoute, string> = {

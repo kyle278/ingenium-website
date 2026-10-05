@@ -7,6 +7,10 @@ import { EXPLAINER_VIDEO } from "@/lib/starter-website";
 import { useStarter } from "./StarterProvider";
 import { trackStarter } from "./track";
 
+// For the last seconds the video shows its own "Check if my business qualifies" button,
+// so a click anywhere on it opens the form instead of pausing.
+const CTA_WINDOW_SECONDS = 5;
+
 /**
  * Hero explainer. It tries to start with sound; browsers usually block sound until the visitor
  * has interacted, so it then plays muted with a "Tap for sound", and the first tap or key press
@@ -14,7 +18,8 @@ import { trackStarter } from "./track";
  */
 export default function VideoSlot() {
   const video = useRef<HTMLVideoElement>(null);
-  const { formOpen } = useStarter();
+  const { formOpen, submitted, openForm } = useStarter();
+  const [ctaLive, setCtaLive] = useState(false);
   const [muted, setMuted] = useState(true);
   const [paused, setPaused] = useState(true);
   const [ended, setEnded] = useState(false);
@@ -89,15 +94,21 @@ export default function VideoSlot() {
           if (!tracked.current.play) { tracked.current.play = true; trackStarter("starter_video_play", { muted: String(e.currentTarget.muted) }); }
         }}
         onPause={() => setPaused(true)}
-        onEnded={() => { setEnded(true); trackStarter("starter_video_complete"); }}
+        onEnded={() => { setEnded(true); setCtaLive(true); trackStarter("starter_video_complete"); }}
         onTimeUpdate={(e) => {
           const v = e.currentTarget;
+          const live = Boolean(v.duration) && v.duration - v.currentTime <= CTA_WINDOW_SECONDS;
+          if (live !== ctaLive) setCtaLive(live);
           if (!tracked.current.half && v.duration && v.currentTime / v.duration >= 0.5) { tracked.current.half = true; trackStarter("starter_video_50"); }
         }}
       >
         <source src={EXPLAINER_VIDEO.mobileSrc} type="video/mp4" media="(max-width: 899px)" />
         <source src={EXPLAINER_VIDEO.src} type="video/mp4" />
       </video>
+
+      {ctaLive && !submitted && (
+        <button type="button" className="starter-video-cta" onClick={(e) => openForm("video", e.currentTarget)} aria-label="Check if my business qualifies" />
+      )}
 
       {paused && !ended && (
         <button type="button" className="starter-video-play" onClick={togglePlay} aria-label="Play the explainer video">

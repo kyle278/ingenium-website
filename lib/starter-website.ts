@@ -39,7 +39,7 @@ export const PRICE = {
 } as const;
 
 export const CTA_LABEL = "Check if my business qualifies";
-export const CTA_POSITIONS = ["hero", "how-it-works", "pricing", "final", "sticky"] as const;
+export const CTA_POSITIONS = ["hero", "video", "how-it-works", "pricing", "final", "sticky"] as const;
 export type CtaPosition = (typeof CTA_POSITIONS)[number];
 
 export const TEAM_SIZES = ["Just me", "2–5", "6–10", "11–25", "More than 25"] as const;

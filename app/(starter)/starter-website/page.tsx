@@ -92,15 +92,20 @@ export default function StarterWebsitePage() {
           <p className="rebuild-kicker">STARTER WEBSITE · CARLOW &amp; KILKENNY</p>
           <h1 id="starter-hero-heading" tabIndex={-1}>Your business website, written for you and live in 5 working days.</h1>
           <p className="starter-hero-sub">Tell us about your business in a 20-minute call. We write it, build it and keep it running, so you can get back to work.</p>
+        </div>
+        <div className="starter-hero-offer">
           <PriceHeadline />
           <div className="starter-hero-action">
             <CtaButton position="hero" id="starter-hero-cta" />
             <p className="starter-hero-note">Takes 30 seconds. No payment needed.</p>
           </div>
-          <PriceDetails />
         </div>
+        {/* Full width under the headline and offer; on phones it sits straight after the button. */}
         <div className="starter-hero-media">
           <VideoSlot />
+        </div>
+        <div className="starter-hero-details">
+          <PriceDetails />
         </div>
       </section>
 

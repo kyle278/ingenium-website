@@ -26,15 +26,15 @@
 .starter-hero-action .starter-cta { width: 100%; }
 .starter-hero-note { margin-top: 10px; font-size: .9375rem; color: var(--color-text-muted); }
 
-/* Video slot (16:9) */
-.starter-video { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--color-line); border-radius: 14px; background: linear-gradient(135deg, var(--starter-pale), #F2F6FB 55%, oklch(94.5% .025 185)); padding: 0; }
-.starter-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.starter-video-poster .starter-phone { position: absolute; left: 50%; top: 9%; width: 36%; transform: translateX(-50%); }
-/* Until the explainer exists, the whole phone stands on its own: no box, nothing cropped. */
-.starter-video.starter-video-still { aspect-ratio: auto; overflow: visible; border: 0; border-radius: 0; background: none; display: flex; justify-content: center; padding: 8px 0 24px; }
-.starter-video-still .starter-phone { width: min(62vw, 250px); }
-.starter-video-poster { cursor: pointer; }
-.starter-video-play { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 68px; height: 68px; border-radius: 50%; background: var(--color-brand); color: #fff; transform: translate(-50%, -50%); box-shadow: 0 10px 30px rgba(20, 36, 61, .25); }
+/* Video (16:9) */
+.starter-video { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--color-line); border-radius: 14px; background: #EEF2F7; box-shadow: 0 24px 60px rgba(20, 36, 61, .14); }
+.starter-video video { display: block; width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+.starter-video-play { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 76px; height: 76px; border: 0; border-radius: 50%; background: var(--color-brand); color: #fff; transform: translate(-50%, -50%); box-shadow: 0 10px 30px rgba(20, 36, 61, .3); cursor: pointer; }
+.starter-video-play svg { margin-left: 4px; }
+.starter-video-controls { position: absolute; left: 12px; bottom: 12px; display: flex; gap: 8px; }
+.starter-video-controls button { display: inline-flex; align-items: center; gap: 8px; min-width: 44px; min-height: 44px; justify-content: center; padding: 0 12px; border: 0; border-radius: 999px; background: rgba(20, 36, 61, .78); color: #fff; font: 600 .875rem var(--font-body); cursor: pointer; backdrop-filter: blur(6px); }
+.starter-video-controls button.is-prompt { padding: 0 16px; background: var(--color-brand); box-shadow: 0 6px 18px rgba(23, 103, 195, .35); animation: starter-nudge 2.4s ease-in-out infinite; }
+@keyframes starter-nudge { 0%, 70%, 100% { transform: none; } 80% { transform: scale(1.06); } 90% { transform: scale(.98); } }
 
 /* Price block */
 .starter-price { margin-top: 20px; }
@@ -297,7 +297,6 @@ html:has(.starter-dialog[open]) { overflow: hidden; }
   .starter-hero { grid-template-columns: 55fr 45fr; gap: 48px; align-items: center; padding-top: 56px; }
   .starter-hero h1 { font-size: clamp(2.75rem, 4.8vw, 4rem); }
   .starter-hero-sub { font-size: 1.25rem; }
-  .starter-video-still .starter-phone { width: min(24vw, 290px); }
   .starter-price-now strong { font-size: 4rem; }
   .starter-problem { grid-template-columns: 1.1fr .9fr; gap: 56px; }
   .starter-tiles { grid-template-columns: repeat(3, 1fr); }
@@ -313,6 +312,7 @@ html:has(.starter-dialog[open]) { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .starter-sticky, .starter-phone, .starter-faq-wrap summary svg { transition: none; }
   .mock-scroll { animation: none; }
+  .starter-video-controls button.is-prompt { animation: none; }
   .starter-dialog[open] .starter-dialog-card { animation: none; }
   .starter-spinner { animation-duration: 2s; }
 }

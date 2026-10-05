@@ -7,6 +7,9 @@ export type StarterEvent =
   | "starter_form_submit"
   | "starter_form_close_unsubmitted"
   | "starter_video_play"
+  | "starter_video_unmute"
+  | "starter_video_50"
+  | "starter_video_complete"
   | "starter_example_open";
 
 /** Pushes a campaign event to GTM, only after the visitor has accepted analytics. */

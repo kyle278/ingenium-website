@@ -12,8 +12,13 @@ export const FOUNDING_PLACES_LEFT = 10;
 // Without it, good-fit leads see the "Kyle will email you" fallback only.
 export const BOOKING_URL = process.env.NEXT_PUBLIC_STARTER_BOOKING_URL?.trim() || "";
 
-// YouTube video id for the hero explainer. Empty shows the still example instead.
-export const EXPLAINER_YOUTUBE_ID = process.env.NEXT_PUBLIC_STARTER_VIDEO_ID?.trim() || "";
+// Hero explainer, self-hosted so no third-party player loads before consent.
+// Bump the version in the file names when the video changes, so browsers fetch the new one.
+export const EXPLAINER_VIDEO = {
+  src: "/starter/explainer-v1-1080.mp4",
+  mobileSrc: "/starter/explainer-v1-720.mp4",
+  poster: "/starter/explainer-v1-poster.webp",
+} as const;
 
 // Live example sites. Leave href empty until each example is published.
 export const EXAMPLE_SITES = [

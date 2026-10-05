@@ -12,6 +12,7 @@ function readSubmitted() { try { return Boolean(sessionStorage.getItem(SUBMITTED
 
 type StarterContextValue = {
   submitted: boolean;
+  formOpen: boolean;
   openForm: (position: CtaPosition, opener: HTMLElement | null) => void;
 };
 
@@ -54,7 +55,7 @@ export default function StarterProvider({ children }: { children: React.ReactNod
     try { sessionStorage.setItem(SUBMITTED_KEY, route); } catch { /* Storage unavailable. */ }
   }, []);
 
-  const value = useMemo(() => ({ submitted, openForm }), [submitted, openForm]);
+  const value = useMemo(() => ({ submitted, formOpen: open, openForm }), [submitted, open, openForm]);
 
   return (
     <StarterContext.Provider value={value}>

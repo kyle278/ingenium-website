@@ -11,9 +11,15 @@ type Kind = "electrician" | "barber";
 export default function PhoneMockup({ kind, priority = false, className = "" }: { kind: Kind; priority?: boolean; className?: string }) {
   return (
     <div className={`starter-phone ${className}`} aria-hidden="true">
-      <div className={`starter-phone-screen is-${kind}`}>
-        <StatusBar dark={kind === "barber"} />
-        {kind === "electrician" ? <ElectricianSite priority={priority} /> : <BarberSite priority={priority} />}
+      <div className="starter-phone-frame">
+        <div className={`starter-phone-screen is-${kind}`}>
+          <StatusBar dark={kind === "barber"} />
+          {/* The site scrolls slowly down and back up inside the screen (CSS only, off for reduced motion). */}
+          <div className="mock-scroll">
+            {kind === "electrician" ? <ElectricianSite priority={priority} /> : <BarberSite priority={priority} />}
+          </div>
+          {kind === "electrician" && <div className="mock-elec-callbar"><Phone />085 123 4567</div>}
+        </div>
       </div>
     </div>
   );
@@ -55,8 +61,19 @@ function ElectricianSite({ priority }: { priority: boolean }) {
           <span><Car />EV chargers</span>
           <span><Tractor />Farms &amp; sheds</span>
         </div>
+        <div className="mock-elec-quote">
+          <p>&ldquo;Turned up the same day, found the fault in ten minutes and left the place spotless.&rdquo;</p>
+          <span>Siobhán, Bagenalstown</span>
+        </div>
+        <div className="mock-elec-form">
+          <b>Get a free quote</b>
+          <i>Your name</i>
+          <i>Phone number</i>
+          <i className="is-tall">What do you need done?</i>
+          <span>Send request</span>
+        </div>
+        <p className="mock-elec-footer">Walsh Electric · RECI registered · Carlow</p>
       </div>
-      <div className="mock-elec-callbar"><Phone />085 123 4567</div>
     </div>
   );
 }
@@ -83,6 +100,11 @@ function BarberSite({ priority }: { priority: boolean }) {
         </ul>
         <p className="mock-barber-hours"><Clock />Tue–Sat 9–6 · Walk-ins before 4pm</p>
         <p className="mock-barber-stars"><Star /><Star /><Star /><Star /><Star /></p>
+        <blockquote className="mock-barber-quote">&ldquo;Best fade in Carlow. In and out in twenty minutes.&rdquo;<span>Darragh M.</span></blockquote>
+        <p className="mock-barber-label">Find us</p>
+        <div className="mock-barber-map"><MapPin /><span>14 Tullow Street<br />Carlow R93</span></div>
+        <span className="mock-barber-cta is-block"><MessageCircle />Book on WhatsApp</span>
+        <p className="mock-barber-footer">BARROW CUTS · EST. 2019</p>
       </div>
     </div>
   );

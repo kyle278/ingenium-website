@@ -10,8 +10,8 @@ import VideoSlot from "@/components/starter/VideoSlot";
 import { ORGANIZATION_ADDRESS, ORGANIZATION_EMAIL, ORGANIZATION_NAME, ORGANIZATION_PHONE, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { EXAMPLE_SITES, FOUNDING_PLACES_LEFT, FOUNDING_PLACES_TOTAL, PRICE, STARTER_PATH } from "@/lib/starter-website";
 
-const TITLE = "Starter Website for Carlow & Kilkenny Businesses | Ingenium";
-const DESCRIPTION = "Your business website, written for you and live in 5 working days. €495 + €50/month, hosting and monthly changes included. Based in Carlow.";
+const TITLE = "Starter Website for Small Businesses & Start-ups | Ingenium";
+const DESCRIPTION = "Websites for small businesses and start-ups, written for you and live in 5 working days. €495 + €50/month, hosting and monthly changes included. Based in Carlow, working across Ireland.";
 const URL = `${SITE_URL}${STARTER_PATH}`;
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ const localBusiness = {
   email: ORGANIZATION_EMAIL,
   telephone: ORGANIZATION_PHONE,
   address: { "@type": "PostalAddress", ...ORGANIZATION_ADDRESS },
-  areaServed: ["Carlow", "Kilkenny"],
+  areaServed: { "@type": "Country", name: "Ireland" },
 };
 
 const trust = [
@@ -78,6 +78,7 @@ const faqs = [
   { q: "Will this get me more customers?", a: "It makes you easier to find, trust and contact. We can't promise a number of calls, and nobody honestly can." },
   { q: "Can I add more pages later?", a: "Yes. We'll quote for extra pages, or move you to the full Websites package." },
   { q: "Do you charge VAT?", a: "No VAT is charged at the moment." },
+  { q: "Do you only work with businesses in Carlow and Kilkenny?", a: "No. We're based in Carlow, but everything runs on a 20-minute call and email, so we build websites for small businesses and start-ups anywhere in Ireland." },
   { q: "Why is it cheaper than your standard websites?", a: "It's one page, written from a single call, using our proven layout. That's how we can build it in 5 days for less." },
 ];
 
@@ -89,9 +90,9 @@ export default function StarterWebsitePage() {
       {/* 2. Hero */}
       <section className="starter-hero starter-container" aria-labelledby="starter-hero-heading">
         <div className="starter-hero-copy">
-          <p className="rebuild-kicker">STARTER WEBSITE · CARLOW &amp; KILKENNY</p>
+          <p className="rebuild-kicker">STARTER WEBSITE · FOR SMALL BUSINESSES &amp; START-UPS</p>
           <h1 id="starter-hero-heading" tabIndex={-1}>Your business website, written for you and live in 5 working days.</h1>
-          <p className="starter-hero-sub">Tell us about your business in a 20-minute call. We write it, build it and keep it running, so you can get back to work.</p>
+          <p className="starter-hero-sub">For small businesses and start-ups. Tell us about your business in a 20-minute call. We write it, build it and keep it running, so you can get back to work.</p>
         </div>
         <div className="starter-hero-offer">
           <PriceHeadline />
@@ -110,7 +111,7 @@ export default function StarterWebsitePage() {
       </section>
 
       {/* 3. Trust strip */}
-      <section className="starter-container" aria-label="Why local businesses choose us">
+      <section className="starter-container" aria-label="Why small businesses and start-ups choose us">
         <ul className="starter-trust">
           {trust.map(({ icon: Icon, text }) => <li key={text}><Icon size={18} aria-hidden="true" />{text}</li>)}
         </ul>
@@ -223,9 +224,10 @@ export default function StarterWebsitePage() {
           <div>
             <h3>A great fit if you:</h3>
             <ul>
-              <li><CheckCircle2 size={18} aria-hidden="true" />Run a local business or are about to launch one</li>
+              <li><CheckCircle2 size={18} aria-hidden="true" />Run a small business, or are launching a start-up</li>
               <li><CheckCircle2 size={18} aria-hidden="true" />Need a professional page that explains what you do and gets you calls</li>
               <li><CheckCircle2 size={18} aria-hidden="true" />Don&apos;t have time to write a website yourself</li>
+              <li><CheckCircle2 size={18} aria-hidden="true" />Are anywhere in Ireland: it all runs on a call and email</li>
             </ul>
           </div>
           <div>

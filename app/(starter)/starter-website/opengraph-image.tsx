@@ -17,7 +17,7 @@ export default async function StarterOpenGraphImage() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={`data:image/png;base64,${logo.toString("base64")}`} width={300} height={74} alt="Ingenium" />
       <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-        <div style={{ fontSize: 24, color: "#087F78", letterSpacing: 2 }}>STARTER WEBSITE · CARLOW &amp; KILKENNY</div>
+        <div style={{ fontSize: 24, color: "#087F78", letterSpacing: 2 }}>WEBSITES FOR SMALL BUSINESSES &amp; START-UPS</div>
         <div style={{ fontSize: 62, fontWeight: 700, lineHeight: 1.1, maxWidth: 1060 }}>Your business website, written for you and live in 5 working days.</div>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 24 }}>

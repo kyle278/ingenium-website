@@ -43,7 +43,7 @@ export function PriceDetails() {
         </table>
       </details>
       {FOUNDING_PLACES_LEFT > 0 && (
-        <p className="starter-founding"><strong>Founding Clients:</strong> first 2 months of the plan free. {FOUNDING_PLACES_LEFT} of {FOUNDING_PLACES_TOTAL} places left.</p>
+        <p className="starter-founding"><strong>Founding Clients:</strong> first 2 months of the plan free, on top of any other offer. {FOUNDING_PLACES_LEFT} of {FOUNDING_PLACES_TOTAL} places left.</p>
       )}
     </div>
   );

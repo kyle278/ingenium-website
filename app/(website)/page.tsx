@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import HeroSystem from "@/components/rebuild/HeroSystem";
 import EnquiryJourney from "@/components/rebuild/EnquiryJourney";
 import ProjectProof from "@/components/rebuild/ProjectProof";
 import { buildMetadata, pageSeo } from "@/lib/seo";
@@ -27,20 +28,11 @@ export default async function HomePage() {
       <div>
         <p className="rebuild-kicker">Websites & CRM. Built around your business.</p>
         <h1 id="home-heading">A better website.<br /><span>A clearer next step.</span></h1>
-        <p className="rebuild-lead">Ingenium builds websites and customer relationship management systems — CRMs — around how your business works. Choose the part you need, or have your website and CRM built together.</p>
+        <p className="rebuild-lead">Ingenium builds websites and customer relationship management systems (CRMs) around how your business works. Choose the part you need, or have your website and CRM built together.</p>
         <div className="home-hero-actions"><Link className="rebuild-button" href="/contact">Discuss your project <ArrowUpRight size={18} aria-hidden="true" /></Link><Link className="rebuild-text-link" href="/connected">See how they work together <ArrowRight size={16} aria-hidden="true" /></Link></div>
         <p className="hero-footnote"><span aria-hidden="true" /> Clear scope. Practical support. Based in Ireland.</p>
       </div>
-      <div className="hero-canvas" role="img" aria-label="Illustrative website and CRM: an enquiry for a home extension becomes a customer record with a next step. Example data, not a client project.">
-        <div className="hero-canvas-label"><span>Your business, connected.</span><span>Website + CRM</span></div>
-        <div className="example-browser">
-          <div className="example-browser-top"><i /><i /><i /><span>Your business website</span></div>
-          <div className="example-website"><div><span className="example-website-brand">OAK & FORM / EXAMPLE</span><h2>Space for the way you live.</h2><p>Thoughtful home extensions.<br />Built around your family.</p><span className="example-website-cta">Discuss your project ↗</span></div><div className="example-architecture" /></div>
-        </div>
-        <div className="hero-connection"><ArrowDown size={15} /><span>The agreed details, in the right place</span></div>
-        <div className="hero-record"><div className="hero-record-top"><span>Customer record</span><span className="hero-record-status"><Check size={10} className="inline" /> New enquiry</span></div><strong>Alex Morgan</strong><p>Home extension · Website enquiry</p><p>Next step: arrange a conversation <ArrowUpRight size={11} className="inline" /></p></div>
-        <p className="hero-canvas-caption">Illustrative design and example data.</p>
-      </div>
+      <HeroSystem />
     </section>
 
     <section className="home-services" aria-labelledby="services-heading">
@@ -70,7 +62,7 @@ export default async function HomePage() {
         { title: "CRM", setup: "€3,000", monthly: "€249", href: "/pricing#crm", detail: "CRM setup, training and ongoing support." },
         { title: "Website + CRM", setup: "€4,500", monthly: "€349", href: "/pricing#connected", detail: "Both parts, with the standard connection included." },
       ].map(offer => <div key={offer.title}><h3>{offer.title}</h3><strong>{offer.setup}</strong><p>setup + {offer.monthly}/month</p><p>{offer.detail}</p><Link href={offer.href} className="rebuild-text-link">See what’s included <ArrowRight size={14} aria-hidden="true" /></Link></div>)}</div>
-      <p className="home-pricing-note">No VAT charged. Defined scope; your requirements and total price are confirmed before work begins. Selling products online? <Link href="/ecommerce" className="rebuild-text-link">Explore ecommerce.</Link></p>
+      <p className="home-pricing-note">No VAT charged. Defined scope. Your requirements and total price are confirmed before work begins. Selling products online? <Link href="/ecommerce" className="rebuild-text-link">Explore ecommerce.</Link></p>
     </section>
 
     <section className="rebuild-section home-invitation" aria-labelledby="invitation-heading"><div><h2 className="rebuild-section-heading" id="invitation-heading">Tell us what needs<br />to work better.</h2><p>Whether you need a new website, a more useful CRM or both, start with the problem you want to solve. We will help you identify the right next step.</p></div><Link href="/contact" className="rebuild-button">Discuss your project <ArrowUpRight size={18} aria-hidden="true" /></Link></section>

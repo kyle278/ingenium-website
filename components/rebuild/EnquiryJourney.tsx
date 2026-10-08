@@ -1,6 +1,5 @@
 "use client";
 
-import { ArrowRight, RotateCcw, Play, Pause } from "lucide-react";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { useAnimate } from "motion/react-mini";
 
@@ -48,6 +47,6 @@ export default function EnquiryJourney() {
       <h3>{stage.title}</h3><p>{stage.body}</p>
       <dl>{stage.fields.map(([label, value]) => <div key={label} className="contents"><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
     </div>
-    <div className="journey-demo-bottom"><p>Your connection and workflow are agreed in your project scope.</p><div className="journey-actions">{!reduce && <button className="rebuild-text-link" type="button" onClick={() => { if (playing) setPlaying(false); else { setActive(0); setPlaying(true); } }}>{playing ? <><Pause size={14} aria-hidden="true" /> Pause</> : <><Play size={14} aria-hidden="true" /> Play through</>}</button>}<button className="rebuild-text-link" type="button" onClick={() => selectStage((active + 1) % stages.length)}>{active === stages.length - 1 ? <>Start again <RotateCcw size={14} aria-hidden="true" /></> : <>Next step <ArrowRight size={14} aria-hidden="true" /></>}</button></div></div>
+    <div className="journey-demo-bottom"><p>Your connection and workflow are agreed in your project scope.</p><div className="journey-actions">{!reduce && <button className="rebuild-text-link" type="button" onClick={() => { if (playing) setPlaying(false); else { setActive(0); setPlaying(true); } }}>{playing ? "Pause" : "Play through"}</button>}<button className="rebuild-text-link" type="button" onClick={() => selectStage((active + 1) % stages.length)}>{active === stages.length - 1 ? "Start again" : "Next step"}</button></div></div>
   </div>;
 }

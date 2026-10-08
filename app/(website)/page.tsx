@@ -30,7 +30,7 @@ export default async function HomePage() {
         <h1 id="home-heading">A better website.<br /><span>A clearer next step.</span></h1>
         <p className="rebuild-lead">Ingenium builds websites and customer relationship management systems (CRMs) around how your business works. Choose the part you need, or have your website and CRM built together.</p>
         <div className="home-hero-actions"><Link className="rebuild-button" href="/contact">Discuss your project <ArrowUpRight size={18} aria-hidden="true" /></Link><Link className="rebuild-text-link" href="/connected">See how they work together</Link></div>
-        <p className="hero-footnote"><span aria-hidden="true" /> Clear scope. Practical support. Based in Ireland.</p>
+        <p className="hero-footnote">Clear scope. Practical support. Based in Ireland.</p>
       </div>
       <HeroSystem />
     </section>

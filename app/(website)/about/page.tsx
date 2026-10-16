@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+
 import TeamGrid from "@/components/rebuild/TeamGrid";
 import Link from "next/link";
 
-import { buildMetadata, pageSeo, ORGANIZATION_ADDRESS, ORGANIZATION_PHONE, ORGANIZATION_EMAIL, ORGANIZATION_SAME_AS } from "@/lib/seo";
-export const metadata: Metadata = buildMetadata(pageSeo["/about"]);
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo, ORGANIZATION_ADDRESS, ORGANIZATION_PHONE, ORGANIZATION_EMAIL, ORGANIZATION_SAME_AS } from "@/lib/seo";
+export async function generateMetadata() { return buildMetadata(pageSeo["/about"]); }
 export default function AboutPage() {
   return <div className="rebuild-page">
     <section className="rebuild-hero"><p className="rebuild-kicker">About Ingenium</p><h1>A small team. Clear responsibilities.</h1><p className="rebuild-lead">We help businesses plan and build websites, CRM systems, and the connections between them. You work with the people responsible for the design, delivery and next steps.</p><Link className="rebuild-button" href="/contact">Discuss your project</Link></section>

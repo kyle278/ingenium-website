@@ -1,7 +1,8 @@
 import RevenueExitCalculator from "./RevenueExitCalculator";
-import { buildMetadata, pageSeo } from "@/lib/seo";
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo } from "@/lib/seo";
 
-export const metadata = buildMetadata(pageSeo["/internal/revenue-calculator"]);
+export async function generateMetadata() { return buildMetadata(pageSeo["/internal/revenue-calculator"]); }
 
 export default function RevenueCalculatorPage() {
   return <RevenueExitCalculator />;

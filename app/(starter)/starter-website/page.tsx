@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { withPortalSeo,getSeoRevision,mergeManagedSchemas } from "@/lib/portalIntegration/seo-runtime";
+import { pageSeo as managedSeo,seoJsonLd } from "@/lib/portalIntegration/seo-adapter";
 import { BadgeCheck, CheckCircle2, Globe, MapPin, PenLine, Plus, RefreshCw, Search, Smartphone, XCircle, FileSignature, Send } from "lucide-react";
 
 import CtaButton from "@/components/starter/CtaButton";
@@ -14,13 +16,15 @@ const TITLE = "Starter Website for Small Businesses & Start-ups | Ingenium";
 const DESCRIPTION = "Websites for small businesses and start-ups, written for you and live in 5 working days. €495 + €50/month, hosting and monthly changes included. Based in Carlow, working across Ireland.";
 const URL = `${SITE_URL}${STARTER_PATH}`;
 
-export const metadata: Metadata = {
+const starterMetadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: URL },
   openGraph: { title: TITLE, description: DESCRIPTION, url: URL, siteName: SITE_NAME, locale: "en_IE", type: "website" },
   twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };
+
+export async function generateMetadata(){return withPortalSeo(starterMetadata,STARTER_PATH);}
 
 const localBusiness = {
   "@context": "https://schema.org",
@@ -82,10 +86,11 @@ const faqs = [
   { q: "Why is it cheaper than your standard websites?", a: "It's one page, written from a single call, using our proven layout. That's how we can build it in 5 days for less." },
 ];
 
-export default function StarterWebsitePage() {
+export default async function StarterWebsitePage() {
+  const revision=await getSeoRevision(),override=revision?managedSeo(revision.snapshot,URL):null;
   return (
     <StarterProvider>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }} />
+      {mergeManagedSchemas([localBusiness],override?.schema).map((schema,index)=><script key={index} type="application/ld+json" dangerouslySetInnerHTML={{__html:seoJsonLd(schema)}}/>)}
 
       {/* 2. Hero */}
       <section className="starter-hero starter-container" aria-labelledby="starter-hero-heading">

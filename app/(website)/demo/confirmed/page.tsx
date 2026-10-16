@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 
-import { buildMetadata } from "@/lib/seo";
+
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+
 
 import ConfirmationPage from "../../contact/ConfirmationPage";
 
-export const metadata: Metadata = buildMetadata({
+export async function generateMetadata() { return buildMetadata({
   title: "Demo Request Received | Ingenium",
   description: "Your demo request has been received.",
   path: "/demo/confirmed",
   keywords: ["demo request confirmed"],
   noIndex: true,
-});
+}); }
 
 export default function DemoConfirmedPage() {
   return (

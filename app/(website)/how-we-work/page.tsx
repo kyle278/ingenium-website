@@ -1,9 +1,10 @@
-import { buildMetadata, pageSeo } from "@/lib/seo";
-import type { Metadata } from "next";
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo } from "@/lib/seo";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-export const metadata: Metadata = buildMetadata(pageSeo["/how-we-work"]);
+export async function generateMetadata() { return buildMetadata(pageSeo["/how-we-work"]); }
 
 const steps = [
   { title: "Understand what needs to change", body: "We review your current website or process and discuss where it is causing difficulty. Bring a page that no longer explains the business, an enquiry that became hard to track or a task your team repeats.", detail: "For a straightforward project, this helps us identify a defined package. More complex requirements begin with paid discovery." },

@@ -1,6 +1,5 @@
-"use client";
-
-import { usePathname } from "next/navigation";
+import { getSeoRevision,mergeManagedSchemas } from "@/lib/portalIntegration/seo-runtime";
+import { pageSeo as managedSeo } from "@/lib/portalIntegration/seo-adapter";
 
 import {
   ORGANIZATION_ADDRESS,
@@ -177,8 +176,8 @@ function buildServiceSchema(pathname: string): JsonLd | null {
   };
 }
 
-export default function RouteStructuredData() {
-  const pathname = usePathname() || "/";
+export default async function RouteStructuredData({pathname}:{pathname:string}) {
+  const revision=await getSeoRevision();const override=revision?managedSeo(revision.snapshot,toAbsoluteUrl(pathname)):null;
 
   if (isPrivatePath(pathname) || /\/(confirmed|thanks)$/.test(pathname)) return null;
 
@@ -191,7 +190,7 @@ export default function RouteStructuredData() {
 
   return (
     <>
-      {schemas.map((schema, index) => (
+      {mergeManagedSchemas(schemas,override?.schema).map((schema, index) => (
         <script
           key={`${pathname}-jsonld-${index}`}
           type="application/ld+json"

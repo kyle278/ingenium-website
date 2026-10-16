@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
+
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import HeroSystem from "@/components/rebuild/HeroSystem";
 import EnquiryJourney from "@/components/rebuild/EnquiryJourney";
 import ProjectProof from "@/components/rebuild/ProjectProof";
-import { buildMetadata, pageSeo } from "@/lib/seo";
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo } from "@/lib/seo";
 import { getPublishedProjects } from "@/lib/portalIntegration/projects";
 
-export const metadata: Metadata = buildMetadata(pageSeo["/"]);
+export async function generateMetadata() { return buildMetadata(pageSeo["/"]); }
 
 const services = [
   { number: "01", title: "A new website", description: "Help customers understand your services, see your work and get in touch. A clear home for your business, built around the people you want to reach.", label: "Explore websites", href: "/websites" },

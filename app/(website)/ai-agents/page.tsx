@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+
 import Link from "next/link";
-import { buildMetadata, pageSeo } from "@/lib/seo";
-export const metadata: Metadata = buildMetadata(pageSeo["/ai-agents"]);
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo } from "@/lib/seo";
+export async function generateMetadata() { return buildMetadata(pageSeo["/ai-agents"]); }
 export default function AIPage() {
   return <div className="rebuild-page">
     <section className="rebuild-hero"><p className="rebuild-kicker">AI workflow support</p><h1>Useful assistance, with a person responsible.</h1><p className="rebuild-lead">We can assess where AI assistance fits a repeatable task, what information it needs and how your team will check its output. The starting point is a clear process.</p><Link className="rebuild-button" href="/contact">Discuss a use case</Link></section>

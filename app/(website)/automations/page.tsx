@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+
 import Link from "next/link";
-import { buildMetadata, pageSeo } from "@/lib/seo";
-export const metadata: Metadata = buildMetadata(pageSeo["/automations"]);
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo } from "@/lib/seo";
+export async function generateMetadata() { return buildMetadata(pageSeo["/automations"]); }
 export default function AutomationsPage() {
   return <div className="rebuild-page">
     <section className="rebuild-hero"><p className="rebuild-kicker">Automation</p><h1>Make the next step easier to follow through.</h1><p className="rebuild-lead">When a process is clear, automation can reduce repetitive work. We scope the triggers, actions and review steps around the tools your team actually uses.</p><Link className="rebuild-button" href="/contact?service=crm">Discuss your workflow</Link></section>

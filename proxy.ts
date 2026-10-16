@@ -1,5 +1,10 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import {
+  readSeoRevision,
+  managedPath,
+} from "@/lib/portalIntegration/seo-runtime";
+import { seoRedirect } from "@/lib/portalIntegration/seo-adapter";
 
 const APEX_HOST = "ingeniumconsulting.net";
 const CANONICAL_HOST = "www.ingeniumconsulting.net";
@@ -7,10 +12,13 @@ const WEBSITE_BRIEF_COOKIE = "ingenium-brief-access";
 const WEBSITE_BRIEF_PATH = "/website-brief";
 
 function isWebsiteBriefPath(pathname: string) {
-  return pathname === WEBSITE_BRIEF_PATH || pathname.startsWith(`${WEBSITE_BRIEF_PATH}/`);
+  return (
+    pathname === WEBSITE_BRIEF_PATH ||
+    pathname.startsWith(`${WEBSITE_BRIEF_PATH}/`)
+  );
 }
 
-export function proxy(request: NextRequest) {
+function existingProxy(request: NextRequest) {
   if (request.nextUrl.hostname !== APEX_HOST) {
     const websiteBriefToken = process.env.WEBSITE_BRIEF_ACCESS_TOKEN?.trim();
     const isDevelopment = process.env.NODE_ENV !== "production";
@@ -20,7 +28,9 @@ export function proxy(request: NextRequest) {
     }
 
     if (!websiteBriefToken) {
-      return isDevelopment ? NextResponse.next() : new NextResponse(null, { status: 404 });
+      return isDevelopment
+        ? NextResponse.next()
+        : new NextResponse(null, { status: 404 });
     }
 
     const tokenFromCookie = request.cookies.get(WEBSITE_BRIEF_COOKIE)?.value;
@@ -55,6 +65,24 @@ export function proxy(request: NextRequest) {
   redirectUrl.protocol = "https:";
 
   return NextResponse.redirect(redirectUrl, 308);
+}
+
+export async function proxy(request: NextRequest) {
+  const gate = existingProxy(request);
+  if (gate.status !== 200 || !managedPath(request.nextUrl.pathname))
+    return gate;
+  const revision = await readSeoRevision(true),
+    rule = revision ? seoRedirect(revision.snapshot, request.url) : null;
+  if (rule)
+    return NextResponse.redirect(
+      new URL(rule.target, request.url),
+      rule.status,
+    );
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-ingenium-path", request.nextUrl.pathname);
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
+  if (revision) response.headers.set("x-ingenium-seo-revision", revision.id);
+  return response;
 }
 
 export const config = {

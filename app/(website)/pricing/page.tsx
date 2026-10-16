@@ -1,11 +1,12 @@
-import { buildMetadata, pageSeo } from "@/lib/seo";
-import type { Metadata } from "next";
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo } from "@/lib/seo";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { offers } from "@/components/rebuild/offers";
 import { OfferFaq, OfferPrice } from "@/components/rebuild/OfferPage";
 
-export const metadata: Metadata = buildMetadata(pageSeo["/pricing"]);
+export async function generateMetadata() { return buildMetadata(pageSeo["/pricing"]); }
 
 const questions = [
   { question: "What are the monthly hours for?", answer: "They cover the small changes, support or configuration work included in your package. Larger requests are scoped separately. Unused hours do not roll over into the following month." },

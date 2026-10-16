@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+
 import Link from "next/link";
-import { buildMetadata, pageSeo } from "@/lib/seo";
-export const metadata: Metadata = buildMetadata(pageSeo["/security"]);
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo } from "@/lib/seo";
+export async function generateMetadata() { return buildMetadata(pageSeo["/security"]); }
 export default function SecurityPage() {
   return <div className="rebuild-page">
     <section className="rebuild-hero"><p className="rebuild-kicker">Security and responsibilities</p><h1>Agree the boundaries before we connect your systems.</h1><p className="rebuild-lead">Website and CRM projects can involve customer information and business-critical tools. Access, responsibilities and review steps need to be clear for the work being delivered.</p><Link className="rebuild-button" href="/technical-review">Request a technical review</Link></section>

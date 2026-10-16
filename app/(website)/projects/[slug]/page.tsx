@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPortalProjectBySlug, getPortalProjectTitle, getPortalProjectSummary, getPortalProjectPresentation, getPublishedProjects } from "@/lib/portalIntegration/projects";
-import { buildMetadata, keywordClusters } from "@/lib/seo";
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  keywordClusters } from "@/lib/seo";
 export const revalidate = 300;
 type Props = { params: Promise<{ slug: string }> };
 export async function generateStaticParams() { return (await getPublishedProjects()).projects.map(({ slug }) => ({ slug })); }

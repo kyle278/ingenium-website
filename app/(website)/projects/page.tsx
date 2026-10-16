@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+
 import Link from "next/link";
 import ProjectProof from "@/components/rebuild/ProjectProof";
 import { getPublishedProjects, getPortalProjectTitle } from "@/lib/portalIntegration/projects";
-import { SITE_URL, buildMetadata, pageSeo } from "@/lib/seo";
-export const metadata: Metadata = buildMetadata(pageSeo["/projects"]);
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import { SITE_URL,  pageSeo } from "@/lib/seo";
+export async function generateMetadata() { return buildMetadata(pageSeo["/projects"]); }
 export const revalidate = 300;
 export default async function ProjectsPage() {
   const { projects } = await getPublishedProjects();

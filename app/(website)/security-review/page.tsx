@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 
-import { buildMetadata, pageSeo } from "@/lib/seo";
+
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo } from "@/lib/seo";
 
 import PolicyPage from "../components/PolicyPage";
 
-export const metadata: Metadata = buildMetadata(pageSeo["/security-review"]);
+export async function generateMetadata() { return buildMetadata(pageSeo["/security-review"]); }
 
 export default function SecurityReviewPage() {
   return (

@@ -98,7 +98,7 @@ export const aeoQueryThemes = [
   "How do you replace disconnected sales and marketing tools with one system?",
 ];
 
-type PageSeoConfig = {
+export type PageSeoConfig = {
   title: string;
   description: string;
   path: string;

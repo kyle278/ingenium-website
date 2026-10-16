@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Public_Sans } from "next/font/google";
 
+import { getSeoRevision } from "@/lib/portalIntegration/seo-runtime";
 import IngeniumTracking from "@/app/components/IngeniumTracking";
 import {
   DEFAULT_DESCRIPTION,
@@ -67,9 +68,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const seoRevision=await getSeoRevision();
   return (
     <html lang="en" data-scroll-behavior="smooth">
+      <head>{seoRevision&&<meta name="ingenium-seo-revision" content={seoRevision.id}/>}</head>
       <body
         className={`${manropeDisplay.variable} ${publicSansBody.variable} min-h-screen bg-[var(--color-bg)] font-[var(--font-body)] text-[var(--color-text)] antialiased`}
       >

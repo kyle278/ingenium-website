@@ -1,10 +1,11 @@
-import { buildMetadata, pageSeo } from "@/lib/seo";
-import type { Metadata } from "next";
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo } from "@/lib/seo";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { offers } from "@/components/rebuild/offers";
 
-export const metadata: Metadata = buildMetadata(pageSeo["/services"]);
+export async function generateMetadata() { return buildMetadata(pageSeo["/services"]); }
 
 export default function ServicesPage() {
   return <div className="rebuild-page">

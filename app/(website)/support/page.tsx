@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+
 import Link from "next/link";
-import { buildMetadata, pageSeo, ORGANIZATION_EMAIL } from "@/lib/seo";
-export const metadata: Metadata = buildMetadata(pageSeo["/support"]);
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo, ORGANIZATION_EMAIL } from "@/lib/seo";
+export async function generateMetadata() { return buildMetadata(pageSeo["/support"]); }
 export default function SupportPage() {
   return <div className="rebuild-page">
     <section className="rebuild-hero"><p className="rebuild-kicker">Client support</p><h1>Tell us what needs attention.</h1><p className="rebuild-lead">Use your agreed project or support channel. If you do not have one, email us with the affected page or system and a short description of the issue.</p><a className="rebuild-button" href={`mailto:${ORGANIZATION_EMAIL}?subject=Support%20request`}>Email support</a></section>

@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+
 import Link from "next/link";
 import TeamGrid from "@/components/rebuild/TeamGrid";
-import { buildMetadata, pageSeo } from "@/lib/seo";
+import { buildManagedMetadata as buildMetadata } from "@/lib/portalIntegration/seo-runtime";
+import {  pageSeo } from "@/lib/seo";
 
-export const metadata: Metadata = buildMetadata(pageSeo["/team"]);
+export async function generateMetadata() { return buildMetadata(pageSeo["/team"]); }
 
 export default function TeamPage() {
   return (

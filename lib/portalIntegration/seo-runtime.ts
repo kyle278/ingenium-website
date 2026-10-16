@@ -67,7 +67,13 @@ export async function readSeoRevision(
     return null;
   }
 }
-export const getSeoRevision = cache(() => readSeoRevision());
+export const getSeoRevision = cache(async () => {
+  const expected = (await headers()).get("x-ingenium-seo-revision");
+  const current = await readSeoRevision();
+  // Tag invalidation can finish after a webhook response. A fresh routing
+  // revision must still be visible to this request's metadata and schema.
+  return expected && current?.id !== expected ? readSeoRevision(true) : current;
+});
 export async function requestPath() {
   return (await headers()).get("x-ingenium-path") || "/";
 }

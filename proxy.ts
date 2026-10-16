@@ -80,6 +80,7 @@ export async function proxy(request: NextRequest) {
     );
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-ingenium-path", request.nextUrl.pathname);
+  requestHeaders.set("x-ingenium-seo-revision", revision?.id ?? "");
   const response = NextResponse.next({ request: { headers: requestHeaders } });
   if (revision) response.headers.set("x-ingenium-seo-revision", revision.id);
   return response;

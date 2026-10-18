@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Plus } from "lucide-react";
 import type { Offer } from "./offers";
+import OfferLink from "@/components/starter/OfferLink";
 
 export function OfferFaq({ items }: { items: Offer["faqs"] }) {
   return <div className="rebuild-faq">
@@ -25,6 +26,7 @@ export default function OfferPage({ offer }: { offer: Offer }) {
       <p className="rebuild-kicker">{offer.name}</p>
       <div className="rebuild-grid-two items-start">
         <div><h1>{offer.title}</h1><p className="rebuild-lead">{offer.description}</p>
+          {offer.slug === "websites" && <p className="starter-context-link"><OfferLink placement="websites" className="rebuild-text-link">Only need one page? Explore our €495 Starter Website offer.</OfferLink></p>}
           <div className="mt-8 flex flex-wrap items-center gap-5"><Link className="rebuild-button" href={offer.href}>{offer.cta}<ArrowRight size={18} aria-hidden="true" /></Link><Link className="rebuild-text-link" href="#included">See what is included</Link></div>
         </div>
         <aside className="rebuild-panel" aria-label={`${offer.packageName} starting scope`}>

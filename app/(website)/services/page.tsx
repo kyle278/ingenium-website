@@ -3,12 +3,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { offers } from "@/components/rebuild/offers";
+import StarterPromotion from "@/components/starter/StarterPromotion";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/services"]);
 
 export default function ServicesPage() {
   return <div className="rebuild-page">
     <section className="rebuild-hero"><p className="rebuild-kicker">Our services</p><h1>Start with the part that needs to work better.</h1><p className="rebuild-lead">A clearer website. A more useful CRM. Or both designed together. Choose the work your business needs now, with room to discuss what comes next.</p><Link href="/contact" className="rebuild-button mt-8">Discuss your project<ArrowRight size={18} aria-hidden="true" /></Link></section>
+    <StarterPromotion compact />
     <section className="rebuild-section" aria-label="Our three main services"><div className="rebuild-grid">
       {offers.slice(0, 3).map((offer, index) => <article className="rebuild-panel flex flex-col" key={offer.slug}><p className="rebuild-kicker">0{index + 1}</p><h2 className="rebuild-section-heading">{offer.name}</h2><p className="mt-4">{offer.description}</p><p className="mt-6 font-semibold">{offer.setup} setup + {offer.monthly}/month</p><p className="mt-2 text-sm">No VAT charged. Defined starting scope.</p><Link href={`/${offer.slug}`} className="rebuild-text-link mt-auto pt-7">Explore {offer.name === "CRM" ? "CRM" : offer.name.toLowerCase()}<ArrowRight size={18} aria-hidden="true" /></Link></article>)}
     </div></section>

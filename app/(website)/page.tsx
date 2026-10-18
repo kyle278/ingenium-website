@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import HeroSystem from "@/components/rebuild/HeroSystem";
+import StarterPromotion, { StarterOfferStrip } from "@/components/starter/StarterPromotion";
 import EnquiryJourney from "@/components/rebuild/EnquiryJourney";
 import ProjectProof from "@/components/rebuild/ProjectProof";
 import { buildMetadata, pageSeo } from "@/lib/seo";
@@ -24,6 +24,7 @@ const process = [
 export default async function HomePage() {
   const proof = await getPublishedProjects();
   return <div>
+    <StarterOfferStrip />
     <section className="home-hero" aria-labelledby="home-heading">
       <div>
         <p className="rebuild-kicker">Websites & CRM. Built around your business.</p>
@@ -32,7 +33,7 @@ export default async function HomePage() {
         <div className="home-hero-actions"><Link className="rebuild-button" href="/contact">Discuss your project <ArrowUpRight size={18} aria-hidden="true" /></Link><Link className="rebuild-text-link" href="/connected">See how they work together</Link></div>
         <p className="hero-footnote">Clear scope. Practical support. Based in Ireland.</p>
       </div>
-      <HeroSystem />
+      <StarterPromotion />
     </section>
 
     <section className="home-services" aria-labelledby="services-heading">

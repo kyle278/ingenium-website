@@ -27,7 +27,7 @@ export default function StickyBar() {
   return (
     <div className={`starter-sticky${visible ? " is-visible" : ""}`} aria-hidden={!visible} inert={!visible}>
       <p><strong>{PRICE.setup}</strong> + {PRICE.monthly}/month</p>
-      <CtaButton position="sticky" label="Check if I qualify" />
+      <CtaButton position="sticky" label="Enquire about Starter" />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { analyticsAllowed, trackPortalEvent } from "@/lib/enquiry-client";
 
 export type StarterEvent =
+  | "starter_offer_click"
   | "starter_cta_click"
   | "starter_form_open"
   | "starter_form_start"

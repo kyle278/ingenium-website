@@ -8,10 +8,10 @@ import StarterProvider from "@/components/starter/StarterProvider";
 import StickyBar from "@/components/starter/StickyBar";
 import VideoSlot from "@/components/starter/VideoSlot";
 import { ORGANIZATION_ADDRESS, ORGANIZATION_EMAIL, ORGANIZATION_NAME, ORGANIZATION_PHONE, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { EXAMPLE_SITES, FOUNDING_PLACES_LEFT, FOUNDING_PLACES_TOTAL, PRICE, STARTER_PATH } from "@/lib/starter-website";
+import { EXAMPLE_SITES, PRICE, STARTER_PATH } from "@/lib/starter-website";
 
 const TITLE = "Starter Website for Small Businesses & Start-ups | Ingenium";
-const DESCRIPTION = "Websites for small businesses and start-ups, written for you and live in 5 working days. €495 + €50/month, hosting and monthly changes included. Based in Carlow, working across Ireland.";
+const DESCRIPTION = "Your first business website, branded and written for you. Normally €795, now €495 setup. Save €300. Plus €50/month hosting and care. Domain paid separately.";
 const URL = `${SITE_URL}${STARTER_PATH}`;
 
 export const metadata: Metadata = {
@@ -91,14 +91,15 @@ export default function StarterWebsitePage() {
       <section className="starter-hero starter-container" aria-labelledby="starter-hero-heading">
         <div className="starter-hero-copy">
           <p className="rebuild-kicker">STARTER WEBSITE · FOR SMALL BUSINESSES &amp; START-UPS</p>
-          <h1 id="starter-hero-heading" tabIndex={-1}>Your business website, written for you and live in 5 working days.</h1>
-          <p className="starter-hero-sub">For small businesses and start-ups. Tell us about your business in a 20-minute call. We write it, build it and keep it running, so you can get back to work.</p>
+          <h1 id="starter-hero-heading" tabIndex={-1}>Your first business website. Written for you.</h1>
+          <p className="starter-hero-sub">One professional page, branded for your business, with an enquiry form so customers can get in touch. Tell us about your business — we write it and build it.</p>
         </div>
         <div className="starter-hero-offer">
           <PriceHeadline />
           <div className="starter-hero-action">
             <CtaButton position="hero" id="starter-hero-cta" />
-            <p className="starter-hero-note">Takes 30 seconds. No payment needed.</p>
+            <p className="starter-hero-note">No payment needed to enquire.</p>
+            <p className="starter-hero-note">Live in 5 working days from your call, as long as you approve the preview within 1 working day.</p>
           </div>
         </div>
         {/* Full width under the headline and offer; on phones it sits straight after the button. */}
@@ -188,7 +189,7 @@ export default function StarterWebsitePage() {
       {/* 8. Price and what's included */}
       <section className="starter-section starter-container starter-pricing" aria-labelledby="starter-price-heading">
         <div>
-          <h2 id="starter-price-heading" className="starter-h2">One price. Everything included.</h2>
+          <h2 id="starter-price-heading" className="starter-h2">Your Starter Website, clearly priced.</h2>
           <PriceBlock />
           <CtaButton position="pricing" />
         </div>
@@ -211,8 +212,8 @@ export default function StarterWebsitePage() {
           </article>
           <article>
             <CheckCircle2 size={26} aria-hidden="true" />
-            <h3>Live in 5 working days, or your first month is free.</h3>
-            <p>Counted from your 20-minute call.</p>
+            <h3>Live in 5 working days.</h3>
+            <p>Counted from your 20-minute call, as long as you approve the preview within 1 working day.</p>
           </article>
         </div>
       </section>
@@ -258,8 +259,8 @@ export default function StarterWebsitePage() {
       {/* 12. Final call to action */}
       <section id="starter-final" className="starter-final" aria-labelledby="starter-final-heading">
         <div className="starter-container">
-          <h2 id="starter-final-heading" className="starter-h2">Get your business online this month.</h2>
-          {FOUNDING_PLACES_LEFT > 0 && <p>{FOUNDING_PLACES_LEFT} of {FOUNDING_PLACES_TOTAL} Founding Client places left, with the first 2 months of the plan free.</p>}
+          <h2 id="starter-final-heading" className="starter-h2">Give your business a place online.</h2>
+          <p>No payment needed to enquire.</p>
           <CtaButton position="final" />
         </div>
       </section>

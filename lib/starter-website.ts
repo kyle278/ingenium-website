@@ -4,10 +4,6 @@
 export const STARTER_PATH = "/starter-website";
 export const STARTER_FORM_SLUG = "starter-website";
 
-// Update by hand, and only while it's true.
-export const FOUNDING_PLACES_TOTAL = 10;
-export const FOUNDING_PLACES_LEFT = 10;
-
 // Set NEXT_PUBLIC_STARTER_BOOKING_URL to the Cal.com or Calendly event link.
 // Without it, good-fit leads see the "Kyle will email you" fallback only.
 export const BOOKING_URL = process.env.NEXT_PUBLIC_STARTER_BOOKING_URL?.trim() || "";
@@ -30,15 +26,16 @@ export const PRICE = {
   standardSetup: "€1,500",
   standardMonthly: "€149",
   setup: "€495",
+  regularSetup: "€795",
   monthly: "€50",
   // Hosting plan paid yearly up front: 10 months' price for 12.
   yearly: "€500",
-  setupSaving: "€1,005",
+  setupSaving: "€300",
   deposit: "€250",
   balance: "€245",
 } as const;
 
-export const CTA_LABEL = "Check if my business qualifies";
+export const CTA_LABEL = "Enquire about my Starter Website";
 export const CTA_POSITIONS = ["hero", "video", "how-it-works", "pricing", "final", "sticky"] as const;
 export type CtaPosition = (typeof CTA_POSITIONS)[number];
 

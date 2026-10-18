@@ -55,8 +55,6 @@
 .starter-price-now { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 6px; }
 .starter-price-now p { display: flex; align-items: baseline; gap: 8px; font-family: var(--font-display); color: var(--color-text); }
 .starter-price-now strong { font-size: 3rem; font-weight: 800; line-height: 1; letter-spacing: -.04em; }
-.starter-price-plus { font-size: 1.75rem; color: var(--color-text-muted); }
-.starter-price-month { font-size: 1.75rem; font-weight: 600; color: var(--color-text-muted); letter-spacing: -.02em; }
 .starter-price-pill { display: inline-flex; align-items: center; min-height: 32px; padding: 4px 14px; border-radius: 999px; background: var(--starter-pale); color: var(--color-text); font-size: .875rem; font-weight: 600; }
 .starter-price-included { margin-top: 10px; font-size: 1rem; color: var(--color-text); }
 .starter-price-yearly { margin-top: 8px; font-size: .9375rem; color: var(--color-text); }
@@ -69,7 +67,6 @@
 .starter-price-diff thead th { font-weight: 650; }
 .starter-price-diff tbody th { font-weight: 500; color: var(--color-text-muted); }
 .starter-price-diff tr:last-child > * { border-bottom: 0; }
-.starter-founding { margin-top: 14px; padding: 12px 14px; border-left: 3px solid var(--teal-ink); background: var(--color-panel-lifted); font-size: .9375rem; line-height: 1.5; }
 
 /* 3. Trust strip */
 .starter-trust { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin-top: 40px; padding: 18px 0; border-block: 1px solid var(--color-line); list-style: none; }
@@ -314,9 +311,7 @@ html:has(.starter-dialog[open]) { overflow: hidden; }
   .starter-hero { grid-template-columns: 1.25fr 1fr; grid-template-areas: "copy offer" "media media" "details details"; gap: 40px 64px; align-items: end; padding-top: 56px; }
   .starter-hero-media { margin-top: 8px; }
   .starter-hero .starter-price-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 64px; align-items: start; padding-top: 20px; }
-  .starter-hero .starter-price-details > p:not(.starter-founding) { grid-column: 1; }
-  .starter-hero .starter-founding { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
-  .starter-hero .starter-price-diff { grid-column: 2; grid-row: 3; margin-top: 4px; }
+  .starter-hero .starter-price-details > p { grid-column: 1; }
   .starter-hero h1 { font-size: clamp(2.75rem, 4.8vw, 4rem); }
   .starter-hero-sub { font-size: 1.25rem; }
   .starter-price-now strong { font-size: 4rem; }
@@ -347,3 +342,6 @@ html:has(.starter-dialog[open]) { overflow: hidden; }
   .starter-dialog[open] .starter-dialog-card { animation: none; }
   .starter-spinner { animation-duration: 2s; }
 }
+
+.starter-price-label { font-size: 1.125rem; font-weight: 500; }
+.starter-price-recurring { margin-top: 12px; font-size: 1rem; line-height: 1.6; color: var(--color-text); }

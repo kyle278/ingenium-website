@@ -1,0 +1,126 @@
+{
+  "registry": "ingenium-v1",
+  "source": "approved rebuild 2026-10-27",
+  "files": [
+    {
+      "file": "app/(website)/page.tsx",
+      "sourceHash": "4dfeefe4985a",
+      "regions": 36
+    },
+    {
+      "file": "app/(website)/about/page.tsx",
+      "sourceHash": "df1908ec6971",
+      "regions": 43
+    },
+    {
+      "file": "app/(website)/components/SiteNav.tsx",
+      "sourceHash": "2030ebc010d9",
+      "regions": 12
+    },
+    {
+      "file": "app/(website)/components/SiteFooter.tsx",
+      "sourceHash": "6f1be950ac15",
+      "regions": 66
+    },
+    {
+      "file": "app/(website)/ai-agents/page.tsx",
+      "sourceHash": "eee2e34c8ea7",
+      "regions": 49
+    },
+    {
+      "file": "app/(website)/automations/page.tsx",
+      "sourceHash": "6a38c177f4b9",
+      "regions": 47
+    },
+    {
+      "file": "app/(website)/contact/page.tsx",
+      "sourceHash": "5bff2d3f4d44",
+      "regions": 13
+    },
+    {
+      "file": "app/(website)/how-we-work/page.tsx",
+      "sourceHash": "73d77029835b",
+      "regions": 34
+    },
+    {
+      "file": "app/(website)/pricing/page.tsx",
+      "sourceHash": "4f14db24182b",
+      "regions": 77
+    },
+    {
+      "file": "app/(website)/projects/page.tsx",
+      "sourceHash": "4604f279307c",
+      "regions": 20
+    },
+    {
+      "file": "app/(website)/security/page.tsx",
+      "sourceHash": "a0ec1a623d8c",
+      "regions": 44
+    },
+    {
+      "file": "app/(website)/services/page.tsx",
+      "sourceHash": "4ad899998d2f",
+      "regions": 48
+    },
+    {
+      "file": "app/(website)/support/page.tsx",
+      "sourceHash": "d2d201b17ffb",
+      "regions": 37
+    },
+    {
+      "file": "app/(website)/team/page.tsx",
+      "sourceHash": "7c25cd0d8401",
+      "regions": 23
+    },
+    {
+      "file": "components/rebuild/LocalBusinessHero.tsx",
+      "sourceHash": "ee84ecb76cb3",
+      "regions": 16
+    },
+    {
+      "file": "components/rebuild/HomeStory.tsx",
+      "sourceHash": "c9d68bc497d5",
+      "regions": 74
+    },
+    {
+      "file": "components/rebuild/OutcomePage.tsx",
+      "sourceHash": "bc817d47384c",
+      "regions": 37
+    },
+    {
+      "file": "components/rebuild/LocalBusinessSections.tsx",
+      "sourceHash": "84c5ac98fd77",
+      "regions": 32
+    },
+    {
+      "file": "components/rebuild/CurrentProjects.tsx",
+      "sourceHash": "b9341f96aa33",
+      "regions": 8
+    },
+    {
+      "file": "app/(website)/how-it-works/page.tsx",
+      "sourceHash": "b1d5ee18801e",
+      "regions": 17
+    },
+    {
+      "file": "app/(website)/packages/page.tsx",
+      "sourceHash": "a232ea19ad29",
+      "regions": 24
+    },
+    {
+      "file": "app/(website)/results/page.tsx",
+      "sourceHash": "4ce68cd4f66b",
+      "regions": 23
+    },
+    {
+      "file": "app/(website)/visibility-check/page.tsx",
+      "sourceHash": "c1cc7ecd648c",
+      "regions": 14
+    },
+    {
+      "file": "app/(website)/book-a-call/page.tsx",
+      "sourceHash": "146f6aa068d6",
+      "regions": 17
+    }
+  ]
+}

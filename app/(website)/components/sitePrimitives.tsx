@@ -1,3 +1,5 @@
+
+import { EditorLink, EditorText } from "@/components/website-editor/Editable";
 import Link from "next/link";
 
 type ActionLink = {
@@ -32,9 +34,9 @@ export function ButtonLink({ action, variant = "primary", className = "" }: Butt
         : primaryButtonClass;
 
   return (
-    <Link href={action.href} className={`${baseClass} ${className}`.trim()}>
-      {action.label}
-    </Link>
+    <EditorLink editorId="r64f04bec20-xf" href={action.href} className={`${baseClass} ${className}`.trim()}>
+      <EditorText editorId="r64f04bec20-zn" tag="Link" value={action.label} />
+    </EditorLink>
   );
 }
 
@@ -51,13 +53,13 @@ export function SectionIntro({
 }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
-      <p className={sectionEyebrowClass}>{eyebrow}</p>
+      <p className={sectionEyebrowClass}><EditorText editorId="r64f04bec20-19q" tag="p" value={eyebrow} /></p>
       <h2 className="mt-4 type-section-title text-[var(--color-text)]">
-        {title}
+        <EditorText editorId="r64f04bec20-1ce" tag="h2" value={title} />
       </h2>
       {body ? (
         <p className="mt-4 max-w-[64ch] type-body-lead text-[var(--color-text-soft)]">
-          {body}
+          <EditorText editorId="r64f04bec20-1g7" tag="p" value={body} />
         </p>
       ) : null}
     </div>
@@ -87,7 +89,7 @@ export function MonoTag({ children, className = "" }: { children: React.ReactNod
     <span
       className={`tech-pill type-detail-kicker inline-flex rounded-full px-3 py-1 text-[var(--color-text-soft)] ${className}`.trim()}
     >
-      {children}
+      <EditorText editorId="r64f04bec20-1za" tag="span" value={children} />
     </span>
   );
 }

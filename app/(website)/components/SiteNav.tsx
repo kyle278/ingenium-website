@@ -1,4 +1,6 @@
 "use client";
+import { EditorImage, EditorLink, EditorText } from "@/components/website-editor/Editable";
+
 
 import Image from "next/image";
 import Link from "next/link";
@@ -32,14 +34,14 @@ export default function SiteNav() {
     if (servicesOpen) { event.stopPropagation(); setServicesOpen(false); servicesButton.current?.focus(); }
     else if (open) { setOpen(false); menuButton.current?.focus(); }
   }}><div className="site-header-inner">
-    <Link href="/" className="site-brand" aria-label="Ingenium home" onClick={close}><Image src="/brand/ingenium-logo.png" alt="" width={1000} height={245} sizes="(max-width: 600px) 180px, 204px" className="site-brand-logo" priority /></Link>
+    <EditorLink editorId="rebuild.app.website.components.SiteNav.tsx.link.cd1475f71db4" href="/" className="site-brand" aria-label="Ingenium home" onClick={close}><EditorImage editorId="rebuild.app.website.components.SiteNav.tsx.image.e3821b3f6333" src="/brand/ingenium-logo.png" alt="" width={1000} height={245} sizes="(max-width: 600px) 180px, 204px" className="site-brand-logo" priority /></EditorLink>
     <button ref={menuButton} className="mobile-menu-button" type="button" aria-expanded={open} aria-controls="site-navigation" aria-label={open ? "Close menu" : "Open menu"} onClick={() => { setOpen(!open); setServicesOpen(false); }}>{open ? <X size={23} /> : <Menu size={23} />}</button>
     <nav id="site-navigation" aria-label="Main navigation" className={`site-navigation ${open ? "is-open" : ""}`}>
       <div className="services-navigation"><button ref={servicesButton} type="button" className="nav-link" aria-expanded={servicesOpen} aria-controls="services-dropdown" onClick={() => setServicesOpen(!servicesOpen)}>Services<ChevronDown size={14} className={servicesOpen ? "rotate-chevron" : undefined} aria-hidden="true" /></button>
-        <div id="services-dropdown" className="services-dropdown" hidden={!servicesOpen}>{services.map(item => <Link href={item.href} key={item.href} onClick={close} aria-current={pathname === item.href ? "page" : undefined}><span>{item.title}<ArrowUpRight size={16} aria-hidden="true" /></span><small>{item.detail}</small></Link>)}</div>
+        <div id="services-dropdown" className="services-dropdown" hidden={!servicesOpen}>{services.map(item => <EditorLink editorId="rebuild.app.website.components.SiteNav.tsx.link.5860dc5ad553" identity={item.href} href={item.href} key={item.href} onClick={close} aria-current={pathname === item.href ? "page" : undefined}><span><EditorText editorId="rebuild.app.website.components.SiteNav.tsx.text.21b8263f512c" identity={item.href} tag="span" value={item.title} /><ArrowUpRight size={16} aria-hidden="true" /></span><small>{item.detail}</small></EditorLink>)}</div>
       </div>
-      {links.map(item => <Link key={item.href} className="nav-link" href={item.href} onClick={close} aria-current={pathname.startsWith(item.href) ? "page" : undefined}>{item.label}</Link>)}
-      <Link href="/book-a-call" className="rebuild-button nav-cta" onClick={close}>Book a free call<ArrowUpRight size={16} aria-hidden="true" /></Link>
+      {links.map(item => <EditorLink editorId="rebuild.app.website.components.SiteNav.tsx.link.9d5b4255e5e1" identity={item.href} key={item.href} className="nav-link" href={item.href} onClick={close} aria-current={pathname.startsWith(item.href) ? "page" : undefined}><EditorText editorId="rebuild.app.website.components.SiteNav.tsx.text.6d349d07aa85" identity={item.href} tag="Link" value={item.label} /></EditorLink>)}
+      <EditorLink editorId="rebuild.app.website.components.SiteNav.tsx.link.2d7331e63eee" href="/book-a-call" className="rebuild-button nav-cta" onClick={close}><EditorText editorId="rebuild.app.website.components.SiteNav.tsx.text.4ad4f7e7d1e3" tag="Link" value={"Book a free call"} /><ArrowUpRight size={16} aria-hidden="true" /></EditorLink>
     </nav>
   </div><div className="site-scroll-progress" aria-hidden="true" /></header>;
 }

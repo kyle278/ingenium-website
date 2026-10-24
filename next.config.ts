@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  turbopack: { root: process.cwd() },
   async redirects() {
     return [
       { source: "/websites", destination: "/phone-ringing-website", permanent: true },

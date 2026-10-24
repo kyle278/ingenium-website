@@ -1,0 +1,116 @@
+{
+  "sourceDeployment": "dpl_7535efcpj8Q2B74nVMWHCdB4MCX6",
+  "registry": "ingenium-v1",
+  "files": [
+    {
+      "file": "app/(website)/about/page.tsx",
+      "sourceHash": "253e854f1ae6afd5a2866ec6275dc35c22bab58c5cd9a7feba563be537b9aab1",
+      "regions": 32
+    },
+    {
+      "file": "app/(website)/ai-agents/page.tsx",
+      "sourceHash": "9e12b8233d565d210960c196d9280cb1e58fe89e98957c6bc3b89249e3ffa64b",
+      "regions": 37
+    },
+    {
+      "file": "app/(website)/automations/page.tsx",
+      "sourceHash": "2e2c2f04a4633cce12b668c9ee98ee10afa9ec5ebce8c932811bfaf3094c4474",
+      "regions": 36
+    },
+    {
+      "file": "app/(website)/contact/page.tsx",
+      "sourceHash": "149129236cf52fc64f1ea2f556894b2fc1af2e785dfd53342aa48b4db92d39c7",
+      "regions": 8
+    },
+    {
+      "file": "app/(website)/how-we-work/page.tsx",
+      "sourceHash": "e727fe8689b388d36b7910e12095a8470b06628c79ce3d72381ae1165df39c01",
+      "regions": 26
+    },
+    {
+      "file": "app/(website)/page.tsx",
+      "sourceHash": "4c739c0d2ba5a10098df4a3a499881d87b2fa9f42e921859e64a3b563a6269f8",
+      "regions": 61
+    },
+    {
+      "file": "app/(website)/pricing/page.tsx",
+      "sourceHash": "fbf7af10d53b06004d990ad55270271b0e6ad88e8f6415b83b3246a0df668a6d",
+      "regions": 61
+    },
+    {
+      "file": "app/(website)/projects/page.tsx",
+      "sourceHash": "dca56430e16dc171422fd34de50bddc2a04e6aaae53473ce86f2f2133467a655",
+      "regions": 13
+    },
+    {
+      "file": "app/(website)/projects/[slug]/page.tsx",
+      "sourceHash": "ef48d5ab4a1126b2feb9bbd21cd541ec235beef4e7a010207c404484d2778bf1",
+      "regions": 29
+    },
+    {
+      "file": "app/(website)/security/page.tsx",
+      "sourceHash": "fb432b794173d849ab847ad5067378991aee72005442b141e0afb6e43325a7e9",
+      "regions": 32
+    },
+    {
+      "file": "app/(website)/services/page.tsx",
+      "sourceHash": "6dcb8f7cca75fb42b363ef528bf550ff83498e667f7799731aa007ba7b58db94",
+      "regions": 36
+    },
+    {
+      "file": "app/(website)/support/page.tsx",
+      "sourceHash": "7124b68724996f0e59695674f1d1b5526b4a15f670242596983fcf2a07326c74",
+      "regions": 27
+    },
+    {
+      "file": "app/(website)/team/page.tsx",
+      "sourceHash": "d254183eedc8e7efb429f71bf6fede0ca9eb737d20f598e2c5171b99cb24e22d",
+      "regions": 15
+    },
+    {
+      "file": "app/(website)/components/SiteNav.tsx",
+      "sourceHash": "5fb2ef13cd2f507af1d50075446e1e35847e82782c708ad82f33e00e84a93431",
+      "regions": 12
+    },
+    {
+      "file": "app/(website)/components/SiteFooter.tsx",
+      "sourceHash": "a64626d2432cf33fc53ebeca1b37555d9d13ca7556a571c2c3ea0edf20c4c2be",
+      "regions": 47
+    },
+    {
+      "file": "components/rebuild/OfferPage.tsx",
+      "sourceHash": "07bd26d18eba15be79feea9339a7d9c329242b2934c26413cf74ecaced69f935",
+      "regions": 58
+    },
+    {
+      "file": "components/rebuild/TeamGrid.tsx",
+      "sourceHash": "a46530f1f6c46281c94b557c24a0b8d1c476ca010c2260cc1270337aef070cbc",
+      "regions": 15
+    },
+    {
+      "file": "app/(website)/components/PolicyPage.tsx",
+      "sourceHash": "827f6be307e0f1ac0b0f5284731e10e5132d650082a05802a96a0d98554d806f",
+      "regions": 16
+    },
+    {
+      "file": "app/(website)/components/FaqAccordion.tsx",
+      "sourceHash": "5f1054fb62f01816a10f94b8b840f5473d895b1937412ecc532cffabea5968d9",
+      "regions": 2
+    },
+    {
+      "file": "app/(website)/components/ServiceFaqSection.tsx",
+      "sourceHash": "95d9df954d8af1ebe9dc2ac91b8b9cf73d6815acb6dd18fc0adb3d005dd1c928",
+      "regions": 3
+    },
+    {
+      "file": "app/(website)/components/sitePrimitives.tsx",
+      "sourceHash": "cc891eded503880bac348a3f2272b4e1ddf86f47d6bfd5d4bbbaffef143b282d",
+      "regions": 6
+    },
+    {
+      "file": "components/rebuild/EnquiryJourney.tsx",
+      "sourceHash": "cf9a03bdc1f4244991e8c71b3a0a01ae4196df1f76a93d776a04c68d9f34bf47",
+      "regions": 10
+    }
+  ]
+}

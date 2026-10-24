@@ -1,3 +1,5 @@
+
+import { EditorSection, EditorText } from "@/components/website-editor/Editable";
 import { SectionIntro, SurfaceCard } from "./sitePrimitives";
 
 export type ServiceFaqItem = {
@@ -32,7 +34,7 @@ export default function ServiceFaqSection({
   };
 
   return (
-    <section>
+    <EditorSection editorId="rb04822633d-js">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -42,14 +44,14 @@ export default function ServiceFaqSection({
         {items.map((item) => (
           <SurfaceCard key={item.question} className="panel-hover p-6 md:p-7">
             <h3 className="type-card-title text-[var(--color-text)]">
-              {item.question}
+              <EditorText identity={item.question} editorId="rb04822633d-wr" tag="h3" value={item.question} />
             </h3>
             <p className="mt-4 type-body-base text-[var(--color-text-soft)]">
-              {item.answer}
+              <EditorText identity={item.question} editorId="rb04822633d-10c" tag="p" value={item.answer} />
             </p>
           </SurfaceCard>
         ))}
       </div>
-    </section>
+    </EditorSection>
   );
 }

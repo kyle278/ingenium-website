@@ -1,3 +1,5 @@
+import { headers } from "next/headers";
+import "./website-editor.css";
 import type { Metadata } from "next";
 import { Manrope, Public_Sans } from "next/font/google";
 
@@ -73,13 +75,14 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const seoRevision = await getSeoRevision();
+  const editorPreview = (await headers()).get("x-ingenium-editor-preview") === "1";
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>{seoRevision && <meta name="ingenium-seo-revision" content={seoRevision.id} />}</head>
       <body
         className={`${manropeDisplay.variable} ${publicSansBody.variable} min-h-screen bg-[var(--color-bg)] font-[var(--font-body)] text-[var(--color-text)] antialiased`}
       >
-        <IngeniumTracking />
+        {!editorPreview && <IngeniumTracking />}
         {children}
       </body>
     </html>

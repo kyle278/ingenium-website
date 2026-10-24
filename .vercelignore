@@ -1,0 +1,11 @@
+.git
+.next
+node_modules
+.env*
+.codex-preview
+video
+campaign
+invoices
+automations
+audits
+*.log

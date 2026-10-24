@@ -1,4 +1,6 @@
 "use client";
+import { EditorText } from "@/components/website-editor/Editable";
+
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -32,7 +34,7 @@ export default function FaqAccordion({ items, editorAttrs }: FaqAccordionProps) 
               className="flex w-full items-center justify-between gap-4 px-4 py-3 text-left"
               {...editorAttrs}
             >
-              <span className="type-action text-white">{item.question}</span>
+              <span className="type-action text-white"><EditorText identity={item.question} editorId="rbfa1c2dae9-ts" tag="span" value={item.question} /></span>
               <ChevronDown
                 className="faq-chevron h-4 w-4 shrink-0 text-slate-500"
                 data-open={isOpen ? "true" : "false"}
@@ -45,7 +47,7 @@ export default function FaqAccordion({ items, editorAttrs }: FaqAccordionProps) 
             >
               <div className="overflow-hidden">
                 <p className="text-sm leading-relaxed text-slate-400" {...editorAttrs}>
-                  {item.answer}
+                  <EditorText identity={item.question} editorId="rbfa1c2dae9-1bf" tag="p" value={item.answer} />
                 </p>
               </div>
             </div>

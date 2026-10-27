@@ -6,6 +6,7 @@ import {
 } from "@/lib/portalIntegration/seo-runtime";
 import { seoRedirect } from "@/lib/portalIntegration/seo-adapter";
 import { BLOG_UNAVAILABLE_HTML } from "@/lib/blog/unavailable";
+import { editorRouteAliases } from "@/lib/website-editor/route-aliases";
 
 const APEX_HOST = "ingeniumconsulting.net";
 const CANONICAL_HOST = "www.ingeniumconsulting.net";
@@ -75,12 +76,26 @@ export async function proxy(request: NextRequest) {
     const requestHeaders=new Headers(request.headers);
     requestHeaders.set("x-ingenium-path",request.nextUrl.pathname);
     requestHeaders.set("x-ingenium-editor-preview","1");
-    const response=NextResponse.next({request:{headers:requestHeaders}});
+    const alias = editorRouteAliases[request.nextUrl.pathname];
+    const destination = request.nextUrl.clone();
+    if (alias) { destination.pathname = alias; requestHeaders.set("x-ingenium-path", alias); }
+    const response=alias ? NextResponse.rewrite(destination,{request:{headers:requestHeaders}}) : NextResponse.next({request:{headers:requestHeaders}});
     const editorParents=["https://portal.ingeniumconsulting.net",process.env.INGENIUM_EDITOR_STAGING_PORTAL_ORIGIN].filter(Boolean);
     response.headers.set("Content-Security-Policy","frame-ancestors "+editorParents.join(" "));
     response.headers.set("Cache-Control","private, no-store");
     response.headers.set("X-Robots-Tag","noindex, nofollow");
     response.headers.set("Referrer-Policy","no-referrer");
+    return response;
+  }
+  if (request.nextUrl.searchParams.has("__editor_verify") && editorRouteAliases[request.nextUrl.pathname]) {
+    const destination = request.nextUrl.clone();
+    destination.pathname = editorRouteAliases[request.nextUrl.pathname];
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-ingenium-path", destination.pathname);
+    requestHeaders.set("x-ingenium-editor-verify", "1");
+    const response = NextResponse.rewrite(destination, { request: { headers: requestHeaders } });
+    response.headers.set("Cache-Control", "private, no-store");
+    response.headers.set("X-Robots-Tag", "noindex, nofollow");
     return response;
   }
     const blogPath = request.nextUrl.pathname;

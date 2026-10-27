@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { editorRedirectMissing } from "./lib/website-editor/route-aliases";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -17,7 +18,7 @@ const nextConfig: NextConfig = {
       { source: "/demo", destination: "/book-a-call", permanent: true },
       { source: "/team", destination: "/about#team", permanent: true },
       { source: "/starter-website", destination: "/packages#7-day-starter", permanent: true },
-    ];
+    ].map(rule => rule.source === "/starter-website" ? rule : { ...rule, missing: editorRedirectMissing });
   },
 };
 

@@ -40,7 +40,7 @@ export function trackPortalEvent(event: string, properties: Record<string, strin
   if (!identity.visitor_id || !identity.session_id) return;
   const tracking = enquiryTracking();
   const safeProperties: Record<string, string> = {};
-  for (const key of [...ALLOWED, "cta_position", "lead_route", "enquiry_service", "blog_post_id", "blog_revision_id", "scroll_depth", "form_slug", "contact_method"]) {
+  for (const key of [...ALLOWED, "cta_position", "lead_route", "enquiry_service", "blog_post_id", "blog_revision_id", "scroll_depth", "form_slug", "form_id", "contact_method"]) {
     const value = properties[key] ?? (tracking as Record<string, unknown>)[key];
     if (typeof value === "string" && /^[a-z0-9 _.-]{1,160}$/i.test(value)) safeProperties[key] = value;
   }

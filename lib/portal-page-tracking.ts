@@ -1,4 +1,5 @@
 import { analyticsAllowed, captureAttribution, portalIdentity, trackPortalEvent } from "./enquiry-client";
+import { PORTAL_FORM_IDS } from "./portalIntegration/public";
 
 // Maintain the existing V1 connection and identity. Installing another SDK here
 // would create competing identities and duplicate page/form submissions.
@@ -24,7 +25,7 @@ export function startPortalPageTracking() {
     for (const entry of entries) {
       const slug = entry.target.getAttribute("data-portal-form-slug");
       if (entry.isIntersecting && slug && !seenForms.has(entry.target)) {
-        seenForms.add(entry.target); trackPortalEvent("form_view", { form_slug: slug });
+        seenForms.add(entry.target); trackPortalEvent("form_view", { form_slug: slug, form_id: PORTAL_FORM_IDS[slug] || "" });
       }
     }
   }, { threshold: 0.1 });

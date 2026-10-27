@@ -1,0 +1,22 @@
+# Current projects production release — 27 October 2026
+
+Production deployment: `dpl_6Cr2uRZiNmYZCTwUPdNfU6ZR63ML`
+
+URL: https://www.ingeniumconsulting.net/projects#current-projects
+
+Built from the clean Website editor release (`c4eeec8`), retaining all existing editor integration and production environment configuration. Promoted with Vercel after its production build passed. Previous production deployment: `dpl_BnUN2Ci9PwMLNSsmpEjHvfMXoEmd`.
+
+The homepage and `/projects` now render six direct website links with locally hosted, compressed WebP screenshots. Both the link and screenshot for Attic use its homepage. No iframe or external screenshot service is required. Screenshot assets live in `public/project-previews/`; the shared component is `components/rebuild/CurrentProjects.tsx`.
+
+- Farrell Cleaning: https://www.farrellcleaning.ie
+- Holland Pianos: https://www.hollandpianos.ie
+- Tantrum: https://tantrum-website.vercel.app
+- KennyPM: https://kennypm-website.vercel.app/
+- Attic Jiu Jitsu: https://attic-jiu-jitsu-website.vercel.app/
+- Connie Byrne Yoga: https://conniebyrneyoga.com
+
+The Portal case-study feed currently responds with HTTP 404. The `/projects` page only renders the separate Portal case-study section when records exist, so the unavailable-feed notice no longer appears alongside the current projects. The feed and its publication rules are unchanged.
+
+Validation: production build and TypeScript passed; all 58 existing tests passed; changed files linted without errors (two existing unused-import warnings). Browser checks at 1440px and 390px confirmed six loaded previews, the Attic homepage link, no horizontal overflow, and no unavailable message. Live checks on `/` and `/projects` returned HTTP 200, loaded all six images, reported no page errors, and resolved published Website editor release `7c303ef2-c11b-497f-8996-afd52d95d080`.
+
+The canonical production source remains `C:/Users/kyler/Desktop/Projects/ingenium-website-editor-release`. This release is fast-forwarded into that checkout after verification. The original `ingenium-website` checkout still contains unrelated development changes; do not deploy it wholesale over the editor release.

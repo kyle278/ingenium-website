@@ -6,6 +6,7 @@ const TOUCH_KEY = "ingenium-attribution-v1";
 const VISITOR_KEY = "ingenium-portal-visitor-v1";
 const SESSION_KEY = "ingenium-portal-session-v1";
 const ALLOWED = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "cid"];
+let trackingDelivery: Promise<unknown> = Promise.resolve();
 export function enquiryRequestId(form: string) {
   const key = `ingenium-pending-request:${form}`;
   try { const existing = sessionStorage.getItem(key); if (existing && /^[a-f0-9-]{36}$/i.test(existing)) return existing; } catch { /* Use an in-memory reference in the caller. */ }
@@ -43,9 +44,16 @@ export function trackPortalEvent(event: string, properties: Record<string, strin
     const value = properties[key] ?? (tracking as Record<string, unknown>)[key];
     if (typeof value === "string" && /^[a-z0-9 _.-]{1,160}$/i.test(value)) safeProperties[key] = value;
   }
-  void fetch(PORTAL_TRACKING_ENDPOINT, {
+  const request = {
     method: "POST", headers: { "Content-Type": "application/json" }, keepalive: true,
     body: JSON.stringify({ site_id: PORTAL_SITE_ID, ...identity, events: [{ event_type: event, client_event_id: crypto.randomUUID(), occurred_at: new Date().toISOString(), page_url: cleanPageUrl(location.href), page_path: location.pathname, referrer: cleanPageUrl(document.referrer), properties: safeProperties }] }),
+  };
+  // V1 creates the session on its first event. Serialize delivery so first-page
+  // and visible-form events cannot race that creation. Drop queued events if
+  // consent was withdrawn (including withdrawal followed by a new identity).
+  trackingDelivery = trackingDelivery.then(() => {
+    if (!analyticsAllowed() || portalIdentity().visitor_id !== identity.visitor_id) return;
+    return fetch(PORTAL_TRACKING_ENDPOINT, request);
   }).catch(() => { /* Analytics never blocks an enquiry. */ });
 }
 export function captureAttribution() {

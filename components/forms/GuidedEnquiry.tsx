@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Building2, CalendarDays, ChartNoAxesCombined, Check, CheckCircle2, CircleHelp, FileText, Globe2, Layers3, LockKeyhole, Mail, MessagesSquare, Pencil, RefreshCw, Rocket, Search, ShieldCheck, ShoppingBag, Users } from "lucide-react";
 import { applicableQuestions, answer, buildJourneyFields, updateAnswer, type Answers, type JourneyField, type JourneyKind } from "@/lib/form-journeys";
 import { MARKETING_NOTICE, PRIVACY_NOTICE, validateEnquiry, validService } from "@/lib/enquiry-contract";
+import { MIN_FILL_MS } from "@/lib/starter-website";
 import { clearEnquiryRequestId, enquiryRequestId, enquiryTracking, recordAcceptedLead, sendEnquiry } from "@/lib/enquiry-client";
 
 const icons = { website: Globe2, chat: MessagesSquare, layers: Layers3, shop: ShoppingBag, help: CircleHelp, refresh: RefreshCw, page: FileText, shield: ShieldCheck, chart: ChartNoAxesCombined, rocket: Rocket, people: Users, calendar: CalendarDays, edit: Pencil, mail: Mail, lock: LockKeyhole, business: Building2, search: Search };
@@ -28,6 +29,7 @@ export default function GuidedEnquiry({ kind, formName, formSlug, intent = "proj
   const [direction, setDirection] = useState("forward");
   const formRef = useRef<HTMLFormElement>(null), headingRef = useRef<HTMLHeadingElement>(null), errorRef = useRef<HTMLParagraphElement>(null), successRef = useRef<HTMLDivElement>(null);
   const currentStep = useRef(step), navigating = useRef(false), sending = useRef(false), requestId = useRef(""), originalTitle = useRef(""), moved = useRef(false), openedAt = useRef(0);
+  const capturedFillMs = useRef("");
   const questions = applicableQuestions(kind, answers), index = questions.findIndex(q => q.id === step), question = questions[index];
   const update = (key: string, value: string | string[]) => setAnswers(current => updateAnswer(current, key, value));
   useEffect(() => {
@@ -65,7 +67,9 @@ export default function GuidedEnquiry({ kind, formName, formSlug, intent = "proj
       if (field.type === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) { problem("Please enter a valid email address."); return; }
     }
     if (question.type !== "consent") { const next = questions[index + 1]; if (next) move(step, next.id); return; }
-    const fields = buildJourneyFields(kind, answers, { ...extraFields, ...(kind === "enquiry" ? { intent } : {}), ...(kind === "starter" ? { fill_ms: String(Date.now() - openedAt.current) } : {}) });
+    const elapsed = String(Date.now() - openedAt.current);
+    if (kind === "starter" && !capturedFillMs.current && Number(elapsed) >= MIN_FILL_MS) capturedFillMs.current = elapsed;
+    const fields = buildJourneyFields(kind, answers, { ...extraFields, ...(kind === "enquiry" ? { intent } : {}), ...(kind === "starter" ? { fill_ms: capturedFillMs.current || elapsed } : {}) });
     const key = kind === "enquiry" ? `${formSlug}:${intent}` : kind === "visibility" ? "visibility-check" : kind === "brief" ? "website-project-brief" : kind === "template" ? "template-gallery" : "starter-website";
     requestId.current ||= enquiryRequestId(key);
     const payload = { request_id: requestId.current, form_slug: formSlug, fields, tracking: enquiryTracking() }, invalid = validateEnquiry(payload);

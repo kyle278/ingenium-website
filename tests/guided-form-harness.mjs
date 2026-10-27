@@ -27,6 +27,7 @@ export function mount(kind = 'enquiry', props = {}, send = async () => ({ ok: tr
     if (name === 'lucide-react') return new Proxy({}, { get: (_, key) => String(key) });
     if (name.endsWith('form-journeys')) return journeys;
     if (name.endsWith('enquiry-contract')) return contract;
+    if (name.endsWith('starter-website')) return starter;
     if (name.endsWith('enquiry-client')) return { enquiryRequestId: () => '11111111-1111-4111-8111-111111111111', enquiryTracking: () => ({}), clearEnquiryRequestId: key => cleared.push(key), recordAcceptedLead() {}, sendEnquiry: async payload => { sent.push(payload); return send(payload); } };
     throw Error(name);
   }, { Date: { now: () => now }, URLSearchParams, location: { search: '' }, window: { matchMedia: () => ({ matches: false }) }, document: { get title() { return title; }, set title(v) { title = v; } } });

@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
-import { analyticsAllowed, captureAttribution, clearAttribution, clearEnquiryRequestId, CONSENT_KEY, enquiryRequestId, enquiryTracking, sendEnquiry, trackPortalEvent } from "@/lib/enquiry-client";
+import { analyticsAllowed, captureAttribution, clearAttribution, CONSENT_KEY, trackPortalEvent } from "@/lib/enquiry-client";
 import "./consent.css";
 
 const GTM_ID = "GTM-KWCQSXC7";
@@ -48,37 +48,6 @@ function loadAnalytics() {
   document.head.appendChild(script);
 }
 
-/** Essential adapter for the existing private website brief only; never an analytics dependency. */
-function LegacyBriefTransport() {
-  useEffect(() => {
-    const pending = new WeakSet<HTMLFormElement>();
-    const ids = new WeakMap<HTMLFormElement, string>();
-    function notify(form: HTMLFormElement, name: string, detail: object) { form.dispatchEvent(new CustomEvent(name, { bubbles: true, detail })); }
-    async function onSubmit(event: Event) {
-      const form = event.target;
-      if (!(form instanceof HTMLFormElement) || form.dataset.formSlug !== "website-project-brief" || event.defaultPrevented) return;
-      event.preventDefault();
-      if (pending.has(form)) return;
-      if (!form.reportValidity()) return;
-      const fields: Record<string, string> = {};
-      for (const [key, value] of new FormData(form)) {
-        if (typeof value !== "string") continue;
-        fields[key] = fields[key] ? `${fields[key]}, ${value}` : value;
-      }
-      const id = ids.get(form) || enquiryRequestId("website-project-brief"); ids.set(form, id);
-      pending.add(form); notify(form, "ingenium:form-submitting", {});
-      try {
-        const receipt = await sendEnquiry({ request_id: id, form_slug: "website-project-brief", fields, tracking: enquiryTracking() });
-        clearEnquiryRequestId("website-project-brief");
-        notify(form, "ingenium:form-success", { response: receipt }); ids.delete(form);
-      } catch (err) { notify(form, "ingenium:form-error", { message: err instanceof Error ? err.message : "We could not confirm receipt. Please email us." }); }
-      finally { pending.delete(form); }
-    }
-    document.addEventListener("submit", onSubmit);
-    return () => document.removeEventListener("submit", onSubmit);
-  }, []);
-  return null;
-}
 export default function IngeniumTracking() {
   const pathname = usePathname();
   const choice = useSyncExternalStore(subscribeChoice, readChoice, () => "loading");
@@ -107,8 +76,9 @@ export default function IngeniumTracking() {
     if (value === "accepted") { captureAttribution(); loadAnalytics(); }
     else { revokeAnalytics(); if (wasAccepted && document.getElementById("ingenium-optional-gtm")) location.reload(); }
   }
-  return <><LegacyBriefTransport />
+  return <>
     <button className="consent-settings" type="button" onClick={() => setOpen(true)}>Privacy settings</button>
     {(open || choice === null) && choice !== "loading" && <section className="consent-panel" aria-label="Analytics preferences"><h2>Your privacy choices</h2><p>Essential features let you send an enquiry. Optional analytics help us understand which pages are useful. Your choice won’t affect the form. <a href="/privacy">Privacy Policy</a></p><div><button type="button" onClick={() => choose("rejected")}>Reject optional</button><button type="button" onClick={() => choose("accepted")}>Accept analytics</button>{choice && <button type="button" onClick={() => setOpen(false)}>Close</button>}</div></section>}
   </>;
 }
+

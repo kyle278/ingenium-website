@@ -4,7 +4,7 @@ import { routeStarterLead, validateStarterFields, LEAD_LABELS } from '../lib/sta
 import { validateEnquiry, NOTICE_VERSION, PRIVACY_NOTICE } from '../lib/enquiry-contract.ts';
 
 const full = { team_size: '2–5', business_type: 'Trades and construction', main_need: "I don't have a website yet" };
-const fields = (extra = {}) => ({ name: 'Mary Walsh', email: 'mary@walsh.ie', phone: '', team_size: '', business_type: '', main_need: '', details: '', privacy_consent: 'true', consent_version: NOTICE_VERSION, consent_text_snapshot: PRIVACY_NOTICE, marketing_consent: 'false', fill_ms: '12000', ...extra });
+const fields = (extra = {}) => ({ name: 'Mary Walsh', first_name: 'Mary', last_name: 'Walsh', email: 'mary@walsh.ie', phone: '', team_size: '', business_type: '', main_need: '', details: '', privacy_consent: 'true', consent_version: NOTICE_VERSION, consent_text_snapshot: PRIVACY_NOTICE, marketing_consent: 'false', fill_ms: '12000', ...extra });
 
 test('all three picks answered with a one-page need is a good fit', () => assert.equal(routeStarterLead(full), 'good-fit'));
 test('shops, bookings and 26+ staff are bigger needs, checked before anything else', () => {

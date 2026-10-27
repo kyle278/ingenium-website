@@ -170,5 +170,6 @@ export default function CallRequestJourney({ initialService = "not-sure", initia
         {step === "consent" && <p className="call-help">Your call is booked once we confirm a time together.</p>}
       </div>
     </fieldset>
+    <p className="guided-footnote">Refreshing clears your answers. <a href="#cookie-settings">Privacy settings</a></p>
   </form>;
 }

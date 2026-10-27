@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { validateEnquiry, acceptedReceipt, PRIVACY_NOTICE, NOTICE_VERSION } from '../lib/enquiry-contract.ts';
-const payload = () => ({ request_id:'11111111-1111-4111-8111-111111111111',form_slug:'contact',fields:{name:'Test Person', email:'test@example.test',service:'connected',message:'A website and CRM enquiry.',budget_range:'2000-5000',privacy_consent:'true',marketing_consent:'false',consent_version:NOTICE_VERSION,consent_text_snapshot:PRIVACY_NOTICE}});
+const payload = () => ({ request_id:'11111111-1111-4111-8111-111111111111',form_slug:'contact',fields:{name:'Test Person',first_name:'Test',last_name:'Person', email:'test@example.test',service:'connected',message:'A website and CRM enquiry.',budget_range:'2000-5000',privacy_consent:'true',marketing_consent:'false',consent_version:NOTICE_VERSION,consent_text_snapshot:PRIVACY_NOTICE}});
 test('valid enquiry does not require marketing consent or business name',()=>assert.equal(validateEnquiry(payload()),null));
 test('missing acknowledgement is rejected independently of browser validation',()=>{const p=payload();p.fields.privacy_consent='false';assert.match(validateEnquiry(p),/acknowledge/)});
 test('malformed email cannot become a lead',()=>{const p=payload();p.fields.email='not-an-email';assert.match(validateEnquiry(p),/email/)});

@@ -19,13 +19,13 @@ export function validateEnquiry(input: unknown): string | null {
   if (!f || typeof f !== "object" || Array.isArray(f) || Object.keys(f).length > 100) return "Please complete the enquiry form.";
   if (Object.values(f).some(v => typeof v !== "string" || v.length > 12000)) return "Please shorten your response.";
   const callback = body.form_slug === "contact" && f.intent === "free-call";
-  if (callback) {
+  {
     for (const key of ["first_name", "last_name"]) {
       if (typeof f[key] !== "string" || !f[key].trim() || f[key].length > 80) return "Please enter your first name and last name.";
     }
-    if (!validContactPhone(f.phone)) return "Please enter a phone number with 7–15 digits so we can call you.";
   }
-  if (typeof f.name !== "string" || f.name.trim().length < 2 || f.name.length > (callback ? 161 : 160)) return "Please enter your name.";
+  if ((callback || f.phone) && !validContactPhone(f.phone)) return "Please enter a phone number with 7–15 digits so we can call you.";
+  if (typeof f.name !== "string" || f.name.trim().length < 2 || f.name.length > 161) return "Please enter your name.";
   const emailRequired = !callback || f.marketing_consent === "true";
   if ((emailRequired || f.email) && (typeof f.email !== "string" || f.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim()))) return "Please enter a valid email address.";
   if (f.privacy_consent !== "true") return "Please acknowledge the Privacy Policy before sending.";

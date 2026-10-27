@@ -176,12 +176,14 @@ export default async function BlogPage({ params, searchParams }: Props) {
           </label>
           <input
             id="blog-search"
+            type="search"
+            enterKeyHint="search"
             name="q"
             defaultValue={data.query}
             placeholder="Search the blog"
             maxLength={100}
           />
-          <button type="submit">Search →</button>
+          <button type="submit">Search</button>
         </form>
       </header>
       <section className="blog-post-grid" aria-label="Articles">

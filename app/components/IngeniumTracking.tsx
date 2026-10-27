@@ -35,6 +35,7 @@ function revokeAnalytics() {
   }
 }
 function loadAnalytics() {
+  if (location.pathname.startsWith("/blog/preview/")) return;
   if (!TAGS_ENABLED || !analyticsAllowed() || document.getElementById("ingenium-optional-gtm")) return;
   const w = window as unknown as { dataLayer?: unknown[] };
   w.dataLayer = w.dataLayer || [];
@@ -87,7 +88,7 @@ export default function IngeniumTracking() {
     if (choice === "rejected") { revokeAnalytics(); if (document.getElementById("ingenium-optional-gtm")) location.reload(); }
   }, [choice]);
   useEffect(() => {
-    if (choice === "accepted" && analyticsAllowed()) { captureAttribution(); trackPortalEvent("page_view"); }
+    if (!pathname?.startsWith("/blog/preview/") && choice === "accepted" && analyticsAllowed()) { captureAttribution(); trackPortalEvent("page_view"); }
   }, [pathname, choice]);
   useEffect(() => {
     function openSettings() { if (location.hash === "#cookie-settings") setOpen(true); }

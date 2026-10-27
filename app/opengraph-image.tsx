@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "Ingenium — Websites and CRM, built around your business.";
+export const alt = "Ingenium — A better website. A clearer next step.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -17,8 +17,8 @@ export default async function OpenGraphImage() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={`data:image/png;base64,${logo.toString("base64")}`} width={340} height={83} alt="Ingenium" />
       <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
-        <div style={{ fontSize: 70, fontWeight: 700, lineHeight: 1.1, maxWidth: 1000 }}>Websites and CRM, built around your business.</div>
-        <div style={{ fontSize: 26, color: "#55647B" }}>Websites · CRM · Built together</div>
+        <div style={{ fontSize: 70, fontWeight: 700, lineHeight: 1.1, maxWidth: 1000 }}>A better website. A clearer next step.</div>
+        <div style={{ fontSize: 26, color: "#55647B" }}>Websites · CRM · Connected systems · Carlow, Ireland</div>
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 22, color: "#087F78" }}>
         <span>ingeniumconsulting.net</span>

@@ -1,0 +1,30 @@
+.demo-site { background: #faf9f4; color: #263b31; font-family: var(--font-body), sans-serif; min-height: 100vh; }
+.demo-banner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; background: var(--demo-accent); color: #faf9f4; padding: 10px max(5vw, 20px); font-size: 12px; }
+.demo-banner a { text-decoration: underline; text-underline-offset: 3px; }
+.demo-nav { display: flex; justify-content: space-between; align-items: center; padding: 28px 5vw; gap: 24px; }
+.demo-brand { font: 650 25px/1.2 var(--font-display), sans-serif; letter-spacing: -.05em; }
+.demo-nav nav { display: flex; align-items: center; gap: 30px; font-size: 13px; }
+.demo-nav-cta { border: 1px solid var(--demo-accent); padding: 12px 18px; border-radius: 3px; }
+.demo-hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 28px 5vw 64px; gap: 6vw; }
+.demo-eyebrow { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: var(--demo-accent); margin: 0 0 24px; }
+.demo-hero h1 { font: 600 clamp(40px, 5.8vw, 80px)/1.03 var(--font-display), sans-serif; letter-spacing: -.06em; margin: 0; max-width: 11ch; }
+.demo-landscaping h1, .demo-carpentry h1 { font-family: Georgia, serif; font-weight: 400; letter-spacing: -.045em; }
+.demo-lead { font-size: clamp(14px, 1.4vw, 18px); line-height: 1.8; max-width: 40ch; margin: 26px 0; color: #526057; }
+.demo-button { display: inline-flex; gap: 40px; align-items: center; padding: 17px 24px; background: var(--demo-accent); color: #faf9f4; font-size: 14px; border-radius: 3px; }
+.demo-hero-note { font-size: 12px; color: #526057; margin: 24px 0 0; }
+.demo-art { position: relative; overflow: hidden; border-radius: 140px 140px 4px 4px; background: var(--demo-surface); }
+.demo-carpentry .demo-art { border-radius: 4px; }
+.demo-art svg { display: block; width: 100%; height: auto; }
+.demo-art-caption { display: flex; justify-content: space-between; gap: 16px; padding: 20px 24px; font-size: 12px; color: var(--demo-accent); background: var(--demo-surface); }
+.demo-services { padding: 64px 5vw; border-top: 1px solid #d9ddd1; }
+.demo-site h2 { font: 500 clamp(26px, 3vw, 40px)/1.2 var(--font-display), sans-serif; letter-spacing: -.04em; margin: 0 0 32px; }
+.demo-service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.demo-service-grid article { border-top: 1px solid #c5cdbd; padding: 22px 0; }
+.demo-service-grid article > span { font-size: 12px; color: var(--demo-accent); }
+.demo-service-grid h3 { font-size: 20px; margin: 28px 0 12px; font-weight: 550; }
+.demo-service-grid p, .demo-approach > p:last-child { font-size: 14px; line-height: 1.8; color: #526057; max-width: 40ch; }
+.demo-approach { padding: 64px 5vw; background: var(--demo-surface); }
+.demo-footer { padding: 40px 5vw; font-size: 18px; font-weight: 600; }
+.demo-footer p, .demo-footer a { display: block; font-size: 12px; font-weight: 400; margin-top: 16px; }
+.demo-footer a { text-decoration: underline; }
+@media(max-width: 650px) { .demo-nav { padding-block: 24px; } .demo-nav nav > a:not(:last-child) { display: none; } .demo-nav nav { gap: 0; } .demo-nav-cta { font-size: 11px; padding: 10px; } .demo-brand { font-size: 22px; } .demo-hero { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; } .demo-hero h1 { font-size: clamp(44px, 12vw, 70px); } .demo-lead { font-size: 16px; } .demo-art { max-width: 520px; } .demo-service-grid { grid-template-columns: 1fr; gap: 8px; } .demo-services, .demo-approach { padding-block: 48px; } }

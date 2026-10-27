@@ -32,6 +32,17 @@ test('foreign/missing origin is rejected with no upstream call',async()=>{const 
 test('invalid payload and missing privacy return 422 without upstream call',async()=>{const api=load();let body=payload();body.fields.email='invalid';assert.equal((await api.POST(request(body))).status,422);body=payload();body.fields.privacy_consent='false';assert.equal((await api.POST(request(body))).status,422);assert.equal(api.calls.length,0)});
 test('malformed JSON and unsupported content type fail before upstream',async()=>{const api=load();assert.equal((await api.POST(request('{'))).status,400);assert.equal((await api.POST(request(payload(),{headers:{'Content-Type':'text/plain'}}))).status,415);assert.equal(api.calls.length,0)});
 test('legitimate receipt returns only accepted ID; sanitised source and request ID reach fixed Portal site',async()=>{const api=load();const response=await api.POST(request());assert.equal(response.status,201);assert.deepEqual(await response.json(),{ok:true,submission_id:'accepted-id'});const [url,options]=api.calls[0];assert.equal(url,'https://portal.invalid.test/forms');const body=JSON.parse(options.body);assert.equal(body.site_id,'test-site');assert.equal(body.metadata.website_request_id,payload().request_id);assert.equal(body.tracking.submission_url,origin+'/contact');assert.equal(body.metadata.first_touch.landing_url,origin+'/');assert.equal(body.fields.marketing_consent,'false')});
+
+test('callback requires phone at the API and forwards separate names without inventing email', async () => {
+ const api=load(); const body=payload();
+ Object.assign(body.fields,{intent:'free-call',first_name:'Mary Jane',last_name:'Ó Néill Walsh',name:'Mary Jane Ó Néill Walsh',email:'',phone:''});
+ assert.equal((await api.POST(request(body))).status,422); assert.equal(api.calls.length,0);
+ body.fields.phone='+353 85 123 4567';
+ assert.equal((await api.POST(request(body))).status,201);
+ const sent=JSON.parse(api.calls[0][1].body).fields;
+ assert.equal(sent.first_name,'Mary Jane'); assert.equal(sent.last_name,'Ó Néill Walsh');
+ assert.equal(sent.phone,'+353 85 123 4567'); assert.equal(sent.email,'');
+});
 test('HTTP 202 honeypot rejection cannot become successful receipt',async()=>{const api=load(async()=>Response.json({ok:true,accepted:false},{status:202}));const response=await api.POST(request());assert.equal(response.status,502);assert.equal((await response.json()).submission_id,undefined)});
 test('upstream HTTP failure, malformed receipt and network failure are not success',async()=>{for(const fn of [async()=>Response.json({error:'failed'},{status:500}),async()=>Response.json({ok:true}),async()=>{throw Error('offline')}]){const api=load(fn);const response=await api.POST(request());assert.ok([502,503].includes(response.status));assert.equal((await response.json()).submission_id,undefined)}});
 test('concurrent replay uses one upstream operation; later replay keeps original receipt',async()=>{let release;const held=new Promise(resolve=>{release=resolve});const api=load(async()=>{await held;return Response.json({ok:true,submission_id:'same-id'},{status:201})});const first=api.POST(request());const second=api.POST(request());await new Promise(resolve=>setImmediate(resolve));assert.equal(api.calls.length,1);release();const [a,b]=await Promise.all([first,second]);assert.deepEqual(await a.json(),await b.json());const replay=await api.POST(request());assert.equal((await replay.json()).submission_id,'same-id');assert.equal(api.calls.length,1)});

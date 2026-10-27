@@ -66,6 +66,7 @@ export const MAIN_NEEDS = [
 ] as const;
 export const SOMETHING_ELSE = "Something else";
 export const DETAILS_MAX = 300;
+export const REFERRED_BY_MAX = 120;
 export const MIN_FILL_MS = 3000;
 
 export const MARKETING_TEXT = "I consent to receive occasional website tips and marketing email updates from Ingenium. I can unsubscribe at any time.";
@@ -96,6 +97,7 @@ export function validateStarterFields(f: Record<string, unknown>): string | null
   if (!optionOrBlank(f.business_type, BUSINESS_TYPES)) return "Please choose a listed business type.";
   if (!optionOrBlank(f.main_need, MAIN_NEEDS)) return "Please choose a listed option.";
   if (typeof f.details === "string" && f.details.length > DETAILS_MAX) return `Please keep the extra detail under ${DETAILS_MAX} characters.`;
+  if (typeof f.referred_by === "string" && f.referred_by.length > REFERRED_BY_MAX) return `Please keep "Who sent you?" under ${REFERRED_BY_MAX} characters.`;
   if (typeof f.phone === "string" && f.phone && !/^[0-9+()\s-]{6,24}$/.test(f.phone)) return "Please check the phone number.";
   if (f.marketing_consent !== "true" && f.marketing_consent !== "false") return "Please confirm your marketing preference.";
   const elapsed = Number(f.fill_ms);

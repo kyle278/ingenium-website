@@ -33,12 +33,13 @@ export function portalIdentity() {
 }
 /** Sends only controlled properties and clean URLs, never form values or query strings. */
 export function trackPortalEvent(event: string, properties: Record<string, string> = {}) {
+  if (location.pathname.startsWith("/blog/preview/")) return;
   if (!analyticsAllowed()) return;
   const identity = portalIdentity();
   if (!identity.visitor_id || !identity.session_id) return;
   const tracking = enquiryTracking();
   const safeProperties: Record<string, string> = {};
-  for (const key of [...ALLOWED, "cta_position", "lead_route", "enquiry_service"]) {
+  for (const key of [...ALLOWED, "cta_position", "lead_route", "enquiry_service", "blog_post_id", "blog_revision_id", "scroll_depth"]) {
     const value = properties[key] ?? (tracking as Record<string, unknown>)[key];
     if (typeof value === "string" && /^[a-z0-9 _.-]{1,160}$/i.test(value)) safeProperties[key] = value;
   }

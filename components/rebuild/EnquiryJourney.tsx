@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { useAnimate } from "motion/react-mini";
 
 function subscribeMotion(callback: () => void) {
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -21,12 +20,6 @@ export default function EnquiryJourney() {
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(false);
   const reduce = useSyncExternalStore(subscribeMotion, reducedMotion, () => true);
-  const [scope, animate] = useAnimate();
-  useEffect(() => {
-    if (reduce || !scope.current) return;
-    const animation = animate(scope.current, { opacity: [.35, 1], transform: ["translateY(8px)", "translateY(0px)"] }, { duration: .28, ease: [.22, 1, .36, 1] });
-    return () => animation.cancel();
-  }, [active, reduce, animate, scope]);
   useEffect(() => {
     if (!playing || reduce) return;
     const timer = window.setTimeout(() => {
@@ -43,7 +36,7 @@ export default function EnquiryJourney() {
       {stages.map((item, index) => <button key={item.label} type="button" aria-pressed={active === index} aria-controls="journey-content" onClick={() => selectStage(index)}>{index + 1}. {item.label}</button>)}
     </div>
     <div className="journey-progress" aria-hidden="true"><span style={{ transform: `translateX(${active * 100}%)` }} /></div>
-    <div ref={scope} id="journey-content" className="journey-state" aria-live={playing && !reduce ? "off" : "polite"} aria-atomic="true">
+    <div key={active} id="journey-content" className="journey-state" aria-live={playing && !reduce ? "off" : "polite"} aria-atomic="true">
       <h3>{stage.title}</h3><p>{stage.body}</p>
       <dl>{stage.fields.map(([label, value]) => <div key={label} className="contents"><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
     </div>

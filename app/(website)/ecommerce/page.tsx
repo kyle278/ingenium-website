@@ -1,7 +1,4 @@
+import { CallLink, NextStep } from "@/components/rebuild/LocalBusinessSections";
 import { buildMetadata, pageSeo } from "@/lib/seo";
-import type { Metadata } from "next";
-import OfferPage from "@/components/rebuild/OfferPage";
-import { getOffer } from "@/components/rebuild/offers";
-
-export const metadata: Metadata = buildMetadata(pageSeo["/ecommerce"]);
-export default function EcommercePage() { return <OfferPage offer={getOffer("ecommerce")} />; }
+export const metadata = buildMetadata(pageSeo["/ecommerce"]);
+export default function EcommercePage() { return <div className="rebuild-page local-page"><section className="rebuild-hero"><p className="local-location">Ecommerce</p><h1>Make your products easier to buy.</h1><p className="rebuild-lead">Need to sell online? Tell us about your products, how you take orders and what your customers need. We’ll help you work out a practical starting point.</p><CallLink service="ecommerce" /></section><section className="rebuild-section local-split"><h2 className="rebuild-section-heading">A shop that fits how you sell.</h2><div><p>We’ll talk through your catalogue, payments, delivery and day-to-day order handling before recommending the right platform.</p><p>Your proposal will explain the work, platform costs, ongoing care and what you need to supply before you decide.</p></div></section><NextStep title="Let’s talk about your products and customers." /></div>; }

@@ -10,6 +10,7 @@ import {
   BOOKING_URL,
   BUSINESS_TYPES,
   DETAILS_MAX,
+  REFERRED_BY_MAX,
   MAIN_NEEDS,
   MARKETING_TEXT,
   SOMETHING_ELSE,
@@ -21,10 +22,10 @@ import {
 } from "@/lib/starter-website";
 import { trackStarter } from "./track";
 
-type Values = { name: string; email: string; phone: string; team_size: string; business_type: string; main_need: string; details: string; privacy: boolean; marketing: boolean };
+type Values = { name: string; email: string; phone: string; team_size: string; business_type: string; main_need: string; details: string; referred_by: string; privacy: boolean; marketing: boolean };
 type FieldName = "name" | "email" | "phone" | "details";
 
-const EMPTY: Values = { name: "", email: "", phone: "", team_size: "", business_type: "", main_need: "", details: "", privacy: false, marketing: false };
+const EMPTY: Values = { name: "", email: "", phone: "", team_size: "", business_type: "", main_need: "", details: "", referred_by: "", privacy: false, marketing: false };
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function fieldError(field: FieldName, values: Values): string {
@@ -59,6 +60,12 @@ export default function QualifyDialog({ open, position, onClose, onSubmitted }: 
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
   const [submitError, setSubmitError] = useState("");
   const [result, setResult] = useState<{ route: LeadRoute; name: string } | null>(null);
+
+  // Referral links and flyer QR codes can carry ?ref=Name to fill "Who sent you?".
+  useEffect(() => {
+    const ref = new URLSearchParams(location.search).get("ref")?.trim().slice(0, REFERRED_BY_MAX);
+    if (ref) setValues((current) => (current.referred_by ? current : { ...current, referred_by: ref }));
+  }, []);
 
   useEffect(() => {
     const element = dialog.current;
@@ -117,6 +124,7 @@ export default function QualifyDialog({ open, position, onClose, onSubmitted }: 
       business_type: values.business_type,
       main_need: values.main_need,
       details: showDetails ? values.details.trim() : "",
+      referred_by: values.referred_by.trim(),
       marketing_consent: values.marketing ? "true" : "false",
       privacy_consent: values.privacy ? "true" : "false",
       consent_version: NOTICE_VERSION,
@@ -206,6 +214,11 @@ export default function QualifyDialog({ open, position, onClose, onSubmitted }: 
                     aria-invalid={Boolean(errorFor("details"))} aria-describedby={`${ids}-details-help${errorFor("details") ? ` ${ids}-details-error` : ""}`} />
                 </Field>
               )}
+
+              <Field id={`${ids}-ref`} label="Who sent you? (optional)" error="" help="If a friend or customer told you about us, add their name so we can thank them.">
+                <input id={`${ids}-ref`} name="referred_by" type="text" autoComplete="off" maxLength={REFERRED_BY_MAX}
+                  value={values.referred_by} onChange={(e) => update("referred_by", e.target.value)} aria-describedby={`${ids}-ref-help`} />
+              </Field>
 
               {/* Honeypot: hidden from people and assistive tech; bots that fill it are rejected server-side. */}
               <div className="starter-honeypot" aria-hidden="true">

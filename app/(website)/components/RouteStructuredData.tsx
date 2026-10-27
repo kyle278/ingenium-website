@@ -1,6 +1,5 @@
-"use client";
-
-import { usePathname } from "next/navigation";
+import { getSeoRevision,mergeManagedSchemas } from "@/lib/portalIntegration/seo-runtime";
+import { pageSeo as managedSeo } from "@/lib/portalIntegration/seo-adapter";
 
 import {
   ORGANIZATION_ADDRESS,
@@ -20,6 +19,14 @@ import {
 type JsonLd = Record<string, unknown>;
 
 const routeLabelMap: Record<string, string> = {
+  "/packages": "Packages",
+  "/phone-ringing-website": "Phone Ringing Website",
+  "/never-miss-a-lead": "Never Miss a Lead",
+  "/leads-to-jobs": "Leads to Jobs",
+  "/results": "Results",
+  "/how-it-works": "How it works",
+  "/visibility-check": "Free visibility check",
+  "/book-a-call": "Book a free call",
   "/": "Home",
   "/services": "Services",
   "/connected": "Website + CRM",
@@ -159,7 +166,7 @@ function buildWebPageSchema(pathname: string): JsonLd | null {
 
 function buildServiceSchema(pathname: string): JsonLd | null {
   const normalizedPathname = normalizePathname(pathname);
-  const servicePaths = ["/websites", "/crm", "/connected", "/ecommerce", "/automations", "/ai-agents"];
+  const servicePaths = ["/phone-ringing-website", "/never-miss-a-lead", "/leads-to-jobs", "/ecommerce", "/automations", "/ai-agents"];
   const config = pageSeo[normalizedPathname];
   const service = servicePaths.includes(normalizedPathname) && config
     ? { name: config.title.split(" | ")[0], description: config.description }
@@ -177,10 +184,10 @@ function buildServiceSchema(pathname: string): JsonLd | null {
   };
 }
 
-export default function RouteStructuredData() {
-  const pathname = usePathname() || "/";
+export default async function RouteStructuredData({pathname}:{pathname:string}) {
+  const revision=await getSeoRevision();const override=revision?managedSeo(revision.snapshot,toAbsoluteUrl(pathname)):null;
 
-  if (isPrivatePath(pathname) || /\/(confirmed|thanks)$/.test(pathname)) return null;
+  if (isPrivatePath(pathname) || pathname === "/blog" || pathname.startsWith("/blog/") || /\/(confirmed|thanks)$/.test(pathname)) return null;
 
   const schemas = [buildBreadcrumb(pathname), buildOrganizationSchema(), buildWebSiteSchema()];
   const pageSchema = buildWebPageSchema(pathname);
@@ -191,7 +198,7 @@ export default function RouteStructuredData() {
 
   return (
     <>
-      {schemas.map((schema, index) => (
+      {mergeManagedSchemas(schemas,override?.schema).map((schema, index) => (
         <script
           key={`${pathname}-jsonld-${index}`}
           type="application/ld+json"

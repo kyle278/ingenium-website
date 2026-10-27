@@ -1,0 +1,7 @@
+import { Check, Search } from "lucide-react";
+import LocalRequestForm from "@/components/rebuild/LocalRequestForm";
+import { buildMetadata, pageSeo } from "@/lib/seo";
+export const metadata = buildMetadata(pageSeo["/visibility-check"]);
+export default function VisibilityCheckPage() {
+  return <div className="rebuild-page local-page"><section className="local-request-layout"><div className="local-request-intro"><p className="local-location"><Search size={17} aria-hidden="true" />Free Google Visibility Check</p><h1>Can local customers find you?</h1><p className="rebuild-lead">Tell us what you do and where you work. We’ll check what a customer can find, then email you a short review with practical next steps.</p><h2>Here’s what we’ll look at.</h2><ul className="local-check-list"><li><Check size={18} aria-hidden="true" />What appears when someone searches your business name</li><li><Check size={18} aria-hidden="true" />Your main service and town in Google search and Maps</li><li><Check size={18} aria-hidden="true" />Whether your contact details and services are easy to find</li><li><Check size={18} aria-hidden="true" />The most useful things to improve first</li></ul><p className="local-form-note">Reviewed by a person and sent by email. Search results vary by location and time; this is a useful snapshot, not a ranking promise.</p><p>No website? No problem. That’s a useful place to start too.</p></div><LocalRequestForm kind="visibility" /></section></div>;
+}

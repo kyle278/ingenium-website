@@ -1,0 +1,41 @@
+import Link from "next/link";
+import EnquiryJourney from "./EnquiryJourney";
+import PackageOptions from "./PackageOptions";
+import { CallLink, LocalFaq, NextStep } from "./LocalBusinessSections";
+const content = {
+  website: { name: "Phone Ringing Website", title: "Give a good referral somewhere good to land.", intro: "When someone hears your name, they look you up. Help them see what you do, where you work and why you’re worth a call.", audience: "For local businesses with no website, or one that no longer does them justice.", heading: "Make choosing you feel straightforward.", benefits: [{ title: "Look like the business you are.", body: "Show your services, your work and the people behind them. Make the care you put into your work visible online." }, { title: "Make the next step obvious.", body: "Help someone on their phone find your number, send an enquiry or understand how to ask for a quote." }, { title: "Leave the writing to us.", body: "You know your trade. We turn what you tell us into clear copy, then you check it sounds right." }], question: "A new site, or a better version of the one you have?", detail: "We’ll look at what customers find today and what they need to know before getting in touch. If you already have a domain or a Google Business Profile, tell us so we can plan around what’s there.", closing: "Let’s give your business a better first impression." },
+  followup: { name: "Never Miss a Lead System", title: "Keep the next customer from slipping through the cracks.", intro: "A message here. A missed call there. A quote you meant to chase. Make it easier to see who needs a reply and what needs to happen next.", audience: "For small teams getting enquiries, but losing track between the first conversation and the job.", heading: "Less remembering. More following through.", benefits: [{ title: "Know who needs a reply.", body: "Bring the important customer details and next actions into a view your team can use." }, { title: "Keep quotes in sight.", body: "See what you’ve sent, what you’re waiting on and which customer needs a follow-up." }, { title: "Make it work for your team.", body: "Start with how you already handle enquiries. We’ll discuss the tools and practical training that fit your day." }], question: "Keep the website that’s already working.", detail: "You may only need help with the follow-up. On the call, tell us where enquiries come from: phone, website, WhatsApp, email or Facebook. We’ll explain which can connect, which need someone to log them, and what is practical with your existing tools.", closing: "Let’s find where good enquiries are getting lost." },
+  both: { name: "Leads to Jobs System", title: "From ‘I found you online’ to ‘When can you start?’", intro: "Give customers a clear way in, and your team a clear way forward. Plan your website and enquiry follow-up around the same customer journey.", audience: "For established local businesses that need a better website and a better way to turn enquiries into jobs.", heading: "A clearer journey, from the first click.", benefits: [{ title: "Help people choose you.", body: "Explain your services and show the work that earns their confidence before they get in touch." }, { title: "Give every enquiry a next step.", body: "Make it clear who is replying, which quote is waiting and what needs attention." }, { title: "Build around how you work.", body: "Talk through bookings, payments and job tracking if you need them. We’ll identify what fits before recommending a platform." }], question: "Start with a real enquiry, not a list of software.", detail: "Walk us through what happens when someone gets in touch today. We’ll look at where you repeat work, lose details or wait for a reply, then recommend the smallest useful improvement. Your proposal will explain the tools, costs, account arrangements and handover before you commit.", closing: "Let’s make the next enquiry easier to turn into a job." },
+} as const;
+const delivery = {
+  website: [
+    { title: "Understand the business", body: "We agree your services, audience and the job each page needs to do. Existing branding, domains and useful content become part of the plan." },
+    { title: "Draft and build", body: "We write the agreed website copy and design the pages. You check the facts, see the work and give feedback before launch." },
+    { title: "Check and hand over", body: "We check the mobile experience and enquiry routes, then explain how to request changes and what your ongoing care includes." },
+  ],
+  followup: [
+    { title: "Map what happens today", body: "Show us where enquiries arrive and what happens to a quote. We identify the details, handovers and next actions your team needs to see." },
+    { title: "Agree the practical setup", body: "We scope the customer records, pipeline and supported connections around your actual tools. Manual steps and additional integrations are made clear." },
+    { title: "Configure and train", body: "The agreed setup, contact import and follow-up templates are checked with your team. Training helps the people using the system understand the next step." },
+  ],
+  both: [
+    { title: "Plan one customer journey", body: "We agree what customers need to see on the website, what your form should ask and where those details belong in the CRM." },
+    { title: "Build the website and connection", body: "Website design, copy and agreed CRM configuration are delivered around the same scope. The proposal defines supported connections and any additional work." },
+    { title: "Test the handover", body: "We check the agreed enquiry path and train your team on the records and follow-up process. Accounts, support and responsibilities are explained before launch." },
+  ],
+} as const;
+
+export default function OutcomePage({ route }: { route: keyof typeof content }) {
+  const c = content[route];
+  const service = route === "website" ? "website" : route === "followup" ? "crm" : "connected";
+  return <div className="rebuild-page local-page">
+    <section className="rebuild-hero"><p className="local-location">{c.name}</p><h1>{c.title}</h1><p className="rebuild-lead">{c.intro}</p><p className="local-audience">{c.audience}</p><CallLink service={service} /></section>
+    <section className="rebuild-section"><h2 className="rebuild-section-heading">{c.heading}</h2><div className="local-pain-grid">{c.benefits.map(b => <article key={b.title}><h3>{b.title}</h3><p>{b.body}</p></article>)}</div></section>
+    <section className="brand-section brand-service-scope" aria-labelledby="delivery-heading"><div><p className="brand-eyebrow">From the plan to the handover</p><h2 id="delivery-heading" className="rebuild-section-heading">A process built around the people using it.</h2><p>Design, technical work and day-to-day use need to fit together. Here’s what we work through with you.</p></div><ol className="brand-scope-steps">{delivery[route].map(step => <li key={step.title}><h3>{step.title}</h3><p>{step.body}</p></li>)}</ol></section>
+    {route !== "website" && <section className="rebuild-section brand-connection"><div className="brand-connection-copy"><p className="brand-eyebrow">An example journey</p><h2 className="rebuild-section-heading">See what the next step can look like.</h2><p>Explore how a website enquiry can reach a customer record and become a clear action for your team. We agree your actual fields, tools and connections before building.</p></div><EnquiryJourney /></section>}
+    <PackageOptions route={route === "website" ? "website" : route === "followup" ? "follow-up" : "both"} />
+    <section className="rebuild-section local-split"><h2 className="rebuild-section-heading">{c.question}</h2><div><p>{c.detail}</p><Link href={route === "website" ? "/results" : "/packages"} className="rebuild-text-link">{route === "website" ? "Explore the work and designs" : "Compare packages and scope"} ↗</Link></div></section>
+    <section className="rebuild-section local-assurance"><h2>Know what you’re saying yes to.</h2><p>We confirm the work, timing, price and ongoing costs in a written proposal. You’ll have the account, ownership and handover details before you commit.</p></section>
+    <LocalFaq /><NextStep title={c.closing} />
+  </div>;
+}

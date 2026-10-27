@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-export default function FormStepHeading({ step }: { step: 0 | 1 }) {
+export default function FormStepHeading({ step, detailsTitle = "Tell us a little about your project.", detailsDescription = "Share your details first. Privacy and consent come next." }: { step: 0 | 1; detailsTitle?: string; detailsDescription?: string }) {
   const heading = useRef<HTMLHeadingElement>(null);
   const previousStep = useRef(step);
 
@@ -17,8 +17,8 @@ export default function FormStepHeading({ step }: { step: 0 | 1 }) {
   return (
     <div className="form-step-heading">
       <p className="rebuild-kicker">Step {step + 1} of 2 · {step === 0 ? "Your details" : "Privacy and consent"}</p>
-      <h2 ref={heading} tabIndex={-1}>{step === 0 ? "Tell us a little about your project." : "Now for the boring but important stuff."}</h2>
-      <p>{step === 0 ? "Share your details first. Privacy and consent come next." : "Review how we use your details and choose whether you’d like email updates before sending."}</p>
+      <h2 ref={heading} tabIndex={-1}>{step === 0 ? detailsTitle : "Now for the boring but important stuff."}</h2>
+      <p>{step === 0 ? detailsDescription : "Review how we use your details and choose whether you’d like email updates before sending."}</p>
     </div>
   );
 }

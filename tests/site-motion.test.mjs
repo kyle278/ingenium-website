@@ -4,32 +4,49 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import ts from 'typescript';
 
+// The current SiteMotion uses a native scroll indicator and IntersectionObserver.
+// Keep this harness aligned with the browser APIs it actually owns.
 function mount(reduced = false) {
-  const effects = [];
-  let animations = 0, cancelled = 0, disconnected = 0, changed;
+  const effects = [], listeners = new Map(), frames = new Map();
+  let disconnected = 0, frameId = 0, changed;
+  const progress = { style: {} };
+  const process = { classList: { add() {} } };
   const media = { matches: reduced, addEventListener: (_, callback) => { changed = callback; }, removeEventListener: () => { changed = undefined; } };
-  const element = { children: [{}, {}] };
-  const root = { querySelector: () => element, querySelectorAll: () => [element] };
+  const root = { querySelector: () => process };
   const compiledModule = { exports: {} };
   const code = ts.transpileModule(fs.readFileSync(new URL('../components/rebuild/SiteMotion.tsx', import.meta.url), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
-  vm.runInNewContext(code, { exports: compiledModule.exports, module: compiledModule, window: {matchMedia: () => media}, document: {getElementById: () => root, querySelector: () => element}, require(name) {
-    if (name === 'react') return {useEffect: effect => effects.push(effect)};
-    if (name === 'next/navigation') return {usePathname: () => '/'};
-    if (name === 'motion/mini') return {animate: () => { animations++; return {cancel: () => cancelled++}; }};
-    if (name === 'motion') return {inView: (target, enter) => {enter(target); return () => disconnected++;}, scroll: () => () => disconnected++};
-    throw new Error(name);
-  }});
+  const window = {
+    matchMedia: () => media, innerHeight: 1000, scrollY: 500,
+    addEventListener: (name, callback) => listeners.set(name, callback),
+    removeEventListener: name => listeners.delete(name),
+    requestAnimationFrame: callback => { frames.set(++frameId, callback); return frameId; },
+    cancelAnimationFrame: id => frames.delete(id),
+  };
+  vm.runInNewContext(code, {
+    exports: compiledModule.exports, module: compiledModule, window,
+    document: { documentElement: { scrollHeight: 2000 }, getElementById: () => root, querySelector: () => progress },
+    IntersectionObserver: class { observe() {} disconnect() { disconnected++; } },
+    require(name) {
+      if (name === 'react') return { useEffect: effect => effects.push(effect) };
+      if (name === 'next/navigation') return { usePathname: () => '/' };
+      throw new Error(name);
+    },
+  });
   compiledModule.exports.default();
   const cleanup = effects[0]();
-  return {stats: () => ({animations, cancelled, disconnected}), cleanup, reduce: () => {media.matches = true; changed();}};
+  function flush() { for (const [id, callback] of frames) { frames.delete(id); callback(); } }
+  return { progress, cleanup, listeners, frames, disconnected: () => disconnected, flush,
+    reduce() { media.matches = true; changed(); flush(); } };
 }
-test('reduced motion skips all entrance and scroll animations', () => {
-  const view = mount(true); assert.equal(view.stats().animations, 0); view.cleanup();
+
+test('reduced motion keeps the scroll indicator at zero', () => {
+  const view = mount(true); assert.equal(view.progress.style.transform, 'scaleX(0)'); view.cleanup();
 });
-test('route cleanup cancels animations and disconnects observers', () => {
-  const view = mount(); assert.ok(view.stats().animations > 0); view.cleanup();
-  assert.equal(view.stats().cancelled, view.stats().animations); assert.ok(view.stats().disconnected > 0);
+test('route cleanup cancels pending frames and disconnects native observers', () => {
+  const view = mount(); assert.equal(view.progress.style.transform, 'scaleX(0.5)');
+  view.listeners.get('scroll')(); assert.equal(view.frames.size, 1);
+  view.cleanup(); assert.equal(view.frames.size, 0); assert.equal(view.listeners.size, 0); assert.ok(view.disconnected() > 0);
 });
-test('enabling reduced motion immediately cancels running effects', () => {
-  const view = mount(); view.reduce(); assert.equal(view.stats().cancelled, view.stats().animations); assert.ok(view.stats().disconnected > 0);
+test('enabling reduced motion resets the running indicator', () => {
+  const view = mount(); view.reduce(); assert.equal(view.progress.style.transform, 'scaleX(0)'); view.cleanup();
 });

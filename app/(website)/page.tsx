@@ -1,70 +1,24 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import HeroSystem from "@/components/rebuild/HeroSystem";
+import { ArrowUpRight, Search } from "lucide-react";
+import LocalBusinessHero from "@/components/rebuild/LocalBusinessHero";
+import CurrentProjects from "@/components/rebuild/CurrentProjects";
+import { CallLink, LocalFaq, NextStep, SimpleSteps } from "@/components/rebuild/LocalBusinessSections";
+import { HomeServiceRoutes, HomeStartingPoints, HomeTeam, HomeWork } from "@/components/rebuild/HomeStory";
 import EnquiryJourney from "@/components/rebuild/EnquiryJourney";
-import ProjectProof from "@/components/rebuild/ProjectProof";
 import { buildMetadata, pageSeo } from "@/lib/seo";
-import { getPublishedProjects } from "@/lib/portalIntegration/projects";
 
 export const metadata: Metadata = buildMetadata(pageSeo["/"]);
-
-const services = [
-  { number: "01", title: "A new website", description: "Help customers understand your services, see your work and get in touch. A clear home for your business, built around the people you want to reach.", label: "Explore websites", href: "/websites" },
-  { number: "02", title: "A clearer CRM", description: "Bring customer details, open opportunities and next actions into a shared view. Keep your existing website if it is doing its job.", label: "Explore CRM", href: "/crm" },
-  { number: "03", title: "Both, built together", description: "Connect your website enquiry form to your customer records from the start. One agreed project, with the standard connection included.", label: "Explore Website + CRM", href: "/connected" },
-];
-const process = [
-  ["01", "Understand", "Start with your business, your customers and what needs to work better."],
-  ["02", "Agree", "Define the pages, features, responsibilities and price in writing."],
-  ["03", "Build", "Review the work as it takes shape, with clear points for your feedback."],
-  ["04", "Launch", "Check the experience, hand over your system and agree ongoing care."],
-];
-
-export default async function HomePage() {
-  const proof = await getPublishedProjects();
-  return <div>
-    <section className="home-hero" aria-labelledby="home-heading">
-      <div>
-        <p className="rebuild-kicker">Websites & CRM. Built around your business.</p>
-        <h1 id="home-heading">A better website.<br /><span>A clearer next step.</span></h1>
-        <p className="rebuild-lead">Ingenium builds websites and customer relationship management systems (CRMs) around how your business works. Choose the part you need, or have your website and CRM built together.</p>
-        <div className="home-hero-actions"><Link className="rebuild-button" href="/contact">Discuss your project <ArrowUpRight size={18} aria-hidden="true" /></Link><Link className="rebuild-text-link" href="/connected">See how they work together</Link></div>
-        <p className="hero-footnote">Clear scope. Practical support. Based in Ireland.</p>
-      </div>
-      <HeroSystem />
-    </section>
-
-    <section className="home-services" aria-labelledby="services-heading">
-      <div className="section-heading-row"><h2 id="services-heading" className="rebuild-section-heading">Start where your<br />business needs help.</h2><p>A useful website. A more organised team. Or a better connection between the two.</p></div>
-      <div className="service-options">{services.map(service => <article className="service-option" key={service.href}><span className="service-option-number">{service.number}</span><h3>{service.title}</h3><p>{service.description}</p><Link className="rebuild-text-link" href={service.href}>{service.label}</Link></article>)}</div>
-    </section>
-
-    {proof.projects.length > 0 && <section className="rebuild-section" aria-labelledby="work-heading">
-      <div className="section-heading-row"><div><p className="rebuild-kicker">Our work</p><h2 id="work-heading" className="rebuild-section-heading">Work you can<br />look through.</h2></div><Link href="/projects" className="rebuild-text-link">View our work</Link></div>
-      <ProjectProof limit={3} />
-    </section>}
-
-    <section className="rebuild-section workflow-section" id="workflow" aria-labelledby="workflow-heading">
-      <div><p className="rebuild-kicker">Website + CRM</p><h2 id="workflow-heading" className="rebuild-section-heading">The form is the beginning of the conversation.</h2><p className="rebuild-lead">A good website helps someone decide to contact you. A useful CRM helps your team take it from there. We bring those two parts together so the details are available when your team follows up.</p><Link href="/demo?service=connected" className="rebuild-text-link">Request a walkthrough</Link></div>
-      <EnquiryJourney />
-    </section>
-
-    <section className="rebuild-section" aria-labelledby="process-heading">
-      <div className="section-heading-row"><div><p className="rebuild-kicker">How we work</p><h2 className="rebuild-section-heading" id="process-heading">Clear from the<br />first conversation.</h2></div><Link href="/how-we-work" className="rebuild-text-link">See our approach</Link></div>
-      <ol className="process-list">{process.map(([number, title, description]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{description}</p></li>)}</ol>
-    </section>
-
-    <section className="rebuild-section home-pricing" aria-labelledby="pricing-heading">
-      <div className="section-heading-row"><h2 className="rebuild-section-heading" id="pricing-heading">Clear starting points.</h2><Link href="/pricing" className="rebuild-text-link">Compare packages</Link></div>
-      <div className="home-pricing-grid">{[
-        { title: "Websites", setup: "€1,500", monthly: "€149", href: "/pricing#websites", detail: "A defined website build and ongoing care." },
-        { title: "CRM", setup: "€3,000", monthly: "€249", href: "/pricing#crm", detail: "CRM setup, training and ongoing support." },
-        { title: "Website + CRM", setup: "€4,500", monthly: "€349", href: "/pricing#connected", detail: "Both parts, with the standard connection included." },
-      ].map(offer => <div key={offer.title}><h3>{offer.title}</h3><strong>{offer.setup}</strong><p>setup + {offer.monthly}/month</p><p>{offer.detail}</p><Link href={offer.href} className="rebuild-text-link">See what’s included</Link></div>)}</div>
-      <p className="home-pricing-note">No VAT charged. Defined scope. Your requirements and total price are confirmed before work begins. Selling products online? <Link href="/ecommerce" className="rebuild-text-link">Explore ecommerce.</Link></p>
-    </section>
-
-    <section className="rebuild-section home-invitation" aria-labelledby="invitation-heading"><div><h2 className="rebuild-section-heading" id="invitation-heading">Tell us what needs<br />to work better.</h2><p>Whether you need a new website, a more useful CRM or both, start with the problem you want to solve. We will help you identify the right next step.</p></div><Link href="/contact" className="rebuild-button">Discuss your project <ArrowUpRight size={18} aria-hidden="true" /></Link></section>
+export default function HomePage() {
+  return <div className="brand-home"><LocalBusinessHero />
+    <section className="brand-section" aria-labelledby="routes-heading" id="two-routes"><div className="brand-section-heading"><div><p className="brand-eyebrow">Start where you need us</p><h2 id="routes-heading">A stronger first impression.<br />A better follow-through.</h2></div><p>Some businesses need a new website. Others need a clearer way to handle the enquiries they already receive. We can help with either, or build them together.</p></div><HomeServiceRoutes /></section>
+    <section className="brand-section brand-connection" id="connection" aria-labelledby="connection-heading"><div className="brand-connection-copy"><p className="brand-eyebrow">The connection matters</p><h2 id="connection-heading">The form is the start.<br />What happens next?</h2><p>A customer has looked through your services and decided to get in touch. Your team should be able to see what they asked for and who needs to respond.</p><p>We agree what the form collects, where the details belong and how your team takes the next step. Explore an example of that journey.</p><Link href="/leads-to-jobs" className="rebuild-text-link">Explore websites and CRM together<ArrowUpRight size={17} aria-hidden="true" /></Link><span className="brand-small-note">Connections and automated actions are agreed in your project scope.</span></div><EnquiryJourney /></section>
+    <CurrentProjects home />
+    <HomeWork />
+    <HomeTeam />
+    <section className="brand-section brand-process" aria-labelledby="process-heading"><div className="brand-section-heading"><div><p className="brand-eyebrow">A process you can follow</p><h2 id="process-heading">We do the building.<br />You stay in the picture.</h2></div><div><p>Clear responsibilities, work you can review, and a handover your team can use.</p><Link href="/how-it-works" className="rebuild-text-link">How we work<ArrowUpRight size={17} aria-hidden="true" /></Link></div></div><SimpleSteps /><p className="brand-small-note">You bring accurate business details, relevant assets and feedback. We agree the scope, responsibilities and timing before work begins.</p></section>
+    <HomeStartingPoints />
+    <section className="brand-section brand-visibility"><Search size={30} aria-hidden="true" /><div><h2>Not sure what customers find today?</h2><p>Request a free Google Visibility Check. We’ll review your business, service and town, then email practical next steps.</p></div><Link href="/visibility-check" className="rebuild-button-secondary">Get my free visibility check<ArrowUpRight size={17} aria-hidden="true" /></Link></section>
+    <LocalFaq /><NextStep title="Let’s make your next enquiry easier to take forward." body="Tell us what needs to work better. We’ll help you find the right scope, from a focused website to a connected customer journey." /><div className="local-mobile-call"><CallLink>Book a free call</CallLink></div>
   </div>;
 }

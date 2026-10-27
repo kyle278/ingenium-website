@@ -35,7 +35,7 @@ export const ORGANIZATION_SAME_AS = [
 ] as const;
 export const SITE_URL = resolveSiteUrl();
 export const DEFAULT_DESCRIPTION =
-  "Ingenium Consulting builds business websites, sets up CRM systems, and brings both together for small businesses.";
+  "Website design, CRM and connected enquiry workflows for businesses in Ireland. Clear scope, thoughtful design and practical follow-through. Based in Carlow.";
 export const DEFAULT_SOCIAL_IMAGE = `${SITE_URL}/opengraph-image`;
 
 export const keywordClusters = {
@@ -98,7 +98,7 @@ export const aeoQueryThemes = [
   "How do you replace disconnected sales and marketing tools with one system?",
 ];
 
-type PageSeoConfig = {
+export type PageSeoConfig = {
   title: string;
   description: string;
   path: string;
@@ -344,6 +344,25 @@ for (const [path, [title, description]] of Object.entries(rebuiltPages)) {
 }
 for (const path of ["/platform", "/implementation", "/implementation-methodology"]) {
   pageSeo[path].noIndex = true;
+}
+
+const localBusinessPages: Record<string, [string, string]> = {
+  "/": ["Websites, CRM & Connected Systems | Ingenium", "A better website. A clearer next step. Website design, CRM setup and connected enquiry workflows, with clear scope and practical handover. Based in Carlow, Ireland."],
+  "/packages": ["Website & Enquiry Follow-up Packages and Prices | Ingenium", "Starter build normally €795, currently €495 plus €49/month care. Up to five pages at €1,495 plus €99/month. CRM work is quoted individually."],
+  "/phone-ringing-website": ["Phone Ringing Website for Local Businesses | Ingenium", "Give referrals somewhere to check your services, see your work and get in touch. Website design and copy for local businesses in Ireland."],
+  "/never-miss-a-lead": ["Never Miss a Lead: Better Enquiry Follow-up | Ingenium", "Keep customer replies, quotes and next actions in view. Practical enquiry follow-up for local businesses and small teams."],
+  "/leads-to-jobs": ["Leads to Jobs: Website & Enquiry Follow-up | Ingenium", "Bring your website and enquiry follow-up together, from checking your services to asking for a quote and hearing back."],
+  "/results": ["Our Work: Website Designs & Projects | Ingenium", "Explore illustrative local business website designs and published Ingenium projects. Find a direction for your own business."],
+  "/how-it-works": ["How It Works: We Draft, You Approve | Ingenium", "Start with a free 15-minute call. We gather the details, draft your content, build and check the customer journey with you."],
+  "/visibility-check": ["Free Google Visibility Check | Ingenium", "Can local customers find your business online? Request a free, human-reviewed Google Visibility Check for your service and town, delivered by email."],
+  "/book-a-call": ["Book a Free 15-minute Call | Ingenium", "Talk through your website, enquiries and quote follow-up with Ingenium. A free 15-minute conversation, with no preparation needed."],
+  "/about": ["Meet the Website, Design & CRM Team | Ingenium", "Meet Kyle, Clayton and Sophie: the people behind Ingenium website design, technical delivery, CRM implementation and project conversations. Based in Carlow."],
+};
+for (const [path, [title, description]] of Object.entries(localBusinessPages)) {
+  pageSeo[path] = { title, description, path, keywords: ["Ingenium Consulting", "local business websites Ireland", "enquiry follow-up", "Carlow web design"] };
+}
+for (const path of ["/websites", "/crm", "/connected", "/pricing", "/services", "/projects", "/how-we-work", "/contact", "/demo", "/team", "/starter-website"]) {
+  if (pageSeo[path]) pageSeo[path].noIndex = true;
 }
 
 export const PAGE_SEO = pageSeo;

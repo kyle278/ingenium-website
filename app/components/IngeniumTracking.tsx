@@ -2,7 +2,8 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
-import { analyticsAllowed, captureAttribution, clearAttribution, CONSENT_KEY, trackPortalEvent } from "@/lib/enquiry-client";
+import { analyticsAllowed, captureAttribution, clearAttribution, CONSENT_KEY } from "@/lib/enquiry-client";
+import { startPortalPageTracking } from "@/lib/portal-page-tracking";
 import "./consent.css";
 
 const GTM_ID = "GTM-KWCQSXC7";
@@ -57,7 +58,7 @@ export default function IngeniumTracking() {
     if (choice === "rejected") { revokeAnalytics(); if (document.getElementById("ingenium-optional-gtm")) location.reload(); }
   }, [choice]);
   useEffect(() => {
-    if (!pathname?.startsWith("/blog/preview/") && choice === "accepted" && analyticsAllowed()) { captureAttribution(); trackPortalEvent("page_view"); }
+    if (choice === "accepted" && analyticsAllowed()) return startPortalPageTracking();
   }, [pathname, choice]);
   useEffect(() => {
     function openSettings() { if (location.hash === "#cookie-settings") setOpen(true); }

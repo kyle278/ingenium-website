@@ -20,3 +20,9 @@ The Portal case-study feed currently responds with HTTP 404. The `/projects` pag
 Validation: production build and TypeScript passed; all 58 existing tests passed; changed files linted without errors (two existing unused-import warnings). Browser checks at 1440px and 390px confirmed six loaded previews, the Attic homepage link, no horizontal overflow, and no unavailable message. Live checks on `/` and `/projects` returned HTTP 200, loaded all six images, reported no page errors, and resolved published Website editor release `7c303ef2-c11b-497f-8996-afd52d95d080`.
 
 The canonical production source remains `C:/Users/kyler/Desktop/Projects/ingenium-website-editor-release`. This release is fast-forwarded into that checkout after verification. The original `ingenium-website` checkout still contains unrelated development changes; do not deploy it wholesale over the editor release.
+
+## Nitro Sports Supplements addition
+
+Added https://nitro-sports-supplements.vercel.app/ as the seventh current project, with a homepage screenshot in `public/project-previews/nitro-sports-supplements.webp`. Captured after declining optional analytics so the consent banner does not obscure the preview.
+
+Production deployment: https://ingenium-website-ei4ayka8w-kyle278s-projects.vercel.app, promoted to https://www.ingeniumconsulting.net. Production build and TypeScript passed. Render check confirmed seven entries with the correct Nitro URL and image. Live browser checks on `/` and `/projects` confirmed HTTP 200, seven project cards, the loaded Nitro screenshot, no page errors, and the same published editor release. The mobile card was checked at 390px without horizontal overflow.

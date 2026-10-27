@@ -9,6 +9,7 @@ const currentProjects = [
   { slug: "kennypm", name: "KennyPM", url: "https://kennypm-website.vercel.app/" },
   { slug: "attic-jiu-jitsu", name: "Attic Jiu Jitsu", url: "https://attic-jiu-jitsu-website.vercel.app/" },
   { slug: "connie-byrne-yoga", name: "Connie Byrne Yoga", url: "https://conniebyrneyoga.com" },
+  { slug: "nitro-sports-supplements", name: "Nitro Sports Supplements", url: "https://nitro-sports-supplements.vercel.app/" },
 ];
 
 export default function CurrentProjects({ home = false }: { home?: boolean }) {

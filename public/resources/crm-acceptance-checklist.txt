@@ -1,0 +1,19 @@
+CRM & AUTOMATION: ACCEPTANCE AND HANDOVER CHECKLIST
+
+[ ] The implementation scope and acceptance criteria have been agreed.
+[ ] Contacts, companies, leads and opportunities use the agreed fields.
+[ ] The sales pipeline and statuses reflect the agreed process.
+[ ] Initial user access and permissions are correct.
+[ ] The cleaned dataset has been mapped, imported and checked.
+[ ] Each agreed workflow passes its success and failure checks.
+[ ] The agreed integration has been tested.
+[ ] Basic dashboards show the expected test data.
+[ ] The team has completed the agreed training.
+[ ] An internal process owner has been identified.
+[ ] User, record, execution and support allowances are documented.
+[ ] Third-party charges are identified.
+[ ] Billing, cancellation, data access and export arrangements are understood.
+[ ] The handover date and 14-day defect warranty are recorded.
+[ ] Remaining defects are distinguished from new feature requests.
+
+The project agreement defines acceptance. This checklist supports that review.

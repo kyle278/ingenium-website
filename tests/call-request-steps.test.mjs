@@ -22,6 +22,7 @@ function mount(props = {}, send = async () => ({ ok: true, submission_id: 'test-
       useRef: value => { const i = cursor++; return hooks[i] ??= { current: value }; },
       useState: value => { const i = cursor++; if (!(i in hooks)) hooks[i] = typeof value === 'function' ? value() : value; return [hooks[i], next => { hooks[i] = typeof next === 'function' ? next(hooks[i]) : next; }]; },
     };
+    if (name === './PackagePricing') return { PackagePrice: 'package-price' };
     if (name === 'next/link') return { default: 'link' };
     if (name === 'lucide-react') return new Proxy({}, { get: (_, key) => String(key) });
     if (name.endsWith('business-packages')) return packages;
@@ -54,7 +55,7 @@ test('a choice advances once; timing and details wait for explicit valid Continu
   const view = mount();
   assert.equal(view.heading(), 'What can we help with?');
   assert.equal(view.find(node => node.props?.name === 'email'), undefined);
-  const choose = view.button('A website').props.onClick;
+  const choose = view.button('Starter Website').props.onClick;
   choose({ detail: 1 }); choose({ detail: 1 });
   assert.equal(view.heading(), 'When suits you?');
   await view.submit(false);
@@ -91,7 +92,7 @@ test('all routes require affirmative privacy; optional marketing is independent'
   }
 });
 
-test('Back preserves independent answers and removes an incompatible package without a review', async () => {
+test('Back preserves independent answers and switches to the newly selected package without a review', async () => {
   const view = mount({ initialPackage: '7-day-starter', initialService: 'crm' });
   assert.equal(view.heading(), 'When suits you?', 'known package determines its service');
   view.change('preferred_date', '2099-10-26');
@@ -105,14 +106,15 @@ test('Back preserves independent answers and removes an incompatible package wit
   assert.equal(view.find(node => node.props?.name === 'email').props.value, 'owner@example.test');
   view.click('Back');
   assert.equal(view.find(node => node.props?.name === 'preferred_date').props.value, '2099-10-26');
-  view.click('Change topic'); view.click('Better follow-up');
+  view.click('Change topic'); view.click('CRM & Automation');
   assert.equal(view.heading(), 'When suits you?');
   await view.submit();
   assert.equal(view.find(node => node.props?.className === 'call-offer'), undefined);
   assert.equal(view.find(node => node.props?.name === 'phone').props.value, '+353 85 000 0000');
   await view.submit(); view.change('privacy_consent', true); await view.submit();
   const fields = view.sent[0].fields;
-  assert.equal(fields.package_interest, undefined);
+  assert.equal(fields.package_interest, 'CRM & Automation');
+  assert.equal(fields.package_id, 'crm-automation');
   assert.equal(fields.service, 'crm');
   assert.equal(fields.preferred_date, '2099-10-26');
   assert.equal(fields.phone, '+353 85 000 0000');
@@ -124,7 +126,7 @@ test('package routes retain the correct offer and compatible topic changes keep 
   for (const offer of packages.businessPackages) {
     const view = mount({ initialPackage: offer.id });
     view.click('Change topic');
-    view.click(offer.service === 'website' ? 'A website' : offer.service === 'crm' ? 'Better follow-up' : 'Both together');
+    view.click(offer.service === 'website' ? 'Starter Website' : offer.service === 'crm' ? 'CRM & Automation' : 'Business Growth');
     await view.details();
     view.change('privacy_consent', true); await view.submit();
     assert.equal(view.sent[0].fields.package_interest, offer.name);

@@ -1,0 +1,21 @@
+BUSINESS GROWTH: ENQUIRY ACKNOWLEDGEMENT TEMPLATE
+
+Subject: We have received your enquiry
+
+Hi [first name],
+
+Thanks for contacting [business name] about [service].
+We have received your details and will review your request.
+
+Our next step is [explain the actual next step].
+You can contact us at [phone/email] if you need to add anything.
+
+Thanks,
+[business name]
+
+BEFORE USING
+Replace every bracketed field.
+Only state a response time your team can meet.
+Do not confirm availability, a booking or a price that has not been agreed.
+Test the contact, CRM lead, business notification and acknowledgement together.
+The acknowledgement is transactional; marketing consent is a separate decision.

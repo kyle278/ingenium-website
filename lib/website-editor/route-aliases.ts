@@ -1,9 +1,12 @@
 // Portal keeps its existing page identities. Editor canvases and publication probes
 // render the replacement pages at those identities while public URLs redirect.
 export const editorRouteAliases: Record<string, string> = {
-  "/websites": "/phone-ringing-website",
-  "/crm": "/never-miss-a-lead",
-  "/connected": "/leads-to-jobs",
+  "/phone-ringing-website": "/business-growth",
+  "/never-miss-a-lead": "/crm-automation",
+  "/leads-to-jobs": "/business-growth",
+  "/websites": "/business-growth",
+  "/crm": "/crm-automation",
+  "/connected": "/business-growth",
   "/pricing": "/packages",
   "/services": "/packages",
   "/projects": "/results",

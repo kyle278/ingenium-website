@@ -3,22 +3,24 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, CheckCircle2, CircleHelp, Globe2, Layers3, MessageCircle, ShoppingBag, ShieldCheck, Mail } from "lucide-react";
-import { getBusinessPackage, packagePriceLabel } from "@/lib/business-packages";
+import { businessPackages, getBusinessPackage } from "@/lib/business-packages";
 import { clearEnquiryRequestId, enquiryRequestId, enquiryTracking, recordAcceptedLead, sendEnquiry } from "@/lib/enquiry-client";
 import { MARKETING_NOTICE, NOTICE_VERSION, PRIVACY_NOTICE, validService, validContactPhone, validateEnquiry } from "@/lib/enquiry-contract";
 
+import { PackagePrice } from "./PackagePricing";
+
 type Step = "need" | "timing" | "details" | "consent";
 const topics = [
-  { value: "website", title: "A website", icon: Globe2 },
-  { value: "crm", title: "Better follow-up", icon: MessageCircle },
-  { value: "connected", title: "Both together", icon: Layers3 },
+  { value: "website", title: "Starter Website", icon: Globe2 },
+  { value: "crm", title: "CRM & Automation", icon: MessageCircle },
+  { value: "connected", title: "Business Growth", icon: Layers3 },
   { value: "ecommerce", title: "An online shop", icon: ShoppingBag },
   { value: "not-sure", title: "Help deciding", icon: CircleHelp },
 ] as const;
 const headings: Record<Step, string> = { need: "What can we help with?", timing: "When suits you?", details: "Where can we reach you?", consent: "A quick privacy check." };
 const windows = [{ value: "", title: "Flexible", detail: "Any time" }, { value: "morning", title: "Morning", detail: "9am–12pm" }, { value: "afternoon", title: "Afternoon", detail: "12pm–5pm" }];
 
-export default function CallRequestJourney({ initialService = "not-sure", initialPackage }: { initialService?: string; initialPackage?: string }) {
+export default function CallRequestJourney({ initialService = "not-sure", initialPackage, initialNow = 0 }: { initialService?: string; initialPackage?: string; initialNow?: number }) {
   const initialOffer = getBusinessPackage(initialPackage);
   const prefilledService = initialOffer?.service || (validService(initialService) ? initialService : "not-sure");
   const initialStep = initialOffer || prefilledService !== "not-sure" ? "timing" : "need";
@@ -75,7 +77,7 @@ export default function CallRequestJourney({ initialService = "not-sure", initia
   function choose(value: typeof prefilledService, detail: number) {
     if (detail > 1 || activeStep.current !== "need") return;
     setService(value);
-    if (selectedPackage && value !== selectedPackage.service) setSelectedPackage(undefined);
+    setSelectedPackage(businessPackages.find(item => item.service === value));
     move("need", "timing");
   }
   function update(key: keyof typeof answers, value: string) { setAnswers(current => ({ ...current, [key]: value })); }
@@ -98,7 +100,7 @@ export default function CallRequestJourney({ initialService = "not-sure", initia
       consent_version: NOTICE_VERSION, consent_text_snapshot: PRIVACY_NOTICE, marketing_consent_text: MARKETING_NOTICE,
       name: `${fields.first_name} ${fields.last_name}`,
     });
-    if (selectedPackage && selectedPackage.service === service) fields.package_interest = selectedPackage.name;
+    if (selectedPackage && selectedPackage.service === service) { fields.package_interest = selectedPackage.name; fields.package_id = selectedPackage.id; }
     fields.message = `Free 15-minute call request. Please call ${fields.phone}. Help with: ${service}. Package interest: ${fields.package_interest || "help deciding"}. Preferred date: ${fields.preferred_date || "flexible"}; time: ${fields.preferred_time || "flexible"} (Europe/Dublin). ${fields.notes || ""}`;
     requestId.current ||= enquiryRequestId("free-call");
     const payload = { request_id: requestId.current, form_slug: "contact", fields, tracking: enquiryTracking() };
@@ -149,7 +151,7 @@ export default function CallRequestJourney({ initialService = "not-sure", initia
             <div className="call-field"><label htmlFor="call-company">Business name <span>(optional)</span></label><input id="call-company" name="company" autoComplete="organization" maxLength={160} value={answers.company} onChange={event => update("company", event.target.value)} /><small>Helps us learn about your business before the call.</small></div>
             <div className="call-field"><label htmlFor="call-notes">Anything to discuss? <span>(optional)</span></label><textarea id="call-notes" name="notes" rows={2} maxLength={2000} value={answers.notes} onChange={event => update("notes", event.target.value)} /></div>
           </div></details>
-          {selectedPackage && <details className="call-extras call-offer"><summary>Selected offer &amp; pricing</summary><p><strong>{selectedPackage.name}</strong></p><p className="call-help">{packagePriceLabel(selectedPackage)}</p></details>}
+          {selectedPackage && <details className="call-extras call-offer"><summary>Selected offer &amp; pricing</summary><p><strong>{selectedPackage.name}</strong></p><PackagePrice packageId={selectedPackage.id} initialNow={initialNow} /><p className="call-help">No VAT charged. Scope and total are confirmed in writing.</p></details>}
         </div>}
 
         {step === "consent" && <div className="call-consents">

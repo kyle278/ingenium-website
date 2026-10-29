@@ -21,6 +21,7 @@ import "./hero.css";
 import "./local-business.css";
 import "./brand-renewal.css";
 import "./forms.css";
+import "./packages.css";
 
 const manropeDisplay = Manrope({
   subsets: ["latin"],

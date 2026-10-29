@@ -7,10 +7,10 @@ import { businessPackages, packagePriceLabel } from "@/lib/business-packages";
 import { PackageSummary } from "./PackageOptions";
 
 export const localBusinessFaqs = [
-  { question: "Do I need to write anything?", answer: "No blank page to wrestle with. Tell us about your business, your services and the places you cover. We draft the website copy for you to check and approve." },
+  { question: "Do I need to write anything?", answer: "You supply business details, website text and images. We provide a content checklist and organise the supplied material. Copywriting from scratch is quoted separately." },
   { question: "What if I already have a Facebook page?", answer: "Keep it. A website gives people one place to check your services, see your work and contact you, even if they don’t use Facebook. We can look at how the two work together." },
   { question: "Can you help if I already have a website?", answer: "Yes. If your website does its job, we can focus on what happens after someone gets in touch. If it needs work too, we’ll look at both together." },
-  { question: "How much will it cost?", answer: `The 7-Day Starter Website is ${packagePriceLabel(businessPackages[0])}. The Phone Ringing Website, with up to five pages, is ${packagePriceLabel(businessPackages[1])}. CRM and website-plus-follow-up work are quoted individually, with setup and ongoing costs explained in your proposal.` },
+  { question: "How much will it cost?", answer: `Starter Website: ${packagePriceLabel(businessPackages[0])}. Business Growth: ${packagePriceLabel(businessPackages[1])}. CRM & Automation: ${packagePriceLabel(businessPackages[2])}. No VAT charged. Scope and allowances are confirmed in writing.` },
   { question: "Is there a contract, and who owns the site?", answer: "Before you commit, your written agreement will explain the accounts, ownership, ongoing charges and what happens if you leave. We’ll talk you through those details so you can make an informed decision." },
   { question: "What happens on the free call?", answer: "We spend 15 minutes on your business, what customers find online and where enquiries get stuck. You leave with a clearer next step. You don’t need a technical brief or prepared content." },
 ];
@@ -26,7 +26,7 @@ export function RouteChoices() {
 }
 export const simpleSteps = [
   { title: "A short call. In your words.", body: "Start with a free 15-minute chat. Tell us what you do and what’s getting in the way. We’ll recommend the smallest useful next step." },
-  { title: "We draft. You approve.", body: "Once we agree the work, we gather the details and do the writing and building. You review it with us, without needing to learn the technology." },
+  { title: "We draft. You approve.", body: "Once we agree the work, we gather your materials and do the configuration and building. You review it with us, without needing to learn the technology." },
   { title: "Ready for real enquiries.", body: "We check the customer journey with you, from finding your services to getting in touch, then show your team how to take it from there." },
 ];
 export function SimpleSteps() { return <ol className="local-steps">{simpleSteps.map((step, i) => <li key={step.title}><span className="local-step-number"><EditorText editorId="rebuild.components.rebuild.LocalBusinessSections.tsx.text.5feceb66ffc8" identity={step.title} tag="span" value={"0"} /><EditorText editorId="rebuild.components.rebuild.LocalBusinessSections.tsx.text.7423e9612e57" identity={step.title} tag="span" value={i + 1} /></span><h3><EditorText editorId="rebuild.components.rebuild.LocalBusinessSections.tsx.text.125d0f917702" identity={step.title} tag="h3" value={step.title} /></h3><p><EditorText editorId="rebuild.components.rebuild.LocalBusinessSections.tsx.text.94ddf4bbfdc9" identity={step.title} tag="p" value={step.body} /></p></li>)}</ol>; }

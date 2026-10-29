@@ -1,0 +1,26 @@
+CRM & AUTOMATION: WORKFLOW MAP
+
+Complete one copy for each agreed workflow.
+
+NAME:
+BUSINESS PROBLEM:
+TRIGGER:
+SOURCE SYSTEM AND RECORD:
+REQUIRED INPUTS:
+CONDITIONS / EXCLUSIONS:
+ACTIONS IN ORDER:
+ASSIGNED OWNER:
+NOTIFICATION RECIPIENT:
+HUMAN REVIEW REQUIRED:
+WHAT HAPPENS IF A STEP FAILS:
+HOW REPEATED EVENTS ARE HANDLED:
+SUCCESS CHECK:
+TEST DATA:
+THIRD-PARTY ACCESS / CHARGES:
+MONTHLY EXECUTION ALLOWANCE:
+SUPPORT CONTACT:
+
+BASE IMPLEMENTATION
+Up to three agreed workflows and one feasible external integration.
+Examples for discovery: website lead assignment, follow-up reminder, opportunity stage-change task.
+The written scope and available integration capabilities determine the final design.

@@ -20,6 +20,9 @@ type JsonLd = Record<string, unknown>;
 
 const routeLabelMap: Record<string, string> = {
   "/packages": "Packages",
+  "/starter-website": "Starter Website",
+  "/business-growth": "Business Growth",
+  "/crm-automation": "CRM & Automation",
   "/phone-ringing-website": "Phone Ringing Website",
   "/never-miss-a-lead": "Never Miss a Lead",
   "/leads-to-jobs": "Leads to Jobs",

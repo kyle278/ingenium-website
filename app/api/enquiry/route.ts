@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { packageEnquirySnapshot } from "@/lib/business-packages";
 import { NextResponse } from "next/server";
 import { acceptedReceipt, sanitizeTracking, validateEnquiry } from "@/lib/enquiry-contract";
 import { PORTAL_FORM_SUBMIT_ENDPOINT, PORTAL_SITE_ID } from "@/lib/portalIntegration/public";
@@ -46,7 +47,21 @@ export async function POST(req: Request) {
   const result = (async () => {
     try {
       const tracking = sanitizeTracking(body.tracking);
-      const response = await fetch(PORTAL_FORM_SUBMIT_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", Origin: origin }, body: JSON.stringify({ site_id: PORTAL_SITE_ID, form_slug: body.form_slug, fields: body.fields, tracking, metadata: { website_request_id: body.request_id, consent_captured_at: new Date().toISOString(), first_touch: sanitizeTracking(body.tracking?.first_touch), latest_touch: sanitizeTracking(body.tracking?.latest_touch) } }), signal: AbortSignal.timeout(20000) });
+      const packageQuote = packageEnquirySnapshot(
+        body.form_slug === STARTER_FORM_SLUG ? "starter-website" : body.fields.package_id,
+        body.form_slug === STARTER_FORM_SLUG ? "website" : body.fields.service,
+        now,
+      );
+      const submittedFields = { ...body.fields };
+      // Strip monetary claims supplied by clients. Only the server's package snapshot is authoritative.
+      for (const key of ["package_setup_eur", "package_monthly_eur", "starter_promotion_eligible", "package_requested_at"]) delete submittedFields[key];
+      if (packageQuote) Object.assign(submittedFields, {
+        package_id: packageQuote.package_id, package_interest: packageQuote.package_name,
+        package_setup_eur: String(packageQuote.setup_eur), package_monthly_eur: String(packageQuote.monthly_eur),
+        starter_promotion_eligible: String(packageQuote.starter_promotion_eligible),
+        package_requested_at: packageQuote.requested_at,
+      });
+      const response = await fetch(PORTAL_FORM_SUBMIT_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", Origin: origin }, body: JSON.stringify({ site_id: PORTAL_SITE_ID, form_slug: body.form_slug, fields: submittedFields, tracking, metadata: { website_request_id: body.request_id, ...(packageQuote ? { package_quote: packageQuote } : {}), consent_captured_at: new Date().toISOString(), first_touch: sanitizeTracking(body.tracking?.first_touch), latest_touch: sanitizeTracking(body.tracking?.latest_touch) } }), signal: AbortSignal.timeout(20000) });
       const receipt = await response.json().catch(() => null);
       if (!response.ok || !acceptedReceipt(receipt)) return { status: 502, body: { error: "We could not confirm receipt. Please email hello@ingeniumconsulting.net before sending again." } };
       return { status: 201, body: { ok: true, submission_id: receipt.submission_id, ...(body.fields.lead_route ? { lead_route: body.fields.lead_route } : {}) } };

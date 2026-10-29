@@ -1,0 +1,16 @@
+STARTER WEBSITE: LAUNCH REVIEW
+
+With Ingenium, check the agreed website before approving launch:
+[ ] Business name, services, service area and contact details are correct.
+[ ] All agreed sections are present.
+[ ] Desktop and phone layouts are readable.
+[ ] Click-to-call and social links go to the correct destinations.
+[ ] A test enquiry reaches the agreed business email.
+[ ] Required policy content supplied by your business is in place.
+[ ] Domain connection and HTTPS are working.
+[ ] Basic title, description and search indexing settings are checked.
+[ ] The agreed revision round has been completed.
+[ ] Final balance, launch date and monthly service start are understood.
+[ ] Domain access, support contact and handover arrangements are recorded.
+
+This is an acceptance aid. The written scope determines deliverables and terms.

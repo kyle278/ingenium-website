@@ -1,0 +1,24 @@
+BUSINESS GROWTH: PIPELINE HANDOVER GUIDE
+
+Agree stages that match how an enquiry becomes a customer.
+Example stages for discussion: New enquiry > Contacted > Quote sent > Won / Lost.
+
+FOR EACH OPEN ENQUIRY, YOUR TEAM SHOULD KNOW:
+Who is the customer?
+What are they asking for?
+Who owns the enquiry?
+What is the current stage?
+What is the next action?
+When does that action need attention?
+
+DAILY REVIEW
+Check new website leads.
+Add telephone and message enquiries manually unless separately integrated.
+Assign an owner and update stages as the conversation moves.
+Review open quotes and record the next action.
+
+AT HANDOVER
+Practise creating a contact, updating a lead and moving an opportunity.
+Submit a test website enquiry and check the agreed workflow.
+Record the user, record, email and execution allowances from your proposal.
+Extra reminder workflows or channel integrations are additional scope.

@@ -5,6 +5,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import ts from 'typescript';
 import crypto from 'node:crypto';
+import * as packages from '../lib/business-packages.ts';
 const __dirname = import.meta.dirname;
 function compile(file) { return ts.transpileModule(fs.readFileSync(path.join(__dirname, '..', file),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText; }
 const contractModule = {exports:{}};
@@ -16,12 +17,13 @@ const starter=starterModule.exports;
 const origin='https://website.example.test';
 function payload(id='11111111-1111-4111-8111-111111111111') {return {request_id:id,form_slug:'contact',fields:{name:'Test Person',first_name:'Test',last_name:'Person',email:'test@example.test',service:'connected',message:'A useful project description.',budget_range:'2000-5000',privacy_consent:'true',marketing_consent:'false',consent_version:contract.NOTICE_VERSION,consent_text_snapshot:contract.PRIVACY_NOTICE},tracking:{submission_url:origin+'/contact?token=private',utm_source:'linkedin',first_touch:{landing_url:origin+'/?email=private@example.test',utm_source:'linkedin'}}};}
 function request(body=payload(), options={}) {return new Request(origin+'/api/enquiry',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json',...options.headers},body:typeof body==='string'?body:JSON.stringify(body)});}
-function load(fetchImplementation=async()=>Response.json({ok:true,submission_id:'accepted-id'},{status:201})) {
+function load(fetchImplementation=async()=>Response.json({ok:true,submission_id:'accepted-id'},{status:201}), clock=Date) {
  const calls=[];const compiledModule={exports:{}};
- vm.runInNewContext(compile('app/api/enquiry/route.ts'),{module:compiledModule,exports:compiledModule.exports,URL,Buffer,AbortSignal,Date,fetch:async(...args)=>{calls.push(args);return fetchImplementation(...args)},require(name){
+ vm.runInNewContext(compile('app/api/enquiry/route.ts'),{module:compiledModule,exports:compiledModule.exports,URL,Buffer,AbortSignal,Date:clock,fetch:async(...args)=>{calls.push(args);return fetchImplementation(...args)},require(name){
   if(name==='node:crypto')return crypto;
   if(name==='next/server')return {NextResponse:{json:(body,options)=>Response.json(body,options)}};
   if(name==='@/lib/enquiry-contract')return contract;
+  if(name==='@/lib/business-packages')return packages;
   if(name==='@/lib/starter-website')return starter;
   if(name==='@/lib/portalIntegration/public')return {PORTAL_FORM_SUBMIT_ENDPOINT:'https://portal.invalid.test/forms',PORTAL_SITE_ID:'test-site'};
   throw Error('Unexpected module '+name);
@@ -51,3 +53,32 @@ test('honeypot and oversize body rejected before upstream write',async()=>{const
 test('actual private brief field contract is accepted without contact service/budget fields',async()=>{const api=load();const body={request_id:payload().request_id,form_slug:'website-project-brief',fields:{name:'Test Person',first_name:'Test',last_name:'Person',first_name:'Test',last_name:'Person',email:'test@example.test',phone:'',company:'Test Ltd',website_url:'',business_summary:'A small local service business.',target_audience:'Local customers',current_website_status:'No website yet',primary_goal:'Generate enquiries',required_pages:'Home, services, contact',requested_features:'Contact form, gallery',feature_count:'2',pages_summary:'Home, services, contact',project_type:'website_build',timeline:'Within 3 months',brand_assets_status:'Ready',copy_support_needed:'Yes',inspiration_sites:'',extra_notes:'',privacy_consent:'true',marketing_consent:'false',accuracy_confirmation:'true',consent_version:'2026-05-07',consent_text_snapshot:'Existing private brief notice',consent_captured_at:'2026-09-26T12:00:00Z'}};assert.equal((await api.POST(request(body))).status,201);body.fields.consent_captured_at='2026-09-26T12:01:00Z';assert.equal((await api.POST(request(body))).status,201);assert.equal(api.calls.length,1);const invalid={...body,request_id:'22222222-2222-4222-8222-222222222222',fields:{...body.fields,accuracy_confirmation:'false'}};assert.equal((await api.POST(request(invalid))).status,422)});
 test('starter lead route and tracker label are computed on the server and returned',async()=>{const api=load();const body={request_id:payload().request_id,form_slug:'starter-website',fields:{privacy_consent:'true',consent_version:contract.NOTICE_VERSION,consent_text_snapshot:contract.PRIVACY_NOTICE,name:'Mary Walsh',first_name:'Mary',last_name:'Walsh',email:'mary@walsh.ie',phone:'',team_size:'More than 25',business_type:'Retail',main_need:"I don't have a website yet",details:'',marketing_consent:'false',fill_ms:'9000',lead_route:'good-fit'}};const response=await api.POST(request(body));assert.equal(response.status,201);assert.equal((await response.json()).lead_route,'bigger-needs');const sent=JSON.parse(api.calls[0][1].body);assert.equal(sent.fields.lead_route,'bigger-needs');assert.equal(sent.fields.lead_label,'Main package')});
 test('starter submissions under 3 seconds are rejected before upstream',async()=>{const api=load();const body={request_id:payload().request_id,form_slug:'starter-website',fields:{privacy_consent:'true',consent_version:contract.NOTICE_VERSION,consent_text_snapshot:contract.PRIVACY_NOTICE,name:'Mary Walsh',first_name:'Mary',last_name:'Walsh',email:'mary@walsh.ie',marketing_consent:'false',fill_ms:'800'}};assert.equal((await api.POST(request(body))).status,422);assert.equal(api.calls.length,0)});
+
+
+test('server ignores forged promotion prices and records eligibility using receipt time', async () => {
+ const deadline=Date.parse(packages.STARTER_PROMOTION.endsAt);
+ for (const [at,expected,eligible] of [[deadline-1,495,true],[deadline,795,false]]) {
+  const Clock=class extends Date { static now(){return at;} };
+  const api=load(undefined,Clock);
+  const body=payload();
+  Object.assign(body.fields,{service:'website',package_id:'starter-website',package_setup_eur:'1',package_monthly_eur:'0',starter_promotion_eligible:'true',package_requested_at:'2020-01-01'});
+  assert.equal((await api.POST(request(body))).status,201);
+  const sent=JSON.parse(api.calls[0][1].body);
+  assert.equal(sent.fields.package_setup_eur,String(expected));
+  assert.equal(sent.fields.package_monthly_eur,'50');
+  assert.equal(sent.fields.starter_promotion_eligible,String(eligible));
+  assert.equal(sent.metadata.package_quote.requested_at,new Date(at).toISOString());
+  assert.equal(sent.metadata.package_quote.vat_charged,false);
+ }
+});
+
+test('a mismatched package cannot smuggle monetary or promotion claims upstream', async () => {
+ const api=load();
+ const body=payload();
+ Object.assign(body.fields,{service:'crm',package_id:'starter-website',package_setup_eur:'1',starter_promotion_eligible:'true'});
+ assert.equal((await api.POST(request(body))).status,201);
+ const sent=JSON.parse(api.calls[0][1].body);
+ assert.equal(sent.metadata.package_quote,undefined);
+ assert.equal(sent.fields.package_setup_eur,undefined);
+ assert.equal(sent.fields.starter_promotion_eligible,undefined);
+});

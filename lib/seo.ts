@@ -35,7 +35,7 @@ export const ORGANIZATION_SAME_AS = [
 ] as const;
 export const SITE_URL = resolveSiteUrl();
 export const DEFAULT_DESCRIPTION =
-  "Website design, CRM and connected enquiry workflows for businesses in Ireland. Clear scope, thoughtful design and practical follow-through. Based in Carlow.";
+  "Business growth and automation for Irish businesses. Professional websites, organised enquiries and practical CRM workflows. Based in Carlow.";
 export const DEFAULT_SOCIAL_IMAGE = `${SITE_URL}/opengraph-image`;
 
 export const keywordClusters = {
@@ -363,6 +363,21 @@ for (const [path, [title, description]] of Object.entries(localBusinessPages)) {
 }
 for (const path of ["/websites", "/crm", "/connected", "/pricing", "/services", "/projects", "/how-we-work", "/contact", "/demo", "/team", "/starter-website"]) {
   if (pageSeo[path]) pageSeo[path].noIndex = true;
+}
+
+// The three-package IA is canonical. Keep metadata free of expiring offer prices.
+const corePackagePages: Record<string, [string, string]> = {
+  "/": ["Business Growth & Automation for Irish Businesses | Ingenium", "Get online. Follow up. Get time back. Starter websites, connected website and CRM packages, and CRM automation for Irish small businesses. Based in Carlow."],
+  "/packages": ["Starter Website, Business Growth & CRM Packages | Ingenium", "Compare three clear packages for Irish businesses. A professional online presence, website and CRM enquiry management, or a scoped CRM and automation implementation."],
+  "/starter-website": ["Starter Website for Irish Small Businesses | Ingenium", "A professional one-page website with up to five sections, mobile-friendly design, enquiry form and basic SEO. Hosting and technical care at 50 euro per month. No VAT charged."],
+  "/business-growth": ["Business Growth: Website, CRM & Enquiry Management | Ingenium", "A website with up to five pages, Ingenium Portal CRM, one sales pipeline, one enquiry workflow and training. Indicative pricing from 1,500 euro setup and 99 euro per month."],
+  "/crm-automation": ["CRM & Automation for Irish Service Businesses | Ingenium", "Centralise customer records and automate agreed processes with Ingenium Portal. Up to three workflows, five initial users and training. Indicative setup from 3,000 euro."],
+};
+for (const [path, [title, description]] of Object.entries(corePackagePages)) {
+  pageSeo[path] = { title, description, path, keywords: ["Ingenium Consulting", "small business Ireland", "business growth", "CRM automation", "website design Carlow"] };
+}
+for (const path of ["/phone-ringing-website", "/never-miss-a-lead", "/leads-to-jobs"]) {
+  pageSeo[path].noIndex = true;
 }
 
 export const PAGE_SEO = pageSeo;

@@ -2,7 +2,7 @@
 
 Date: 29 October 2026
 Workspace: C:/Users/kyler/Desktop/Projects/ingenium-website
-Status: Implemented locally. Public production has not been deployed.
+Status: Promoted to public production on 29 October 2026. See core-packages-production-release-2026-10-29.md for deployment and live verification.
 Local production preview: http://localhost:3010/
 
 ## Commercial decisions

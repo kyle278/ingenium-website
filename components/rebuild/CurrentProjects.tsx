@@ -11,6 +11,7 @@ const currentProjects = [
   { slug: "connie-byrne-yoga", name: "Connie Byrne Yoga", url: "https://conniebyrneyoga.com" },
   { slug: "nitro-sports-supplements", name: "Nitro Sports Supplements", url: "https://nitro-sports-supplements.vercel.app/" },
   { slug: "emerald-golf-distribution", name: "Emerald Golf Distribution", url: "https://emerald-golf-distribution.vercel.app/" },
+  { slug: "fight-factory-pro-wrestling", name: "Fight Factory Pro Wrestling", url: "https://fight-factory-pro-wrestling.vercel.app/" },
 ];
 
 export default function CurrentProjects({ home = false }: { home?: boolean }) {

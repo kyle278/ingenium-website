@@ -10,6 +10,7 @@ const currentProjects = [
   { slug: "attic-jiu-jitsu", image: "/project-previews/attic-jiu-jitsu-20261029.webp", name: "Attic Jiu Jitsu", url: "https://attic-jiu-jitsu-website.vercel.app/" },
   { slug: "connie-byrne-yoga", name: "Connie Byrne Yoga", url: "https://conniebyrneyoga.com" },
   { slug: "nitro-sports-supplements", name: "Nitro Sports Supplements", url: "https://nitro-sports-supplements.vercel.app/" },
+  { slug: "emerald-golf-distribution", name: "Emerald Golf Distribution", url: "https://emerald-golf-distribution.vercel.app/" },
 ];
 
 export default function CurrentProjects({ home = false }: { home?: boolean }) {

@@ -17,7 +17,7 @@ const topics = [
   { value: "ecommerce", title: "An online shop", icon: ShoppingBag },
   { value: "not-sure", title: "Help deciding", icon: CircleHelp },
 ] as const;
-const headings: Record<Step, string> = { need: "What can we help with?", timing: "When suits you?", details: "Where can we reach you?", consent: "A quick privacy check." };
+const headings: Record<Step, string> = { need: "What can we help with?", timing: "When can we call you?", details: "Where can we reach you?", consent: "A quick privacy check." };
 const windows = [{ value: "", title: "Flexible", detail: "Any time" }, { value: "morning", title: "Morning", detail: "9am–12pm" }, { value: "afternoon", title: "Afternoon", detail: "12pm–5pm" }];
 
 export default function CallRequestJourney({ initialService = "not-sure", initialPackage, initialNow = 0 }: { initialService?: string; initialPackage?: string; initialNow?: number }) {
@@ -131,7 +131,7 @@ export default function CallRequestJourney({ initialService = "not-sure", initia
     <fieldset disabled={status === "pending"} className="call-fields">
       <legend className="sr-only">Free 15-minute call request</legend>
       <div key={step} className={`call-screen call-screen-${direction}`}>
-        <div className="call-heading"><h2 id="call-question" ref={headingRef} tabIndex={-1}>{headings[step]}</h2><p>{step === "need" ? "Choose one to continue. Your phone number lets us arrange the call." : step === "timing" ? "Optional. We’ll agree a time with you." : step === "details" ? "Leave your number so we can arrange your free 15-minute call." : "Choose your preferences, then send your request."}</p></div>
+        <div className="call-heading"><h2 id="call-question" ref={headingRef} tabIndex={-1}>{headings[step]}</h2><p>{step === "need" ? "Choose one to continue. Your phone number lets us arrange the call." : step === "timing" ? "Choose a preference or continue. We’ll contact you to agree a time for your free 15-minute call." : step === "details" ? "Enter your name and phone number. You can also leave a note about what you’d like to discuss." : "Choose your preferences, then send your request."}</p></div>
 
         {step === "need" && <><div className="call-topics" role="group" aria-labelledby="call-question">{topics.map(({ value, title, icon: Icon }) => <button type="button" className="call-topic" key={value} onClick={event => choose(value, event.detail)}><Icon size={21} aria-hidden="true" /><span>{title}</span><ArrowRight size={17} aria-hidden="true" /></button>)}</div>{hasNavigated.current && <div className="call-saved"><span>Saved: {topic.title}</span><button type="button" onClick={() => move("need", "timing")}>Continue with this <ArrowRight size={16} aria-hidden="true" /></button></div>}</>}
 
@@ -168,7 +168,7 @@ export default function CallRequestJourney({ initialService = "not-sure", initia
 
         <div hidden aria-hidden="true"><label htmlFor="call-fax">Leave this empty</label><input id="call-fax" name="website_fax" tabIndex={-1} autoComplete="off" value={answers.website_fax} onChange={event => update("website_fax", event.target.value)} /></div>
         {error && <p ref={errorRef} tabIndex={-1} className="rebuild-form-error" role="alert">{error} <a href="mailto:hello@ingeniumconsulting.net">Email us</a></p>}
-        {step !== "need" && <div className="call-actions">{step !== "timing" && <button type="button" className="call-back" onClick={() => { move(step, step === "consent" ? "details" : "timing", true); }}><ArrowLeft size={17} aria-hidden="true" />Back</button>}<button type="submit" className="rebuild-button">{status === "pending" ? "Sending your request…" : step === "consent" ? "Request my free call" : "Continue"}<ArrowRight size={17} aria-hidden="true" /></button></div>}
+        {step !== "need" && <div className="call-actions">{step !== "timing" && <button type="button" className="call-back" onClick={() => { move(step, step === "consent" ? "details" : "timing", true); }}><ArrowLeft size={17} aria-hidden="true" />Back</button>}<button type="submit" className="rebuild-button">{status === "pending" ? "Sending your request…" : step === "consent" ? "Request my free callback" : step === "timing" && !answers.preferred_date && !answers.preferred_time ? "Continue without a preference" : "Continue"}<ArrowRight size={17} aria-hidden="true" /></button></div>}
         {step === "consent" && <p className="call-help">Your call is booked once we confirm a time together.</p>}
       </div>
     </fieldset>

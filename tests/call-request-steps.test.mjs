@@ -57,9 +57,9 @@ test('a choice advances once; timing and details wait for explicit valid Continu
   assert.equal(view.find(node => node.props?.name === 'email'), undefined);
   const choose = view.button('Starter Website').props.onClick;
   choose({ detail: 1 }); choose({ detail: 1 });
-  assert.equal(view.heading(), 'When suits you?');
+  assert.equal(view.heading(), 'When can we call you?');
   await view.submit(false);
-  assert.equal(view.heading(), 'When suits you?');
+  assert.equal(view.heading(), 'When can we call you?');
   const staleSubmit = view.render().props.onSubmit;
   await staleSubmit({ preventDefault() {}, currentTarget: { reportValidity: () => true } });
   await staleSubmit({ preventDefault() {}, currentTarget: { reportValidity: () => true } });
@@ -94,7 +94,7 @@ test('all routes require affirmative privacy; optional marketing is independent'
 
 test('Back preserves independent answers and switches to the newly selected package without a review', async () => {
   const view = mount({ initialPackage: '7-day-starter', initialService: 'crm' });
-  assert.equal(view.heading(), 'When suits you?', 'known package determines its service');
+  assert.equal(view.heading(), 'When can we call you?', 'known package determines its service');
   view.change('preferred_date', '2099-10-26');
   await view.submit();
   view.change('first_name', 'Test'); view.change('last_name', 'Owner'); view.change('email', 'owner@example.test');
@@ -107,7 +107,7 @@ test('Back preserves independent answers and switches to the newly selected pack
   view.click('Back');
   assert.equal(view.find(node => node.props?.name === 'preferred_date').props.value, '2099-10-26');
   view.click('Change topic'); view.click('CRM & Automation');
-  assert.equal(view.heading(), 'When suits you?');
+  assert.equal(view.heading(), 'When can we call you?');
   await view.submit();
   assert.equal(view.find(node => node.props?.className === 'call-offer'), undefined);
   assert.equal(view.find(node => node.props?.name === 'phone').props.value, '+353 85 000 0000');

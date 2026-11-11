@@ -17,13 +17,13 @@ function useOfferTime(initialNow: number) {
 }
 export function StarterPromotion({ initialNow, compact = false }: { initialNow: number; compact?: boolean }) {
   const now = useOfferTime(initialNow);
-  const active = starterPromotionActive(now);
+  if (!starterPromotionActive(now)) return null;
   const left = promotionTimeLeft(now);
-  return <aside className={`package-promotion${compact ? " is-compact" : ""}${active ? "" : " is-ended"}`} aria-label="Starter Website offer">
-    <div className="package-promotion-copy"><Clock3 size={20} aria-hidden="true" /><div><strong>{active ? <>Starter Website. <s>€795</s> €495 setup.</> : "Starter Website: €795 setup."}</strong><p>{active ? "Save €300 on setup. Hosting & technical care: €50/month from launch." : "Hosting & technical care: €50/month from launch."}</p></div></div>
-    {active ? <div className="package-countdown-wrap"><div className="package-countdown" role="timer" aria-live="off" aria-label={`${left.days} days, ${left.hours} hours, ${left.minutes} minutes and ${left.seconds} seconds remaining`}>
+  return <aside className={`package-promotion${compact ? " is-compact" : ""}`} aria-label="Starter Website offer">
+    <div className="package-promotion-copy"><Clock3 size={20} aria-hidden="true" /><div><strong>Starter Website. <s>€795</s> €495 setup.</strong><p>Save €300 on setup. Hosting &amp; technical care: €50/month from launch.</p></div></div>
+    <div className="package-countdown-wrap"><div className="package-countdown" role="timer" aria-live="off" aria-label={`${left.days} days, ${left.hours} hours, ${left.minutes} minutes and ${left.seconds} seconds remaining`}>
       {Object.entries(left).map(([label, value]) => <span key={label}><strong>{String(value).padStart(2, "0")}</strong><small>{label}</small></span>)}
-    </div><p>Ends <time dateTime={STARTER_PROMOTION.endsAt}>{PROMOTION_DEADLINE_LABEL}</time></p></div> : <p className="package-promotion-ended">The €495 promotion has ended.</p>}
+    </div><p>Ends <time dateTime={STARTER_PROMOTION.endsAt}>{PROMOTION_DEADLINE_LABEL}</time></p></div>
     {!compact && <Link href="/starter-website" className="package-promotion-link">Explore Starter<ArrowUpRight size={17} aria-hidden="true" /></Link>}
   </aside>;
 }

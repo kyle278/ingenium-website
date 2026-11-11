@@ -372,6 +372,7 @@ const corePackagePages: Record<string, [string, string]> = {
   "/starter-website": ["Starter Website for Irish Small Businesses | Ingenium", "A professional one-page website with up to five sections, mobile-friendly design, enquiry form and basic SEO. Hosting and technical care at 50 euro per month. No VAT charged."],
   "/business-growth": ["Business Growth: Website, CRM & Enquiry Management | Ingenium", "A website with up to five pages, Ingenium Portal CRM, one sales pipeline, one enquiry workflow and training. Indicative pricing from 1,500 euro setup and 99 euro per month."],
   "/crm-automation": ["CRM & Automation for Irish Service Businesses | Ingenium", "Centralise customer records and automate agreed processes with Ingenium Portal. Up to three workflows, five initial users and training. Indicative setup from 3,000 euro."],
+  "/quote-follow-up": ["Quote Follow-Up Checklist for Service Businesses | Ingenium", "Review your last five enquiries. Find where quotes stall, agree an owner and a next action, and decide whether your website or workflow needs work."],
 };
 for (const [path, [title, description]] of Object.entries(corePackagePages)) {
   pageSeo[path] = { title, description, path, keywords: ["Ingenium Consulting", "small business Ireland", "business growth", "CRM automation", "website design Carlow"] };

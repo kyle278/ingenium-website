@@ -1,58 +1,105 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
-import { enquiryExamples, type EnquiryExample, type EnquiryExampleId } from "@/lib/enquiry-examples";
+import { useId, useRef, useState } from "react";
+import { ArrowRight, CalendarClock } from "lucide-react";
+import { enquiryExamples, getEnquiryExample, type EnquiryExample, type EnquiryExampleId } from "@/lib/enquiry-examples";
 
-function subscribeMotion(callback: () => void) {
-  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-  media.addEventListener("change", callback);
-  return () => media.removeEventListener("change", callback);
-}
-function reducedMotion() { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+const sources = [
+  { id: "website", label: "Website form" },
+  { id: "manual", label: "Phone or WhatsApp" },
+] as const;
+const steps = ["Request", "Record", "Owner", "Follow-up"] as const;
+const nextActions = ["Show the office record", "Assign an owner", "Set the follow-up", "Start again"] as const;
 
-function journeyStages(scenario: EnquiryExample) {
+function journeyStages(example: EnquiryExample, fromWebsite: boolean) {
   return [
-    { label: "Enquiry", title: scenario.request, body: "See the details a customer could send in the agreed website form.", fields: scenario.fields },
-    { label: "Record", title: "The office gets a record", body: "The agreed workflow captures the enquiry, notifies your team and emails the customer an acknowledgement.", fields: [["Stage", "New enquiry"], ["Example email", scenario.acknowledgement]] },
-    { label: "Owner", title: "Your team agrees who handles it", body: "The person reviewing the request decides who takes it forward and records that owner in the shared pipeline.", fields: [["Owner", scenario.owner], ["Stage", scenario.stage]] },
-    { label: "Follow-up", title: "The next action is visible", body: "Your team records the next action and updates the stage as the enquiry moves forward.", fields: [["Next action", scenario.action], ["Owner", scenario.owner]] },
+    {
+      who: fromWebsite ? "Customer · website form" : "Customer · phone or WhatsApp",
+      title: example.request,
+      body: fromWebsite
+        ? "The customer shares the details your team needs for the first reply."
+        : "A customer calls or sends a message. The person who takes it collects the same job details.",
+      fields: example.fields,
+    },
+    {
+      who: fromWebsite ? "Included workflow" : "Your team · manual entry",
+      title: fromWebsite ? "The office gets a record" : "A team member adds the enquiry",
+      body: fromWebsite
+        ? "The agreed form creates or updates the contact, creates a lead and alerts the office. The customer receives an acknowledgement by email."
+        : "The person who took the call or read the message adds a lead to the shared pipeline. They reply through the original channel.",
+      fields: fromWebsite
+        ? [["Example email", example.acknowledgement]]
+        : [["What to log", "Customer details, job details and the channel they used"]],
+    },
+    {
+      who: "Your team · assignment",
+      title: "Give the enquiry to one person",
+      body: `The office assigns it to the ${example.owner.toLowerCase()}. The team can now see who is responsible for the next reply.`,
+      fields: [],
+    },
+    {
+      who: "Your team · follow-up",
+      title: "Agree the next action and when it’s due",
+      body: "The owner records the action and due date in the shared pipeline. The office can review what needs doing and who is handling it.",
+      fields: [],
+    },
   ];
 }
 
 export default function EnquiryJourney({ initialExample }: { initialExample?: EnquiryExampleId }) {
-  const [scenario, setScenario] = useState(initialExample || enquiryExamples[0].id);
+  const [scenario, setScenario] = useState(initialExample ?? enquiryExamples[0].id);
+  const [source, setSource] = useState<(typeof sources)[number]["id"]>("website");
   const [active, setActive] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  const reduce = useSyncExternalStore(subscribeMotion, reducedMotion, () => true);
-  const example = enquiryExamples.find(item => item.id === scenario) ?? enquiryExamples[0];
-  const stages = journeyStages(example);
-  useEffect(() => {
-    if (!playing || reduce) return;
-    const timer = window.setTimeout(() => {
-      if (active === stages.length - 1) setPlaying(false);
-      else setActive(active + 1);
-    }, 950);
-    return () => window.clearTimeout(timer);
-  }, [active, playing, reduce, stages.length]);
-  function selectStage(index: number) { setPlaying(false); setActive(index); }
-  const stage = stages[active];
+  const contentId = useId();
+  const heading = useRef<HTMLHeadingElement>(null);
+  const example = getEnquiryExample(scenario) ?? enquiryExamples[0];
+  const fromWebsite = source === "website";
+  const stage = journeyStages(example, fromWebsite)[active];
+
+  const record = [
+    ["Source", fromWebsite ? "Website form" : "Phone or WhatsApp · logged by staff"],
+    ["Stage", active === 0 ? "Awaiting entry" : active < 3 ? "New enquiry" : example.stage],
+    ["Owner", active < 2 ? "Not assigned" : example.owner],
+    ["Next action", active < 3 ? "Not set" : example.action],
+    ["Due", active < 3 ? "Not set" : example.due],
+  ];
+
+  function advance() {
+    setActive((active + 1) % steps.length);
+    window.requestAnimationFrame(() => heading.current?.focus());
+  }
+
   return <div className="journey-demo">
-    <div className="journey-demo-heading"><strong>Sample enquiry</strong><span>Illustrative example</span></div>
-    <div className="journey-scenarios" role="group" aria-label="Choose an example">
-      {enquiryExamples.map(item => <button key={item.id} type="button" aria-pressed={scenario === item.id} aria-controls="journey-content" onClick={() => { setScenario(item.id); selectStage(0); }}>{item.label}</button>)}
+    <div className="journey-demo-heading">
+      <strong>Follow one enquiry</strong>
+      <span>Illustrative example</span>
     </div>
-    <div className="journey-steps" role="group" aria-label="Explore the enquiry journey">
-      {stages.map((item, index) => <button key={item.label} type="button" aria-pressed={active === index} aria-controls="journey-content" onClick={() => selectStage(index)}>{item.label}</button>)}
+    <div className="journey-options">
+      <div className="journey-scenarios" role="group" aria-label="Choose a trade">
+        {enquiryExamples.map(item => <button key={item.id} type="button" aria-pressed={scenario === item.id} aria-controls={contentId} onClick={() => { setScenario(item.id); setActive(0); }}>{item.label}</button>)}
+      </div>
+      <div className="journey-scenarios" role="group" aria-label="How the enquiry arrives">
+        {sources.map(item => <button key={item.id} type="button" aria-pressed={source === item.id} aria-controls={contentId} onClick={() => { setSource(item.id); setActive(0); }}>{item.label}</button>)}
+      </div>
     </div>
-    <div className="journey-progress" aria-hidden="true"><span style={{ transform: `translateX(${active * 100}%)` }} /></div>
-    <div id="journey-content" className="journey-state" aria-live={playing && !reduce ? "off" : "polite"} aria-atomic="true">
-      <h3>{stage.title}</h3><p>{stage.body}</p>
-      <dl>{stage.fields.map(([label, value]) => <div key={label} className="contents"><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+    <div className="journey-steps" role="group" aria-label="Walkthrough steps">
+      {steps.map((step, index) => <button key={step} type="button" aria-pressed={active === index} aria-controls={contentId} onClick={() => setActive(index)}><span aria-hidden="true">{index + 1}</span> {step}</button>)}
     </div>
-    <div className="journey-next-action">
-      <strong>Where this request ends up</strong>
-      <span>{example.action} · {example.owner}</span>
+    <div className="journey-view" id={contentId} aria-live="polite" aria-atomic="true">
+      <div className="journey-state">
+        <p className="journey-stage-role">{stage.who}</p>
+        <h3 ref={heading} tabIndex={-1}>{stage.title}</h3>
+        <p>{stage.body}</p>
+        {stage.fields.length > 0 && <dl className="journey-fields">{stage.fields.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>}
+      </div>
+      <div className="journey-office" data-dated={active === 3}>
+        <div className="journey-office-title"><CalendarClock size={18} aria-hidden="true" /><h4>Office view</h4></div>
+        <dl className="journey-fields">{record.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+      </div>
     </div>
-    <div className="journey-demo-bottom"><p>Form fields, notifications and pipeline stages are agreed with your team.</p><div className="journey-actions">{!reduce && <button className="rebuild-text-link" type="button" onClick={() => { if (playing) setPlaying(false); else { setActive(0); setPlaying(true); } }}>{playing ? "Pause" : "Play through"}</button>}<button className="rebuild-text-link" type="button" onClick={() => selectStage((active + 1) % stages.length)}>{active === stages.length - 1 ? "Start again" : "Next step"}</button></div></div>
+    <div className="journey-demo-bottom">
+      <button className="rebuild-button" type="button" onClick={advance}>{nextActions[active]}<ArrowRight size={17} aria-hidden="true" /></button>
+      <p>We agree the form questions and pipeline stages with your team. Automatic imports from other channels and extra reminders are scoped separately.</p>
+    </div>
   </div>;
 }

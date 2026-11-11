@@ -131,20 +131,6 @@ body { background: var(--color-bg); letter-spacing: -.015em; }
 .service-option .rebuild-text-link { margin-top: auto; padding-top: 14px; font-size: .875rem; }
 .workflow-section { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(32px,6vw,88px); align-items: start; }
 .workflow-section .rebuild-lead { margin-bottom: 24px; }
-.journey-demo { border: 1px solid var(--color-line); border-radius: 12px; background: var(--color-panel-lifted); padding: 28px; }
-.journey-demo-heading { display: flex; justify-content: space-between; gap: 12px; font-size: .8125rem; padding-bottom: 20px; border-bottom: 1px solid var(--color-line); }
-.journey-demo-heading span { color: var(--color-text-muted); font-size: .75rem; }
-.journey-steps { display: flex; gap: 6px; margin: 22px 0; }
-.journey-steps button { width: 100%; height: 44px; border: 1px solid var(--color-line); border-radius: 5px; font-size: .8125rem; cursor: pointer; }
-.journey-steps button[aria-pressed=true] { background: var(--color-text); color: var(--color-panel-lifted); border-color: var(--color-text); }
-.journey-state { min-height: 214px; }
-.journey-state h3 { font-size: 1.25rem; font-weight: 650; letter-spacing: -.03em; margin-bottom: 10px; }
-.journey-state p { color: var(--color-text-muted); font-size: .875rem; margin-bottom: 18px; }
-.journey-state dl { display: grid; grid-template-columns: 104px 1fr; gap: 10px 18px; padding: 16px; background: var(--surface-blue); border-radius: 6px; font-size: .8125rem; }
-.journey-state dt { color: var(--color-text-muted); }
-.journey-demo-bottom { display: flex; justify-content: space-between; gap: 16px; align-items: center; border-top: 1px solid var(--color-line); padding-top: 18px; }
-.journey-demo-bottom p { font-size: .6875rem; color: var(--color-text-muted); max-width: 30ch; }
-.journey-demo-bottom button { font-size: .8125rem; min-height: 44px; }
 .process-list { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 28px; padding-top: 28px; }
 .process-list li { border-top: 1px solid var(--color-line); padding-top: 22px; }
 .process-list span { color: var(--teal-ink); font-size: .75rem; }
@@ -237,10 +223,6 @@ body { background: var(--color-bg); letter-spacing: -.015em; }
   .home-pricing-grid > div + div { padding-top: 24px; border-top: 1px solid var(--color-line); }
   .home-pricing-grid h3 { margin-bottom: 12px; }
   .home-pricing-grid p { margin-bottom: 12px; }
-  .journey-demo { padding: 22px 18px; }
-  .journey-steps { gap: 4px; }
-  .journey-steps button { font-size: .6875rem; }
-  .journey-demo-bottom { align-items: start; flex-direction: column; }
   .process-list { gap: 24px 18px; }
   .site-footer-inner { grid-template-columns: 1fr 1fr; gap: 36px 24px; }
   .site-footer-inner > div:last-child { grid-column: 1 / -1; }
@@ -249,11 +231,6 @@ body { background: var(--color-bg); letter-spacing: -.015em; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
 /* Motion.dev-inspired progressive motion. Text stays readable without JS. */
 .site-scroll-progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--color-brand); transform: scaleX(0); transform-origin: left; pointer-events: none; }
-.journey-progress { height: 3px; background: var(--color-line); overflow: hidden; border-radius: 3px; margin: -8px 0 22px; }
-.journey-progress span { display: block; width: 25%; height: 100%; background: var(--teal-ink); transition: transform 280ms cubic-bezier(.22,1,.36,1); }
-.journey-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
-.journey-actions button { white-space: nowrap; }
-.journey-steps button { transition: background 180ms ease-out, color 180ms ease-out; }
 .rebuild-button svg, .rebuild-text-link svg, .services-dropdown svg { transition: transform 200ms cubic-bezier(.22,1,.36,1); }
 .rebuild-button:hover svg, .rebuild-text-link:hover svg, .services-dropdown a:hover svg { transform: translate(2px,-2px); }
 .rebuild-button:active { transform: scale(.98); }

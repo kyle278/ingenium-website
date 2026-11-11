@@ -17,7 +17,6 @@ const resources: Record<string, string[]> = {
 const examples = {
   carpentry: { label: "Illustrative website", title: "A one-page carpentry site", description: "See how services, work and an enquiry can fit on one page.", image: "/template-previews/carpentry-demo.png", href: "/template-previews/carpentry", link: "Explore the carpentry demo" },
   landscaping: { label: "Illustrative website", title: "A landscaping website", description: "See how a site can make different garden jobs and the next step clear.", image: "/template-previews/landscaping-demo.png", href: "/template-previews/landscaping", link: "Explore the landscaping demo" },
-  cleaning: { label: "Published website", title: "Farrell Contract Cleaning", description: "The site presents commercial and residential services with a clear quote request.", image: "/project-previews/farrell-cleaning.webp", href: "https://www.farrellcleaning.ie/", link: "Visit the published website" },
 };
 const content = {
   "starter-website": {
@@ -96,7 +95,6 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
   const isStarter = item.id === "starter-website";
   const promotionActive = isStarter && starterPromotionActive(now);
   const faqs = isStarter && !promotionActive ? copy.faqs.slice(2) : copy.faqs;
-  const websiteExamples = isStarter ? [examples.carpentry, examples.landscaping] : [examples.cleaning, examples.landscaping];
   return <EditorFlow containerId={`core-packages.v2.${item.id}.flow`} className="core-package-page">
     {promotionActive && <StarterPromotion initialNow={now} compact />}
     <EditorSection editorId={`core-packages.v2.${item.id}.hero`} className="core-detail-hero">
@@ -130,22 +128,45 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
       </>}
     </nav>
     {isGrowth && <section className="core-section core-journey-demo" id="enquiry-demo" aria-labelledby="enquiry-demo-heading">
-      <div>
-        <h2 id="enquiry-demo-heading">See what the customer sends. Then see who follows up.</h2>
-        <dl className="core-workflow-split">
-          <div><dt>What happens automatically</dt><dd>The website creates a record, alerts your team and acknowledges the request.</dd></div>
-          <div><dt>What your team handles</dt><dd>Staff choose the owner and update the stage and next action. They can enter calls and messages manually. Automatic channel connections and extra reminders are scoped separately.</dd></div>
-        </dl>
-        <Link href="/quote-follow-up" className="rebuild-text-link">Check your last five enquiries<ArrowUpRight size={16} aria-hidden="true" /></Link>
+      <div className="core-section-heading">
+        <h2 id="enquiry-demo-heading">From “No owner yet” to a dated follow-up.</h2>
+        <div>
+          <p>Follow one sample quote request from the moment it arrives to the moment someone owns the next action.</p>
+          <a href="#package-example" className="rebuild-text-link">See a live quote form<ArrowRight size={16} aria-hidden="true" /></a>
+        </div>
       </div>
       <EnquiryJourney key={initialExample ?? "default"} initialExample={initialExample} />
     </section>}
     <section className="core-section core-proof" id="package-example" aria-labelledby="package-example-heading">
       <div className="core-section-heading">
-        <h2 id="package-example-heading">{isGrowth ? "See how customers can ask for a quote." : isStarter ? "See what fits on one page." : "Start with one workflow your team can test."}</h2>
-        {isGrowth && <p>Compare a published website with a design example. The sample enquiry above illustrates the CRM handover.</p>}
+        <h2 id="package-example-heading">{isGrowth ? "See how a real customer asks for a quote." : isStarter ? "See what fits on one page." : "Start with one workflow your team can test."}</h2>
       </div>
-      {isStarter || isGrowth ? <div className="core-proof-grid">{websiteExamples.map(example => <article key={example.title}>
+      {isGrowth ? <>
+        <article className="growth-proof">
+          <div className="growth-proof-copy">
+            <p className="brand-eyebrow">Published client website</p>
+            <h3>Farrell Contract Cleaning</h3>
+            <p>The website we built gives home and business customers a dedicated route to ask for a quote. The first step asks what type of cleaning they need and how they prefer to be contacted.</p>
+            <a href="https://www.farrellcleaning.ie/quote" className="rebuild-button" target="_blank" rel="noopener noreferrer">Open Farrell’s live quote form<ArrowUpRight size={17} aria-hidden="true" /></a>
+            <p className="core-small">You can inspect the first step without entering any details. The walkthrough above uses sample records to show how your team could handle follow-up.</p>
+          </div>
+          <figure className="growth-proof-capture">
+            <Image src="/project-previews/farrell-quote-mobile.webp" alt="First step of Farrell Contract Cleaning’s live quote form on a phone, showing service type and preferred contact method" width={716} height={1394} sizes="(max-width: 600px) 75vw, 290px" />
+            <figcaption>Live quote form on mobile · Step 1 of 3</figcaption>
+          </figure>
+        </article>
+        <div className="growth-proof-next">
+          <div>
+            <h3>What would happen to your last enquiry?</h3>
+            <p>Bring an example and invite the person who handles intake. On the free 15-minute call, we’ll trace where it came from, who saw it and what should happen next.</p>
+          </div>
+          <div>
+            <Link href={cta} className="rebuild-button">Request a free callback<ArrowUpRight size={17} aria-hidden="true" /></Link>
+            <Link href="/quote-follow-up" className="rebuild-text-link">Check your last five enquiries<ArrowRight size={16} aria-hidden="true" /></Link>
+            <Link href={examples.landscaping.href} className="rebuild-text-link">{examples.landscaping.link}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+          </div>
+        </div>
+      </> : isStarter ? <div className="core-proof-grid">{[examples.carpentry, examples.landscaping].map(example => <article key={example.title}>
         <Image src={example.image} alt={`Homepage preview for ${example.title}`} width={1200} height={800} sizes="(max-width: 700px) 90vw, 550px" />
         <div>
           <p className="brand-eyebrow">{example.label}</p>

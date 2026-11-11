@@ -12,7 +12,7 @@ export const metadata = buildMetadata(pageSeo["/book-a-call"]);
 const packageCall = {
   "business-growth": {
     title: "Walk through one enquiry",
-    prompt: "If you have one, bring a quote request that was slow to move. We’ll ask what came in, who saw it and who should take the next action.",
+    prompt: "Bring one quote request that was slow to move and, if it helps, invite the person who handles intake. A brief description is enough. We’ll look at what came in, who saw it and who should take the next action.",
     detail: "If the package fits, the next step is a written scope covering the website, agreed workflow, allowances and price.",
     href: "/business-growth#enquiry-demo",
     link: "See an enquiry example first",

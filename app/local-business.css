@@ -226,6 +226,10 @@ html:has(.call-page) { scroll-behavior: auto; }
 .call-page-heading .local-location { margin-bottom: 10px; }
 .call-page-heading h1 { font: 600 clamp(2rem, 4vw, 3.5rem)/1.12 var(--font-display); letter-spacing: -.045em; }
 .call-page-heading > p:last-child { color: var(--color-text-muted); max-width: 56ch; margin-top: 12px; line-height: 1.6; }
+.call-discussion { max-width: 58rem; margin-bottom: 20px; padding: 12px 16px; background: var(--surface-blue); border: 1px solid var(--color-line); border-radius: 10px; }
+.call-discussion summary { min-height: 34px; padding-block: 6px; color: var(--color-text); font-weight: 650; cursor: pointer; }
+.call-discussion p { max-width: 62ch; margin-top: 8px; line-height: 1.65; color: var(--color-text-muted); }
+.call-discussion .rebuild-text-link { margin-top: 9px; }
 .call-page-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .85fr); gap: clamp(32px, 6vw, 88px); align-items: start; }
 .call-page-layout > div, .call-page-aside { min-width: 0; }
 .call-page-aside { padding-top: 28px; }

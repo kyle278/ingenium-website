@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Check, CheckCircle2 } from "lucide-react";
 import { EditorFlow, EditorSection, EditorText } from "@/components/website-editor/Editable";
 import { businessPackages, getBusinessPackage, packageBookingUrl, PACKAGE_PRICE_NOTE, PROMOTION_DEADLINE_LABEL, starterPromotionActive } from "@/lib/business-packages";
+import { enquiryExamples, enquiryExamplePath, type EnquiryExampleId } from "@/lib/enquiry-examples";
 import { PackagePrice, StarterPromotion } from "./PackagePricing";
 import { OfferFaq } from "./OfferPage";
 import EnquiryJourney from "./EnquiryJourney";
@@ -86,7 +87,7 @@ const content = {
   },
 } as const;
 
-export default async function CorePackagePage({ packageId }: { packageId: keyof typeof content }) {
+export default async function CorePackagePage({ packageId, initialExample }: { packageId: keyof typeof content; initialExample?: EnquiryExampleId }) {
   const item = getBusinessPackage(packageId)!;
   const copy = content[packageId];
   const now = await packageRequestTime();
@@ -109,6 +110,10 @@ export default async function CorePackagePage({ packageId }: { packageId: keyof 
           <a href={isGrowth ? "#enquiry-demo" : "#package-example"} className="rebuild-text-link">{isGrowth ? "See a sample enquiry" : isStarter ? "See one-page examples" : "See an implementation example"}</a>
         </div>
         <p className="core-small">We’ll contact you to agree a time for a free 15-minute call.</p>
+        {isGrowth && <nav className="growth-example-links" aria-label="See a quote example from your trade">
+          <span>See an enquiry from your trade</span>
+          <div>{enquiryExamples.map(example => <Link key={example.id} href={enquiryExamplePath(example.id)} aria-current={example.id === initialExample ? "true" : undefined}>{example.label}</Link>)}</div>
+        </nav>}
       </div>
       <aside className="core-quote-panel" aria-label={`${item.name} pricing`}><h2>Your starting point</h2><PackagePrice packageId={item.id} initialNow={now} showTotal /><p><strong>Choose this if:</strong> {item.fit}</p><p><strong>Target delivery:</strong> {item.timing}, once the agreed deposit, content and access are received.</p><p className="core-small">{item.payment}</p><p className="core-small">No VAT charged. Your written quote confirms all subscription terms. Existing agreements are honoured.</p></aside>
     </EditorSection>
@@ -126,14 +131,14 @@ export default async function CorePackagePage({ packageId }: { packageId: keyof 
     </nav>
     {isGrowth && <section className="core-section core-journey-demo" id="enquiry-demo" aria-labelledby="enquiry-demo-heading">
       <div>
-        <h2 id="enquiry-demo-heading">Follow a quote request from the website to the office.</h2>
+        <h2 id="enquiry-demo-heading">See what the customer sends. Then see who follows up.</h2>
         <dl className="core-workflow-split">
           <div><dt>What happens automatically</dt><dd>The website creates a record, alerts your team and acknowledges the request.</dd></div>
           <div><dt>What your team handles</dt><dd>Staff choose the owner and update the stage and next action. They can enter calls and messages manually. Automatic channel connections and extra reminders are scoped separately.</dd></div>
         </dl>
         <Link href="/quote-follow-up" className="rebuild-text-link">Check your last five enquiries<ArrowUpRight size={16} aria-hidden="true" /></Link>
       </div>
-      <EnquiryJourney />
+      <EnquiryJourney key={initialExample ?? "default"} initialExample={initialExample} />
     </section>}
     <section className="core-section core-proof" id="package-example" aria-labelledby="package-example-heading">
       <div className="core-section-heading">
@@ -165,6 +170,19 @@ export default async function CorePackagePage({ packageId }: { packageId: keyof 
           <a href="/resources/crm-acceptance-checklist.txt" className="rebuild-text-link">See the acceptance checklist<ArrowUpRight size={16} aria-hidden="true" /></a>
         </article>
       </div>}
+      {isStarter && <div className="core-readiness">
+        <div><h3>What to have ready</h3><p>Your business and service details, approved text and photos, and access to the domain you want to use.</p></div>
+        <div><h3>What we’ll do</h3><p>Organise your material into one mobile-friendly page, test calls and enquiries, and look after hosting and technical care from launch.</p></div>
+        <a href="/resources/starter-content-checklist.txt" className="rebuild-text-link" download>Download the content checklist<ArrowUpRight size={16} aria-hidden="true" /></a>
+      </div>}
+      {!isStarter && !isGrowth && <details className="core-record-example core-renewal-example" id="renewal-example">
+        <summary>See a renewal follow-up example</summary>
+        <dl className="core-workflow-split">
+          <div><dt>Record</dt><dd>A customer’s service renewal is due next month. The record has a renewal date and a named owner.</dd></div>
+          <div><dt>Agreed action</dt><dd>Create a task for the owner to review the renewal before it is due.</dd></div>
+          <div><dt>Acceptance check</dt><dd>Use a sample date and check that the agreed owner receives the task once, with the right due date.</dd></div>
+        </dl>
+      </details>}
     </section>
     <EditorSection editorId={`core-packages.v2.${item.id}.problem`} className="core-section core-editorial"><h2><EditorText editorId="core-packages.v2.problem.title" identity={item.id} tag="h2" value={copy.problemTitle} /></h2><div><p>{copy.problem}</p><p className="core-example-label">{copy.exampleTitle}</p><p>{copy.example}</p></div></EditorSection>
     <EditorSection editorId={`core-packages.v2.${item.id}.included`} className="core-section core-inclusions" id="included"><div><p className="brand-eyebrow">A defined scope. A usable handover.</p><h2>What you get.</h2><ul className="core-package-includes">{item.includes.map(text => <li key={text}><Check size={19} aria-hidden="true" /><span>{text}</span></li>)}</ul></div><div className="core-support-stack"><article><CheckCircle2 size={22} aria-hidden="true" /><h3>Practical help included</h3><ul>{item.extras.map((text, index) => <li key={text}><a href={resources[item.id][index]} className="rebuild-text-link" download>{text}<ArrowUpRight size={15} aria-hidden="true" /></a></li>)}</ul><p className="core-small">Included in your package price.</p></article><article><h3>What the monthly service covers</h3><p>{item.care}</p></article><article><h3>Keep the scope clear</h3><p>{item.excludes}</p></article></div></EditorSection>

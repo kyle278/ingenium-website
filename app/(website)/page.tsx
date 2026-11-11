@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Check, Globe2, MessagesSquare, Workflow } from "lucide-react";
 import { EditorFlow, EditorSection, EditorText } from "@/components/website-editor/Editable";
 import { businessPackages, PACKAGE_PRICE_NOTE, starterPromotionActive } from "@/lib/business-packages";
+import { enquiryExamples, enquiryExamplePath } from "@/lib/enquiry-examples";
 import { PackagePrice, StarterPromotion } from "@/components/rebuild/PackagePricing";
 import PackageOptions from "@/components/rebuild/PackageOptions";
 import CurrentProjects from "@/components/rebuild/CurrentProjects";
@@ -31,8 +32,14 @@ export default async function HomePage() {
     <EditorSection editorId="core-packages.v2.home.packages" className="core-section" id="packages" aria-labelledby="packages-heading"><div className="core-section-heading"><div><p className="brand-eyebrow">Three packages. Three clear starting points.</p><h2 id="packages-heading">Start with the problem<br />you need to solve.</h2></div><p>You do not need to buy everything at once. Establish your presence, connect your enquiries or bring your operations together.</p></div><PackageOptions /><Link href="/packages#compare" className="rebuild-text-link core-compare-link">Compare the full scope<ArrowUpRight size={17} aria-hidden="true" /></Link></EditorSection>
     <EditorSection editorId="core-packages.v2.home.service-businesses" className="core-section core-editorial"><h2>Built around the way<br />service businesses work.</h2><div><p>A landscaper waiting on quote approvals. A cleaning firm juggling new enquiries. A contractor searching for the latest customer details. The tools should make the next action clearer.</p><div className="core-sector-tags"><span>Landscaping & outdoor services</span><span>Trades & contracting</span><span>Cleaning & property services</span><span>Specialist professional services</span></div><p className="core-small">Starting out? Starter gives referrals somewhere to check you. Already busy? Business Growth and CRM & Automation help organise what comes next.</p></div></EditorSection>
     <section className="core-section core-close core-home-example" aria-labelledby="home-example-heading">
-      <div><h2 id="home-example-heading">Where did the last quote get stuck?</h2><p>Follow a sample patio or cleaning enquiry into a shared pipeline and see which steps your team handles.</p></div>
-      <Link href="/business-growth#enquiry-demo" className="rebuild-button-secondary">See a sample enquiry<ArrowUpRight size={17} aria-hidden="true" /></Link>
+      <div>
+        <h2 id="home-example-heading">Where did the last quote get stuck?</h2>
+        <p>Pick a sample request and see what the customer sends, what the office sees and who follows up.</p>
+        <nav className="growth-example-links" aria-label="Sample quote enquiries">
+          <div>{enquiryExamples.map(example => <Link key={example.id} href={enquiryExamplePath(example.id)}>{example.label}</Link>)}</div>
+        </nav>
+      </div>
+      <Link href="/quote-follow-up" className="rebuild-button-secondary">Check your last five enquiries<ArrowUpRight size={17} aria-hidden="true" /></Link>
     </section>
     <CurrentProjects home />
     <EditorSection editorId="core-packages.v2.home.how" className="core-section"><div className="core-section-heading"><h2>You run the business.<br />We handle the setup.</h2><p>No technical brief needed for the first call. Bring one example of what is getting in the way.</p></div><ol className="core-process"><li><span>01</span><h3>A useful first conversation</h3><p>Tell us how customers find you and where work gets stuck. We recommend a useful starting point.</p></li><li><span>02</span><h3>A scope you can review</h3><p>See what is included, what we need from you, the payment stages and the delivery target in writing.</p></li><li><span>03</span><h3>Build, test and hand over</h3><p>Review the agreed work with us. We check the enquiry or workflow journey and show you how to use it.</p></li></ol></EditorSection>

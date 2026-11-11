@@ -23,6 +23,10 @@ export default function QuoteFollowUpGuide() {
       <ol className="quote-follow-up-checks">
         {checks.map(check => <li key={check.title}><h3>{check.title}</h3><p>{check.detail}</p></li>)}
       </ol>
+      <div className="quote-review-actions">
+        <a className="rebuild-button-secondary" href="/resources/quote-follow-up-review.csv" download>Download the five-enquiry worksheet<ArrowUpRight size={17} aria-hidden="true" /></a>
+        <p className="core-small">A CSV you can open in your spreadsheet and use with the person who handles enquiries.</p>
+      </div>
       <div className="core-record-example">
         <p className="brand-eyebrow">Illustrative example</p>
         <h3>Patio enquiry · Carlow</h3>

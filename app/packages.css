@@ -171,18 +171,64 @@
 }
 .journey-scenarios button[aria-pressed="true"] { background: var(--surface-blue); border-color: var(--color-brand); color: var(--color-brand); }
 .core-journey-demo .journey-state p, .core-journey-demo .journey-demo-bottom p { margin-top: 0; }
+.growth-example-links {
+  margin-top: var(--core-space-6);
+  padding-top: var(--core-space-4);
+  border-top: 1px solid var(--color-line);
+}
+.growth-example-links > span { display: block; margin-bottom: var(--core-space-2); color: var(--color-text-muted); font-size: .875rem; }
+.growth-example-links > div { display: flex; flex-wrap: wrap; gap: var(--core-space-2); }
+.growth-example-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--core-space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--core-radius);
+  background: var(--color-panel-lifted);
+  color: var(--color-brand);
+  font-size: .875rem;
+  font-weight: 650;
+}
+.growth-example-links a:hover, .growth-example-links a[aria-current] { border-color: var(--color-brand); background: var(--surface-blue); }
+.journey-next-action {
+  display: grid;
+  gap: var(--core-space-1);
+  margin-bottom: var(--core-space-5);
+  padding: var(--core-space-3) var(--core-space-4);
+  border-inline-start: 3px solid var(--teal-ink);
+  border-radius: 0 var(--core-radius) var(--core-radius) 0;
+  background: var(--surface-teal);
+  font-size: .875rem;
+  line-height: 1.5;
+}
+.journey-next-action span { color: var(--color-text-muted); }
 .core-journey-demo, .core-proof { scroll-margin-top: 7rem; }
 .core-proof-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--core-gap); }
 .core-proof-grid > article, .core-record-example { background: var(--color-panel-lifted); border: 1px solid var(--color-line); border-radius: var(--core-radius); overflow: hidden; }
 .core-proof-grid img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; object-position: top; border-bottom: 1px solid var(--color-line); }
 .core-proof-grid article > img + div, .core-record-example { padding: var(--core-pad); }
-.core-proof-grid h3, .core-record-example h3, .quote-follow-up-checks h3 {
+.core-proof-grid h3, .core-record-example h3, .quote-follow-up-checks h3, .core-readiness h3 {
   font: 650 var(--core-card-heading)/1.25 var(--font-display);
   letter-spacing: -.025em;
 }
 .core-proof-grid h3 + p, .core-record-example > p { margin-block: var(--core-space-2); color: var(--color-text-muted); }
 .core-proof-grid .brand-eyebrow, .core-record-example .brand-eyebrow { margin-block: 0 var(--core-space-2); }
 .core-proof-grid .rebuild-text-link { margin-top: var(--core-space-2); min-height: 44px; }
+.core-readiness {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--core-space-5);
+  margin-top: var(--core-gap);
+  padding: var(--core-pad);
+  border: 1px solid var(--color-line);
+  border-radius: var(--core-radius);
+  background: var(--surface-blue);
+}
+.core-readiness p { margin-top: var(--core-space-2); color: var(--color-text-muted); }
+.core-readiness > a { grid-column: 1 / -1; }
+.core-renewal-example { margin-top: var(--core-space-5); }
+.core-renewal-example summary { min-height: 44px; padding-block: 10px; font-weight: 700; cursor: pointer; }
 .core-home-example { background: var(--surface-blue); }
 .quote-follow-up-guide { max-width: 56rem; margin-inline: auto; }
 .quote-follow-up-guide h2 { font: 650 var(--core-heading)/1.2 var(--font-display); letter-spacing: var(--core-track); }
@@ -190,8 +236,11 @@
 .quote-follow-up-checks li { padding-inline-start: var(--core-space-2); }
 .quote-follow-up-checks li::marker { color: var(--color-brand); font-weight: 700; }
 .quote-follow-up-checks p { margin-top: var(--core-space-1); color: var(--color-text-muted); line-height: 1.7; }
+.quote-review-actions { display: flex; align-items: center; flex-wrap: wrap; gap: var(--core-space-4); margin-top: var(--core-space-5); }
+.quote-review-actions .core-small { max-width: 42ch; }
+.quote-review-actions + .core-record-example { margin-top: var(--core-space-6); }
 @media (max-width: 700px) {
-  .core-proof-grid { grid-template-columns: minmax(0, 1fr); }
+  .core-proof-grid, .core-readiness { grid-template-columns: minmax(0, 1fr); }
 }
 .core-comparison-hero { padding: var(--core-space-12) 0; }
 .core-comparison-hero h1 { max-width: 18ch; }

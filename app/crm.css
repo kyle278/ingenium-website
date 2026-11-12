@@ -120,8 +120,6 @@
 .crm-close > a { flex: none; }
 
 .crm-entry-section { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: var(--core-gap); align-items: start; }
-.crm-entry-section .core-home-example { margin: 0; display: block; padding: var(--crm-inset); border-radius: var(--crm-radius); }
-.crm-entry-section .core-home-example > a { margin-top: var(--core-space-5); }
 .crm-entry-panel { padding: var(--crm-inset); background: var(--crm-paper); border: 1px solid var(--color-line); border-top: 3px solid var(--color-brand); border-radius: var(--crm-radius); }
 .crm-entry-panel h2 { font: 700 clamp(1.6rem, 3vw, 2.55rem)/1.17 var(--font-display); letter-spacing: -.045em; text-wrap: pretty; }
 .crm-entry-panel h2 + p { margin-top: var(--core-space-3); color: var(--color-text-muted); line-height: 1.65; }

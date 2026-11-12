@@ -367,7 +367,7 @@ for (const path of ["/websites", "/crm", "/connected", "/pricing", "/services", 
 
 // The three-package IA is canonical. Keep metadata free of expiring offer prices.
 const corePackagePages: Record<string, [string, string]> = {
-  "/": ["Business Growth & Automation for Irish Businesses | Ingenium", "Get online. Follow up. Get time back. Starter websites, connected website and CRM packages, and CRM automation for Irish small businesses. Based in Carlow."],
+  "/": ["Business Growth & Automation for Irish Businesses | Ingenium", "Ingenium sets up CRM and follow-up workflows for Irish teams. Keep your website or connect a new one to manage enquiries. Based in Carlow."],
   "/packages": ["Starter Website, Business Growth & CRM Packages | Ingenium", "Compare three clear packages for Irish businesses. A professional online presence, website and CRM enquiry management, or a scoped CRM and automation implementation."],
   "/starter-website": ["Starter Website for Irish Small Businesses | Ingenium", "A professional one-page website with up to five sections, mobile-friendly design, enquiry form and basic SEO. Hosting and technical care at 50 euro per month. No VAT charged."],
   "/business-growth": ["Business Growth: Website, CRM & Enquiry Management | Ingenium", "A website with up to five pages, Ingenium Portal CRM, one sales pipeline, one enquiry workflow and training. Indicative pricing from 1,500 euro setup and 99 euro per month."],

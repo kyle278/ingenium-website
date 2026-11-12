@@ -23,6 +23,7 @@ import "./brand-renewal.css";
 import "./forms.css";
 import "./packages.css";
 import "./crm.css";
+import "./home.css";
 
 const manropeDisplay = Manrope({
   subsets: ["latin"],

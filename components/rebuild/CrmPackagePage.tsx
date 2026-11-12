@@ -5,6 +5,7 @@ import { businessPackages, getBusinessPackage, packageBookingUrl, PACKAGE_PRICE_
 import { packageRequestTime } from "@/lib/package-request-time";
 import { OfferFaq } from "./OfferPage";
 import { PackagePrice } from "./PackagePricing";
+import QuoteBoard from "./QuoteBoard";
 
 const packageId = "crm-automation";
 const editorBase = `core-packages.v2.${packageId}`;
@@ -33,28 +34,6 @@ const copy = {
     { question: "How do the monthly costs and handover work?", answer: "Your proposal defines platform access, user and execution allowances, backups, monitoring, support availability, billing, cancellation and data export. The proposed subscription starts from €199 per month; additional users, services or usage may change it." },
   ],
 } as const;
-
-function QuoteBoard() {
-  return <figure className="crm-board">
-    <figcaption><span><GitBranch size={16} aria-hidden="true" /> Quote follow-up</span><span>Illustration · sample data</span></figcaption>
-    <div className="crm-board-surface">
-      <div className="crm-board-record">
-        <div><p>Quote Q-014</p><strong>Equipment service quote</strong></div>
-        <span className="crm-board-status">Quote sent</span>
-      </div>
-      <ol className="crm-board-stages" aria-label="Example quote stages">
-        <li><Check size={15} aria-hidden="true" /> Draft</li>
-        <li aria-current="step"><span aria-hidden="true" /> Sent</li>
-        <li><span aria-hidden="true" /> Decision</li>
-      </ol>
-      <div className="crm-board-task">
-        <CalendarCheck size={23} aria-hidden="true" />
-        <div><p>Next action</p><strong>Follow up on quote</strong><small>Assigned to the quote owner</small></div>
-        <span>Due Thursday</span>
-      </div>
-    </div>
-  </figure>;
-}
 
 export default async function CrmPackagePage() {
   const item = getBusinessPackage(packageId)!;

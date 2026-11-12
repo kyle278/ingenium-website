@@ -14,9 +14,9 @@ const currentProjects = [
   { slug: "fight-factory-pro-wrestling", name: "Fight Factory Pro Wrestling", url: "https://fight-factory-pro-wrestling.vercel.app/" },
 ];
 
-export default function CurrentProjects({ home = false }: { home?: boolean }) {
+export default function CurrentProjects() {
   return (
-    <section id="current-projects" className={home ? "brand-section" : "rebuild-section"} aria-labelledby="current-projects-heading">
+    <section id="current-projects" className="rebuild-section" aria-labelledby="current-projects-heading">
       <h2 id="current-projects-heading" className="rebuild-section-heading">Current projects</h2>
       <div className={styles.grid}>
         {currentProjects.map((project) => (

@@ -282,7 +282,6 @@
 }
 .core-readiness p { margin-top: var(--core-space-2); color: var(--color-text-muted); }
 .core-readiness > a { grid-column: 1 / -1; }
-.core-renewal-example { margin-top: var(--core-space-5); scroll-margin-top: 7rem; }
 .core-home-example { background: var(--surface-blue); }
 .quote-follow-up-guide { max-width: 56rem; margin-inline: auto; }
 .quote-follow-up-guide h2 { font: 650 var(--core-heading)/1.2 var(--font-display); letter-spacing: var(--core-track); }

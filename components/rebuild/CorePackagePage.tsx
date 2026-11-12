@@ -12,7 +12,6 @@ import EnquiryJourney from "./EnquiryJourney";
 const resources: Record<string, string[]> = {
   "starter-website": ["/resources/starter-content-checklist.txt", "/resources/starter-launch-checklist.txt"],
   "business-growth": ["/resources/growth-enquiry-response.txt", "/resources/growth-pipeline-guide.txt"],
-  "crm-automation": ["/resources/crm-workflow-map.txt", "/resources/crm-acceptance-checklist.txt"],
 };
 const examples = {
   carpentry: { label: "Illustrative website", title: "A one-page carpentry site", description: "See how services, work and an enquiry can fit on one page.", image: "/template-previews/carpentry-demo.png", href: "/template-previews/carpentry", link: "Explore the carpentry demo" },
@@ -63,29 +62,6 @@ const content = {
       { question: "Does the website include content writing?", answer: "You supply your business details, text and images. We organise and lightly edit the supplied content. New copywriting, photography and brand development can be quoted separately." },
     ],
   },
-  "crm-automation": {
-    headline: "Know who owns the next step on every open quote.",
-    intro: "See which quotes are open, who owns them and when follow-up is due. We set up one sales pipeline in Ingenium Portal and test the first workflow with the people who’ll use it.",
-    problemTitle: "Why Ingenium Portal?",
-    problem: "Ingenium Portal is the customer relationship management (CRM) system we build and support. We start with one team and one pipeline, and test the agreed workflow with your team before handover.",
-    exampleTitle: "Keep the tools that already work.",
-    example: "We agree what stays in your existing tools and what needs to move. If a connection would help, we check feasibility and access. Your written proposal sets out the agreed setup, support and data export arrangements.",
-    steps: [
-      { title: "Map the work before choosing the system", text: "Review your current tools, roles, data and handovers. Agree one pipeline, up to five standard custom fields, workflow requirements and acceptance checks. Complex discovery is priced separately first." },
-      { title: "Configure, connect and test", text: "Configure Ingenium Portal, up to three workflows and one feasible external integration. Import one cleaned contact dataset, with record limits and field mapping agreed before implementation." },
-      { title: "Train, accept and hand over", text: "Set up up to five initial users, review basic dashboards and provide up to three hours of training. The agreed functionality has a 14-day defect warranty after handover." },
-    ],
-    faqs: [
-      { question: "Do we need to replace our website?", answer: "No. This is a CRM and automation implementation. We can review one agreed connection to your existing website or another supported system. A website build is an additional service." },
-      { question: "What if we already have a CRM or job-management software?", answer: "Bring one handover that’s hard to manage today. We’ll look at where the work sits and tell you if your existing tools can handle it with a better setup." },
-      { question: "What does ‘from €3,000’ include?", answer: "A defined base implementation: discovery and scope, one pipeline, up to five custom fields, up to three workflows, one cleaned contact import, one feasible integration, basic dashboards, up to five initial users and up to three hours of training. The final price depends on your data, process and integration requirements." },
-      { question: "What counts as one integration?", answer: "One agreed connection to an external service, subject to feasibility, access and the defined data flow. Complex or multi-system integrations need separate scope. Third-party subscription and API charges are additional." },
-      { question: "Will you clean all our historical data?", answer: "The base implementation imports one cleaned contact dataset in the agreed format. We agree record limits and data quality requirements first. Deduplication, reconstruction, attachments and large or multi-system migrations are separate work." },
-      { question: "How is data export agreed?", answer: "Your written proposal sets out data export and handover. Tell us which records you need to keep and we’ll confirm the arrangements before work starts." },
-      { question: "What happens if the agreed functionality has a defect?", answer: "The 14-day warranty after handover covers defects in the agreed implementation. We correct covered defects without an additional implementation charge. New features and scope changes are quoted separately." },
-      { question: "How do the monthly costs and handover work?", answer: "Your proposal defines platform access, user and execution allowances, backups, monitoring, support availability, billing, cancellation and data export. The proposed subscription starts from €199 per month; additional users, services or usage may change it." },
-    ],
-  },
 } as const;
 
 export default async function CorePackagePage({ packageId, initialExample }: { packageId: keyof typeof content; initialExample?: EnquiryExampleId }) {
@@ -95,8 +71,6 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
   const cta = packageBookingUrl(item);
   const isGrowth = item.id === "business-growth";
   const isStarter = item.id === "starter-website";
-  const isCrm = item.id === "crm-automation";
-  const callbackLabel = isCrm ? "Discuss your CRM" : "Request a free callback";
   const promotionActive = isStarter && starterPromotionActive(now);
   const faqs = isStarter && !promotionActive ? copy.faqs.slice(2) : copy.faqs;
   return <EditorFlow containerId={`core-packages.v2.${item.id}.flow`} className="core-package-page">
@@ -108,8 +82,8 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
         <h1><EditorText editorId="core-packages.v2.landing.headline" identity={item.id} tag="h1" value={copy.headline} /></h1>
         <p className="rebuild-lead"><EditorText editorId="core-packages.v2.landing.intro" identity={item.id} tag="p" value={copy.intro} /></p>
         <div className="core-hero-actions">
-          <Link href={cta} className="rebuild-button">{callbackLabel}<ArrowUpRight size={18} aria-hidden="true" /></Link>
-          <a href={isGrowth ? "#enquiry-demo" : "#package-example"} className="rebuild-text-link">{isGrowth ? "See a sample enquiry" : isStarter ? "See one-page examples" : "See the quote follow-up example"}</a>
+          <Link href={cta} className="rebuild-button">Request a free callback<ArrowUpRight size={18} aria-hidden="true" /></Link>
+          <a href={isGrowth ? "#enquiry-demo" : "#package-example"} className="rebuild-text-link">{isGrowth ? "See a sample enquiry" : "See one-page examples"}</a>
         </div>
         <p className="core-small">We’ll contact you to agree a time for a free 15-minute call.</p>
         {isGrowth && <nav className="growth-example-links" aria-label="See a quote example from your trade">
@@ -123,12 +97,9 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
       {isGrowth ? <>
         <Link href="/crm-automation">Happy with your website? See CRM &amp; Automation <ArrowUpRight size={16} aria-hidden="true" /></Link>
         <Link href="/starter-website">Just need a first website? See Starter <ArrowUpRight size={16} aria-hidden="true" /></Link>
-      </> : isStarter ? <>
+      </> : <>
         <Link href="/business-growth">Need more pages and enquiry tracking? See Business Growth <ArrowUpRight size={16} aria-hidden="true" /></Link>
         <Link href="/ecommerce">Need to take orders online? Explore ecommerce <ArrowUpRight size={16} aria-hidden="true" /></Link>
-      </> : <>
-        <Link href="/business-growth">Need a new website as well? See Business Growth <ArrowUpRight size={16} aria-hidden="true" /></Link>
-        <Link href="/packages#compare">Compare scope and pricing <ArrowUpRight size={16} aria-hidden="true" /></Link>
       </>}
     </nav>
     {isGrowth && <section className="core-section core-journey-demo" id="enquiry-demo" aria-labelledby="enquiry-demo-heading">
@@ -143,7 +114,7 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
     </section>}
     <section className="core-section core-proof" id="package-example" aria-labelledby="package-example-heading">
       <div className="core-section-heading">
-        <h2 id="package-example-heading">{isGrowth ? "See how a real customer asks for a quote." : isStarter ? "See what fits on one page." : "The quote went out. Who follows up?"}</h2>
+        <h2 id="package-example-heading">{isGrowth ? "See how a real customer asks for a quote." : "See what fits on one page."}</h2>
       </div>
       {isGrowth ? <>
         <article className="growth-proof">
@@ -170,7 +141,7 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
             <Link href={examples.landscaping.href} className="rebuild-text-link">{examples.landscaping.link}<ArrowUpRight size={16} aria-hidden="true" /></Link>
           </div>
         </div>
-      </> : isStarter ? <div className="core-proof-grid">{[examples.carpentry, examples.landscaping].map(example => <article key={example.title}>
+      </> : <div className="core-proof-grid">{[examples.carpentry, examples.landscaping].map(example => <article key={example.title}>
         <Image src={example.image} alt={`Homepage preview for ${example.title}`} width={1200} height={800} sizes="(max-width: 700px) 90vw, 550px" />
         <div>
           <p className="brand-eyebrow">{example.label}</p>
@@ -178,39 +149,11 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
           <p>{example.description}</p>
           <Link href={example.href} className="rebuild-text-link">{example.link}<ArrowUpRight size={16} aria-hidden="true" /></Link>
         </div>
-      </article>)}</div> : <div className="core-proof-grid">
-        <article className="core-record-example">
-          <p className="brand-eyebrow">Example with sample data</p>
-          <h3>Quote follow-up</h3>
-          <dl className="core-workflow-split">
-            <div><dt>Trigger</dt><dd>An estimator moves a sample quote to “Quote sent”.</dd></div>
-            <div><dt>Action</dt><dd>The agreed workflow creates a follow-up task for the quote owner, due on Thursday in this example.</dd></div>
-            <div><dt>What your team tests</dt><dd>Check who receives the task, where it appears and whether the due date is right.</dd></div>
-          </dl>
-        </article>
-        <article className="core-record-example">
-          <h3>Start with one workflow your team can test.</h3>
-          <p>Agree the trigger, the owner and what should happen if a step fails. Run a sample with the people who will use it.</p>
-          <a href="/resources/crm-acceptance-checklist.txt" className="rebuild-text-link">See the acceptance checklist<ArrowUpRight size={16} aria-hidden="true" /></a>
-          <p><a href="#renewal-example" className="rebuild-text-link">See the renewal example<ArrowRight size={16} aria-hidden="true" /></a></p>
-        </article>
-      </div>}
+      </article>)}</div>}
       {isStarter && <div className="core-readiness">
         <div><h3>What to have ready</h3><p>Your business and service details, approved text and photos, and access to the domain you want to use.</p></div>
         <div><h3>What we’ll do</h3><p>Organise your material into one mobile-friendly page, test calls and enquiries, and look after hosting and technical care from launch.</p></div>
         <a href="/resources/starter-content-checklist.txt" className="rebuild-text-link" download>Download the content checklist<ArrowUpRight size={16} aria-hidden="true" /></a>
-      </div>}
-      {isCrm && <section className="core-record-example core-renewal-example" id="renewal-example" aria-labelledby="renewal-example-heading">
-        <p className="brand-eyebrow">Example with sample data</p>
-        <h3 id="renewal-example-heading">Service renewal follow-up</h3>
-        <dl className="core-workflow-split">
-          <div><dt>Record</dt><dd>A customer’s service renewal is due next month. The record has a renewal date and a named owner.</dd></div>
-          <div><dt>Agreed action</dt><dd>Create a task for the owner to review the renewal before it is due.</dd></div>
-          <div><dt>Acceptance check</dt><dd>Use a sample date and check that the agreed owner receives the task once, with the right due date.</dd></div>
-        </dl>
-      </section>}
-      {isCrm && <div className="core-hero-actions">
-        <Link href="/blog/move-from-spreadsheets-into-a-crm" className="rebuild-text-link">See how to prepare a contact import<ArrowRight size={16} aria-hidden="true" /></Link>
       </div>}
     </section>
     <EditorSection editorId={`core-packages.v2.${item.id}.problem`} className="core-section core-editorial">
@@ -219,19 +162,18 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
         <p>{copy.problem}</p>
         <p className="core-example-label">{copy.exampleTitle}</p>
         <p>{copy.example}</p>
-        {isCrm && <Link href="/security" className="rebuild-text-link">Review security and data handling<ArrowRight size={16} aria-hidden="true" /></Link>}
       </div>
     </EditorSection>
     <EditorSection editorId={`core-packages.v2.${item.id}.included`} className="core-section core-inclusions" id="included"><div><p className="brand-eyebrow">A defined scope. A usable handover.</p><h2>What you get.</h2><ul className="core-package-includes">{item.includes.map(text => <li key={text}><Check size={19} aria-hidden="true" /><span>{text}</span></li>)}</ul></div><div className="core-support-stack"><article><CheckCircle2 size={22} aria-hidden="true" /><h3>Practical help included</h3><ul>{item.extras.map((text, index) => <li key={text}><a href={resources[item.id][index]} className="rebuild-text-link" download>{text}<ArrowUpRight size={15} aria-hidden="true" /></a></li>)}</ul><p className="core-small">Included in your package price.</p></article><article><h3>What the monthly service covers</h3><p>{item.care}</p></article><article><h3>Keep the scope clear</h3><p>{item.excludes}</p></article></div></EditorSection>
     <EditorSection editorId={`core-packages.v2.${item.id}.process`} className="core-section"><h2>A clear route from first call to handover.</h2><ol className="core-process">{copy.steps.map((step, index) => <li key={step.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{step.title}</h3><p>{step.text}</p></li>)}</ol></EditorSection>
-    <EditorSection editorId={`core-packages.v2.${item.id}.assurance`} className="core-section core-assurance"><CheckCircle2 size={28} aria-hidden="true" /><div><h2>Know what you are approving.</h2><p>We agree the deliverables, payment milestones and acceptance checks in writing. Review the work against that scope before the final balance and launch or handover. Additional work is quoted before it starts.</p>{item.id === "crm-automation" && <p>Your implementation also includes the 14-day defect warranty described above.</p>}</div></EditorSection>
+    <EditorSection editorId={`core-packages.v2.${item.id}.assurance`} className="core-section core-assurance"><CheckCircle2 size={28} aria-hidden="true" /><div><h2>Know what you are approving.</h2><p>We agree the deliverables, payment milestones and acceptance checks in writing. Review the work against that scope before the final balance and launch or handover. Additional work is quoted before it starts.</p></div></EditorSection>
     <section className="core-section core-faq"><div><h2>Before you decide.</h2><p>{item.name}, explained plainly.</p></div><OfferFaq items={[...faqs]} /></section>
     <EditorSection editorId={`core-packages.v2.${item.id}.close`} className="core-section core-close">
       <div>
-        <h2>{isStarter ? "Give referrals a site you can share." : isGrowth ? "Bring one enquiry that got stuck." : "Bring one handover your team repeats."}</h2>
-        <p>{isCrm ? "We’ll use the free 15-minute call to talk through a recent quote or renewal, the tools your team uses and what would be useful to test first." : "We’ll use the free 15-minute call to check the fit and talk through what we would put in scope."}</p>
+        <h2>{isStarter ? "Give referrals a site you can share." : "Bring one enquiry that got stuck."}</h2>
+        <p>We’ll use the free 15-minute call to check the fit and talk through what we would put in scope.</p>
       </div>
-      <Link href={cta} className="rebuild-button">{callbackLabel}<ArrowUpRight size={18} aria-hidden="true" /></Link>
+      <Link href={cta} className="rebuild-button">Request a free callback<ArrowUpRight size={18} aria-hidden="true" /></Link>
     </EditorSection>
     <nav className="core-other-paths" aria-label="Other packages">{businessPackages.filter(other => other.id !== item.id).map(other => <Link key={other.id} href={other.href}><span>{other.question}<strong>{other.name}</strong></span><ArrowRight size={20} aria-hidden="true" /></Link>)}</nav>
     <p className="core-small core-final-note">{PACKAGE_PRICE_NOTE}</p>

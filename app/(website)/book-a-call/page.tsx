@@ -25,9 +25,9 @@ const packageCall = {
     link: "See the one-page examples first",
   },
   "crm-automation": {
-    title: "Start with one repeated task",
-    prompt: "Describe the tools involved and who owns the work today. A sample record can help us talk through what needs to move.",
-    detail: "We’ll check what access is needed for a feasible connection and what your team would test before handover.",
+    title: "Talk through one handover",
+    prompt: "Think of a quote or service renewal you want to handle differently. We’ll talk through who owns it today and which tools your team uses.",
+    detail: "We’ll discuss what would be useful to test first and whether it’s worth scoping a change.",
     href: "/crm-automation#package-example",
     link: "See an acceptance example first",
   },
@@ -39,13 +39,16 @@ export default async function BookCallPage({ searchParams }: { searchParams: Pro
   const { service, package: packageId } = await searchParams;
   const selectedPackage = getBusinessPackage(packageId);
   const discussion = selectedPackage && packageCall[selectedPackage.id];
+  const isCrm = selectedPackage?.id === "crm-automation";
   const calendar = calendarUrl();
   const initialNow = await packageRequestTime();
   return <div className="rebuild-page local-page call-page">
     <header className="call-page-heading">
       <p className="local-location">{selectedPackage?.name || <EditorText editorId="rebuild.app.website.book.a.call.page.tsx.text.e87875779ea2" tag="p" value="A useful first conversation" />}</p>
-      <h1><EditorText editorId="rebuild.app.website.book.a.call.page.tsx.text.f7d0980dce5c" tag="h1" identity={selectedPackage?.id || "general"} value={selectedPackage ? "Request a free callback." : "Book a free call."} /></h1>
-      <p><EditorText editorId="rebuild.app.website.book.a.call.page.tsx.text.158e23fa8168" tag="p" value="15 minutes to work out your next step. Leave your number and we’ll get in touch to confirm a time." /></p>
+      <h1><EditorText editorId="rebuild.app.website.book.a.call.page.tsx.text.f7d0980dce5c" tag="h1" identity={selectedPackage?.id || "general"} value={isCrm ? "Request a free CRM callback." : selectedPackage ? "Request a free callback." : "Book a free call."} /></h1>
+      <p>{isCrm
+        ? "Leave your number and we’ll get in touch to arrange a free 15-minute call about one process your team wants to improve."
+        : <EditorText editorId="rebuild.app.website.book.a.call.page.tsx.text.158e23fa8168" tag="p" value="15 minutes to work out your next step. Leave your number and we’ll get in touch to confirm a time." />}</p>
     </header>
     {discussion && <details className="call-discussion">
       <summary>What we’ll cover · {discussion.title}</summary>

@@ -40,7 +40,7 @@ export default function QuoteFollowUpGuide() {
     <section className="core-section core-close">
       <div>
         <h2>Choose what to fix first.</h2>
-        <p>If the website needs work and enquiries are hard to share, see the Business Growth example. If the site already brings in suitable work, start by <Link href="/crm-automation" className="rebuild-text-link">mapping the handover</Link>.</p>
+        <p>If the website needs work and enquiries are hard to share, see the Business Growth example. If you want to see how a team records the owner and due date after sending a quote, <Link href="/crm-automation#package-example" className="rebuild-text-link">see the quote follow-up example</Link>.</p>
       </div>
       <Link href="/business-growth#enquiry-demo" className="rebuild-button">See a sample enquiry<ArrowUpRight size={17} aria-hidden="true" /></Link>
     </section>

@@ -162,3 +162,27 @@
   .crm-workflow-links > a { transition: none; }
   .crm-page .rebuild-button:hover { transform: none; }
 }
+
+
+/* Workflow preview and pricing on the Business Growth detail page. */
+.crm-website-note { margin-top: var(--core-space-3); color: var(--color-text-muted); font-size: .9375rem; }
+.growth-package-hero .core-hero-actions { gap: var(--core-space-3); }
+.growth-hero-price { margin-top: var(--core-space-4); }
+.growth-hero-price .rebuild-text-link { min-height: 2.75rem; font-size: .875rem; }
+.growth-intake-board { align-self: center; margin-top: var(--core-space-8); }
+.growth-intake-board ol { padding: 0; margin: 0; list-style: none; }
+.growth-intake-board li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--core-space-4);
+  align-items: start;
+  padding-block: var(--core-space-4);
+  border-top: 1px solid var(--crm-navy-line);
+}
+.growth-intake-board li:last-child { padding-bottom: 0; }
+.growth-intake-board li svg { color: var(--crm-mint); }
+.growth-intake-board li p { margin-top: var(--core-space-1); font-size: .875rem; color: var(--crm-on-navy); }
+.core-support-stack > .core-quote-panel { margin: 0 0 var(--core-space-6); }
+@media (max-width: 760px) {
+  .growth-intake-board { margin-top: 0; }
+}

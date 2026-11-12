@@ -352,7 +352,7 @@ const localBusinessPages: Record<string, [string, string]> = {
   "/phone-ringing-website": ["Phone Ringing Website for Local Businesses | Ingenium", "Give referrals somewhere to check your services, see your work and get in touch. Website design and copy for local businesses in Ireland."],
   "/never-miss-a-lead": ["Never Miss a Lead: Better Enquiry Follow-up | Ingenium", "Keep customer replies, quotes and next actions in view. Practical enquiry follow-up for local businesses and small teams."],
   "/leads-to-jobs": ["Leads to Jobs: Website & Enquiry Follow-up | Ingenium", "Bring your website and enquiry follow-up together, from checking your services to asking for a quote and hearing back."],
-  "/results": ["Our Work: Website Designs & Projects | Ingenium", "Explore illustrative local business website designs and published Ingenium projects. Find a direction for your own business."],
+  "/results": ["Our Work: CRM Workflows & Website Projects | Ingenium", "Explore quote and renewal workflows using sample data, a published enquiry form, and website projects by Ingenium."],
   "/how-it-works": ["How It Works: We Draft, You Approve | Ingenium", "Start with a free 15-minute call. We gather the details, draft your content, build and check the customer journey with you."],
   "/visibility-check": ["Free Google Visibility Check | Ingenium", "Can local customers find your business online? Request a free, human-reviewed Google Visibility Check for your service and town, delivered by email."],
   "/book-a-call": ["Book a Free 15-minute Call | Ingenium", "Talk through your website, enquiries and quote follow-up with Ingenium. A free 15-minute conversation, with no preparation needed."],
@@ -368,9 +368,9 @@ for (const path of ["/websites", "/crm", "/connected", "/pricing", "/services", 
 // The three-package IA is canonical. Keep metadata free of expiring offer prices.
 const corePackagePages: Record<string, [string, string]> = {
   "/": ["Business Growth & Automation for Irish Businesses | Ingenium", "Ingenium sets up CRM and follow-up workflows for Irish teams. Keep your website or connect a new one to manage enquiries. Based in Carlow."],
-  "/packages": ["Starter Website, Business Growth & CRM Packages | Ingenium", "Compare three clear packages for Irish businesses. A professional online presence, website and CRM enquiry management, or a scoped CRM and automation implementation."],
+  "/packages": ["CRM, Business Growth & Starter Website Packages | Ingenium", "Compare CRM and automation for established teams, a new website with enquiry management, and Starter Website for a first site."],
   "/starter-website": ["Starter Website for Irish Small Businesses | Ingenium", "A professional one-page website with up to five sections, mobile-friendly design, enquiry form and basic SEO. Hosting and technical care at 50 euro per month. No VAT charged."],
-  "/business-growth": ["Business Growth: Website, CRM & Enquiry Management | Ingenium", "A website with up to five pages, Ingenium Portal CRM, one sales pipeline, one enquiry workflow and training. Indicative pricing from 1,500 euro setup and 99 euro per month."],
+  "/business-growth": ["Business Growth: Enquiry Management & Website | Ingenium", "Connect your new website to Ingenium Portal so enquiries reach your sales pipeline. Includes one agreed enquiry workflow and training."],
   "/crm-automation": ["CRM & Automation for Irish Teams | Ingenium", "See who owns each open quote and when follow-up is due. Ingenium Portal brings quotes and renewals into one pipeline your team can test."],
   "/quote-follow-up": ["Quote Follow-Up Checklist for Service Businesses | Ingenium", "Review your last five enquiries. Find where quotes stall, agree an owner and a next action, and decide whether your website or workflow needs work."],
 };

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, MessagesSquare, Workflow } from "lucide-react";
 import { EditorFlow, EditorSection, EditorText } from "@/components/website-editor/Editable";
@@ -7,6 +6,7 @@ import { enquiryExamples, enquiryExamplePath } from "@/lib/enquiry-examples";
 import { packageRequestTime } from "@/lib/package-request-time";
 import { PackagePrice, StarterPromotion } from "@/components/rebuild/PackagePricing";
 import CrmWorkflowLinks from "@/components/rebuild/CrmWorkflowLinks";
+import FarrellQuoteProof from "@/components/rebuild/FarrellQuoteProof";
 import { HomeTeam } from "@/components/rebuild/HomeStory";
 import { OfferFaq } from "@/components/rebuild/OfferPage";
 import QuoteBoard from "@/components/rebuild/QuoteBoard";
@@ -89,29 +89,13 @@ export default async function HomePage() {
       <Link href="/crm-automation#crm-implementation" className="rebuild-text-link core-compare-link">See how a CRM implementation works <ArrowUpRight size={16} aria-hidden="true" /></Link>
     </EditorSection>
 
-    <EditorSection editorId="core-packages.v2.home.project-proof" className="core-section home-proof" id="current-projects" aria-labelledby="home-project-heading">
-      <div>
-        <p className="brand-eyebrow">Published client website · Farrell Contract Cleaning</p>
-        <h2 id="home-project-heading">A clearer way to request a cleaning quote.</h2>
-        <p>We built a dedicated quote form for Farrell. Customers can choose the type of cleaning they need and tell the team how they prefer to be contacted.</p>
-        <div className="core-hero-actions">
-          <Link href="/business-growth#package-example" className="rebuild-button">See the published quote example <ArrowUpRight size={17} aria-hidden="true" /></Link>
-          <Link href="/results#current-projects" className="rebuild-text-link">See more website projects <ArrowUpRight size={16} aria-hidden="true" /></Link>
-        </div>
-      </div>
-      <figure className="home-proof-capture">
-        <div>
-          <Image src="/project-previews/farrell-quote-mobile.webp" alt="Farrell’s quote form showing cleaning service and contact method choices on a phone" width={716} height={1394} sizes="208px" />
-        </div>
-        <figcaption>First step of Farrell’s live quote form</figcaption>
-      </figure>
-    </EditorSection>
+    <FarrellQuoteProof editorId="core-packages.v2.home.project-proof" id="current-projects" projectsLink="/results#current-projects" />
 
     <HomeTeam />
     <section className="core-section core-faq" aria-labelledby="home-faq-heading"><div><h2 id="home-faq-heading">Questions before you decide.</h2><p>Existing websites, scope and ongoing support.</p></div><OfferFaq items={faqs} /></section>
     <EditorSection editorId="core-packages.v2.home.close" className="core-section core-close home-close">
       <div><h2>Which handover would you fix first?</h2><p>Use a free 15-minute call to talk through a recent enquiry, quote or renewal and decide what’s worth testing.</p></div>
-      <div className="home-close-actions">
+      <div className="package-call-actions">
         <Link href={packageBookingUrl(crm)} className="rebuild-button">Discuss your CRM <ArrowUpRight size={17} aria-hidden="true" /></Link>
         <Link href={packageBookingUrl(growth)} className="rebuild-button-secondary">Discuss Business Growth <ArrowUpRight size={17} aria-hidden="true" /></Link>
       </div>

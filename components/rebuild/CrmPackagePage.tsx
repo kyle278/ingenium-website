@@ -24,7 +24,7 @@ const copy = {
     { title: "Train, accept and hand over", output: "Team training and handover", text: "Set up up to five initial users, review basic dashboards and provide up to three hours of training. The agreed functionality has a 14-day defect warranty after handover." },
   ],
   faqs: [
-    { question: "Do we need to replace our website?", answer: "No. This is a CRM and automation implementation. We can review one agreed connection to your existing website or another supported system. A website build is an additional service." },
+    { question: "Can we keep our existing website?", answer: "Yes. We start with the CRM and the workflow your team needs. We can review one agreed connection to your site or another supported system, subject to feasibility. Website work can be scoped separately." },
     { question: "What if we already have a CRM or job-management software?", answer: "Bring one handover that’s hard to manage today. We’ll look at where the work sits and tell you if your existing tools can handle it with a better setup." },
     { question: "What does ‘from €3,000’ include?", answer: "A defined base implementation: discovery and scope, one pipeline, up to five custom fields, up to three workflows, one cleaned contact import, one feasible integration, basic dashboards, up to five initial users and up to three hours of training. The final price depends on your data, process and integration requirements." },
     { question: "What counts as one integration?", answer: "One agreed connection to an external service, subject to feasibility, access and the defined data flow. Complex or multi-system integrations need separate scope. Third-party subscription and API charges are additional." },
@@ -47,6 +47,7 @@ export default async function CrmPackagePage() {
         <p className="brand-eyebrow">{item.name}</p>
         <h1 id="crm-heading"><EditorText editorId="core-packages.v2.landing.headline" identity={item.id} tag="h1" value={copy.headline} /></h1>
         <p className="rebuild-lead"><EditorText editorId="core-packages.v2.landing.intro" identity={item.id} tag="p" value={copy.intro} /></p>
+        <p className="crm-website-note">Keep your existing website. We can scope website work separately if it would improve how enquiries come in.</p>
         <div className="core-hero-actions">
           <a href="#package-example" className="rebuild-button">See the workflow <ArrowDown size={18} aria-hidden="true" /></a>
           <Link href={callback} className="rebuild-button-secondary">Discuss your CRM <ArrowUpRight size={17} aria-hidden="true" /></Link>
@@ -167,7 +168,7 @@ export default async function CrmPackagePage() {
       </div>
       <Link href={callback} className="rebuild-button">Discuss your CRM <ArrowUpRight size={18} aria-hidden="true" /></Link>
     </EditorSection>
-    <nav className="core-other-paths" aria-label="Other packages">{businessPackages.filter(other => other.id !== item.id).map(other => <Link key={other.id} href={other.href}><span>{other.question}<strong>{other.name}</strong></span><ArrowRight size={20} aria-hidden="true" /></Link>)}</nav>
+    <nav className="core-other-paths" aria-label="Other packages">{[...businessPackages].reverse().filter(other => other.id !== item.id).map(other => <Link key={other.id} href={other.href}><span>{other.id === "business-growth" ? "Need a new site and connected enquiries?" : "Buying your first website?"}<strong>{other.name}</strong></span><ArrowRight size={20} aria-hidden="true" /></Link>)}</nav>
     <p className="core-small core-final-note">{PACKAGE_PRICE_NOTE}</p>
   </EditorFlow>;
 }

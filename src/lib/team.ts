@@ -1,8 +1,8 @@
 import type { StaticImageData } from "next/image";
 
-import claytonHeadshot from "../../ingeniumTeam/claytonlong.png";
-import kyleHeadshot from "../../ingeniumTeam/kyle redmond.png";
-import sophieHeadshot from "../../ingeniumTeam/sophiecoleman.png";
+import claytonHeadshot from "../../ingeniumTeam/clayton-long-ingenium-blue.webp";
+import kyleHeadshot from "../../ingeniumTeam/kyle-redmond-ingenium-blue.webp";
+import sophieHeadshot from "../../ingeniumTeam/sophie-coleman-ingenium-blue.webp";
 
 export interface TeamMemberRecord {
   name: string;

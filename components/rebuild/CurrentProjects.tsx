@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import styles from "./current-projects.module.css";
 
+import ProjectSampleBadge, { isSampleWebsite } from "./ProjectSampleBadge";
 import { currentProjects } from "@/lib/current-projects";
 
 export default function CurrentProjects({ heading = "Current projects" }: { heading?: string }) {
@@ -11,8 +12,8 @@ export default function CurrentProjects({ heading = "Current projects" }: { head
       <div className={styles.grid}>
         {currentProjects.map((project) => (
           <article key={project.slug}>
-            <a className={styles.project} href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${project.name} website (opens in a new tab)`}>
-              <div className={styles.preview}>
+            <a className={styles.project} href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${project.name} website${isSampleWebsite(project.url) ? " (sample)" : ""} (opens in a new tab)`}>
+              <div className={styles.preview}><ProjectSampleBadge url={project.url} />
                 <Image src={project.image} alt={`Screenshot of the ${project.name} website`} width={1200} height={833} sizes="(max-width: 760px) 100vw, (max-width: 1304px) 50vw, 600px" />
               </div>
               <div className={styles.caption}>

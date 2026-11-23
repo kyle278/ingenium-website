@@ -1,0 +1,18 @@
+.badge {
+  position: absolute;
+  z-index: 1;
+  top: .75rem;
+  left: .75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .375rem .625rem;
+  border: 1px solid rgba(255, 255, 255, .3);
+  border-radius: .375rem;
+  background: #14243d;
+  color: #fff;
+  font-size: .875rem;
+  font-weight: 650;
+  line-height: 1.25;
+  pointer-events: none;
+}

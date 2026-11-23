@@ -91,7 +91,7 @@ export default function HomeProjectRail({ editorId }: { editorId: string }) {
         <ul className={styles.track}>
           {currentProjects.map(project => <li key={project.slug}>
             <a href={project.url} target="_blank" rel="noopener noreferrer" className={styles.card} aria-label={`Visit ${project.name} website (opens in a new tab)`}>
-              <div className={styles.preview}><Image src={"image" in project ? project.image : `/project-previews/${project.slug}.webp`} alt={`Screenshot of the ${project.name} website`} width={1200} height={833} sizes="(max-width: 600px) 80vw, 380px" /></div>
+              <div className={styles.preview}><Image src={project.image} alt={`Screenshot of the ${project.name} website`} width={1200} height={833} sizes="(max-width: 600px) 80vw, 380px" /></div>
               <div className={styles.caption}><div><h3>{project.name}</h3><p>{new URL(project.url).hostname.replace(/^www\./, "")}</p></div><ArrowUpRight size={18} aria-hidden="true" /></div>
             </a>
           </li>)}

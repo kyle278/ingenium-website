@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Pause, Play } from "lucide-react";
 import { EditorSection, EditorText } from "@/components/website-editor/Editable";
-import ProjectSampleBadge, { isSampleWebsite } from "./ProjectSampleBadge";
+import ProjectSampleBadge, { getProjectBadge } from "./ProjectSampleBadge";
 import { currentProjects } from "@/lib/current-projects";
 import styles from "./home-project-rail.module.css";
 
@@ -46,7 +46,7 @@ export default function HomeProjectRail({ editorId }: { editorId: string }) {
       previous = time;
       if (visible.current && !document.hidden) {
         const end = element.scrollWidth - element.clientWidth;
-        position = Math.max(0, Math.min(end, position + elapsed * .035 * direction.current));
+        position = Math.max(0, Math.min(end, position + elapsed * .0525 * direction.current));
         element.scrollLeft = position;
         if (position >= end) direction.current = -1;
         if (position <= 0) direction.current = 1;
@@ -92,7 +92,7 @@ export default function HomeProjectRail({ editorId }: { editorId: string }) {
         <ul className={styles.track}>
           {currentProjects.map(project => <li key={project.slug}>
             <a href={project.url} target="_blank" rel="noopener noreferrer" className={styles.card} aria-label={`Visit ${project.name} website${isSampleWebsite(project.url) ? " (sample)" : ""} (opens in a new tab)`}>
-              <div className={styles.preview}><ProjectSampleBadge url={project.url} /><Image src={project.image} alt={`Screenshot of the ${project.name} website`} width={1200} height={833} sizes="(max-width: 600px) 80vw, 380px" /></div>
+              <div className={styles.preview}><ProjectSampleBadge url={project.url} slug={project.slug} /><Image src={project.image} alt={`Screenshot of the ${project.name} website`} width={1200} height={833} sizes="(max-width: 600px) 80vw, 380px" /></div>
               <div className={styles.caption}><div><h3>{project.name}</h3><p>{new URL(project.url).hostname.replace(/^www\./, "")}</p></div><ArrowUpRight size={18} aria-hidden="true" /></div>
             </a>
           </li>)}

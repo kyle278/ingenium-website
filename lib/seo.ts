@@ -373,6 +373,7 @@ const corePackagePages: Record<string, [string, string]> = {
   "/business-growth": ["Business Growth: Enquiry Management & Website | Ingenium", "Connect your new website to Ingenium Portal so enquiries reach your sales pipeline. Includes one agreed enquiry workflow and training."],
   "/crm-automation": ["CRM & Automation for Irish Teams | Ingenium", "See who owns each open quote and when follow-up is due. Ingenium Portal brings quotes and renewals into one pipeline your team can test."],
   "/quote-follow-up": ["Quote Follow-Up Checklist for Service Businesses | Ingenium", "Review your last five enquiries. Find where quotes stall, agree an owner and a next action, and decide whether your website or workflow needs work."],
+  "/follow-up-calculator": ["Slow Reply Cost Calculator | Ingenium", "Estimate the potential job value affected by slow or missed enquiry replies. Adjust your monthly enquiries, job value and win rate with Ingenium’s free calculator."],
 };
 for (const [path, [title, description]] of Object.entries(corePackagePages)) {
   pageSeo[path] = { title, description, path, keywords: ["Ingenium Consulting", "small business Ireland", "business growth", "CRM automation", "website design Carlow"] };

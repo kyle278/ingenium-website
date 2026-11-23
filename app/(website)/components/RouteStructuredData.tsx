@@ -29,6 +29,7 @@ const routeLabelMap: Record<string, string> = {
   "/results": "Results",
   "/how-it-works": "How it works",
   "/visibility-check": "Free visibility check",
+  "/follow-up-calculator": "Follow-up cost calculator",
   "/book-a-call": "Book a free call",
   "/": "Home",
   "/services": "Services",

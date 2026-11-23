@@ -1,4 +1,5 @@
-import { EditorSection, EditorText } from "@/components/website-editor/Editable";
+import { ArrowUpRight } from "lucide-react";
+import { EditorLink, EditorSection, EditorText } from "@/components/website-editor/Editable";
 import styles from "./home-follow-up.module.css";
 
 const problems = [
@@ -32,6 +33,9 @@ export default function HomeFollowUp({ editorId }: { editorId: string }) {
             </li>
           ))}
         </ul>
+        <EditorLink editorId={`${editorId}.calculator-link`} href="/follow-up-calculator" className={`rebuild-text-link ${styles.calculatorLink}`}>
+          {text("calculator-link.text", "What could slow replies be costing you?", "span")}<ArrowUpRight size={17} aria-hidden="true" />
+        </EditorLink>
       </div>
       <figure className={styles.comparison} aria-labelledby="follow-up-comparison-heading">
         <figcaption id="follow-up-comparison-heading" className={styles.label}>{text("comparison.heading", "Enquiries this week: before and after")}</figcaption>

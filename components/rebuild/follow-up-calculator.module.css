@@ -1,0 +1,56 @@
+.layout {
+  --calculator-paper: #fff;
+  --calculator-amount: clamp(2.7rem, 5vw, 4.5rem);
+  --calculator-number-width: 6rem;
+  --calculator-track: .375rem;
+  --calculator-radius: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--core-space-12);
+  align-items: start;
+  margin-top: var(--core-space-10);
+  margin-bottom: var(--core-section);
+}
+.inputs, .result { min-width: 0; }
+.inputs h2, .result h2 { font: 650 var(--core-card-heading)/1.3 var(--font-display); letter-spacing: var(--tracking-heading); }
+.description, .monthly, .caveat { color: var(--color-text-muted); line-height: 1.75; }
+.description { margin-top: var(--core-space-3); max-width: 55ch; }
+.fields { display: grid; gap: var(--core-space-8); margin-top: var(--core-space-8); }
+.fieldHeading { display: flex; align-items: center; justify-content: space-between; gap: var(--core-space-4); }
+.fieldHeading label { font-weight: 600; line-height: 1.5; }
+.numberWrap { display: flex; align-items: center; gap: var(--core-space-1); flex-shrink: 0; color: var(--color-text); }
+.numberWrap input {
+  width: var(--calculator-number-width);
+  min-height: var(--core-space-12);
+  padding: var(--core-space-2);
+  background: var(--calculator-paper);
+  border: var(--core-hairline) solid var(--control-border);
+  border-radius: var(--core-space-1);
+  font: 600 var(--core-body)/1.4 var(--font-body);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.slider { display: block; width: 100%; height: var(--core-space-10); margin-top: var(--core-space-2); accent-color: var(--color-brand); cursor: pointer; }
+.help { color: var(--color-text-muted); font-size: var(--core-small); line-height: 1.7; }
+.reset { display: inline-flex; align-items: center; gap: var(--core-space-2); min-height: var(--core-space-12); margin-top: var(--core-space-6); color: var(--color-brand); font-size: var(--text-body-sm); font-weight: 600; cursor: pointer; }
+.reset:hover { text-decoration: underline; text-underline-offset: var(--core-space-1); }
+.result { background: var(--surface-blue); border: var(--core-hairline) solid var(--color-line); border-radius: var(--calculator-radius); padding: var(--core-pad); }
+.liveResult { margin-block: var(--core-space-5); }
+.amount { color: var(--color-text); font: 650 var(--calculator-amount)/1.12 var(--font-display); letter-spacing: var(--tracking-heading-tight); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.monthly { margin-top: var(--core-space-3); }
+.monthly strong { color: var(--color-text); font-weight: 600; }
+.caveat { font-size: var(--text-body-sm); }
+.result > a { margin-top: var(--core-space-6); }
+.result > .help { margin-top: var(--core-space-3); }
+.formula { margin-top: var(--core-space-8); padding-top: var(--core-space-6); border-top: var(--core-hairline) solid var(--color-line); }
+.formula h3 { font-weight: 650; }
+.formula p { margin-top: var(--core-space-2); color: var(--color-text-muted); font-size: var(--core-small); line-height: 1.7; }
+.formula .equation { color: var(--color-text); font-variant-numeric: tabular-nums; }
+@media (max-width: 850px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: var(--core-space-8); }
+}
+@media (max-width: 480px) {
+  .fieldHeading { align-items: start; gap: var(--core-space-2); }
+  .fieldHeading label { padding-top: var(--core-space-2); font-size: var(--text-body-sm); }
+  .result > a { width: 100%; }
+}

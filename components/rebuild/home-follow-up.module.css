@@ -53,6 +53,8 @@
 }
 .problems h3 { font: 650 var(--text-body-lg)/1.4 var(--font-display); letter-spacing: var(--tracking-body); }
 .problems p { color: var(--color-text-muted); margin-top: var(--core-space-1); font-size: var(--core-body); }
+.calculatorLink { margin-top: var(--core-space-6); min-height: var(--core-space-12); }
+.calculatorLink svg { flex-shrink: 0; }
 .comparison {
   margin: 0;
   padding: var(--core-space-8);

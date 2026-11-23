@@ -1,0 +1,22 @@
+.banner {
+  --banner-bg: #10243a;
+  --banner-text: #e4edf6;
+  --banner-emphasis: #fff;
+  --banner-link-height: 2rem;
+  display: grid;
+  place-items: center;
+  min-height: var(--core-space-12);
+  padding: var(--core-space-1) var(--core-space-5);
+  background: var(--banner-bg);
+  color: var(--banner-text);
+  text-align: center;
+  font-size: var(--text-body-sm);
+  line-height: 1.6;
+}
+.banner strong { font-weight: 650; color: var(--banner-emphasis); }
+.link { display: inline-flex; align-items: center; min-height: var(--banner-link-height); color: var(--banner-emphasis); font-weight: 650; text-decoration: underline; text-underline-offset: var(--core-space-1); white-space: nowrap; }
+.link:hover { text-decoration-thickness: var(--core-hairline); }
+.link:focus-visible { outline-color: var(--banner-emphasis); outline-offset: var(--core-space-1); }
+@media (max-width: 600px) {
+  .banner { font-size: var(--core-small); padding-block: var(--core-space-2); }
+}

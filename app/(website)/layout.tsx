@@ -1,6 +1,7 @@
 import { requestPath } from "@/lib/portalIntegration/seo-runtime";
 import SiteFooter from "./components/SiteFooter";
 import SiteNav from "./components/SiteNav";
+import CallBanner from "./components/CallBanner";
 import RouteStructuredData from "./components/RouteStructuredData";
 import SiteMotion from "@/components/rebuild/SiteMotion";
 import { EditorProvider } from "@/components/website-editor/EditorProvider";
@@ -19,6 +20,7 @@ export default async function WebsiteLayout({ children }: { children: React.Reac
       <a className="skip-link" href="#main-content">Skip to content</a>
       <RouteStructuredData pathname={pathname} />
       <SiteMotion />
+      <CallBanner />
       <SiteNav />
       <main id="main-content" className="site-main" tabIndex={-1}>{children}</main>
       <SiteFooter />

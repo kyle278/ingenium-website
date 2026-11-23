@@ -1,11 +1,9 @@
 import Link from "next/link";
-import { ArrowUpRight, MessagesSquare, Workflow } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { EditorFlow, EditorSection, EditorText } from "@/components/website-editor/Editable";
-import { getBusinessPackage, packageBookingUrl, starterPromotionActive } from "@/lib/business-packages";
-import { enquiryExamples, enquiryExamplePath } from "@/lib/enquiry-examples";
+import { getBusinessPackage, packageBookingUrl } from "@/lib/business-packages";
 import { packageRequestTime } from "@/lib/package-request-time";
-import { PackagePrice, StarterPromotion } from "@/components/rebuild/PackagePricing";
-import CrmWorkflowLinks from "@/components/rebuild/CrmWorkflowLinks";
+import HomePackages from "@/components/rebuild/HomePackages";
 import FarrellQuoteProof from "@/components/rebuild/FarrellQuoteProof";
 import { HomeTeam } from "@/components/rebuild/HomeStory";
 import { OfferFaq } from "@/components/rebuild/OfferPage";
@@ -48,35 +46,7 @@ export default async function HomePage() {
     <HomeFollowUp editorId="core-packages.v2.home.follow-up-problem" />
 
     <EditorSection editorId="core-packages.v2.home.packages" className="core-section home-offers" id="packages" aria-labelledby="packages-heading">
-      <header className="core-section-heading">
-        <h2 id="packages-heading">Where does the work get stuck?</h2>
-        <p>Start with the part your team needs to improve. See what each option does in practice.</p>
-      </header>
-      <div className="home-offer-grid">
-        <article className="home-offer home-offer-crm" id="crm-automation" aria-labelledby="home-crm-heading">
-          <p className="home-offer-label"><Workflow size={20} aria-hidden="true" /> CRM &amp; Automation</p>
-          <h3 id="home-crm-heading">Get quotes and renewals out of inboxes.</h3>
-          <p>Keep your website. Start with one team and set up an agreed workflow in Ingenium Portal so people know who owns the next step and when it’s due.</p>
-          <PackagePrice packageId={crm.id} initialNow={now} compact />
-          <CrmWorkflowLinks />
-        </article>
-        <article className="home-offer home-offer-growth" id="business-growth" aria-labelledby="home-growth-heading">
-          <p className="home-offer-label"><MessagesSquare size={20} aria-hidden="true" /> Business Growth</p>
-          <h3 id="home-growth-heading">Connect a better website to your sales process.</h3>
-          <p>Get a new website and a shared place to manage its enquiries. See how a request reaches the team and gets a first response.</p>
-          <PackagePrice packageId={growth.id} initialNow={now} compact />
-          <nav className="growth-example-links" aria-label="Sample website enquiries">
-            <div>{enquiryExamples.map(example => <Link key={example.id} href={enquiryExamplePath(example.id)}>{example.label}</Link>)}</div>
-          </nav>
-          <Link href="/quote-follow-up" className="rebuild-text-link">Check your last five enquiries <ArrowUpRight size={16} aria-hidden="true" /></Link>
-        </article>
-      </div>
-      <div className="home-offer-footer" id="starter-website">
-        <div><h3>Starter Website</h3><p>A first site for a small business.</p></div>
-        <Link href={starter.href} className="rebuild-text-link">Explore Starter Website <ArrowUpRight size={16} aria-hidden="true" /></Link>
-        <Link href="/packages#compare" className="rebuild-text-link">Compare all three packages <ArrowUpRight size={16} aria-hidden="true" /></Link>
-      </div>
-      {starterPromotionActive(now) && <StarterPromotion initialNow={now} compact />}
+      <HomePackages initialNow={now} />
     </EditorSection>
 
     <EditorSection editorId="core-packages.v2.home.how" className="core-section" aria-labelledby="home-process-heading">

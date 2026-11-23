@@ -42,10 +42,10 @@ const content = {
     ],
   },
   "business-growth": {
-    headline: "Connect your website to your enquiry process.",
-    intro: "If the website needs work as well as your enquiry process, we build a new site and connect its forms to Ingenium Portal. Your team gets a shared pipeline and one agreed workflow for new website enquiries.",
-    problemTitle: "Who needs a quote? Who needs a reply?",
-    problem: "A request comes through your website. Another arrives by phone. A customer messages about last week's quote. When the next action lives in someone's head, it is easy for a conversation to stall.",
+    headline: "Know who replies to the next quote request.",
+    intro: "We build your website and a shared pipeline for the quote requests it brings in. Your team can see each website enquiry, decide who replies and record the next step.",
+    problemTitle: "How did your team handle the last quote request?",
+    problem: "Think about one request your team received recently. Who saw it first? Who replied, and where did they record the next step?",
     exampleTitle: "From a landscaping enquiry to a visible next step.",
     example: "A visitor asks about a garden project. Their website enquiry creates a CRM contact and lead, alerts your business and sends an acknowledgement. Your team can see the enquiry, update the stage and manage the next action. Phone calls and messages can be recorded manually; automatic imports from those channels are separate integrations.",
     steps: [
@@ -94,13 +94,14 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
         <div className="core-hero-actions">
           {isGrowth ? <>
             <a href="#enquiry-demo" className="rebuild-button">See the enquiry workflow <ArrowRight size={17} aria-hidden="true" /></a>
-            <Link href={cta} className="rebuild-button-secondary">Discuss Business Growth <ArrowUpRight size={17} aria-hidden="true" /></Link>
+            <Link href={cta} className="rebuild-button-secondary">Request a walkthrough <ArrowUpRight size={17} aria-hidden="true" /></Link>
           </> : <>
             <Link href={cta} className="rebuild-button">Request a free callback <ArrowUpRight size={18} aria-hidden="true" /></Link>
             <a href="#package-example" className="rebuild-text-link">See one-page examples</a>
           </>}
         </div>
-        <p className="core-small">We’ll contact you to agree a time for a free 15-minute call.</p>
+        <p className="core-small">{isGrowth ? "We’ll contact you to arrange a free 15-minute walkthrough. Bring one recent quote request and we’ll talk through how your team handled it." : "We’ll contact you to agree a time for a free 15-minute call."}</p>
+        {isGrowth && <p className="core-small"><a className="rebuild-text-link" href="mailto:hello@ingeniumconsulting.net?subject=Business%20Growth%20question">Ask a question by email</a></p>}
         {isGrowth && <div className="growth-hero-price">
           <PackagePrice packageId={item.id} initialNow={now} compact />
           <a href="#included" className="rebuild-text-link">See scope and pricing <ArrowRight size={16} aria-hidden="true" /></a>
@@ -163,7 +164,7 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
             <p>Bring an example and invite the person who handles intake. On the free 15-minute call, we’ll trace where it came from, who saw it and what should happen next.</p>
           </div>
           <div>
-            <Link href={cta} className="rebuild-button">Request a free callback<ArrowUpRight size={17} aria-hidden="true" /></Link>
+            <Link href={cta} className="rebuild-button">{isGrowth ? "Request a walkthrough" : "Request a free callback"}<ArrowUpRight size={17} aria-hidden="true" /></Link>
             <Link href="/quote-follow-up" className="rebuild-text-link">Check your last five enquiries<ArrowRight size={16} aria-hidden="true" /></Link>
             <Link href={examples.landscaping.href} className="rebuild-text-link">{examples.landscaping.link}<ArrowUpRight size={16} aria-hidden="true" /></Link>
           </div>
@@ -197,10 +198,10 @@ export default async function CorePackagePage({ packageId, initialExample }: { p
     <section className="core-section core-faq"><div><h2>Before you decide.</h2><p>{item.name}, explained plainly.</p></div><OfferFaq items={[...faqs]} /></section>
     <EditorSection editorId={`core-packages.v2.${item.id}.close`} className="core-section core-close">
       <div>
-        <h2>{isStarter ? "Give referrals a site you can share." : "Bring one enquiry that got stuck."}</h2>
-        <p>We’ll use the free 15-minute call to check the fit and talk through what we would put in scope.</p>
+        <h2>{isStarter ? "Give referrals a site you can share." : "Bring one recent quote request."}</h2>
+        <p>{isGrowth ? "We’ll walk through how it reached the person who replied and discuss what a Business Growth project could cover." : "We’ll use the free 15-minute call to check the fit and talk through what we would put in scope."}</p>
       </div>
-      <Link href={cta} className="rebuild-button">Request a free callback<ArrowUpRight size={18} aria-hidden="true" /></Link>
+      <Link href={cta} className="rebuild-button">{isGrowth ? "Request a walkthrough" : "Request a free callback"}<ArrowUpRight size={18} aria-hidden="true" /></Link>
     </EditorSection>
     <nav className="core-other-paths" aria-label="Other packages">{[...businessPackages].reverse().filter(other => other.id !== item.id).map(other => <Link key={other.id} href={other.href}><span>{other.question}<strong>{other.name}</strong></span><ArrowRight size={20} aria-hidden="true" /></Link>)}</nav>
     <p className="core-small core-final-note">{PACKAGE_PRICE_NOTE}</p>

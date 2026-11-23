@@ -2,17 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import styles from "./current-projects.module.css";
 
-const currentProjects = [
-  { slug: "farrell-cleaning", name: "Farrell Cleaning", url: "https://www.farrellcleaning.ie" },
-  { slug: "holland-pianos", name: "Holland Pianos", url: "https://www.hollandpianos.ie" },
-  { slug: "tantrum", name: "Tantrum", url: "https://tantrum-website.vercel.app" },
-  { slug: "kennypm", name: "KennyPM", url: "https://kennypm-website.vercel.app/" },
-  { slug: "attic-jiu-jitsu", image: "/project-previews/attic-jiu-jitsu-20261029.webp", name: "Attic Jiu Jitsu", url: "https://attic-jiu-jitsu-website.vercel.app/" },
-  { slug: "connie-byrne-yoga", name: "Connie Byrne Yoga", url: "https://conniebyrneyoga.com" },
-  { slug: "nitro-sports-supplements", name: "Nitro Sports Supplements", url: "https://nitro-sports-supplements.vercel.app/" },
-  { slug: "emerald-golf-distribution", name: "Emerald Golf Distribution", url: "https://emerald-golf-distribution.vercel.app/" },
-  { slug: "fight-factory-pro-wrestling", name: "Fight Factory Pro Wrestling", url: "https://fight-factory-pro-wrestling.vercel.app/" },
-];
+import { currentProjects } from "@/lib/current-projects";
 
 export default function CurrentProjects({ heading = "Current projects" }: { heading?: string }) {
   return (
@@ -23,7 +13,7 @@ export default function CurrentProjects({ heading = "Current projects" }: { head
           <article key={project.slug}>
             <a className={styles.project} href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${project.name} website (opens in a new tab)`}>
               <div className={styles.preview}>
-                <Image src={project.image || `/project-previews/${project.slug}.webp`} alt={`Screenshot of the ${project.name} website`} width={1200} height={833} sizes="(max-width: 760px) 100vw, (max-width: 1304px) 50vw, 600px" />
+                <Image src={("image" in project ? project.image : undefined) || `/project-previews/${project.slug}.webp`} alt={`Screenshot of the ${project.name} website`} width={1200} height={833} sizes="(max-width: 760px) 100vw, (max-width: 1304px) 50vw, 600px" />
               </div>
               <div className={styles.caption}>
                 <div><h3>{project.name}</h3><p>{new URL(project.url).hostname.replace(/^www\./, "")}</p></div>

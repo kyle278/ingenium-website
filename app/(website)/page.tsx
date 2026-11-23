@@ -4,7 +4,7 @@ import { EditorFlow, EditorSection, EditorText } from "@/components/website-edit
 import { getBusinessPackage, packageBookingUrl } from "@/lib/business-packages";
 import { packageRequestTime } from "@/lib/package-request-time";
 import HomePackages from "@/components/rebuild/HomePackages";
-import FarrellQuoteProof from "@/components/rebuild/FarrellQuoteProof";
+import HomeProjectRail from "@/components/rebuild/HomeProjectRail";
 import { HomeTeam } from "@/components/rebuild/HomeStory";
 import { OfferFaq } from "@/components/rebuild/OfferPage";
 import QuoteBoard from "@/components/rebuild/QuoteBoard";
@@ -62,7 +62,7 @@ export default async function HomePage() {
       <Link href="/crm-automation#crm-implementation" className="rebuild-text-link core-compare-link">See how a CRM implementation works <ArrowUpRight size={16} aria-hidden="true" /></Link>
     </EditorSection>
 
-    <FarrellQuoteProof editorId="core-packages.v2.home.project-proof" id="current-projects" projectsLink="/results#current-projects" />
+    <HomeProjectRail editorId="core-packages.v2.home.project-proof" />
 
     <HomeTeam />
     <section className="core-section core-faq" aria-labelledby="home-faq-heading"><div><h2 id="home-faq-heading">Questions before you decide.</h2><p>Existing websites, scope and ongoing support.</p></div><OfferFaq items={faqs} /></section>

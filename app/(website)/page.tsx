@@ -10,6 +10,7 @@ import FarrellQuoteProof from "@/components/rebuild/FarrellQuoteProof";
 import { HomeTeam } from "@/components/rebuild/HomeStory";
 import { OfferFaq } from "@/components/rebuild/OfferPage";
 import QuoteBoard from "@/components/rebuild/QuoteBoard";
+import HomeFollowUp from "@/components/rebuild/HomeFollowUp";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
 export const metadata = buildMetadata(pageSeo["/"]);
@@ -43,6 +44,8 @@ export default async function HomePage() {
       </div>
       <QuoteBoard />
     </EditorSection>
+
+    <HomeFollowUp editorId="core-packages.v2.home.follow-up-problem" />
 
     <EditorSection editorId="core-packages.v2.home.packages" className="core-section home-offers" id="packages" aria-labelledby="packages-heading">
       <header className="core-section-heading">
